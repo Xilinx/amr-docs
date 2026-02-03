@@ -1,0 +1,182 @@
+# AMR - List of Abbreviations
+
+<span id="amr-listofabbreviations-overview"></span>
+
+## Overview
+
+This page contains definitions of abbreviations and acronyms used in other parts of the AMR documentation.
+
+<span id="amr-listofabbreviations-definitions"></span>
+
+## Definitions
+
+<table>
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 73%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AMR</td>
+<td>Adaptive Management Runtime</td>
+</tr>
+<tr class="even">
+<td>AMI</td>
+<td>AMR Management Interface</td>
+</tr>
+<tr class="odd">
+<td>AMC</td>
+<td>AMR Management Controller</td>
+</tr>
+<tr class="even">
+<td><span class="legacy-color-text-default">APU</span></td>
+<td><span class="legacy-color-text-default">Application Processing Unit </span></td>
+</tr>
+<tr class="odd">
+<td><span class="legacy-color-text-default">ASDM<br />
+</span></td>
+<td><span class="legacy-color-text-default">Alveo Sensor Data Management<br />
+</span></td>
+</tr>
+<tr class="even">
+<td><span class="legacy-color-text-default">BDF</span></td>
+<td><span class="legacy-color-text-default">Bus Device Function</span></td>
+</tr>
+<tr class="odd">
+<td><span class="legacy-color-text-default">CCIX</span></td>
+<td><span class="legacy-color-text-default">Cache Coherent Interconnect for Accelerators</span></td>
+</tr>
+<tr class="even">
+<td><span class="legacy-color-text-default">CIPS</span></td>
+<td><span class="legacy-color-text-default">Control, Interfaces, and Processing System</span></td>
+</tr>
+<tr class="odd">
+<td><span class="legacy-color-text-default">CPM</span></td>
+<td><span class="legacy-color-text-default">CCIX PCIe Module</span></td>
+</tr>
+<tr class="even">
+<td><span class="legacy-color-text-default">FPD</span></td>
+<td><span class="legacy-color-text-default">Full Power Domain</span></td>
+</tr>
+<tr class="odd">
+<td><span class="legacy-color-text-default">FPT</span></td>
+<td><span class="legacy-color-text-default">Flash Partition Table</span></td>
+</tr>
+<tr class="even">
+<td><span class="legacy-color-text-default">GCQ</span></td>
+<td><span class="legacy-color-text-default">Generic Command Queue</span></td>
+</tr>
+<tr class="odd">
+<td><span class="legacy-color-text-default">HBM</span></td>
+<td><span class="legacy-color-text-default">High-Bandwidth Memory</span></td>
+</tr>
+<tr class="even">
+<td><span class="legacy-color-text-default">INI</span></td>
+<td><span class="legacy-color-text-default">Inter-NoC Interconnect</span></td>
+</tr>
+<tr class="odd">
+<td><span class="legacy-color-text-default">LPD</span></td>
+<td><span class="legacy-color-text-default">Low Power Domain</span></td>
+</tr>
+<tr class="even">
+<td><span class="legacy-color-text-default">M2R</span></td>
+<td><span class="legacy-color-text-default">Management to RPU</span></td>
+</tr>
+<tr class="odd">
+<td><span class="legacy-color-text-default">MC</span></td>
+<td><span class="legacy-color-text-default">Memory Controller</span></td>
+</tr>
+<tr class="even">
+<td><span class="legacy-color-text-default">NoC</span></td>
+<td><span class="legacy-color-text-default">Network on Chip</span></td>
+</tr>
+<tr class="odd">
+<td><span class="legacy-color-text-default">NMU</span></td>
+<td><span class="legacy-color-text-default">NoC Master Unit</span></td>
+</tr>
+<tr class="even">
+<td><span class="legacy-color-text-default">NPS</span></td>
+<td><span class="legacy-color-text-default">NoC Packet Switch</span></td>
+</tr>
+<tr class="odd">
+<td><span class="legacy-color-text-default">NSU</span></td>
+<td><span class="legacy-color-text-default">NoC Slave Unit</span></td>
+</tr>
+<tr class="even">
+<td><span class="legacy-color-text-default">PC</span></td>
+<td><span class="legacy-color-text-default">Pseudo Channel</span></td>
+</tr>
+<tr class="odd">
+<td><span class="legacy-color-text-default">PDI</span></td>
+<td><span class="legacy-color-text-default">Programmable Device Image</span></td>
+</tr>
+<tr class="even">
+<td><span class="legacy-color-text-default">PF</span></td>
+<td><span class="legacy-color-text-default">Physical Function</span></td>
+</tr>
+<tr class="odd">
+<td><span class="legacy-color-text-default">PL</span></td>
+<td><span class="legacy-color-text-default">Programmable Logic</span></td>
+</tr>
+<tr class="even">
+<td><span class="legacy-color-text-default">PLM</span></td>
+<td><span class="legacy-color-text-default">Platform Loader and Manager</span></td>
+</tr>
+<tr class="odd">
+<td><span class="legacy-color-text-default">PMC</span></td>
+<td><span class="legacy-color-text-default">Platform Management Controller</span></td>
+</tr>
+<tr class="even">
+<td><span class="legacy-color-text-default">PS</span></td>
+<td><span class="legacy-color-text-default">Processing System</span></td>
+</tr>
+<tr class="odd">
+<td><span class="legacy-color-text-default">PSR</span></td>
+<td><span class="legacy-color-text-default">Processor System Reset</span></td>
+</tr>
+<tr class="even">
+<td><span class="legacy-color-text-default">QoS</span></td>
+<td><span class="legacy-color-text-default">Quality of Service</span></td>
+</tr>
+<tr class="odd">
+<td><span class="legacy-color-text-default">RPU</span></td>
+<td><span class="legacy-color-text-default">Realtime Processing Unit</span></td>
+</tr>
+<tr class="even">
+<td><span class="legacy-color-text-default">SDR<br />
+</span></td>
+<td><span class="legacy-color-text-default">Sensor Data Record<br />
+</span></td>
+</tr>
+<tr class="odd">
+<td><span class="legacy-color-text-default">TTC</span></td>
+<td><span class="legacy-color-text-default">Triple Timer Counter</span></td>
+</tr>
+<tr class="even">
+<td><span class="legacy-color-text-default">UUID</span></td>
+<td><span class="legacy-color-text-default">Universally Unique Identifier</span></td>
+</tr>
+<tr class="odd">
+<td><span class="legacy-color-text-default">VBNV</span></td>
+<td><p><span class="legacy-color-text-default"><span data-colorid="dzus5iz3w1">&lt;Vendor&gt;_&lt;Board&gt;_&lt;Name&gt;_&lt;Version&gt; </span><span data-colorid="rcv8pp8hda">identifier<br />
+e.g. amd_v80_gen5x8_25.1</span></span></p>
+<ul>
+<li>vendor: amd</li>
+<li>board: v80</li>
+<li>name: <span class="legacy-color-text-default"><span data-colorid="g1flj82xvp">gen5x8_25.1</span></span></li>
+<li>version: 1</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td><span class="legacy-color-text-default"><span class="legacy-color-text-blue3">XSA</span></span></td>
+<td><span class="legacy-color-text-default"><span class="legacy-color-text-blue3"> Xilinx Support Archive</span></span></td>
+</tr>
+</tbody>
+</table>
+

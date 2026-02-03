@@ -1,0 +1,1236 @@
+# AMR V80 - CIPS Configuration
+
+<span id="amrv80-cipsconfiguration-cips"></span>
+
+## CIPS
+
+The processing system (PS), platform management controller (PMC), and CCIX PCIe module (CPM) modules are grouped together and configured using the control, interface, and processing system (CIPS) IP core. The PS contains the APUs, RPUs, and peripherals (I2C, UART, SPI, etc.). It shares the DDRMC with the PL via the NoC. The PMC is responsible for boot and configuration management, power management, reliability and safety functions, dynamic function eXchange (DFX), life cycle management and I/O peripherals. The CPM provides the primary interfaces for designs, such as AMR, following the server system methodology. It has hardened connections to the NoC which is used to access the DDR and other hardened IP. The CIPS configuration is described below. All settings differing from the default settings are indicated in the GUI captures below.
+
+A description of the CIPS configuration options can be found in <https://docs.xilinx.com/r/en-US/pg352-cips>.
+
+<span id="amrv80-cipsconfiguration-ccixpciemodule-cpm5"></span>
+
+## CCIX PCIe Module (CPM5)
+
+<span id="amrv80-cipsconfiguration-cpm5guiconfiguration"></span>
+
+### CPM5 GUI Configuration
+
+A description of the CPM configuration options can be found here:
+
+  - <https://docs.xilinx.com/r/en-US/pg347-cpm-dma-bridge>
+
+  - <https://docs.xilinx.com/r/en-US/pg347-cpm-dma-bridge/CPM5-GUI-Customization>
+
+<span id="amrv80-cipsconfiguration-cpm5basicconfiguration"></span>
+
+#### CPM5 Basic Configuration
+
+In the CPM5 Basic Configuration window, there are two PCIe Controllers to choose from. When selecting a PCIe controller, AMR follows the same guidance listed here: <https://docs.xilinx.com/r/en-US/pg347-cpm-dma-bridge/General-Guidance-for-CPM5>. In addition to this, AMR is only using 8 lanes, and to be in PCI SIG compliance, the bottom 8 lanes must be used. As a result, PCIe® controller 1 must be used.
+
+AMR V80 is a Gen 5x8 design supporting 32GT/s raw bandwidth.
+
+![image1](../../images/grey_arrow_down2.png)
+
+![image2](../../images/1107374422.png)
+
+<span id="amrv80-cipsconfiguration-cpm5pciecontroller1configuration"></span>
+
+#### CPM5 PCIE Controller 1 Configuration
+
+<span id="amrv80-cipsconfiguration-basic"></span>
+
+##### Basic
+
+**Configuration Mode: Advanced**
+
+AMR uses PCIe extended configuration space. There are multiple settings that need to be enabled to allow for this functionality. First, the mode must be changed to advanced. This enables the MSI-X cap, advanced options, and interface options GUI tabs. Then, in the advanced options tab, the configuration space must be changed to ‘Extended Large’. This will allow the PCIe extended configuration space to be extended from its default configuration. Finally, in the Interfaces tab, enable ‘Extended Config Interface’. This interface connects to the HW discovery IP, which provides vendor specific extended configuration information.
+
+**Functional Mode: QDMA**
+
+Used for high bandwidth DDR accesses.
+
+![image3](../../images/grey_arrow_down2.png)
+
+![image4](../../images/1107374413.png)
+
+<span id="amrv80-cipsconfiguration-capabilities"></span>
+
+##### Capabilities
+
+**Total Physical Functions: 2**
+
+Two Physical Functions (PF) are used in the AMR design. PF0 allows the card to be managed by the PCIe host. PF1 allows DMA transfers with the PCIe Host. Additional PFs can be enabled as required by user applications.
+
+AMR PCIe uses the synchronous clock from the PCIe edge connector.
+
+![image5](../../images/grey_arrow_down2.png)
+
+![image6](../../images/1107374419.png)
+
+<span id="amrv80-cipsconfiguration-pfids"></span>
+
+##### PF IDs
+
+These values must match the settings for the AMR card as indicated in the table below. The greyed out settings are not used by AMR.
+
+![images/1107374383.png](../../images/1107374383.png)
+
+**PF - ID Initial Values: Change values to those below to match AMD specific settings**
+
+  - Device ID PF 0
+
+  -   - V80: 50b4/50b5
+
+  - Subsystem ID PF 0: 000e
+
+**Class Code: Change values to those below**
+
+  - Base Class Value PF 0: 12 : Processing Accelerator – vendor-specific interface
+
+  - Subclass Value PF 0: 00 : Processing Accelerator – vendor-specific interface
+
+![image7](../../images/grey_arrow_down2.png)
+
+![image8](../../images/1107374425.png)
+
+<span id="amrv80-cipsconfiguration-pciebars"></span>
+
+##### PCIE: BARs
+
+The configuration for the PF0 AXI Bridge Master and PF1 DMA is shown below. These options enable the Master AXI interface within the CIPS IP and is used to interface with AXI peripherals, and also allows for PCIe Host DMA transfers to the memory devices.
+
+CPM5 can support up to six 32-bit BARs or three 64-bit BARs per PF. AMR only requires two physical functions. PF0 uses a single 64-bit BAR mapping to a 256MB address space (BAR0). As a result, PCIe BAR0 is mapped to the first 256MB of the PL memory space: 0x201\_0000\_0000 - 0x201\_0FFF\_FFFF (256MB). For additional information on address mapping in AMD Versal™ devices, refer to the following link: <https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map>. Since the address space for PCIe and AXI is different, address translation is required.
+
+PF1 is configured to use the DMA.
+
+![image9](../../images/grey_arrow_down2.png)
+
+PF0
+
+![image10](../../images/1107374407.png)
+
+PF1
+
+![image11](../../images/1107374410.png)
+
+<span id="amrv80-cipsconfiguration-pcie-dma"></span>
+
+##### PCIe: DMA
+
+This functionality is not used by AMR.
+
+![image12](../../images/grey_arrow_down2.png)
+
+![image13](../../images/1107374401.png)
+
+MSI-X Cap
+
+MSI-X capabilities for PF1 were enabled to be used in conjunction with the DMA.
+
+![image14](../../images/grey_arrow_down2.png)
+
+[![image15](../../images/1107374416.png)](../../images/1107374416.png)
+
+<span id="amrv80-cipsconfiguration-advancedoptions"></span>
+
+##### Advanced Options
+
+AMR uses vendor specific extended capabilities (VSEC) with the large extended configuration space. The extended capabilities contain the entries for the HW Discovery IP, UUID, gcq\_m2r, and AXI remapping ([AMR V80 - Base Logic](../base-logic/)). To minimize design complexity, AMR does not enable virtualization capabilities, so ARI and ACS are disabled.
+
+**Verify Alternate Routing ID (ARI) Capability:** **Unselectable**
+
+**Disable Access Control Services (ACS) Capability: De-Selected**
+
+**Verify Advanced Error Reporting (AER) Capability: Selected**
+
+**PCI Express Extended Configuration Space Enabled: Extended Large**
+
+![image16](../../images/grey_arrow_down2.png)
+
+![image17](../../images/1107374395.png)
+
+<span id="amrv80-cipsconfiguration-enableinterfaceoptions"></span>
+
+##### Enable Interface Options
+
+The Extend Config Interface option enables the interface to allow PCIe to transfer configuration information with the user application. In AMR, this port, pcie1\_cfg\_ext, is connected to the Hardware Discovery IP.
+
+**Extended Config Interface: Select**
+
+![image18](../../images/grey_arrow_down2.png)
+
+![image19](../../images/1107374404.png)
+
+<span id="amrv80-cipsconfiguration-cpm5tclconfiguration"></span>
+
+### CPM5 TCL Configuration
+
+The above configuration can be enabled using the TCL configuration settings below.
+
+![image20](../../images/grey_arrow_down2.png)
+
+CONFIG.CPM\_CONFIG { \\
+
+CPM\_PCIE0\_MODES {None} \\
+
+CPM\_PCIE1\_ACS\_CAP\_ON {0} \\
+
+CPM\_PCIE1\_ARI\_CAP\_ENABLED {0} \\
+
+CPM\_PCIE1\_CFG\_EXT\_IF {1} \\
+
+CPM\_PCIE1\_CFG\_VEND\_ID {10ee} \\
+
+CPM\_PCIE1\_COPY\_PF0\_QDMA\_ENABLED {0} \\
+
+CPM\_PCIE1\_EXT\_PCIE\_CFG\_SPACE\_ENABLED {Extended\_Large} \\
+
+CPM\_PCIE1\_FUNCTIONAL\_MODE {QDMA} \\
+
+CPM\_PCIE1\_MAX\_LINK\_SPEED {32.0\_GT/s} \\
+
+CPM\_PCIE1\_MODES {DMA} \\
+
+CPM\_PCIE1\_MODE\_SELECTION {Advanced} \\
+
+CPM\_PCIE1\_MSI\_X\_OPTIONS {MSI-X\_Internal} \\
+
+CPM\_PCIE1\_PF0\_AXIBAR2PCIE\_BASEADDR\_0 {0x0000008000000000} \\
+
+CPM\_PCIE1\_PF0\_AXIBAR2PCIE\_BASEADDR\_1 {0x0000008040000000} \\
+
+CPM\_PCIE1\_PF0\_AXIBAR2PCIE\_BASEADDR\_2 {0x0000008080000000} \\
+
+CPM\_PCIE1\_PF0\_AXIBAR2PCIE\_BASEADDR\_3 {0x00000080C0000000} \\
+
+CPM\_PCIE1\_PF0\_AXIBAR2PCIE\_BASEADDR\_4 {0x0000008100000000} \\
+
+CPM\_PCIE1\_PF0\_AXIBAR2PCIE\_BASEADDR\_5 {0x0000008140000000} \\
+
+CPM\_PCIE1\_PF0\_AXIBAR2PCIE\_HIGHADDR\_0 {0x000000803FFFFFFFF} \\
+
+CPM\_PCIE1\_PF0\_AXIBAR2PCIE\_HIGHADDR\_1 {0x000000807FFFFFFFF} \\
+
+CPM\_PCIE1\_PF0\_AXIBAR2PCIE\_HIGHADDR\_2 {0x00000080BFFFFFFFF} \\
+
+CPM\_PCIE1\_PF0\_AXIBAR2PCIE\_HIGHADDR\_3 {0x00000080FFFFFFFFF} \\
+
+CPM\_PCIE1\_PF0\_AXIBAR2PCIE\_HIGHADDR\_4 {0x000000813FFFFFFFF} \\
+
+CPM\_PCIE1\_PF0\_AXIBAR2PCIE\_HIGHADDR\_5 {0x000000817FFFFFFFF} \\
+
+CPM\_PCIE1\_PF0\_BAR0\_QDMA\_64BIT {1} \\
+
+CPM\_PCIE1\_PF0\_BAR0\_QDMA\_ENABLED {1} \\
+
+CPM\_PCIE1\_PF0\_BAR0\_QDMA\_PREFETCHABLE {1} \\
+
+CPM\_PCIE1\_PF0\_BAR0\_QDMA\_SCALE {Megabytes} \\
+
+CPM\_PCIE1\_PF0\_BAR0\_QDMA\_SIZE {256} \\
+
+CPM\_PCIE1\_PF0\_BAR0\_QDMA\_TYPE {AXI\_Bridge\_Master} \\
+
+CPM\_PCIE1\_PF0\_BAR2\_QDMA\_64BIT {0} \\
+
+CPM\_PCIE1\_PF0\_BAR2\_QDMA\_ENABLED {0} \\
+
+CPM\_PCIE1\_PF0\_BAR2\_QDMA\_PREFETCHABLE {0} \\
+
+CPM\_PCIE1\_PF0\_BAR2\_QDMA\_SCALE {Kilobytes} \\
+
+CPM\_PCIE1\_PF0\_BAR2\_QDMA\_SIZE {4} \\
+
+CPM\_PCIE1\_PF0\_BAR2\_QDMA\_TYPE {AXI\_Bridge\_Master} \\
+
+CPM\_PCIE1\_PF0\_BASE\_CLASS\_VALUE {12} \\
+
+CPM\_PCIE1\_PF0\_CFG\_DEV\_ID {50b4} \\
+
+CPM\_PCIE1\_PF0\_CFG\_SUBSYS\_ID {000e} \\
+
+CPM\_PCIE1\_PF0\_DEV\_CAP\_FUNCTION\_LEVEL\_RESET\_CAPABLE {0} \\
+
+CPM\_PCIE1\_PF0\_MSIX\_CAP\_TABLE\_OFFSET {40} \\
+
+CPM\_PCIE1\_PF0\_MSIX\_CAP\_TABLE\_SIZE {1} \\
+
+CPM\_PCIE1\_PF0\_MSIX\_ENABLED {0} \\
+
+CPM\_PCIE1\_PF0\_PCIEBAR2AXIBAR\_QDMA\_0 {0x0000020100000000} \\
+
+CPM\_PCIE1\_PF0\_SUB\_CLASS\_VALUE {00} \\
+
+CPM\_PCIE1\_PF1\_BAR0\_QDMA\_64BIT {1} \\
+
+CPM\_PCIE1\_PF1\_BAR0\_QDMA\_ENABLED {0} \\
+
+CPM\_PCIE1\_PF1\_BAR0\_QDMA\_PREFETCHABLE {1} \\
+
+CPM\_PCIE1\_PF1\_BAR0\_QDMA\_SCALE {Kilobytes} \\
+
+CPM\_PCIE1\_PF1\_BAR0\_QDMA\_SIZE {4} \\
+
+CPM\_PCIE1\_PF1\_BAR0\_QDMA\_TYPE {DMA} \\
+
+CPM\_PCIE1\_PF1\_BAR2\_QDMA\_64BIT {0} \\
+
+CPM\_PCIE1\_PF1\_BAR2\_QDMA\_ENABLED {0} \\
+
+CPM\_PCIE1\_PF1\_BAR2\_QDMA\_PREFETCHABLE {0} \\
+
+CPM\_PCIE1\_PF1\_BAR2\_QDMA\_SCALE {Kilobytes} \\
+
+CPM\_PCIE1\_PF1\_BAR2\_QDMA\_SIZE {4} \\
+
+CPM\_PCIE1\_PF1\_BAR2\_QDMA\_TYPE {AXI\_Bridge\_Master} \\
+
+CPM\_PCIE1\_PF1\_BASE\_CLASS\_VALUE {12} \\
+
+CPM\_PCIE1\_PF1\_CFG\_DEV\_ID {50b5} \\
+
+CPM\_PCIE1\_PF1\_CFG\_SUBSYS\_ID {000e} \\
+
+CPM\_PCIE1\_PF1\_CFG\_SUBSYS\_VEND\_ID {10EE} \\
+
+CPM\_PCIE1\_PF1\_MSIX\_CAP\_TABLE\_OFFSET {50000} \\
+
+CPM\_PCIE1\_PF1\_MSIX\_CAP\_TABLE\_SIZE {8} \\
+
+CPM\_PCIE1\_PF1\_MSIX\_ENABLED {1} \\
+
+CPM\_PCIE1\_PF1\_PCIEBAR2AXIBAR\_QDMA\_2 {0x0000020200000000} \\
+
+CPM\_PCIE1\_PF1\_SUB\_CLASS\_VALUE {00} \\
+
+CPM\_PCIE1\_PL\_LINK\_CAP\_MAX\_LINK\_WIDTH {X8} \\
+
+CPM\_PCIE1\_TL\_PF\_ENABLE\_REG {2} \\
+
+} \\
+
+<span id="amrv80-cipsconfiguration-pspmc"></span>
+
+## PS PMC
+
+There are numerous processor subsystem (PS) and platform management controller (PMC) settings. These settings (indicated below) align to the AMR design requirements. A description of the CIPS configuration options can be found in <https://docs.xilinx.com/r/en-US/pg352-cips>. Information on the PS/PMC can be found here: <https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Processing-System-Architecture>.
+
+Processing Subsystem (RPU and APU)
+
+The PS includes two Arm® Cortex®-R5F RPU processors and two Arm Cortex-A72 APU processors. These provide programmers with real-time and application operating environments.
+
+<span id="amrv80-cipsconfiguration-platformmanagementcontroller-pmc"></span>
+
+### Platform Management Controller (PMC)
+
+When the system starts up, it is controlled by the PMC.
+
+<span id="amrv80-cipsconfiguration-pspmcguiconfiguration"></span>
+
+### PS PMC GUI Configuration
+
+There are numerous PS/PMC configuration settings. The settings below were made per the AMR design requirements.
+
+<span id="amrv80-cipsconfiguration-bootmode"></span>
+
+#### Boot Mode
+
+The Versal device is connected to 2Gb (256MB) OSPI for configuration and 64GB eMMC for storage. Both devices are 8-bits. These connections need to be enabled in PS PMC.
+
+Note: eMMC1 cannot be used for boot since the pins are shared with OSPI.
+
+**OSPI: Primary Boot**
+
+<https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Primary-Boot-Interfaces-Table>
+
+**Mode:** Single device interface (not Stacked)
+
+**Frequency:** A requested frequency of 200MHz was requested (Max frequency is 200MHz).
+
+**SDO/EMMC0: Used for storage or secondary boot**
+
+<https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Secondary-Boot-Process-and-Device-Choices>
+
+**Slot Type:** eMMC
+
+**Data Transfer Width:** 8Bit
+
+![image21](../../images/grey_arrow_down2.png)
+
+![image22](../../images/1107374386.png)
+
+![image23](../../images/1107374392.png)
+
+<span id="amrv80-cipsconfiguration-peripherals"></span>
+
+#### Peripherals
+
+Enable the peripherals as indicated below. These connections are dependent upon the Versal device connections to the board and are described below. The pin locations for the peripheral are not set in the ‘Peripheral’ tab. Instead, they are set in the ‘IO’ tab
+
+<span id="amrv80-cipsconfiguration-pciereset"></span>
+
+##### PCIe Reset
+
+PCIe reset from the host is connected to the PMC MIO pins through a buffer. There is a reset for each PCIe controller to support bifurcation. Enable the PCIe reset, then to set the actual pin, switch to the IO tab.
+
+  - IO → PS-Domain → PCIe Reset → CPM PCIE Controller 0 (End Point) → PMC\_MIO\_24
+
+  - IO → PS-Domain → PCIe Reset → CPM PCIE Controller 1 (End Point) → PMC\_MIO\_25
+
+<https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/PCIe-Resets-on-MIO-Pins>
+
+![image24](../../images/grey_arrow_down2.png)
+
+![image25](../../images/1107374446.png)
+
+<span id="amrv80-cipsconfiguration-uart0-uart1"></span>
+
+##### UART0 / UART1
+
+AMR connects to two UARTs on the PS MIO (LPD) for debug purposes.
+
+  - IO → PS-Domain → UART0 → PS\_MIO\_8 and PS\_MIO\_9
+
+  - IO → PS-Domain → UART1 → PS\_MIO\_20 and PS\_MIO\_21
+
+<https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/UART-I/O-Signals>
+
+![image26](../../images/grey_arrow_down2.png)
+
+**UART0**
+
+![image27](../../images/1107374428.png)
+
+**UART1**
+
+![image28](../../images/1107374581.png)
+
+<span id="amrv80-cipsconfiguration-spi0"></span>
+
+##### SPI0
+
+The Versal device connects to SPI0 in the PS MIO (LPD). This is used for logging flash.
+
+  - IO → PS-Domain → SPI0 → PS\_MIO\_12 through PS\_MIO\_17
+
+  - IO → PS-Domain → SPI0 → SS0 → PS\_MIO\_15
+
+<https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/SPI-Controller-I/O-Signals>
+
+![image29](../../images/grey_arrow_down2.png)
+
+**SPI0**
+
+![image30](../../images/1107374566.png)
+
+<span id="amrv80-cipsconfiguration-lpd-i2c0-lpd-i2c1"></span>
+
+##### LPD\_I2C0 / LPD\_I2C1
+
+The Versal device connects to both I2C controllers in the LPD. I2C0 is the main I2C bus used for management of the board power, clocks, temperatures, etc. I2C1 is used for the management of the QSFPs (V80 only).
+
+  - IO → PS-Domain → I2C0 → PS\_MIO\_2 and PS\_MIO\_3
+
+  - IO → PS-Domain → I2C1 → PS\_MIO\_0 and PS\_MIO\_1
+
+<https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/LPD-I2C-Interface-Signals>
+
+![image31](../../images/grey_arrow_down2.png)
+
+**LPD\_I2C0**
+
+![image32](../../images/1107374572.png)
+
+**LPD\_I2C1**
+
+![image33](../../images/1107374557.png)
+
+<span id="amrv80-cipsconfiguration-ttc0-ttc1-ttc2-ttc3"></span>
+
+##### TTC0 / TTC1 / TTC2 / TTC3
+
+The triple timer counters (TTCs) can generate periodic interrupts or can be used to count the widths of signal pulses from an MIO pin or from the PL. In AMR, the TTCs are used by SW to generate periodic interrupts for runtime purposes. The TTCs cannot be used to monitor any HW functionality through the PMC MIO or PS MIO pins because there are not any spare MIO pins.
+
+<https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Triple-Timer-Counters>
+
+![image34](../../images/grey_arrow_down2.png)
+
+**TTC0**
+
+![image35](../../images/1107374563.png)
+
+**TTC1**
+
+![image36](../../images/1107374569.png)
+
+**TTC2**
+
+![image37](../../images/1107374560.png)
+
+**TTC3**
+
+![image38](../../images/1107374551.png)
+
+<span id="amrv80-cipsconfiguration-io"></span>
+
+#### IO
+
+PMC peripheral pins can have more than one MIO pin assignment option. More information on the different selections can be found here: <https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/PMC-MIO-Pin-Table>. All the MIO pins (PMC, MIO, and PS MIO) are connected per the AMR design requirements. While PMC Bank 1 pins 45:47 appear to be unused in the capture below, there are signals connected to these pins for future growth.
+
+When setting these pins in the GUI, first set the I/O pins in the Peripheral ‘I/O’ column. Be careful to select appropriately between PMC\_MIO and PS\_MIO. Then set the rest of the I/O in PMC Bank 0, PMC Bank 1, and PS Bank 2 columns.
+
+The GPIO direction for each bank is set per the description below. They are also included as TCL in [PS PMC TCL Settings](#amrv80-cipsconfiguration-pspmctclsettings).
+
+  - PMC Bank 0: All the GPIO 0\* signals are outputs except MIO\_11, which is an input.
+
+  - PMC Bank 1: All the GPIO 1\* signals are outputs except MIO\_33, MIO\_37, MIO\_41, MIO\_48, MIO\_49, MIO\_50, which are inputs.
+
+  - PS Bank 2: All the GPIO 2\* signals are outputs except MIO\_5, MIO\_10, MIO\_11, MIO\_14, and MIO\_25, which are inputs.
+
+![image39](../../images/grey_arrow_down2.png)
+
+![image40](../../images/1107374548.png)
+
+<span id="amrv80-cipsconfiguration-debug"></span>
+
+#### Debug
+
+None of the debug settings are used. Leave all settings at Default.
+
+<span id="amrv80-cipsconfiguration-plbscan"></span>
+
+##### PL BSCAN
+
+![image41](../../images/grey_arrow_down2.png)
+
+![image42](../../images/1107374539.png)
+
+<span id="amrv80-cipsconfiguration-crosstrigger"></span>
+
+##### Cross Trigger
+
+![image43](../../images/grey_arrow_down2.png)
+
+![image44](../../images/1107374545.png)
+
+<span id="amrv80-cipsconfiguration-psparalleltrace"></span>
+
+##### PS Parallel Trace
+
+![image45](../../images/grey_arrow_down2.png)
+
+![image46](../../images/1107374554.png)
+
+<span id="amrv80-cipsconfiguration-hsdp"></span>
+
+##### HSDP
+
+![image47](../../images/grey_arrow_down2.png)
+
+![image48](../../images/1107374536.png)
+
+<span id="amrv80-cipsconfiguration-clocking"></span>
+
+#### Clocking
+
+<span id="amrv80-cipsconfiguration-inputclocks"></span>
+
+##### Input Clocks
+
+Change the input REF\_CLK to match the board oscillator clock frequency (from 33.333MHz to 33.333333MHz).
+
+REF\_CLK: 33.333333
+
+![image49](../../images/grey_arrow_down2.png)
+
+![image50](../../images/1107374533.png)
+
+<span id="amrv80-cipsconfiguration-outputclocks"></span>
+
+##### Output Clocks
+
+SLR0
+
+The Processor memory clocks (HSM0 and HSM1) are not used in AMR because it is a design requirement to use external 200MHz LVDS clocks for HBM and DDR MCs.
+
+Enable the PL CLK 0, PL CLK 1, and PL CLK 2 and set the frequencies to 100MHz, 33.3333333MHz, and 250MHz (respectively). This creates the CIPs pl0\_ref\_clk, pl1\_ref\_clk, and pl2\_ref\_clk outputs from CIPS in the BD. PL CLK 0 (100MHz) is used for numerous AXI interfaces. PL CLK 1 is a free running clock used to generate other system clocks. PL CLK 2 is set to run at 250MHz. This is the frequency of the PCIe extended configuration interface.
+
+Change the CPM\_TOPSW clock to 1000MHz so the CPM runs at maximum frequency.
+
+![image51](../../images/grey_arrow_down2.png)
+
+![image52](../../images/1107374542.png)
+
+![image53](../../images/1107374398.png)
+
+![image54](../../images/1107374389.png)
+
+SLR1
+
+There are not any options for SLR1 - this tab does not exist.
+
+SLR2
+
+Leave at the default setting. The Processor memory clocks (HSM0 and HSM1) are not used in AMR because it is a design requirement to use external 200MHz LVDS clocks for HBM and DDR MCs.
+
+![image55](../../images/grey_arrow_down2.png)
+
+![image56](../../images/1107374524.png)
+
+XilSEM Library
+
+Leave all settings at Default. XilSEM is not used in AMR.
+
+![image57](../../images/grey_arrow_down2.png)
+
+![image58](../../images/1107374521.png)
+
+<span id="amrv80-cipsconfiguration-sysmon"></span>
+
+#### Sysmon
+
+<span id="amrv80-cipsconfiguration-slr0-1"></span>
+
+##### SLR0
+
+**Basic Configuration**
+
+Change the voltage averaging samples to 8.
+
+![image59](../../images/grey_arrow_down2.png)
+
+![image60](../../images/1107374503.png)
+
+**On Chip Supply**
+
+These are optional voltages that can be monitored by AMC for future use. The ADC and thresholds would need to be adjusted appropriately.
+
+Additional information on the nomenclature can be found here: <https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Power-Pins>
+
+  - VCC\_PMC: PMC power domain
+
+  - VCC\_PSFP: PS full-power domain (FPD)
+
+  - VCC\_PSLP: PS low-power domain (LPD)
+
+  - VCC\_RAM: Block RAM, UltraRAM, and PL clocking network
+
+  - VCCSOC: NoC, NPI, and DDRMC SoC power domain (SPD)
+
+  - VCCINT: Internal logic (programmable logic, integrated hardware
+
+  - VCCAUX: Auxiliary circuits
+
+  - VCC\_AUXPMC: Auxiliary for the PMC
+
+  - VCCAUX\_SMON: Analog for the ADC and other analog circuits in the system monitor
+
+Monitor Configuration, PMC MIO, and PS MIO Banks
+
+  - VCCO\_500: PMC MIO bank 0 with dedicated analog signals DIO\_A
+
+  - VCCO\_501: PMC MIO bank 1
+
+  - VCCO\_502: LPD MIO bank PS (PS\_MIO)
+
+  - VCCO\_503: PMC dedicated I/O (DIO) bank - Config Bank Mode Pins and JTAG
+
+Monitor DDR Banks Voltage
+
+  - VCCO\_700: CH0 DDR
+
+  - VCCO\_701: CH0 DDR
+
+  - VCCO\_702: CH0 DDR
+
+Monitor GTYP Bank Voltages
+
+  - GTYP\_AVTT\_104: Gigabit transceiver; analog transmit driver
+
+  - GTYP\_AVTT\_105: Gigabit transceiver; analog transmit driver
+
+  - GTYP\_AVCC\_104: Gigabit transceiver; analog internal circuits
+
+  - GTYP\_AVCC\_105: Gigabit transceiver; analog internal circuits
+
+  - GTYP\_AVCCAUX\_104: Gigabit transceiver; auxiliary analog transceivers
+
+  - GTYP\_AVCCAUX\_105: Gigabit transceiver; auxiliary analog transceivers
+
+![image61](../../images/grey_arrow_down2.png)
+
+![image62](../../images/1107374455.png)
+
+![image63](../../images/1107374464.png)
+
+**Temperature**
+
+Enable the over temperature check to help protect the Versal device and PCB.
+
+![image64](../../images/grey_arrow_down2.png)
+
+![image65](../../images/1107374515.png)
+
+**External Supply Monitor**
+
+None of the external supplies are monitored in AMR.
+
+![image66](../../images/grey_arrow_down2.png)
+
+![image67](../../images/1107374506.png)
+
+<span id="amrv80-cipsconfiguration-slr1-1"></span>
+
+##### SLR1
+
+**On Chip Supply**
+
+None of the supplies in SLR1 are monitored in AMR.
+
+![image68](../../images/grey_arrow_down2.png)
+
+![image69](../../images/1107374518.png)
+
+<span id="amrv80-cipsconfiguration-slr2-1"></span>
+
+##### SLR2
+
+On Chip Supply
+
+None of the supplies in SLR2 are monitored in AMR V80.
+
+![image70](../../images/grey_arrow_down2.png)
+
+![image71](../../images/1107374494.png)
+
+<span id="amrv80-cipsconfiguration-devicesecurity"></span>
+
+#### Device Security
+
+<span id="id1"></span>
+
+##### SLR0
+
+**General**
+
+Select ‘Enable/Update Glitch Detector Settings (after BootROM handoff)’. This allows VCC\_PMC to be changed to match the voltage setting of the AMR design requirements (0.88V).
+
+The pulse width will ignore glitches less than the setting of 0.5ns.
+
+Note: AMR does not enable a specific glitch detection response. If a response were required, it would need to be set up in the Tamper tab. AMR does not set any Tamper settings.
+
+Unselect “Known Answer Tests (KATs)”. AMR does not use the Cryptographic engines, so there is no need to perform this test.
+
+<https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Known-Answer-Tests>
+
+**Clock Monitor**
+
+AMR does not enable clock monitoring. Leave all settings at Default.
+
+![image72](../../images/grey_arrow_down2.png)
+
+![image73](../../images/1107374440.png)
+
+![image74](../../images/1107374473.png)
+
+<span id="id2"></span>
+
+##### SLR1
+
+**General**
+
+Select ‘Enable/Update Glitch Detector Settings (after BootROM handoff)’. This allows VCC\_PMC to be changed to match the voltage setting of the AMR design requirements (0.88V).
+
+The pulse width will ignore glitches less than the setting of 0.5ns.
+
+Note: AMR does not enable a specific glitch detection response. If a response were required, it would need to be set up in the Tamper tab. AMR does not set any Tamper settings.
+
+Unselect ‘Known Answer Tests (KATs)’. AMR does not use the Cryptographic engines, so there is no need to perform this test.
+
+<https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Known-Answer-Tests>
+
+**Clock Monitor**
+
+AMR does not enable clock monitoring. Leave all settings at default.
+
+![image75](../../images/grey_arrow_down2.png)
+
+![image76](../../images/1107374452.png)
+
+![image77](../../images/1107374461.png)
+
+<span id="id3"></span>
+
+##### SLR2
+
+**General**
+
+Select ‘Enable/Update Glitch Detector Settings (after BootROM handoff)’. This allows VCC\_PMC to be changed to match the voltage setting of the AMR design requirements (0.88V).
+
+The Pulse Width will ignore glitches less than the setting of 0.5ns.
+
+Note: AMR does not enable a specific glitch detection response. If a response were required, it would need to be set up in the Tamper tab. AMR does not set any Tamper settings.
+
+Unselect ‘Known Answer Tests (KATs)’. AMR does not use the cryptographic engines, so there is no need to perform this test.
+
+<https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Known-Answer-Tests>
+
+**Clock Monitor**
+
+AMR does not enable clock monitoring. Leave all settings at default.
+
+![image78](../../images/grey_arrow_down2.png)
+
+![image79](../../images/1107374443.png)
+
+![image80](../../images/1107374449.png)
+
+<span id="amrv80-cipsconfiguration-tamper"></span>
+
+#### Tamper
+
+AMR does not exercise Tamper functionality. It could be used to set a systematic response to a tamper event.
+
+<https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Secure-Lockdown-Support-in-PLM>
+
+<span id="id4"></span>
+
+##### SLR0
+
+**General**
+
+Leave all settings at default.
+
+**Voltage**
+
+Leave all settings at default.
+
+![image81](../../images/grey_arrow_down2.png)
+
+![image82](../../images/1107374500.png)
+
+![image83](../../images/1107374509.png)
+
+<span id="id5"></span>
+
+##### SLR1
+
+**General**
+
+Leave all settings at default.
+
+**Voltage**
+
+Leave all settings at default.
+
+![image84](../../images/grey_arrow_down2.png)
+
+![image85](../../images/1107374485.png)
+
+![image86](../../images/1107374491.png)
+
+<span id="id6"></span>
+
+##### SLR2
+
+**General**
+
+Leave all settings at default.
+
+**Voltage**
+
+Leave all settings at default.
+
+![image87](../../images/grey_arrow_down2.png)
+
+![image88](../../images/1107374497.png)
+
+![image89](../../images/1107374482.png)
+
+<span id="amrv80-cipsconfiguration-psplinterfaces"></span>
+
+#### PS PL Interfaces
+
+AMR only uses one PL reset from CIPS and it is enabled here. This reset is used to create multiple derived resets synchronized to various PL clock domains.
+
+The PL Master AXI LPD interface connects to the RPU SmartConnect. This allows for RPU communication with the SMBus IP and the PCIe host through the General Command Queue (GCQ).
+
+‘Number of PL Resets: 1’ creates the CIPS pl0\_resetn output.
+
+Select “M\_AXI\_LPD” and set “Data Width” to 32. This creates the 32-bit @100MHz AXI4 M\_AXI\_LPD port on CIPs.
+
+![image90](../../images/grey_arrow_down2.png)
+
+![image91](../../images/1107374488.png)
+
+<span id="amrv80-cipsconfiguration-noc"></span>
+
+#### NoC
+
+AMR uses two PS NoC connections on SLR0 for PMC and RPU communication to other NoCs. A description of the available options are here: <https://docs.xilinx.com/r/en-US/pg352-cips/PS-NoC-Interfaces>.
+
+<span id="id7"></span>
+
+##### SLR0
+
+RPU:
+
+  - Select ‘RPU to NoC’: This creates the 128-bit @ 800MHz LPD\_AXI\_NOC\_0 port on CIPS
+
+PMC:
+
+  - Select ‘PMC to NoC’: This creates the 128-bit @ 400MHz PMC\_NOC\_AXI\_0 port on CIPS
+
+![image92](../../images/grey_arrow_down2.png)
+
+![image93](../../images/1107374476.png)
+
+<span id="id8"></span>
+
+##### SLR1
+
+AMR does not have any PMC NoC connections in SLR1.
+
+![image94](../../images/grey_arrow_down2.png)
+
+[![image95](../../images/1107374470.png)](../../images/1107374470.png)
+
+<span id="id9"></span>
+
+##### SLR2
+
+AMR does not have any PMC NoC connections in SLR2.
+
+![image96](../../images/grey_arrow_down2.png)
+
+[![image97](../../images/1107374467.png)](../../images/1107374467.png)
+
+<span id="amrv80-cipsconfiguration-interrupts"></span>
+
+#### Interrupts
+
+AMR uses two PL to PS LPD interrupts: one for the GCQ between the RPU (IRQ 0) and PCIe Host, and the other for SMBus (IRQ 1).
+
+Enable LPD interrupts: IRQ 0 & 1. This creates the pl\_ps\_irq0 & pl\_ps\_irq1 interrupt ports on CIPS.
+
+Enable Inter Processor Interrupts. The Inter Processor Interrupts allows one processor to interrupt another processor. The PMC and PSM Interrupts are enabled by default, and use the first three IPI agents. To allow R5 interrupts to the PMC and PSM, AMR uses four additional agents; IPI3, IPI4, IPI5, and IPI6. Two agents are used for each R5 processor. These can be changed as deemed necessary.
+
+  - IPI 0:2: N/C
+
+  - IPI 3:4: R5 0
+
+  - IPI 5:6: R5 1
+
+![image98](../../images/grey_arrow_down2.png)
+
+![image99](../../images/1107374434.png)
+
+<span id="amrv80-cipsconfiguration-power"></span>
+
+#### Power
+
+Set the AMR MIO Bank voltages to match the AMR design requirements.
+
+  - Bank0 \[MIO 0:25\]: LVCMOS 1.8V (default)
+
+  - Bank1 \[MIO 26:51\]: LVCMOS 3.3V
+
+  - Bank2 \[MIO 0:25\]: LVCMOS 3.3V
+
+  - Bank3 \[Dedicated\]: LVCMOS 1.8V (default)
+
+![image100](../../images/grey_arrow_down2.png)
+
+[![image101](../../images/1107374458.png)](../../images/1107374458.png)
+
+PS PMC TCL Settings
+
+![image102](../../images/grey_arrow_down2.png)
+
+CONFIG.PS\_PMC\_CONFIG { \\
+
+BOOT\_MODE {Custom} \\
+
+CLOCK\_MODE {Custom} \\
+
+DDR\_MEMORY\_MODE {Custom} \\
+
+DESIGN\_MODE {1} \\
+
+DEVICE\_INTEGRITY\_MODE {Custom} \\
+
+IO\_CONFIG\_MODE {Custom} \\
+
+PCIE\_APERTURES\_DUAL\_ENABLE {0} \\
+
+PCIE\_APERTURES\_SINGLE\_ENABLE {1} \\
+
+PMC\_BANK\_1\_IO\_STANDARD {LVCMOS3.3} \\
+
+PMC\_CRP\_OSPI\_REF\_CTRL\_FREQMHZ {200} \\
+
+PMC\_CRP\_PL0\_REF\_CTRL\_FREQMHZ {100} \\
+
+PMC\_CRP\_PL1\_REF\_CTRL\_FREQMHZ {33.3333333} \\
+
+PMC\_CRP\_PL2\_REF\_CTRL\_FREQMHZ {250} \\
+
+PMC\_GLITCH\_CONFIG {{DEPTH\_SENSITIVITY 1} {MIN\_PULSE\_WIDTH 0.5} {TYPE CUSTOM} {VCC\_PMC\_VALUE 0.88}} \\
+
+PMC\_GLITCH\_CONFIG\_1 {{DEPTH\_SENSITIVITY 1} {MIN\_PULSE\_WIDTH 0.5} {TYPE CUSTOM} {VCC\_PMC\_VALUE 0.88}} \\
+
+PMC\_GLITCH\_CONFIG\_2 {{DEPTH\_SENSITIVITY 1} {MIN\_PULSE\_WIDTH 0.5} {TYPE CUSTOM} {VCC\_PMC\_VALUE 0.88}} \\
+
+PMC\_GPIO\_EMIO\_PERIPHERAL\_ENABLE {0} \\
+
+PMC\_MIO11 {{AUX\_IO 0} {DIRECTION in} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO12 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO13 {{AUX\_IO 0} {DIRECTION inout} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE Reserved}} \\
+
+PMC\_MIO17 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO26 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO27 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO28 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO29 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO30 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO31 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO32 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO33 {{AUX\_IO 0} {DIRECTION in} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO34 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO35 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO36 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO37 {{AUX\_IO 0} {DIRECTION in} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO38 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO39 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO40 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO41 {{AUX\_IO 0} {DIRECTION in} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO42 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO43 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO44 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO48 {{AUX\_IO 0} {DIRECTION in} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO49 {{AUX\_IO 0} {DIRECTION in} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO50 {{AUX\_IO 0} {DIRECTION in} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO51 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PMC\_MIO\_EN\_FOR\_PL\_PCIE {0} \\
+
+PMC\_OSPI\_PERIPHERAL {{ENABLE 1} {IO {PMC\_MIO 0 .. 11}} {MODE Single}} \\
+
+PMC\_REF\_CLK\_FREQMHZ {33.333333} \\
+
+PMC\_SD0\_DATA\_TRANSFER\_MODE {8Bit} \\
+
+PMC\_SD0\_PERIPHERAL {{CLK\_100\_SDR\_OTAP\_DLY 0x00} {CLK\_200\_SDR\_OTAP\_DLY 0x2} {CLK\_50\_DDR\_ITAP\_DLY 0x1E} {CLK\_50\_DDR\_OTAP\_DLY 0x5} {CLK\_50\_SDR\_ITAP\_DLY 0x2C} {CLK\_50\_SDR\_OTAP\_DLY 0x5} {ENABLE 1} {IO\\
+
+{PMC\_MIO 13 .. 25}}} \\
+
+PMC\_SD0\_SLOT\_TYPE {eMMC} \\
+
+PMC\_USE\_PMC\_NOC\_AXI0 {0} \\
+
+PS\_BANK\_2\_IO\_STANDARD {LVCMOS3.3} \\
+
+PS\_BOARD\_INTERFACE {Custom} \\
+
+PS\_CRL\_CPM\_TOPSW\_REF\_CTRL\_FREQMHZ {1000} \\
+
+PS\_GEN\_IPI0\_ENABLE {0} \\
+
+PS\_GEN\_IPI1\_ENABLE {0} \\
+
+PS\_GEN\_IPI2\_ENABLE {0} \\
+
+PS\_GEN\_IPI3\_ENABLE {1} \\
+
+PS\_GEN\_IPI3\_MASTER {R5\_0} \\
+
+PS\_GEN\_IPI4\_ENABLE {1} \\
+
+PS\_GEN\_IPI4\_MASTER {R5\_0} \\
+
+PS\_GEN\_IPI5\_ENABLE {1} \\
+
+PS\_GEN\_IPI5\_MASTER {R5\_1} \\
+
+PS\_GEN\_IPI6\_ENABLE {1} \\
+
+PS\_GEN\_IPI6\_MASTER {R5\_1} \\
+
+PS\_GPIO\_EMIO\_PERIPHERAL\_ENABLE {0} \\
+
+PS\_I2C0\_PERIPHERAL {{ENABLE 1} {IO {PS\_MIO 2 .. 3}}} \\
+
+PS\_I2C1\_PERIPHERAL {{ENABLE 1} {IO {PS\_MIO 0 .. 1}}} \\
+
+PS\_IRQ\_USAGE {{CH0 1} {CH1 1} {CH10 0} {CH11 0} {CH12 0} {CH13 0} {CH14 0} {CH15 0} {CH2 0} {CH3 0} {CH4 0} {CH5 0} {CH6 0} {CH7 0} {CH8 0} {CH9 0}} \\
+
+PS\_KAT\_ENABLE {0} \\
+
+PS\_KAT\_ENABLE\_1 {0} \\
+
+PS\_KAT\_ENABLE\_2 {0} \\
+
+PS\_MIO10 {{AUX\_IO 0} {DIRECTION in} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PS\_MIO11 {{AUX\_IO 0} {DIRECTION in} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PS\_MIO12 {{AUX\_IO 0} {DIRECTION inout} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE Reserved}} \\
+
+PS\_MIO13 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PS\_MIO14 {{AUX\_IO 0} {DIRECTION in} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PS\_MIO18 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PS\_MIO19 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PS\_MIO22 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PS\_MIO23 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PS\_MIO24 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PS\_MIO25 {{AUX\_IO 0} {DIRECTION in} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PS\_MIO4 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PS\_MIO5 {{AUX\_IO 0} {DIRECTION in} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PS\_MIO6 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PS\_MIO7 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE GPIO}} \\
+
+PS\_MIO8 {{AUX\_IO 0} {DIRECTION in} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 0} {SLEW slow} {USAGE Reserved}} \\
+
+PS\_MIO9 {{AUX\_IO 0} {DIRECTION out} {DRIVE\_STRENGTH 8mA} {OUTPUT\_DATA default} {PULL pullup} {SCHMITT 1} {SLEW slow} {USAGE Reserved}} \\
+
+PS\_M\_AXI\_LPD\_DATA\_WIDTH {32} \\
+
+PS\_NUM\_FABRIC\_RESETS {1} \\
+
+PS\_PCIE1\_PERIPHERAL\_ENABLE {0} \\
+
+PS\_PCIE2\_PERIPHERAL\_ENABLE {1} \\
+
+PS\_PCIE\_EP\_RESET1\_IO {PMC\_MIO 24} \\
+
+PS\_PCIE\_EP\_RESET2\_IO {PMC\_MIO 25} \\
+
+PS\_PCIE\_RESET {{ENABLE 1}} \\
+
+PS\_PL\_CONNECTIVITY\_MODE {Custom} \\
+
+PS\_SPI0 {{GRP\_SS0\_ENABLE 1} {GRP\_SS0\_IO {PS\_MIO 15}} {GRP\_SS1\_ENABLE 0} {GRP\_SS1\_IO {PMC\_MIO 14}} {GRP\_SS2\_ENABLE 0} {GRP\_SS2\_IO {PMC\_MIO 13}} {PERIPHERAL\_ENABLE 1} {PERIPHERAL\_IO {PS\_MIO 12 .. 17}}}\\
+
+\\
+
+PS\_SPI1 {{GRP\_SS0\_ENABLE 0} {GRP\_SS0\_IO {PS\_MIO 9}} {GRP\_SS1\_ENABLE 0} {GRP\_SS1\_IO {PS\_MIO 8}} {GRP\_SS2\_ENABLE 0} {GRP\_SS2\_IO {PS\_MIO 7}} {PERIPHERAL\_ENABLE 0} {PERIPHERAL\_IO {PS\_MIO 6 .. 11}}} \\
+
+PS\_TTC0\_PERIPHERAL\_ENABLE {1} \\
+
+PS\_TTC1\_PERIPHERAL\_ENABLE {1} \\
+
+PS\_TTC2\_PERIPHERAL\_ENABLE {1} \\
+
+PS\_TTC3\_PERIPHERAL\_ENABLE {1} \\
+
+PS\_UART0\_PERIPHERAL {{ENABLE 1} {IO {PS\_MIO 8 .. 9}}} \\
+
+PS\_UART1\_PERIPHERAL {{ENABLE 1} {IO {PS\_MIO 20 .. 21}}} \\
+
+PS\_USE\_FPD\_CCI\_NOC {0} \\
+
+PS\_USE\_M\_AXI\_FPD {0} \\
+
+PS\_USE\_M\_AXI\_LPD {1} \\
+
+PS\_USE\_NOC\_LPD\_AXI0 {1} \\
+
+PS\_USE\_PMCPL\_CLK0 {1} \\
+
+PS\_USE\_PMCPL\_CLK1 {1} \\
+
+PS\_USE\_PMCPL\_CLK2 {1} \\
+
+PS\_USE\_S\_AXI\_LPD {0} \\
+
+SMON\_ALARMS {Set\_Alarms\_On} \\
+
+SMON\_ENABLE\_TEMP\_AVERAGING {0} \\
+
+SMON\_MEAS100 {{ALARM\_ENABLE 1} {ALARM\_LOWER 0.00} {ALARM\_UPPER 4.00} {AVERAGE\_EN 0} {ENABLE 1} {MODE {4 V unipolar}} {NAME VCCO\_500} {SUPPLY\_NUM 9}} \\
+
+SMON\_MEAS101 {{ALARM\_ENABLE 1} {ALARM\_LOWER 0.00} {ALARM\_UPPER 4.00} {AVERAGE\_EN 0} {ENABLE 1} {MODE {4 V unipolar}} {NAME VCCO\_501} {SUPPLY\_NUM 10}} \\
+
+SMON\_MEAS102 {{ALARM\_ENABLE 1} {ALARM\_LOWER 0.00} {ALARM\_UPPER 4.00} {AVERAGE\_EN 0} {ENABLE 1} {MODE {4 V unipolar}} {NAME VCCO\_502} {SUPPLY\_NUM 11}} \\
+
+SMON\_MEAS103 {{ALARM\_ENABLE 1} {ALARM\_LOWER 0.00} {ALARM\_UPPER 4.00} {AVERAGE\_EN 0} {ENABLE 1} {MODE {4 V unipolar}} {NAME VCCO\_503} {SUPPLY\_NUM 12}} \\
+
+SMON\_MEAS104 {{ALARM\_ENABLE 1} {ALARM\_LOWER 0.00} {ALARM\_UPPER 2.00} {AVERAGE\_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME VCCO\_700} {SUPPLY\_NUM 13}} \\
+
+SMON\_MEAS105 {{ALARM\_ENABLE 1} {ALARM\_LOWER 0.00} {ALARM\_UPPER 2.00} {AVERAGE\_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME VCCO\_701} {SUPPLY\_NUM 14}} \\
+
+SMON\_MEAS106 {{ALARM\_ENABLE 1} {ALARM\_LOWER 0.00} {ALARM\_UPPER 2.00} {AVERAGE\_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME VCCO\_702} {SUPPLY\_NUM 15}} \\
+
+SMON\_MEAS118 {{ALARM\_ENABLE 1} {ALARM\_LOWER 0.00} {ALARM\_UPPER 2.00} {AVERAGE\_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME VCC\_PMC} {SUPPLY\_NUM 0}} \\
+
+SMON\_MEAS119 {{ALARM\_ENABLE 1} {ALARM\_LOWER 0.00} {ALARM\_UPPER 2.00} {AVERAGE\_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME VCC\_PSFP} {SUPPLY\_NUM 1}} \\
+
+SMON\_MEAS120 {{ALARM\_ENABLE 1} {ALARM\_LOWER 0.00} {ALARM\_UPPER 2.00} {AVERAGE\_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME VCC\_PSLP} {SUPPLY\_NUM 2}} \\
+
+SMON\_MEAS121 {{ALARM\_ENABLE 1} {ALARM\_LOWER 0.00} {ALARM\_UPPER 2.00} {AVERAGE\_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME VCC\_RAM} {SUPPLY\_NUM 3}} \\
+
+SMON\_MEAS122 {{ALARM\_ENABLE 1} {ALARM\_LOWER 0.00} {ALARM\_UPPER 2.00} {AVERAGE\_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME VCC\_SOC} {SUPPLY\_NUM 4}} \\
+
+SMON\_MEAS47 {{ALARM\_ENABLE 1} {ALARM\_LOWER 0.00} {ALARM\_UPPER 2.00} {AVERAGE\_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME GTYP\_AVCCAUX\_104} {SUPPLY\_NUM 20}} \\
+
+SMON\_MEAS48 {{ALARM\_ENABLE 1} {ALARM\_LOWER 0.00} {ALARM\_UPPER 2.00} {AVERAGE\_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME GTYP\_AVCCAUX\_105} {SUPPLY\_NUM 21}} \\
+
+SMON\_MEAS64 {{ALARM\_ENABLE 1} {ALARM\_LOWER 0.00} {ALARM\_UPPER 2.00} {AVERAGE\_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME GTYP\_AVCC\_104} {SUPPLY\_NUM 18}} \\
+
+SMON\_MEAS65 {{ALARM\_ENABLE 1} {ALARM\_LOWER 0.00} {ALARM\_UPPER 2.00} {AVERAGE\_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME GTYP\_AVCC\_105} {SUPPLY\_NUM 19}} \\
+
+SMON\_MEAS81 {{ALARM\_ENABLE 1} {ALARM\_LOWER 0.00} {ALARM\_UPPER 2.00} {AVERAGE\_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME GTYP\_AVTT\_104} {SUPPLY\_NUM 22}} \\
+
+SMON\_MEAS82 {{ALARM\_ENABLE 1} {ALARM\_LOWER 0.00} {ALARM\_UPPER 2.00} {AVERAGE\_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME GTYP\_AVTT\_105} {SUPPLY\_NUM 23}} \\
+
+SMON\_MEAS96 {{ALARM\_ENABLE 1} {ALARM\_LOWER 0.00} {ALARM\_UPPER 2.00} {AVERAGE\_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME VCCAUX} {SUPPLY\_NUM 6}} \\
+
+SMON\_MEAS97 {{ALARM\_ENABLE 1} {ALARM\_LOWER 0.00} {ALARM\_UPPER 2.00} {AVERAGE\_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME VCCAUX\_PMC} {SUPPLY\_NUM 7}} \\
+
+SMON\_MEAS98 {{ALARM\_ENABLE 1} {ALARM\_LOWER 0.00} {ALARM\_UPPER 2.00} {AVERAGE\_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME VCCAUX\_SMON} {SUPPLY\_NUM 8}} \\
+
+SMON\_MEAS99 {{ALARM\_ENABLE 1} {ALARM\_LOWER 0.00} {ALARM\_UPPER 2.00} {AVERAGE\_EN 0} {ENABLE 1} {MODE {2 V unipolar}} {NAME VCCINT} {SUPPLY\_NUM 5}} \\
+
+SMON\_TEMP\_AVERAGING\_SAMPLES {0} \\
+
+SMON\_VOLTAGE\_AVERAGING\_SAMPLES {8} \\
+
+} \\
+

@@ -1,0 +1,66 @@
+# AMR V80 - Clock Reset Module
+
+<span id="amrv80-clockresetmodule-clockreset"></span>
+
+## Clock Reset
+
+The AMR Clock Reset module is used to create kernel clocks and distribute synchronous resets throughout the device. The [Clocking Wizard](https://docs.xilinx.com/r/en-US/ug1273-versal-acap-design/Clocking) is used to create additional PL clocks, and the synchronous resets are generated using the [Processor System Reset IP](https://docs.xilinx.com/v/u/en-US/pg164-proc-sys-reset).
+
+[![image1](../../images/1107375517.png)](../../images/1107375517.png)
+
+<span id="amrv80-clockresetmodule-sub-blocks"></span>
+
+## Sub-blocks
+
+<span id="amrv80-clockresetmodule-usr-clk-wiz"></span>
+
+### usr\_clk\_wiz
+
+This IP uses the 33.333333MHz from the CIPS (pl1\_ref\_clk) to create the 299.996999MHz and 499.994999MHz clocks for user logic\_clk\_usr\_0 & clk\_usr\_1). The user can change the output clock frequencies to meet their design requirements. The resets from usr\_0\_psr and usr\_1\_psr are asserted when the ‘locked’ signal from this module is de-asserted.
+
+<span id="amrv80-clockresetmodule-pl-psr-programmablelogicprocessorsystemreset"></span>
+
+### pl\_psr - Programmable Logic Processor System Reset
+
+This block synchronizes the CIPS reset (pl0\_resetn), to the CIPS 100MHz clock (pl0\_ref\_clk). Then it is used to create device wide resets synchronous to the PCIe 250MHz clock and the clock wizard 299.996999MHz and 499.994999MHz clocks.
+
+<span id="amrv80-clockresetmodule-pcie-psr-pcieprocessorsystemreset"></span>
+
+### pcie\_psr - PCIe Processor System Reset
+
+This block creates a reset signal synchronous to the 249.999985MHz PCIe (dma interface) clock.
+
+<span id="amrv80-clockresetmodule-usr-0-psr-user0processorsystemreset"></span>
+
+### usr\_0\_psr - User0 Processor System Reset
+
+Using the 100MHz synchronized reset output from pl\_psr and the dcm\_locked signal from the clock wizard, this block creates a reset signal synchronous to the clock wizard 299.996999MHz clock. These resets would be used for user logic.
+
+<span id="amrv80-clockresetmodule-usr-1-psr-user1processorsystemreset"></span>
+
+### usr\_1\_psr - User1 Processor System Reset
+
+Using the 100MHz synchronized reset output from pl\_psr and the dcm\_locked signal from the clock wizard, this block creates a reset signal synchronous to the clock wizard 499.994999MHz clock. These resets would be used for user logic.
+
+<span id="amrv80-clockresetmodule-pcie-mgmt-pdi-reset"></span>
+
+### pcie\_mgmt\_pdi\_reset
+
+This block is reserved for future growth.
+
+<span id="amrv80-clockresetmodule-flashreload"></span>
+
+#### Flash Reload
+
+AMR only supports a Power-On-Reset to reload a design from flash. It does **not** support a hot reset to reload the flash due to the system complexity of resets which are described below.
+
+  - When PCIe Reset asserts, this reset does not naturally progress to the rest of the device.
+
+  - The reset structure of Versal is not structured/tested in a way that it can be reset properly without reloading the entire design from flash (in the desired time frame).
+    
+      - The programmatic way to reset NOC, PS, DDR, HBM, etc is by issuing a POR and reloading the design from flash.
+
+  - The device POR cannot be issued until the host has issued the PCIe reset sequence or adverse behavior on the host may be observed.
+    
+      - Some DELL servers reboot themselves if the PCIe link goes down unexpectedly.
+

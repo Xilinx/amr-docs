@@ -1,0 +1,54 @@
+# AMR V80 - Memory Map
+
+AMR uses the address mapping illustrated below.
+
+<span id="amrv80-memorymap-memorymapping"></span>
+
+## Memory Mapping
+
+This table shows the recommended functions that can access the DDR Memories. The light grey rows and columns related to the APU, PCIe User, and PCIe DMA are not currently used, but they are captured for future growth. The **Yes/No** entries indicate the recommended memory access. There is not an active control that prohibits unintended access to the DDR. For example, if caution is not exercised, the APU or PL could access DDR locations intended for the RPU (RPU execution).
+
+Address remapping must be used for the PCIe to access the 128MB of memory starting at 0x000\_3800\_0000. The address remap is configured in the AXI NoC CIPS (axi\_noc\_cips).
+
+![images/1107374801.png](../../images/1107374801.png)
+
+N/A\* The RPU is only 32-bit addressing, so it cannot access more than 4GB of DDR.
+
+<span id="amrv80-memorymap-amrmemorymap"></span>
+
+## AMR Memory Map
+
+This table shows the memory map of AMR. The greyed out rows are not used in AMR, but they are available for future growth.
+
+A complete AMD Versal™ Address map can be found here:
+
+  - <https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/4-GB-Processor-System-Address-Map>
+
+  - <https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map>
+
+<span id="amrv80-memorymap-amr4gmemoryspace-ddrlower2g-ps-pmc"></span>
+
+### AMR 4G Memory Space - DDR Lower 2G & PS/PMC
+
+![images/1107374801.png](../../images/1107374801.png)
+
+<span id="amrv80-memorymap-amrhbmmemoryspace"></span>
+
+### AMR HBM Memory Space
+
+![images/1107374822.png](../../images/1107374822.png)
+
+<span id="amrv80-memorymap-pf0baraddressing"></span>
+
+### AMR PL Memory Space
+
+![images/1107374813.png](../../images/1107374813.png)
+
+PCIe® Management functions are in blue.
+
+<span id="amrv80-memorymap-amrddrupper2ganddimm32gmemoryspace"></span>
+
+### AMR DDR Upper 2G and DIMM 32G Memory Space
+
+![images/1107374792.png](../../images/1107374792.png)
+

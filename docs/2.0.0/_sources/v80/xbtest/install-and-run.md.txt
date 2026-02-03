@@ -1,0 +1,343 @@
+# How-to install and run a pre-built AMR design on an ALVEO V80 card
+
+This is a getting started guide for the Adaptive Management Runtime (AMR) to be used with the provided pre-built AMR package file. This guide offers instruction in installing the package on your server and running key commands to test and evaluate the design example. The pre-built example image includes the AMR base design. This provides a turnkey card capable of running through the canned tests in the xbtest suite. For the AMR source files, only the AMR base design is included - the xbtest IP is not included and instead would be replaced with a user application.
+
+<span id="how-toinstallandrunapre-builtamrdesignonanalveocard-beforeyoubegin"></span>
+
+## Before You Begin
+
+<span id="how-toinstallandrunapre-builtamrdesignonanalveocard-dependencies"></span>
+
+### Dependencies
+
+Supported OS and kernel. See [Supported Kernels and Distributions](../overview/amr-overview.md#AMROverview-SupportedKernelsandDistributions)
+
+*Note*: root/sudo permissions are required.
+
+Tools
+
+  - Vivado™ 2026.1
+
+<span id="how-toinstallandrunapre-builtamrdesignonanalveocard-preparingforamrinstallation"></span>
+
+### Preparing for AMR Installation
+
+1.  Confirm the server is running a supported OS. Follow the instructions provided in the *Alveo V80 Data Center Accelerator Cards Installation Guide* ([UG1617](https://docs.amd.com/go/en-US/ug1617-alveo-v80)) to physically install the card in your server.
+
+2.  Get the latest AMR installation package for your Alveo card.
+    
+    1.  For the most recent version of the example design, refer to the table in [AMR Release Information](../release-information/)..md
+        
+        1.  *AMR Git Release Tag* directs you to the latest release of source code on GitHub, which can be downloaded as a `.zip` or `.tar.gz` file.
+        
+        2.  *AMR Deployment Archive* is a `.zip` of the AMR installation package. It is pre-built from the same source code in the *AMR Git Release Tag*, using the Vivado™ tools version noted in the [AMR Release Information](../release-information/) table..md
+    
+    2.  Download the latest *AMR Deployment Archive* to the server that contains your Alveo card.
+    
+    3.  Unzip the archive, and find the `amr_install.sh` script (which will be used in the AMR installation). Review the [AMR Deployment Archive](../../deployment/deployment-archive) for details on the extracted files and directory structure..md
+
+3.  Unlike prior Alveo platforms, AMR does not use the Xilinx RunTime Library (XRT). Instead, AMR includes the AMR Management Interface (AMI) as part of the example design. Before AMR installation, ensure that XRT has been removed. It’s not possible to have AMI and XRT running on the same host at the same time.
+
+    **Ubuntu:**
+
+    ```bash
+    # Check if XRT is installed
+    apt list | grep xrt
+
+    # Remove XRT if present
+    sudo apt remove xrt
+    ```
+
+    **RHEL:**
+
+    ```bash
+    # Check if XRT is installed
+    yum list | grep xrt
+
+    # Remove XRT if present
+    sudo yum remove xrt
+    ```
+
+<span id="how-toinstallandrunapre-builtamrdesignonanalveocard-amrinstallationanchor"></span>
+
+## AMR Installation
+
+Installing AMR is a two-step process. First, you will install the pre-built AMR package onto the host. Second, you will program AMR into flash on your Alveo card.
+
+To install the package onto the host, navigate to the directory with the amr\_install.sh script, and execute this script.
+
+    $ sudo ./amr_install.sh
+
+If successfully installed, the console will display “AMR Installation Complete.” For further information, see [Installing AMR Deployment package onto the Host Server](../install-host/) for detailed instructions with a complete example output.
+
+To program AMR onto your Alveo card for the first time, update the Flash Partition Table ](FPT) image in flash using Vivado HW Manager and JTAG. Refer to [AMR Updating FPT Image in Flash](../update-fpt/) for step-by-step instructions. If successful, Vivado HW Manager will report this with a pop-up message: “Flash programming completed successfully.” Cold boot the server to boot AMR from flash.
+
+<span id="how-toinstallandrunapre-builtamrdesignonanalveocard-testingamr"></span>
+
+## Testing AMR
+
+Two sets of tools are provided to test the AMR design running in hardware: a suite of AMI commands (`ami_tool <command>`) and xbtest testcases (`xbtest -d <Bus:Device.Function(BDF)> -c <testcase>`). A subset of these tools are illustrated below.
+
+<span id="how-toinstallandrunapre-builtamrdesignonanalveocard-ami-tooloverview"></span>
+
+### ami\_tool Overview
+
+The overview command shows basic information including the AMI version, the BDF, the device name, the currently programmed design’s UUID, and the device state. Take note of the BDF of your card (**21:00.0** in the example below), which will be used in subsequent commands.
+
+    $ ami_tool overview
+    
+    AMI
+    ---------------------
+    Version          | 2.4.0  (0)
+    Branch
+    Hash             | 898e7542b3ce3dd7f8cef299c152b809541fd039
+    Hash Date        | 20250918
+    Driver Version   | 2.4.0  (0)
+    
+    
+    BDF       | Device          | UUID                               | AMC          | State
+    ------------------------------
+    e2:00.0   | ALVEO V80 INT   | 709c2688cb801825929d52552b83354b   | 2.4.0  (0)   | READY
+
+If the device state is NOT\_READY, cold reboot the system.
+
+Confirm the AMI driver version matches the AMC version on the device before continuing (compatibility is indicated by having the same Major & Minor version numbers in the AMI/AMC Major.Minor.Patch version number format). If they do not match, AMI behavior is undefined.
+
+<span id="how-toinstallandrunapre-builtamrdesignonanalveocard-ami-toolmfg-info"></span>
+
+### ami\_tool mfg\_info
+
+The mfg\_info command displays the card manufacturing information stored on an EEPROM. The values will vary from card to card.
+
+    $ ami_tool mfg_info -d <BDF>
+    
+    Manufacturing Information
+    ------------------------
+    Eeprom Version              | 4.0
+    Product Name                | ALVEO V80 PQ
+    Board Revision              | 1
+    Serial Number               | XFL1VQUAH0XJ
+    Mac Address 1               | 00:0a:35:22:4c:10
+    Mac Address N               | 00:0a:35:22:4c:1f
+    Manufacturing Date          | Thu Jan  9 13:58:00 2025
+    UUID                        | bf913201-be72-a4bc-4f48-c044d3e752d5
+    Board Part Num              | A-V80-P64G-PQ-G
+    Mfg Part Num                | 043-05113-01
+
+<span id="how-toinstallandrunapre-builtamrdesignonanalveocard-ami-toolsensors"></span>
+
+### ami\_tool sensors
+
+The sensors command displays the available sensors and their values. The values may vary. For removable sensors (such as QSFP devices), the Status may appear as “invalid”; this indicates that no device is inserted. The **\*** displayed after a sensor status indicates that the value retrieved was from a cached store - i.e., the value had been previously updated within the refresh timeframe (1 second).
+
+    $ ami_tool sensors -d <BDF>
+    
+    Name            |      Value | Status
+    --------------
+    1V2_GTXAVTT     |   31.000 C | valid
+                    |    8.000 A | valid
+                    |    1.200 V | valid
+    --------------
+    0V88_VCC_CPM5   |   28.000 C | valid*
+                    |    3.000 A | valid*
+                    |    0.880 V | valid*
+    --------------
+    PCB             |   30.000 C | valid*
+    --------------
+    Device          |   40.000 C | valid*
+    --------------
+    VCCINT          |   35.000 C | valid*
+                    |   23.000 A | valid*
+                    |    0.800 V | valid*
+    --------------
+    Module_0        |    0.000 C | valid*
+    --------------
+    Module_1        |    0.000 C | invalid
+    --------------
+    Module_2        |    0.000 C | invalid
+    --------------
+    Module_3        |    0.000 C | invalid
+    --------------
+    DIMM            |   27.000 C | valid*
+    --------------
+    1V2_VCC_HBM     |   35.000 C | valid*
+                    |    4.000 A | valid*
+                    |    1.199 V | valid*
+    --------------
+    Total_Power     |   54.695 W | valid
+    --------------
+    12V_AUX1        |    0.859 A | valid*
+                    |   12.144 V | valid*
+    --------------
+    12V_AUX2        |    1.119 A | valid*
+                    |   12.136 V | valid*
+    --------------
+    1V2_VCCO_DIMM   |    1.100 A | valid*
+                    |    1.200 V | valid*
+    --------------
+    3V3_PEX         |    1.759 A | valid*
+                    |    3.312 V | valid*
+    --------------
+    12V_PEX         |    2.040 A | valid*
+                    |   12.168 V | valid*
+    --------------
+    3V3_QSFP        |    0.020 A | valid*
+                    |    3.312 V | valid*
+    --------------
+    1V5_VCCAUX      |    1.498 V | valid*
+
+<span id="how-toinstallandrunapre-builtamrdesignonanalveocard-xbtest-d-bdf-cverify"></span>
+
+### xbtest -d \<BDF\> -c verify
+
+Verify successful AMR installation by running the xbtest `verify` test, which checks basic communication between the host and xbtest IP’s scratch registers. In the following example, the BDF is 21:00.0; this may differ on your system.
+
+Successful completion of this test is indicated by 0 Errors, 0 Failures, and the message “RESULT: ALL TESTS PASSED”. The Critical Warning `ITF_138` “PCIe link speed (4) configuration running on the card does not match expected (5) according to device information” is an indication that the PCIe link speed is limited by the host capability, but is not a failure.
+
+    $  xbtest -d <BDF> -c verify
+    
+    INFO      :: GEN_016 :: GENERAL      :: Scanning installed xbtest HW designs...
+    STATUS    :: MGT_002 :: TIMER        :: Start 1s tick function
+    INFO      :: GEN_016 :: GENERAL      :: e2:00.0 :: Getting card configuration
+    INFO      :: GEN_064 :: GENERAL      :: e2:00.0 :: Starting test 1 of 1. Executing: xbtest -d e2:00.0 -j /opt/amd/amr/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/xbtest/test/verify.json -i /opt/amd/amr/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/design.pdi -e /opt/amd/amr/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/xbtest/metadata/xbtest_pfm_def.json
+    INFO      :: GEN_039 :: GENERAL      :: #####################################################################################################
+    INFO      :: GEN_039 :: GENERAL      :: xbtest version: 7.1.0
+    INFO      :: GEN_016 :: GENERAL      ::          - SW Build    : 4064028 on Thu Aug 21 17:31:15 2025
+    INFO      :: GEN_016 :: GENERAL      ::          - Process ID  : 25972
+    INFO      :: GEN_016 :: GENERAL      :: #####################################################################################################
+    INFO      :: GEN_016 :: GENERAL      :: System:
+    INFO      :: GEN_016 :: GENERAL      ::          - Name          : Linux
+    INFO      :: GEN_016 :: GENERAL      ::          - Release       : 6.8.0-78-generic
+    INFO      :: GEN_016 :: GENERAL      ::          - Version       : #78-Ubuntu SMP PREEMPT_DYNAMIC Tue Aug 12 11:34:18 UTC 2025
+    INFO      :: GEN_016 :: GENERAL      ::          - Machine       : x86_64
+    INFO      :: GEN_039 :: GENERAL      ::          - Running with AMI driver 2.4.0
+    INFO      :: GEN_016 :: GENERAL      :: #####################################################################################################
+    INFO      :: GEN_039 :: GENERAL      :: Start of xbtest session at: Mon Aug 25 08:50:26 2025 PDT
+    INFO      :: GEN_039 :: GENERAL      :: #####################################################################################################
+    INFO      :: ITF_008 :: XBT_SW_CFG   :: Using card: ALVEO V80 PQ (e2:00.0)
+    Starting dynamic display mode...
+    
+    
+    Repeating last content of dynamic display mode:
+      INFO      :: GEN_039 :: GENERAL      :: #####################################################################################################
+      INFO      :: GEN_039 :: GENERAL      :: xbtest version: 7.1.0
+      INFO      :: GEN_039 :: GENERAL      ::        - Running with AMI driver 2.4.0
+      INFO      :: GEN_039 :: GENERAL      :: Start of xbtest session at: Mon Aug 25 08:50:26 2025 PDT
+      INFO      :: GEN_039 :: GENERAL      :: #####################################################################################################
+      INFO      :: ITF_008 :: XBT_SW_CFG   :: Using card: ALVEO V80 PQ (e2:00.0)
+      CRIT WARN :: ITF_138 :: DEVICE       :: PCIe link speed (4) configuration running on the card does not match expected (5) according to device information
+      WARNING   :: VER_012 :: VERIFY       :: Verify xbtest HW IP has not access to the DNA
+    
+      -------- --------------------- -------------------------
+      |                  | |                          STATUS                           | |                            ONGOING TEST                             |
+      |     TESTCASE     | |---------------------| |-----------------------|
+      |                  | | Pending | Completed | Passed | Failed | Errors | Warnings | | Remaining time (s) | Parameters                                     |
+      |------| |---------------------| |-----------------------|
+      | verify           | |       0 |         3 |      3 |      0 |      0 |        1 | |                n/a | n/a                                            |
+      -------- --------------------- -------------------------
+    
+      Card status: Power: 54.7 W; Temperature: 40 C; Qty of measurements: 1
+    
+      Messages stats: 1 Warnings, 1 Critical Warnings, 25 Passes, 0 Errors, 0 Failures encountered
+    
+      Total elapsed: 6 s
+    
+    
+    INFO      :: GEN_040 :: GENERAL      :: ############################################## SUMMARY ##############################################
+    INFO      :: GEN_040 :: GENERAL      :: End of xbtest session at: Mon Aug 25 08:50:30 2025 PDT
+    INFO      :: GEN_040 :: GENERAL      :: 1 Warnings, 1 Critical Warnings, 24 Passes, 0 Errors, 0 Failures encountered
+    INFO      :: GEN_040 :: GENERAL      :: #####################################################################################################
+    PASS      :: GEN_024 :: GENERAL      :: RESULT: ALL TESTS PASSED
+
+<span id="how-toinstallandrunapre-builtamrdesignonanalveocard-xbtest-d-bdf-cmemory"></span>
+
+### xbtest -d \<BDF\> -c memory
+
+Verify the DDR and HBM memory performance by running the xbtest memory test, which checks communication between the xbtest IP and available memories. Read and write bandwidth and latency measurements are logged to .csv files for detailed review. In the following example, the BDF is 21:00.0. This may differ on your system.
+
+Successful completion of this test is indicated by 0 Errors, 0 Failures, and the message “RESULT: ALL TESTS PASSED”. The Critical Warning `ITF_138` “PCIe link speed (4) configuration running on the card does not match expected (5) according to device information” is an indication that the PCIe link speed is limited by the host capability, but is not a failure.
+
+    $ xbtest -d <BDF> -c memory
+    INFO      :: GEN_016 :: GENERAL      :: Scanning installed xbtest HW designs...
+    STATUS    :: MGT_002 :: TIMER        :: Start 1s tick function
+    INFO      :: GEN_016 :: GENERAL      :: e2:00.0 :: Getting card configuration
+    INFO      :: GEN_064 :: GENERAL      :: e2:00.0 :: Starting test 1 of 1. Executing: xbtest -d e2:00.0 -j /opt/amd/amr/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/xbtest/test/memory.json -i /opt/amd/amr/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/design.pdi -e /opt/amd/amr/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/xbtest/metadata/xbtest_pfm_def.json
+    INFO      :: GEN_039 :: GENERAL      :: #####################################################################################################
+    INFO      :: GEN_039 :: GENERAL      :: xbtest version: 7.1.0
+    INFO      :: GEN_016 :: GENERAL      ::          - SW Build    : 4064028 on Thu Aug 21 17:31:15 2025
+    INFO      :: GEN_016 :: GENERAL      ::          - Process ID  : 25991
+    INFO      :: GEN_016 :: GENERAL      :: #####################################################################################################
+    INFO      :: GEN_016 :: GENERAL      :: System:
+    INFO      :: GEN_016 :: GENERAL      ::          - Name          : Linux
+    INFO      :: GEN_016 :: GENERAL      ::          - Release       : 6.8.0-78-generic
+    INFO      :: GEN_016 :: GENERAL      ::          - Version       : #78-Ubuntu SMP PREEMPT_DYNAMIC Tue Aug 12 11:34:18 UTC 2025
+    INFO      :: GEN_016 :: GENERAL      ::          - Machine       : x86_64
+    INFO      :: GEN_039 :: GENERAL      ::          - Running with AMI driver 2.4.0
+    INFO      :: GEN_016 :: GENERAL      :: #####################################################################################################
+    INFO      :: GEN_039 :: GENERAL      :: Start of xbtest session at: Mon Aug 25 08:51:26 2025 PDT
+    INFO      :: GEN_039 :: GENERAL      :: #####################################################################################################
+    INFO      :: ITF_008 :: XBT_SW_CFG   :: Using card: ALVEO V80 PQ (e2:00.0)
+    Starting dynamic display mode...
+    
+    
+    Repeating last content of dynamic display mode:
+      INFO      :: GEN_039 :: GENERAL      :: #####################################################################################################
+      INFO      :: GEN_039 :: GENERAL      :: xbtest version: 7.1.0
+      INFO      :: GEN_039 :: GENERAL      ::        - Running with AMI driver 2.4.0
+      INFO      :: GEN_039 :: GENERAL      :: Start of xbtest session at: Mon Aug 25 08:51:26 2025 PDT
+      INFO      :: GEN_039 :: GENERAL      :: #####################################################################################################
+      INFO      :: ITF_008 :: XBT_SW_CFG   :: Using card: ALVEO V80 PQ (e2:00.0)
+      CRIT WARN :: ITF_138 :: DEVICE       :: PCIe link speed (4) configuration running on the card does not match expected (5) according to device information
+      WARNING   :: VER_012 :: VERIFY       :: Verify xbtest HW IP has not access to the DNA
+    
+      -------- --------------------- -------------------------
+      |                  | |                          STATUS                           | |                            ONGOING TEST                             |
+      |     TESTCASE     | |---------------------| |-----------------------|
+      |                  | | Pending | Completed | Passed | Failed | Errors | Warnings | | Remaining time (s) | Parameters                                     |
+      |------| |---------------------| |-----------------------|
+      | memory                                                                                                                                                 |
+      |              DDR | |       0 |         4 |      4 |      0 |      0 |        0 | |                n/a | n/a                                            |
+      |              HBM | |       0 |         4 |      4 |      0 |      0 |        0 | |                n/a | n/a                                            |
+      |------| |---------------------| |-----------------------|
+      | verify           | |       0 |         3 |      3 |      0 |      0 |        1 | |                n/a | n/a                                            |
+      -------- --------------------- -------------------------
+    
+      Card status: Power: 56.7 W; Temperature: 48 C; Qty of measurements: 100
+    
+      Messages stats: 1 Warnings, 1 Critical Warnings, 65 Passes, 0 Errors, 0 Failures encountered
+    
+      Total elapsed: 105 s
+    
+    
+    INFO      :: GEN_040 :: GENERAL      :: ############################################## SUMMARY ##############################################
+    INFO      :: GEN_040 :: GENERAL      :: End of xbtest session at: Mon Aug 25 08:53:09 2025 PDT
+    PASS      :: GEN_022 :: GENERAL      :: memory DDR test passed
+    PASS      :: GEN_022 :: GENERAL      :: memory HBM test passed
+    INFO      :: GEN_040 :: GENERAL      :: 1 Warnings, 1 Critical Warnings, 64 Passes, 0 Errors, 0 Failures encountered
+    INFO      :: GEN_040 :: GENERAL      :: #####################################################################################################
+    PASS      :: GEN_024 :: GENERAL      :: RESULT: ALL TESTS PASSED
+
+<span id="how-toinstallandrunapre-builtamrdesignonanalveocard-troubleshooting"></span>
+
+### Troubleshooting
+
+For debugging information, see [AMR Debug Techniques](../../deployment/debug)..md
+
+<span id="how-toinstallandrunapre-builtamrdesignonanalveocard-nextsteps"></span>
+
+## Next Steps
+
+This getting started guide covered AMR installation and basic hardware testing commands. If you would like to explore the full set of hardware test commands available, see:
+
+  - [AMR Management Interface userguide](../../deployment/ami-tool-guide)
+
+  - [xbtest User Guide / Usage / command line options](xbtest-Userguide)
+
+Notably, some interesting commands to try are:
+
+  - the AMI cfgmem\_program command, which updates the PDI in flash over the PCIe interface. See [AMR Updating Design PDI in Flash](../update-pdi/)
+
+  - additional pre-canned xbtest tests are available to test other features on the card. Please refer to [xbtest User Guide / Pre-canned tests section](xbtest/user-guide/source/index). The available pre-canned tests are: gtm\_prbs, gtyp\_prbs, memory, mmio, power, stress, and verify.
+
+For a quick look at how to build AMR, refer to the getting started guide: [How-to Rebuild an AMR Design for Yourself](rebuild/).
+

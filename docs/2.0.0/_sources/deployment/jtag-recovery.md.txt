@@ -1,0 +1,87 @@
+# AMR JTAG Boot Recovery
+
+<span id="amrjtagbootrecovery-vivadofailuremessage"></span>
+
+## Vivado Failure Message
+
+During the development cycle, it may be possible that the flash gets corrupted and it is no longer possible to program the device via the OSPI Flash boot mode.
+
+The reason for the failure can be read from the ERROR\_STATUS register.
+
+<https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/ERROR_STATUS-Register>
+
+[![image1](../images/1107374031.png)](../images/1107374031.png)
+
+Vivado will display the following error message.
+
+[![image2](../images/1107374034.png)](../images/1107374034.png)
+
+In this scenario, the provided script can be used to change the boot mode to JTAG to allow programming.
+
+The JTAG Boot recovery script can be found in the /opt/amd/amr/amd\_v80\_gen5x8\_24.1/flash\_setup/versal\_change\_boot\_mode.tcl.
+
+<span id="amrjtagbootrecovery-settingthejtagbootmode"></span>
+
+## Setting the JTAG Boot mode
+
+The primary boot mechanism is the OSPI interface.
+
+<https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Primary-Boot-Interfaces-Table>
+
+If programming fails due to the above error, it is necessary to switch the boot mode to JTAG recovery.
+
+Invoke XSDB and connect to the board target.
+
+Check the targets and connect to the AMD Versal™ xcv80.
+
+    ```
+    xsdb% connect
+    tcfchan#0
+    # Select the Versal v80 device
+    xsdb% ta 1
+    xsdb% ta
+      1* Versal xcv80
+         2  RPU
+            3  Cortex-R5 #0 (Running)
+            4  Cortex-R5 #1 (Halted)
+         5  APU (L2 Cache Reset)
+            6  Cortex-A72 #0 (APU Reset)
+            7  Cortex-A72 #1 (APU Reset)
+         8  PPU
+            9  MicroBlaze PPU (Sleeping)
+        10  PSM
+           11  MicroBlaze PSM (Sleeping)
+        12  PMC
+        13  PL
+    xsdb%
+    ```
+
+Using jtag\_status check the current boot mode.
+
+    xsdb% device status jtag_status
+    JTAG STATUS: 0x042eb18f05
+              ....
+              BOOT MODE (Bits [15:12]): 1000    <- OSPI interface BOOT MODE
+              ....
+    xsdb%
+
+Convert to the JTAG boot mode using included script versal\_change\_boot\_mode.tcl.
+
+    xsdb% source versal_change_boot_mode.tcl
+
+Read the device status back again and verify the boot bits are now 0000.
+
+    xsdb% device status jtag_status
+    JTAG STATUS: 0x042eb10f05
+              ....
+              BOOT MODE (Bits [15:12]): 0000    <- JTAG BOOT MODE
+              ....
+
+<span id="amrjtagbootrecovery-recoveryprocedure"></span>
+
+## Recovery Procedure
+
+Once the flash JTAG boot mode has been enabled, follow the normal procedure for updating the image.
+
+[AMR Updating FPT Image in Flash](../update-fpt/)
+

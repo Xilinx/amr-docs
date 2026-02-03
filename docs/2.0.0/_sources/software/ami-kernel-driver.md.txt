@@ -1,0 +1,115 @@
+# AMI - Kernel Driver Interaction
+
+<span id="ami-kerneldriverinteraction-initialization"></span>
+
+## Initialization
+
+<span id="ami-kerneldriverinteraction-mappinggcqip-payload"></span>
+
+### Mapping GCQ IP/Payload
+
+For each physical function during initialization, the kernel module will parse the PCIe extended capabilities to get access to the VSEC capability.
+
+This capability contains the associated path (PCIe bar/offset & length) to the GCQ IP block and to the shared memory interface.
+
+![images/1107377215.png](../images/1107377215.png)
+
+<span id="ami-kerneldriverinteraction-partitiontable"></span>
+
+### Partition Table
+
+Using the information obtained from the VSEC capability, the driver will parse the top of the shared memory which contains a partition table populated by the AMC on initialization.
+
+The AMI driver uses this data to get the initial AMC status, information used to initialize the GCQ driver via FAL, obtain the AMC log and to read any populated response data.
+
+| Field                         | Description                                                                |
+| ----------- | -------------------------- |
+| Magic Number                  | Unique identifier                                                          |
+| GCQ Ring Buffer offset/length | Used by the GCQ driver to store CQ/SQ slot data                            |
+| AMC Status                    | This will be set to a value of 0x1 when the AMC is fully initialized       |
+| AMC Logging Payload           | The offset within the shared memory to be populated with the log           |
+| AMC Data Payload              | The offset within the shared memory to be populated with the response data |
+
+<span id="ami-kerneldriverinteraction-threading"></span>
+
+### Threading
+
+Once the GCQ driver has been configured, the AMI kernel driver will spawn three different threads per physical function.
+
+![images/1107377212.png](../images/1107377212.png)
+
+<table style="width:100%;">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 78%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Thread</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Heartbeat Thread</td>
+<td><p>Periodically (every 0.5 seconds) send a message to the AMC and waits for appropriate response.</p>
+<p>On failure/timeout a bound in callback will be invoked to the upper layer of the driver.</p></td>
+</tr>
+<tr class="even">
+<td>Logging Thread</td>
+<td>Periodically (every second) checks the logging buffer (in shared memory) populated by the AMC and dumps anything found to info 'dmesg' kernel log.</td>
+</tr>
+<tr class="odd">
+<td>Response Thread</td>
+<td>Handles waiting for and parsing responses from from the AMC via the FAL GCQ.</td>
+</tr>
+</tbody>
+</table>
+
+<span id="ami-kerneldriverinteraction-normaloperation"></span>
+
+## Normal Operation
+
+The AMI/AMC control layer contains the functionality to submit a synchronous request and blocks on a conditional variable waiting for the response from the AMC proxy layer.
+
+The AMC proxy layer is used to form up the lower level requests and interact with the GCQ driver to send requests and wait on responses (via AMC response thread).
+
+If a response isn’t received within the specified timeout the driver layer blocks any further requests as the assumption is the AMC has failed.
+
+In this instance the failure/timeout will be added to the dmesg error log.
+
+<span id="ami-kerneldriverinteraction-supportedcommands"></span>
+
+### Supported Commands
+
+The following is a list of the currently supported commands with the associated timeouts.
+
+| <span class="legacy-color-text-blue1">Request</span>                               | <span class="legacy-color-text-blue1">Description</span>                                  | <span class="legacy-color-text-blue1">Timeout</span>     |
+| ---------------------------- | ------------------------------- | -------------------- |
+| <span class="legacy-color-text-blue1">GCQ\_SUBMIT\_CMD\_GET\_GCQ\_VERSION</span>   | <span class="legacy-color-text-blue1">Get the GCQ version</span>                          | <span class="legacy-color-text-blue1">30 seconds</span>  |
+| <span class="legacy-color-text-blue1">GCQ\_SUBMIT\_CMD\_GET\_SDR</span>            | <span class="legacy-color-text-blue1">Get an SDR (Sensor Data Record)</span>              | <span class="legacy-color-text-blue1">30 seconds</span>  |
+| <span class="legacy-color-text-blue1">GCQ\_SUBMIT\_CMD\_GET\_SDR\_SIZE</span>      | <span class="legacy-color-text-blue1">Get an SDR Size</span>                              | <span class="legacy-color-text-blue1">30 seconds</span>  |
+| <span class="legacy-color-text-blue1">GCQ\_SUBMIT\_CMD\_DOWNLOAD\_PDI</span>       | <span class="legacy-color-text-blue1">Request to start PDI Download</span>                | <span class="legacy-color-text-blue1">40 minutes</span>  |
+| <span class="legacy-color-text-blue1">GCQ\_SUBMIT\_CMD\_DEVICE\_BOOT</span>        | <span class="legacy-color-text-blue1">Select the bootable partition with the flash</span> | <span class="legacy-color-text-blue1">30 seconds</span>  |
+| <span class="legacy-color-text-blue1">GCQ\_SUBMIT\_CMD\_COPY\_PARTITION</span>     | <span class="legacy-color-text-blue1">Request to start copying a partition</span>         | <span class="legacy-color-text-blue1">1 hour</span>      |
+| <span class="legacy-color-text-blue1">GCQ\_SUBMIT\_CMD\_GET\_HEARTBEAT</span>      | <span class="legacy-color-text-blue1">Heartbeat message (on its own thread)</span>        | <span class="legacy-color-text-blue1">0.5 seconds</span> |
+| <span class="legacy-color-text-blue1">GCQ\_SUBMIT\_CMD\_EEPROM\_READ\_WRITE</span> | <span class="legacy-color-text-blue1">Read/Write EEPROM request</span>                    | <span class="legacy-color-text-blue1">30 seconds</span>  |
+
+<span id="ami-kerneldriverinteraction-basicflow"></span>
+
+### Basic Flow
+
+The flow for each request/response is the same which the exception of the heartbeat which has operates on it’s own thread.
+
+The AMC control layer calls into the AMC proxy to form up a request, this request is then sent to the AMC via the FAL GCQ.
+
+The AMC control layer is then blocked waiting for the response.
+
+During this time the AMC response thread reads the incoming data from the FAL GCQ to check for any responses.
+
+If a matching response is received, it is signaled back to the control layer via the conditional variable with success and the data is processed.
+
+If no matching response is found within the timeout period, the conditional variable is signaled via a failure and returned to the calling function.
+
+![images/1107377206.png](../images/1107377206.png)
+

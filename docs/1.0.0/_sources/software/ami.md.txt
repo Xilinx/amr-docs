@@ -1,0 +1,15 @@
+# AMR Management Interface (AMI)
+
+  - [AMI Architecture](../ami-architecture/)
+
+  - [Card Detection, Selection, and General Overview](../getting-started/card-detection/)
+
+  - [Sensors and Hardware Monitoring](../../firmware/sensors/)
+
+  - [User Interface](../../firmware/user-interface/)
+
+  - [AMI - Kernel Driver Interaction](../ami-kernel-driver/)
+
+  - [AMI - API Description](../ami-api/)
+
+  - [AMI - Hot Reset](../ami-hot-reset/)

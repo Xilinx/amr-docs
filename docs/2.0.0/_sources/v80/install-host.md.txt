@@ -1,0 +1,178 @@
+# AMR Installing the Deployment package onto the Host Server
+
+1.  Before AMR installation, ensure that the Xilinx RunTime library (XRT) has been removed. It’s impossible to have AMR management interface (AMI) and XRT running on the same host simultaneously.
+
+    **Ubuntu:**
+
+    ```bash
+    # Check if XRT is installed
+    apt list | grep xrt
+
+    # Remove XRT if present
+    sudo apt remove xrt
+    ```
+
+    **RHEL:**
+
+    ```bash
+    # Check if XRT is installed
+    yum list | grep xrt
+
+    # Remove XRT if present
+    sudo yum remove xrt
+    ```
+
+2.  Unzip the deployment archive
+
+    unzip amd_v80_gen5x8_25.1_xbtest_stress_20251113.zip
+
+3.  Change the directory into the folder that was created during the unzip
+
+    cd amd_v80_gen5x8_25.1_xbtest_stress_20251113
+
+4.  Run the AMR\_install bash script
+
+Note: this will need to be run as sudo.
+
+    sudo ./amr_install.sh
+
+The AMR\_install script will perform the following tasks:
+
+  - Remove any previous AMR deployment installations (including AMI and xbtest software installations).
+
+  - Copy AMR deployment archive contents (excluding sw\_packages) to the **/opt/amd/amr/\<AMR Design Name\>/** directory. The *AMR Design Name* for this example is *amd\_v80\_gen5x8\_25.1\_xbtest\_stress*.
+
+  - Install the AMI & xbtest software packages.
+
+Example amr\_install script output:
+
+    sudo ./amr_install.sh
+    
+    ==========================================================================
+    Removing previous AMR installations
+    ==========================================================================
+    
+    
+    WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+    
+    
+    WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+    
+    
+    ==========================================================================
+    Removing previous installation of AMI
+    ==========================================================================
+    
+    Reading package lists... Done
+    Building dependency tree
+    Reading state information... Done
+    The following packages were automatically installed and are no longer required:
+      cmake-data libevent-core-2.1-7 libevent-pthreads-2.1-7 libjsoncpp1 libopts25 librhash0 sntp
+    Use 'apt autoremove' to remove them.
+    The following packages will be REMOVED:
+      ami
+    0 upgraded, 0 newly installed, 1 to remove and 0 not upgraded.
+    After this operation, 0 B of additional disk space will be used.
+    (Reading database ... 317066 files and directories currently installed.)
+    Removing ami (2.4.0-0.0bab29e5.20240926) ...
+    Unloading old ami driver
+    Unregistering ami Linux kernel module sources 2.4.0 from dkms
+    
+    ---- Uninstall Beginning ----
+    Module:  ami
+    Version: 2.4.0
+    Kernel:  6.8.0-71-generic  (x86_64)
+    -------------
+    
+    Status: Before uninstall, this module version was ACTIVE on this kernel.
+    
+    ami.ko:
+     - Uninstallation
+       - Deleting from: /lib/modules/6.8.0-71-generic/updates/dkms/
+     - Original module
+       - No original module was found for this module on this kernel.
+       - Use the dkms install command to reinstall any previous module version.
+    
+    depmod......
+    
+    DKMS: uninstall completed.
+    
+    ----------
+    Deleting module version: 2.4.0
+    completely from the DKMS tree.
+    ----------
+    Done.
+    dpkg: warning: while removing ami, directory '/usr/local/lib' not empty so not removed
+    dpkg: warning: while removing ami, directory '/usr/local/bin' not empty so not removed
+    
+    ==========================================================================
+    Removing previous installation of AMR HW
+    ==========================================================================
+    
+    
+    ==========================================================================
+    Installing New AMR deployment
+    ==========================================================================
+    
+    
+    ==========================================================================
+    AMR Deployment files copied to /opt/amd/amr/amd_v80_gen5x8_25.1
+    ==========================================================================
+    
+    
+    ==========================================================================
+    Installing AMI & XBTEST
+    ==========================================================================
+    
+    Reading package lists... Done
+    Building dependency tree
+    Reading state information... Done
+    Note, selecting 'ami' instead of './sw_packages/ami_2.4.0-0.898e7542.20251118_amd64_24.04.deb'
+    The following packages were automatically installed and are no longer required:
+      cmake-data libevent-core-2.1-7 libevent-pthreads-2.1-7 libjsoncpp1 libopts25 librhash0 sntp
+    Use 'apt autoremove' to remove them.
+    The following NEW packages will be installed:
+      ami
+    0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+    Need to get 0 B/174 kB of archives.
+    After this operation, 0 B of additional disk space will be used.
+    Get:1 /scratch/amd_v80_gen5x8_25.1_20240926/sw_packages/ami_2.4.0-0.898e7542.20251118_amd64_24.04.deb ami amd64 2.4.0-0.0bab29e5.20240926 [174 kB]
+    Selecting previously unselected package ami.
+    (Reading database ... 316958 files and directories currently installed.)
+    Preparing to unpack .../ami_2.4.0-0.898e7542.20251118_amd64_24.04.deb ...
+    Unpacking ami (2.4.0-0.0bab29e5.20240926) ...
+    Setting up ami (2.4.0-0.0bab29e5.20240926) ...
+    Module ami not loaded. Skipping 'rmmod'.
+    
+    Creating symlink /var/lib/dkms/ami/2.4.0/source ->
+                     /usr/src/ami-2.4.0
+    
+    DKMS: add completed.
+    
+    Kernel preparation unnecessary for this kernel.  Skipping...
+    
+    Building module:
+    cleaning build area....
+    cd driver; make; cd ............
+    cleaning build area....
+    
+    DKMS: build completed.
+    
+    ami.ko:
+    Running module version sanity check.
+     - Original module
+       - No original module exists within this kernel
+     - Installation
+       - Installing to /lib/modules/6.8.0-71-generic/updates/dkms/
+    
+    depmod...
+    
+    DKMS: install completed.
+    INFO: Loading new ami Linux kernel modules
+    Done! If you are not running in bash you may need to refresh your environment before using AMI in the current shell.
+    If using csh, run 'rehash'. Otherwise, refer to the manual for your shell or start a new session.
+    
+    ==========================================================================
+    AMR Installation Complete
+    ==========================================================================
+

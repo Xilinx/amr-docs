@@ -1,0 +1,35 @@
+# AMI - Hot Reset
+
+A PCI hot reset can be triggered on a per device basis.
+
+This functionality is provided via the Device API and it required to be run with root permissions.
+
+    /**
+     * ami_dev_hot_reset() - Trigger a PCI hot reset for this device.
+     * @dev: Device handle.
+     *
+     * The provided handle will be deleted and an attempt will be made to
+     * re-initialise it once the hot reset is complete. It is important that you
+     * do not have any other open device handles pointing to the same device - this
+     * could lead to stability issues!
+     *
+     * This function requires sudo/root permissions.
+     *
+     * Return: AMI_STATUS_OK or AMI_STATUS_ERROR
+     */
+    int ami_dev_hot_reset(ami_device **dev);
+
+This function performs the following steps that will hot reset the card without having to power cycle.
+
+  - Set the platform management controller (PMC) GPIO by writing a 1 to the GPIO offset (0x1040000) on BAR 0.
+
+  - Internally free up resources used with the driver for the device.
+
+  - Remove the device from the PCI tree by writing to the appropriate sysfs node via pci\_remove() library function.
+
+  - Toggle SBR (Secondary Bus Reset) by reading from the PCI bridge control register of the PCI port belonging to the device, writing 0x40 (PDI will reload here), then clearing it with a small delay in between.
+
+  - Rescan the PCI bus using pci\_rescan(), this will trigger the AMI probe function again which will clear the PMC GPIO.
+
+  - Internally refresh the handle for specified device and allocate resources.
+

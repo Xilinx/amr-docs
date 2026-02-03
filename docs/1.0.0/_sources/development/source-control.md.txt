@@ -1,0 +1,49 @@
+# Source Configuration Control
+
+<span id="sourceconfigurationcontrol-configurationcontrol"></span>
+
+## Configuration Control
+
+Git is the current configuration control tool used to manage the AMR codebase, and GitHub is the host for serving this data.
+
+The code can be found on GitHub at:
+
+[AMR](https:/github.com/Xilinx/AMR)
+
+<span id="sourceconfigurationcontrol-amrreleasebranch"></span>
+
+## AMR Release Branch
+
+The AMR is released as source into GitHub. It is tagged using the following pattern:
+
+**xlnx\_rel\_[version]**
+
+  - version -  version of required Vivado tools version eg: v2026.1.
+
+<span id="sourceconfigurationcontrol-sourcecodeorganization"></span>
+
+## Source Code Organization
+
+The folder structure for the AMR repository is organized as follows:
+
+[![Folder Structure](../images/1107374257.png)](../images/1107374257.png)
+
+<span id="sourceconfigurationcontrol-deploy"></span>
+
+### /deploy
+
+Contains scripts and is the area where the build packaging will be undertaken.
+
+<span id="sourceconfigurationcontrol-fw"></span>
+
+### /fw
+
+Contains the target firmware source files to provide the management control capability deployed onto the RPU, known as the AMR management controller (AMC).
+
+<span id="sourceconfigurationcontrol-sw"></span>
+
+### /sw
+
+Contains supporting host based applications to interface with AMR.
+
+This includes the AMR management interface (AMI).

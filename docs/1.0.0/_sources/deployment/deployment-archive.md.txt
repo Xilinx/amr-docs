@@ -1,0 +1,126 @@
+# AMR Deployment Archive
+
+The AMR deployment archive contains a prebuilt and verified AMR design, which includes the xbtest IP along with all the host SW needed to run the xbtest application.
+
+This allows AMD Alveo™ card users to download the Alveo Versal™ example design onto their card and run the xbtest verification/qualification tests.
+
+<span id="amrdeploymentarchive-amrdeploymentarchivecontents"></span>
+
+## AMR Deployment Archive Contents
+
+The AMR development archive is ZIP file whose name references the AMR design and a release number.
+
+\<VBNV\>\_\<application name\>\_\<release\>.zip
+
+e.g. amd\_v80\_gen5x8\_25.1\_xbtest\_stress\_20251113.zip
+
+Once unzipped, the contents are placed into a folder, which has the same name format as the name of the ZIP.
+
+amd\_v80\_gen5x8\_25.1\_xbtest\_stress\_20251113
+
+`├── amr_install.sh`
+
+`├── design.pdi`
+
+`├── flash_setup`
+
+`│ ├── fpt_setup_amd_v80_gen5x8_25.1_exdes_1_20251113.pdi`
+
+`│ ├── v80_initialization.pdi`
+
+`│ └── versal_change_boot_mode.tcl`
+
+`├── static.xsa`
+
+`├── sw_packages`
+
+`│ ├── ami_2.4.0-0.898e7542.20251118_amd64_24.04.deb`
+
+`│ ├── ami-2.4.0-0.898e7542.20251118.x86_64_9.x.rpm`
+
+`│ ├── xbtest_7.1-4064028_amd64_24.04.deb`
+
+`│ └── xbtest-7.1-4064028.x86_64_9.x.rpm`
+
+`├── version.json`
+
+`└── xbtest`
+
+`├── metadata`
+
+`│ ├── user_metadata.json`
+
+`│ ├── xbtest_metadata.json`
+
+`│ └── xbtest_pfm_def.json`
+
+`└── test`
+
+`├── gtm_prbs.json`
+
+`├── gtyp_prbs.json`
+
+`├── memory.json`
+
+`├── mmio.json`
+
+`├── power.json`
+
+`├── stress.json`
+
+`└── verify.json`
+
+<span id="amrdeploymentarchive-amrinstallscript"></span>
+
+### AMR Install script
+
+amr\_install.sh is a bash script used to install the AMR deployment package onto the Host. See the [Installing the Deployment package onto the Host Server](../install-host/) section for more details.
+
+<span id="amrdeploymentarchive-designpdi"></span>
+
+### Design PDI
+
+design.pdi is a PDI (programmable device image) of AMR plus the xbtest IP. This can be downloaded to the Versal device via JTAG, or written to one of the partitions (defined in the FPT) in the OSPI flash, in order to boot from flash.
+
+<span id="amrdeploymentarchive-flashsetupdirectory"></span>
+
+### Flash Setup directory
+
+The flash setup directory contains files which can be used to recover the OSPI Flash if its contents have become corrupted. A corrupted OSPI can prevent a Versal device from booting and these files provide a method of restoring the flash to a known good point. See [/wiki/spaces/XPS/pages/1093308464](../system-architecture/device-programming/) and [/wiki/spaces/XPS/pages/1093308635](../update-fpt/) for more details.
+
+  - AMI/AMC expect a FPT to be present in the OSPI to organize how different images are stored in flash. The FPT setup PDI is a flash image which contains the FPT along with the AMR xbtest design in the first PDI partition defined in the FPT. When recovering/setting up the flash with HW Manager, this image should be selected as the configuration PDI.
+
+  - HW manager requires an initialization PDI to be downloaded to the Versal device first before transferring the desired PDI to Flash. A prebuilt initialization PDI for the specific Alveo board being targeted is included in the flash\_setup directory (i.e., v80\_initialization.pdi).
+
+  - versal\_change\_boot\_mode.tcl is a script which can be run on XSDB which will change the boot mode of the Versal device to JTAG. This is needed when there isn’t a valid image on the OSPI flash, and by changing the JTAG Mode, HW Manager can then be used to write a valid image to flash.
+
+<span id="amrdeploymentarchive-staticxsa"></span>
+
+### Static XSA
+
+static.xsa is a XSA (Xilinx support archive) that is built from the AMR source code and the xbtest IP. Its primary use is as an input to Vitis™ when building FW applications. While not required to run the xbtest application, this xsa could be useful for developers who want to rebuild the AMC FW.
+
+<span id="amrdeploymentarchive-swpackagesdirectory"></span>
+
+### SW Packages directory
+
+The SW packages directory contains RPM and DEB packages for installation of AMI and xbtest applications onto the Host server. These packages are installed while running the AMR\_install.sh script.
+
+<span id="amrdeploymentarchive-componentversionjson"></span>
+
+### Component version JSON
+
+component\_version.json is a JSON file containing version information related to the AMR AMI software, AMC firmware, and SMBus IP driver in the deployment archive.
+
+<span id="amrdeploymentarchive-versionjson"></span>
+
+### Version JSON
+
+version.json is a JSON file containing version information related to the AMR xbtest design in the deployment archive.
+
+<span id="amrdeploymentarchive-xbtestdirectory"></span>
+
+### Xbtest directory
+
+The JSON files in the xbtest directory contain metadata which is consumed by the xbtest software application running on the Host.
+

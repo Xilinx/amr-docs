@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+<!-- Google Tag Manager -->
+<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+<!-- End Google Tag Manager -->
+  <title>Board Management Controller (BMC) Proxy Driver &mdash; AMR  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/_static/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Firmware Interface (FW_IF) Abstraction Layer" href="fw-if-layer.html" />
+    <link rel="prev" title="AMR External Device Control (AXC) Proxy Driver" href="axc-proxy.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
+<!-- End Google Tag Manager --> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+            <a href="../index.html" class="icon icon-home"> AMR
+            <img src="../_static/xilinx-header-logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">AMR Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/amr-overview.html">AMR Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AMR Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/install-and-run.html">How-to install and run a pre-built AMR design on an ALVEO V80 card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/rebuild.html">How-to Rebuild an AMR Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AMR System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../system-architecture/board-management.html">AMR - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system-architecture/device-programming.html">AMR - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system-architecture/host-communication.html">AMR - Host to Card Communication</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AMR Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/install-card.html">AMR Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/update-fpt.html">AMR Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/update-pdi.html">AMR Updating amr_ospi.bin PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/debug.html">AMR Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/jtag-recovery.html">AMR JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/ami-tool-guide.html">AMR Management Interface userguide (ami_tool)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/hierarchy.html">AMR V80 - Hierarchy Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asdm-application.html">AMR ASDM Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inband-telemetry.html">AMR InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Board Management Controller (BMC) Proxy Driver</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#note">Note:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#supported-commands">Supported commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mctp">MCTP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pldm-type-0">PLDM Type 0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pldm-type-2">PLDM Type 2</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#supported-pdrs">Supported PDRs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#internal-apis">Internal APIs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#enums">Enums</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initialize-the-proxy">Initialize the proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bind-callback">Bind callback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-sensor-info-response">Set sensor info response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-response">Set response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-uuid">Get UUID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-sensor-id-request">Get sensor ID request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-write">Data write</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#print-statistics">Print statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clear-statistics">Clear statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-proxy-state">Get proxy state</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#bmc-proxy-handling-requests">BMC Proxy Handling Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bmc-proxy-handling-responses">BMC Proxy Handling Responses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#initialize-proxy">Initialize Proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#register-for-callback">Register for Callback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generating-responses">Generating Responses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#handling-requests">Handling Requests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#common-pdr-header">Common PDR header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#numeric-sensor-pdr">Numeric sensor PDR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sensor-name-pdr">Sensor name PDR</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="osal.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="profiles-cmake.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../software/ami.html">AMR Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/qdma.html">AMR QDMA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/abbreviations.html">AMR - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes.html">AMR Release Information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: black" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AMR</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Board Management Controller (BMC) Proxy Driver</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/firmware/bmc-proxy.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="board-management-controller-bmc-proxy-driver">
+<h1>Board Management Controller (BMC) Proxy Driver<a class="headerlink" href="#board-management-controller-bmc-proxy-driver" title="Permalink to this heading">¶</a></h1>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-overview"></span></p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
+<p>MCTP - Management Component Transport Protocol</p>
+<p>PLDM - Platform Level Data Model</p>
+<p>The BMC proxy allows for communication and sensor management between the BMC and AMC through MCTP/PLDM protocols. The BMC proxy is polling indefinitely and listening for incoming messages through a FAL <strong>read</strong> call. If a message is received, an internal flag is set that will start the processing of the message. The proxy calls into the MCTP code to determine whether the message is an MCTP, PLDM Type 0 or PLDM Type 2 form which will determine the exact command. The PLDM code will then form a response to the initial request, which gets sent back to the BMC via a firmware interface <strong>write</strong> by the BMC proxy driver.</p>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-note"></span></p>
+<div class="section" id="note">
+<h3>Note:<a class="headerlink" href="#note" title="Permalink to this heading">¶</a></h3>
+<p>The MCTP/PLDM code provided is intended to be used and an example to prove the basic functionality of a BMC stack. AMC only supports Type 0 and Type 2 DMTF messages (limited to sensor reading - i.e. no effecters).</p>
+<p><img alt="images/1107376765.png" src="../_images/1107376765.png" /></p>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-supportedcommands"></span></p>
+</div>
+</div>
+<div class="section" id="supported-commands">
+<h2>Supported commands<a class="headerlink" href="#supported-commands" title="Permalink to this heading">¶</a></h2>
+<p>M - Mandatory</p>
+<p>O - Optional</p>
+<p>C - Conditional</p>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-mctp"></span></p>
+<div class="section" id="mctp">
+<h3>MCTP<a class="headerlink" href="#mctp" title="Permalink to this heading">¶</a></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Command Name</th>
+<th>Command Code</th>
+<th>DMTF Spec<br />
+<br />
+M/O/C</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Set Endpoint ID</td>
+<td>0x01</td>
+<td>M</td>
+</tr>
+<tr class="even">
+<td>Get Endpoint ID</td>
+<td>0x02</td>
+<td>M</td>
+</tr>
+<tr class="odd">
+<td>Get Endpoint UUID</td>
+<td>0x03</td>
+<td>M</td>
+</tr>
+<tr class="even">
+<td>Get MCTP Version Support</td>
+<td><p>0x04</p></td>
+<td>M</td>
+</tr>
+<tr class="odd">
+<td>Get Message Type support</td>
+<td>0x05</td>
+<td>M</td>
+</tr>
+</tbody>
+</table>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-pldmtype0"></span></p>
+</div>
+<div class="section" id="pldm-type-0">
+<h3>PLDM Type 0<a class="headerlink" href="#pldm-type-0" title="Permalink to this heading">¶</a></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Command Name</th>
+<th>Command Code</th>
+<th>DMTF Spec<br />
+<br />
+M/O/C</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SetTID</td>
+<td>0x01</td>
+<td>M</td>
+</tr>
+<tr class="even">
+<td>GetTID</td>
+<td>0x02</td>
+<td>M</td>
+</tr>
+<tr class="odd">
+<td>GetPLDMVersion</td>
+<td>0x03</td>
+<td>M</td>
+</tr>
+<tr class="even">
+<td>GetPLDMTypes</td>
+<td><p>0x04</p></td>
+<td>M</td>
+</tr>
+<tr class="odd">
+<td>GetPLDMCommands</td>
+<td>0x05</td>
+<td>M</td>
+</tr>
+</tbody>
+</table>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-pldmtype2"></span></p>
+</div>
+<div class="section" id="pldm-type-2">
+<h3>PLDM Type 2<a class="headerlink" href="#pldm-type-2" title="Permalink to this heading">¶</a></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Command Name</th>
+<th>Command Code</th>
+<th>DMTF Spec<br />
+<br />
+M/O/C</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SetTID</td>
+<td>0x01</td>
+<td>M</td>
+</tr>
+<tr class="even">
+<td>GetTID</td>
+<td>0x02</td>
+<td>M</td>
+</tr>
+<tr class="odd">
+<td><span class="legacy-color-text-blue3">SetNumericSensorEnable</span></td>
+<td><span class="legacy-color-text-blue3">0x10</span></td>
+<td>M</td>
+</tr>
+<tr class="even">
+<td><span class="legacy-color-text-blue3">GetSensorReading</span></td>
+<td><p><span class="legacy-color-text-blue3">0x11</span></p></td>
+<td>M</td>
+</tr>
+<tr class="odd">
+<td><span class="legacy-color-text-blue3">GetPDRRepositoryInfo</span></td>
+<td><span class="legacy-color-text-blue3">0x50</span></td>
+<td>M</td>
+</tr>
+<tr class="even">
+<td><span class="legacy-color-text-blue3">GetPDR</span></td>
+<td><span class="legacy-color-text-blue3">0x51</span></td>
+<td>M</td>
+</tr>
+</tbody>
+</table>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-supportedpdrs"></span></p>
+</div>
+</div>
+<div class="section" id="supported-pdrs">
+<h2>Supported PDRs<a class="headerlink" href="#supported-pdrs" title="Permalink to this heading">¶</a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>PDR Type Number</th>
+<th>PDR Type Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Terminus Locator PDR</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Numeric Sensor PDR</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Sensor Auxiliary Names PDR</td>
+</tr>
+</tbody>
+</table>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-internalapis"></span></p>
+</div>
+<div class="section" id="internal-apis">
+<h2>Internal APIs<a class="headerlink" href="#internal-apis" title="Permalink to this heading">¶</a></h2>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-enums"></span></p>
+<div class="section" id="enums">
+<h3>Enums<a class="headerlink" href="#enums" title="Permalink to this heading">¶</a></h3>
+<p>BMC accepted events.</p>
+<p><strong>BMC_PROXY_DRIVER_EVENTS</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
+ * @enum    BMC_PROXY_DRIVER_EVENTS
+ * @brief   Events raised by this proxy driver
+ */
+typedef enum BMC_PROXY_DRIVER_EVENTS
+{
+    BMC_PROXY_DRIVER_E_MSG_ARRIVAL = 0,
+    BMC_PROXY_DRIVER_E_GET_PDR,
+    BMC_PROXY_DRIVER_E_GET_PDR_REPOSITORY_INFO,
+    BMC_PROXY_DRIVER_E_GET_SENSOR_INFO,
+    BMC_PROXY_DRIVER_E_ENABLE_SENSOR,
+    BMC_PROXY_DRIVER_E_INVALID_REQUEST_RECVD,
+    MAX_BMC_PROXY_DRIVER_EVENTS
+
+} BMC_PROXY_DRIVER_EVENTS;
+</pre></div>
+</div>
+<p>Response result IDs.</p>
+<p><strong>BMC_PROXY_RESULT</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
+ * @enum    BMC_PROXY_RESPONSE_RESULT
+ * @brief   The response result
+ */
+typedef enum BMC_PROXY_RESULT
+{
+    BMC_PROXY_RESULT_SUCCESS = 0,
+    BMC_PROXY_RESULT_FAILURE,
+    MAX_BMC_PROXY_RESULT
+
+} BMC_PROXY_RESULT;
+</pre></div>
+</div>
+<p>Response IDs.</p>
+<p><strong>BMC_SENSOR_RESPONSE</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
+ * @enum    BMC_SENSOR_RESPONSE
+ * @brief   The response
+ */
+typedef enum BMC_SENSOR_RESPONSE
+{
+    BMC_RESPONSE_OK = 0,
+    BMC_RESPONSE_ERROR,
+    MAX_BMC_SENSOR_RESPONSE
+
+} BMC_SENSOR_RESPONSE;
+</pre></div>
+</div>
+<p>Enable sensor response IDs.</p>
+<p><strong>BMC_SET_NUMERIC_SENSOR_ENABLE_RESPONSE</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
+ * @enum    BMC_SET_NUMERIC_SENSOR_ENABLE_RESPONSE
+ * @brief   The response
+ */
+typedef enum BMC_SET_NUMERIC_SENSOR_ENABLE_RESPONSE
+{
+    BMC_SENSOR_ENABLE_RESP_OK = 0,
+    BMC_SENSOR_ENABLE_RESP_INVALID_SENSOR_ID,
+    BMC_SENSOR_ENABLE_RESP_INVALID_SENSOR_OPERATIONAL_STATE,
+    BMC_SENSOR_ENABLE_RESP_EVENT_GENERATION_NOT_SUPPORTED,
+    BMC_SENSOR_ENABLE_RESP_NONE,
+    MAX_BMC_SENSOR_ENABLE_RESP
+
+} BMC_SET_NUMERIC_SENSOR_ENABLE_RESPONSE;
+</pre></div>
+</div>
+<p>Get sensor response IDs.</p>
+<p><strong>BMC_GET_SENSOR_RESPONSE</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
+ * @enum    BMC_GET_SENSOR_RESPONSE
+ * @brief   The response
+ */
+typedef enum BMC_GET_SENSOR_RESPONSE
+{
+    BMC_GET_SENSOR_RESP_OK = 0,
+    BMC_GET_SENSOR_RESP_INVALID_SENSOR_ID,
+    BMC_GET_SENSOR_RESP_INVALID_SENSOR_OPERATIONAL_STATE,
+    BMC_GET_SENSOR_RESP_REARM_UNAVAILABLE_IN_PRESENT_STATE,
+    BMC_GET_SENSOR_RESP_NONE,
+    MAX_BMC_GET_SENSOR_RESP
+
+} BMC_GET_SENSOR_RESPONSE;
+</pre></div>
+</div>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-initializetheproxy"></span></p>
+</div>
+<div class="section" id="initialize-the-proxy">
+<h3>Initialize the proxy<a class="headerlink" href="#initialize-the-proxy" title="Permalink to this heading">¶</a></h3>
+<p>The initialize function takes in 15 parameters:</p>
+<ul class="simple">
+<li><p>The unique ID of the proxy driver</p></li>
+<li><p>Pointer to the firmware interface the proxy uses</p></li>
+<li><p>The port of the firmware interface</p></li>
+<li><p>The priority of the task</p></li>
+<li><p>Pointer to the list of temperature sensor PDRs</p></li>
+<li><p>Pointer to the list of voltage sensor PDRs</p></li>
+<li><p>Pointer to the list of current sensor PDRs</p></li>
+<li><p>Pointer to the list of power sensor PDRs</p></li>
+<li><p>Pointer to the list of names sensor PDRs</p></li>
+<li><p>Total number of PDRs in the respective lists</p></li>
+</ul>
+<p><strong>iBMC_Initialise</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Main initialisation point for the BMC Proxy Driver
+ *
+ * @param   ucProxyId   Unique ID for this Proxy driver
+ * @param   pxFwIf      Handle to the Firmware Interface to use
+ * @param   ulFwIfPort  Port to use on the Firmware Interface
+ * @param   ulTaskPrio  Priority of the Proxy driver task (if RR disabled)
+ * @param   ulTaskStack Stack size of the Proxy driver task
+ * @param   pxPdrTemperatureSensors Pointer to Temperature PDR
+ * @param   iTotalPdrTemperature Size of Temperature PDR
+ * @param   pxPdrVoltageSensors Pointer to Voltage PDR
+ * @param   iTotalPdrVoltage Size of Voltage PDR
+ * @param   pxPdrCurrentSensors Pointer to Current PDR
+ * @param   iTotalPdrCurrent Size of Current PDR
+ * @param   pxPdrPowerSensors Pointer to Power PDR
+ * @param   iTotalPdrPower Size of Power PDR
+ * @param   pxPdrSensorNames Pointer to Sensor Names PDR
+ * @param   iTotalPdrName Size of Sensor Names PDR
+ * @param   pucUuid Pointer to UUID
+ *
+ * @return  OK          Proxy driver initialised correctly
+ *          ERROR       Proxy driver not initialised, or was already initialised
+ *
+ * @note    Proxy drivers can have 0 or more firmware interfaces
+ */
+int iBMC_Initialise( uint8_t ucProxyId,
+                     FW_IF_CFG *pxFwIf,
+                     uint32_t ulFwIfPort,
+                     uint32_t ulTaskPrio,
+                     uint32_t ulTaskStack,
+                     PLDM_NUMERIC_SENSOR_PDR *pxPdrTemperatureSensors,
+                     int iTotalPdrTemperature,
+                     PLDM_NUMERIC_SENSOR_PDR *pxPdrVoltageSensors,
+                     int iTotalPdrVoltage,
+                     PLDM_NUMERIC_SENSOR_PDR *pxPdrCurrentSensors,
+                     int iTotalPdrCurrent,
+                     PLDM_NUMERIC_SENSOR_PDR *pxPdrPowerSensors,
+                     int iTotalPdrPower,
+                     PLDM_NUMERIC_SENSOR_NAME_PDR *pxPdrSensorNames,
+                     int iTotalPdrName,
+                     uint8_t *pucUuid );
+</pre></div>
+</div>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-bindcallback"></span></p>
+</div>
+<div class="section" id="bind-callback">
+<h3>Bind callback<a class="headerlink" href="#bind-callback" title="Permalink to this heading">¶</a></h3>
+<p>Applications can bind into the callback to listen to incoming events and handle them accordingly.</p>
+<p>Current list of supported events:</p>
+<ul class="simple">
+<li><p>BMC_PROXY_DRIVER_E_SMBUS_MSG_ARRIVAL</p></li>
+<li><p>BMC_PROXY_DRIVER_E_GET_PDR</p></li>
+<li><p>BMC_PROXY_DRIVER_E_GET_PDR_REPOSITORY_INFO</p></li>
+<li><p>BMC_PROXY_DRIVER_E_GET_SENSOR_INFO</p></li>
+<li><p>BMC_PROXY_DRIVER_E_ENABLE_SENSOR</p></li>
+<li><p>BMC_PROXY_DRIVER_E_INVALID_REQUEST_RECVD</p></li>
+</ul>
+<p><strong>iBMC_BindCallback</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Bind into this proxy driver
+ *
+ * @param   pxCallback  Callback to bind into the proxy driver
+ *
+ * @return  OK          Callback successfully bound
+ *          ERROR       Callback not bound
+ */
+int iBMC_BindCallback( EVL_CALLBACK *pxCallback );
+</pre></div>
+</div>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-setsensorinforesponse"></span></p>
+</div>
+<div class="section" id="set-sensor-info-response">
+<h3>Set sensor info response<a class="headerlink" href="#set-sensor-info-response" title="Permalink to this heading">¶</a></h3>
+<p>Function used to respond to the BMC_PROXY_DRIVER_E_GET_SENSOR_INFO event.</p>
+<p><strong>iBMC_SendResponseForGetSensor</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Response to a Sensor Info request
+ *
+ * @param   pxSignal        Current event occurence (used for tracking)
+ * @param   usSensorId      Sensor Id
+ * @param   ssSensorInfo    Sensor Value
+ * @param   ucSensorState   Sensor Operational State
+ * @param   xSensorResponse The response to the sensor query, OK, Invalid ID etc
+ *
+ * @return  OK          Command was successful
+ *          ERROR       Command failed
+ */
+int iBMC_SendResponseForGetSensor( EVL_SIGNAL *pxSignal,
+                                   uint16_t usSensorId,
+                                   int16_t ssSensorInfo,
+                                   uint8_t ucSensorState,
+                                   BMC_GET_SENSOR_RESPONSE xSensorResponse );
+</pre></div>
+</div>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-setresponse"></span></p>
+</div>
+<div class="section" id="set-response">
+<h3>Set response<a class="headerlink" href="#set-response" title="Permalink to this heading">¶</a></h3>
+<p>Responds back to a request from the proxy to enable a sensor.</p>
+<p><strong>iBMC_SetResponse</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
+* @brief Response to an enable sensor request
+*
+* @param pxSignal Current event occurence (used for tracking)
+* @param xBmcResponse Enable sensor response
+*
+* @return OK Command was successful
+* ERROR Command failed
+*/
+int iBMC_SetResponse( EVL_SIGNAL *pxSignal, uint16_t usSensorId, BMC_SENSOR_RESPONSE xBmcResponse );
+</pre></div>
+</div>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-getuuid"></span></p>
+</div>
+<div class="section" id="get-uuid">
+<h3>Get UUID<a class="headerlink" href="#get-uuid" title="Permalink to this heading">¶</a></h3>
+<p>Returns the board UUID</p>
+<p><strong>iBMC_GetUuid</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Get the UUID
+ *
+ * @param   pucUuid   pointer to UUID location
+ *
+ * @return  OK or ERROR
+ */
+int iBMC_GetUuid( uint8_t * pucUuid );
+</pre></div>
+</div>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-getsensoridrequest"></span></p>
+</div>
+<div class="section" id="get-sensor-id-request">
+<h3>Get sensor ID request<a class="headerlink" href="#get-sensor-id-request" title="Permalink to this heading">¶</a></h3>
+<p>If a BMC_PROXY_DRIVER_E_GET_SENSOR_INFO event is received, the application can call iBMC_GetSensorIdRequest to get more information about the request like the sensor ID and operational state.</p>
+<p><strong>iBMC_GetSensorIdRequest</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Function called after certain events are raised to get the sensor id
+ *
+ * @param   pxSignal            pointer to signal raised
+ * @param   pusSensorId         pointer sensor id
+ * @param   pucOperationalState pointer to the new state (if required)
+ *
+ * @return  OK or ERROR
+ */
+int iBMC_GetSensorIdRequest( EVL_SIGNAL *pxSignal, int16_t *pssSensorId, uint8_t *pucOperationalState );
+</pre></div>
+</div>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-datawrite"></span></p>
+</div>
+<div class="section" id="data-write">
+<h3>Data write<a class="headerlink" href="#data-write" title="Permalink to this heading">¶</a></h3>
+<p>Performs a FAL write with the supplied buffer and size.</p>
+<p><strong>iBMC_ResponseDataWrite</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Start a Data Write
+ *
+ * @param   pucData     Pointer to the data
+ * @param   usDatasize  Size of data received
+ *
+ * @return  OK or ERROR
+ */
+int iBMC_ResponseDataWrite( uint8_t *pucData, uint16_t usDataSize );
+</pre></div>
+</div>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-printstatistics"></span></p>
+</div>
+<div class="section" id="print-statistics">
+<h3>Print statistics<a class="headerlink" href="#print-statistics" title="Permalink to this heading">¶</a></h3>
+<p>Prints the statistics associated with the proxy.</p>
+<p><strong>iBMC_PrintStatistics</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Print all the stats gathered by the application
+ *
+ * @return  OK          Stats retrieved from proxy driver successfully
+ *          ERROR       Stats not retrieved successfully
+ *
+ */
+int iBMC_PrintStatistics( void );
+</pre></div>
+</div>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-clearstatistics"></span></p>
+</div>
+<div class="section" id="clear-statistics">
+<h3>Clear statistics<a class="headerlink" href="#clear-statistics" title="Permalink to this heading">¶</a></h3>
+<p>Clears the statistics associated with the proxy.</p>
+<p><strong>iBMC_ClearStatistics</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Clear all the stats in the application
+ *
+ * @return  OK          Stats cleared successfully
+ *          ERROR       Stats not cleared successfully
+ *
+ */
+int iBMC_ClearStatistics( void );
+</pre></div>
+</div>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-getproxystate"></span></p>
+</div>
+<div class="section" id="get-proxy-state">
+<h3>Get proxy state<a class="headerlink" href="#get-proxy-state" title="Permalink to this heading">¶</a></h3>
+<p>Gets the current health state of the proxy.</p>
+<p><strong>iBMC_GetState</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
+* @brief Gets the current state of the proxy driver
+*
+* @param pxState Pointer to the state
+*
+* @return OK If successful
+* ERROR If not successful
+*/
+int iBMC_GetState( MODULE_STATE *pxState );
+</pre></div>
+</div>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-bmcproxyhandlingrequests"></span></p>
+</div>
+</div>
+<div class="section" id="bmc-proxy-handling-requests">
+<h2>BMC Proxy Handling Requests<a class="headerlink" href="#bmc-proxy-handling-requests" title="Permalink to this heading">¶</a></h2>
+<p>The request API’s allows an application to get a copy of the internal proxy request data received via the FAL.</p>
+<ul class="simple">
+<li><p>iBMC_GetSensorIdRequest</p></li>
+</ul>
+<p>The requests data is stored within the BMC proxy when the event is generated and the callback has been invoked to notify any registered users.</p>
+<p>When the request from the application is made a protected copy of the data is made and returned that will allow the user to perform the relevant action.</p>
+<p>A global mutex is held until a MCTP message is processed and response created. Any BMC request calls that change private data are within the flow of that message making them protected.</p>
+<p><img alt="images/1107376756.png" src="../_images/1107376756.png" /></p>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-bmcproxyhandlingresponses"></span></p>
+</div>
+<div class="section" id="bmc-proxy-handling-responses">
+<h2>BMC Proxy Handling Responses<a class="headerlink" href="#bmc-proxy-handling-responses" title="Permalink to this heading">¶</a></h2>
+<p>The response API’s are used by the application to respond back to the request with data/result code once the relevant action has been performed.</p>
+<ul class="simple">
+<li><p>iBMC_SetResponse</p></li>
+<li><p>iBMC_GetSensorInfoResponse</p></li>
+</ul>
+<p>Within each response a the relevant flag is set, signaling to the proxy that the event has been handled and the requested data is available.</p>
+<p>A global mutex is held until a MCTP message is processed and response created. Any BMC response calls that change private data are within the flow of that message making them protected.</p>
+<p><img alt="images/1107376753.png" src="../_images/1107376753.png" /></p>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-examples"></span></p>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">¶</a></h2>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-initializeproxy"></span></p>
+<div class="section" id="initialize-proxy">
+<h3>Initialize Proxy<a class="headerlink" href="#initialize-proxy" title="Permalink to this heading">¶</a></h3>
+<p>The initialize function needs a unique id for the proxy, a handle to a FW_IF (already created and initialized), and a task priority/size passed in, as well as the PDR sensor lists and total values.</p>
+<p><strong>iBMC_Initialise Example</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if( OK == iBMC_Initialise( AMC_EVENT_UNIQUE_ID_BMC, &amp;xSMBusIf, 0, AMC_TASK_PRIO_DEFAULT, AMC_TASK_DEFAULT_STACK,
+                               pxPdrTemperatureSensors, TOTAL_PDR_TEMPERATURE,
+                               pxPdrVoltageSensors,     TOTAL_PDR_VOLTAGE,
+                               pxPdrCurrentSensors,     TOTAL_PDR_CURRENT,
+                               pxPdrPowerSensors,       TOTAL_PDR_POWER,
+                               pxPdrSensorNames,        TOTAL_PDR_NUMERIC_ASCI_SENSORS ) )
+</pre></div>
+</div>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-registerforcallback"></span></p>
+</div>
+<div class="section" id="register-for-callback">
+<h3>Register for Callback<a class="headerlink" href="#register-for-callback" title="Permalink to this heading">¶</a></h3>
+<p>Define a function based on the function pointer prototype and bind in using the API.</p>
+<p><strong>iBMC_Initialise Example</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   BMC Proxy Driver EVL callback
+ */
+static int iBmcCallback( EVL_SIGNAL *pxSignal )
+{
+    int iStatus = ERROR;
+
+    if( ( NULL != pxSignal ) &amp;&amp; ( AMC_EVENT_UNIQUE_ID_BMC == pxSignal-&gt;ucModule ) )
+    {
+        switch( pxSignal-&gt;ucEventType )
+        {
+        default:
+        {
+            break;
+        }
+        }
+    }
+
+    return iStatus;
+}
+</pre></div>
+</div>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-generatingresponses"></span></p>
+</div>
+<div class="section" id="generating-responses">
+<h3>Generating Responses<a class="headerlink" href="#generating-responses" title="Permalink to this heading">¶</a></h3>
+<p>Example of calling the response (iBMC_GetSensorInfoResponse) from within the callback to send the result back to the proxy.</p>
+<p><strong>BMC_PRIVATE_DATA</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   RMI Handler EVL callback
+ */
+static int iBmcProxyCallback( EVL_SIGNAL *pxSignal )
+{
+    int iStatus = ERROR;
+
+    if( ( NULL != pxSignal ) &amp;&amp; ( AMC_EVENT_UNIQUE_ID_BMC == pxSignal-&gt;ucModule ) )
+    {
+        if( MAX_BMC_PROXY_DRIVER_EVENTS &gt;= pxSignal-&gt;ucEventType )
+        {
+            switch( pxSignal-&gt;ucEventType )
+            {
+
+            case BMC_PROXY_DRIVER_E_GET_PDR:
+            {
+                INC_STAT_COUNTER( OUT_OF_BAND_STATS_BMC_PDR_REQUEST )
+                break;
+            }
+
+            case BMC_PROXY_DRIVER_E_GET_PDR_REPOSITORY_INFO:
+            {
+                INC_STAT_COUNTER( OUT_OF_BAND_STATS_BMC_PDR_INFO_REQUEST )
+                break;
+            }
+
+            case BMC_PROXY_DRIVER_E_GET_SENSOR_INFO:
+            {
+                INC_STAT_COUNTER( OUT_OF_BAND_STATS_BMC_SENSOR_INFO_REQUEST )
+
+                /* TODO: Get info on requested sensor */
+
+                /* TODO: Set the result code based on the collection */
+
+                iBMC_GetSensorInfoResponse( pxSignal,
+                                            sSensorId,
+                                            sSensorDataResponse,
+                                            ucSensorOperationalState,
+                                            xSensorResponse );
+
+                break;
+            }
+            default:
+            {
+                INC_STAT_COUNTER( OUT_OF_BAND_STATS_BMC_UNSUPPORTED_REQUEST )
+                break;
+            }
+            }
+
+            iStatus = OK;
+        }
+    }
+
+    return iStatus;
+}
+</pre></div>
+</div>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-handlingrequests"></span></p>
+</div>
+<div class="section" id="handling-requests">
+<h3>Handling Requests<a class="headerlink" href="#handling-requests" title="Permalink to this heading">¶</a></h3>
+<p>Example of requesting the data associated with an event (iBMC_GetSensorIdRequest) from within the callback and to send the result back to the proxy.</p>
+<p><strong>BMC_PRIVATE_DATA</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   RMI Handler EVL callback
+ */
+static int iBmcProxyCallback( EVL_SIGNAL *pxSignal )
+{
+    int iStatus = ERROR;
+
+    if( ( NULL != pxSignal ) &amp;&amp; ( AMC_EVENT_UNIQUE_ID_BMC == pxSignal-&gt;ucModule ) )
+    {
+        if( MAX_BMC_PROXY_DRIVER_EVENTS &gt;= pxSignal-&gt;ucEventType )
+        {
+            switch( pxSignal-&gt;ucEventType )
+            {
+
+            case BMC_PROXY_DRIVER_E_GET_PDR:
+            {
+                INC_STAT_COUNTER( OUT_OF_BAND_STATS_BMC_PDR_REQUEST )
+                break;
+            }
+
+            case BMC_PROXY_DRIVER_E_GET_PDR_REPOSITORY_INFO:
+            {
+                INC_STAT_COUNTER( OUT_OF_BAND_STATS_BMC_PDR_INFO_REQUEST )
+                break;
+            }
+
+            case BMC_PROXY_DRIVER_E_GET_SENSOR_INFO:
+            {
+                INC_STAT_COUNTER( OUT_OF_BAND_STATS_BMC_SENSOR_INFO_REQUEST )
+
+                /* call into BMC Proxy to get required sensor id */
+                iBMC_GetSensorIdRequest( pxSignal, &amp;sSensorId, &amp;ucSensorOperationalState )
+
+                break;
+            }
+            default:
+            {
+                INC_STAT_COUNTER( OUT_OF_BAND_STATS_BMC_UNSUPPORTED_REQUEST )
+                break;
+            }
+            }
+
+            iStatus = OK;
+        }
+    }
+
+    return iStatus;
+}
+</pre></div>
+</div>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-commonpdrheader"></span></p>
+</div>
+</div>
+<div class="section" id="common-pdr-header">
+<h2>Common PDR header<a class="headerlink" href="#common-pdr-header" title="Permalink to this heading">¶</a></h2>
+<p>Structure to store the MCTP/PLDM common header, used in the response buffer.</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uint32</td>
+<td>recordHandle</td>
+<td>An opaque number that is used for accessing individual PDRs within a PDR Repository.</td>
+</tr>
+<tr>
+<td>uint8</td>
+<td>PDRHeaderVersion</td>
+<td>This field is provided in case a future version of this specification requires a modification to the format of the PDR Header.</td>
+</tr>
+<tr>
+<td>uint8</td>
+<td>PDRType</td>
+<td>The type of the PDR.</td>
+</tr>
+<tr>
+<td>uint16</td>
+<td>recordChangeNumber</td>
+<td>Mechanism for preventing the use of invalid PDR data if a record's data gets updated while the record was in the process of being read out.</td>
+</tr>
+<tr>
+<td>uint16</td>
+<td>dataLength</td>
+<td>The total number of PDR data bytes following this field.</td>
+</tr>
+</tbody>
+</table>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-numericsensorpdr"></span></p>
+</div>
+<div class="section" id="numeric-sensor-pdr">
+<h2>Numeric sensor PDR<a class="headerlink" href="#numeric-sensor-pdr" title="Permalink to this heading">¶</a></h2>
+<p>Structure that represents a single numeric sensor PDR.</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 3%" />
+<col style="width: 16%" />
+<col style="width: 79%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>uint16</td>
+<td>PLDMTerminusHandle</td>
+<td>A handle that identifies PDRs that belong to a particular PLDM terminus.</td>
+</tr>
+<tr class="even">
+<td>uint16</td>
+<td>sensorID</td>
+<td>ID of the sensor relative to the given PLDM Terminus ID.</td>
+</tr>
+<tr class="odd">
+<td>uint16</td>
+<td>entityType</td>
+<td>The Type value for the entity that is associated with this sensor.</td>
+</tr>
+<tr class="even">
+<td>uint16</td>
+<td>entityInstanceNumber</td>
+<td>The Instance Number for the entity that is associated with this sensor. See 9.1 for more information.</td>
+</tr>
+<tr class="odd">
+<td>uint16</td>
+<td>containerID</td>
+<td>The containerID for the containing entity that instantiates the entity that is measured by this sensor.</td>
+</tr>
+<tr class="even">
+<td>uint8_t</td>
+<td>sensorInit</td>
+<td>Indicates whether the sensor requires initialization by the initializationAgent.</td>
+</tr>
+<tr class="odd">
+<td>uint8_t</td>
+<td>sensorAuxiliaryNamesPDR</td>
+<td><p>true = sensor has a Sensor Auxiliary Names PDR</p>
+<p>false = sensor does not have an associated Sensor Auxiliary Names PDR</p></td>
+</tr>
+<tr class="even">
+<td>uint8_t</td>
+<td>baseUnit</td>
+<td>The base unit of the reading returned by this sensor.</td>
+</tr>
+<tr class="odd">
+<td>int8_t</td>
+<td>unitModifier</td>
+<td>A power-of-10 multiplier for the baseUnit.</td>
+</tr>
+<tr class="even">
+<td>uint8_t</td>
+<td>rateUnit</td>
+<td>value: { None, Per MicroSecond, Per MilliSecond, Per Second, Per Minute, Per Hour, Per Day, Per Week, Per Month, Per Year }</td>
+</tr>
+<tr class="odd">
+<td>uint8_t</td>
+<td>baseOEMUnitHandle</td>
+<td>This value is used to locate the corresponding PLDM OEM Unit PDR that defines the OEMUnit when the OEMUnit value is used for the baseUnit.</td>
+</tr>
+<tr class="even">
+<td>uint8_t</td>
+<td>auxUnit</td>
+<td>The base unit of the reading returned by this sensor.</td>
+</tr>
+<tr class="odd">
+<td>int8_t</td>
+<td>auxUnitModifier</td>
+<td>A power-of-10 multiplier for the auxUnit.</td>
+</tr>
+<tr class="even">
+<td>uint8_t</td>
+<td>auxrateUnit</td>
+<td>value: { None, Per MicroSecond, Per MilliSecond, Per Second, Per Minute, Per Hour, Per Day, Per Week, Per Month, Per Year }</td>
+</tr>
+<tr class="odd">
+<td>uint8_t</td>
+<td>rel</td>
+<td>The relationship between the base unit and the auxiliary unit.</td>
+</tr>
+<tr class="even">
+<td>uint8_t</td>
+<td>auxOEMUnitHandle</td>
+<td>This value is used to locate the PLDM OEM Unit PDR that defines the OEMUnit if the OEMUnit value is used for the auxUnit.</td>
+</tr>
+<tr class="odd">
+<td>uint8_t</td>
+<td>isLinear</td>
+<td>Indicates whether a sensor is linear or dynamic in its range. For example, this value can be used by a MAP to populate the IsLinear attribute of CIM_NumericSensor.</td>
+</tr>
+<tr class="even">
+<td>uint8_t</td>
+<td>sensorDataSize</td>
+<td>The bit width and format of reading and threshold values that the sensor returns value: { uint8, sint8, uint16, sint16, uint32, sint32 }</td>
+</tr>
+<tr class="odd">
+<td>float</td>
+<td>resolution</td>
+<td>The resolution of the sensor in Units</td>
+</tr>
+<tr class="even">
+<td>float</td>
+<td>offset</td>
+<td>A constant value that is added in as part of the conversion process of converting a raw sensor reading to Units</td>
+</tr>
+<tr class="odd">
+<td>uint16_t</td>
+<td>accuracy</td>
+<td>Given as a -/- percentage in 1/100ths of a % from 0.00 to 100.00. For example, the integer value 510 corresponds to ± 5.10%</td>
+</tr>
+<tr class="even">
+<td>uint8_t</td>
+<td>plusTolerance</td>
+<td>Tolerance is given in -/- counts of the reading value.</td>
+</tr>
+<tr class="odd">
+<td>uint8_t</td>
+<td>minusTolerance</td>
+<td>Tolerance is given in -/- counts of the reading value.</td>
+</tr>
+<tr class="even">
+<td>int16_t</td>
+<td>hysteresis</td>
+<td>The amount of hysteresis associated with the sensor thresholds, given in raw sensor counts.</td>
+</tr>
+<tr class="odd">
+<td>uint8_t</td>
+<td>supportedThresholds</td>
+<td>For PLDM: bit field where bit position represents whether a given threshold is supported</td>
+</tr>
+<tr class="even">
+<td>uint8_t</td>
+<td>thresholdAndHysteresisVolatility</td>
+<td>Identifies under which conditions any threshold or hysteresis settings that were set through the SetSensorThresholds or SetSensorHysteresis command may be lost.</td>
+</tr>
+<tr class="odd">
+<td>float</td>
+<td>stateTransitionInterval</td>
+<td>How long the sensor device takes to do an enabledState change (worst case)</td>
+</tr>
+<tr class="even">
+<td>float</td>
+<td>updateInterval</td>
+<td>Polling or update interval in seconds expressed using a floating point number (generally corresponds to the CIM PollingInterval property)</td>
+</tr>
+<tr class="odd">
+<td>int16_t</td>
+<td>maxReadable</td>
+<td>The maximum value that the sensor may return. The size of this field is given by the sensorDataSize field in this PDR.</td>
+</tr>
+<tr class="even">
+<td>int16_t</td>
+<td>minReadable</td>
+<td>The minimum value that the sensor may return. The size of this field is given by the sensorDataSize field in this PDR.</td>
+</tr>
+<tr class="odd">
+<td>uint8_t</td>
+<td>rangeFieldFormat</td>
+<td>Indicates the format used for the following nominalValue, normalMax, normalMin, criticalHigh, criticalLow, fatalHigh, and fatalLow fields.</td>
+</tr>
+<tr class="even">
+<td>uint8_t</td>
+<td>rangeFieldSupport</td>
+<td>Indicates which of the fields that identify the operating ranges of the parameter monitored by the sensor are supported. (This bitfield indicates whether the following nominalValue, normalMax, and so on, fields contain valid range values.)</td>
+</tr>
+<tr class="odd">
+<td>int16_t</td>
+<td>nominalValue</td>
+<td>This value presents the nominal value for the parameter that is monitored by the sensor. The size of this field is given by the rangeFieldFormat field in this PDR. This value is given directly in the specified units without the use of any conversion formula.</td>
+</tr>
+<tr class="even">
+<td>int16_t</td>
+<td>normalMax</td>
+<td>The upper limit of the normal operating range for the parameter that is monitored by the numeric sensor.</td>
+</tr>
+<tr class="odd">
+<td>int16_t</td>
+<td>normalMin</td>
+<td>The lower limit of the normal operating range for the parameter that is monitored by the numeric sensor.</td>
+</tr>
+<tr class="even">
+<td>int16_t</td>
+<td>warningHigh</td>
+<td>A warning condition that occurs when the monitored value is greater than the value reported by warningHigh.</td>
+</tr>
+<tr class="odd">
+<td>int16_t</td>
+<td>warningLow</td>
+<td>A warning condition that occurs when the monitored value is less than or equal to the value reported by warningLow.</td>
+</tr>
+<tr class="even">
+<td>int16_t</td>
+<td>criticalHigh</td>
+<td>A critical condition that occurs when the monitored value is greater than or equal to the value reported by criticalHigh.</td>
+</tr>
+<tr class="odd">
+<td>int16_t</td>
+<td>criticalLow</td>
+<td>A critical condition that occurs when the monitored value is less than the value reported by criticalLow.</td>
+</tr>
+<tr class="even">
+<td>int16_t</td>
+<td>fatalHigh</td>
+<td>A fatal condition that occurs when the monitored value is greater than the value reported by fatalHigh.</td>
+</tr>
+<tr class="odd">
+<td>int16_t</td>
+<td>fatalLow</td>
+<td>A fatal condition that occurs when the monitored value is less than the value reported by fatalLow.</td>
+</tr>
+</tbody>
+</table>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-sensornamepdr"></span></p>
+</div>
+<div class="section" id="sensor-name-pdr">
+<h2>Sensor name PDR<a class="headerlink" href="#sensor-name-pdr" title="Permalink to this heading">¶</a></h2>
+<p>Structure that stores the sensor names PDR.</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uint16</td>
+<td>PLDMTerminusHandle</td>
+<td>ID of the sensor relative to the given PLDM terminus</td>
+</tr>
+<tr>
+<td>uint16</td>
+<td>sensorID</td>
+<td>ID of the sensor relative to the given PLDM terminus</td>
+</tr>
+<tr>
+<td>uint8</td>
+<td>sensorCount</td>
+<td>For each sensor x in sensorCount, there can be 1..nameStringCount[x] strings, where each set of strings corresponds to a sensor in a composite sensor.</td>
+</tr>
+<tr>
+<td>uint8</td>
+<td>nameStringCount</td>
+<td>Number of following pairs [0..N] of nameLanguageTag - sensorName fields for sensor[1]</td>
+</tr>
+<tr>
+<td>uint8</td>
+<td>nameLanguageTag</td>
+<td>A null-terminated ISO646 ASCII string that holds a language tag.</td>
+</tr>
+<tr>
+<td>uint8</td>
+<td>sensorName</td>
+<td>A null-terminated unicode string for the auxiliary name of the sensor</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          
+				  
+				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="axc-proxy.html" class="btn btn-neutral float-left" title="AMR External Device Control (AXC) Proxy Driver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fw-if-layer.html" class="btn btn-neutral float-right" title="Firmware Interface (FW_IF) Abstraction Layer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
+      <span class="lastupdated">Last updated on March 09, 2026.
+      </span></p>
+  </div>
+
+
+
+										<div class="aem-Grid aem-Grid--16">
+											<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+												<div class="container-fluid sub-footer">
+
+													                    <div class="row">
+                        <div class="col-xs-24">
+                          <p><a target="_blank" href="https://www.amd.com/en/corporate/copyright">Terms and Conditions</a> | <a target="_blank" href="https://www.amd.com/en/corporate/privacy">Privacy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/cookies">Cookie Policy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/trademarks">Trademarks</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf">Statement on Forced Labor</a> | <a target="_blank" href="https://www.amd.com/en/corporate/competition">Fair and Open Competition</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf">UK Tax Strategy</a> | <a target="_blank" href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA">Inclusive Terminology</a> | <a href="#cookiessettings" class="ot-sdk-show-settings">Cookies Settings</a></p>
+                        </div>
+                    </div>
+												</div>
+											</div>
+										</div>
+										
+</br>
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,215 @@
+# How-to Rebuild an AMR Design for Yourself
+
+This is a getting-started guide for the Adaptive Management Runtime (AMR) to be used with the provided AMR source code on GitHub. The source code comprises firmware library, and a host operating system driver and utility application. This guide details downloading the appropriate source code for your card and rebuilding the complete design. After running through these steps, you will have created a PDI that can be installed on your system.
+
+<span id="how-torebuildanamrdesignforyourself-beforeyoubegin"></span>
+
+## Before You Begin
+
+<span id="how-torebuildanamrdesignforyourself-builddependencies"></span>
+
+### Build Dependencies
+
+
+Tools
+
+  - Use the AMD Vivado™ version associated with the AMR release
+
+  - Python 3.6.8 or later.
+
+  - Cmake 3.5.0 or later.
+
+System Memory Requirements
+
+  - 64GB
+
+<span id="how-torebuildanamrdesignforyourself-hardwaretestdependencies"></span>
+
+### Hardware Test Dependencies for V80
+
+See [Supported Kernels and Distributions](../overview/amr-overview.md#AMROverview-SupportedKernelsandDistributions) for an up-to-date list.
+
+*Note*: root/sudo permissions are required.
+
+<span id="how-torebuildanamrdesignforyourself-installpythonfrompython-org"></span>
+
+### Install Python from python.org
+
+To install Python, navigate to: <https://www.python.org/downloads/>. Locate and install the latest Python 3.6.8 or newer for your operating system.
+
+<span id="how-torebuildanamrdesignforyourself-downloadthesourcecode"></span>
+
+## Download the Source Code
+
+Get the latest AMR installation package.
+
+1.  Refer to the [AMR release table](../release-information/) to find the latest example design version. the *amr git release branch* will direct you to the release branch source code in github.
+
+2.  Clone the latest release branch AMR source code repository. Confirm that you cloned the repository to a development server with sufficient system memory to build AMR, either locally on the server or remotely through LSF.
+
+3.  Make a note of the listed Vivado tool version used to build this source code, as AMR has been verified to build with this tool version. You will use the same Vivado version to build AMR.
+
+In this example, we will clone the AMR repo with the <Release Branch> mentioned in document reference page(../references.md) (which has been verified with Vivado 2026.1) and build instructions for AMR design are same for both V80 and RAVE. The high-level directory structure will look similar to the following:
+
+    AMR
+    ├── deploy
+    │   └── scripts
+    ├── fw
+    │   └── AMC
+    └── sw
+        └── AMI
+
+<span id="how-torebuildanamrdesignforyourself-buildthedesign"></span>
+
+## Build the Design
+
+<span id="how-torebuildanamrdesignforyourself"></span>
+
+### Build Hardware, Firmware, Software together with below command.
+
+The following steps will guide you through setting up your Vivado environment and building an AMR V80/RAVE PDI from the cloned source code.
+
+1.  Set up the desired version of Vivado in your environment by sourcing the `settings64.](c)sh` script from your Vivado install directory.
+    
+      - 
+        
+        
+        
+        
+        
+            # for csh
+            $ source settings64.csh
+            
+            # for bash
+            $ source settings64.sh
+        
+        
+        
+        
+
+2.  To build all components and generate pdi, execute 
+    ./build.sh -profile <v80|rave>
+
+<!-- end list -->
+
+    - For more information on the build script, refer to [AMR Build Scripts](../build-scripts/)
+
+       ```bash
+        # To build V80 hardware, firmware and software
+          cd amr
+          ./build_all.sh -profile v80
+        ```
+
+    - To confirm that the build completed successfully, review the generated output and verify that the required output files from each build step are present as indicated in the next section.
+
+<span id="how-torebuildanamrdesignforyourself-firmware"></span>
+### Firmware
+
+  The following steps will guide you through building the AMI firmware from the cloned source code.
+
+  1.  On your development server, navigate to the AMC directory in \<AMR cloned repo\>/fw/AMC/.
+
+2.  Run the script 
+    ./scripts/build_amc.sh -xsa <hw_xsa> -profile <v80/rave>
+which will build the firmware and generate amr_ospi_fpt.bin, amr_ospi.bin. After successfully building, the firmware package will be in \<AMR\>/fw/AMI/build_amc/. Copy this to your deployment server.
+
+<span id="how-torebuildanamrdesignforyourself-software"></span>
+
+### Software
+
+The following steps will guide you through building the AMI software from the cloned source code.
+
+1.  On your development server, navigate to the AMI directory in \<AMR cloned repo\>/sw/AMI/.
+
+2.  Run scripts/build_ami.sh, which will build the software and generate three debian/rpm files. 
+    - ami_<version>.<hash>.<date>_amd64.deb example: ami_2.0.0-0.0a8a8683.20260216_amd64.deb
+    - amitool_<version>.<hash>.<date>_amd64.deb example: amitool_2.0.0-0.0a8a8683.20260216_amd64.deb
+    - libami_<version>.<hash>.<date>_amd64.deb example: libami_2.0.0-0.0a8a8683.20260216_amd64.deb
+After successfully building, the software package will be in \<AMR\>/sw/AMI/build_ami/>. Copy this to your deployment server.
+
+3.  On your deployment server, install the AMI package.. Make sure to install libami_<version>.<hash>.<date>_amd64.deb before installing other debian files.
+
+    ```bash
+    # development server
+    cd <AMR>/sw/AMI
+    bash scripts/build_ami.sh
+
+    # deployment server
+    sudo dpkg -i <path/to/libami_xxx.deb>
+    sudo dpkg -i <path/to/amitool_xxx.deb>
+    sudo dpkg -i <path/to/ami_xxx.deb>
+    ```
+
+<span id="how-torebuildanamrdesignforyourself-reviewthegeneratedoutput"></span>
+
+## Review the Generated Output
+
+By default, the `build.sh` script creates a build directory which would contain fw and sw images. Review your output directory to confirm it looks like the following.
+
+    <AMR>
+    ├── build/
+    │   ├── amc.elf*
+    │   ├── amd_fpt.bin*
+    │   ├── amr_ospi_all_0_sync_offsets.txt
+    │   ├── amr_ospi.bin
+    │   ├── amr_ospi_fpt.bin
+    │   ├── amr_ospi_pdi.bif*
+    │   ├── build.log
+    │   ├── CMakeCache.txt
+    │   ├── CMakeFiles
+    │   ├── cmake_install.cmake
+    │   ├── Makefile
+    │   ├── ami
+        ├── driver
+        ├── libami
+    │   ├── ami_2.0.0-0.0a8a8683.20260224_amd64.deb
+        ├── amitool_2.0.0-0.0a8a8683.20260224_amd64.deb
+        └── libami_2.0.0-0.0a8a8683.20260224_amd64.deb
+
+    ├── build.sh
+    ├── fw/
+    ├── scripts/
+    └── sw/
+    
+    Important Note: Generated files followed by a '*' are required files created by each step in the build flow, which can be used as an indication that the build has completed successfully. Verify that these files exist after building the design.
+
+## Programming and Testing the Design
+
+In this section, you will use the AMI cfgmem\_program command to program your new design PDI to flash. As a prerequisite, review [AMR - Device Programming](../system-architecture/device-programming/) Verify your deployment server and Alveo card are properly set up, and note the card BDF which you will use to program the PDI.
+
+To program the PDI to flash, your deployment server will need access to the new design PDI. You will use the AMI cfgmem\_program command, specifying the card BDF, path to the design PDI, and which flash partition to program. In this example, the BDF is c1:00.0 and the PDI will be programmed to flash partition 0. Successful programming is indicated by the message “`OK. Image has been programmed successfully.`” A hot reset is automatically performed to boot the updated design in partition 0. The incoming UUID may be reported as “N/A” if no UUID metadata is provided with the PDI. This is normal behavior and does not affect the programming.
+
+    ```bash
+    # usage: sudo ami_tool cfgmem_program -d <bdf> -t <type> -i <pdi path> -p <flash partition number>
+    sudo ami_tool cfgmem_program -d c1:00.0 -t primary -i <Path_to_pdi/bin file> -p 0
+    ```
+    
+    ----------------
+    Device | c1:00.0
+    ----------------
+    Current Configuration
+    ----------------
+    UUID   | 4b85bf2b90fbe3b9ed912f24e2c3ede6
+    ----------------
+    Incoming Configuration
+    ----------------
+    UUID      | 51074aa2b75b033b2ec36570094bff92
+    Path      | <this will show pdi path>
+    Partition | 0
+    ----------------
+    Are you sure you wish to proceed? [Y/n]: Y
+    
+    Updating base flash image...
+    [####################################################################################################] 100% |
+    Image programming complete.
+    Will do a hot reset to boot into partition 0. This may take a minute...
+
+<span id="how-torebuildanamrdesignforyourself-nextsteps"></span>
+
+## Next Steps
+
+This getting started guide outlined the steps to download the AMR source code, build the AMR, and program the PDI using AMI. If you would like to explore other available hardware test commands, see:
+
+  - [AMR Management Interface userguide](../../deployment/ami-tool-guide)
+
+

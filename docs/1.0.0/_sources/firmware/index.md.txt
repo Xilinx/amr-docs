@@ -1,0 +1,25 @@
+# Firmware Design - AMR
+
+  - [AMR Management Controller (AMC) - Architecture and Design](amc-architecture/)
+
+  - [AMR ASDM Application](asdm-application/)
+
+  - [AMR InBand Telemetry Application](inband-telemetry/)
+
+  - [AMR OutOfBand Telemetry Application](outofband-telemetry/)
+
+  - [AMR Management Interface (AMI) Proxy Driver](ami-proxy/)
+
+  - [AMR Programming Control (APC) Proxy Driver](apc-proxy/)
+
+  - [AMR Sensor Control (ASC) Proxy Driver](asc-proxy/)
+
+  - [AMR External Device Control (AXC) Proxy Driver](axc-proxy/)
+
+  - [Board Management Controller (BMC) Proxy Driver](bmc-proxy/)
+
+  - [Firmware Interface (FW_IF) Abstraction Layer](fw-if-layer/)
+
+  - [Operating System Abstraction Layer (OSAL)](osal/)
+
+  - [Profiles and CMake build process](profiles-cmake/)

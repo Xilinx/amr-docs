@@ -1,0 +1,14 @@
+# AMR Installing the Design onto the Card
+
+After installing the AMR, the next step is to update the design in the OSPI flash.
+
+As the FPT you are installing may not align with the FPT that is currently on your card, it is important that you update the OSPI flash with the amr_ospi-fpt.bin over JTAG using the AMD Vivado™ HW manager. This will ensure that the correct FPT is in flash.
+
+The steps to do this are found in [Updating AMR FPT Image in Flash](../update-fpt/).
+
+In general, when the FPT is known to be the same, it is also possible to update the AMR design over PCIe® using the AMI tool. In this case, the amr_ospi.bin from the compiled build folder is used instead of the amr_ospi_fpt.bin. Only the PDI\_BOOT partition is updated in flash ](not the FPT).
+
+The steps to do this are found in [AMR Updating Design PDI in Flash](../update-pdi/).
+
+**Note:** Especially when picking up a new card, it’s worth noting that the deployment archive will always contain a version of AMI which is compatible with the AMC FW which is in the amr_ospi_fpt.bin pdi. To avoid any confusion, updating the amr_ospi_fpt.bin over JTAG is the simplest and recommended approach.
+

@@ -1,0 +1,18 @@
+# Hardware Design - V80
+
+  - [AMR V80 - Hierarchy Overview](hierarchy.md)
+
+  - [AMR V80 - CIPS Configuration](cips-config.md)
+
+  - [AMR V80 - Memory Resources](memory-resources.md)
+
+  - [AMR V80 - Memory Map](memory-map.md)
+
+  - [AMR V80 - NoC Configuration](noc-config.md)
+
+  - [AMR V80 - Base Logic](base-logic.md)
+
+  - [AMR V80 - Clock Reset Module](clock-reset.md)
+
+  - [AMR V80 - Source File Overview](source-files.md)
+

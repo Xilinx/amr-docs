@@ -1,0 +1,68 @@
+# AMR - Host to Card Communication
+
+<span id="amr-hosttocardcommunication-overviewofphysicalfunction0"></span>
+
+## Overview of Physical Function 0
+
+Applications deriving from AMR V80 are inherently PCIe® centric. This section gives an overview of how the AMR hardware design has been configured to facilitate management of the AMR design from the PCIe host via the AMC firmware and companion AMR V80 PCIe driver and utility application.
+
+  - The Hardware Discovery section explains how the AMR host driver identifies AMD Alveo™ V80 card instances running an application derived from the AMR base design so that the Host OS driver can bind to the card and access the application’s AMR management interface.
+
+  - The Host to RPU Communication section describes the general principles of message exchange between the host OS and the AMC firmware implementing the AMR management interface for each card instance.
+
+  - The Host to User Application Communication section suggests ways AMR can be extended to allow application data to be exchanged between application stack running on the PCIe host and the AMD Alveo™ V80 card.
+    
+      - Application developers will naturally alter the AMR base design to optimize application data flow to suit their specific application’s requirements and hence this page offers only high level guidance for user data transport to the Alveo V80 card.
+
+<span id="amr-hosttocardcommunication-hardwarediscovery"></span>
+
+### Hardware Discovery
+
+On boot, the host system enumerates the set of PCIe cards in the system and attaches the reference AMR host OS drivers to instances of the Alveo V80 cards it finds running AMR base hardware designs. A full PCIe-based management interface is not available until the AMR host OS driver has attached to the card and acquired a small amount of metadata from the card about its hardware design content. Once the AMR PCIe host driver is attached, the [AMR management interface](../software/ami)) is available to allow the current design content of the AMR V80 cards to be inspected, controlled, and updated.
+
+<span id="amr-hosttocardcommunication-uuidromandpcieextendedcapabilities"></span>
+
+#### UUID ROM and PCIe Extended Capabilities
+
+It is helpful to be able to identify which version or build of a design is operating on the FPGA of the Alveo card. In the AMR V80, the base hardware design contains a small AXI peripheral memory that is initialized with a 128-bit UUID value to allow for such design identification. The intent is that the value programmed into the UUID is different for each build of the design. During the AMR build process, the flow scripts compute a hash of the post routed design file and then assign that value into the UUID peripheral’s memory. The AMI driver and command line utility can query for the UUID later when the card is booted and operational in the host system. This allows the driver and the user to identify which iterations of a given AMR base design are operating on each card within the host system.
+
+AMR’s base design includes another piece of IP infrastructure to populate the PCIe extended capabilities configuration space with information about a small number of hardware features in the design. The main purpose of the PCIe extended capabilities content is to inform the AMI software stack of the address offset of a few AXI peripherals (UUID ROM, mailbox, address remapper) within the AMR base hardware design. This information is helpful to know in the earliest stages of the card boot and driver bring-up as it allows early reporting of the UUID ROM content just from the data that can be recovered by system commands, such as *lspci*. It is worth noting that this convention of address metadata exchange is in place to support successive versioning of a base design over several iterations and design teams. It is possible to simplify the AMR design further by removing the PCIe extended capabilities mechanism provided the address assignments of the AXI peripherals currently presented via in PCIe extended capabilities can be held consistent across design iterations. This tradeoff potentially makes the the software stack more tightly coupled to the addressing conventions of the AMR base design. However, by accepting this tradeoff other design techniques such as PCIe tandem load can be deployed.
+
+[![image1](../images/1107373737.png)](../images/1107373737.png)
+
+<span id="amr-hosttocardcommunication-pciebarlayout"></span>
+
+#### PCIe BAR Layout
+
+The AMR V80 hardware base design declares a single memory aperture for PF0. This memory aperture enables AMI communication to the AMC firmware running on the RPU. Only a subset of this memory will be used in the AMR base design. However, as more features of the processing subsystem are enabled, additional message passing interfaces from the host to, for example, the User OS running in the AMD Versal™ APU, may make use of this memory region.
+
+[![image2](../images/1107373728.png)](../images/1107373728.png)
+
+<span id="amr-hosttocardcommunication-hosttorpucommunication"></span>
+
+### Host to RPU Communication
+
+The AMI (host OS) and AMC (embedded firmware) components of AMRs software stack communicate via a region of shared memory and a mailbox peripheral IPs called a [generic command queue](../ip-details/gcq-ip/).
+
+[![image3](../images/1107373734.png)](../images/1107373734.png)
+
+The diagram above shows the PCIe host’s access path to the mailbox (magenta colored nets) and the RPU’s access path to the mailbox (green colored nets). Commands issued to the AMR V80 design via the AMI utility on the PCIe host are transformed into a series of agreed message types that are pushed into the circular buffer of the gcq\_m2r IP shown above. The AMC firmware running in the RPU will be alerted to the availability of these messages and (when its control loop allows) begin to service those messages. Internally, the GCQ IP implements a *pair* of circular buffers to act as submission and completion queues. This allows the RPU to receive commands submitted from the PCIe host and return result codes and other status information on the completion queue. The GCQ IP also implements interrupt services so that software running on the RPU and PCIe host can avoid inefficient polling the card. In the base design, the AMC firmware makes use of interrupts to provide prompt servicing of requests from the AMI software on the host OS. AMR does not have PCIe interrupt architecture requirements to the host OS as it is anticipated that the application interrupt architecture will take precedence over these lower level (and relatively infrequent) command interactions over the management interface.
+
+<span id="amr-hosttocardcommunication-hosttouserapplicationcommunication"></span>
+
+### Host to User Application Communication
+
+Extending the AMR base design to support additional layers of communication, specifically for the user application, will naturally follow the requirements of the specific application being implemented. Some applications may require several PCIe memory apertures to be accessed, others may be satisfied with a very small control interface aperture and data transport via [Versal’s PCIe Slave Bridge](https:/docs.xilinx.com/r/en-US/pg344-pcie-dma-versal/Slave-Bridge) to the host memory itself. When extending the AMR base design to accommodate application data transport the following extensions to the AMR base design may be common:
+
+  - Enable additional physical functions to separate application data transport from card management data transport in the Host OS, etc.
+
+  - Add additional GCQ mailbox IP instances to allow message passing between the user space application on the Host OS and application level firmware operating in the APU.
+
+<span id="amr-hosttocardcommunication-overviewofphysicalfunction1"></span>
+
+## Overview of Physical Function 1
+
+The AMR V80 hardware base design defines PF1 to enable CPM PCIe BAR configurations. This allows DDR and HBM memory to be targeted by CPM DMA transfers to and from host memory.
+
+[![image4](../images/1107373731.png)](../images/1107373731.png)
+
