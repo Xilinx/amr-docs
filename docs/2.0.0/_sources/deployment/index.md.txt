@@ -6,7 +6,7 @@
 
   - [AMR Updating FPT Image in Flash](update-fpt.md)
 
-  - [AMR Updating Design PDI in Flash](update-pdi.md)
+  - [AMR Updating PDI in Flash](update-pdi.md)
 
   - [AMR Debug Techniques](debug.md)
 

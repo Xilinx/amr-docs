@@ -18,7 +18,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-5RHQV7');</script>
 <!-- End Google Tag Manager -->
-  <title>AMR Updating amr_ospi.bin PDI in Flash &mdash; AMR  documentation</title>
+  <title>AMR Updating PDI in Flash &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -66,7 +66,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AMR Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../getting-started/install-and-run.html">How-to install and run a pre-built AMR design on an ALVEO V80 card</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/rebuild.html">How-to Rebuild an AMR Design for Yourself</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AMR System Architecture</span></p>
@@ -79,7 +78,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install-card.html">AMR Installing the Design onto the Card</a></li>
 <li class="toctree-l1"><a class="reference internal" href="update-fpt.html">AMR Updating FPT Image in Flash</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">AMR Updating amr_ospi.bin PDI in Flash</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">AMR Updating PDI in Flash</a></li>
 <li class="toctree-l1"><a class="reference internal" href="debug.html">AMR Debug Techniques</a></li>
 <li class="toctree-l1"><a class="reference internal" href="jtag-recovery.html">AMR JTAG Boot Recovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ami-tool-guide.html">AMR Management Interface userguide (ami_tool)</a></li>
@@ -89,9 +88,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Hardware Design</span></p>
+<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../hardware/hierarchy.html">AMR V80 - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../v80/index.html">V80 Platform Documentation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
@@ -133,7 +132,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>AMR Updating amr_ospi.bin PDI in Flash</li>
+      <li>AMR Updating PDI in Flash</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/deployment/update-pdi.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -143,8 +142,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="amr-updating-amr-ospi-bin-pdi-in-flash">
-<h1>AMR Updating amr_ospi.bin PDI in Flash<a class="headerlink" href="#amr-updating-amr-ospi-bin-pdi-in-flash" title="Permalink to this heading">¶</a></h1>
+  <div class="section" id="amr-updating-pdi-in-flash">
+<h1>AMR Updating PDI in Flash<a class="headerlink" href="#amr-updating-pdi-in-flash" title="Permalink to this heading">¶</a></h1>
 <ol class="arabic">
 <li><p>The ami_tool cfgmem_info command will list the available partitions that have been defined in the FPT.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Usage: ami_tool cfgmem_info -d &lt;bdf&gt; -t &lt;type&gt; [options...]</span>
@@ -162,7 +161,8 @@ Entries     | 3</p>
 1         | PDI_BOOT | 0x07480000 | 0x07400000 | 0x003ec160 | 360874e0d8a584c09afde073c0ff403a | N/A           | In-Active
 2         | PDI_USER | 0x0e880000 | 0x01000000 | 0x00000000 | 00000000000000000000000000000000 | Off           | Not Loaded</p>
 </li>
-<li><p>The ami_tool cfgmem_program command can then be used to write a amr_ospi.bin pdi to a PDI_BOOT partition.</p></li>
+<li><p>The ami_tool cfgmem_program command can then be used to write a amr_ospi.bin pdi to a partition 1 and 2. Partition 3 user partition which is used to load user PL pdi’s
+through ami_tool pdi_\program command.</p></li>
 </ol>
 <p>e.g.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>```bash
@@ -216,7 +216,7 @@ Will do a hot reset to boot into partition 0. This may take a minute...
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 09, 2026.
+      <span class="lastupdated">Last updated on March 10, 2026.
       </span></p>
   </div>
 

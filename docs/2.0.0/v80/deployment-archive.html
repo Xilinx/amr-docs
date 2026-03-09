@@ -35,7 +35,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Hardware Design - V80" href="hardware/index.html" />
+    <link rel="prev" title="AMR Installing the Deployment package onto the Host Server" href="install-host.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -64,7 +66,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AMR Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../getting-started/install-and-run.html">How-to install and run a pre-built AMR design on an ALVEO V80 card</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/rebuild.html">How-to Rebuild an AMR Design for Yourself</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AMR System Architecture</span></p>
@@ -77,7 +78,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/install-card.html">AMR Installing the Design onto the Card</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/update-fpt.html">AMR Updating FPT Image in Flash</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../deployment/update-pdi.html">AMR Updating amr_ospi.bin PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/update-pdi.html">AMR Updating PDI in Flash</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/debug.html">AMR Debug Techniques</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/jtag-recovery.html">AMR JTAG Boot Recovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/ami-tool-guide.html">AMR Management Interface userguide (ami_tool)</a></li>
@@ -87,9 +88,29 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Hardware Design</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../hardware/hierarchy.html">AMR V80 - Hierarchy Overview</a></li>
+<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">V80 Platform Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="install-and-run.html">How-to install and run a pre-built AMR design on an ALVEO V80 card</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-host.html">AMR Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">AMR Deployment Archive</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#amr-deployment-archive-contents">AMR Deployment Archive Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#amr-install-script">AMR Install script</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#design-pdi">Design PDI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flash-setup-directory">Flash Setup directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#static-xsa">Static XSA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sw-packages-directory">SW Packages directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#component-version-json">Component version JSON</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#version-json">Version JSON</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbtest-directory">Xbtest directory</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hardware/index.html">Hardware Design - V80</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run.html">How-to install and run a pre-built AMR design on an ALVEO V80 card</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
@@ -131,6 +152,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">V80 Platform Documentation</a> &raquo;</li>
       <li>AMR Deployment Archive</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/v80/deployment-archive.md.txt" rel="nofollow"> View page source</a>
@@ -232,13 +254,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </div>
           
 				  
-				  <footer>
+				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="install-host.html" class="btn btn-neutral float-left" title="AMR Installing the Deployment package onto the Host Server" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="hardware/index.html" class="btn btn-neutral float-right" title="Hardware Design - V80" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 09, 2026.
+      <span class="lastupdated">Last updated on March 10, 2026.
       </span></p>
   </div>
 

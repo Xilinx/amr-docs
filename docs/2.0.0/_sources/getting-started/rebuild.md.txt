@@ -10,7 +10,6 @@ This is a getting-started guide for the Adaptive Management Runtime (AMR) to be 
 
 ### Build Dependencies
 
-
 Tools
 
   - Use the AMD Vivado™ version associated with the AMR release
@@ -22,6 +21,9 @@ Tools
 System Memory Requirements
 
   - 64GB
+
+Pre-requisites
+- source /proj/xbuilds/2026.1_daily_latest/installs/lin64/2026.1/Vivado/settings64.sh
 
 <span id="how-torebuildanamrdesignforyourself-hardwaretestdependencies"></span>
 
@@ -39,17 +41,28 @@ To install Python, navigate to: <https://www.python.org/downloads/>. Locate and 
 
 <span id="how-torebuildanamrdesignforyourself-downloadthesourcecode"></span>
 
+## Building OSPI Images through Yocto:
+1. Rave:
+    Use the Yocto procedure to build all necessary binary OSPI images and packages. The AMR package is built using the Yocto meta-embedded-plus template. The final artifacts will be in the build/tmp/deploy/images/emb_plus_ve2302_amr folder.
+
+    MACHINE=emb-plus-ve2302-amr bitbake emb-plus-ospi-amr
+
+2. V80:
+        TBD
+
+For building x86 packages refer [software build section](#how-torebuildanamrdesignforyourself-software)
+
 ## Download the Source Code
 
 Get the latest AMR installation package.
 
-1.  Refer to the [AMR release table](../release-information/) to find the latest example design version. the *amr git release branch* will direct you to the release branch source code in github.
+1.  Refer to the [AMR release notes](../release-notes.md) to find the latest example design version. the *amr git release branch* will direct you to the release branch source code in github.
 
 2.  Clone the latest release branch AMR source code repository. Confirm that you cloned the repository to a development server with sufficient system memory to build AMR, either locally on the server or remotely through LSF.
 
 3.  Make a note of the listed Vivado tool version used to build this source code, as AMR has been verified to build with this tool version. You will use the same Vivado version to build AMR.
 
-In this example, we will clone the AMR repo with the <Release Branch> mentioned in document reference page(../references.md) (which has been verified with Vivado 2026.1) and build instructions for AMR design are same for both V80 and RAVE. The high-level directory structure will look similar to the following:
+In this example, we will clone the AMR repo with the latest release (which has been verified with Vivado 2026.1) and build instructions for AMR design are same for both V80 and RAVE. The high-level directory structure will look similar to the following:
 
     AMR
     ├── deploy

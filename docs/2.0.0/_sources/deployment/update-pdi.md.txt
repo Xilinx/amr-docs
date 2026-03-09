@@ -1,4 +1,4 @@
-# AMR Updating amr_ospi.bin PDI in Flash
+# AMR Updating PDI in Flash
 
 1.  The ami\_tool cfgmem\_info command will list the available partitions that have been defined in the FPT.
 
@@ -23,7 +23,8 @@
     1         | PDI_BOOT | 0x07480000 | 0x07400000 | 0x003ec160 | 360874e0d8a584c09afde073c0ff403a | N/A           | In-Active
     2         | PDI_USER | 0x0e880000 | 0x01000000 | 0x00000000 | 00000000000000000000000000000000 | Off           | Not Loaded
 
-2.  The ami\_tool cfgmem\_program command can then be used to write a amr_ospi.bin pdi to a PDI\_BOOT partition.
+2.  The ami\_tool cfgmem\_program command can then be used to write a amr_ospi.bin pdi to a partition 1 and 2. Partition 3 user partition which is used to load user PL pdi's 
+through ami\_tool pdi_\program command. 
 
 e.g.
 

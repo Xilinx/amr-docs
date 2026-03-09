@@ -37,7 +37,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="AMR - Board Management Solution" href="../system-architecture/board-management.html" />
-    <link rel="prev" title="How-to install and run a pre-built AMR design on an ALVEO V80 card" href="install-and-run.html" /> 
+    <link rel="prev" title="AMR Overview" href="../overview/amr-overview.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -66,7 +66,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AMR Getting Started</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="install-and-run.html">How-to install and run a pre-built AMR design on an ALVEO V80 card</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">How-to Rebuild an AMR Design for Yourself</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#before-you-begin">Before You Begin</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#build-dependencies">Build Dependencies</a></li>
@@ -74,6 +73,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#install-python-from-python-org">Install Python from python.org</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#building-ospi-images-through-yocto">Building OSPI Images through Yocto:</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#download-the-source-code">Download the Source Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#build-the-design">Build the Design</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#build-hardware-firmware-software-together-with-below-command">Build Hardware, Firmware, Software together with below command.</a></li>
@@ -97,7 +97,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/install-card.html">AMR Installing the Design onto the Card</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/update-fpt.html">AMR Updating FPT Image in Flash</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../deployment/update-pdi.html">AMR Updating amr_ospi.bin PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/update-pdi.html">AMR Updating PDI in Flash</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/debug.html">AMR Debug Techniques</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/jtag-recovery.html">AMR JTAG Boot Recovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/ami-tool-guide.html">AMR Management Interface userguide (ami_tool)</a></li>
@@ -107,9 +107,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Hardware Design</span></p>
+<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../hardware/hierarchy.html">AMR V80 - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../v80/index.html">V80 Platform Documentation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
@@ -180,6 +180,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <ul class="simple">
 <li><p>64GB</p></li>
 </ul>
+<p>Pre-requisites</p>
+<ul class="simple">
+<li><p>source /proj/xbuilds/2026.1_daily_latest/installs/lin64/2026.1/Vivado/settings64.sh</p></li>
+</ul>
 <p><span id="how-torebuildanamrdesignforyourself-hardwaretestdependencies"></span></p>
 </div>
 <div class="section" id="hardware-test-dependencies-for-v80">
@@ -194,15 +198,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p><span id="how-torebuildanamrdesignforyourself-downloadthesourcecode"></span></p>
 </div>
 </div>
+<div class="section" id="building-ospi-images-through-yocto">
+<h2>Building OSPI Images through Yocto:<a class="headerlink" href="#building-ospi-images-through-yocto" title="Permalink to this heading">¶</a></h2>
+<ol class="arabic">
+<li><p>Rave:
+Use the Yocto procedure to build all necessary binary OSPI images and packages. The AMR package is built using the Yocto meta-embedded-plus template. The final artifacts will be in the build/tmp/deploy/images/emb_plus_ve2302_amr folder.</p>
+<p>MACHINE=emb-plus-ve2302-amr bitbake emb-plus-ospi-amr</p>
+</li>
+<li><p>V80:
+TBD</p></li>
+</ol>
+<p>For building x86 packages refer <a class="reference internal" href="#how-torebuildanamrdesignforyourself-software"><span class="xref myst">software build section</span></a></p>
+</div>
 <div class="section" id="download-the-source-code">
 <h2>Download the Source Code<a class="headerlink" href="#download-the-source-code" title="Permalink to this heading">¶</a></h2>
 <p>Get the latest AMR installation package.</p>
 <ol class="arabic simple">
-<li><p>Refer to the <a class="reference internal" href="#../release-information/"><span class="xref myst">AMR release table</span></a> to find the latest example design version. the <em>amr git release branch</em> will direct you to the release branch source code in github.</p></li>
+<li><p>Refer to the <a class="reference internal" href="../release-notes.html"><span class="std std-doc">AMR release notes</span></a> to find the latest example design version. the <em>amr git release branch</em> will direct you to the release branch source code in github.</p></li>
 <li><p>Clone the latest release branch AMR source code repository. Confirm that you cloned the repository to a development server with sufficient system memory to build AMR, either locally on the server or remotely through LSF.</p></li>
 <li><p>Make a note of the listed Vivado tool version used to build this source code, as AMR has been verified to build with this tool version. You will use the same Vivado version to build AMR.</p></li>
 </ol>
-<p>In this example, we will clone the AMR repo with the <Release Branch> mentioned in document reference page(../references.md) (which has been verified with Vivado 2026.1) and build instructions for AMR design are same for both V80 and RAVE. The high-level directory structure will look similar to the following:</p>
+<p>In this example, we will clone the AMR repo with the latest release (which has been verified with Vivado 2026.1) and build instructions for AMR design are same for both V80 and RAVE. The high-level directory structure will look similar to the following:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>AMR
 ├── deploy
 │   └── scripts
@@ -369,7 +385,7 @@ Will do a hot reset to boot into partition 0. This may take a minute...
           
 				  
 				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="install-and-run.html" class="btn btn-neutral float-left" title="How-to install and run a pre-built AMR design on an ALVEO V80 card" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../overview/amr-overview.html" class="btn btn-neutral float-left" title="AMR Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../system-architecture/board-management.html" class="btn btn-neutral float-right" title="AMR - Board Management Solution" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
@@ -377,7 +393,7 @@ Will do a hot reset to boot into partition 0. This may take a minute...
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 09, 2026.
+      <span class="lastupdated">Last updated on March 10, 2026.
       </span></p>
   </div>
 

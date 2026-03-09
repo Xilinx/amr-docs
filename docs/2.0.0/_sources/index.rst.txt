@@ -51,10 +51,11 @@ AMR
 
 .. toctree::
    :maxdepth: 2
-   :caption: Hardware Design
+   :caption: V80 Platform
    :hidden:
 
-   hardware/hierarchy
+   v80/index
+
 
 .. toctree::
    :maxdepth: 2
@@ -100,9 +101,9 @@ Release Information
 +=====================+==================+
 | **Version**         | 1.0.0            |
 +---------------------+------------------+
-| **Release Date**    | January 15, 2026 |
+| **Release Date**    | April 15, 2026 |
 +---------------------+------------------+
-| **Vivado Version**  | 2025.1           |
+| **Vivado Version**  | 2026.1           |
 +---------------------+------------------+
 | **Supported         | V80, RAVE        |
 | Platforms**         |                  |

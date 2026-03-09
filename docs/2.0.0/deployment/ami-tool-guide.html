@@ -66,7 +66,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AMR Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../getting-started/install-and-run.html">How-to install and run a pre-built AMR design on an ALVEO V80 card</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/rebuild.html">How-to Rebuild an AMR Design for Yourself</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AMR System Architecture</span></p>
@@ -79,7 +78,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install-card.html">AMR Installing the Design onto the Card</a></li>
 <li class="toctree-l1"><a class="reference internal" href="update-fpt.html">AMR Updating FPT Image in Flash</a></li>
-<li class="toctree-l1"><a class="reference internal" href="update-pdi.html">AMR Updating amr_ospi.bin PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update-pdi.html">AMR Updating PDI in Flash</a></li>
 <li class="toctree-l1"><a class="reference internal" href="debug.html">AMR Debug Techniques</a></li>
 <li class="toctree-l1"><a class="reference internal" href="jtag-recovery.html">AMR JTAG Boot Recovery</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">AMR Management Interface userguide (ami_tool)</a><ul>
@@ -154,68 +153,70 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#cfgmem-flags-rd">cfgmem_flags_rd</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id28">Description</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id29">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id30">Notes</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#cfgmem-flags-wr">cfgmem_flags_wr</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id30">Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id31">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id31">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id32">Example output</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#pdi-program">pdi_program</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id32">Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id33">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id33">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id34">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id35">Notes</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#bar-wr">bar_wr</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id34">Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id35">Example output</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id36">Notes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id36">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id37">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id38">Notes</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#bar-rd">bar_rd</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id37">Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id38">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id39">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id40">Example output</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#device-boot">device_boot</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id39">Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id40">Example output</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id41">Notes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id41">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id42">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id43">Notes</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#mfg-info">mfg_info</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id42">Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id43">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id44">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id45">Example output</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#eeprom-rd">eeprom_rd</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id44">Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id45">Example output</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id46">Notes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id46">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id47">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id48">Notes</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#eeprom-wr">eeprom_wr</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id47">Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id48">Example output</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id49">Notes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id49">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id50">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id51">Notes</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-byte-rd">module_byte_rd</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id50">Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id51">Example output</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id52">Notes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id52">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id53">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id54">Notes</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-byte-wr">module_byte_wr</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id53">Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id54">Example output</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id55">Notes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id55">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id56">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id57">Notes</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#debug-verbosity">debug_verbosity</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id56">Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id57">Example output</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id58">Notes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id58">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id59">Example output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id60">Notes</a></li>
 </ul>
 </li>
 </ul>
@@ -228,9 +229,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Hardware Design</span></p>
+<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../hardware/hierarchy.html">AMR V80 - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../v80/index.html">V80 Platform Documentation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
@@ -321,8 +322,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="section" id="usage-options">
 <h2>Usage - Options<a class="headerlink" href="#usage-options" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="#help"><span class="xref myst">AMR Management Interface userguide</span></a></p></li>
-<li><p><a class="reference internal" href="#version"><span class="xref myst">AMR Management Interface userguide</span></a></p></li>
+<li><p><a class="reference internal" href="#help"><span class="xref myst">help</span></a></p></li>
+<li><p><a class="reference internal" href="#version"><span class="xref myst">version</span></a></p></li>
 </ul>
 <hr class="docutils" />
 <p><span id="amrmanagementinterfaceuserguide-ami-tool-help"></span></p>
@@ -424,26 +425,26 @@ Driver Version  |  2.0.0  (0)
 <div class="section" id="usage-commands">
 <h2>Usage - Commands<a class="headerlink" href="#usage-commands" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference external" href="https://amd.atlassian.net/wiki/spaces/~71202065244d6db58848f69318bfa2c81340bb/pages/1107374046/../management-interface-userguide-ami_tool#overview2">overview</a></p></li>
-<li><p><a class="reference internal" href="#pcieinfo"><span class="xref myst">AMR Management Interface userguide</span></a></p></li>
-<li><p><a class="reference internal" href="#reload"><span class="xref myst">AMR Management Interface userguide</span></a></p></li>
-<li><p><a class="reference internal" href="#sensors"><span class="xref myst">AMR Management Interface userguide</span></a></p></li>
-<li><p><a class="reference internal" href="#cfgmem_info"><span class="xref myst">AMR Management Interface userguide</span></a></p></li>
-<li><p><a class="reference internal" href="#cfgmem_program"><span class="xref myst">AMR Management Interface userguide</span></a></p></li>
-<li><p><a class="reference internal" href="#cfgmem_fpt"><span class="xref myst">AMR Management Interface userguide</span></a></p></li>
-<li><p><a class="reference internal" href="#cfgmem_copy"><span class="xref myst">AMR Management Interface userguide</span></a></p></li>
-<li><p><a class="reference internal" href="#cfgmem_flags_rd"><span class="xref myst">AMR Management Interface userguide</span></a></p></li>
-<li><p><a class="reference internal" href="#cfgmem_flags_wr"><span class="xref myst">AMR Management Interface userguide</span></a></p></li>
-<li><p><a class="reference internal" href="#pdi_program"><span class="xref myst">AMR Management Interface userguide</span></a></p></li>
-<li><p><a class="reference internal" href="#bar_wr"><span class="xref myst">AMR Management Interface userguide</span></a></p></li>
-<li><p><a class="reference internal" href="#bar_rd"><span class="xref myst">AMR Management Interface userguide</span></a></p></li>
-<li><p><a class="reference internal" href="#device_boot"><span class="xref myst">AMR Management Interface userguide</span></a></p></li>
-<li><p><a class="reference internal" href="#mfg_info"><span class="xref myst">AMR Management Interface userguide</span></a></p></li>
-<li><p><a class="reference internal" href="#eeprom_rd"><span class="xref myst">AMR Management Interface userguide</span></a></p></li>
-<li><p><a class="reference internal" href="#eeprom_wr"><span class="xref myst">AMR Management Interface userguide</span></a></p></li>
-<li><p><a class="reference internal" href="#module_byte_rd"><span class="xref myst">AMR Management Interface userguide</span></a></p></li>
-<li><p><a class="reference internal" href="#module_byte_wr"><span class="xref myst">AMR Management Interface userguide</span></a></p></li>
-<li><p><a class="reference internal" href="#debug_verbosity"><span class="xref myst">AMR Management Interface userguide</span></a></p></li>
+<li><p><a class="reference internal" href="#overview"><span class="xref myst">overview</span></a></p></li>
+<li><p><a class="reference internal" href="#pcieinfo"><span class="xref myst">pcieinfo</span></a></p></li>
+<li><p><a class="reference internal" href="#reload"><span class="xref myst">reload</span></a></p></li>
+<li><p><a class="reference internal" href="#sensors"><span class="xref myst">sensors</span></a></p></li>
+<li><p><a class="reference internal" href="#cfgmem_info"><span class="xref myst">cfgmem_info</span></a></p></li>
+<li><p><a class="reference internal" href="#cfgmem_program"><span class="xref myst">cfgmem_program</span></a></p></li>
+<li><p><a class="reference internal" href="#cfgmem_fpt"><span class="xref myst">cfgmem_fpt</span></a></p></li>
+<li><p><a class="reference internal" href="#cfgmem_copy"><span class="xref myst">cfgmem_copy</span></a></p></li>
+<li><p><a class="reference internal" href="#cfgmem_flags_rd"><span class="xref myst">cfgmem_flags_rd</span></a></p></li>
+<li><p><a class="reference internal" href="#cfgmem_flags_wr"><span class="xref myst">cfgmem_flags_wr</span></a></p></li>
+<li><p><a class="reference internal" href="#pdi_program"><span class="xref myst">pdi_program</span></a></p></li>
+<li><p><a class="reference internal" href="#bar_wr"><span class="xref myst">bar_wr</span></a></p></li>
+<li><p><a class="reference internal" href="#bar_rd"><span class="xref myst">bar_rd</span></a></p></li>
+<li><p><a class="reference internal" href="#device_boot"><span class="xref myst">device_boot</span></a></p></li>
+<li><p><a class="reference internal" href="#mfg_info"><span class="xref myst">mfg_info</span></a></p></li>
+<li><p><a class="reference internal" href="#eeprom_rd"><span class="xref myst">eeprom_rd</span></a></p></li>
+<li><p><a class="reference internal" href="#eeprom_wr"><span class="xref myst">eeprom_wr</span></a></p></li>
+<li><p><a class="reference internal" href="#module_byte_rd"><span class="xref myst">module_byte_rd</span></a></p></li>
+<li><p><a class="reference internal" href="#module_byte_wr"><span class="xref myst">module_byte_wr</span></a></p></li>
+<li><p><a class="reference internal" href="#debug_verbosity"><span class="xref myst">debug_verbosity</span></a></p></li>
 </ul>
 <hr class="docutils" />
 <p><span id="id5"></span></p>
@@ -732,7 +733,8 @@ Total_Power                   | 33.150 W | valid
 <div class="section" id="id17">
 <h4>Description<a class="headerlink" href="#id17" title="Permalink to this heading">¶</a></h4>
 <p>Displays the file partition table (FPT) currently available on the selected card.</p>
-<p>On a cold boot, partition 0 is the default boot location.</p>
+<p>On a cold boot, partition 0 is the default boot location.
+Partition 2 is user partition. Use user partition flags to autoload user pdi on power up. Power-up Load flag can be set to On. The flag is stored persistently and AMC will load user partial PDI (stored in OSPI) if the auto-load flag is ON.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% ami_tool cfgmem_info --help
 cfgmem_info - get fpt information
 
@@ -806,7 +808,7 @@ Options:
 </div>
 <div class="section" id="id20">
 <h4>Example output<a class="headerlink" href="#id20" title="Permalink to this heading">¶</a></h4>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool cfgmem_program -d 21:00.0 -i /home/builds/latest/design.pdi -p 1 -t primary
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool cfgmem_program -d 21:00.0 -i &lt;path_to_pdi&gt; -p 1 -t primary
 ----------------
 Device | 21:00.0
 ----------------
@@ -877,7 +879,7 @@ Options:
 </div>
 <div class="section" id="id23">
 <h4>Example output<a class="headerlink" href="#id23" title="Permalink to this heading">¶</a></h4>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool cfgmem_fpt -d 21:00.0 -i /home/builds/latest/fpt_setup.pdi -t primary
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool cfgmem_fpt -d 21:00.0 -i &lt;path_to_amr_ospi_fpt.bin&gt; -t primary
 ----------------
 Device | 21:00.0
 ----------------
@@ -888,7 +890,7 @@ UUID   | 7574dae0cea793ae3b0503b136a3bfd0
 Incoming Configuration
 ----------------
 UUID      | 7574dae0cea793ae3b0503b136a3bfd0
-Path      | &lt;This will be path to pdi&gt;
+Path      | &lt;This will be path_to_amr_ospi_fpt.bin&gt;
 ----------------
 Will update FPT!
 Are you sure you wish to proceed? [Y/n]: Y
@@ -971,7 +973,7 @@ Done. Partition copied successfully.
 <p><span id="id28"></span></p>
 <div class="section" id="id28">
 <h4>Description<a class="headerlink" href="#id28" title="Permalink to this heading">¶</a></h4>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>To Read FPT partition flags
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>To Read FPT partition flags. Flag setting is applicable to partition 2(user partition) only.
 
 ~% sudo ami_tool cfgmem_flags_rd --help
 cfgmem_flags_rd - Read partition flags
@@ -992,25 +994,34 @@ Options:
 </div>
 <div class="section" id="id29">
 <h4>Example output<a class="headerlink" href="#id29" title="Permalink to this heading">¶</a></h4>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool cfgmem_flags_rd -d c1 -t primary -p 0
-    Reading partition flags from (device c1:00.0, partition 0)
-    Flags: 0x00010000
-    Power-up load: N/A
-    Power-up load status: N/A
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool cfgmem_flags_rd -d c1 -t primary -p 2
+    Reading partition flags from (device c1:00.0, partition 2)
+    Flags: 0x00020001
+    Power-up load: On
+    Power-up load status: Loaded
 
 ~%
 </pre></div>
 </div>
+<p><span id="id30"></span></p>
+</div>
+<div class="section" id="id30">
+<h4>Notes<a class="headerlink" href="#id30" title="Permalink to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Flags: 0x00020001 in this bit 0 indicates power up( 1: on, 0: off). The status bits 17-16 indicates the status( 0: Not Loaded, 1: Loaded, 2/3: Error)</p></li>
+<li><p>Power-up load status can have values: Loaded, Not Loaded, Error.</p></li>
+</ul>
 <hr class="docutils" />
 <p><span id="amrmanagementinterfaceuserguide-ami-tool-cfgmem-flags-wr"></span></p>
 </div>
 </div>
 <div class="section" id="cfgmem-flags-wr">
 <h3>cfgmem_flags_wr<a class="headerlink" href="#cfgmem-flags-wr" title="Permalink to this heading">¶</a></h3>
-<p><span id="id30"></span></p>
-<div class="section" id="id30">
-<h4>Description<a class="headerlink" href="#id30" title="Permalink to this heading">¶</a></h4>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>To Write to FPT partition flags
+<p><span id="id31"></span></p>
+<div class="section" id="id31">
+<h4>Description<a class="headerlink" href="#id31" title="Permalink to this heading">¶</a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>To Write to FPT partition flags. This is applicable to partition 2(user partition).
+Once the autoload flag is on then on power up AMC will load the user PDI from user partition.
 
 ~% sudo ami_tool cfgmem_flags_wr --help
 </pre></div>
@@ -1032,13 +1043,13 @@ Options:
  ~%
 </pre></div>
 </div>
-<p><span id="id31"></span></p>
+<p><span id="id32"></span></p>
 </div>
-<div class="section" id="id31">
-<h4>Example output<a class="headerlink" href="#id31" title="Permalink to this heading">¶</a></h4>
+<div class="section" id="id32">
+<h4>Example output<a class="headerlink" href="#id32" title="Permalink to this heading">¶</a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool cfgmem_flags_wr -d c1 -t primary -p 2 -i on
 Writing partition flags to (device c1:00.0, partition 2 flags 0x00000001)
-OK - Partition flags written successfully
+OK - Partition flags written successfullys
 
 ~%
 </pre></div>
@@ -1049,9 +1060,9 @@ OK - Partition flags written successfully
 </div>
 <div class="section" id="pdi-program">
 <h3>pdi_program<a class="headerlink" href="#pdi-program" title="Permalink to this heading">¶</a></h3>
-<p><span id="id32"></span></p>
-<div class="section" id="id32">
-<h4>Description<a class="headerlink" href="#id32" title="Permalink to this heading">¶</a></h4>
+<p><span id="id33"></span></p>
+<div class="section" id="id33">
+<h4>Description<a class="headerlink" href="#id33" title="Permalink to this heading">¶</a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span> program a bitstream onto a device
 
 ~% sudo ami_tool pdi_program --help
@@ -1073,10 +1084,10 @@ Options:
  ~%
 </pre></div>
 </div>
-<p><span id="id33"></span></p>
+<p><span id="id34"></span></p>
 </div>
-<div class="section" id="id33">
-<h4>Example output<a class="headerlink" href="#id33" title="Permalink to this heading">¶</a></h4>
+<div class="section" id="id34">
+<h4>Example output<a class="headerlink" href="#id34" title="Permalink to this heading">¶</a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool pdi_program -d 21 -i &lt;path_to_pdi&gt;
 ----------------------------------------------
 Device      | c1:00.0
@@ -1101,20 +1112,26 @@ OK. Image has been programmed successfully.
 ***********************************************
 Hot reset has been performed.
 ***********************************************
-
-
-~%
 </pre></div>
 </div>
+<p><span id="id35"></span></p>
+</div>
+<div class="section" id="id35">
+<h4>Notes<a class="headerlink" href="#id35" title="Permalink to this heading">¶</a></h4>
+<ul>
+<li><p>This command is also used to load apu image</p>
+<p>~%</p>
+</li>
+</ul>
 <hr class="docutils" />
 <p><span id="amrmanagementinterfaceuserguide-ami-tool-bar-wr"></span></p>
 </div>
 </div>
 <div class="section" id="bar-wr">
 <h3>bar_wr<a class="headerlink" href="#bar-wr" title="Permalink to this heading">¶</a></h3>
-<p><span id="id34"></span></p>
-<div class="section" id="id34">
-<h4>Description<a class="headerlink" href="#id34" title="Permalink to this heading">¶</a></h4>
+<p><span id="id36"></span></p>
+<div class="section" id="id36">
+<h4>Description<a class="headerlink" href="#id36" title="Permalink to this heading">¶</a></h4>
 <p>Writes a value to the PCI BAR memory.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool bar_wr --help
 bar_wr - Write to PCI BAR memory
@@ -1134,10 +1151,10 @@ Options:
 ~%
 </pre></div>
 </div>
-<p><span id="id35"></span></p>
+<p><span id="id37"></span></p>
 </div>
-<div class="section" id="id35">
-<h4>Example output<a class="headerlink" href="#id35" title="Permalink to this heading">¶</a></h4>
+<div class="section" id="id37">
+<h4>Example output<a class="headerlink" href="#id37" title="Permalink to this heading">¶</a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool bar_wr -d 21:00.0 -b 0 -a 0x1000 -i 0x22
 Writing the following data to device 21:00.0 and BAR 0 at offset 0x0000000000001000
 
@@ -1148,10 +1165,10 @@ Successfully wrote to 1 register(s)
 ~%
 </pre></div>
 </div>
-<p><span id="id36"></span></p>
+<p><span id="id38"></span></p>
 </div>
-<div class="section" id="id36">
-<h4>Notes<a class="headerlink" href="#id36" title="Permalink to this heading">¶</a></h4>
+<div class="section" id="id38">
+<h4>Notes<a class="headerlink" href="#id38" title="Permalink to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>This command requires root/sudo privileges.</p></li>
 <li><p>If <strong>-i</strong> is selected, the following variable is the value you wish to write.</p></li>
@@ -1169,9 +1186,9 @@ Successfully wrote to 1 register(s)
 </div>
 <div class="section" id="bar-rd">
 <h3>bar_rd<a class="headerlink" href="#bar-rd" title="Permalink to this heading">¶</a></h3>
-<p><span id="id37"></span></p>
-<div class="section" id="id37">
-<h4>Description<a class="headerlink" href="#id37" title="Permalink to this heading">¶</a></h4>
+<p><span id="id39"></span></p>
+<div class="section" id="id39">
+<h4>Description<a class="headerlink" href="#id39" title="Permalink to this heading">¶</a></h4>
 <p>Reads a value from the PCI BAR memory.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool bar_rd --help
 bar_rd - Read from PCI BAR memory
@@ -1191,10 +1208,10 @@ Options:
 ~%
 </pre></div>
 </div>
-<p><span id="id38"></span></p>
+<p><span id="id40"></span></p>
 </div>
-<div class="section" id="id38">
-<h4>Example output<a class="headerlink" href="#id38" title="Permalink to this heading">¶</a></h4>
+<div class="section" id="id40">
+<h4>Example output<a class="headerlink" href="#id40" title="Permalink to this heading">¶</a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool bar_rd -d 21:00.0 -b 0 -a 0x1000 -l 10
 Reading 10 register(s) from device c1:00.0 and BAR 0 at offset 0x0000000000001000
 
@@ -1222,9 +1239,9 @@ Reading 10 register(s) from device c1:00.0 and BAR 0 at offset 0x000000000000100
 </div>
 <div class="section" id="device-boot">
 <h3>device_boot<a class="headerlink" href="#device-boot" title="Permalink to this heading">¶</a></h3>
-<p><span id="id39"></span></p>
-<div class="section" id="id39">
-<h4>Description<a class="headerlink" href="#id39" title="Permalink to this heading">¶</a></h4>
+<p><span id="id41"></span></p>
+<div class="section" id="id41">
+<h4>Description<a class="headerlink" href="#id41" title="Permalink to this heading">¶</a></h4>
 <p>Selects the boot partition for the card to reboot from.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool device_boot --help
 device_boot - set device boot partition
@@ -1241,10 +1258,10 @@ Options:
 ~%
 </pre></div>
 </div>
-<p><span id="id40"></span></p>
+<p><span id="id42"></span></p>
 </div>
-<div class="section" id="id40">
-<h4>Example output<a class="headerlink" href="#id40" title="Permalink to this heading">¶</a></h4>
+<div class="section" id="id42">
+<h4>Example output<a class="headerlink" href="#id42" title="Permalink to this heading">¶</a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% sudo ami_tool device_boot -d 21:00.0 -p 0
 Will do a hot reset to boot into partition 0. This may take a minute...
 
@@ -1255,10 +1272,10 @@ Hot reset has been performed into partition 0.
 ~%
 </pre></div>
 </div>
-<p><span id="id41"></span></p>
+<p><span id="id43"></span></p>
 </div>
-<div class="section" id="id41">
-<h4>Notes<a class="headerlink" href="#id41" title="Permalink to this heading">¶</a></h4>
+<div class="section" id="id43">
+<h4>Notes<a class="headerlink" href="#id43" title="Permalink to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>This command requires root/sudo privileges.</p></li>
 <li><p>This causes a hot reset of the card from the selected partition.</p></li>
@@ -1269,9 +1286,9 @@ Hot reset has been performed into partition 0.
 </div>
 <div class="section" id="mfg-info">
 <h3>mfg_info<a class="headerlink" href="#mfg-info" title="Permalink to this heading">¶</a></h3>
-<p><span id="id42"></span></p>
-<div class="section" id="id42">
-<h4>Description<a class="headerlink" href="#id42" title="Permalink to this heading">¶</a></h4>
+<p><span id="id44"></span></p>
+<div class="section" id="id44">
+<h4>Description<a class="headerlink" href="#id44" title="Permalink to this heading">¶</a></h4>
 <p>Displays the manufacturing information for a selected card.</p>
 <p>This output can be logged to a file using the <strong>-o</strong> option and the logged format specified by the <strong>-f</strong> option.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% ami_tool mfg_info --help
@@ -1285,10 +1302,10 @@ Options:
 ~%
 </pre></div>
 </div>
-<p><span id="id43"></span></p>
+<p><span id="id45"></span></p>
 </div>
-<div class="section" id="id43">
-<h4>Example output<a class="headerlink" href="#id43" title="Permalink to this heading">¶</a></h4>
+<div class="section" id="id45">
+<h4>Example output<a class="headerlink" href="#id45" title="Permalink to this heading">¶</a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% ami_tool mfg_info -d c1:00.0
 
 Manufacturing Information
@@ -1313,9 +1330,9 @@ Mfg Part Num              | 043-05113-01
 </div>
 <div class="section" id="eeprom-rd">
 <h3>eeprom_rd<a class="headerlink" href="#eeprom-rd" title="Permalink to this heading">¶</a></h3>
-<p><span id="id44"></span></p>
-<div class="section" id="id44">
-<h4>Description<a class="headerlink" href="#id44" title="Permalink to this heading">¶</a></h4>
+<p><span id="id46"></span></p>
+<div class="section" id="id46">
+<h4>Description<a class="headerlink" href="#id46" title="Permalink to this heading">¶</a></h4>
 <p>Allows performing a raw data read of the device EEPROM.</p>
 <p>This output can be logged to a file using the <strong>-o</strong> option.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% ami_tool eeprom_rd --help
@@ -1333,10 +1350,10 @@ Options:
  ~%
 </pre></div>
 </div>
-<p><span id="id45"></span></p>
+<p><span id="id47"></span></p>
 </div>
-<div class="section" id="id45">
-<h4>Example output<a class="headerlink" href="#id45" title="Permalink to this heading">¶</a></h4>
+<div class="section" id="id47">
+<h4>Example output<a class="headerlink" href="#id47" title="Permalink to this heading">¶</a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% ami_tool eeprom_rd -d 21:00.0 -a 0 -l 128
 Reading 128 byte(s) from device 21:00.0 at offset 0x00
 
@@ -1351,10 +1368,10 @@ Reading 128 byte(s) from device 21:00.0 at offset 0x00
 ~%
 </pre></div>
 </div>
-<p><span id="id46"></span></p>
+<p><span id="id48"></span></p>
 </div>
-<div class="section" id="id46">
-<h4>Notes<a class="headerlink" href="#id46" title="Permalink to this heading">¶</a></h4>
+<div class="section" id="id48">
+<h4>Notes<a class="headerlink" href="#id48" title="Permalink to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>The <strong>-l &lt;len&gt;</strong> option specifies the number of bytes to read from the EEPROM.</p></li>
 <li><p>If <strong>-o</strong> is selected, the data read will be written to the file path provided.</p></li>
@@ -1371,9 +1388,9 @@ Reading 128 byte(s) from device 21:00.0 at offset 0x00
 </div>
 <div class="section" id="eeprom-wr">
 <h3>eeprom_wr<a class="headerlink" href="#eeprom-wr" title="Permalink to this heading">¶</a></h3>
-<p><span id="id47"></span></p>
-<div class="section" id="id47">
-<h4>Description<a class="headerlink" href="#id47" title="Permalink to this heading">¶</a></h4>
+<p><span id="id49"></span></p>
+<div class="section" id="id49">
+<h4>Description<a class="headerlink" href="#id49" title="Permalink to this heading">¶</a></h4>
 <p>Allows performing a raw data write to the device EEPROM.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% ami_tool eeprom_wr --help
 eeprom_wr - Write to the device EEPROM
@@ -1390,10 +1407,10 @@ Options:
  ~%
 </pre></div>
 </div>
-<p><span id="id48"></span></p>
+<p><span id="id50"></span></p>
 </div>
-<div class="section" id="id48">
-<h4>Example output<a class="headerlink" href="#id48" title="Permalink to this heading">¶</a></h4>
+<div class="section" id="id50">
+<h4>Example output<a class="headerlink" href="#id50" title="Permalink to this heading">¶</a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% ami_tool eeprom_wr -d 21 -a 0x80 -i 0x33
 Writing the following data to device 21:00.0 at offset 0x80
 
@@ -1404,10 +1421,10 @@ Successfully wrote to 1 register(s)
 ~%
 </pre></div>
 </div>
-<p><span id="id49"></span></p>
+<p><span id="id51"></span></p>
 </div>
-<div class="section" id="id49">
-<h4>Notes<a class="headerlink" href="#id49" title="Permalink to this heading">¶</a></h4>
+<div class="section" id="id51">
+<h4>Notes<a class="headerlink" href="#id51" title="Permalink to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>If <strong>-i</strong> is selected, the following variable is the value you wish to write.</p></li>
 <li><p>If <strong>-I</strong> is selected, the following variable is the path to the file you wish to write from.</p></li>
@@ -1424,9 +1441,9 @@ Successfully wrote to 1 register(s)
 </div>
 <div class="section" id="module-byte-rd">
 <h3>module_byte_rd<a class="headerlink" href="#module-byte-rd" title="Permalink to this heading">¶</a></h3>
-<p><span id="id50"></span></p>
-<div class="section" id="id50">
-<h4>Description<a class="headerlink" href="#id50" title="Permalink to this heading">¶</a></h4>
+<p><span id="id52"></span></p>
+<div class="section" id="id52">
+<h4>Description<a class="headerlink" href="#id52" title="Permalink to this heading">¶</a></h4>
 <p>Allows performing a raw data read of a device QSFP module.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% ami_tool module_byte_rd --help
 module_byte_rd - Read from a QSFP module
@@ -1444,10 +1461,10 @@ Options:
 ~%
 </pre></div>
 </div>
-<p><span id="id51"></span></p>
+<p><span id="id53"></span></p>
 </div>
-<div class="section" id="id51">
-<h4>Example output<a class="headerlink" href="#id51" title="Permalink to this heading">¶</a></h4>
+<div class="section" id="id53">
+<h4>Example output<a class="headerlink" href="#id53" title="Permalink to this heading">¶</a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% ami_tool module_byte_rd -d 21 -c 1 -p 0 -b 5
 
 Reading byte 0x05 from page 0 (device 21:00.0, cage 1)
@@ -1455,10 +1472,10 @@ Value 0x00
 ~%
 </pre></div>
 </div>
-<p><span id="id52"></span></p>
+<p><span id="id54"></span></p>
 </div>
-<div class="section" id="id52">
-<h4>Notes<a class="headerlink" href="#id52" title="Permalink to this heading">¶</a></h4>
+<div class="section" id="id54">
+<h4>Notes<a class="headerlink" href="#id54" title="Permalink to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>The cage numbers are 1-indexed (i.e. 0 is invalid).</p></li>
 </ul>
@@ -1468,9 +1485,9 @@ Value 0x00
 </div>
 <div class="section" id="module-byte-wr">
 <h3>module_byte_wr<a class="headerlink" href="#module-byte-wr" title="Permalink to this heading">¶</a></h3>
-<p><span id="id53"></span></p>
-<div class="section" id="id53">
-<h4>Description<a class="headerlink" href="#id53" title="Permalink to this heading">¶</a></h4>
+<p><span id="id55"></span></p>
+<div class="section" id="id55">
+<h4>Description<a class="headerlink" href="#id55" title="Permalink to this heading">¶</a></h4>
 <p>Allows performing a raw data write to a device QSFP module.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% ami_tool eeprom_wr --help
 module_byte_wr - Write to PCI BAR memory
@@ -1488,10 +1505,10 @@ Options:
 ~%
 </pre></div>
 </div>
-<p><span id="id54"></span></p>
+<p><span id="id56"></span></p>
 </div>
-<div class="section" id="id54">
-<h4>Example output<a class="headerlink" href="#id54" title="Permalink to this heading">¶</a></h4>
+<div class="section" id="id56">
+<h4>Example output<a class="headerlink" href="#id56" title="Permalink to this heading">¶</a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% ami_tool module_byte_wr -d 21 -c 1 -p 0 -b 5 -i 0x01
 
 Writing value 0x01 to page 0, byte 0x05 (device 21:00.0, cage 1)
@@ -1499,10 +1516,10 @@ OK - value written successfully
 ~%
 </pre></div>
 </div>
-<p><span id="id55"></span></p>
+<p><span id="id57"></span></p>
 </div>
-<div class="section" id="id55">
-<h4>Notes<a class="headerlink" href="#id55" title="Permalink to this heading">¶</a></h4>
+<div class="section" id="id57">
+<h4>Notes<a class="headerlink" href="#id57" title="Permalink to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>The cage numbers are 1-indexed (i.e. 0 is invalid).</p></li>
 </ul>
@@ -1512,9 +1529,9 @@ OK - value written successfully
 </div>
 <div class="section" id="debug-verbosity">
 <h3>debug_verbosity<a class="headerlink" href="#debug-verbosity" title="Permalink to this heading">¶</a></h3>
-<p><span id="id56"></span></p>
-<div class="section" id="id56">
-<h4>Description<a class="headerlink" href="#id56" title="Permalink to this heading">¶</a></h4>
+<p><span id="id58"></span></p>
+<div class="section" id="id58">
+<h4>Description<a class="headerlink" href="#id58" title="Permalink to this heading">¶</a></h4>
 <p>Sets the verbosity level of the AMC output.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% ami_tool debug_verbosity --help
 debug_verbosity - set the AMC debug level
@@ -1531,20 +1548,20 @@ Options:
  ~%
 </pre></div>
 </div>
-<p><span id="id57"></span></p>
+<p><span id="id59"></span></p>
 </div>
-<div class="section" id="id57">
-<h4>Example output<a class="headerlink" href="#id57" title="Permalink to this heading">¶</a></h4>
+<div class="section" id="id59">
+<h4>Example output<a class="headerlink" href="#id59" title="Permalink to this heading">¶</a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% ami_tool debug_verbosity -d 21 -l debug
 Setting AMC debug level to &#39;debug&#39;.
 OK. debug level updated!
 ~%
 </pre></div>
 </div>
-<p><span id="id58"></span></p>
+<p><span id="id60"></span></p>
 </div>
-<div class="section" id="id58">
-<h4>Notes<a class="headerlink" href="#id58" title="Permalink to this heading">¶</a></h4>
+<div class="section" id="id60">
+<h4>Notes<a class="headerlink" href="#id60" title="Permalink to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>Debug levels are “up to and including”, i.e. a debug level of WARNING will include LOG, INFO, ERROR, and WARNING messages.</p></li>
 <li><p>The default debug level is LOG.</p></li>
@@ -1569,7 +1586,7 @@ OK. debug level updated!
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 09, 2026.
+      <span class="lastupdated">Last updated on March 10, 2026.
       </span></p>
   </div>
 

@@ -40,9 +40,9 @@ The **ami\_tool** application provides a command line interface (CLI) to the use
 
 ## Usage - Options
 
-  - [AMR Management Interface userguide](#help)
+  - [help](#help)
 
-  - [AMR Management Interface userguide](#version)
+  - [version](#version)
 
 ---
 
@@ -147,45 +147,45 @@ Displays the version information of the currently installed AMI API and AMI Driv
 
 ## Usage - Commands
 
-  - [overview](https://amd.atlassian.net/wiki/spaces/~71202065244d6db58848f69318bfa2c81340bb/pages/1107374046/../management-interface-userguide-ami_tool#overview2)
+  - [overview](#overview)
 
-  - [AMR Management Interface userguide](#pcieinfo)
+  - [pcieinfo](#pcieinfo)
 
-  - [AMR Management Interface userguide](#reload)
+  - [reload](#reload)
 
-  - [AMR Management Interface userguide](#sensors)
+  - [sensors](#sensors)
 
-  - [AMR Management Interface userguide](#cfgmem\_info)
+  - [cfgmem_info](#cfgmem_info)
 
-  - [AMR Management Interface userguide](#cfgmem\_program)
+  - [cfgmem_program](#cfgmem_program)
 
-  - [AMR Management Interface userguide](#cfgmem\_fpt)
+  - [cfgmem_fpt](#cfgmem_fpt)
 
-  - [AMR Management Interface userguide](#cfgmem\_copy)
+  - [cfgmem_copy](#cfgmem_copy)
 
-  - [AMR Management Interface userguide](#cfgmem\_flags\_rd)
+  - [cfgmem_flags_rd](#cfgmem_flags_rd)
 
-  - [AMR Management Interface userguide](#cfgmem\_flags\_wr)
+  - [cfgmem_flags_wr](#cfgmem_flags_wr)
 
-  - [AMR Management Interface userguide](#pdi\_program)
+  - [pdi_program](#pdi_program)
 
-  - [AMR Management Interface userguide](#bar\_wr)
+  - [bar_wr](#bar_wr)
 
-  - [AMR Management Interface userguide](#bar\_rd)
+  - [bar_rd](#bar_rd)
 
-  - [AMR Management Interface userguide](#device\_boot)
+  - [device_boot](#device_boot)
 
-  - [AMR Management Interface userguide](#mfg\_info)
+  - [mfg_info](#mfg_info)
 
-  - [AMR Management Interface userguide](#eeprom\_rd)
+  - [eeprom_rd](#eeprom_rd)
 
-  - [AMR Management Interface userguide](#eeprom\_wr)
+  - [eeprom_wr](#eeprom_wr)
 
-  - [AMR Management Interface userguide](#module\_byte\_rd)
+  - [module_byte_rd](#module_byte_rd)
 
-  - [AMR Management Interface userguide](#module\_byte\_wr)
+  - [module_byte_wr](#module_byte_wr)
 
-  - [AMR Management Interface userguide](#debug\_verbosity)
+  - [debug_verbosity](#debug_verbosity)
 
 ---
 
@@ -491,6 +491,7 @@ This output can be logged to a file using the **-o** option, and the logged form
 Displays the file partition table (FPT) currently available on the selected card.
 
 On a cold boot, partition 0 is the default boot location.
+Partition 2 is user partition. Use user partition flags to autoload user pdi on power up. Power-up Load flag can be set to On. The flag is stored persistently and AMC will load user partial PDI (stored in OSPI) if the auto-load flag is ON.
 
     ~% ami_tool cfgmem_info --help
     cfgmem_info - get fpt information
@@ -564,7 +565,7 @@ Uploads a PDI for AMC to program onto the card.
 
 #### Example output
 
-    ~% sudo ami_tool cfgmem_program -d 21:00.0 -i /home/builds/latest/design.pdi -p 1 -t primary
+    ~% sudo ami_tool cfgmem_program -d 21:00.0 -i <path_to_pdi> -p 1 -t primary
     ----------------
     Device | 21:00.0
     ----------------
@@ -639,7 +640,7 @@ Uploads a PDI containing a valid FPT (file partition table) for AMC to program o
 
 #### Example output
 
-    ~% sudo ami_tool cfgmem_fpt -d 21:00.0 -i /home/builds/latest/fpt_setup.pdi -t primary
+    ~% sudo ami_tool cfgmem_fpt -d 21:00.0 -i <path_to_amr_ospi_fpt.bin> -t primary
     ----------------
     Device | 21:00.0
     ----------------
@@ -650,7 +651,7 @@ Uploads a PDI containing a valid FPT (file partition table) for AMC to program o
     Incoming Configuration
     ----------------
     UUID      | 7574dae0cea793ae3b0503b136a3bfd0
-    Path      | <This will be path to pdi>
+    Path      | <This will be path_to_amr_ospi_fpt.bin>
     ----------------
     Will update FPT!
     Are you sure you wish to proceed? [Y/n]: Y
@@ -736,7 +737,7 @@ Copies the contents of one partition on the card to another.
 <span id="id28"></span>
 
 #### Description
-    To Read FPT partition flags
+    To Read FPT partition flags. Flag setting is applicable to partition 2(user partition) only.
 
     ~% sudo ami_tool cfgmem_flags_rd --help
     cfgmem_flags_rd - Read partition flags
@@ -756,22 +757,29 @@ Copies the contents of one partition on the card to another.
 
 #### Example output
 
-    ~% sudo ami_tool cfgmem_flags_rd -d c1 -t primary -p 0
-        Reading partition flags from (device c1:00.0, partition 0)
-        Flags: 0x00010000
-        Power-up load: N/A
-        Power-up load status: N/A
+    ~% sudo ami_tool cfgmem_flags_rd -d c1 -t primary -p 2
+        Reading partition flags from (device c1:00.0, partition 2)
+        Flags: 0x00020001
+        Power-up load: On
+        Power-up load status: Loaded
 
     ~%
+<span id="id30"></span>
+
+#### Notes
+
+- Flags: 0x00020001 in this bit 0 indicates power up( 1: on, 0: off). The status bits 17-16 indicates the status( 0: Not Loaded, 1: Loaded, 2/3: Error)
+- Power-up load status can have values: Loaded, Not Loaded, Error.
 ---
 <span id="amrmanagementinterfaceuserguide-ami-tool-cfgmem-flags-wr"></span>
 
 ### cfgmem\_flags\_wr
 
-<span id="id30"></span>
+<span id="id31"></span>
 
 #### Description
-    To Write to FPT partition flags
+    To Write to FPT partition flags. This is applicable to partition 2(user partition).
+    Once the autoload flag is on then on power up AMC will load the user PDI from user partition.
 
     ~% sudo ami_tool cfgmem_flags_wr --help
    cfgmem_flags_wr - Write partition flags
@@ -791,13 +799,13 @@ Copies the contents of one partition on the card to another.
 
      ~%
 
-<span id="id31"></span>
+<span id="id32"></span>
 
 #### Example output
 
     ~% sudo ami_tool cfgmem_flags_wr -d c1 -t primary -p 2 -i on
     Writing partition flags to (device c1:00.0, partition 2 flags 0x00000001)
-    OK - Partition flags written successfully
+    OK - Partition flags written successfullys
 
     ~%
 ---
@@ -805,7 +813,7 @@ Copies the contents of one partition on the card to another.
 
 ### pdi\_program
 
-<span id="id32"></span>
+<span id="id33"></span>
 
 #### Description
      program a bitstream onto a device
@@ -828,7 +836,7 @@ Copies the contents of one partition on the card to another.
 
      ~%
 
-<span id="id33"></span>
+<span id="id34"></span>
 
 #### Example output
 
@@ -856,7 +864,11 @@ Copies the contents of one partition on the card to another.
     ***********************************************
     Hot reset has been performed.
     ***********************************************
- 
+
+<span id="id35"></span>
+
+ #### Notes
+ - This command is also used to load apu image 
 
     ~%
 ---
@@ -864,7 +876,7 @@ Copies the contents of one partition on the card to another.
 
 ### bar\_wr
 
-<span id="id34"></span>
+<span id="id36"></span>
 
 #### Description
 
@@ -887,7 +899,7 @@ Writes a value to the PCI BAR memory.
             -I <file>          File to write
     ~%
 
-<span id="id35"></span>
+<span id="id37"></span>
 
 #### Example output
 
@@ -900,7 +912,7 @@ Writes a value to the PCI BAR memory.
     Successfully wrote to 1 register(s)
     ~%
 
-<span id="id36"></span>
+<span id="id38"></span>
 
 #### Notes
 
@@ -922,7 +934,7 @@ Writes a value to the PCI BAR memory.
 
 ### bar\_rd
 
-<span id="id37"></span>
+<span id="id39"></span>
 
 #### Description
 
@@ -945,7 +957,7 @@ Reads a value from the PCI BAR memory.
             -o <file>          Output file
     ~%
 
-<span id="id38"></span>
+<span id="id40"></span>
 
 #### Example output
 
@@ -976,7 +988,7 @@ Notes
 
 ### device\_boot
 
-<span id="id39"></span>
+<span id="id41"></span>
 
 #### Description
 
@@ -996,7 +1008,7 @@ Selects the boot partition for the card to reboot from.
             -p <partition>      Partition to select
     ~%
 
-<span id="id40"></span>
+<span id="id42"></span>
 
 #### Example output
 
@@ -1009,7 +1021,7 @@ Selects the boot partition for the card to reboot from.
     ***********************************************
     ~%
 
-<span id="id41"></span>
+<span id="id43"></span>
 
 #### Notes
 
@@ -1023,7 +1035,7 @@ Selects the boot partition for the card to reboot from.
 
 ### mfg\_info
 
-<span id="id42"></span>
+<span id="id44"></span>
 
 #### Description
 
@@ -1041,7 +1053,7 @@ This output can be logged to a file using the **-o** option and the logged forma
             -o <file>           Specify output file
     ~%
 
-<span id="id43"></span>
+<span id="id45"></span>
 
 #### Example output
 
@@ -1068,7 +1080,7 @@ This output can be logged to a file using the **-o** option and the logged forma
 
 ### eeprom\_rd
 
-<span id="id44"></span>
+<span id="id46"></span>
 
 #### Description
 
@@ -1090,7 +1102,7 @@ This output can be logged to a file using the **-o** option.
         -o <file>          Output file
      ~%
 
-<span id="id45"></span>
+<span id="id47"></span>
 
 #### Example output
 
@@ -1107,7 +1119,7 @@ This output can be logged to a file using the **-o** option.
     [ 0x0000000000000070 ]   19 16 f5 04 5b 73 ff 4b bf 39 e7 20 e9 71 03 97
     ~%
 
-<span id="id46"></span>
+<span id="id48"></span>
 
 #### Notes
 
@@ -1127,7 +1139,7 @@ This output can be logged to a file using the **-o** option.
 
 ### eeprom\_wr
 
-<span id="id47"></span>
+<span id="id49"></span>
 
 #### Description
 
@@ -1147,7 +1159,7 @@ Allows performing a raw data write to the device EEPROM.
         -I <file>          File to write
      ~%
 
-<span id="id48"></span>
+<span id="id50"></span>
 
 #### Example output
 
@@ -1160,7 +1172,7 @@ Allows performing a raw data write to the device EEPROM.
     Successfully wrote to 1 register(s)
     ~%
 
-<span id="id49"></span>
+<span id="id51"></span>
 
 #### Notes
 
@@ -1180,7 +1192,7 @@ Allows performing a raw data write to the device EEPROM.
 
 ### module\_byte\_rd
 
-<span id="id50"></span>
+<span id="id52"></span>
 
 #### Description
 
@@ -1201,7 +1213,7 @@ Allows performing a raw data read of a device QSFP module.
 
     ~%
 
-<span id="id51"></span>
+<span id="id53"></span>
 
 #### Example output
 
@@ -1211,7 +1223,7 @@ Allows performing a raw data read of a device QSFP module.
     Value 0x00
     ~%
 
-<span id="id52"></span>
+<span id="id54"></span>
 
 #### Notes
 
@@ -1223,7 +1235,7 @@ Allows performing a raw data read of a device QSFP module.
 
 ### module\_byte\_wr
 
-<span id="id53"></span>
+<span id="id55"></span>
 
 #### Description
 
@@ -1244,7 +1256,7 @@ Allows performing a raw data write to a device QSFP module.
         -i <value>         Byte value to write
     ~%
 
-<span id="id54"></span>
+<span id="id56"></span>
 
 #### Example output
 
@@ -1254,7 +1266,7 @@ Allows performing a raw data write to a device QSFP module.
     OK - value written successfully
     ~%
 
-<span id="id55"></span>
+<span id="id57"></span>
 
 #### Notes
 
@@ -1266,7 +1278,7 @@ Allows performing a raw data write to a device QSFP module.
 
 ### debug\_verbosity
 
-<span id="id56"></span>
+<span id="id58"></span>
 
 #### Description
 
@@ -1286,7 +1298,7 @@ Sets the verbosity level of the AMC output.
                                 {log, info, error, warning, debug}
      ~%
 
-<span id="id57"></span>
+<span id="id59"></span>
 
 #### Example output
 
@@ -1295,7 +1307,7 @@ Sets the verbosity level of the AMC output.
     OK. debug level updated!
     ~%
 
-<span id="id58"></span>
+<span id="id60"></span>
 
 #### Notes
 

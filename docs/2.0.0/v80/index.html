@@ -18,7 +18,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-5RHQV7');</script>
 <!-- End Google Tag Manager -->
-  <title>AMR V80 - Hierarchy Overview &mdash; AMR  documentation</title>
+  <title>V80 Platform Documentation &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -36,7 +36,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="AMR Management Controller (AMC) - Architecture and Design" href="../firmware/amc-architecture.html" />
+    <link rel="next" title="How-to install and run a pre-built AMR design on an ALVEO V80 card" href="install-and-run.html" />
     <link rel="prev" title="Source Configuration Control" href="../development/source-control.html" /> 
 </head>
 
@@ -66,7 +66,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AMR Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../getting-started/install-and-run.html">How-to install and run a pre-built AMR design on an ALVEO V80 card</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/rebuild.html">How-to Rebuild an AMR Design for Yourself</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AMR System Architecture</span></p>
@@ -79,7 +78,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/install-card.html">AMR Installing the Design onto the Card</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/update-fpt.html">AMR Updating FPT Image in Flash</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../deployment/update-pdi.html">AMR Updating amr_ospi.bin PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/update-pdi.html">AMR Updating PDI in Flash</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/debug.html">AMR Debug Techniques</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/jtag-recovery.html">AMR JTAG Boot Recovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/ami-tool-guide.html">AMR Management Interface userguide (ami_tool)</a></li>
@@ -89,14 +88,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Hardware Design</span></p>
+<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">AMR V80 - Hierarchy Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#block-diagram">Block Diagram</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#control-interfaces-and-processing-system">Control, Interfaces and Processing System</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#programmable-logic-pl">Programmable Logic (PL)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#noc-interconnect">NoC Interconnect</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">V80 Platform Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install-and-run.html">How-to install and run a pre-built AMR design on an ALVEO V80 card</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-host.html">AMR Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment-archive.html">AMR Deployment Archive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hardware/index.html">Hardware Design - V80</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run.html">How-to install and run a pre-built AMR design on an ALVEO V80 card</a></li>
 </ul>
 </li>
 </ul>
@@ -140,9 +139,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>AMR V80 - Hierarchy Overview</li>
+      <li>V80 Platform Documentation</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/hardware/hierarchy.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/v80/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -150,83 +149,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="amr-v80-hierarchy-overview">
-<h1>AMR V80 - Hierarchy Overview<a class="headerlink" href="#amr-v80-hierarchy-overview" title="Permalink to this heading">¶</a></h1>
-<p><span id="amrv80-hierarchyoverview-introduction"></span></p>
-<div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h2>
-<p>The AMR design is a PCIe® based design that is used to demonstrate the capabilities of the card, firmware, and drivers. The design is composed of three major blocks: CIPS, Base Logic, and Clocks and Resets. The NoC interconnect is used to route AXI traffic across the device.</p>
-<p><span id="amrv80-hierarchyoverview-blockdiagram"></span></p>
-</div>
-<div class="section" id="block-diagram">
-<h2>Block Diagram<a class="headerlink" href="#block-diagram" title="Permalink to this heading">¶</a></h2>
-<p>The following is the block diagram of the design, highlighting the connectivity for the three blocks in AMR. The <em>User Application</em> block is not part of the AMR design, and serves only to illustrate how a user application could be integrated with AMR to connect directly to MCIO and QSFP interfaces, and connect to the NoC to interface with the PCIe, HBM, and DDR4 blocks. The AMR base design can be extended to include the MCIO and QSFP for the user application by uncommenting the pins from the hw/amd_&lt;board&gt;_gen5x8_25.1/src/bd/create_bd_design.tcl and hw/amd_&lt;board&gt;_gen5x8_25.1/src/constraints/impl.pins.xdc.</p>
-<p><img alt="images/1107374308.png" src="../_images/1107374308.png" /></p>
-<p><span id="amrv80-hierarchyoverview-control-interfacesandprocessingsystem"></span></p>
-</div>
-<div class="section" id="control-interfaces-and-processing-system">
-<h2>Control, Interfaces and Processing System<a class="headerlink" href="#control-interfaces-and-processing-system" title="Permalink to this heading">¶</a></h2>
-<p>The Control, interfaces, and processing system (CIPS) IP configures the various hard blocks that are present in the AMD Versal™ device. The AMR design configures the coherent module with PCIe (CPM) block, the real-time processing unit (RPU) block, and the platform management controller (PMC) block through the CIPS IP. The primary blocks used in this design are summarized in the following table.</p>
-<table border="1" class="docutils">
-<thead>
-<tr>
-<th>Block</th>
-<th>AMR Usage</th>
-<th>More information</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Coherent Module with PCIe</td>
-<td>The CPM block contains the PCIe gen5x8 and QDMA hardened IPs on the device. It interfaces between the PCIe transceivers and the NoC interconnect to allow communication from the PCIe host to the device. It is configured with the minimum necessary to demonstrate functionality of the card.</td>
-<td><a href="https://docs.xilinx.com/r/en-US/am016-versal-cpm-ccix/Introduction-to-CPM">Versal CPM CCIX Architecture Manual - Introduction to CPM</a></td>
-</tr>
-<tr>
-<td>Real-time Processing Unit</td>
-<td>The RPU block contains the R5 processor that is used for running the AMC firmware on the device. This is part of the processing system low-power domain (PS LPD). The primary purpose of this block in this design is to handle the board management functions of the card.</td>
-<td><a href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/LPD-Interconnect-Diagram">Versal TRM - LPD Architecture</a></td>
-</tr>
-<tr>
-<td>Platform Management Controller</td>
-<td>The PMC block contains a MicroBlaze-based processor subsystem. It is primarily responsible for managing the bootup, configuration, and internal monitoring of the device. It interfaces with the external flash devices to read/write device images for device configuration. This compulsory unit is required for the Versal device to function.</td>
-<td><a href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Platform-Management-Controller-Architecture">Versal TRM - PMC Architecture</a></td>
-</tr>
-</tbody>
-</table>
-<p><span id="amrv80-hierarchyoverview-programmablelogic-pl"></span></p>
-</div>
-<div class="section" id="programmable-logic-pl">
-<h2>Programmable Logic (PL)<a class="headerlink" href="#programmable-logic-pl" title="Permalink to this heading">¶</a></h2>
-<p>The PL region contains the soft logic IP and I/O connections. It is separated into two main blocks: Base Logic, and Clocks and Resets. It contains I/O connections to the SMBus, MCIOs, and QSFP I/O interfaces. A summary of the function of each block is described in the table below.</p>
-<table>
-<thead>
-<tr class="header">
-<th><p>Block</p></th>
-<th><p>AMR Usage</p></th>
-<th><p>More information</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><p>Base Logic</p></td>
-<td><p>The base logic region primarily contains peripheral IPs that are used by the R5 processor to handle the card and driver management firmware. This includes the SMBus IP, command queues, and identification ROMs.</p>
+  <div class="section" id="v80-platform-documentation">
+<h1>V80 Platform Documentation<a class="headerlink" href="#v80-platform-documentation" title="Permalink to this heading">¶</a></h1>
+<p>This section contains V80-specific documentation including installation, deployment, hardware design, and testing.</p>
+<div class="toctree-wrapper compound">
 <ul>
-<li><p><em><strong>IMPORTANT:</strong></em> SMBus IP is not included with the AMR design sources. The IP must be downloaded separately from a lounge (<a href="https://www.xilinx.com/member/v80" class="external-link">https://www.xilinx.com/member/v80.html</a>) and added to the IP repository of the AMR hardware design (&lt;amr&gt;/hw/<span class="legacy-color-text-blue1">amd_&lt;board&gt;_gen5x8_25.1</span>/src/iprepo/) before building the design.</p></li>
-</ul></td>
-<td><p><a href="../base-logic.md">AMR V80 - Base Logic</a></p></td>
-</tr>
-<tr class="even">
-<td><p>Clocks and Resets</p></td>
-<td><p>The clock and resets region contains the clocking wizards and reset synchronizer blocks for the user application. It also contains the logic to facilitate hot-reset/PDI reload of the device.</p></td>
-<td><p><a href="../clock-reset.md">AMR V80 - Clock Reset Module</a></p></td>
-</tr>
-</tbody>
-</table>
-<p><span id="amrv80-hierarchyoverview-nocinterconnect"></span></p>
-</div>
-<div class="section" id="noc-interconnect">
-<h2>NoC Interconnect<a class="headerlink" href="#noc-interconnect" title="Permalink to this heading">¶</a></h2>
-<p>The NoC interconnect facilitates high bandwidth transport between the various CIPS blocks, the PL, and the DDR4 and HBM memories. Through the NOC IP configurator, the HBM and DDR memory controllers are configured and instantiated into the design. The V80 contains 32GB of internal HBM and 4GB DDR4. Additionally, the V80 also includes a 32GB DDR4 DIMM. In the AMR, the 4GB of DDR4 is allocated to the R5 processor and DMA over PCIe. The 32GB HBM and the 32GB of DDR4 is available for the user application.</p>
+<li class="toctree-l1"><a class="reference internal" href="install-and-run.html">How-to install and run a pre-built AMR design on an ALVEO V80 card</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install-and-run.html#before-you-begin">Before You Begin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-and-run.html#amr-installation">AMR Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-and-run.html#testing-amr">Testing AMR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-and-run.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install-host.html">AMR Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment-archive.html">AMR Deployment Archive</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="deployment-archive.html#amr-deployment-archive-contents">AMR Deployment Archive Contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hardware/index.html">Hardware Design - V80</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/install-and-run.html">How-to install and run a pre-built AMR design on an ALVEO V80 card</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run.html#before-you-begin">Before You Begin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run.html#amr-installation">AMR Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run.html#testing-amr">Testing AMR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 
@@ -237,14 +185,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 				  
 				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../development/source-control.html" class="btn btn-neutral float-left" title="Source Configuration Control" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../firmware/amc-architecture.html" class="btn btn-neutral float-right" title="AMR Management Controller (AMC) - Architecture and Design" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="install-and-run.html" class="btn btn-neutral float-right" title="How-to install and run a pre-built AMR design on an ALVEO V80 card" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 09, 2026.
+      <span class="lastupdated">Last updated on March 10, 2026.
       </span></p>
   </div>
 

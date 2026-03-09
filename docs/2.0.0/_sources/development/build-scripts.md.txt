@@ -5,7 +5,7 @@ The AMR Git repository contains a shell script which can be used to build any of
 
 Example Build Command
 
-The following command demonstrates how to build a V80 design.
+The following command demonstrates how to build a V80 design. For Rave set the appropriate -profile option
 
     $ cd <amr>
     $ ./build.sh -profile v80
@@ -28,7 +28,7 @@ The build script divides the build flow into a number of separate steps.
 
 ### hw step
 
-The hw step of the build flow operates on the AMR hardware design described here. A /build directory is created, where the implemented hardware design and Vivado log are generated. The xpr file for this project is located here **\<amr\>/hw/amd\_v80\_gen5x8\_25.1/build/prj.xpr**.
+The hw step of the build flow operates on the AMR hardware design described here. A /build directory is created, where the implemented hardware design and Vivado log are generated. The xpr file for this project is located here **amr/build_v80/amr_vivado_designs/alveo_v80/v80_base/project**. Similary for Rave it should be located under build_rave.
 
 This Vivado project is used to generate the BD design, run Synthesis & Implementation, and create the initial PDI. The write\_hw\_platform command is run on the implemented design to create an XSA (named amd_<version>.xsa), which is used as a hardware handoff file to the AMC build in the fw build step.
 
@@ -64,9 +64,10 @@ The AMC’s build_amc.sh can take a number of different build options (which are
 
 The **profile** is the v80 or rave and the **xsa** is the xsa generated in the hw step.
 
-The resultant ELF file from the AMC build is then stored in the fw directory (**\<amr\>/fw/AMC/build_amc/amc.elf**), and is then copied into the hardware build directory.
+The resultant ELF file from the AMC build is then stored in the fw directory (**\<amr\>/fw/AMC/build_amc/amc.elf**)
 
-**Tip:** If the firmware has changed and the hardware design has not, the hardware XSA does not need to be re-built when compiling the firmware. The hw step can be commented out in the build script, which will reduce build time.
+**Tip:** If the firmware has changed and the hardware design has not, the hardware XSA does not need to be re-built when compiling the firmware. Following command can be used to build amc only
+  ./scripts/build_amc.sh -xsa /path/to/example.xsa -profile <v80|rave> -amc
 
 <span id="amrbuildscripts-fptstep"></span>
 

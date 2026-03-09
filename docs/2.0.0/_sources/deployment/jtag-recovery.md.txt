@@ -18,7 +18,7 @@ Vivado will display the following error message.
 
 In this scenario, the provided script can be used to change the boot mode to JTAG to allow programming.
 
-The JTAG Boot recovery script can be found in the /opt/amd/amr/amd\_v80\_gen5x8\_24.1/flash\_setup/versal\_change\_boot\_mode.tcl.
+The JTAG Boot recovery script can be found in the AMR repo deploy/scripts/versal_change_boot_mode.tcl
 
 <span id="amrjtagbootrecovery-settingthejtagbootmode"></span>
 

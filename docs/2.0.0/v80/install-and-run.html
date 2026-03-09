@@ -36,8 +36,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="How-to Rebuild an AMR Design for Yourself" href="rebuild.html" />
-    <link rel="prev" title="AMR Overview" href="../overview/amr-overview.html" /> 
+    <link rel="next" title="AMR Installing the Deployment package onto the Host Server" href="install-host.html" />
+    <link rel="prev" title="V80 Platform Documentation" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -65,27 +65,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../overview/amr-overview.html">AMR Overview</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AMR Getting Started</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">How-to install and run a pre-built AMR design on an ALVEO V80 card</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#before-you-begin">Before You Begin</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#dependencies">Dependencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#preparing-for-amr-installation">Preparing for AMR Installation</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#amr-installation">AMR Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#testing-amr">Testing AMR</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#ami-tool-overview">ami_tool Overview</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ami-tool-mfg-info">ami_tool mfg_info</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ami-tool-sensors">ami_tool sensors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#xbtest-d-bdf-c-verify">xbtest -d &lt;BDF&gt; -c verify</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#xbtest-d-bdf-c-memory">xbtest -d &lt;BDF&gt; -c memory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#next-steps">Next Steps</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="rebuild.html">How-to Rebuild an AMR Design for Yourself</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/rebuild.html">How-to Rebuild an AMR Design for Yourself</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AMR System Architecture</span></p>
 <ul>
@@ -97,7 +78,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/install-card.html">AMR Installing the Design onto the Card</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/update-fpt.html">AMR Updating FPT Image in Flash</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../deployment/update-pdi.html">AMR Updating amr_ospi.bin PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/update-pdi.html">AMR Updating PDI in Flash</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/debug.html">AMR Debug Techniques</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/jtag-recovery.html">AMR JTAG Boot Recovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/ami-tool-guide.html">AMR Management Interface userguide (ami_tool)</a></li>
@@ -107,9 +88,34 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Hardware Design</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../hardware/hierarchy.html">AMR V80 - Hierarchy Overview</a></li>
+<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">V80 Platform Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">How-to install and run a pre-built AMR design on an ALVEO V80 card</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#before-you-begin">Before You Begin</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#preparing-for-amr-installation">Preparing for AMR Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#amr-installation">AMR Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing-amr">Testing AMR</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ami-tool-overview">ami_tool Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ami-tool-mfg-info">ami_tool mfg_info</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ami-tool-sensors">ami_tool sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbtest-d-bdf-c-verify">xbtest -d &lt;BDF&gt; -c verify</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbtest-d-bdf-c-memory">xbtest -d &lt;BDF&gt; -c memory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="install-host.html">AMR Installing the Deployment package onto the Host Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment-archive.html">AMR Deployment Archive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hardware/index.html">Hardware Design - V80</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run.html">How-to install and run a pre-built AMR design on an ALVEO V80 card</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
@@ -151,9 +157,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">V80 Platform Documentation</a> &raquo;</li>
       <li>How-to install and run a pre-built AMR design on an ALVEO V80 card</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/getting-started/install-and-run.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/v80/install-and-run.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -484,7 +491,7 @@ PASS      :: GEN_024 :: GENERAL      :: RESULT: ALL TESTS PASSED
 <li><p>the AMI cfgmem_program command, which updates the PDI in flash over the PCIe interface. See <a class="reference internal" href="#../update-pdi/"><span class="xref myst">AMR Updating Design PDI in Flash</span></a></p></li>
 <li><p>additional pre-canned xbtest tests are available to test other features on the card. Please refer to <a class="reference internal" href="#xbtest/user-guide/source/index"><span class="xref myst">xbtest User Guide / Pre-canned tests section</span></a>. The available pre-canned tests are: gtm_prbs, gtyp_prbs, memory, mmio, power, stress, and verify.</p></li>
 </ul>
-<p>For a quick look at how to build AMR, refer to the getting started guide: <a class="reference internal" href="rebuild.html"><span class="doc std std-doc">How-to Rebuild an AMR Design for Yourself</span></a>.</p>
+<p>For a quick look at how to build AMR, refer to the getting started guide: <a class="reference internal" href="#rebuild/"><span class="xref myst">How-to Rebuild an AMR Design for Yourself</span></a>.</p>
 </div>
 </div>
 
@@ -494,15 +501,15 @@ PASS      :: GEN_024 :: GENERAL      :: RESULT: ALL TESTS PASSED
           
 				  
 				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../overview/amr-overview.html" class="btn btn-neutral float-left" title="AMR Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="rebuild.html" class="btn btn-neutral float-right" title="How-to Rebuild an AMR Design for Yourself" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="V80 Platform Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="install-host.html" class="btn btn-neutral float-right" title="AMR Installing the Deployment package onto the Host Server" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 09, 2026.
+      <span class="lastupdated">Last updated on March 10, 2026.
       </span></p>
   </div>
 

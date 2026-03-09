@@ -1,0 +1,14 @@
+==========================
+V80 Platform Documentation
+==========================
+
+This section contains V80-specific documentation including installation, deployment, hardware design, and testing.
+
+.. toctree::
+   :maxdepth: 2
+
+   install-and-run
+   install-host
+   deployment-archive
+   hardware/index
+   xbtest/install-and-run

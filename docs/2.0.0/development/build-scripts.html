@@ -66,7 +66,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AMR Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../getting-started/install-and-run.html">How-to install and run a pre-built AMR design on an ALVEO V80 card</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/rebuild.html">How-to Rebuild an AMR Design for Yourself</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AMR System Architecture</span></p>
@@ -79,7 +78,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/install-card.html">AMR Installing the Design onto the Card</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/update-fpt.html">AMR Updating FPT Image in Flash</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../deployment/update-pdi.html">AMR Updating amr_ospi.bin PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/update-pdi.html">AMR Updating PDI in Flash</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/debug.html">AMR Debug Techniques</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/jtag-recovery.html">AMR JTAG Boot Recovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/ami-tool-guide.html">AMR Management Interface userguide (ami_tool)</a></li>
@@ -98,9 +97,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
 <li class="toctree-l1"><a class="reference internal" href="source-control.html">Source Configuration Control</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Hardware Design</span></p>
+<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../hardware/hierarchy.html">AMR V80 - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../v80/index.html">V80 Platform Documentation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
@@ -156,7 +155,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h1>AMR Build Scripts<a class="headerlink" href="#amr-build-scripts" title="Permalink to this heading">¶</a></h1>
 <p>The AMR Git repository contains a shell script which can be used to build any of the AMR example designs. <code class="docutils literal notranslate"><span class="pre">build.sh</span></code> is the main build script, which calls other build scripts for each step of the build.</p>
 <p>Example Build Command</p>
-<p>The following command demonstrates how to build a V80 design.</p>
+<p>The following command demonstrates how to build a V80 design. For Rave set the appropriate -profile option</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ cd &lt;amr&gt;
 $ ./build.sh -profile v80
 </pre></div>
@@ -174,7 +173,7 @@ $ ./build.sh -profile v80
 <p><span id="amrbuildscripts-hwstep"></span></p>
 <div class="section" id="hw-step">
 <h3>hw step<a class="headerlink" href="#hw-step" title="Permalink to this heading">¶</a></h3>
-<p>The hw step of the build flow operates on the AMR hardware design described here. A /build directory is created, where the implemented hardware design and Vivado log are generated. The xpr file for this project is located here <strong>&lt;amr&gt;/hw/amd_v80_gen5x8_25.1/build/prj.xpr</strong>.</p>
+<p>The hw step of the build flow operates on the AMR hardware design described here. A /build directory is created, where the implemented hardware design and Vivado log are generated. The xpr file for this project is located here <strong>amr/build_v80/amr_vivado_designs/alveo_v80/v80_base/project</strong>. Similary for Rave it should be located under build_rave.</p>
 <p>This Vivado project is used to generate the BD design, run Synthesis &amp; Implementation, and create the initial PDI. The write_hw_platform command is run on the implemented design to create an XSA (named amd_<version>.xsa), which is used as a hardware handoff file to the AMC build in the fw build step.</p>
 <p><span id="amrbuildscripts-fwstep"></span></p>
 </div>
@@ -205,8 +204,9 @@ $ ./build.sh -profile v80
 </pre></div>
 </div>
 <p>The <strong>profile</strong> is the v80 or rave and the <strong>xsa</strong> is the xsa generated in the hw step.</p>
-<p>The resultant ELF file from the AMC build is then stored in the fw directory (<strong>&lt;amr&gt;/fw/AMC/build_amc/amc.elf</strong>), and is then copied into the hardware build directory.</p>
-<p><strong>Tip:</strong> If the firmware has changed and the hardware design has not, the hardware XSA does not need to be re-built when compiling the firmware. The hw step can be commented out in the build script, which will reduce build time.</p>
+<p>The resultant ELF file from the AMC build is then stored in the fw directory (<strong>&lt;amr&gt;/fw/AMC/build_amc/amc.elf</strong>)</p>
+<p><strong>Tip:</strong> If the firmware has changed and the hardware design has not, the hardware XSA does not need to be re-built when compiling the firmware. Following command can be used to build amc only
+./scripts/build_amc.sh -xsa /path/to/example.xsa -profile &lt;v80|rave&gt; -amc</p>
 <p><span id="amrbuildscripts-fptstep"></span></p>
 </div>
 <div class="section" id="fpt-step">
@@ -242,7 +242,7 @@ $ ./build.sh -profile v80
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 09, 2026.
+      <span class="lastupdated">Last updated on March 10, 2026.
       </span></p>
   </div>
 

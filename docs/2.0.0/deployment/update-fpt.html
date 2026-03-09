@@ -36,7 +36,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="AMR Updating amr_ospi.bin PDI in Flash" href="update-pdi.html" />
+    <link rel="next" title="AMR Updating PDI in Flash" href="update-pdi.html" />
     <link rel="prev" title="AMR Installing the Design onto the Card" href="install-card.html" /> 
 </head>
 
@@ -66,7 +66,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AMR Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../getting-started/install-and-run.html">How-to install and run a pre-built AMR design on an ALVEO V80 card</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/rebuild.html">How-to Rebuild an AMR Design for Yourself</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AMR System Architecture</span></p>
@@ -79,7 +78,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install-card.html">AMR Installing the Design onto the Card</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">AMR Updating FPT Image in Flash</a></li>
-<li class="toctree-l1"><a class="reference internal" href="update-pdi.html">AMR Updating amr_ospi.bin PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update-pdi.html">AMR Updating PDI in Flash</a></li>
 <li class="toctree-l1"><a class="reference internal" href="debug.html">AMR Debug Techniques</a></li>
 <li class="toctree-l1"><a class="reference internal" href="jtag-recovery.html">AMR JTAG Boot Recovery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ami-tool-guide.html">AMR Management Interface userguide (ami_tool)</a></li>
@@ -89,9 +88,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Hardware Design</span></p>
+<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../hardware/hierarchy.html">AMR V80 - Hierarchy Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../v80/index.html">V80 Platform Documentation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
@@ -145,15 +144,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
              
   <div class="section" id="amr-updating-fpt-image-in-flash">
 <h1>AMR Updating FPT Image in Flash<a class="headerlink" href="#amr-updating-fpt-image-in-flash" title="Permalink to this heading">¶</a></h1>
-<p>After running the amr_install.sh script, the files required to update the OSPI flash image can be found in the /opt/amd/amr/&lt;VBNV&gt;*/flash_setup/ directory.</p>
-<p>An update of the FPT table requires that the fpt_setup_&lt;VBNV&gt;_&lt;Release&gt;.pdi be written to flash via JTAG using the AMD Vivado™ hardware manager using the following steps.</p>
+<p>After the build is successful, the files required to update the OSPI flash image can be found in the build directory.</p>
+<p>An update of the FPT table requires that the amr_ospi_fpt.bin pdi be written to flash via JTAG using the AMD Vivado™ hardware manager using the following steps.</p>
 <p><strong>1)</strong> Stop the AMI application using the following command.</p>
 <p><strong>Note</strong>: Before updating the FPGA image over JTAG, it is important to stop any communication between AMI (on the Host) and AMC (on the Card).</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo rmmod ami
 </pre></div>
 </div>
 <p>Only after stopping AMI is it safe to change the device image over JTAG.</p>
-<p><strong>2)</strong> If not done so, connect V80 card to the host running Vivado using micro-USB cable and start the application.</p>
+<p><strong>2)</strong> If not done so, connect card to the host running Vivado using micro-USB cable and start the application.</p>
 <p>Select Open Hardware Manager</p>
 <p><a class="reference download internal" download="" href="../_downloads/3021e3923e7dd28c38f516aa16ddb83e/1107373915.png"><span class="xref download myst"><img alt="image-20250818-150233.png" src="../_images/1107373915.png" /></span></a></p>
 <p><strong>3)</strong> Select Open Target to connect to the AMD Alveo™ card you want to target.</p>
@@ -183,12 +182,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p><a class="reference download internal" download="" href="../_downloads/b634eda191ca582dee8f2b723c2c341f/1107373912.png"><span class="xref download myst"><img alt="image-20250818-151846.png" src="../_images/1107373912.png" /></span></a></p>
 <p>Select OK when asked if you want to program the configuration memory device now.</p>
 <p><a class="reference download internal" download="" href="../_downloads/e42aff2f77f4bc24b7de854010a45818/1107373876.png"><span class="xref download myst"><img alt="image3" src="../_images/1107373876.png" /></span></a></p>
-<p><strong>6)</strong> Select the the fpt_setup pdi from the /opt/amd/amr/&lt;VBNV&gt;*/flash_setup/ directory as the configuration PDI and select the the initialization pdi from the same /opt/amd/amr/&lt;VBNV&gt;*/flash_setup/ directory as the Initialization PDI.</p>
+<p><strong>6)</strong> Select the amr_ospi_fpt.bin pdi from build directory</p>
 <p>It is recommended that the Entire Configuration Memory Device option is selected from the Program Operations → Address Range Drop down menu, so that the flash memory is in a known state after FPT setup PDI update.</p>
 <p><a class="reference download internal" download="" href="../_downloads/9591afe3ce28e3259f915033acb16555/1107373918.png"><span class="xref download myst"><img alt="image-20250818-152246.png" src="../_images/1107373918.png" /></span></a></p>
-<p><strong>Note:</strong> In the Configuration File field, browse to and select the path to <strong>amr_ospi_fpt.bin</strong> file (typically located in /opt/amd/amr/&lt;VBNV&gt;*/flash_setup/ directory).</p>
+<p><strong>Note:</strong> In the Configuration File field, browse to and select the path to <strong>amr_ospi_fpt.bin</strong> file. For initial pdi browse and select the path to <strong>amr_ospi.bin</strong> file</p>
 <p>Upon clicking OK, the initialization PDI is downloaded to the FPGA and used to transfer the Configuration PDI into the OSPI Flash Memory.</p>
-<p><strong>Tip:</strong> If the flash partition table is modified from the AMR example (e.g. if <strong>fw/AMC/scripts/fpt.json</strong> is modified), a new FPT Setup PDI is generated by the AMR build flow to be programmed to OSPI.</p>
+<p><strong>Tip:</strong> If the flash partition table is modified from the AMR example, a new FPT Setup PDI is generated by the AMR build flow to be programmed to OSPI.</p>
 <p><strong>7)</strong> When Finished, Hardware Manager will report that Flash Programming has completed successfully.</p>
 <p><a class="reference download internal" download="" href="../_downloads/454575d094f885a7ae19012e146870dc/1107373867.png"><span class="xref download myst"><img alt="image4" src="../_images/1107373867.png" /></span></a></p>
 <p><strong>8)</strong> It is now necessary to perform a <strong>cold reboot</strong> of the Host server in order to boot the new design from flash.</p>
@@ -221,14 +220,14 @@ c1:00.0 | ALVEO V80 INT | 00000000000000000000000014862935 | 2.0.0  (0) | READY
 				  
 				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="install-card.html" class="btn btn-neutral float-left" title="AMR Installing the Design onto the Card" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="update-pdi.html" class="btn btn-neutral float-right" title="AMR Updating amr_ospi.bin PDI in Flash" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="update-pdi.html" class="btn btn-neutral float-right" title="AMR Updating PDI in Flash" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 09, 2026.
+      <span class="lastupdated">Last updated on March 10, 2026.
       </span></p>
   </div>
 

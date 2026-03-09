@@ -32,7 +32,7 @@
 
 <span id="amroverview-supportedkernelsanddistributions"></span>
 
-## Supported Kernels and Distributions
+## Supported Kernels and Distributions for V80
 
 | <span data-colorid="kdq9nyngzr">Operating System</span> | <span data-colorid="uu37qyp26c">Architecture</span> | <span data-colorid="zgwzhugq9a">Supported Versions</span> | <span data-colorid="g2qoz68626">Kernel-Version</span> |
 | ------------------- | ----------------- | ------------------- | ------------------- |
