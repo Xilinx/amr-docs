@@ -3,22 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
-  <title>AMR V80 - Base Logic &mdash; AMR  documentation</title>
+  <title>AMR V80 - Base Logic (V80-Specific) &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
@@ -38,11 +23,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -86,19 +67,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development/source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/asdm-application.html">AMR ASDM Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/inband-telemetry.html">AMR InBand Telemetry Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../firmware/asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
@@ -130,7 +118,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>AMR V80 - Base Logic</li>
+      <li>AMR V80 - Base Logic (V80-Specific)</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/v80/hardware/base-logic.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -140,146 +128,407 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="amr-v80-base-logic">
-<h1>AMR V80 - Base Logic<a class="headerlink" href="#amr-v80-base-logic" title="Permalink to this heading">¶</a></h1>
+  <div class="section" id="amr-v80-base-logic-v80-specific">
+<h1>AMR V80 - Base Logic (V80-Specific)<a class="headerlink" href="#amr-v80-base-logic-v80-specific" title="Permalink to this heading">¶</a></h1>
+<blockquote>
+<div><p><strong>For common base design concepts</strong>, see <a class="reference internal" href="../../hardware/base-logic.html"><span class="std std-doc">Common Base Design Philosophy</span></a></p>
+<p>This document contains <strong>V80-specific</strong> implementation details and deltas from the common baseline.</p>
+</div></blockquote>
 <p><span id="amrv80-baselogic-overview"></span></p>
-<div class="section" id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
-<p>The base logic contains the management functionality of the AMR design. It is comprised of the hardware discovery IP, UUID ROM IP, management-to-RPU generic command queue IP, the PCIe management SmartConnect IP, the RPU SmartConnect IP, and SMBus IP.</p>
-<p>From a PCIe perspective, management is achieved through the use of the physical function (PF0). This physical function is reserved for those with administrator privileges, protecting card management from other user functions, such as accelerator functions. AMR does not enable the User Physical Function.</p>
+<div class="section" id="v80-specific-overview">
+<h2>V80-Specific Overview<a class="headerlink" href="#v80-specific-overview" title="Permalink to this heading">¶</a></h2>
+<p>The V80 base logic implementation uses <strong>CPM5 hardened PCIe</strong> with minimal PL IP instantiation.</p>
+<p><strong>V80-Specific Characteristics:</strong></p>
+<ul class="simple">
+<li><p>✓ <strong>CPM5</strong> provides hardened PCIe Gen5 x8 and QDMA</p></li>
+<li><p>✓ <strong>Minimal PL usage</strong> - only test hierarchy (SmartConnect + GPIO)</p></li>
+<li><p>✓ <strong>No PCIe IP in PL</strong> - all PCIe functionality is hardened in CPM5</p></li>
+<li><p>✓ Device IDs: 0x50b4 (PF0), 0x50b5 (PF1)</p></li>
+</ul>
 <p><img alt="../../images/1107375471.png)" src="../../_images/1107375471.png" /></p>
-<p><span id="amrv80-baselogic-uuidrom"></span></p>
+<p><span id="amrv80-baselogic-pf0configuration"></span></p>
 </div>
-<div class="section" id="uuid-rom">
-<h2>UUID ROM<a class="headerlink" href="#uuid-rom" title="Permalink to this heading">¶</a></h2>
-<p>AMR uses a UUID ROM in the base logic of the design to store the universally unique identifier (UUID). The UUID is comprised of a 32 character hexadecimal string (128-bit), calculated using a MD5 checksum, that uniquely identifies the implemented design. Any change in the AMR design, placement, or routing will result in a different UUID value. The UUID value is automatically inserted in the UUID ROM (LUTRAM) of the routed DCP. Upon programming the AMD Versal™ device with the PDI, the AMD Alveo™ management interface (AMI) uses the UUID to ensure compatibility with other packages such as xbtest.</p>
-<p><span id="amrv80-baselogic-hardwarediscovery"></span></p>
+<div class="section" id="pf0-configuration-v80-specific">
+<h2>PF0 Configuration (V80-Specific)<a class="headerlink" href="#pf0-configuration-v80-specific" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="cpm5-pf0-settings">
+<h3>CPM5 PF0 Settings<a class="headerlink" href="#cpm5-pf0-settings" title="Permalink to this heading">¶</a></h3>
+<p><strong>PF0 CPM5 Configuration:</strong></p>
+<ul class="simple">
+<li><p>Device ID: <strong>0x50b4</strong></p></li>
+<li><p>Base Class: 12 (Processing Accelerators)</p></li>
+<li><p>Sub Class: 00</p></li>
+<li><p>Subsystem ID: 0x000e</p></li>
+<li><p>Vendor ID: 0x10ee</p></li>
+</ul>
 </div>
-<div class="section" id="hardware-discovery">
-<h2>Hardware Discovery<a class="headerlink" href="#hardware-discovery" title="Permalink to this heading">¶</a></h2>
-<p>The <a class="reference internal" href="#../ip-details/hardware-discovery-ip/"><span class="xref myst">Versal Hardware Discovery IP</span></a> enables functionality to assist software with discovery of available features and peripheral address offsets within the configured AMR design at startup. It implements the PCIe vendor specific extended capability (VSEC) structure within the extended configuration space of the PCIe IP, which indicates the memory-mapped location of the BAR layout table. The BAR layout table contains all of the PCIe endpoints found on each Physical Function (PF) in the system, along with information needed for accessing each endpoint.</p>
-<p>AMR configures the hardware discovery IP with the management BAR layout table with pointers to identify:</p>
-<ol class="arabic simple">
-<li><p>The downloaded Versal device’s PDI by querying the embedded hardware UUID.</p></li>
-<li><p>The location of gcq_m2r to establish inter-PF and RPU communications.</p></li>
-<li><p>The location of the GCQ buffer in DDR memory for host/RPU communication.</p></li>
-</ol>
-<p>AMR uses the Management BAR Layout Table (PF0) configured with these entries:</p>
-<table>
+<div class="section" id="pf0-bar-configuration">
+<h3>PF0 BAR Configuration<a class="headerlink" href="#pf0-bar-configuration" title="Permalink to this heading">¶</a></h3>
+<table border="1" class="docutils">
 <thead>
-<tr class="header">
-<th>PF0 Entry</th>
-<th>IP Name</th>
-<th>Start Address</th>
-<th>End Address</th>
+<tr>
+<th>BAR</th>
+<th>Size</th>
+<th>Type</th>
+<th>Prefetchable</th>
+<th>Status</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td>0</td>
-<td>UUID ROM</td>
-<td>0x201_0100_1000</td>
-<td>0x201_0100_1FFF</td>
+<tr>
+<td><strong>BAR0</strong></td>
+<td><strong>16 MB</strong></td>
+<td>64-bit, AXI_Bridge_Master</td>
+<td>No</td>
+<td>Enabled</td>
 </tr>
-<tr class="even">
-<td>1</td>
-<td>gcq_m2r</td>
-<td>0x201_0101_0000</td>
-<td>0x201_0101_0FFF</td>
-</tr>
-<tr class="odd">
-<td>2</td>
-<td><p>PCIe Host to DDR remap in axi_noc_cips</p>
-<p>Remaps PCIe Address</p>
-<p>0x201_0800_0000 - 0x201_0FFF_FFFF</p>
-<p>to DDR Address</p>
-<p>0x000_03800_0000 - 0x000_3FFF_FFFF</p></td>
-<td><p>0x201_0800_0000</p></td>
-<td><p>0x201_0FFF_FFFF</p></td>
+<tr>
+<td><strong>BAR2</strong></td>
+<td>4 KB</td>
+<td>32-bit, AXI_Bridge_Master</td>
+<td>No</td>
+<td><strong>Disabled</strong></td>
 </tr>
 </tbody>
 </table>
-<p>AMR does not use the User BAR layout table.</p>
-<p><span id="amrv80-baselogic-generalconfig"></span></p>
-<div class="section" id="general-config">
-<h3>General Config<a class="headerlink" href="#general-config" title="Permalink to this heading">¶</a></h3>
-<p>The hardware discovery IP is manually configured. AMR sets the PCIe Extended Capability Base Address to 0x600 and the next capability Pointer is set to 0x000 to indicate this is the last capability in the extended capability address space. Since the hardware discovery IP is manually configured, the ‘PF0 List of Endpoints Names’ does not need to be entered.</p>
-<p><span id="amrv80-baselogic-pf0configuration"></span></p>
-</div>
-<div class="section" id="pf0-configuration">
-<h3>PF0 Configuration<a class="headerlink" href="#pf0-configuration" title="Permalink to this heading">¶</a></h3>
-<p>The configuration for the three BAR entries must be entered. The <a class="reference internal" href="#../cips-config.md#AMRV80-CIPSConfiguration-PF0BARAddress"><span class="xref myst">PF0 BAR</span></a> is configured with an offset of 0x201_0000_0000, so the 0x201_xxxx_xxxx is not entered in the address entries of this tab.</p>
-<p><span id="amrv80-baselogic-pf0entry0"></span></p>
-<div class="section" id="pf0-entry-0">
-<h4>PF0 Entry 0<a class="headerlink" href="#pf0-entry-0" title="Permalink to this heading">¶</a></h4>
-<p>This is the entry for the UUID ROM.</p>
+<p><strong>Address Mapping:</strong></p>
 <ul class="simple">
-<li><p>Type: 0x50 = UUID ROM</p></li>
-<li><p>BAR: PF0 BAR Endpoint</p></li>
-<li><p>Address: Endpoint address offset from the PCIe BAR identified in the BAR field. The <a class="reference internal" href="#../cips-config.md#AMRV80-CIPSConfiguration-PF0BARAddress"><span class="xref myst">PF0 BAR</span></a> is configured with an offset of 0x201_0000_0000.</p></li>
-<li><p>Version Type: IP Catalog Version</p></li>
-<li><p>Major Version: Major Version of the IP</p></li>
-<li><p>Minor Version: Minor Version of the IP</p></li>
-<li><p>Reserved: Leave at default setting.</p></li>
+<li><p>PCIe BAR0 Address: <strong>0x201_0000_0000</strong></p></li>
+<li><p>AXI Target Address: <strong>0x0000020100000000</strong></p></li>
+<li><p>NoC Aperture: 16 MB (configured in axi_noc_cips M00_AXI)</p></li>
+<li><p>NoC Remap: 0x201_0000_0000 → 0x1000_0000 (local address space)</p></li>
 </ul>
-<p><span id="amrv80-baselogic-pf0entry1"></span></p>
 </div>
-<div class="section" id="pf0-entry-1">
-<h4>PF0 Entry 1<a class="headerlink" href="#pf0-entry-1" title="Permalink to this heading">¶</a></h4>
-<p>This is the entry for the GCQ - gcq_m2r.</p>
+<div class="section" id="pf0-features">
+<h3>PF0 Features<a class="headerlink" href="#pf0-features" title="Permalink to this heading">¶</a></h3>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Feature</th>
+<th>V80 Setting</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MSI-X</strong></td>
+<td>Disabled</td>
+</tr>
+<tr>
+<td><strong>Function Level Reset</strong></td>
+<td>Disabled</td>
+</tr>
+<tr>
+<td><strong>Extended Config Interface</strong></td>
+<td>Disabled (CFG_EXT_IF = 0)</td>
+</tr>
+<tr>
+<td><strong>Extended Config Space</strong></td>
+<td>None</td>
+</tr>
+<tr>
+<td><strong>ARI Capability</strong></td>
+<td>Disabled</td>
+</tr>
+<tr>
+<td><strong>ACS Capability</strong></td>
+<td>Disabled</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pf0-current-usage">
+<h3>PF0 Current Usage<a class="headerlink" href="#pf0-current-usage" title="Permalink to this heading">¶</a></h3>
+<p><strong>Base Design:</strong></p>
 <ul class="simple">
-<li><p>Type 0x54 = GCQ</p></li>
-<li><p>BAR: PF0 BAR Endpoint</p></li>
-<li><p>Address: Endpoint address offset from the PCIe BAR identified in the BAR field. The <a class="reference internal" href="#../cips-config.md#AMRV80-CIPSConfiguration-PF0BARAddress"><span class="xref myst">PF0 BAR</span></a> is configured with an offset of 0x201_0000_0000.</p></li>
-<li><p>Version Type: IP Catalog Version</p></li>
-<li><p>Major Version: Major Version of the IP</p></li>
-<li><p>Minor Version: Minor Version of the IP</p></li>
-<li><p>Reserved: Leave at default setting.</p></li>
+<li><p>No hardware IP connected to PF0 address space</p></li>
+<li><p>Address space <strong>reserved</strong> for future management IP</p></li>
+<li><p>Management handled by firmware on RPU</p></li>
 </ul>
-<p><span id="amrv80-baselogic-pf0entry2"></span></p>
-</div>
-<div class="section" id="pf0-entry-2">
-<h4>PF0 Entry 2<a class="headerlink" href="#pf0-entry-2" title="Permalink to this heading">¶</a></h4>
-<p>This is the entry for the remapper between the Host PCIe management and RPU in the DDR.</p>
+<p><strong>Future Expansion Potential:</strong></p>
 <ul class="simple">
-<li><p>Type 0x55 = AXI NoC IP Remapper</p></li>
-<li><p>BAR: PF0 BAR Endpoint</p></li>
-<li><p>Address: Endpoint address offset from the PCIe BAR identified in the BAR field. The <a class="reference internal" href="#../cips-config.md#AMRV80-CIPSConfiguration-PF0BARAddress"><span class="xref myst">PF0 BAR</span></a> is configured with an offset of 0x201_0000_0000.</p></li>
-<li><p>Version Type: IP Catalog Version</p></li>
-<li><p>Major Version: Major Version of the IP</p></li>
-<li><p>Minor Version: Minor Version of the IP</p></li>
-<li><p>Reserved: Leave at default setting.</p></li>
+<li><p>SMBus controller</p></li>
+<li><p>Identification/UUID ROMs</p></li>
+<li><p>Management register blocks</p></li>
+<li><p>Custom control interfaces</p></li>
 </ul>
-<p><img alt="image2" src="../../_images/grey_arrow_down1.png" /></p>
-<p><span id="amrv80-baselogic-hardwarediscoveryipguiconfiguration"></span></p>
+<p><span id="amrv80-baselogic-pf1configuration"></span></p>
 </div>
 </div>
-<div class="section" id="hardware-discovery-ip-gui-configuration">
-<h3>Hardware Discovery IP GUI configuration<a class="headerlink" href="#hardware-discovery-ip-gui-configuration" title="Permalink to this heading">¶</a></h3>
-<p><img alt="image3" src="../../_images/1107375474.png" /></p>
-<p><img alt="image4" src="../../_images/1107375477.png" /></p>
-<p><span id="amrv80-baselogic-genericcommandqueuemanagement-to-rpu-gcq-m2r"></span></p>
+<div class="section" id="pf1-configuration-v80-specific">
+<h2>PF1 Configuration (V80-Specific)<a class="headerlink" href="#pf1-configuration-v80-specific" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="cpm5-pf1-settings">
+<h3>CPM5 PF1 Settings<a class="headerlink" href="#cpm5-pf1-settings" title="Permalink to this heading">¶</a></h3>
+<p><strong>PF1 CPM5 Configuration:</strong></p>
+<ul class="simple">
+<li><p>Device ID: <strong>0x50b5</strong></p></li>
+<li><p>Base Class: 12 (Processing Accelerators)</p></li>
+<li><p>Sub Class: 00</p></li>
+<li><p>Subsystem ID: 0x000e</p></li>
+<li><p>Subsystem Vendor ID: 0x10ee</p></li>
+<li><p>Vendor ID: 0x10ee</p></li>
+</ul>
+</div>
+<div class="section" id="pf1-bar-configuration">
+<h3>PF1 BAR Configuration<a class="headerlink" href="#pf1-bar-configuration" title="Permalink to this heading">¶</a></h3>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>BAR</th>
+<th>Size</th>
+<th>Type</th>
+<th>Prefetchable</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>BAR0</strong></td>
+<td><strong>512 KB</strong></td>
+<td>64-bit, DMA</td>
+<td>Yes</td>
+<td><strong>Enabled</strong></td>
+</tr>
+<tr>
+<td><strong>BAR2</strong></td>
+<td><strong>256 MB</strong></td>
+<td>64-bit, AXI_Bridge_Master</td>
+<td>Yes</td>
+<td><strong>Enabled</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Address Mapping (BAR2):</strong></p>
+<ul class="simple">
+<li><p>PCIe BAR2 Address: <strong>0x202_0000_0000</strong></p></li>
+<li><p>AXI Target Address: <strong>0x0000020200000000</strong></p></li>
+<li><p>NoC Aperture: 1 GB (configured in axi_noc_cips M01_AXI)</p></li>
+<li><p>Routes to: PF1 hierarchical block</p></li>
+</ul>
+<p><strong>DMA (BAR0):</strong></p>
+<ul class="simple">
+<li><p>512 KB address space for QDMA registers and descriptors</p></li>
+<li><p>CPM5 hardened QDMA engine</p></li>
+</ul>
+</div>
+<div class="section" id="pf1-features">
+<h3>PF1 Features<a class="headerlink" href="#pf1-features" title="Permalink to this heading">¶</a></h3>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Feature</th>
+<th>V80 Setting</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MSI-X</strong></td>
+<td><strong>Enabled</strong> (8 vectors)</td>
+</tr>
+<tr>
+<td><strong>MSI-X Table Offset</strong></td>
+<td>0x50000</td>
+</tr>
+<tr>
+<td><strong>MSI-X Table Size</strong></td>
+<td>8 entries</td>
+</tr>
+<tr>
+<td><strong>Function Level Reset</strong></td>
+<td>Disabled</td>
+</tr>
+<tr>
+<td><strong>DMA Type</strong></td>
+<td>CPM5 QDMA (hardened)</td>
+</tr>
+</tbody>
+</table>
+<p><span id="amrv80-baselogic-pf1hierarchy"></span></p>
 </div>
 </div>
-<div class="section" id="generic-command-queue-management-to-rpu-gcq-m2r">
-<h2>Generic Command Queue Management-to-RPU (gcq_m2r)<a class="headerlink" href="#generic-command-queue-management-to-rpu-gcq-m2r" title="Permalink to this heading">¶</a></h2>
-<p>The AMR gcq_m2r instantiates the <a class="reference internal" href="#../ip-details/gcq-ip/"><span class="xref myst">Generic Command Queue IP</span></a> to allow the PCIe management and RPU to communicate with each other using 128 MB of DDR4 shared memory. The communication is performed through the the use of two AXI4-Lite interfaces that provide access to the queue status/control registers contained within the GCQ IP. In the GCQ IP, the Producer is connected to the Submission Queue (SQ) interface (S00_AXI). It generates the submission queue interrupt (irq_sq). The Consumer is connected to the Completion Queue (CQ) interface (S01_AXI). It generates the completion queue interrupt (irq_cq). In gcq_m2r, the producer is the PCIe Management, and the consumer is the RPU. The SQ and CQ ring buffers are contained in DDR memory shared between the PCIe management PF &amp; RPU - <a class="reference internal" href="#../memory-map.md#AMRV80-MemoryMap-gcq_m2rDDRlocation"><span class="xref myst">gcq_m2r DDR location</span></a>. The AMR design connects the submission queue interrupt to the CIPS LPD PL-PS interrupt (IRQ 0) so it can be serviced by the RPU. The consumer queue interrupt is not used.</p>
-<p><a class="reference download internal" download="" href="../../_downloads/8c34fe0572a9c354773f2d65b0a0e0b8/1107375480.png"><span class="xref download myst"><img alt="image5" src="../../_images/1107375480.png" /></span></a></p>
-<p><span id="amrv80-baselogic-rpusmartconnect-rpu-sc"></span></p>
+<div class="section" id="pf1-hierarchical-block">
+<h2>PF1 Hierarchical Block<a class="headerlink" href="#pf1-hierarchical-block" title="Permalink to this heading">¶</a></h2>
+<p>The PF1 hierarchy is <strong>common across platforms</strong> but with V80-specific clock/address configuration:</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Component</th>
+<th>IP Type</th>
+<th>Instance Name</th>
+<th>V80 Configuration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SmartConnect</td>
+<td>xilinx.com:ip:smartconnect</td>
+<td>smartconnect_pf1</td>
+<td>1 slave (S00_AXI), 1 master (M00_AXI)</td>
+</tr>
+<tr>
+<td>AXI GPIO</td>
+<td>xilinx.com:ip:axi_gpio</td>
+<td>axi_gpio_test_pf1</td>
+<td>Default: <strong>0x000000F1</strong>, bidirectional</td>
+</tr>
+<tr>
+<td>Processor System Reset</td>
+<td>xilinx.com:ip:proc_sys_reset:5.0</td>
+<td>proc_sys_reset_0</td>
+<td>100 MHz clock domain</td>
+</tr>
+</tbody>
+</table>
+<p><strong>V80-Specific Configuration:</strong></p>
+<ul class="simple">
+<li><p>Clock: <strong>pl0_ref_clk (100 MHz)</strong> from CIPS</p></li>
+<li><p>Reset: <strong>pl0_resetn</strong> from CIPS → proc_sys_reset_0</p></li>
+<li><p>Connected to: <strong>axi_noc_cips M01_AXI</strong></p></li>
+<li><p>GPIO loopback: gpio_io_o → gpio_io_i</p></li>
+</ul>
+<p><span id="amrv80-baselogic-cpm5hardened"></span></p>
 </div>
-<div class="section" id="rpu-smart-connect-rpu-sc">
-<h2>RPU Smart Connect (rpu_sc)<a class="headerlink" href="#rpu-smart-connect-rpu-sc" title="Permalink to this heading">¶</a></h2>
-<p>The AMR RPU SmartConnect (rpu_sc) block allows the RPU to communicate to the base logic RPU peripherals through the <a class="reference external" href="https://docs.xilinx.com/r/en-US/pg247-smartconnect/SmartConnect-v1.0-LogiCORE-IP-Product-Guide">AXI SmartConnect IP</a>. The AXI SmartConnect IP is instantiated inside rpu_sc and it is responsible for connecting one or more AXI memory-mapped master devices to one or more memory-mapped AXI slave devices. In this case, it connects the CIPS Master AXI Low Power Domain (M_AXI_LPD) interface of the RPU, to the base logic RPU slave peripherals (gcq_m2r and axi_smbus_rpu). This interface operates at 100MHz.</p>
-<p><span id="amrv80-baselogic-pcieslr0managementsmartconnect-pcie-slr0-mgmt-sc"></span></p>
+<div class="section" id="cpm5-hardened-pcie-v80-specific">
+<h2>CPM5 Hardened PCIe (V80-Specific)<a class="headerlink" href="#cpm5-hardened-pcie-v80-specific" title="Permalink to this heading">¶</a></h2>
+<p><strong>Key V80 Advantage:</strong> PCIe and QDMA are <strong>hardened silicon</strong> in CPM5.</p>
+<div class="section" id="cpm5-benefits">
+<h3>CPM5 Benefits<a class="headerlink" href="#cpm5-benefits" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>✓ <strong>Zero PL resource usage</strong> for PCIe/QDMA</p></li>
+<li><p>✓ <strong>Higher performance</strong> - Gen5 x8 (32 GT/s)</p></li>
+<li><p>✓ <strong>Lower latency</strong> - hardened data path</p></li>
+<li><p>✓ <strong>Hardened NoC connection</strong> - NMU_128 integrated</p></li>
+<li><p>✓ <strong>Simpler timing closure</strong> - no PCIe in fabric</p></li>
+</ul>
 </div>
-<div class="section" id="pcie-slr0-management-smartconnect-pcie-slr0-mgmt-sc">
-<h2>PCIe SLR0 Management SmartConnect (pcie_slr0_mgmt_sc)<a class="headerlink" href="#pcie-slr0-management-smartconnect-pcie-slr0-mgmt-sc" title="Permalink to this heading">¶</a></h2>
-<p>The AMR PCIe SLR0 Management SmartConnect (pcies_slr0_mgmt_sc) block allows the RPU, PMC, and Host to communicate to the base logic management peripherals through the <a class="reference external" href="https://docs.xilinx.com/r/en-US/pg247-smartconnect/SmartConnect-v1.0-LogiCORE-IP-Product-Guide">AXI SmartConnect IP</a>. In this case, it connects the CIPS RPU, PMC, and Host master AXI devices, from axi_noc_cips, to the base logic management slave AXI devices (hw_discovery, uuid_rom, gcq_m2r, and pcie_mgmt_pdi_reset). This interface operates at 100MHz.</p>
-<p><span id="amrv80-baselogic-smbusip-axi-smbus-rpu"></span></p>
+<div class="section" id="cpm5-configuration-summary">
+<h3>CPM5 Configuration Summary<a class="headerlink" href="#cpm5-configuration-summary" title="Permalink to this heading">¶</a></h3>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>V80 Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PCIe Controller</td>
+<td><strong>Controller 1</strong> (bottom x8 lanes)</td>
+</tr>
+<tr>
+<td>Link Speed</td>
+<td><strong>32.0 GT/s</strong> (Gen 5)</td>
+</tr>
+<tr>
+<td>Lane Width</td>
+<td><strong>X8</strong></td>
+</tr>
+<tr>
+<td>Functional Mode</td>
+<td><strong>QDMA</strong></td>
+</tr>
+<tr>
+<td>Mode Selection</td>
+<td>Advanced</td>
+</tr>
+<tr>
+<td>Total PFs Enabled</td>
+<td><strong>2</strong> (TL_PF_ENABLE_REG = 2)</td>
+</tr>
+<tr>
+<td>MSI-X Options</td>
+<td>MSI-X Internal</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Reference:</strong> See <a class="reference internal" href="cips-config.html"><span class="std std-doc">V80 CIPS Configuration</span></a> for complete CPM5 settings.</p>
+<p><span id="amrv80-baselogic-nocconnection"></span></p>
 </div>
-<div class="section" id="smbus-ip-axi-smbus-rpu">
-<h2>SMBus IP (axi_smbus_rpu)<a class="headerlink" href="#smbus-ip-axi-smbus-rpu" title="Permalink to this heading">¶</a></h2>
-<p>AMR instantiates the SMBus IP. This allows AMR to communicate with external devices sharing the two-wire open drain interface operating on the same principles as I2C. The SMBus IP is controlled by the AXI4-Lite interface running at 100MHz. Its interrupt is connected to the CIPS LPD PL-PS interrupt (IRQ 1) so it can be serviced by the RPU. Its I/O is located in bank 702 and connects to the PCIe edge connector per the schematic.</p>
+</div>
+<div class="section" id="noc-connection-v80-specific">
+<h2>NoC Connection (V80-Specific)<a class="headerlink" href="#noc-connection-v80-specific" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="cpm5-to-noc">
+<h3>CPM5 to NoC<a class="headerlink" href="#cpm5-to-noc" title="Permalink to this heading">¶</a></h3>
+<p><strong>V80 Hardened Connection:</strong></p>
+<ul class="simple">
+<li><p>CPM5 connects to NoC via <strong>hardened NMU_128</strong> interfaces</p></li>
+<li><p>No PL IP required for PCIe to NoC routing</p></li>
+<li><p>Direct connection to axi_noc_cips</p></li>
+</ul>
+<p><strong>AXI NoC CIPS Master Interfaces (V80):</strong></p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Interface</th>
+<th>Aperture</th>
+<th>Address</th>
+<th>Remap</th>
+<th>Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>M00_AXI</strong></td>
+<td>16 MB</td>
+<td>0x201_0000_0000</td>
+<td>→ 0x1000_0000</td>
+<td>PF0 address space (empty)</td>
+</tr>
+<tr>
+<td><strong>M01_AXI</strong></td>
+<td>1 GB</td>
+<td>0x202_0000_0000</td>
+<td>(none)</td>
+<td>PF1 hierarchy (GPIO test)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Reference:</strong> See <a class="reference internal" href="noc-config.html"><span class="std std-doc">V80 NoC Configuration</span></a> for complete NoC topology.</p>
+<p><span id="amrv80-baselogic-plresourceusage"></span></p>
+</div>
+</div>
+<div class="section" id="pl-resource-usage-v80-specific">
+<h2>PL Resource Usage (V80-Specific)<a class="headerlink" href="#pl-resource-usage-v80-specific" title="Permalink to this heading">¶</a></h2>
+<p><strong>V80 Base Design PL IP:</strong></p>
+<ul class="simple">
+<li><p>1× smartconnect (PF1)</p></li>
+<li><p>1× axi_gpio (PF1)</p></li>
+<li><p>1× proc_sys_reset (PF1)</p></li>
+</ul>
+<p><strong>Estimated Resources:</strong></p>
+<ul class="simple">
+<li><p>LUTs: &lt; 2K (minimal - no PCIe/DMA in PL)</p></li>
+<li><p>BRAMs: &lt; 5</p></li>
+<li><p>No QDMA resources needed (hardened in CPM5)</p></li>
+</ul>
+<p><span id="amrv80-baselogic-smbusip"></span></p>
+</div>
+<div class="section" id="smbus-ip-available-but-not-instantiated">
+<h2>SMBus IP (Available but Not Instantiated)<a class="headerlink" href="#smbus-ip-available-but-not-instantiated" title="Permalink to this heading">¶</a></h2>
+<p><strong>Status:</strong> SMBus v1.1 IP is in the IP repository but <strong>not instantiated</strong> in V80 base design.</p>
+<p><strong>SMBus IP Details:</strong></p>
+<ul class="simple">
+<li><p>Vendor: xilinx.com</p></li>
+<li><p>Version: 1.1</p></li>
+<li><p>Implementation: SystemVerilog (smbus_v1_1_vl_rfs.sv)</p></li>
+<li><p>Interface: S_AXI (AXI4-Lite slave)</p></li>
+<li><p>Location: <code class="docutils literal notranslate"><span class="pre">ip/smbus_v1_1/</span></code></p></li>
+<li><p>Licensing: Requires download from <a class="reference external" href="https://www.xilinx.com/member/v80.html">https://www.xilinx.com/member/v80.html</a></p></li>
+</ul>
+<p><strong>To Add SMBus:</strong></p>
+<ul class="simple">
+<li><p>Connect to M_AXI_LPD interface</p></li>
+<li><p>Wire IRQ 1 interrupt to CIPS</p></li>
+<li><p>Update address map</p></li>
+<li><p>Required for designs needing SMBus board management</p></li>
+</ul>
+<p><strong>Note:</strong> The SMBus IP must be present in iprepo directory for Vivado build to succeed.</p>
+<p>|——–|—–|——|
+| <strong>PCIe Implementation</strong> | CPM5 hardened | PL PCIe IP (soft logic) |
+| <strong>PL Resource for PCIe</strong> | <strong>~0 LUTs</strong> | <strong>~54K LUTs</strong> (QDMA PL IP) |
+| <strong>QDMA Location</strong> | Hardened in CPM5 | PL IP instantiation |
+| <strong>NoC Connection</strong> | Hardened NMU_128 | PL NMU_512 |
+| <strong>Device IDs</strong> | 0x50b4, 0x50b5 | 0x5700, 0x5701 |
+| <strong>PCIe Speed</strong> | Gen 5 (32 GT/s) | Gen 3 (8 GT/s) |
+| <strong>Timing Closure</strong> | Easier (hardened) | Harder (PCIe in fabric) |</p>
 </div>
 </div>
 
@@ -294,7 +543,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

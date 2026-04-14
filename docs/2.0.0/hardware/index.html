@@ -3,22 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
-  <title>Hardware Design - V80 &mdash; AMR  documentation</title>
+  <title>Hardware Design - AMR Common &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -35,14 +20,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="V80 Platform Documentation" href="../v80/index.html" />
+    <link rel="prev" title="Source Configuration Control" href="../development/source-control.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -86,19 +69,36 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Hardware Design - AMR Common</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#platform-documentation">Platform Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#common-hardware-documentation">Common Hardware Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#key-common-design-principles">Key Common Design Principles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#minimal-base-design">Minimal Base Design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#platform-agnostic-concepts">Platform-Agnostic Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#platform-specific-implementations">Platform-Specific Implementations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../v80/index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/asdm-application.html">AMR ASDM Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/inband-telemetry.html">AMR InBand Telemetry Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../firmware/asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
@@ -130,7 +130,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Hardware Design - V80</li>
+      <li>Hardware Design - AMR Common</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/hardware/index.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -140,18 +140,63 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="hardware-design-v80">
-<h1>Hardware Design - V80<a class="headerlink" href="#hardware-design-v80" title="Permalink to this heading">¶</a></h1>
+  <div class="section" id="hardware-design-amr-common">
+<h1>Hardware Design - AMR Common<a class="headerlink" href="#hardware-design-amr-common" title="Permalink to this heading">¶</a></h1>
+<p>This section contains hardware design documentation <strong>common to all AMR platforms</strong> (V80, RAVE). For platform-specific details, see the individual platform documentation.</p>
+<div class="section" id="platform-documentation">
+<h2>Platform Documentation<a class="headerlink" href="#platform-documentation" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="#hierarchy.md"><span class="xref myst">AMR V80 - Hierarchy Overview</span></a></p></li>
-<li><p><a class="reference internal" href="cips-config.html"><span class="std std-doc">AMR V80 - CIPS Configuration</span></a></p></li>
-<li><p><a class="reference internal" href="memory-resources.html"><span class="std std-doc">AMR V80 - Memory Resources</span></a></p></li>
-<li><p><a class="reference internal" href="memory-map.html"><span class="std std-doc">AMR V80 - Memory Map</span></a></p></li>
-<li><p><a class="reference internal" href="noc-config.html"><span class="std std-doc">AMR V80 - NoC Configuration</span></a></p></li>
-<li><p><a class="reference internal" href="base-logic.html"><span class="std std-doc">AMR V80 - Base Logic</span></a></p></li>
-<li><p><a class="reference internal" href="clock-reset.html"><span class="std std-doc">AMR V80 - Clock Reset Module</span></a></p></li>
-<li><p><a class="reference internal" href="source-files.html"><span class="std std-doc">AMR V80 - Source File Overview</span></a></p></li>
+<li><p><a class="reference internal" href="../v80/hardware/index.html"><span class="std std-doc">V80 Hardware Design</span></a> - Alveo V80 (CPM5, HBM)</p></li>
+<li><p><a class="reference internal" href="../rave/hardware/index.html"><span class="std std-doc">RAVE Hardware Design</span></a> - Embedded+ VE2302 (PL PCIe, LPDDR4)</p></li>
 </ul>
+</div>
+<div class="section" id="common-hardware-documentation">
+<h2>Common Hardware Documentation<a class="headerlink" href="#common-hardware-documentation" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#comparison.md"><span class="xref myst">Platform Comparison</span></a> - V80 vs RAVE comparison and selection guide</p></li>
+<li><p><a class="reference internal" href="hierarchy.html"><span class="std std-doc">Versal Architecture Overview</span></a> - Common Versal concepts (CIPS, PL, NoC)</p></li>
+<li><p><a class="reference internal" href="cips-config.html"><span class="std std-doc">CIPS Common Configuration</span></a> - RPU, PMC, and PS peripheral concepts</p></li>
+<li><p><a class="reference internal" href="base-logic.html"><span class="std std-doc">Base Design Philosophy</span></a> - Minimal design, software GCQ, firmware-based management</p></li>
+<li><p><a class="reference internal" href="memory-resources.html"><span class="std std-doc">Memory Architecture Concepts</span></a> - DDR, memory controllers, general concepts</p></li>
+<li><p><a class="reference internal" href="memory-map.html"><span class="std std-doc">Address Mapping Concepts</span></a> - PCIe to AXI address translation</p></li>
+<li><p><a class="reference internal" href="noc-config.html"><span class="std std-doc">NoC Interconnect Overview</span></a> - NoC concepts (NMU, NSU, NPS, performance)</p></li>
+<li><p><a class="reference internal" href="clock-reset.html"><span class="std std-doc">Clock and Reset Concepts</span></a> - CIPS clocks, reset synchronization</p></li>
+<li><p><a class="reference internal" href="source-files.html"><span class="std std-doc">Build System Overview</span></a> - Vivado build structure and flow</p></li>
+</ul>
+</div>
+<div class="section" id="key-common-design-principles">
+<h2>Key Common Design Principles<a class="headerlink" href="#key-common-design-principles" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="minimal-base-design">
+<h3>Minimal Base Design<a class="headerlink" href="#minimal-base-design" title="Permalink to this heading">¶</a></h3>
+<p>All AMR platforms follow a minimal base design philosophy:</p>
+<ul class="simple">
+<li><p>No management IP blocks in PL (no GCQ hardware, UUID ROM, EEPROM controllers)</p></li>
+<li><p>Firmware-based management using RPU (R5 processors)</p></li>
+<li><p>Software GCQ implementation using shared DDR memory</p></li>
+<li><p>Expansion points available (M_AXI_LPD, address space, interrupts)</p></li>
+</ul>
+</div>
+<div class="section" id="platform-agnostic-concepts">
+<h3>Platform-Agnostic Concepts<a class="headerlink" href="#platform-agnostic-concepts" title="Permalink to this heading">¶</a></h3>
+<p>The following concepts are shared across all platforms:</p>
+<ul class="simple">
+<li><p>Versal CIPS architecture (RPU, PMC, PS)</p></li>
+<li><p>NoC interconnect fundamentals</p></li>
+<li><p>Memory controller architecture</p></li>
+<li><p>Boot and configuration flow</p></li>
+<li><p>2 Physical Functions (PF0 management, PF1 user/DMA)</p></li>
+<li><p>QDMA for DMA transfers (different implementations)</p></li>
+</ul>
+</div>
+<div class="section" id="platform-specific-implementations">
+<h3>Platform-Specific Implementations<a class="headerlink" href="#platform-specific-implementations" title="Permalink to this heading">¶</a></h3>
+<p>See individual platform documentation for:</p>
+<ul class="simple">
+<li><p><strong>V80</strong>: CPM5 hardened PCIe, HBM memory, Gen5x8 configuration</p></li>
+<li><p><strong>RAVE</strong>: PL-based PCIe IP, LPDDR4 memory, expansion I/O, peripherals</p></li>
+</ul>
+</div>
+</div>
 </div>
 
 
@@ -159,13 +204,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </div>
           
 				  
-				  <footer>
+				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../development/source-control.html" class="btn btn-neutral float-left" title="Source Configuration Control" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../v80/index.html" class="btn btn-neutral float-right" title="V80 Platform Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

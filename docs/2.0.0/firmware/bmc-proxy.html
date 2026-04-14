@@ -3,21 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
   <title>Board Management Controller (BMC) Proxy Driver &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
@@ -40,11 +25,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="prev" title="AMR External Device Control (AXC) Proxy Driver" href="axc-proxy.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -88,19 +69,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../v80/index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asdm-application.html">AMR ASDM Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inband-telemetry.html">AMR InBand Telemetry Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Board Management Controller (BMC) Proxy Driver</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a><ul>
@@ -499,15 +487,15 @@ int iBMC_Initialise( uint8_t ucProxyId,
                      uint32_t ulFwIfPort,
                      uint32_t ulTaskPrio,
                      uint32_t ulTaskStack,
-                     PLDM_NUMERIC_SENSOR_PDR *pxPdrTemperatureSensors,
+                     PLDMNumericSensorPdr *pxPdrTemperatureSensors,
                      int iTotalPdrTemperature,
-                     PLDM_NUMERIC_SENSOR_PDR *pxPdrVoltageSensors,
+                     PLDMNumericSensorPdr *pxPdrVoltageSensors,
                      int iTotalPdrVoltage,
-                     PLDM_NUMERIC_SENSOR_PDR *pxPdrCurrentSensors,
+                     PLDMNumericSensorPdr *pxPdrCurrentSensors,
                      int iTotalPdrCurrent,
-                     PLDM_NUMERIC_SENSOR_PDR *pxPdrPowerSensors,
+                     PLDMNumericSensorPdr *pxPdrPowerSensors,
                      int iTotalPdrPower,
-                     PLDM_NUMERIC_SENSOR_NAME_PDR *pxPdrSensorNames,
+                     PLDMNumericSensorNamePdr *pxPdrSensorNames,
                      int iTotalPdrName,
                      uint8_t *pucUuid );
 </pre></div>
@@ -519,7 +507,7 @@ int iBMC_Initialise( uint8_t ucProxyId,
 <p>Applications can bind into the callback to listen to incoming events and handle them accordingly.</p>
 <p>Current list of supported events:</p>
 <ul class="simple">
-<li><p>BMC_PROXY_DRIVER_E_SMBUS_MSG_ARRIVAL</p></li>
+<li><p>BMC_PROXY_DRIVER_E_MSG_ARRIVAL</p></li>
 <li><p>BMC_PROXY_DRIVER_E_GET_PDR</p></li>
 <li><p>BMC_PROXY_DRIVER_E_GET_PDR_REPOSITORY_INFO</p></li>
 <li><p>BMC_PROXY_DRIVER_E_GET_SENSOR_INFO</p></li>
@@ -715,7 +703,7 @@ int iBMC_GetState( MODULE_STATE *pxState );
 <h3>Initialize Proxy<a class="headerlink" href="#initialize-proxy" title="Permalink to this heading">¶</a></h3>
 <p>The initialize function needs a unique id for the proxy, a handle to a FW_IF (already created and initialized), and a task priority/size passed in, as well as the PDR sensor lists and total values.</p>
 <p><strong>iBMC_Initialise Example</strong></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if( OK == iBMC_Initialise( AMC_EVENT_UNIQUE_ID_BMC, &amp;xSMBusIf, 0, AMC_TASK_PRIO_DEFAULT, AMC_TASK_DEFAULT_STACK,
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if( OK == iBMC_Initialise( AMC_CFG_UNIQUE_ID_BMC, &amp;xSMBusIf, 0, AMC_TASK_PRIO_DEFAULT, AMC_TASK_DEFAULT_STACK,
                                pxPdrTemperatureSensors, TOTAL_PDR_TEMPERATURE,
                                pxPdrVoltageSensors,     TOTAL_PDR_VOLTAGE,
                                pxPdrCurrentSensors,     TOTAL_PDR_CURRENT,
@@ -736,7 +724,7 @@ static int iBmcCallback( EVL_SIGNAL *pxSignal )
 {
     int iStatus = ERROR;
 
-    if( ( NULL != pxSignal ) &amp;&amp; ( AMC_EVENT_UNIQUE_ID_BMC == pxSignal-&gt;ucModule ) )
+    if( ( NULL != pxSignal ) &amp;&amp; ( AMC_CFG_UNIQUE_ID_BMC == pxSignal-&gt;ucModule ) )
     {
         switch( pxSignal-&gt;ucEventType )
         {
@@ -764,7 +752,7 @@ static int iBmcProxyCallback( EVL_SIGNAL *pxSignal )
 {
     int iStatus = ERROR;
 
-    if( ( NULL != pxSignal ) &amp;&amp; ( AMC_EVENT_UNIQUE_ID_BMC == pxSignal-&gt;ucModule ) )
+    if( ( NULL != pxSignal ) &amp;&amp; ( AMC_CFG_UNIQUE_ID_BMC == pxSignal-&gt;ucModule ) )
     {
         if( MAX_BMC_PROXY_DRIVER_EVENTS &gt;= pxSignal-&gt;ucEventType )
         {
@@ -827,7 +815,7 @@ static int iBmcProxyCallback( EVL_SIGNAL *pxSignal )
 {
     int iStatus = ERROR;
 
-    if( ( NULL != pxSignal ) &amp;&amp; ( AMC_EVENT_UNIQUE_ID_BMC == pxSignal-&gt;ucModule ) )
+    if( ( NULL != pxSignal ) &amp;&amp; ( AMC_CFG_UNIQUE_ID_BMC == pxSignal-&gt;ucModule ) )
     {
         if( MAX_BMC_PROXY_DRIVER_EVENTS &gt;= pxSignal-&gt;ucEventType )
         {
@@ -1202,7 +1190,7 @@ static int iBmcProxyCallback( EVL_SIGNAL *pxSignal )
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

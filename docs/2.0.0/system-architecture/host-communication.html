@@ -3,21 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
   <title>AMR - Host to Card Communication &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
@@ -40,11 +25,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="prev" title="AMR - Device Programming" href="device-programming.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -75,7 +56,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1 current"><a class="current reference internal" href="#">AMR - Host to Card Communication</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview-of-physical-function-0">Overview of Physical Function 0</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#hardware-discovery">Hardware Discovery</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#uuid-rom-and-pcie-extended-capabilities">UUID ROM and PCIe Extended Capabilities</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pcie-bar-layout">PCIe BAR Layout</a></li>
 </ul>
 </li>
@@ -101,19 +81,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../v80/index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/asdm-application.html">AMR ASDM Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/inband-telemetry.html">AMR InBand Telemetry Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../firmware/asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
@@ -160,56 +147,59 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p><span id="amr-hosttocardcommunication-overviewofphysicalfunction0"></span></p>
 <div class="section" id="overview-of-physical-function-0">
 <h2>Overview of Physical Function 0<a class="headerlink" href="#overview-of-physical-function-0" title="Permalink to this heading">¶</a></h2>
-<p>Applications deriving from AMR V80 are inherently PCIe® centric. This section gives an overview of how the AMR hardware design has been configured to facilitate management of the AMR design from the PCIe host via the AMC firmware and companion AMR V80 PCIe driver and utility application.</p>
+<p>Applications deriving from AMR are inherently PCIe® centric. This section gives an overview of how the AMR hardware design has been configured to facilitate management of the AMR design from the PCIe host via the AMC firmware and companion AMR PCIe driver and utility application.</p>
 <ul class="simple">
-<li><p>The Hardware Discovery section explains how the AMR host driver identifies AMD Alveo™ V80 card instances running an application derived from the AMR base design so that the Host OS driver can bind to the card and access the application’s AMR management interface.</p></li>
 <li><p>The Host to RPU Communication section describes the general principles of message exchange between the host OS and the AMC firmware implementing the AMR management interface for each card instance.</p></li>
-<li><p>The Host to User Application Communication section suggests ways AMR can be extended to allow application data to be exchanged between application stack running on the PCIe host and the AMD Alveo™ V80 card.</p>
+<li><p>The Host to User Application Communication section suggests ways AMR can be extended to allow application data to be exchanged between application stack running on the PCIe host and the Alveo card.</p>
 <ul>
-<li><p>Application developers will naturally alter the AMR base design to optimize application data flow to suit their specific application’s requirements and hence this page offers only high level guidance for user data transport to the Alveo V80 card.</p></li>
+<li><p>Application developers will naturally alter the AMR base design to optimize application data flow to suit their specific application’s requirements and hence this page offers only high level guidance for user data transport to the Alveo card.</p></li>
 </ul>
 </li>
 </ul>
 <p><span id="amr-hosttocardcommunication-hardwarediscovery"></span></p>
 <div class="section" id="hardware-discovery">
 <h3>Hardware Discovery<a class="headerlink" href="#hardware-discovery" title="Permalink to this heading">¶</a></h3>
-<p>On boot, the host system enumerates the set of PCIe cards in the system and attaches the reference AMR host OS drivers to instances of the Alveo V80 cards it finds running AMR base hardware designs. A full PCIe-based management interface is not available until the AMR host OS driver has attached to the card and acquired a small amount of metadata from the card about its hardware design content. Once the AMR PCIe host driver is attached, the <a class="reference internal" href="../software/ami.html"><span class="doc std std-doc">AMR management interface</span></a>) is available to allow the current design content of the AMR V80 cards to be inspected, controlled, and updated.</p>
-<p><span id="amr-hosttocardcommunication-uuidromandpcieextendedcapabilities"></span></p>
-<div class="section" id="uuid-rom-and-pcie-extended-capabilities">
-<h4>UUID ROM and PCIe Extended Capabilities<a class="headerlink" href="#uuid-rom-and-pcie-extended-capabilities" title="Permalink to this heading">¶</a></h4>
-<p>It is helpful to be able to identify which version or build of a design is operating on the FPGA of the Alveo card. In the AMR V80, the base hardware design contains a small AXI peripheral memory that is initialized with a 128-bit UUID value to allow for such design identification. The intent is that the value programmed into the UUID is different for each build of the design. During the AMR build process, the flow scripts compute a hash of the post routed design file and then assign that value into the UUID peripheral’s memory. The AMI driver and command line utility can query for the UUID later when the card is booted and operational in the host system. This allows the driver and the user to identify which iterations of a given AMR base design are operating on each card within the host system.</p>
-<p>AMR’s base design includes another piece of IP infrastructure to populate the PCIe extended capabilities configuration space with information about a small number of hardware features in the design. The main purpose of the PCIe extended capabilities content is to inform the AMI software stack of the address offset of a few AXI peripherals (UUID ROM, mailbox, address remapper) within the AMR base hardware design. This information is helpful to know in the earliest stages of the card boot and driver bring-up as it allows early reporting of the UUID ROM content just from the data that can be recovered by system commands, such as <em>lspci</em>. It is worth noting that this convention of address metadata exchange is in place to support successive versioning of a base design over several iterations and design teams. It is possible to simplify the AMR design further by removing the PCIe extended capabilities mechanism provided the address assignments of the AXI peripherals currently presented via in PCIe extended capabilities can be held consistent across design iterations. This tradeoff potentially makes the the software stack more tightly coupled to the addressing conventions of the AMR base design. However, by accepting this tradeoff other design techniques such as PCIe tandem load can be deployed.</p>
-<p><a class="reference download internal" download="" href="../_downloads/6fd22249aea4950d9d0f3c7cef54b4c9/1107373737.png"><span class="xref download myst"><img alt="image1" src="../_images/1107373737.png" /></span></a></p>
+<p>On boot, the host system enumerates the set of PCIe cards in the system and attaches the reference AMR host OS drivers to instances of the Alveo cards it finds running AMR base hardware designs. A full PCIe-based management interface is not available until the AMR host OS driver has attached to the card and acquired a small amount of metadata from the card about its hardware design content. Once the AMR PCIe host driver is attached, the <a class="reference internal" href="../software/ami.html"><span class="doc std std-doc">AMR management interface</span></a> is available to allow the current design content of the AMR cards to be inspected, controlled, and updated.</p>
 <p><span id="amr-hosttocardcommunication-pciebarlayout"></span></p>
-</div>
 <div class="section" id="pcie-bar-layout">
 <h4>PCIe BAR Layout<a class="headerlink" href="#pcie-bar-layout" title="Permalink to this heading">¶</a></h4>
-<p>The AMR V80 hardware base design declares a single memory aperture for PF0. This memory aperture enables AMI communication to the AMC firmware running on the RPU. Only a subset of this memory will be used in the AMR base design. However, as more features of the processing subsystem are enabled, additional message passing interfaces from the host to, for example, the User OS running in the AMD Versal™ APU, may make use of this memory region.</p>
+<p>The AMR hardware base design declares a single memory aperture for PF0. This memory aperture enables AMI communication to the AMC firmware running on the RPU. Only a subset of this memory will be used in the AMR base design. However, as more features of the processing subsystem are enabled, additional message passing interfaces from the host to, for example, the User OS running in the AMD Versal™ APU, may make use of this memory region.</p>
 <p><a class="reference download internal" download="" href="../_downloads/e100e2fcf7d7008127f163a4701722d0/1107373728.png"><span class="xref download myst"><img alt="image2" src="../_images/1107373728.png" /></span></a></p>
 <p><span id="amr-hosttocardcommunication-hosttorpucommunication"></span></p>
 </div>
 </div>
 <div class="section" id="host-to-rpu-communication">
 <h3>Host to RPU Communication<a class="headerlink" href="#host-to-rpu-communication" title="Permalink to this heading">¶</a></h3>
-<p>The AMI (host OS) and AMC (embedded firmware) components of AMRs software stack communicate via a region of shared memory and a mailbox peripheral IPs called a <a class="reference internal" href="#../ip-details/gcq-ip/"><span class="xref myst">generic command queue</span></a>.</p>
-<p><a class="reference download internal" download="" href="../_downloads/a19c1f39f214ec471baf67e377afa493/1107373734.png"><span class="xref download myst"><img alt="image3" src="../_images/1107373734.png" /></span></a></p>
-<p>The diagram above shows the PCIe host’s access path to the mailbox (magenta colored nets) and the RPU’s access path to the mailbox (green colored nets). Commands issued to the AMR V80 design via the AMI utility on the PCIe host are transformed into a series of agreed message types that are pushed into the circular buffer of the gcq_m2r IP shown above. The AMC firmware running in the RPU will be alerted to the availability of these messages and (when its control loop allows) begin to service those messages. Internally, the GCQ IP implements a <em>pair</em> of circular buffers to act as submission and completion queues. This allows the RPU to receive commands submitted from the PCIe host and return result codes and other status information on the completion queue. The GCQ IP also implements interrupt services so that software running on the RPU and PCIe host can avoid inefficient polling the card. In the base design, the AMC firmware makes use of interrupts to provide prompt servicing of requests from the AMI software on the host OS. AMR does not have PCIe interrupt architecture requirements to the host OS as it is anticipated that the application interrupt architecture will take precedence over these lower level (and relatively infrequent) command interactions over the management interface.</p>
+<p>The AMI (host OS) and AMC (embedded firmware) components of AMR’s software stack communicate via a region of shared memory using a software protocol called the Generic Communication Queue (GCQ). The GCQ is implemented in software on both the host and firmware sides, utilizing a shared memory region accessible from both the PCIe host and the RPU.</p>
+<p>Commands issued to the AMR design via the AMI utility on the PCIe host are transformed into a series of agreed message types that are pushed into the circular buffer in shared memory. The AMC firmware running in the RPU will be alerted to the availability of these messages and (when its control loop allows) begin to service those messages.</p>
+<p>The GCQ software implementation uses a <em>pair</em> of circular buffers to act as submission and completion queues:</p>
+<ul class="simple">
+<li><p><strong>Submission Queue</strong>: The host writes commands to this queue for the RPU to process</p></li>
+<li><p><strong>Completion Queue</strong>: The RPU writes responses and status information back to the host</p></li>
+</ul>
+<p>The shared memory region is organized as follows:</p>
+<ul class="simple">
+<li><p><strong>GCQ Base Address</strong>: 0x10000000 (mapped to PCIe BAR space)</p></li>
+<li><p><strong>Ring Buffer Base</strong>: 0x10001000</p></li>
+<li><p><strong>Ring Buffer Size</strong>: 4KB (0x1000)</p></li>
+</ul>
+<p>The GCQ implementation also uses mailbox/interrupt mechanisms to avoid inefficient polling. In the base design, the AMC firmware makes use of interrupts to provide prompt servicing of requests from the AMI software on the host OS. AMR does not have strict PCIe interrupt architecture requirements to the host OS as it is anticipated that the application interrupt architecture will take precedence over these lower level (and relatively infrequent) command interactions over the management interface.</p>
 <p><span id="amr-hosttocardcommunication-hosttouserapplicationcommunication"></span></p>
 </div>
 <div class="section" id="host-to-user-application-communication">
 <h3>Host to User Application Communication<a class="headerlink" href="#host-to-user-application-communication" title="Permalink to this heading">¶</a></h3>
 <p>Extending the AMR base design to support additional layers of communication, specifically for the user application, will naturally follow the requirements of the specific application being implemented. Some applications may require several PCIe memory apertures to be accessed, others may be satisfied with a very small control interface aperture and data transport via <a class="reference external" href="https://docs.xilinx.com/r/en-US/pg344-pcie-dma-versal/Slave-Bridge">Versal’s PCIe Slave Bridge</a> to the host memory itself. When extending the AMR base design to accommodate application data transport the following extensions to the AMR base design may be common:</p>
 <ul class="simple">
-<li><p>Enable additional physical functions to separate application data transport from card management data transport in the Host OS, etc.</p></li>
-<li><p>Add additional GCQ mailbox IP instances to allow message passing between the user space application on the Host OS and application level firmware operating in the APU.</p></li>
+<li><p>Enable additional physical functions to separate application data transport from card management data transport in the Host OS.</p></li>
+<li><p>Implement additional GCQ software instances to allow message passing between the user space application on the Host OS and application level firmware operating in the APU.</p></li>
 </ul>
 <p><span id="amr-hosttocardcommunication-overviewofphysicalfunction1"></span></p>
 </div>
 </div>
 <div class="section" id="overview-of-physical-function-1">
 <h2>Overview of Physical Function 1<a class="headerlink" href="#overview-of-physical-function-1" title="Permalink to this heading">¶</a></h2>
-<p>The AMR V80 hardware base design defines PF1 to enable CPM PCIe BAR configurations. This allows DDR and HBM memory to be targeted by CPM DMA transfers to and from host memory.</p>
-<p><a class="reference download internal" download="" href="../_downloads/81862faf95302fae07b036ddfc4d1411/1107373731.png"><span class="xref download myst"><img alt="image4" src="../_images/1107373731.png" /></span></a></p>
+<p>The AMR hardware base design defines PF1 to enable CPM PCIe BAR configurations. This allows DDR and HBM memory to be targeted by CPM DMA transfers to and from host memory.</p>
+<p><strong>Note</strong>: The availability and configuration of PF1 may vary depending on the specific platform implementation (V80, RAVE, etc.).</p>
 </div>
 </div>
 
@@ -227,7 +217,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

@@ -60,6 +60,8 @@ This API can be used to bind into a callback to be notified of events generated 
 
   - **AMI\_PROXY\_DRIVER\_E\_PDI\_COPY\_START**
 
+  - **AMI\_PROXY\_DRIVER\_E\_PDI\_PROGRAM\_START**
+
   - **AMI\_PROXY\_DRIVER\_E\_SENSOR\_READ**
 
   - **AMI\_PROXY\_DRIVER\_E\_GET\_IDENTITY**
@@ -73,6 +75,8 @@ This API can be used to bind into a callback to be notified of events generated 
   - **AMI\_PROXY\_DRIVER\_E\_MODULE\_READ\_WRITE**
 
   - **AMI\_PROXY\_DRIVER\_E\_DEBUG\_VERBOSITY**
+
+  - **AMI\_PROXY\_DRIVER\_E\_FPT\_FLAGS**
 
 **iAMI\_BindCallback**
 
@@ -125,6 +129,25 @@ This will post a message onto the mailbox to be handled within the the internal 
      *          ERROR       Data not passed successfully
      */
     int iAMI_SetPdiCopyCompleteResponse( EVL_SIGNAL *pxSignal, AMI_PROXY_RESULT xResult );
+
+<span id="amrmanagementinterface-ami-proxydriver-pdiprogramresponse"></span>
+
+### PDI Program Response
+
+This will post a message onto the mailbox to be handled within the the internal task to send a response back over the FAL that the PDI program request has completed successfully/failed.
+
+**iAMI\_SetPdiProgramCompleteResponse**
+
+    /**
+     * @brief   Set the response after the PDI program has completed
+     *
+     * @param   pxSignal    Current event occurance (used for tracking)
+     * @param   xResult     The result of the pdi program request
+     *
+     * @return  OK          Data passed to proxy driver successfully
+     *          ERROR       Data not passed successfully
+     */
+    int iAMI_SetPdiProgramCompleteResponse( EVL_SIGNAL *pxSignal, AMI_PROXY_RESULT xResult );
 
 <span id="amrmanagementinterface-ami-proxydriver-sensorcompleteresponse"></span>
 
@@ -241,6 +264,26 @@ This will post a message onto the mailbox to be handled within the the internal 
      */
     int iAMI_SetDebugVerbosityResponse( EVL_SIGNAL *pxSignal, AMI_PROXY_RESULT xResult );
 
+<span id="amrmanagementinterface-ami-proxydriver-fptflagsresponse"></span>
+
+### FPT Flags Response
+
+This will post a message onto the mailbox to be handled within the the internal task to send a response back over the FAL that the FPT flags request has completed successfully/failed.
+
+**iAMI\_SetFptFlagsResponse**
+
+    /**
+     * @brief   Set the response after the FPT flags request has completed
+     *
+     * @param   pxSignal    Current event occurance (used for tracking)
+     * @param   xResult     The result of the request
+     * @param   ulFlags     The flags value (for read requests)
+     *
+     * @return  OK          Data passed to proxy driver successfully
+     *          ERROR       Data not passed successfully
+     */
+    int iAMI_SetFptFlagsResponse( EVL_SIGNAL *pxSignal, AMI_PROXY_RESULT xResult, uint32_t ulFlags );
+
 <span id="amrmanagementinterface-ami-proxydriver-pdidownloadrequest"></span>
 
 ### PDI Download Request
@@ -259,7 +302,7 @@ This API will be used by the application to obtain the data associated with the 
      *          ERROR                   Data not retrieved successfully
      *
      */
-    int iAMI_GetPdiDownloadRequest( EVL_SIGNAL *pxSignal, AMI_PROXY_PDI_DOWNLOAD_REQUEST *pxDownloadRequest );
+    int iAMI_GetPdiDownloadRequest( EVL_SIGNAL *pxSignal, AMIProxyPdiDownloadRequest *pxDownloadRequest );
 
 <span id="amrmanagementinterface-ami-proxydriver-pdicopyrequest"></span>
 
@@ -279,7 +322,27 @@ This API will be used by the application to obtain the data associated with the 
      *          ERROR                   Data not retrieved successfully
      */
     int iAMI_GetPdiCopyRequest( EVL_SIGNAL *pxSignal,
-                                AMI_PROXY_PDI_COPY_REQUEST *pxCopyRequest );
+                                AMIProxyPdiCopyRequest *pxCopyRequest );
+
+<span id="amrmanagementinterface-ami-proxydriver-pdiprogramrequest"></span>
+
+### PDI Program Request
+
+This API will be used by the application to obtain the data associated with the PDI program request, which is stored internally within the proxy before the event is raised.
+
+**iAMI\_GetPdiProgramRequest**
+
+    /**
+     * @brief   Get the PDI program request
+     *
+     * @param   pxSignal                Current event occurance (used for tracking)
+     * @param   pxProgramRequest        Pointer to program pdi structure
+     *
+     * @return  OK                      Data retrieved from proxy driver successfully
+     *          ERROR                   Data not retrieved successfully
+     */
+    int iAMI_GetPdiProgramRequest( EVL_SIGNAL *pxSignal,
+                                   AMIProxyPdiProgramRequest *pxProgramRequest );
 
 <span id="amrmanagementinterface-ami-proxydriver-sensorrequest"></span>
 
@@ -299,7 +362,7 @@ This API will be used by the application to obtain the data associated with the 
      *          ERROR                   Data not retrieved successfully
      *
      */
-    int iAMI_GetSensorRequest( EVL_SIGNAL *pxSignal, AMI_PROXY_SENSOR_REQUEST *pxSensorRequest );
+    int iAMI_GetSensorRequest( EVL_SIGNAL *pxSignal, AMIProxySensorRequest *pxSensorRequest );
 
 <span id="amrmanagementinterface-ami-proxydriver-bootselectrequest"></span>
 
@@ -319,7 +382,7 @@ This API will be used by the application to obtain the data associated with the 
      *          ERROR                   Data not retrieved successfully
      *
      */
-    int iAMI_GetBootSelectRequest( EVL_SIGNAL *pxSignal, AMI_PROXY_BOOT_SELECT_REQUEST *pxBootSelectRequest );
+    int iAMI_GetBootSelectRequest( EVL_SIGNAL *pxSignal, AMIProxyBootSelectRequest *pxBootSelectRequest );
 
 <span id="amrmanagementinterface-ami-proxydriver-eepromreadwriterequest"></span>
 
@@ -340,7 +403,7 @@ This API will be used by the application to obtain the data associated with the 
      *
      */
     int iAMI_GetEepromReadWriteRequest( EVL_SIGNAL *pxSignal,
-                                        AMI_PROXY_EEPROM_RW_REQUEST *pxEepromReadWriteRequest );
+                                        AMIProxyEepromRWRequest *pxEepromReadWriteRequest );
 
 <span id="amrmanagementinterface-ami-proxydriver-modulereadwriterequest"></span>
 
@@ -360,7 +423,7 @@ This API will be used by the application to obtain the data associated with the 
      * ERROR Data not retrieved successfully
      *
      */
-    int iAMI_GetModuleReadWriteRequest( EVL_SIGNAL *pxSignal, AMI_PROXY_MODULE_RW_REQUEST *pxModuleReadWriteRequest );
+    int iAMI_GetModuleReadWriteRequest( EVL_SIGNAL *pxSignal, AMIProxyModuleRWRequest *pxModuleReadWriteRequest );
 
 <span id="amrmanagementinterface-ami-proxydriver-debugverbosityrequest"></span>
 
@@ -381,6 +444,25 @@ This API will be used by the application to obtain the data associated with the 
      *
      */
     int iAMI_GetDebugVerbosityRequest( EVL_SIGNAL *pxSignal, uint8_t *pucDebugVerbosityRequest );
+
+<span id="amrmanagementinterface-ami-proxydriver-fptflagsrequest"></span>
+
+### FPT Flags Request
+
+This API will be used by the application to obtain the data associated with the FPT flags request, which is stored internally within the proxy before the event is raised.
+
+**iAMI\_GetFptFlagsRequest**
+
+    /**
+     * @brief   Get the FPT flags request
+     *
+     * @param   pxSignal                Current event occurance (used for tracking)
+     * @param   pxFptFlagsRequest       Pointer to FPT flags request structure
+     *
+     * @return  OK                      Data retrieved from proxy driver successfully
+     *          ERROR                   Data not retrieved successfully
+     */
+    int iAMI_GetFptFlagsRequest( EVL_SIGNAL *pxSignal, AMIProxyFptFlagsRequest *pxFptFlagsRequest );
 
 <span id="amrmanagementinterface-ami-proxydriver-printstatistics"></span>
 
@@ -492,12 +574,12 @@ The initialize function needs a unique id for the proxy, a handle to a FW\_IF (a
 
 **iAMI\_Initialise Example**
 
-    #define AMC_EVENT_UNIQUE_ID_AMI ( 1 )   /* each proxy needs an unique id */
+    #define AMC_CFG_UNIQUE_ID_AMI ( 3 )   /* each proxy needs an unique id */
     #define AMC_TASK_PRIO_DEFAULT   ( 5 )
     #define AMC_TASK_DEFAULT_STACK  ( 0x1024 )
     
     /* NOTE: The handle to the FW_IF needs to have been initialised and created before being passed in */
-    if( OK == iAMI_Initialise( AMC_EVENT_UNIQUE_ID_AMI, &myIf, 0, AMC_TASK_PRIO_DEFAULT, AMC_TASK_DEFAULT_STACK ) )
+    if( OK == iAMI_Initialise( AMC_CFG_UNIQUE_ID_AMI, &myIf, 0, AMC_TASK_PRIO_DEFAULT, AMC_TASK_DEFAULT_STACK ) )
     {
         printf( "AMI Proxy Driver initialised\r\n" );
     }
@@ -526,7 +608,7 @@ Define a function based on the function pointer prototype and bind in using the 
             switch( pxSignal->ucEventType )
             {
             case AMI_PROXY_DRIVER_E_SENSOR_READ:
-            case AMI_PROXY_DRIVER_E_PDI_DOWNLOAD_STAMI:
+            case AMI_PROXY_DRIVER_E_PDI_DOWNLOAD_START:
             case AMI_PROXY_DRIVER_E_GET_IDENTITY:
                 /* TODO: handle the events */
                 iStatus = OK;
@@ -586,8 +668,8 @@ Example of calling the response (**iAMI\_SetSensorCompleteResponse**) from withi
                 /* Send the response back using same pxSignal structure passed into callback & the result */
                 iStatus = iAMI_SetSensorCompleteResponse( pxSignal, xResult );
                 break;
-    
-            case AMI_PROXY_DRIVER_E_PDI_DOWNLOAD_STAMI:
+
+            case AMI_PROXY_DRIVER_E_PDI_DOWNLOAD_START:
             case AMI_PROXY_DRIVER_E_GET_IDENTITY:
                 /* TODO: handle the other events */
                 break;
@@ -632,8 +714,8 @@ Example of requesting the data associated with an event (**iAMI\_GetSensorReques
                     iStatus = iAMI_SetSensorCompleteResponse( pxSignal, xResult );
                 }
                 break;
-    
-            case AMI_PROXY_DRIVER_E_PDI_DOWNLOAD_STAMI:
+
+            case AMI_PROXY_DRIVER_E_PDI_DOWNLOAD_START:
             case AMI_PROXY_DRIVER_E_GET_IDENTITY:
                 /* TODO: handle the other events */
                 break;

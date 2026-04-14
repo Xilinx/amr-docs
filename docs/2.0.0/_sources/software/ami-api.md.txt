@@ -22,21 +22,22 @@ It is used in various API’s to identify which device the operation should be p
     /* Opaque declaration of `struct ami_device`. */
     typedef struct ami_device ami_device;
     
-    /**
-    * struct amc_version - structure to hold AMC version information
-    * @major: Major software version
-    * @minor: Minor software version
-    * @patch: Patch number (if applicable)
-    * @local_changes: 0 for no changes, 1 for changes
-    * @dev_commits: Number of development commits since the version was released
-    */
-    struct amc_version {
-        uint8_t   major;
-        uint8_t   minor;
-        uint8_t   patch;
-        uint8_t   local_changes;
-        uint16_t  dev_commits;
-    };
+    /**                                                                 
+    * struct amc_version - structure to hold AMC version information    
+    * @major: Major software version                                    
+    * @minor: Minor software version                                    
+    * @patch: Patch number (if applicable)                              
+    * @local_changes: 0 for no changes, 1 for changes                   
+    * @dev_commits: Number of development commits since the version was 
+    released                                                            
+     */                                                                  
+    struct amc_version {                                                
+        uint8_t   major;                                              
+        uint8_t   minor;                                              
+        uint8_t   patch;                                              
+        uint8_t   local_changes;                                      
+        uint16_t  dev_commits;                                        
+    };          
     
     /**
      * enum ami_amc_debug_level - AMC debug verbosity levels
@@ -92,7 +93,7 @@ It is used in various API’s to identify which device the operation should be p
 </tr>
 <tr class="odd">
 <td><p><span class="legacy-color-text-blue1">int <strong>ami_dev_hot_reset</strong>(ami_device **dev);</span></p></td>
-<td><p><span class="legacy-color-text-blue1">Trigger a PCI hot reset for this device</span></p></td>
+<td><p><span class="legacy-color-text-blue1">Trigger a software-based device reboot for this device</span></p></td>
 </tr>
 <tr class="even">
 <td><p><span class="legacy-color-text-blue1">int <strong>ami_dev_set_amc_debug_level</strong>(ami_device *dev, enum ami_amc_debug_level level);</span></p></td>
@@ -270,46 +271,62 @@ There is also functionality within this API to return the FPT header and each FP
         uint8_t num_entries;
     };
     
-    /**
-     * enum ami_fpt_type - Different FPT partition types.
-     * @AMI_FPT_TYPE_FPT: File partition table.
-     * @AMI_FPT_TYPE_RECOVERY_FPT: Recovery file partition table.
-     * @AMI_FPT_TYPE_EXTENSION_FPT: Extension file partition table.
-     * @AMI_FPT_TYPE_PDI_BOOT: PDI boot.
-     * @AMI_FPT_TYPE_PDI_BOOT_BACKUP: PDI boot backup.
-     * @AMI_FPT_TYPE_PDI_XSABIN_META: XSABIN metadata.
-     * @AMI_FPT_TYPE_PDI_GOLDEN: PDI golden image.
-     * @AMI_FPT_TYPE_PDI_SYS_DTB: SYS DTB.
-     * @AMI_FPT_TYPE_PDI_META: PDI metadata.
-     * @AMI_FPT_TYPE_PDI_META_BACKUP: PDI metadata backup.
-     * @AMI_FPT_TYPE_SC_FW: SC FW.
-     */
-    enum ami_fpt_type {
-        AMI_FPT_TYPE_FPT             = 0xFFFF,
-        AMI_FPT_TYPE_RECOVERY_FPT    = 0xFFFE,
-        AMI_FPT_TYPE_EXTENSION_FPT   = 0xFFFD,
-        AMI_FPT_TYPE_PDI_BOOT        = 0x0E00,
-        AMI_FPT_TYPE_PDI_BOOT_BACKUP = 0x0E01,
-        AMI_FPT_TYPE_PDI_XSABIN_META = 0x0E02,
-        AMI_FPT_TYPE_PDI_GOLDEN      = 0x0E03,
-        AMI_FPT_TYPE_PDI_SYS_DTB     = 0x0E04,
-        AMI_FPT_TYPE_PDI_META        = 0x0E05,
-        AMI_FPT_TYPE_PDI_META_BACKUP = 0x0E06,
-        AMI_FPT_TYPE_SC_FW           = 0x0C00,
+    /**                                                                 
+    * enum ami_fpt_type - Different FPT partition types.               
+    * @AMI_FPT_TYPE_FPT: File partition table.                         
+    * @AMI_FPT_TYPE_RECOVERY_FPT: Recovery file partition table.       
+    * @AMI_FPT_TYPE_EXTENSION_FPT: Extension file partition table.     
+    * @AMI_FPT_TYPE_PDI_BOOT: PDI boot.                                
+    * @AMI_FPT_TYPE_PDI_BOOT_BACKUP: PDI boot backup.                  
+    * @AMI_FPT_TYPE_PDI_XSABIN_META: XSABIN metadata.                  
+    * @AMI_FPT_TYPE_PDI_GOLDEN: PDI golden image.                      
+    * @AMI_FPT_TYPE_PDI_SYS_DTB: SYS DTB.                              
+    * @AMI_FPT_TYPE_PDI_META: PDI metadata.                            
+    * @AMI_FPT_TYPE_PDI_META_BACKUP: PDI metadata backup.              
+    * @AMI_FPT_TYPE_PDI_USER: PDI user.                                
+    * @AMI_FPT_TYPE_SC_FW: SC FW.                                      
+    */                                                                 
+    enum ami_fpt_type {                                                 
+      AMI_FPT_TYPE_FPT             = 0xFFFF,                          
+      AMI_FPT_TYPE_RECOVERY_FPT    = 0xFFFE,                          
+      AMI_FPT_TYPE_EXTENSION_FPT   = 0xFFFD,                          
+      AMI_FPT_TYPE_PDI_BOOT        = 0x0E00,                          
+      AMI_FPT_TYPE_PDI_BOOT_BACKUP = 0x0E01,                          
+      AMI_FPT_TYPE_PDI_XSABIN_META = 0x0E02,                          
+      AMI_FPT_TYPE_PDI_GOLDEN      = 0x0E03,                          
+      AMI_FPT_TYPE_PDI_SYS_DTB     = 0x0E04,                          
+      AMI_FPT_TYPE_PDI_META        = 0x0E05,                          
+      AMI_FPT_TYPE_PDI_META_BACKUP = 0x0E06,                          
+      AMI_FPT_TYPE_PDI_USER        = 0x0F00,                          
+      AMI_FPT_TYPE_SC_FW           = 0x0C00,                          
+    };                              
+
+    /**                                                                 
+    * struct ami_fpt_partition - The individual partition information. 
+    * @type: Partition type.                                           
+    * @base_addr: Partition base address.                              
+    * @size: Partition size.                                           
+    * @pdi_md5: MD5 checksum of the pdi file (16 bytes).               
+    * @pdi_size: Size of the pdi file.                                 
+    * @flags: Partition flags.                                         
+    */
+    struct ami_fpt_partition {                                          
+      enum ami_fpt_type type;                                         
+      uint32_t base_addr;                                             
+      uint32_t size;              /* in bytes */                      
+      uint8_t  pdi_md5[16];       /* MD5 checksum of the pdi file */
+      uint32_t pdi_size;          /* Size of the pdi file */
+      union {
+        uint32_t flags;         /* User defined flags */
+        struct {
+              uint32_t powerup_flag:1;    /* Power on load user partition flag          0: Disabled, 1: Enabled */
+              uint32_t reserved1:15;      /* Reserved for future use  */
+              uint32_t powerup_error:2;   /* Power on load user partition error flag 0: Not Loaded, 1:Loaded, 2: Error */
+              uint32_t reserved2:14;      /* Reserved for future use */ 
+          } user;
+      };
     };
-    
-    /**
-     * struct ami_fpt_partition - The individual partition information.
-     * @type: Partition type.
-     * @base_addr: Partition base address.
-     * @size: Partition size.
-     */
-    struct ami_fpt_partition {
-        enum ami_fpt_type type;
-        uint32_t base_addr;
-        uint32_t size;
-    };
-    
+
     /**
      * struct ami_pdi_progress - Data struct for PDI download progress handlers
      * @bytes_to_write: Total number of bytes to write as part of the procedure
@@ -343,7 +360,9 @@ There is also functionality within this API to return the FPT header and each FP
 | <span class="legacy-color-text-blue1">int **ami\_prog\_device\_boot**(struct ami\_device \*\*dev, uint32\_t partition);</span>                                                                                                       | <span class="legacy-color-text-blue1">Set the device boot partition</span>             |
 | <span class="legacy-color-text-blue1">int **ami\_prog\_copy\_partition**(ami\_device \*dev, uint32\_t src\_device, uint32\_t src\_part, uint32\_t dest\_device, uint32\_t dest\_part, ami\_event\_handler progress\_handler);</span> | <span class="legacy-color-text-blue1">Copy one device partition to another</span>      |
 | <span class="legacy-color-text-blue1">int **ami\_prog\_get\_fpt\_header**(ami\_device \*dev, uint8\_t boot\_device, struct ami\_fpt\_header \*header);</span>                                                                        | <span class="legacy-color-text-blue1">Get the FPT header information</span>            |
-| <span class="legacy-color-text-blue1">int **ami\_prog\_get\_fpt\_partition**(ami\_device \*dev, uint32\_t num, struct ami\_fpt\_partition \*partition);</span>                                                                       | <span class="legacy-color-text-blue1">Get FPT partition information</span>             |
+| <span class="legacy-color-text-blue1">int **ami\_prog\_set\_fpt\_partition**(ami\_device \*dev, uint8\_t boot\_device, uint32\_t num, struct ami\_fpt\_partition \*partition);</span>                                                | <span class="legacy-color-text-blue1">Set FPT partition information</span>             |
+| <span class="legacy-color-text-blue1">int **ami\_prog\_get\_fpt\_partition**(ami\_device \*dev, uint8\_t boot\_device, uint32\_t num, struct ami\_fpt\_partition \*partition);</span>                                                | <span class="legacy-color-text-blue1">Get FPT partition information</span>             |
+| <span class="legacy-color-text-blue1">int **ami\_prog\_pdi**(ami\_device \*dev, const char \*path, ami\_event\_handler progress\_handler);</span>                                                                                    | <span class="legacy-color-text-blue1">Program a .pdi bitstream onto a device</span>    |
 
 <span id="ami-apidescription-manufacturerinfofunctions"></span>
 

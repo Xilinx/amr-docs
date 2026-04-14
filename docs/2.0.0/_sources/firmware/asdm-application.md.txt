@@ -242,22 +242,21 @@ The Header is 5 bytes long and is formatted as follows:
 
 4.  Total Number of Bytes (in multiples of 8)
 
-**ASDM\_SENSOR\_HEADER**
+**ASDMSensorHeader**
 
     /**
-     * @struct  ASDM_SENSOR_HEADER
+     * @struct  ASDMSensorHeader
      * @brief   the SDR/SDS header format
      *
      * @note    Packed to 5 bytes to maintain layout for parsing in AMI
      */
-    typedef struct __attribute__((__packed__)) ASDM_SENSOR_HEADER
+    typedef struct __attribute__( ( __packed__ ) ) ASDMSensorHeader
     {
-        uint8_t     ucRepoType;           /* is a unique number that represents the SDR */
-        uint8_t     ucRepoVersionNum;     /* is used to differentiate multiple versions of SDRs */
-        uint8_t     ucTotalNumRecords;    /* total number of sensor records within each SDR type */
-        uint16_t    usTotalNumBytes;      /* is represented in multiple of 8s (i.e.) a record of 80 bytes
-                                             long will be represented as 10 */
-    } ASDM_SENSOR_HEADER;
+        uint8_t  ucRepoType;        /* is a unique number that represents the SDR */
+        uint8_t  ucRepoVersionNum;  /* is used to differentiate multiple versions of SDRs */
+        uint8_t  ucTotalNumRecords; /* total number of sensor records within each SDR type */
+        uint16_t usTotalNumBytes;   /* is represented in multiple of 8s long will be represented as 10 */
+    } ASDMSensorHeader;
 
 Individual sensor record, contains sensor information as defines in the ASDM spec.
 

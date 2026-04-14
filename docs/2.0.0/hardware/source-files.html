@@ -3,21 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
   <title>AMR V80 - Source File Overview &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
@@ -38,11 +23,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -86,19 +67,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Hardware Design - AMR Common</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../v80/index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/asdm-application.html">AMR ASDM Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/inband-telemetry.html">AMR InBand Telemetry Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../firmware/asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
@@ -146,71 +134,58 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="section" id="hardware-directory-tree">
 <h2>Hardware Directory Tree<a class="headerlink" href="#hardware-directory-tree" title="Permalink to this heading">¶</a></h2>
 <p><strong>Hardware Source</strong></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>amr
-├── fw/AMC
-└── hw
-    └── amd_v80_gen5x8_25.1
-        ├── build_all.sh
-        ├── fpt
-        │   ├── fpt_pdi_gen.py
-        │   └── pdi_combine.bif
-        └── src
-            ├── bd
-            │   └── create_bd_design.tcl
-            ├── build_design.tcl
-            ├── constraints
-            │   ├── impl.pins.xdc
-            │   ├── impl.xdc
-            │   ├── opt.post.tcl
-            │   ├── place.pre.tcl
-            │   └── write_device_image.pre.tcl
-            ├── create_design.tcl
-            └── iprepo
-                ├── cmd_queue_v2_0
-                ├── hw_discovery_v1_0
-                ├── shell_utils_uuid_rom_v2_0
-                └── smbus_v1_1*
-
-*       : This location does not exist. The user must populate this location.
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>└── amr_vivado_designs
+└── alveo_v80
+└── platforms
+├── scripts
+│   └── gen_sdt.tcl
+└── v80_base
+├── ip
+│   └── smbus_v1_1*
+│       ├── src
+│       │   └── ...
+│       ├── xgui
+│       │   ├── smbus_v1_1.tcl
+│       │   └── smbus_v1_1_v1_0.tcl
+│       └── component.xml
+├── Makefile
+├── scripts
+│   ├── config_bd.tcl
+│   └── main.tcl
+└── xdc
+├── impl.pins.xdc
+└── impl.xdc
 </pre></div>
 </div>
 <p><span id="amrv80-sourcefileoverview-amr"></span></p>
 </div>
 <div class="section" id="amr">
 <h2>amr<a class="headerlink" href="#amr" title="Permalink to this heading">¶</a></h2>
-<p>This is the top level directory containing the source files for creating the AMR design and the build script. When executed, the build_all.sh script builds the hardware design, firmware, FPT binary, and final PDI.</p>
+<p>This is the top level directory containing the source files for creating the AMR design and the build script. When executed, the build.sh script builds the hardware design, firmware, and final PDI.</p>
 <p><span id="amrv80-sourcefileoverview-hw"></span></p>
 <div class="section" id="hw">
 <h3>hw<a class="headerlink" href="#hw" title="Permalink to this heading">¶</a></h3>
 <p>The hw directory contains the files necessary to build the hardware design.</p>
-<p><span id="amrv80-sourcefileoverview-amd-v80-gen5x8-25-1"></span></p>
-<div class="section" id="amd-v80-gen5x8-25-1">
-<h4>amd_v80_gen5x8_25.1<a class="headerlink" href="#amd-v80-gen5x8-25-1" title="Permalink to this heading">¶</a></h4>
-<p>This is the top level directory for the AMD Gen5x8 example design. The directory name is the same as the VBNV, and is used throughout the design.</p>
-<p><span id="amrv80-sourcefileoverview-build-all-sh"></span></p>
-<div class="section" id="build-all-sh">
-<h5>build_all.sh<a class="headerlink" href="#build-all-sh" title="Permalink to this heading">¶</a></h5>
-<p>This is the main build shell. Executing this shell will launch Vivado<sup>TM</sup>, build the AMR hardware design, compile the AMC firmware, and generate the PDI files. For the AMC FW to be compiled, this script expects the fw/AMC folder at the same level as the hw directory. This is indicated by the asterisk in the Hardware Directory Tree above.</p>
-<p><span id="amrv80-sourcefileoverview-fpt"></span></p>
+<p><span id="amrv80-sourcefileoverview-amr-v80"></span></p>
+<div class="section" id="build-sh">
+<h4>build.sh<a class="headerlink" href="#build-sh" title="Permalink to this heading">¶</a></h4>
+<p>This is the main build shell. Executing this shell will launch Vivado<sup>TM</sup>, build the AMR hardware design, compile the AMC firmware, and generate the PDI files. This is indicated by the asterisk in the Hardware Directory Tree above.</p>
+<p><span id="amrv80-sourcefileoverview-pdi-gen"></span></p>
 </div>
-<div class="section" id="fpt">
-<h5>fpt<a class="headerlink" href="#fpt" title="Permalink to this heading">¶</a></h5>
+<div class="section" id="pdi-gen-this-is-used-in-the-build-sh-to-combine-the-fw-amc-elf-with-the-hw-pdi">
+<h4>PDI Gen - This is used in the build.sh to combine the FW amc.elf with the HW PDI.<a class="headerlink" href="#pdi-gen-this-is-used-in-the-build-sh-to-combine-the-fw-amc-elf-with-the-hw-pdi" title="Permalink to this heading">¶</a></h4>
 <ul class="simple">
-<li><p>pdi_combine.bif - This file is used in the build_all.sh to combine the FW amc.elf with the HW PDI.</p>
+<li><p>output: build_amc/amr_ospi_fpt.bin</p></li>
+<li><p>fpt_pdi_gen.py - This file is used in the build.sh to create the final FPT PDI</p>
 <ul>
-<li><p>output: build/amd_v80_gen5x8_25.1_nofpt.pdi</p></li>
-</ul>
-</li>
-<li><p>fpt_pdi_gen.py - This file is used in the build_all.sh to create the final FPT PDI</p>
-<ul>
-<li><p>output: amd_v80_gen5x8_25.1.pdi</p></li>
+<li><p>output: amr_ospi.bin and amr_ospi_fpt.bin</p></li>
 </ul>
 </li>
 </ul>
 <p><span id="amrv80-sourcefileoverview-src"></span></p>
 </div>
 <div class="section" id="src">
-<h5>src<a class="headerlink" href="#src" title="Permalink to this heading">¶</a></h5>
+<h4>src<a class="headerlink" href="#src" title="Permalink to this heading">¶</a></h4>
 <ul>
 <li><p><strong>bd</strong> - This is the Block Design generation directory which contains the TCL file necessary to build the AMD Vivado™ AMR design.</p>
 <ul class="simple">
@@ -225,34 +200,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><p><em>Note</em>: Since the GTs are not used in the base V80 design, these pins have been commented out.</p></li>
 </ul>
 </li>
-<li></li>
 </ul>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>impl.xdc - This file defines strictly enforced pblocks for each SLR. A strictly enforced pblock does not allow cells to be moved outside pblock boundaries. The base logic is assigned to SLR0, while user logic can be assigned to SLR0, SLR1, and SLR2 as needed.
-
-
-
-
-
-The NMU for the PCIe Management SmartConnect (pcie\_slr0\_mgmt\_sc) is LOC’d to keep the base logic resources close to the CIPS in SLR0.
-</pre></div>
-</div>
+<p>impl.xdc - This file defines strictly enforced pblocks for each SLR. A strictly enforced pblock does not allow cells to be moved outside pblock boundaries. The base logic is assigned to SLR0, while user logic can be assigned to SLR0, SLR1, and SLR2 as needed.</p>
+<p>The NMU for the PCIe Management SmartConnect (pcie_slr0_mgmt_sc) is LOC’d to keep the base logic resources close to the CIPS in SLR0.</p>
 <ul class="simple">
 <li><p>opt.post.tcl - This file turns on bitstream compression and enables NPI DMA mode to accelerate device download. It also disables BUFG insertion in placement to prevent clock changes.</p></li>
 <li><p>place.pre.tcl - The PCIe Management PDI Reset logic currently is not used in AMR, but it was added for future growth. Currently, the settings in this file connect the reset to a PMC interrupt. The response to this interrupt has not been defined.</p></li>
 <li><p>write_device_image.pre.tcl - This file generates the UUID for the AMR design which is stored in the UUID of the base logic.</p></li>
-</ul>
-</li>
 <li><p><strong>create_design.tcl</strong> - This file is used by Vivado to create the project, create the BD, add the constraint files, and set the processing order for creating the AMR design.</p></li>
 <li><p><strong>iprepo</strong> - This directory contains all the additional IP necessary to build the AMR design that is not included in the Vivado released SW.</p>
-<ul class="simple">
-<li><p>cmd_queue_v2_0</p></li>
-<li><p>hw_discovery_v1_0</p></li>
-<li><p>shell_utils_uuid_rom_v2_0</p></li>
-<li><p>smbus_v1_1 - This IP must be added from the lounge by the user due to licensing requirements (<a class="reference external" href="https://www.xilinx.com/member/v80.html">https://www.xilinx.com/member/v80.html</a>). Vivado will not build the AMR design if this IP is not present. This is indicated by the asterisk in the Hardware Directory Tree above.</p></li>
+<ul>
+<li><p>smbus_v1_1 - This IP is used by the v80 to communicate with server board management controller.</p></li>
 </ul>
 </li>
 </ul>
-</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -269,7 +232,7 @@ The NMU for the PCIe Management SmartConnect (pcie\_slr0\_mgmt\_sc) is LOC’d t
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

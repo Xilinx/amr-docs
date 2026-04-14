@@ -1,20 +1,22 @@
-# AMR V80 - Memory Resources
+# AMR - Memory Resources
 
 Overview
 
 The AMR design contains discrete DDR, DDR DIMM, and HBM.
 
-<span id="amrv80-memoryresources-discreteddrdiagram"></span>
+<span id="amr-memoryresources-discreteddrdiagram"></span>
 
 ## Discrete DDR
 
-AMR contains 4GB of DDR that is used for APU and RPU execution, and inter-processor communication between the PMC, RPU, and APU via the general command queue (GCQ) IP. The DDR operates at 200MHz, and it is controlled by the AMD Versal™ integrated memory controller (DDRMC). This hardened MC contains four ports to optimize throughput to the DDR. The AMR design only uses MC Ports 0 and 1. The diagram below illustrates the organization of the DDR memory. AMR does not currently use a user PF or the APU, so those memory locations are not currently used (indicated by \* in the below diagram with the cross-hatch background).
+AMR contains 4GB of discrete DDR that is used for RPU (R5) execution and inter-processor communication. The General Command Queue (GCQ) is implemented as a **software mechanism** using shared DDR memory regions for communication between the RPU and PCIe host/PMC (not a hardware IP block).
+
+The DDR operates at 200MHz and is controlled by the AMD Versal™ integrated memory controller (DDRMC). This hardened MC contains four ports to optimize throughput to the DDR. The AMR V80 base design uses MC Ports 0 and 1. The diagram below illustrates the organization of the DDR memory.
 
 More information on the MC can be found here: <https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Integrated-Memory-Controller-DDRMC-Architecture>.
 
 [![image1](../../images/1107374762.png)](../../images/1107374762.png)
 
-<span id="amrv80-memoryresources-dimmdiagram"></span>
+<span id="amr-memoryresources-dimmdiagram"></span>
 
 ## DDR DIMM
 
@@ -24,7 +26,7 @@ More information on the MC can be found at <https://docs.xilinx.com/r/en-US/pg31
 
 [![image2](../../images/1107374759.png)](../../images/1107374759.png)
 
-<span id="amrv80-memoryresources-hbmdiagram"></span>
+<span id="amr-memoryresources-hbmdiagram"></span>
 
 ## HBM
 

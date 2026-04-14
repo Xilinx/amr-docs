@@ -3,21 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
   <title>AMR InBand Telemetry Application &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
@@ -36,15 +21,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="AMR OutOfBand Telemetry Application" href="outofband-telemetry.html" />
+    <link rel="next" title="AMR OutOfBand Telemetry Application1" href="outofband-telemetry.html" />
     <link rel="prev" title="AMR ASDM Application" href="asdm-application.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -88,9 +69,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../v80/index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul class="current">
@@ -113,10 +102,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
@@ -251,23 +239,23 @@ int iIN_BAND_TELEMETRY_TestMode( int iActivate );
 <div class="section" id="structures">
 <h3>Structures<a class="headerlink" href="#structures" title="Permalink to this heading">¶</a></h3>
 <p>Internal Context structure</p>
-<p><strong>IN_BAND_PRIVATE_DATA</strong></p>
+<p><strong>INBandPrivateData</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
- * @struct  IN_BAND_PRIVATE_DATA
- * @brief   Structure to hold ths in band telemetry private data
+ * @struct  INBandPrivateData
+ * @brief   Structure to hold the in band telemetry private data
  */
-typedef struct IN_BAND_PRIVATE_DATA
+typedef struct
 {
-    uint32_t                        ulUpperFirewall;
-    void                            *pvOsalMutexHdl;
-    uint64_t                        ullSharedMemBaseAddr;
-    uint32_t                        pulStatCounters[ IN_BAND_STATS_MAX ];
-    uint32_t                        pulErrorCounters[ IN_BAND_ERRORS_MAX ];
-    int                             iInitialised;
-    int                             iInBandTestMode;
-    uint32_t                        ulLowerFirewall;
+    uint32_t ulUpperFirewall;
+    void     *pvOsalMutexHdl;
+    uint64_t ullSharedMemBaseAddr;
+    uint32_t pulStatCounters[ IN_BAND_STATS_MAX ];
+    uint32_t pulErrorCounters[ IN_BAND_ERRORS_MAX ];
+    int      iInitialised;
+    int      iInBandTestMode;
+    uint32_t ulLowerFirewall;
 
-} IN_BAND_PRIVATE_DATA;
+} INBandPrivateData;
 </pre></div>
 </div>
 <p><span id="amrinbandtelemetryapplication-iin-band-telemetry-initialisefunction"></span></p>
@@ -329,14 +317,14 @@ typedef struct IN_BAND_PRIVATE_DATA
 				  
 				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="asdm-application.html" class="btn btn-neutral float-left" title="AMR ASDM Application" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="outofband-telemetry.html" class="btn btn-neutral float-right" title="AMR OutOfBand Telemetry Application" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="outofband-telemetry.html" class="btn btn-neutral float-right" title="AMR OutOfBand Telemetry Application1" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

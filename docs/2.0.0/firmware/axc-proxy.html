@@ -3,21 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
   <title>AMR External Device Control (AXC) Proxy Driver &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
@@ -37,14 +22,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Board Management Controller (BMC) Proxy Driver" href="bmc-proxy.html" />
-    <link rel="prev" title="AMR Sensor Control (ASC) Proxy Driver" href="asc-proxy.html" /> 
+    <link rel="prev" title="AMR Programming Control (APC) Proxy Driver" href="apc-proxy.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -88,19 +69,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../v80/index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asdm-application.html">AMR ASDM Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inband-telemetry.html">AMR InBand Telemetry Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">AMR External Device Control (AXC) Proxy Driver</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#key-pages">Key pages</a></li>
@@ -193,6 +181,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
              
   <div class="section" id="amr-external-device-control-axc-proxy-driver">
 <h1>AMR External Device Control (AXC) Proxy Driver<a class="headerlink" href="#amr-external-device-control-axc-proxy-driver" title="Permalink to this heading">¶</a></h1>
+<p><strong>Note:</strong> QSFP module control is only applicable to Alveo V80 cards.</p>
 <p><span id="amrexternaldevicecontrol-axc-proxydriver-overview"></span></p>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
@@ -207,8 +196,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p><span id="amrexternaldevicecontrol-axc-proxydriver-keypages"></span></p>
 <div class="section" id="key-pages">
 <h3>Key pages<a class="headerlink" href="#key-pages" title="Permalink to this heading">¶</a></h3>
-<p>I2C switch (PCA9545A) data sheet: <a class="reference internal" href="#assets/attachments/1107376562/1107376654.pdf"><span class="xref myst">PCA9545A_45B_45C.pdf</span></a></p>
-<p>Low-Voltage I/O Expander (TCA6408A) data sheet: <a class="reference internal" href="#assets/attachments/1107376562/1107376660.pdf"><span class="xref myst">tca6408a.pdf</span></a></p>
+<p>I2C switch (PCA9545A) data sheet: <a class="reference download internal" download="" href="../_downloads/b02278f7fcf92468ee46194ab912009c/1107376654.pdf"><span class="xref download myst">PCA9545A_45B_45C.pdf</span></a></p>
+<p>Low-Voltage I/O Expander (TCA6408A) data sheet: <a class="reference download internal" download="" href="../_downloads/0ea21c585412d3098ef57329ae9154f3/1107376660.pdf"><span class="xref download myst">tca6408a.pdf</span></a></p>
 <p><span id="amrexternaldevicecontrol-axc-proxydriver-keyacronyms"></span></p>
 </div>
 <div class="section" id="key-acronyms">
@@ -334,7 +323,7 @@ int iAXC_Initialise( uint8_t ucProxyId, uint32_t ulTaskPrio, uint32_t ulTaskStac
  *          ERROR            Callback not bound
  *
  */
-int iAXC_AddExternalDevice( AXC_PROXY_DRIVER_EXTERNAL_DEVICE_CONFIG *pxExDeviceCfg );
+int iAXC_AddExternalDevice( AXCProxyDriverExternalDeviceCfg *pxExDeviceCfg );
 </pre></div>
 </div>
 <p><span id="amrexternaldevicecontrol-axc-proxydriver-bindcallbacks"></span></p>
@@ -431,7 +420,7 @@ int iAXC_GetByte( uint8_t ucExDeviceId, uint32_t ulPage, uint32_t ulByteOffset, 
  *
  * @note    This API will return the specified upper page from QSFP memory map
  */
-int iAXC_GetPage( uint8_t ucExDeviceId, uint32_t ulPage, AXC_PROXY_DRIVER_PAGE_DATA *pxData );
+int iAXC_GetPage( uint8_t ucExDeviceId, uint32_t ulPage, AXCProxyDriverPageData *pxData );
 </pre></div>
 </div>
 <p><span id="amrexternaldevicecontrol-axc-proxydriver-getiostatusfromdesiredqsfp"></span></p>
@@ -470,7 +459,7 @@ int iAXC_GetSingleIoStatus( uint8_t ucExDeviceId, AXC_PROXY_DRIVER_QSFP_IO xIoCo
  *          ERROR           Data not retrieved successfully
  *
  */
-int iAXC_GetAllIoStatuses( uint8_t ucExDeviceId, AXC_PROXY_DRIVER_QSFP_IO_STATUSES *pxIoStatuses );
+int iAXC_GetAllIoStatuses( uint8_t ucExDeviceId, AXCProxyDriverQsfpIoStatuses *pxIoStatuses );
 </pre></div>
 </div>
 <p><span id="amrexternaldevicecontrol-axc-proxydriver-gettemperaturefromdesiredexternaldevice"></span></p>
@@ -594,7 +583,7 @@ int iAXC_ClearStatistics( void );
 <h3>Initialize Driver<a class="headerlink" href="#initialize-driver" title="Permalink to this heading">¶</a></h3>
 <p>This function should only be called once. It requires a unique ID for the proxy, used for signaling new events from the proxy, along with proxy driver task priority and stack size.</p>
 <p><strong>iAQC_Initialise Example</strong></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if( OK == iAXC_Initialise( AMC_EVENT_UNIQUE_ID_AXC, AMC_TASK_PRIO_DEFAULT, AMC_TASK_DEFAULT_STACK ) )
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if( OK == iAXC_Initialise( AMC_CFG_UNIQUE_ID_AXC, AMC_TASK_PRIO_DEFAULT, AMC_TASK_DEFAULT_STACK ) )
 {
     AMC_PRINTF( &quot;AXC Proxy Driver initialised\r\n&quot; );
 }
@@ -615,7 +604,7 @@ static int iAxcCallback( EVL_SIGNAL *pxSignal )
 {
     int iStatus = ERROR;
 
-    if( ( NULL != pxSignal ) &amp;&amp; ( AMC_EVENT_UNIQUE_ID_AXC == pxSignal-&gt;ucModule ) )
+    if( ( NULL != pxSignal ) &amp;&amp; ( AMC_CFG_UNIQUE_ID_AXC == pxSignal-&gt;ucModule ) )
     {
         switch( pxSignal-&gt;ucEventType )
         {
@@ -657,11 +646,11 @@ else
 <p>To add a new external device, pass in a pointer to a device config structure. This should include a handle to a FW_IF (already created and initialized), and a unique ID for the device.</p>
 <p><strong>iAQC_AddQsfpDevice Example</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/* AXC Device configs */
-AXC_PROXY_DRIVER_EXTERNAL_DEVICE_CONFIG xQsfpDevice1 = { &amp;xQsfpIf1, 1 };
-AXC_PROXY_DRIVER_EXTERNAL_DEVICE_CONFIG xQsfpDevice2 = { &amp;xQsfpIf2, 2 };
-AXC_PROXY_DRIVER_EXTERNAL_DEVICE_CONFIG xQsfpDevice3 = { &amp;xQsfpIf3, 3 };
-AXC_PROXY_DRIVER_EXTERNAL_DEVICE_CONFIG xQsfpDevice4 = { &amp;xQsfpIf4, 4 };
-AXC_PROXY_DRIVER_EXTERNAL_DEVICE_CONFIG xDimmDevice  = { &amp;xDimmIf, 5 };
+AXCProxyDriverExternalDeviceCfg xQsfpDevice1 = { &amp;xQsfpIf1, 1 };
+AXCProxyDriverExternalDeviceCfg xQsfpDevice2 = { &amp;xQsfpIf2, 2 };
+AXCProxyDriverExternalDeviceCfg xQsfpDevice3 = { &amp;xQsfpIf3, 3 };
+AXCProxyDriverExternalDeviceCfg xQsfpDevice4 = { &amp;xQsfpIf4, 4 };
+AXCProxyDriverExternalDeviceCfg xDimmDevice  = { &amp;xDimmIf, 5 };
 
 if( ( OK == iAXC_AddExternalDevice( &amp;xQsfpDevice1 ) ) &amp;&amp;
     ( OK == iAXC_AddExternalDevice( &amp;xQsfpDevice2 ) ) &amp;&amp;
@@ -734,7 +723,7 @@ else
 <p><strong>iAQC_GetPage Example</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>uint8_t iQsfpId = 1;
 uint32_t iPageNum = 0;
-AXC_PROXY_DRIVER_QSFP_PAGE_DATA xTestPage = { { 0 } };
+AXCProxyDriverPageData xTestPage = { { 0 } };
 int i = 0;
 
 if( OK != iAXC_GetPage( iQsfpId, iPageNum, &amp;xTestPage ) )
@@ -781,7 +770,7 @@ else
 <p>Example of reading all IO statuses from QSFP 1. The parameters can be adjusted to read from a different QSFP, as required.</p>
 <p><strong>iAQC_GetAllIoStatuses Example</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>uint8_t iQsfpId = 1;
-AXC_PROXY_DRIVER_QSFP_IO_STATUSES xTestStatuses = { 0 };
+AXCProxyDriverQsfpIoStatuses xTestStatuses = { 0 };
 
 if( OK != iAXC_GetAllIoStatuses( iQsfpId, &amp;xTestStatuses ) )
 {
@@ -817,31 +806,6 @@ else
 }
 </pre></div>
 </div>
-<p><strong>ASC_PROXY_DRIVER_EVENTS</strong></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/*
- * @enum    ASC_PROXY_DRIVER_EVENTS
- * @brief   Events raised by this proxy driver
- */
-typedef enum ASC_PROXY_DRIVER_EVENTS
-{
-    ASC_PROXY_DRIVER_E_SENSOR_UPDATE_COMPLETE = 0,
-    ASC_PROXY_DRIVER_E_SENSOR_UNAVAILABLE,
-    ASC_PROXY_DRIVER_E_SENSOR_COMMS_FAILURE,
-    ASC_PROXY_DRIVER_E_SENSOR_WARNING,
-    ASC_PROXY_DRIVER_E_SENSOR_CRITICAL,
-    ASC_PROXY_DRIVER_E_SENSOR_FATAL,
-    ASC_PROXY_DRIVER_E_SENSOR_LOWER_WARNING,
-    ASC_PROXY_DRIVER_E_SENSOR_LOWER_CRITICAL,
-    ASC_PROXY_DRIVER_E_SENSOR_LOWER_FATAL,
-    ASC_PROXY_DRIVER_E_SENSOR_UPPER_WARNING,
-    ASC_PROXY_DRIVER_E_SENSOR_UPPER_CRITICAL,
-    ASC_PROXY_DRIVER_E_SENSOR_UPPER_FATAL,
-
-    MAX_ASC_PROXY_DRIVER_EVENTS
-
-} ASC_PROXY_DRIVER_EVENTS;
-</pre></div>
-</div>
 </div>
 </div>
 </div>
@@ -853,7 +817,7 @@ typedef enum ASC_PROXY_DRIVER_EVENTS
           
 				  
 				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="asc-proxy.html" class="btn btn-neutral float-left" title="AMR Sensor Control (ASC) Proxy Driver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="apc-proxy.html" class="btn btn-neutral float-left" title="AMR Programming Control (APC) Proxy Driver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="bmc-proxy.html" class="btn btn-neutral float-right" title="Board Management Controller (BMC) Proxy Driver" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
@@ -861,7 +825,7 @@ typedef enum ASC_PROXY_DRIVER_EVENTS
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

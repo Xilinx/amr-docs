@@ -30,7 +30,7 @@ This should only apply to a single device, i.e., sensors may be read in parallel
 
 To allow user applications to interact with the AMI driver, there needs to be a way for the user to select which device to interact with. The AMI driver creates a character device file for each supported device to facilitate this:
 
-  - The driver creates a character device for every compatible PCI device (/dev/ami1, /dev/ami2, etc…).
+  - The driver creates a character device for every compatible PCI device (/dev/ami0, /dev/ami-bdf-c1:00.0, /dev/ami-bdf-21:00.0 etc).
 
   - There is a global character device file /dev/ami0 which does not belong to any device (this is currently unused).
 

@@ -3,22 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
-  <title>Hardware Design - V80 &mdash; AMR  documentation</title>
+  <title>Hardware Design - V80 (Alveo) &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
@@ -40,11 +25,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="prev" title="AMR Deployment Archive" href="../deployment-archive.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -88,26 +69,45 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development/source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">V80 Platform Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../install-and-run.html">How-to install and run a pre-built AMR design on an ALVEO V80 card</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../install-host.html">AMR Installing the Deployment package onto the Host Server</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../deployment-archive.html">AMR Deployment Archive</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Hardware Design - V80</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Hardware Design - V80 (Alveo)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#v80-platform-overview">V80 Platform Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#v80-specific-hardware-documentation">V80-Specific Hardware Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#key-v80-features">Key V80 Features</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cpm5-hardened-pcie">CPM5 Hardened PCIe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hbm-high-bandwidth-memory">HBM High-Bandwidth Memory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#memory-capacity">Memory Capacity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#performance-characteristics">Performance Characteristics</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#v80-target-applications">V80 Target Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#technical-specifications-summary">Technical Specifications Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../xbtest/install-and-run.html">How-to install and run a pre-built AMR design on an ALVEO V80 card</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/asdm-application.html">AMR ASDM Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/inband-telemetry.html">AMR InBand Telemetry Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../firmware/asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
@@ -140,7 +140,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../index.html">V80 Platform Documentation</a> &raquo;</li>
-      <li>Hardware Design - V80</li>
+      <li>Hardware Design - V80 (Alveo)</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/v80/hardware/index.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -150,18 +150,72 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="hardware-design-v80">
-<h1>Hardware Design - V80<a class="headerlink" href="#hardware-design-v80" title="Permalink to this heading">¶</a></h1>
+  <div class="section" id="hardware-design-v80-alveo">
+<h1>Hardware Design - V80 (Alveo)<a class="headerlink" href="#hardware-design-v80-alveo" title="Permalink to this heading">¶</a></h1>
+<blockquote>
+<div><p><strong>For common hardware concepts</strong>, see <a class="reference internal" href="../../hardware/index.html"><span class="std std-doc">Common Hardware Documentation</span></a></p>
+<p>This section contains V80 (Alveo) platform-specific hardware design documentation.</p>
+</div></blockquote>
+<div class="section" id="v80-platform-overview">
+<h2>V80 Platform Overview<a class="headerlink" href="#v80-platform-overview" title="Permalink to this heading">¶</a></h2>
+<p>The V80 is a PCIe accelerator card featuring the Versal V80 HBM-series device. The platform provides high-performance computing capabilities with hardened PCIe Gen5 connectivity and high-bandwidth memory resources optimized for data center and cloud deployments.</p>
+<p>The V80 includes CPM5 (Coherent PCIe Module) which integrates PCIe Gen5 x8 controller and QDMA functionality in hardened silicon. This eliminates the need for soft logic PCIe and DMA IP, preserving programmable logic resources for user applications. The device also features 32 GB of integrated HBM (High-Bandwidth Memory) providing exceptional memory bandwidth for compute-intensive workloads.</p>
+<p>The platform design targets maximum performance with PCIe bandwidth of approximately 32 GB/s and HBM memory bandwidth approaching 460 GB/s. Total memory capacity reaches 68 GB through the combination of HBM, DDR DIMM, and discrete DDR resources.</p>
+</div>
+<div class="section" id="v80-specific-hardware-documentation">
+<h2>V80-Specific Hardware Documentation<a class="headerlink" href="#v80-specific-hardware-documentation" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="hierarchy.html"><span class="std std-doc">AMR V80 - Hierarchy Overview</span></a></p></li>
-<li><p><a class="reference internal" href="cips-config.html"><span class="std std-doc">AMR V80 - CIPS Configuration</span></a></p></li>
-<li><p><a class="reference internal" href="memory-resources.html"><span class="std std-doc">AMR V80 - Memory Resources</span></a></p></li>
-<li><p><a class="reference internal" href="memory-map.html"><span class="std std-doc">AMR V80 - Memory Map</span></a></p></li>
-<li><p><a class="reference internal" href="noc-config.html"><span class="std std-doc">AMR V80 - NoC Configuration</span></a></p></li>
-<li><p><a class="reference internal" href="base-logic.html"><span class="std std-doc">AMR V80 - Base Logic</span></a></p></li>
-<li><p><a class="reference internal" href="clock-reset.html"><span class="std std-doc">AMR V80 - Clock Reset Module</span></a></p></li>
-<li><p><a class="reference internal" href="source-files.html"><span class="std std-doc">AMR V80 - Source File Overview</span></a></p></li>
+<li><p><a class="reference internal" href="hierarchy.html"><span class="std std-doc">V80 - Hierarchy Overview</span></a> - V80 block diagram and architecture</p></li>
+<li><p><a class="reference internal" href="cips-config.html"><span class="std std-doc">V80 - CIPS Configuration</span></a> - CPM5 PCIe Gen5 x8 configuration</p></li>
+<li><p><a class="reference internal" href="memory-resources.html"><span class="std std-doc">V80 - Memory Resources</span></a> - HBM (32GB) + DDR DIMM (32GB) + Discrete DDR (4GB)</p></li>
+<li><p><a class="reference internal" href="memory-map.html"><span class="std std-doc">V80 - Memory Map</span></a> - V80 address space with HBM regions</p></li>
+<li><p><a class="reference internal" href="noc-config.html"><span class="std std-doc">V80 - NoC Configuration</span></a> - CPM5 hardened NoC connection, HBM ports</p></li>
+<li><p><a class="reference internal" href="base-logic.html"><span class="std std-doc">V80 - Base Logic</span></a> - V80 PF0/PF1 with CPM5, device IDs 0x50b4/0x50b5</p></li>
+<li><p><a class="reference internal" href="clock-reset.html"><span class="std std-doc">V80 - Clock Reset Module</span></a> - V80 clock configuration</p></li>
+<li><p><a class="reference internal" href="source-files.html"><span class="std std-doc">V80 - Source File Overview</span></a> - alveo_v80 build structure</p></li>
 </ul>
+</div>
+<div class="section" id="key-v80-features">
+<h2>Key V80 Features<a class="headerlink" href="#key-v80-features" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="cpm5-hardened-pcie">
+<h3>CPM5 Hardened PCIe<a class="headerlink" href="#cpm5-hardened-pcie" title="Permalink to this heading">¶</a></h3>
+<p>The V80 integrates the CPM5 (Coherent PCIe Module) hardened block providing PCIe Gen5 x8 controller and QDMA DMA engine in silicon. This hardened implementation delivers several advantages including zero programmable logic resource consumption for PCIe and DMA, lower latency through dedicated silicon paths, and simplified timing closure without PCIe logic in the fabric.</p>
+<p>The CPM5 connects directly to the NoC through hardened NMU_128 interfaces, enabling efficient routing of PCIe traffic to memory controllers and programmable logic peripherals. Configuration is handled through the CIPS IP using the CPM_CONFIG parameter block.</p>
+</div>
+<div class="section" id="hbm-high-bandwidth-memory">
+<h3>HBM High-Bandwidth Memory<a class="headerlink" href="#hbm-high-bandwidth-memory" title="Permalink to this heading">¶</a></h3>
+<p>The V80 includes 32 GB of integrated HBM organized as two 16GB stacks. Each stack contains eight HBM controllers, with each controller providing two pseudo channels. This architecture delivers 32 total HBM ports to the NoC, enabling parallel access patterns and peak bandwidth approaching 460 GB/s.</p>
+<p>The HBM operates at 200 MHz and connects to the NoC through HBM_NSU interfaces. Each pseudo channel addresses a dedicated 1GB portion of the HBM, though global memory access is supported across all pseudo channels with some performance trade-offs for non-direct access patterns.</p>
+</div>
+<div class="section" id="memory-capacity">
+<h3>Memory Capacity<a class="headerlink" href="#memory-capacity" title="Permalink to this heading">¶</a></h3>
+<p>The V80 provides 68 GB of total memory capacity through three distinct memory resources. The 32 GB HBM provides high-bandwidth on-chip memory for compute-intensive operations. The 32 GB DDR4 DIMM offers expandable capacity for general-purpose storage and buffering. The 4 GB discrete DDR supports RPU firmware execution and inter-processor communication.</p>
+<p>This memory architecture enables diverse workload requirements with the flexibility to allocate different memory types based on bandwidth and capacity needs. Applications can leverage HBM for high-throughput data processing while using DDR for larger datasets and control structures.</p>
+</div>
+<div class="section" id="performance-characteristics">
+<h3>Performance Characteristics<a class="headerlink" href="#performance-characteristics" title="Permalink to this heading">¶</a></h3>
+<p>The V80 delivers approximately 32 GB/s of PCIe bandwidth through the Gen5 x8 interface. HBM memory bandwidth approaches 460 GB/s peak throughput. The combination of high PCIe bandwidth and exceptional memory bandwidth enables demanding applications including AI inference, video processing, and real-time analytics.</p>
+<p>The platform supports data center deployment scenarios where multiple V80 cards can be installed in a single server, providing scalable compute and memory resources. The PCIe form factor integrates seamlessly with standard server infrastructure.</p>
+</div>
+</div>
+<div class="section" id="v80-target-applications">
+<h2>V80 Target Applications<a class="headerlink" href="#v80-target-applications" title="Permalink to this heading">¶</a></h2>
+<p>The V80 platform is optimized for data center and cloud computing environments requiring maximum performance. Target applications include AI and machine learning inference workloads that benefit from high memory bandwidth, video processing pipelines that demand both PCIe and memory throughput, and high-performance computing tasks requiring large memory capacity.</p>
+<p>The platform excels in scenarios where multiple accelerator cards are deployed in a single server, with the PCIe form factor enabling dense compute configurations. Cloud service providers can leverage the V80 for multi-tenant inference services, while enterprise data centers can deploy the platform for analytics and processing workloads.</p>
+</div>
+<div class="section" id="technical-specifications-summary">
+<h2>Technical Specifications Summary<a class="headerlink" href="#technical-specifications-summary" title="Permalink to this heading">¶</a></h2>
+<p>The V80 uses the Versal V80 device (part number xcv80-lsva4737-2MHP-e-S), an HBM-series Versal with three super logic regions. The device includes CPM5 for hardened PCIe and QDMA, along with integrated HBM stacks for high-bandwidth memory.</p>
+<p>PCIe connectivity provides Gen5 x8 operation at 32 GT/s raw speed. Two physical functions are configured with device IDs 0x50b4 for management (PF0) and 0x50b5 for user/DMA operations (PF1). The CPM5 QDMA engine provides queue-based DMA with hardware acceleration for descriptor processing.</p>
+<p>Memory resources include 32 GB HBM (two 16GB stacks), 32 GB DDR4 DIMM (RDIMM configuration), and 4 GB discrete DDR4 for firmware and control operations. All memory types operate at 200 MHz with appropriate data rates for their respective technologies.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../hardware/index.html"><span class="std std-doc">Common Hardware Documentation</span></a> - Shared Versal/CIPS/NoC concepts</p></li>
+<li><p><a class="reference external" href="https://www.amd.com/en/products/accelerators/alveo/v-series/v80.html">Versal V80 Product Brief</a> - V80 product information</p></li>
+</ul>
+</div>
 </div>
 
 
@@ -178,7 +232,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

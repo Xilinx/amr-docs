@@ -221,19 +221,20 @@ This output can be logged to a file using the **-o** option, and the logged form
 #### Example output
 
     ~$ ami_tool overview
-    
+
      AMI
     ---------------------------------------------------------
     Version        | 2.0.0  (0)
-    Branch
-    Hash           | b3851ec2d223e6c35e567e245dc380049d2ba139
-    Hash Date      | 20260226
+    Branch         |
+    Hash           | 15a98eb71fdee61c662ff155227c0525dc3cbbd7
+    Hash Date      | 20260317
     Driver Version | 2.0.0  (0)
 
 
-    BDF     | Device        | UUID                             | AMC        | State
-    -------------------------------------------------------------------------------
-    21:00.0 | ALVEO V80 INT | 00000000000000000000000014862935 | 2.0.0  (0) | READY
+    BDF     | Device        | Serial Number | UUID                             | AMC        | State
+    -----------------------------------------------------------------------------------------------
+    21:00.0 | ALVEO V80 INT | XFL1GF4VJ1KW  | 00000000000000000000000032314bde | 2.0.0  (0) | READY
+
 
 <span id="id8"></span>
 
@@ -250,6 +251,8 @@ This output can be logged to a file using the **-o** option, and the logged form
       - BDF - the ID to use when selecting this device for subsequent commands.
     
       - Device - the type of device detected (e.g. V80, etc.).
+
+      - Serial Number - Unique board identifier assigned during manufacturing and stored in the device EEPROM.
     
       - UUID - the ID of the hardware build loaded on the card.
     
@@ -712,9 +715,9 @@ Copies the contents of one partition on the card to another.
 
 #### Example output
 
-    ~% sudo ami_tool cfgmem_copy -d 21:00.0 -i primary:1 -p primary:0
-    Copying partition 1 to partition 0...
-    Estimated time to copy partition: 1234 (seconds) (NOTE: Changing logging levels may increase copy time)
+    ~% sudo ami_tool cfgmem_copy -d 21:00.0 -i primary:0 -p primary:1
+    Copying partition 0 to partition 1
+    Estimated time to copy partition: 302 (seconds)
     .........................................
     Done. Partition copied successfully.
     ~%
@@ -726,8 +729,6 @@ Copies the contents of one partition on the card to another.
   - This command requires root/sudo privileges.
 
   - The source partition must be smaller than or equal in size to the destination partition.
-
-  - The timeout value of this command is 45 minutes - this is to allow a maximum-sized FPT partition (126MB) to be copied.
 
 ---
 <span id="amrmanagementinterfaceuserguide-ami-tool-cfgmem-flags-rd"></span>
@@ -816,29 +817,31 @@ Copies the contents of one partition on the card to another.
 <span id="id33"></span>
 
 #### Description
-     program a bitstream onto a device
+     pdi_program - live-load a PDI bitstream onto a device
 
     ~% sudo ami_tool pdi_program --help
-    mem_program - program a bitstream onto a device
+    pdi_program - live-load a PDI bitstream onto a device
 
     This command requires root/sudo permissions.
 
     Usage:
-        ami_tool mem_program -d <bdf> -i <path> <-a>
+        ami_tool pdi_program -d <bdf> -i <path> [-a | -r]
 
     Options:
         -h --help             Show this screen
         -d <b>:[d].[f]        Specify the device BDF
-        -i <path>             Path to image file
-        -a                    APU image
+        -i <path>             Path to PDI image file
+        -a                    APU image (load targeting APU subsystem only)
+        -r                    RPU image (load targeting RPU subsystem only)
         -y                    Skip confirmation
         -q                    Quit after programming
+
 
      ~%
 
 <span id="id34"></span>
 
-#### Example output
+#### Example output for Partial PL pdi load
 
     ~% sudo ami_tool pdi_program -d 21 -i <path_to_pdi>
     ----------------------------------------------
@@ -865,11 +868,62 @@ Copies the contents of one partition on the card to another.
     Hot reset has been performed.
     ***********************************************
 
+#### Example output for APU image download
+
+    ~% sudo ami_tool pdi_program -d 21 -i <path_to apu.image> -a 
+    ----------------------------------------------
+    Device      | c1:00.0
+    ----------------------------------------------
+
+    Current Configuration
+    ----------------------------------------------
+    UUID        | 00000000000000000000000014862935
+    ----------------------------------------------
+    Parent UUID | 00000000000000000000000014862935
+    Path        | <This should be path to apu.image>
+    ----------------------------------------------
+
+    Are you sure you wish to proceed? [Y/n]: Y
+    
+    Updating image...
+    [####################################################################################################] 100% |
+    Image programming complete.
+    Will do a hot reset to boot into partition 1. This may take a minute...
+    
+    OK. Image has been programmed successfully.
+    ***********************************************
+    Hot reset has been performed.
+    ***********************************************
+
+
+#### Example output for RPU1 image download
+
+    ~% sudo ami_tool pdi_program -d 21 -i <path_to rpu1.image> -r
+    ----------------------------------------------
+    Device      | c1:00.0
+    ----------------------------------------------
+
+    Current Configuration
+    ----------------------------------------------
+    UUID        | 00000000000000000000000014862935
+    ----------------------------------------------
+    Parent UUID | 00000000000000000000000014862935
+    Path        | <This should be path to rpu1.image>
+    ----------------------------------------------
+
+    Are you sure you wish to proceed? [Y/n]: Y
+    
+    Updating image...
+    [####################################################################################################] 100% |
+    Image programming complete.
+    Will do a hot reset to boot into partition 1. This may take a minute...
+    
+    OK. Image has been programmed successfully.
+    ***********************************************
+    Hot reset has been performed.
+    ***********************************************
+
 <span id="id35"></span>
-
- #### Notes
- - This command is also used to load apu image 
-
     ~%
 ---
 <span id="amrmanagementinterfaceuserguide-ami-tool-bar-wr"></span>
@@ -1027,7 +1081,7 @@ Selects the boot partition for the card to reboot from.
 
   - This command requires root/sudo privileges.
 
-  - This causes a hot reset of the card from the selected partition.
+  - This causes a software-based device reboot from the selected partition.
 
 ---
 

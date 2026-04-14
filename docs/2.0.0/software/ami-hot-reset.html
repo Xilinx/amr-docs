@@ -3,22 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
-  <title>AMI - Hot Reset &mdash; AMR  documentation</title>
+  <title>AMI - Device Reboot &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -38,11 +23,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -86,19 +67,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../v80/index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/asdm-application.html">AMR ASDM Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/inband-telemetry.html">AMR InBand Telemetry Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../firmware/asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
@@ -130,7 +118,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>AMI - Hot Reset</li>
+      <li>AMI - Device Reboot</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/software/ami-hot-reset.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -140,35 +128,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="ami-hot-reset">
-<h1>AMI - Hot Reset<a class="headerlink" href="#ami-hot-reset" title="Permalink to this heading">¶</a></h1>
-<p>A PCI hot reset can be triggered on a per device basis.</p>
-<p>This functionality is provided via the Device API and it required to be run with root permissions.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
- * ami_dev_hot_reset() - Trigger a PCI hot reset for this device.
- * @dev: Device handle.
- *
- * The provided handle will be deleted and an attempt will be made to
- * re-initialise it once the hot reset is complete. It is important that you
- * do not have any other open device handles pointing to the same device - this
- * could lead to stability issues!
- *
- * This function requires sudo/root permissions.
- *
- * Return: AMI_STATUS_OK or AMI_STATUS_ERROR
- */
-int ami_dev_hot_reset(ami_device **dev);
+  <div class="section" id="ami-device-reboot">
+<h1>AMI - Device Reboot<a class="headerlink" href="#ami-device-reboot" title="Permalink to this heading">¶</a></h1>
+<p>AMR supports software-based device reboot functionality. The device can be rebooted to a specific flash partition using the <code class="docutils literal notranslate"><span class="pre">device_boot</span></code> command.</p>
+<p><strong>Important:</strong> AMR does not support GPIO-based PCIe hot reset. Device reboots are performed through software commands that trigger firmware-initiated partition boot.</p>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">ami_tool</span> <span class="pre">device_boot</span></code> command to reboot the device from a specific partition:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ami_tool<span class="w"> </span>device_boot<span class="w"> </span>-d<span class="w"> </span>&lt;bdf&gt;<span class="w"> </span>-p<span class="w"> </span>&lt;partition_number&gt;
 </pre></div>
 </div>
-<p>This function performs the following steps that will hot reset the card without having to power cycle.</p>
-<ul class="simple">
-<li><p>Set the platform management controller (PMC) GPIO by writing a 1 to the GPIO offset (0x1040000) on BAR 0.</p></li>
-<li><p>Internally free up resources used with the driver for the device.</p></li>
-<li><p>Remove the device from the PCI tree by writing to the appropriate sysfs node via pci_remove() library function.</p></li>
-<li><p>Toggle SBR (Secondary Bus Reset) by reading from the PCI bridge control register of the PCI port belonging to the device, writing 0x40 (PDI will reload here), then clearing it with a small delay in between.</p></li>
-<li><p>Rescan the PCI bus using pci_rescan(), this will trigger the AMI probe function again which will clear the PMC GPIO.</p></li>
-<li><p>Internally refresh the handle for specified device and allocate resources.</p></li>
-</ul>
+<p>This triggers a firmware-controlled reboot that reloads the PDI from the specified flash partition.</p>
+</div>
 </div>
 
 
@@ -182,7 +153,7 @@ int ami_dev_hot_reset(ami_device **dev);
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

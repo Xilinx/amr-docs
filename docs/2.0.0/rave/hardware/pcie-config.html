@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AMR RAVE - PCIe Configuration &mdash; AMR  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/_static/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+            <a href="../../index.html" class="icon icon-home"> AMR
+            <img src="../../_static/xilinx-header-logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">AMR Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/amr-overview.html">AMR Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AMR Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/rebuild.html">How-to Rebuild an AMR Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AMR System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../system-architecture/board-management.html">AMR - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../system-architecture/device-programming.html">AMR - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../system-architecture/host-communication.html">AMR - Host to Card Communication</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AMR Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/install-card.html">AMR Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/update-fpt.html">AMR Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/update-pdi.html">AMR Updating PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/debug.html">AMR Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/jtag-recovery.html">AMR JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/ami-tool-guide.html">AMR Management Interface userguide (ami_tool)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../development/build-scripts.html">AMR Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development/source-control.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../v80/index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Hardware Design - RAVE (VE2302)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/asdm-application.html">AMR ASDM Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/inband-telemetry.html">AMR InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/osal.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/profiles-cmake.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../software/ami.html">AMR Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software/qdma.html">AMR QDMA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices/abbreviations.html">AMR - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">AMR Release Information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: black" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AMR</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>AMR RAVE - PCIe Configuration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/rave/hardware/pcie-config.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="amr-rave-pcie-configuration">
+<h1>AMR RAVE - PCIe Configuration<a class="headerlink" href="#amr-rave-pcie-configuration" title="Permalink to this heading">¶</a></h1>
+<blockquote>
+<div><p><strong>For common PCIe concepts</strong>, see <a class="reference internal" href="../../hardware/index.html"><span class="std std-doc">Common Hardware Documentation</span></a></p>
+<p>This document describes the RAVE (VE2302) PCIe implementation.</p>
+</div></blockquote>
+<p><span id="amrrave-pcieconfig-overview"></span></p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
+<p>The RAVE platform implements PCIe connectivity using the PCIe Versal IP (xilinx.com:ip:pcie_versal) instantiated in programmable logic. The VE2302 device is a Versal Edge-series device that does not include a CPM (Coherent PCIe Module) hardened block, so PCIe functionality must be implemented using soft logic IP in the PL fabric.</p>
+<p>The PCIe IP provides Gen3 x4 connectivity between the VE2302 and the on-board Ryzen processor. This implementation uses GTYP transceivers in Bank 103 and consumes approximately 29,000 LUTs of programmable logic resources. The soft logic approach provides configuration flexibility while requiring careful attention to timing closure and resource budgeting.</p>
+<p><span id="amrrave-pcieconfig-plpcieip"></span></p>
+</div>
+<div class="section" id="pl-pcie-versal-ip">
+<h2>PL PCIe Versal IP<a class="headerlink" href="#pl-pcie-versal-ip" title="Permalink to this heading">¶</a></h2>
+<p><img alt="RAVE PCIe IP Configuration" src="images/rave_pcie_ip_config.png" /></p>
+<p><strong>Note:</strong> Image shows PCIe Versal IP configured for Gen3 x4, GTYP Bank 103, device IDs 0x5700/0x5701.</p>
+<div class="section" id="ip-information">
+<h3>IP Information<a class="headerlink" href="#ip-information" title="Permalink to this heading">¶</a></h3>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IP Name</strong></td>
+<td>PCIe Versal</td>
+</tr>
+<tr>
+<td><strong>Vendor</strong></td>
+<td>xilinx.com:ip:pcie_versal</td>
+</tr>
+<tr>
+<td><strong>Implementation</strong></td>
+<td>Soft logic in PL fabric</td>
+</tr>
+<tr>
+<td><strong>Resource Usage</strong></td>
+<td>~29K LUTs, ~36 BRAMs, ~26 URAMs</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="rave-pcie-configuration">
+<h3>RAVE PCIe Configuration<a class="headerlink" href="#rave-pcie-configuration" title="Permalink to this heading">¶</a></h3>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Setting</th>
+<th>RAVE Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Link Speed</strong></td>
+<td><strong>Gen 3</strong> (8.0 GT/s)</td>
+<td>VE2302 GTYP limitation</td>
+</tr>
+<tr>
+<td><strong>Lane Width</strong></td>
+<td><strong>x4</strong></td>
+<td>Connected to Ryzen via PCIe x4</td>
+</tr>
+<tr>
+<td><strong>GT Bank</strong></td>
+<td><strong>GTYP Bank 103</strong></td>
+<td>LPD_GTYP transceivers</td>
+</tr>
+<tr>
+<td><strong>Reference Clocks</strong></td>
+<td>REFP0/REFN0, REFP1/REFN1</td>
+<td>External oscillators</td>
+</tr>
+<tr>
+<td><strong>Physical Functions</strong></td>
+<td><strong>2</strong> (PF0, PF1)</td>
+<td>Standard AMR pattern</td>
+</tr>
+<tr>
+<td><strong>Vendor ID</strong></td>
+<td>0x10EE</td>
+<td>AMD/Xilinx</td>
+</tr>
+<tr>
+<td><strong>PF0 Device ID</strong></td>
+<td><strong>0x5700</strong></td>
+<td>Management function</td>
+</tr>
+<tr>
+<td><strong>PF1 Device ID</strong></td>
+<td><strong>0x5701</strong></td>
+<td>User/DMA function</td>
+</tr>
+<tr>
+<td><strong>Subsystem ID</strong></td>
+<td>0x000e</td>
+<td>AMD standard</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gt-transceiver-pinout">
+<h3>GT Transceiver Pinout<a class="headerlink" href="#gt-transceiver-pinout" title="Permalink to this heading">¶</a></h3>
+<p><strong>GTYP Bank 103</strong> (PCIe x4 to Ryzen):</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Lane</th>
+<th>TX Pins</th>
+<th>RX Pins</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Lane 0</strong></td>
+<td>TXP0, TXN0</td>
+<td>RXP0, RXN0</td>
+<td>PCIe lane 0</td>
+</tr>
+<tr>
+<td><strong>Lane 1</strong></td>
+<td>TXP1, TXN1</td>
+<td>RXP1, RXN1</td>
+<td>PCIe lane 1</td>
+</tr>
+<tr>
+<td><strong>Lane 2</strong></td>
+<td>TXP2, TXN2</td>
+<td>RXP2, RXN2</td>
+<td>PCIe lane 2</td>
+</tr>
+<tr>
+<td><strong>Lane 3</strong></td>
+<td>TXP3, TXN3</td>
+<td>RXP3, RXN3</td>
+<td>PCIe lane 3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Reference Clocks:</strong></p>
+<ul class="simple">
+<li><p>REFP0/REFN0 - Primary reference clock</p></li>
+<li><p>REFP1/REFN1 - Secondary reference clock</p></li>
+</ul>
+<p><span id="amrrave-pcieconfig-pfconfiguration"></span></p>
+</div>
+</div>
+<div class="section" id="physical-function-configuration">
+<h2>Physical Function Configuration<a class="headerlink" href="#physical-function-configuration" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="pf0-management-function">
+<h3>PF0 (Management Function)<a class="headerlink" href="#pf0-management-function" title="Permalink to this heading">¶</a></h3>
+<p><strong>PF0 Configuration:</strong></p>
+<ul class="simple">
+<li><p>Device ID: <strong>0x5700</strong></p></li>
+<li><p>Base Class: 12 (Processing Accelerators)</p></li>
+<li><p>Sub Class: 00</p></li>
+<li><p>Subsystem ID: 0x000e</p></li>
+</ul>
+<p><strong>PF0 BARs</strong> (configurable in PCIe IP):</p>
+<ul class="simple">
+<li><p>BAR0: Management register space (size TBD)</p></li>
+<li><p>Type: AXI_Bridge_Master</p></li>
+<li><p>Purpose: Firmware management interface</p></li>
+</ul>
+</div>
+<div class="section" id="pf1-user-dma-function">
+<h3>PF1 (User/DMA Function)<a class="headerlink" href="#pf1-user-dma-function" title="Permalink to this heading">¶</a></h3>
+<p><strong>PF1 Configuration:</strong></p>
+<ul class="simple">
+<li><p>Device ID: <strong>0x5701</strong></p></li>
+<li><p>Base Class: 12 (Processing Accelerators)</p></li>
+<li><p>Sub Class: 00</p></li>
+<li><p>Subsystem ID: 0x000e</p></li>
+</ul>
+<p><strong>PF1 BARs</strong> (configurable in PCIe IP):</p>
+<ul class="simple">
+<li><p>BAR0: DMA registers (XDMA IP)</p></li>
+<li><p>BAR2: AXI Bridge (PL access for test/user logic)</p></li>
+<li><p>MSI-X: Configured to align with XDMA IP</p></li>
+</ul>
+<p><strong>Note:</strong> MSI-X settings must be configured in PCIe IP to match XDMA capabilities (XDMA cannot reconfigure MSI-X independently).</p>
+<p><span id="amrrave-pcieconfig-nocconnection"></span></p>
+</div>
+</div>
+<div class="section" id="noc-connection-rave-specific">
+<h2>NoC Connection (RAVE-Specific)<a class="headerlink" href="#noc-connection-rave-specific" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="pl-pcie-to-noc-routing">
+<h3>PL PCIe to NoC Routing<a class="headerlink" href="#pl-pcie-to-noc-routing" title="Permalink to this heading">¶</a></h3>
+<p>The PCIe IP routes traffic to the NoC through programmable logic NMU and NSU interfaces:</p>
+<p><strong>Connection Path:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>PL PCIe IP
+  ↓ (AXI Master/Slave interfaces)
+NMU_512 (in AXI NoC IP)
+  ↓
+NoC Interconnect
+  ↓
+NSU_512 / Memory Controllers
+</pre></div>
+</div>
+<p><strong>AXI NoC IP Configuration:</strong></p>
+<ul class="simple">
+<li><p>Add NMU_512 interface for PCIe master traffic</p></li>
+<li><p>Configure QoS (bandwidth, latency requirements)</p></li>
+<li><p>Route to memory controllers (LPDDR4) and PL slaves</p></li>
+<li><p>Requires manual configuration in AXI NoC IP</p></li>
+</ul>
+<p><span id="amrrave-pcieconfig-clocking"></span></p>
+</div>
+</div>
+<div class="section" id="pcie-clocking">
+<h2>PCIe Clocking<a class="headerlink" href="#pcie-clocking" title="Permalink to this heading">¶</a></h2>
+<p><strong>Clock Sources:</strong></p>
+<ul class="simple">
+<li><p><strong>Reference Clocks:</strong> External oscillators (REFP/REFN)</p></li>
+<li><p><strong>AXI Clock:</strong> From CIPS (pl0_ref_clk or pl2_ref_clk)</p></li>
+<li><p><strong>User Clock:</strong> PCIe IP generates user_clk output</p></li>
+</ul>
+<p><strong>Clock Domain Crossings:</strong></p>
+<ul class="simple">
+<li><p>PCIe IP to AXI NoC: Asynchronous crossing</p></li>
+<li><p>Requires proper clock configuration in NoC IP</p></li>
+<li><p>Multiple proc_sys_reset blocks for synchronization</p></li>
+</ul>
+<p><span id="amrrave-pcieconfig-resethandling"></span></p>
+</div>
+<div class="section" id="pcie-reset-handling">
+<h2>PCIe Reset Handling<a class="headerlink" href="#pcie-reset-handling" title="Permalink to this heading">¶</a></h2>
+<p><strong>Reset Signals:</strong></p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Signal</th>
+<th>Source</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PCIe RST</strong></td>
+<td>PMC MIO24</td>
+<td>PCIe fundamental reset</td>
+</tr>
+<tr>
+<td><strong>WAKE_B</strong></td>
+<td>PMC MIO25</td>
+<td>PCIe wake signal</td>
+</tr>
+<tr>
+<td><strong>pl0_resetn</strong></td>
+<td>CIPS</td>
+<td>PL reset output</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Reset Synchronization:</strong></p>
+<ul class="simple">
+<li><p>PCIe reset synchronized to PCIe clock domain</p></li>
+<li><p>PL reset synchronized to AXI clock domains</p></li>
+<li><p>Multiple proc_sys_reset blocks for different clocks</p></li>
+</ul>
+<p><span id="amrrave-pcieconfig-pinconstraints"></span></p>
+</div>
+<div class="section" id="pin-constraints-rave-specific">
+<h2>Pin Constraints (RAVE-Specific)<a class="headerlink" href="#pin-constraints-rave-specific" title="Permalink to this heading">¶</a></h2>
+<p><strong>XDC Constraints Required:</strong></p>
+<div class="highlight-tcl notranslate"><div class="highlight"><pre><span></span><span class="c"># GTYP Bank 103 - PCIe x4</span>
+<span class="nv">set_property</span><span class="w"> </span>PACKAGE_PIN<span class="w"> </span><span class="o">&lt;</span>pin<span class="o">&gt;</span><span class="w"> </span><span class="k">[</span><span class="nv">get_ports</span><span class="w"> </span><span class="k">{</span><span class="nv">pcie_txp</span><span class="k">[</span><span class="nv">0</span><span class="k">]}]</span>
+<span class="nv">set_property</span><span class="w"> </span>PACKAGE_PIN<span class="w"> </span><span class="o">&lt;</span>pin<span class="o">&gt;</span><span class="w"> </span><span class="k">[</span><span class="nv">get_ports</span><span class="w"> </span><span class="k">{</span><span class="nv">pcie_txn</span><span class="k">[</span><span class="nv">0</span><span class="k">]}]</span>
+<span class="c"># ... (lanes 0-3)</span>
+
+<span class="c"># Reference clocks</span>
+<span class="nv">set_property</span><span class="w"> </span>PACKAGE_PIN<span class="w"> </span><span class="o">&lt;</span>pin<span class="o">&gt;</span><span class="w"> </span><span class="k">[</span><span class="nv">get_ports</span><span class="w"> </span>pcie_refclk_p<span class="k">]</span>
+<span class="nv">set_property</span><span class="w"> </span>PACKAGE_PIN<span class="w"> </span><span class="o">&lt;</span>pin<span class="o">&gt;</span><span class="w"> </span><span class="k">[</span><span class="nv">get_ports</span><span class="w"> </span>pcie_refclk_n<span class="k">]</span>
+</pre></div>
+</div>
+<p><strong>See:</strong> RAVE XDC files for complete pin assignments.</p>
+<p><span id="amrrave-pcieconfig-performancecharacteristics"></span></p>
+</div>
+<div class="section" id="performance-characteristics">
+<h2>Performance Characteristics<a class="headerlink" href="#performance-characteristics" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="rave-pcie-performance">
+<h3>RAVE PCIe Performance<a class="headerlink" href="#rave-pcie-performance" title="Permalink to this heading">¶</a></h3>
+<p>| <strong>Raw Bandwidth</strong> | ~4 GB/s | ~32 GB/s | <strong>1:8</strong> |
+| <strong>Link Speed</strong> | 8.0 GT/s | 32.0 GT/s | 1:4 |
+| <strong>Lanes</strong> | x4 | x8 | 1:2 |
+| <strong>Latency</strong> | Higher (PL routing) | Lower (hardened) | - |</p>
+<ul class="simple">
+<li><p>Sufficient for edge AI inference</p></li>
+<li><p>Adequate for vision processing</p></li>
+<li><p>May limit multi-stream video applications</p></li>
+<li><p>Lower bandwidth balanced by lower cost/power</p></li>
+</ul>
+<p><span id="amrrave-pcieconfig-designcomplexity"></span></p>
+</div>
+</div>
+<div class="section" id="design-complexity">
+<h2>Design Complexity<a class="headerlink" href="#design-complexity" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="id1">
+<h3>Design Complexity<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
+<p>The RAVE design requires:</p>
+<ol class="arabic simple">
+<li><p>✓ PCIe IP instantiation and configuration</p></li>
+<li><p>✓ GT transceiver setup and clocking</p></li>
+<li><p>✓ NMU_512 NoC interface configuration</p></li>
+<li><p>✓ Pin constraints for GT lanes</p></li>
+<li><p>✓ Timing closure for PCIe in fabric</p></li>
+<li><p>✓ Coordination with XDMA IP for MSI-X</p></li>
+</ol>
+<p><strong>Note:</strong> CPM5 handles all of this automatically in hardened logic.</p>
+</div>
+<div class="section" id="configuration-files">
+<h3>Configuration Files<a class="headerlink" href="#configuration-files" title="Permalink to this heading">¶</a></h3>
+<p><strong>RAVE Design Files:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">config_bd.tcl</span></code>: Includes PCIe IP instantiation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">impl.pins.xdc</span></code>: GT lane pin assignments</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">impl.xdc</span></code>: PCIe timing constraints</p></li>
+</ul>
+<p>The soft logic implementation requires careful floorplanning and timing closure for PCIe operation in the FPGA fabric.</p>
+<p><span id="amrrave-pcieconfig-xdmaconfig"></span></p>
+</div>
+</div>
+<div class="section" id="xdma-configuration">
+<h2>XDMA Configuration<a class="headerlink" href="#xdma-configuration" title="Permalink to this heading">¶</a></h2>
+<p>The RAVE platform uses XDMA for DMA operations with the following configuration:</p>
+<ul class="simple">
+<li><p><strong>Physical Functions</strong>: 2 (PF0 for management, PF1 for user/DMA)</p></li>
+<li><p><strong>Device IDs</strong>: PF0 (0x5710), PF1 (0x5711)</p></li>
+<li><p><strong>Data Width</strong>: 256-bit AXI</p></li>
+<li><p><strong>DMA Channels</strong>: Multiple H2C and C2H channels</p></li>
+<li><p><strong>AXI Interfaces</strong>: AXI Master, AXI-Lite Master, AXI Bypass</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Note:</strong> Legacy RAVE designs used QDMA with 512 queues. The platform has migrated to XDMA for improved simplicity and compatibility with VE2302 Embedded+ platform requirements.</p>
+</div></blockquote>
+<p>See <a class="reference internal" href="xdma-config.html"><span class="std std-doc">RAVE XDMA Configuration</span></a> for detailed XDMA IP setup.</p>
+<p><span id="amrrave-pcieconfig-debugging"></span></p>
+</div>
+<div class="section" id="pcie-debug-and-testing">
+<h2>PCIe Debug and Testing<a class="headerlink" href="#pcie-debug-and-testing" title="Permalink to this heading">¶</a></h2>
+<p><strong>RAVE-Specific Tools:</strong></p>
+<ul class="simple">
+<li><p>DPDK test application with XDMA</p></li>
+<li><p>PCIe link analyzer</p></li>
+<li><p>Vivado ILA for PCIe signals</p></li>
+</ul>
+<p><strong>Reference:</strong> <a class="reference external" href="https://amd.atlassian.net/wiki">RAVE DPDK and XDMA Debug</a> - Testing documentation</p>
+<p><span id="amrrave-pcieconfig-references"></span></p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="xdma-config.html"><span class="std std-doc">RAVE XDMA Configuration</span></a> - XDMA PL IP details</p></li>
+<li><p><a class="reference internal" href="../../hardware/base-logic.html"><span class="std std-doc">Common Base Design</span></a> - Shared design philosophy</p></li>
+<li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg213-pcie-dma-versal">PCIe Versal IP Product Guide</a> - IP documentation</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          
+				  
+				  <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
+      <span class="lastupdated">Last updated on April 14, 2026.
+      </span></p>
+  </div>
+
+
+
+										<div class="aem-Grid aem-Grid--16">
+											<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+												<div class="container-fluid sub-footer">
+
+													                    <div class="row">
+                        <div class="col-xs-24">
+                          <p><a target="_blank" href="https://www.amd.com/en/corporate/copyright">Terms and Conditions</a> | <a target="_blank" href="https://www.amd.com/en/corporate/privacy">Privacy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/cookies">Cookie Policy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/trademarks">Trademarks</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf">Statement on Forced Labor</a> | <a target="_blank" href="https://www.amd.com/en/corporate/competition">Fair and Open Competition</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf">UK Tax Strategy</a> | <a target="_blank" href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA">Inclusive Terminology</a> | <a href="#cookiessettings" class="ot-sdk-show-settings">Cookies Settings</a></p>
+                        </div>
+                    </div>
+												</div>
+											</div>
+										</div>
+										
+</br>
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

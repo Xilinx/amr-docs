@@ -16,11 +16,9 @@ The following command demonstrates how to build a V80 design. For Rave set the a
 
 The build script divides the build flow into a number of separate steps.
 
-  - hw - builds the hardware design into an XSA file
+  - hw - Builds the hardware design and exports an XSA file
 
-  - fw - using the XSA file, compiles the firmware into an elf file
-
-  - fpt - creates the flash partition table as a binary file
+  - fw - using the XSA file, compiles the AMC firmware into an elf file
 
   - pdi - uses the outputs of previous steps to generate the device programming files
 
@@ -28,22 +26,22 @@ The build script divides the build flow into a number of separate steps.
 
 ### hw step
 
-The hw step of the build flow operates on the AMR hardware design described here. A /build directory is created, where the implemented hardware design and Vivado log are generated. The xpr file for this project is located here **amr/build_v80/amr_vivado_designs/alveo_v80/v80_base/project**. Similary for Rave it should be located under build_rave.
+The hw step of the build flow operates on the AMR hardware design described here. A /build_v80 directory is created, where the implemented hardware design and Vivado log are generated. The xpr file for this project is located here **amr/build_v80/amr_vivado_designs/alveo_v80/v80_base/project**. Similary for Rave it will be located under build_rave.
 
-This Vivado project is used to generate the BD design, run Synthesis & Implementation, and create the initial PDI. The write\_hw\_platform command is run on the implemented design to create an XSA (named amd_<version>.xsa), which is used as a hardware handoff file to the AMC build in the fw build step.
+This Vivado project is used to generate the BD design, run Synthesis & Implementation, and create the initial PDI. The write\_hw\_platform command is run on the implemented design to create an XSA (named v80_base.xsa), which is used as a hardware handoff file to the AMC build in the fw build step.
 
 <span id="amrbuildscripts-fwstep"></span>
 
 ### fw step
 
-The fw step of the build flow operates on the AMR AMC firmware design described here: [Firmware Design - AMR](../firmware/index). The fw step builds the AMC firmware and generates a FPT binary.
+The fw step of the build flow operates on the AMR AMC firmware design described here: [Firmware Design - AMR](../firmware/index). The fw step builds the AMC firmware and generates final PDIs.
 
-The AMC build is run in the AMC source code directory (i.e., **\<amr\>/fw/AMC**) using the AMC’s own build script **(\<amr\>/fw/AMC/scripts/build_amc.sh).**
+The AMC build is run in the AMC source code directory (i.e., **\<amr\>/fw/AMC**) using the AMC’s own build script **(\<amr\>/fw/AMC/scripts/build.sh).**
 
-The AMC’s build_amc.sh can take a number of different build options (which are detailed in the AMC’s [Profiles and CMake build process](Profiles-and-CMake-build-process) page), but the the AMR build flow executes it with these specific options.
+The AMC’s build.sh can take a number of different build options (which are detailed in the AMC’s [Profiles and CMake build process](Profiles-and-CMake-build-process) page), but the the AMR build flow executes it with these specific options.
 
     ```bash
-      ./scripts/build_amc.sh -help
+      ./scripts/build.sh -help
       =================================== AMC Build script ====================================
 
       -profile <profile_name> : set the board profile to build (rave|v80)
@@ -58,7 +56,7 @@ The AMC’s build_amc.sh can take a number of different build options (which are
         if both XSA and SDT are provided, then the SDT will be used to generate the BSP
 
       E.g.: To build from scratch:
-      ./scripts/build_amc.sh -xsa /path/to/example.xsa -profile <v80|rave>
+      ./scripts/build.sh -xsa /path/to/example.xsa -profile <v80|rave>
 
     ```
 
@@ -67,15 +65,7 @@ The **profile** is the v80 or rave and the **xsa** is the xsa generated in the h
 The resultant ELF file from the AMC build is then stored in the fw directory (**\<amr\>/fw/AMC/build_amc/amc.elf**)
 
 **Tip:** If the firmware has changed and the hardware design has not, the hardware XSA does not need to be re-built when compiling the firmware. Following command can be used to build amc only
-  ./scripts/build_amc.sh -xsa /path/to/example.xsa -profile <v80|rave> -amc
-
-<span id="amrbuildscripts-fptstep"></span>
-
-### fpt step
-
-Another important concept of the AMR design is the FPT (see [AMR - Device Programming](../system-architecture/device-programming/)) as this defines how the flash memory is organized.
-
-The execution of the gen\_fpt.py takes place during the fpt step, and the resultant binary file is stored in the fw directory (**\<amr\>/fw/AMC/build/fpt.bin**).
+  ./scripts/build.sh -xsa /path/to/example.xsa -profile <v80|rave> -amc
 
 <span id="amrbuildscripts-pdistep"></span>
 
@@ -89,7 +79,7 @@ First, the amr\_ospi.bin is created when bootgen is called to combine the PDI ge
 
 The amr\_ospi\_fpt.bin is intended to be written to flash over JTAG using HW Manager. This PDI sets up the flash so that it can be used by AMC/AMI.
 
-This basically means that it contains the FPT at the beginning of the memory, which AMI/AMC can then process to determine where in flash it can write different PDIs. Padding is added between the amr\_ospi\_fpt.bin and the amr\_ospi.bin to ensure that the amr\_ospi.bin is aligned to a 32KB boundary (this is a requirement of the PMC boot search).
+This basically means that it contains the FPT at the beginning of the OSPI flash memory, which AMI/AMC can then process to determine where in flash it can write different PDIs. Padding is added between the amr\_ospi\_fpt.bin and the amr\_ospi.bin to ensure that the amr\_ospi.bin is aligned to a 32KB boundary (this is a requirement of the PMC boot search).
 
 Effectively, the amr\_ospi\_fpt.bin configures the flash to contain the FPT along with amr\_ospi.bin in the 1st PDI Partition.
 

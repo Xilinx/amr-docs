@@ -3,21 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
   <title>AMR Overview &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
@@ -40,11 +25,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="prev" title="AMR" href="../index.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -63,15 +44,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <p class="caption" role="heading"><span class="caption-text">AMR Overview</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">AMR Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#new-in-this-release">New In This Release</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#obsolete-features">Obsolete Features</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#new-in-this-release">New In This Release</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#supported-kernels-and-distributions-for-v80">Supported Kernels and Distributions for V80</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#supported-platforms">Supported Platforms</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#alveo-v80">Alveo V80</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rave-standard-alveo-platform">Rave (Standard Alveo Platform)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rave-embedded-platform">Rave (Embedded+ Platform)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#adaptive-management-runtime">Adaptive Management Runtime</a></li>
 </ul>
 </li>
@@ -105,19 +83,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../v80/index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/asdm-application.html">AMR ASDM Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/inband-telemetry.html">AMR InBand Telemetry Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../firmware/asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
@@ -166,27 +151,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h2>New In This Release<a class="headerlink" href="#new-in-this-release" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Support for Vivado™ 2026.1 toolset.</p></li>
-<li><p>Support for RHEL 9.4 with kernel 5.14, and Ubuntu 24.04 with kernel 6.8</p></li>
 <li><p>Enhanced OSPI flash write performance optimization for faster device programming.</p></li>
-<li><p>Partition flag read/write functionality for advanced flash management and partition control.</p></li>
-<li><p>RPM package support for Red Hat distributions in addition to existing Debian packages.</p></li>
-<li><p>Enhanced V80 board profile with eMMC storage support, SMBus interface, and QSFP module control.</p></li>
-<li><p>Improved firmware architecture with board profile system supporting rave (standard reference) and v80 (enhanced) variants for flexible platform deployment</p></li>
-</ul>
-<p><span id="amroverview-obsoletefeatures"></span></p>
-<div class="section" id="obsolete-features">
-<h3>Obsolete Features<a class="headerlink" href="#obsolete-features" title="Permalink to this heading">¶</a></h3>
-<ul class="simple">
-<li><p>The following OS versions and kernels are no longer officially supported:</p>
-<ul>
-<li><p>Ubuntu 22.04 with kernels 5.4.0 and 5.15.0</p></li>
-<li><p>RHEL 8.3 with kernel 4.18.0</p></li>
-</ul>
-</li>
-<li><p>V70 board profile has been removed in favor of the unified rave (standard) and v80 (enhanced) board profiles</p></li>
+<li><p>Partition flag read/write functionality for advanced flash management and partition control, including power-on load configuration.</p></li>
+<li><p>Improved firmware architecture with board profile system supporting rave (standard reference) and v80 variants for flexible platform deployment.</p></li>
+<li><p>Three-partition FPT structure (two boot PDIs + one user partition) with 128-byte header and entries.</p></li>
+<li><p>PS subsystems with RPU0 (AMR), RPU1 and APU.</p></li>
 </ul>
 <p><span id="amroverview-supportedkernelsanddistributions"></span></p>
-</div>
 </div>
 <div class="section" id="supported-kernels-and-distributions-for-v80">
 <h2>Supported Kernels and Distributions for V80<a class="headerlink" href="#supported-kernels-and-distributions-for-v80" title="Permalink to this heading">¶</a></h2>
@@ -203,20 +174,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <tr>
 <td><span data-colorid="w6a3hfta9z">Ubuntu</span></td>
 <td><span data-colorid="dwhflvbtbg">x86_64</span></td>
-<td><span data-colorid="bmtdp27dz1">24.04</span></td>
-<td><span data-colorid="ytedsyen0b">6.8.0</span></td>
-</tr>
-<tr>
-<td><span data-colorid="w6a3hfta9z">Ubuntu</span></td>
-<td><span data-colorid="dwhflvbtbg">x86_64</span></td>
-<td><span data-colorid="bmtdp27dz1">24.04.3</span></td>
-<td><span data-colorid="ytedsyen0b">6.17.12</span></td>
+<td><span data-colorid="bmtdp27dz1">22.04<br>24.04<br>24.04.3</span></td>
+<td><span data-colorid="ytedsyen0b">5.15.0<br>6.8.0<br>6.17.12</span></td>
 </tr>
 <tr>
 <td><span data-colorid="a9kve1ggv2">RHEL</span></td>
 <td><span data-colorid="vt4guanqx8">x86_64</span></td>
-<td><span data-colorid="tmrzs0i204">9.7</span></td>
-<td><span data-colorid="el6txwhuye">6.19.3</span></td>
+<td><span data-colorid="tmrzs0i204">8.3<br>9.7</span></td>
+<td><span data-colorid="el6txwhuye">4.18.0<br>6.19.3</span></td>
 </tr>
 </tbody>
 </table>
@@ -245,20 +210,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="section" id="alveo-v80">
 <h3>Alveo V80<a class="headerlink" href="#alveo-v80" title="Permalink to this heading">¶</a></h3>
 <p>The Alveo V80 is a high performance data processing card in a PCIe form factor containing a Versal HBM FPGA device, DDR memory, and a variety of communication interfaces. The Alveo V80 has a broad range of market applications in high-performance compute, analytics, networking, storage, fintech, and blockchain. The following diagram provides a high level overview of the primary card features and interfaces. See the Alveo V80 Data Center Accelerator Card Data Sheet (DS1013) for information on the card and its capabilities.</p>
+<blockquote>
+<div><p><strong>Note:</strong> Queue DMA (QDMA) functionality is supported exclusively on the Alveo V80 platform. QDMA is not available on RAVE (Embedded+) platforms, which utilize XDMA for PCIe data transfer operations.</p>
+</div></blockquote>
 <p><a class="reference download internal" download="" href="../_downloads/ae7b4c937f1537f5834fd132ead1bf49/1107373415.png"><span class="xref download myst"><img alt="image1" src="../_images/1107373415.png" /></span></a></p>
 <p><span id="amroverview-rave"></span></p>
 </div>
-<div class="section" id="rave-standard-alveo-platform">
-<h3>Rave (Standard Alveo Platform)<a class="headerlink" href="#rave-standard-alveo-platform" title="Permalink to this heading">¶</a></h3>
-<p>The Rave platform represents the standard reference implementation for Alveo boards featuring Versal devices. Rave provides essential PCIe connectivity and basic management capabilities suitable for a wide range of applications. Key characteristics include:</p>
+<div class="section" id="rave-embedded-platform">
+<h3>Rave (Embedded+ Platform)<a class="headerlink" href="#rave-embedded-platform" title="Permalink to this heading">¶</a></h3>
+<p>The Rave platform represents the standard reference implementation for Embedded+ boards featuring Versal devices. Rave provides essential PCIe connectivity and basic management capabilities suitable for a wide range of applications. Key characteristics include:</p>
 <ul class="simple">
 <li><p>Single I2C bus configuration for device communication</p></li>
 <li><p>EEPROM version 1.0 support for board information storage</p></li>
 <li><p>Standard OSPI flash management for device programming</p></li>
 <li><p>In-band telemetry via PCIe for card monitoring and control</p></li>
-<li><p>Streamlined architecture optimized for standard Alveo deployment scenarios</p></li>
+<li><p>Streamlined architecture optimized for Embedded+ platform deployment scenarios</p></li>
 </ul>
 <p>The Rave profile serves as the baseline platform configuration, providing core functionality while minimizing complexity for applications that do not require advanced storage or expansion interfaces.</p>
+<p><img alt="RAVE Platform Block Diagram" src="../_images/rave_block.png" /></p>
 <p><span id="amroverview-alveoversalexampledesign"></span></p>
 </div>
 <div class="section" id="adaptive-management-runtime">
@@ -273,8 +242,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><p>The AMR’s design flow produces full programming images for the FPGA, which simplifies the overall design flow and avoids other management overheads associated with dynamic function exchange.</p></li>
 </ul>
 </li>
-<li><p>The AMR’s firmware provides a reference implementation of card management functions for both in-band (PCIe) and out-of-band (SMBUS/BMC) sensor access and card control, plus other application-level card management functions. This includes writing new PDIs into the card’s OSPI flash configuration memory across three partitions (two boot PDIs and one user design), with enhanced write performance, partition flag management, and automatic partition loading on power-up.</p></li>
-<li><p>The AMR supports two board profiles: rave (standard reference implementation) and v80 (enhanced with eMMC storage, SMBus interface, and QSFP module control), allowing flexible deployment across different Alveo and Embedded+ platforms.</p></li>
+<li><p>The AMR’s firmware provides a reference implementation of card management functions for in-band (PCIe) sensor access and card control, plus other application-level card management functions. This includes writing new PDIs into the card’s OSPI flash configuration memory across three partitions (two boot PDIs and one user design), with enhanced write performance, partition flag management, and automatic partition loading on power-up. <strong>Note:</strong> Out-of-band SMBus/BMC support is not implemented; users must establish SMBus functionality based on their requirements.</p></li>
+<li><p>The AMR supports two board profiles: rave (standard reference implementation) and v80 (with eMMC storage, SMBus interface, and QSFP module control), allowing flexible deployment across different Alveo and Embedded+ platforms.</p></li>
 </ul>
 <p><span id="amroverview-amrhardwarearchitecture"></span></p>
 </div>
@@ -283,7 +252,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h2>AMR Hardware Architecture<a class="headerlink" href="#amr-hardware-architecture" title="Permalink to this heading">¶</a></h2>
 <p>The AMR includes platform-specific base hardware designs that demonstrate PCIe connectivity and management capabilities. For detailed information on the hardware architecture for each supported platform, please refer to:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#../hardware/v80-hardware"><span class="xref myst">V80 Hardware Architecture</span></a> - Enhanced platform with eMMC, QSFP, and SMBus support</p></li>
+<li><p><a class="reference internal" href="#../hardware/v80-hardware"><span class="xref myst">V80 Hardware Architecture</span></a> - Platform with eMMC, QSFP, and SMBus support</p></li>
 <li><p><a class="reference internal" href="#../hardware/rave-hardware"><span class="xref myst">Rave Hardware Architecture</span></a> - Standard reference platform architecture</p></li>
 </ul>
 <p><span id="amroverview-amrsoftwarearchitecture"></span></p>
@@ -318,7 +287,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 </li>
 <li><p>Use of Vitis™ embedded software flow to compile AMR firmware image for inclusion into final programming image.</p></li>
-<li><p>Profile-based configuration system enabling different board variants (rave for standard Alveo, v80 for enhanced platforms) to be built from a unified source tree.</p></li>
+<li><p>Profile-based configuration system enabling different board variants (rave for Embedded+ platforms, v80 for Alveo platforms) to be built from a unified source tree.</p></li>
 </ul>
 </div>
 </div>
@@ -337,7 +306,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

@@ -40,7 +40,9 @@ The AMC firmware running within the V80s RPU subsystem includes software service
 
 <span id="amr-boardmanagementsolution-out-of-band-smbus-management"></span>
 
-## Out-of-band (SMBUS) Management
+## Out-of-band (SMBus) Management
 
-Alveo cards deployed to server environments typically must implement industry standard card management protocols so that the card’s configuration and operating state can be made known to the server’s own board management controller. To facilitate communication to the server BMC, the AMR hardware design implements an SMBUS interface peripheral in the Versal programmable logic. Through the SMBUS interface, the remote management interface component of the AMC firmware can receive and respond to messages from the BMC. The Out-of-band services implemented in the AMC satisfy server integration requirements for card identification (via the FRU EEPROM), implementation of standards for autodetection of the card (PLDM over MCTP) and SMBUS access to sensor status during the operating runtime of the card.
+**Important:** SMBus support is not implemented in the current AMR release. While the hardware design includes an SMBus interface peripheral in the Versal programmable logic, the firmware protocol handling and out-of-band management services are not present. Users must implement SMBus communication and protocol support based on their specific server integration requirements.
+
+Alveo cards deployed to server environments typically must implement industry standard card management protocols so that the card's configuration and operating state can be made known to the server's own board management controller. The AMR hardware design includes an SMBus interface peripheral in the Versal programmable logic to facilitate communication to the server BMC. When implemented, the remote management interface component of the AMC firmware can receive and respond to messages from the BMC to satisfy server integration requirements for card identification (via the FRU EEPROM), implementation of standards for autodetection of the card (PLDM over MCTP), and SMBus access to sensor status during the operating runtime of the card.
 

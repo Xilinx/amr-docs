@@ -3,21 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
   <title>AMI - API Description &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
@@ -38,11 +23,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -86,19 +67,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../v80/index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/asdm-application.html">AMR ASDM Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/inband-telemetry.html">AMR InBand Telemetry Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../firmware/asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
@@ -173,21 +161,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/* Opaque declaration of `struct ami_device`. */
 typedef struct ami_device ami_device;
 
-/**
-* struct amc_version - structure to hold AMC version information
-* @major: Major software version
-* @minor: Minor software version
-* @patch: Patch number (if applicable)
-* @local_changes: 0 for no changes, 1 for changes
-* @dev_commits: Number of development commits since the version was released
-*/
-struct amc_version {
-    uint8_t   major;
-    uint8_t   minor;
-    uint8_t   patch;
-    uint8_t   local_changes;
-    uint16_t  dev_commits;
-};
+/**                                                                 
+* struct amc_version - structure to hold AMC version information    
+* @major: Major software version                                    
+* @minor: Minor software version                                    
+* @patch: Patch number (if applicable)                              
+* @local_changes: 0 for no changes, 1 for changes                   
+* @dev_commits: Number of development commits since the version was 
+released                                                            
+ */                                                                  
+struct amc_version {                                                
+    uint8_t   major;                                              
+    uint8_t   minor;                                              
+    uint8_t   patch;                                              
+    uint8_t   local_changes;                                      
+    uint16_t  dev_commits;                                        
+};          
 
 /**
  * enum ami_amc_debug_level - AMC debug verbosity levels
@@ -244,7 +233,7 @@ enum ami_amc_debug_level {
 </tr>
 <tr class="odd">
 <td><p><span class="legacy-color-text-blue1">int <strong>ami_dev_hot_reset</strong>(ami_device **dev);</span></p></td>
-<td><p><span class="legacy-color-text-blue1">Trigger a PCI hot reset for this device</span></p></td>
+<td><p><span class="legacy-color-text-blue1">Trigger a software-based device reboot for this device</span></p></td>
 </tr>
 <tr class="even">
 <td><p><span class="legacy-color-text-blue1">int <strong>ami_dev_set_amc_debug_level</strong>(ami_device *dev, enum ami_amc_debug_level level);</span></p></td>
@@ -442,44 +431,60 @@ struct ami_fpt_header {
     uint8_t num_entries;
 };
 
-/**
- * enum ami_fpt_type - Different FPT partition types.
- * @AMI_FPT_TYPE_FPT: File partition table.
- * @AMI_FPT_TYPE_RECOVERY_FPT: Recovery file partition table.
- * @AMI_FPT_TYPE_EXTENSION_FPT: Extension file partition table.
- * @AMI_FPT_TYPE_PDI_BOOT: PDI boot.
- * @AMI_FPT_TYPE_PDI_BOOT_BACKUP: PDI boot backup.
- * @AMI_FPT_TYPE_PDI_XSABIN_META: XSABIN metadata.
- * @AMI_FPT_TYPE_PDI_GOLDEN: PDI golden image.
- * @AMI_FPT_TYPE_PDI_SYS_DTB: SYS DTB.
- * @AMI_FPT_TYPE_PDI_META: PDI metadata.
- * @AMI_FPT_TYPE_PDI_META_BACKUP: PDI metadata backup.
- * @AMI_FPT_TYPE_SC_FW: SC FW.
- */
-enum ami_fpt_type {
-    AMI_FPT_TYPE_FPT             = 0xFFFF,
-    AMI_FPT_TYPE_RECOVERY_FPT    = 0xFFFE,
-    AMI_FPT_TYPE_EXTENSION_FPT   = 0xFFFD,
-    AMI_FPT_TYPE_PDI_BOOT        = 0x0E00,
-    AMI_FPT_TYPE_PDI_BOOT_BACKUP = 0x0E01,
-    AMI_FPT_TYPE_PDI_XSABIN_META = 0x0E02,
-    AMI_FPT_TYPE_PDI_GOLDEN      = 0x0E03,
-    AMI_FPT_TYPE_PDI_SYS_DTB     = 0x0E04,
-    AMI_FPT_TYPE_PDI_META        = 0x0E05,
-    AMI_FPT_TYPE_PDI_META_BACKUP = 0x0E06,
-    AMI_FPT_TYPE_SC_FW           = 0x0C00,
-};
+/**                                                                 
+* enum ami_fpt_type - Different FPT partition types.               
+* @AMI_FPT_TYPE_FPT: File partition table.                         
+* @AMI_FPT_TYPE_RECOVERY_FPT: Recovery file partition table.       
+* @AMI_FPT_TYPE_EXTENSION_FPT: Extension file partition table.     
+* @AMI_FPT_TYPE_PDI_BOOT: PDI boot.                                
+* @AMI_FPT_TYPE_PDI_BOOT_BACKUP: PDI boot backup.                  
+* @AMI_FPT_TYPE_PDI_XSABIN_META: XSABIN metadata.                  
+* @AMI_FPT_TYPE_PDI_GOLDEN: PDI golden image.                      
+* @AMI_FPT_TYPE_PDI_SYS_DTB: SYS DTB.                              
+* @AMI_FPT_TYPE_PDI_META: PDI metadata.                            
+* @AMI_FPT_TYPE_PDI_META_BACKUP: PDI metadata backup.              
+* @AMI_FPT_TYPE_PDI_USER: PDI user.                                
+* @AMI_FPT_TYPE_SC_FW: SC FW.                                      
+*/                                                                 
+enum ami_fpt_type {                                                 
+  AMI_FPT_TYPE_FPT             = 0xFFFF,                          
+  AMI_FPT_TYPE_RECOVERY_FPT    = 0xFFFE,                          
+  AMI_FPT_TYPE_EXTENSION_FPT   = 0xFFFD,                          
+  AMI_FPT_TYPE_PDI_BOOT        = 0x0E00,                          
+  AMI_FPT_TYPE_PDI_BOOT_BACKUP = 0x0E01,                          
+  AMI_FPT_TYPE_PDI_XSABIN_META = 0x0E02,                          
+  AMI_FPT_TYPE_PDI_GOLDEN      = 0x0E03,                          
+  AMI_FPT_TYPE_PDI_SYS_DTB     = 0x0E04,                          
+  AMI_FPT_TYPE_PDI_META        = 0x0E05,                          
+  AMI_FPT_TYPE_PDI_META_BACKUP = 0x0E06,                          
+  AMI_FPT_TYPE_PDI_USER        = 0x0F00,                          
+  AMI_FPT_TYPE_SC_FW           = 0x0C00,                          
+};                              
 
-/**
- * struct ami_fpt_partition - The individual partition information.
- * @type: Partition type.
- * @base_addr: Partition base address.
- * @size: Partition size.
- */
-struct ami_fpt_partition {
-    enum ami_fpt_type type;
-    uint32_t base_addr;
-    uint32_t size;
+/**                                                                 
+* struct ami_fpt_partition - The individual partition information. 
+* @type: Partition type.                                           
+* @base_addr: Partition base address.                              
+* @size: Partition size.                                           
+* @pdi_md5: MD5 checksum of the pdi file (16 bytes).               
+* @pdi_size: Size of the pdi file.                                 
+* @flags: Partition flags.                                         
+*/
+struct ami_fpt_partition {                                          
+  enum ami_fpt_type type;                                         
+  uint32_t base_addr;                                             
+  uint32_t size;              /* in bytes */                      
+  uint8_t  pdi_md5[16];       /* MD5 checksum of the pdi file */
+  uint32_t pdi_size;          /* Size of the pdi file */
+  union {
+    uint32_t flags;         /* User defined flags */
+    struct {
+          uint32_t powerup_flag:1;    /* Power on load user partition flag          0: Disabled, 1: Enabled */
+          uint32_t reserved1:15;      /* Reserved for future use  */
+          uint32_t powerup_error:2;   /* Power on load user partition error flag 0: Not Loaded, 1:Loaded, 2: Error */
+          uint32_t reserved2:14;      /* Reserved for future use */ 
+      } user;
+  };
 };
 
 /**
@@ -538,8 +543,16 @@ enum ami_boot_devices {
 <td><span class="legacy-color-text-blue1">Get the FPT header information</span></td>
 </tr>
 <tr>
-<td><span class="legacy-color-text-blue1">int <strong>ami_prog_get_fpt_partition</strong>(ami_device *dev, uint32_t num, struct ami_fpt_partition *partition);</span></td>
+<td><span class="legacy-color-text-blue1">int <strong>ami_prog_set_fpt_partition</strong>(ami_device *dev, uint8_t boot_device, uint32_t num, struct ami_fpt_partition *partition);</span></td>
+<td><span class="legacy-color-text-blue1">Set FPT partition information</span></td>
+</tr>
+<tr>
+<td><span class="legacy-color-text-blue1">int <strong>ami_prog_get_fpt_partition</strong>(ami_device *dev, uint8_t boot_device, uint32_t num, struct ami_fpt_partition *partition);</span></td>
 <td><span class="legacy-color-text-blue1">Get FPT partition information</span></td>
+</tr>
+<tr>
+<td><span class="legacy-color-text-blue1">int <strong>ami_prog_pdi</strong>(ami_device *dev, const char *path, ami_event_handler progress_handler);</span></td>
+<td><span class="legacy-color-text-blue1">Program a .pdi bitstream onto a device</span></td>
 </tr>
 </tbody>
 </table>
@@ -939,7 +952,7 @@ ami_sensor_internal *sensor_data;
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

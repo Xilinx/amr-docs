@@ -3,22 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
-  <title>AMR V80 - Memory Resources &mdash; AMR  documentation</title>
+  <title>AMR - Memory Architecture Concepts (Common) &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -38,11 +23,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -86,19 +67,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Hardware Design - AMR Common</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../v80/index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/asdm-application.html">AMR ASDM Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/inband-telemetry.html">AMR InBand Telemetry Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../firmware/asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
@@ -130,7 +118,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>AMR V80 - Memory Resources</li>
+      <li>AMR - Memory Architecture Concepts (Common)</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/hardware/memory-resources.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -140,31 +128,174 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="amr-v80-memory-resources">
-<h1>AMR V80 - Memory Resources<a class="headerlink" href="#amr-v80-memory-resources" title="Permalink to this heading">¶</a></h1>
-<p>Overview</p>
-<p>The AMR design contains discrete DDR, DDR DIMM, and HBM.</p>
-<p><span id="amrv80-memoryresources-discreteddrdiagram"></span></p>
-<div class="section" id="discrete-ddr">
-<h2>Discrete DDR<a class="headerlink" href="#discrete-ddr" title="Permalink to this heading">¶</a></h2>
-<p>AMR contains 4GB of DDR that is used for APU and RPU execution, and inter-processor communication between the PMC, RPU, and APU via the general command queue (GCQ) IP. The DDR operates at 200MHz, and it is controlled by the AMD Versal™ integrated memory controller (DDRMC). This hardened MC contains four ports to optimize throughput to the DDR. The AMR design only uses MC Ports 0 and 1. The diagram below illustrates the organization of the DDR memory. AMR does not currently use a user PF or the APU, so those memory locations are not currently used (indicated by * in the below diagram with the cross-hatch background).</p>
-<p>More information on the MC can be found here: <a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Integrated-Memory-Controller-DDRMC-Architecture">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Integrated-Memory-Controller-DDRMC-Architecture</a>.</p>
-<p><a class="reference download internal" download="" href="../_downloads/d1ec226b95c341726bed8ecdd72352ed/1107374762.png"><span class="xref download myst"><img alt="image1" src="../_images/1107374762.png" /></span></a></p>
-<p><span id="amrv80-memoryresources-dimmdiagram"></span></p>
+  <div class="section" id="amr-memory-architecture-concepts-common">
+<h1>AMR - Memory Architecture Concepts (Common)<a class="headerlink" href="#amr-memory-architecture-concepts-common" title="Permalink to this heading">¶</a></h1>
+<blockquote>
+<div><p><strong>For platform-specific memory configurations</strong>, see:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../v80/hardware/memory-resources.html"><span class="std std-doc">V80 Memory Resources</span></a> - HBM + DDR4 DIMM + Discrete SDRAM (68GB)</p></li>
+<li><p><a class="reference internal" href="../rave/hardware/memory-resources.html"><span class="std std-doc">RAVE Memory Resources</span></a> - LPDDR4 only (8-16GB)</p></li>
+</ul>
+</div></blockquote>
+<p><span id="amr-memoryresources-overview"></span></p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
+<p>This document describes <strong>common memory architecture concepts</strong> shared across all AMR platforms. All platforms use Versal integrated memory controllers and DRAM for RPU0 execution and inter-processor communication.</p>
+<p>All AMR platforms allocate DRAM memory for RPU0 firmware execution, storing the firmware code sections, data sections, stack, and heap in memory accessible by the R5 processors. Shared DRAM regions support the software GCQ implementation for inter-processor communication, with ring buffers and message storage allocated in memory accessible by both the RPU and PCIe host. The Versal integrated memory controllers (DDRMC) provide hardened logic for controlling DRAM and LPDDR4 devices, with NoC connectivity enabling access from multiple masters throughout the system.</p>
+<p>Platform-specific memory configurations vary significantly in capacity and architecture. The V80 platform combines HBM (32GB), DDR DIMM (32GB), and discrete SDRAM (4GB) for a total of 68GB of memory resources distributed across multiple memory types optimized for different access patterns. The RAVE platform uses LPDDR4 exclusively with 8GB or 16GB total capacity depending on the board variant, providing a more constrained memory environment optimized for embedded applications.</p>
+<p><span id="amr-memoryresources-memorycontrollers"></span></p>
 </div>
-<div class="section" id="ddr-dimm">
-<h2>DDR DIMM<a class="headerlink" href="#ddr-dimm" title="Permalink to this heading">¶</a></h2>
-<p>AMR V80 contains 32GB of DDR DIMM that is a shared memory resource for the host, APU, and programmable logic (PL). There is not any predefined organization or partitioning of this memory. Like the DDR, the DIMM operates at 200MHz and it is controlled by the Versal integrated memory controller (DDRMC). This hardened MC contains four ports to optimize throughput to the DDR. The AMR V80 design uses all four ports, but other connections to these ports are allowed. The diagram below illustrates the DIMM memory space. AMR V80 does not currently use the APU, but it is available for future growth.</p>
-<p>More information on the MC can be found at <a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Integrated-Memory-Controller-DDRMC-Architecture">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Integrated-Memory-Controller-DDRMC-Architecture</a>.</p>
-<p><a class="reference download internal" download="" href="../_downloads/f45fcf722ae85222ba955fe250a5e44d/1107374759.png"><span class="xref download myst"><img alt="image2" src="../_images/1107374759.png" /></span></a></p>
-<p><span id="amrv80-memoryresources-hbmdiagram"></span></p>
+<div class="section" id="versal-integrated-memory-controllers">
+<h2>Versal Integrated Memory Controllers<a class="headerlink" href="#versal-integrated-memory-controllers" title="Permalink to this heading">¶</a></h2>
+<p>All Versal devices include integrated memory controllers (DDRMC) that connect to the NoC.</p>
+<div class="section" id="ddrmc-architecture">
+<h3>DDRMC Architecture<a class="headerlink" href="#ddrmc-architecture" title="Permalink to this heading">¶</a></h3>
+<p>The Versal integrated memory controllers implement hardened logic for DDR and LPDDR4 memory management. Each controller provides multiple ports for parallel access, with four ports per controller enabling concurrent access from different masters to optimize overall memory throughput. The controllers integrate with the NoC through DDRMC_NSU (NoC Slave Unit) interfaces that convert NoC packet domain traffic directly to memory controller operations.</p>
+<p>The memory controllers operate at configurable frequencies with 200 MHz being the typical configuration for AMR platforms. This frequency applies to the controller clock, with DDR and LPDDR4 devices achieving higher effective data rates through double-data-rate operation. The controllers support various DDR technologies including DDR4, LPDDR4, and LPDDR4X depending on the specific Versal device variant.</p>
+<p>Each memory controller provides four ports that can be independently addressed and accessed. AMR designs typically utilize two ports per controller (ports 0 and 1) for CIPS traffic and PCIe DMA operations. The remaining ports (2 and 3) stay available for user application memory masters when additional bandwidth or parallel access paths are required.</p>
+<p>More information: <a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Integrated-Memory-Controller-DDRMC-Architecture">Integrated Memory Controller Architecture</a></p>
+<p><span id="amr-memoryresources-memoryusagepatterns"></span></p>
 </div>
-<div class="section" id="hbm">
-<h2>HBM<a class="headerlink" href="#hbm" title="Permalink to this heading">¶</a></h2>
-<p>HBM memory is a high bandwidth, low power memory alternative to DDR. AMR contains 32GB of on-chip high-bandwidth memory (HBM). Like the DDR and DIMM, HBM operates at 200MHz. It is controlled by the Versal Integrated HBM controller. There is not any predefined organization or partitioning of this memory.</p>
-<p>HBM is comprised of two 16GB stacks. Each stack has eight integrated AXI HBM Controllers. Each HBM controller contains two pseudo channels where each pseudo channel addresses a 1GB dedicated portion of the HBM. The HBM architecture also allows for global memory access to each master connected to the HBM; however accessing a non-direct portion of the memory will come at a performance cost.</p>
-<p>More information on the HBM MC can be found at <a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Integrated-HBM-Controller">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Integrated-HBM-Controller</a>.</p>
-<p><img alt="image3" src="../_images/1107374765.png" /></p>
+</div>
+<div class="section" id="common-memory-usage-patterns">
+<h2>Common Memory Usage Patterns<a class="headerlink" href="#common-memory-usage-patterns" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="rpu-execution-memory">
+<h3>RPU Execution Memory<a class="headerlink" href="#rpu-execution-memory" title="Permalink to this heading">¶</a></h3>
+<p>All platforms allocate DRAM memory regions for RPU0 firmware execution. The RPU uses this memory for firmware code sections containing the executable instructions, firmware data sections holding initialized and uninitialized variables, and stack and heap regions for runtime memory allocation. Firmware data structures including message buffers, state machines, and configuration tables also reside in this memory.</p>
+<p>The RPU accesses DDR memory through the LPD_AXI_NOC_0 NoC interface, which provides a 128-bit connection operating at 800 MHz. The R5 processors have 32-bit addressing capabilities, limiting direct access to a maximum of 4GB of the address space. This constraint influences memory allocation strategies, with firmware and related data structures placed within the lower 4GB region for direct RPU accessibility.</p>
+</div>
+<div class="section" id="inter-processor-communication-ipc">
+<h3>Inter-Processor Communication (IPC)<a class="headerlink" href="#inter-processor-communication-ipc" title="Permalink to this heading">¶</a></h3>
+<p>The software GCQ implementation allocates shared DRAM memory regions for inter-processor communication. Ring buffer structures for submission and completion queues reside in memory that is accessible by the RPU through direct addressing, by the PMC through its NoC connection, and by the PCIe host through address-remapped BAR regions. Firmware protocols manage queue synchronization, message formatting, and flow control without dedicated hardware logic. This approach represents a pure software and firmware implementation rather than a hardware IP block in the programmable logic.</p>
+</div>
+<div class="section" id="pmc-boot-memory">
+<h3>PMC Boot Memory<a class="headerlink" href="#pmc-boot-memory" title="Permalink to this heading">¶</a></h3>
+<p>The PMC utilizes DRAM memory during the boot sequence for pre-boot initialization activities, temporary storage of configuration data, platform management function execution, and device initialization sequences. The PMC writes initialization parameters to memory, prepares data structures for handoff to the RPU, and may cache configuration information before the full system becomes operational.</p>
+<p><span id="amr-memoryresources-nocintegration"></span></p>
+</div>
+</div>
+<div class="section" id="noc-integration">
+<h2>NoC Integration<a class="headerlink" href="#noc-integration" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="ddrmc-to-noc-connection">
+<h3>DDRMC to NoC Connection<a class="headerlink" href="#ddrmc-to-noc-connection" title="Permalink to this heading">¶</a></h3>
+<p><strong>All memory controllers connect to NoC via DDRMC_NSU:</strong></p>
+<ul class="simple">
+<li><p>Converts NoC packet domain to memory controller domain</p></li>
+<li><p>No AXI protocol conversion (direct NoC to MC)</p></li>
+<li><p>Optimized for memory bandwidth</p></li>
+</ul>
+<p><strong>NoC Routing to Memory:</strong></p>
+<ul class="simple">
+<li><p>PCIe host → NoC → DDRMC_NSU → Memory</p></li>
+<li><p>RPU → NoC → DDRMC_NSU → Memory</p></li>
+<li><p>PMC → NoC → DDRMC_NSU → Memory</p></li>
+</ul>
+</div>
+<div class="section" id="memory-performance">
+<h3>Memory Performance<a class="headerlink" href="#memory-performance" title="Permalink to this heading">¶</a></h3>
+<p>Memory performance is influenced by several factors that interact in complex ways. NoC contention between multiple masters accessing memory simultaneously can reduce available bandwidth for individual transactions. Quality of Service settings in the NoC configuration affect arbitration priority and bandwidth allocation among competing traffic streams. The read/write ratio of the workload influences memory controller efficiency due to different command overhead for read versus write operations. Burst sizes affect protocol efficiency with larger bursts amortizing command overhead across more data beats. Memory controller address mapping determines whether accesses hit in open row buffers or require row activation commands. The number of active memory controller ports affects parallel access capability and overall throughput potential.</p>
+<p><span id="amr-memoryresources-memoryfrequency"></span></p>
+</div>
+</div>
+<div class="section" id="memory-operating-frequency">
+<h2>Memory Operating Frequency<a class="headerlink" href="#memory-operating-frequency" title="Permalink to this heading">¶</a></h2>
+<p><strong>Common Configuration:</strong></p>
+<ul class="simple">
+<li><p>Memory Controller Frequency: <strong>200 MHz</strong></p></li>
+<li><p>For DDR: Effective data rate = <strong>400 MT/s</strong> (double data rate)</p></li>
+<li><p>For LPDDR4: Effective data rate = <strong>400 MT/s</strong></p></li>
+</ul>
+<p><strong>Note:</strong> HBM (V80 only) uses separate integrated controllers operating at 200 MHz.</p>
+<p><span id="amr-memoryresources-addressspace"></span></p>
+</div>
+<div class="section" id="address-space-concepts">
+<h2>Address Space Concepts<a class="headerlink" href="#address-space-concepts" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="versal-address-map">
+<h3>Versal Address Map<a class="headerlink" href="#versal-address-map" title="Permalink to this heading">¶</a></h3>
+<p><strong>4GB Address Space (32-bit accessible):</strong></p>
+<ul class="simple">
+<li><p>0x000_0000_0000 - 0x000_FFFF_FFFF (4GB)</p></li>
+<li><p>Includes PS/PMC peripherals and lower DRAM</p></li>
+</ul>
+<p><strong>16TB Address Space (64-bit):</strong></p>
+<ul class="simple">
+<li><p>0x000_0000_0000 - 0x0FF_FFFF_FFFF (16TB)</p></li>
+<li><p>Includes upper DDR, HBM (V80), PL address space</p></li>
+</ul>
+<p><strong>References:</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/4-GB-Processor-System-Address-Map">Versal 4GB Address Map</a></p></li>
+<li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map">Versal 16TB Address Map</a></p></li>
+</ul>
+<p><span id="amr-memoryresources-platformdifferences"></span></p>
+</div>
+</div>
+<div class="section" id="platform-specific-memory-configurations">
+<h2>Platform-Specific Memory Configurations<a class="headerlink" href="#platform-specific-memory-configurations" title="Permalink to this heading">¶</a></h2>
+<p>For detailed memory configurations, see platform-specific documentation:</p>
+<div class="section" id="v80-memory-configuration">
+<h3>V80 Memory Configuration<a class="headerlink" href="#v80-memory-configuration" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference internal" href="../v80/hardware/memory-resources.html"><span class="std std-doc">V80 Memory Resources</span></a></p>
+<p><strong>V80-Specific:</strong></p>
+<ul class="simple">
+<li><p>✓ <strong>HBM</strong>: 32 GB (2× 16GB stacks, 16 controllers)</p></li>
+<li><p>✓ <strong>DDR DIMM</strong>: 32 GB DDR4 RDIMM</p></li>
+<li><p>✓ <strong>Discrete SDRAM</strong>: 4 GB LPDDR4</p></li>
+<li><p>✓ <strong>Total</strong>: 68 GB</p></li>
+<li><p>✓ <strong>HBM Bandwidth</strong>: ~460 GB/s</p></li>
+</ul>
+</div>
+<div class="section" id="rave-memory-configuration">
+<h3>RAVE Memory Configuration<a class="headerlink" href="#rave-memory-configuration" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference internal" href="../rave/hardware/memory-resources.html"><span class="std std-doc">RAVE Memory Resources</span></a></p>
+<p><strong>RAVE-Specific:</strong></p>
+<ul class="simple">
+<li><p>✓ <strong>LPDDR4</strong>: 8 GB or 16 GB (soldered)</p></li>
+<li><p>✓ <strong>Configuration</strong>: 2 channels x32</p></li>
+<li><p>✓ <strong>Total</strong>: 8-16 GB</p></li>
+<li><p>❌ <strong>No HBM</strong>: Edge device limitation</p></li>
+<li><p>❌ <strong>No DIMM slots</strong>: Embedded platform</p></li>
+</ul>
+<p><span id="amr-memoryresources-designguidelines"></span></p>
+</div>
+</div>
+<div class="section" id="design-guidelines">
+<h2>Design Guidelines<a class="headerlink" href="#design-guidelines" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="memory-allocation">
+<h3>Memory Allocation<a class="headerlink" href="#memory-allocation" title="Permalink to this heading">¶</a></h3>
+<p>When designing applications for AMR:</p>
+<ol class="arabic simple">
+<li><p><strong>Check platform memory capacity</strong></p>
+<ul class="simple">
+<li><p>V80: 68 GB available</p></li>
+<li><p>RAVE: 8-16 GB available</p></li>
+</ul>
+</li>
+<li><p><strong>Reserve RPU memory</strong></p>
+<ul class="simple">
+<li><p>Firmware execution and data</p></li>
+<li><p>Software GCQ buffers</p></li>
+<li><p>Typically few MB</p></li>
+</ul>
+</li>
+<li><p><strong>Plan for IPC</strong></p>
+<ul class="simple">
+<li><p>Software GCQ requires shared memory</p></li>
+<li><p>Size based on message throughput</p></li>
+</ul>
+</li>
+<li><p><strong>Consider bandwidth</strong></p>
+<ul class="simple">
+<li><p>V80: Use HBM for high-bandwidth workloads</p></li>
+<li><p>RAVE: LPDDR4 sufficient for edge applications</p></li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="platform-portability">
+<h3>Platform Portability<a class="headerlink" href="#platform-portability" title="Permalink to this heading">¶</a></h3>
+<p>To support both platforms, application designs should target the more constrained memory capacity (8-16GB) to ensure portability across platforms. Applications should not assume HBM availability and should instead design memory access patterns that work with standard DDR or LPDDR4 memory. Using QDMA abstractions ensures DMA code works across platforms regardless of whether QDMA is hardened or implemented in PL. Testing memory bandwidth requirements on both platforms validates that performance is acceptable across the different memory architectures.</p>
+</div>
 </div>
 </div>
 
@@ -179,7 +310,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

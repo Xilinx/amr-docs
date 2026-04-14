@@ -99,24 +99,24 @@ Function for enabling and disabling the test mode for InBand Telemetry
 
 Internal Context structure
 
-**IN\_BAND\_PRIVATE\_DATA**
+**INBandPrivateData**
 
     /**
-     * @struct  IN_BAND_PRIVATE_DATA
-     * @brief   Structure to hold ths in band telemetry private data
+     * @struct  INBandPrivateData
+     * @brief   Structure to hold the in band telemetry private data
      */
-    typedef struct IN_BAND_PRIVATE_DATA
+    typedef struct
     {
-        uint32_t                        ulUpperFirewall;
-        void                            *pvOsalMutexHdl;
-        uint64_t                        ullSharedMemBaseAddr;
-        uint32_t                        pulStatCounters[ IN_BAND_STATS_MAX ];
-        uint32_t                        pulErrorCounters[ IN_BAND_ERRORS_MAX ];
-        int                             iInitialised;
-        int                             iInBandTestMode;
-        uint32_t                        ulLowerFirewall;
-    
-    } IN_BAND_PRIVATE_DATA;
+        uint32_t ulUpperFirewall;
+        void     *pvOsalMutexHdl;
+        uint64_t ullSharedMemBaseAddr;
+        uint32_t pulStatCounters[ IN_BAND_STATS_MAX ];
+        uint32_t pulErrorCounters[ IN_BAND_ERRORS_MAX ];
+        int      iInitialised;
+        int      iInBandTestMode;
+        uint32_t ulLowerFirewall;
+
+    } INBandPrivateData;
 
 <span id="amrinbandtelemetryapplication-iin-band-telemetry-initialisefunction"></span>
 

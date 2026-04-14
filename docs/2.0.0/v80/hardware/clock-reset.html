@@ -3,21 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
   <title>AMR V80 - Clock Reset Module &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
@@ -38,11 +23,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -86,19 +67,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development/source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/asdm-application.html">AMR ASDM Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/inband-telemetry.html">AMR InBand Telemetry Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../firmware/asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
@@ -142,48 +130,85 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
              
   <div class="section" id="amr-v80-clock-reset-module">
 <h1>AMR V80 - Clock Reset Module<a class="headerlink" href="#amr-v80-clock-reset-module" title="Permalink to this heading">¶</a></h1>
-<p><span id="amrv80-clockresetmodule-clockreset"></span></p>
-<div class="section" id="clock-reset">
-<h2>Clock Reset<a class="headerlink" href="#clock-reset" title="Permalink to this heading">¶</a></h2>
-<p>The AMR Clock Reset module is used to create kernel clocks and distribute synchronous resets throughout the device. The <a class="reference external" href="https://docs.xilinx.com/r/en-US/ug1273-versal-acap-design/Clocking">Clocking Wizard</a> is used to create additional PL clocks, and the synchronous resets are generated using the <a class="reference external" href="https://docs.xilinx.com/v/u/en-US/pg164-proc-sys-reset">Processor System Reset IP</a>.</p>
-<p><a class="reference download internal" download="" href="../../_downloads/3349ddb257f8fe72fe566b104581f4e6/1107375517.png"><span class="xref download myst"><img alt="image1" src="../../_images/1107375517.png" /></span></a></p>
-<p><span id="amrv80-clockresetmodule-sub-blocks"></span></p>
+<blockquote>
+<div><p><strong>For common clock/reset concepts</strong>, see <a class="reference internal" href="../../hardware/clock-reset.html"><span class="std std-doc">Common Clock Reset</span></a></p>
+<p>This document describes V80-specific clock and reset configuration.</p>
+</div></blockquote>
+<p><span id="amrv80-clockresetmodule-overview"></span></p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
+<p>The V80 base design uses CIPS-generated clocks (100 MHz, 33.33 MHz, 250 MHz) directly without clock generation IP. A single processor system reset block in the PF1 hierarchy provides reset synchronization for the test logic. The design can be extended with clocking wizards and additional reset blocks when user kernels require custom clock domains.</p>
+<p><span id="amr-clockresetmodule-sub-blocks"></span></p>
 </div>
-<div class="section" id="sub-blocks">
-<h2>Sub-blocks<a class="headerlink" href="#sub-blocks" title="Permalink to this heading">¶</a></h2>
-<p><span id="amrv80-clockresetmodule-usr-clk-wiz"></span></p>
-<div class="section" id="usr-clk-wiz">
-<h3>usr_clk_wiz<a class="headerlink" href="#usr-clk-wiz" title="Permalink to this heading">¶</a></h3>
-<p>This IP uses the 33.333333MHz from the CIPS (pl1_ref_clk) to create the 299.996999MHz and 499.994999MHz clocks for user logic_clk_usr_0 &amp; clk_usr_1). The user can change the output clock frequencies to meet their design requirements. The resets from usr_0_psr and usr_1_psr are asserted when the ‘locked’ signal from this module is de-asserted.</p>
-<p><span id="amrv80-clockresetmodule-pl-psr-programmablelogicprocessorsystemreset"></span></p>
+<div class="section" id="cips-clock-outputs">
+<h2>CIPS Clock Outputs<a class="headerlink" href="#cips-clock-outputs" title="Permalink to this heading">¶</a></h2>
+<p>The CIPS IP provides multiple PL reference clocks for use in the programmable logic:</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Clock Signal</th>
+<th>Frequency</th>
+<th>Usage in Base Design</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pl0_ref_clk</td>
+<td>100 MHz</td>
+<td>PF1 hierarchy (SmartConnect, GPIO, proc_sys_reset_0)</td>
+</tr>
+<tr>
+<td>pl1_ref_clk</td>
+<td>33.3333 MHz</td>
+<td>Available for future expansion (user clocking wizard input)</td>
+</tr>
+<tr>
+<td>pl2_ref_clk</td>
+<td>250 MHz</td>
+<td>NoC AXI interfaces (axi_noc_cips aclk4)</td>
+</tr>
+</tbody>
+</table>
+<p><span id="amr-clockresetmodule-base-design-resets"></span></p>
 </div>
-<div class="section" id="pl-psr-programmable-logic-processor-system-reset">
-<h3>pl_psr - Programmable Logic Processor System Reset<a class="headerlink" href="#pl-psr-programmable-logic-processor-system-reset" title="Permalink to this heading">¶</a></h3>
-<p>This block synchronizes the CIPS reset (pl0_resetn), to the CIPS 100MHz clock (pl0_ref_clk). Then it is used to create device wide resets synchronous to the PCIe 250MHz clock and the clock wizard 299.996999MHz and 499.994999MHz clocks.</p>
-<p><span id="amrv80-clockresetmodule-pcie-psr-pcieprocessorsystemreset"></span></p>
+<div class="section" id="base-design-reset-structure">
+<h2>Base Design Reset Structure<a class="headerlink" href="#base-design-reset-structure" title="Permalink to this heading">¶</a></h2>
+<p><span id="amr-clockresetmodule-pf1-proc-sys-reset"></span></p>
+<div class="section" id="pf1-proc-sys-reset-0">
+<h3>PF1 proc_sys_reset_0<a class="headerlink" href="#pf1-proc-sys-reset-0" title="Permalink to this heading">¶</a></h3>
+<p>This processor system reset block (xilinx.com:ip:proc_sys_reset:5.0) is instantiated within the PF1 hierarchical block:</p>
+<p><strong>Inputs:</strong></p>
+<ul class="simple">
+<li><p>ext_reset_in: Connected to PF1 aresetn (external reset input)</p></li>
+<li><p>slowest_sync_clk: Connected to pl0_ref_clk (100 MHz)</p></li>
+</ul>
+<p><strong>Outputs:</strong></p>
+<ul class="simple">
+<li><p>interconnect_aresetn: Reset for SmartConnect (smartconnect_pf1)</p></li>
+<li><p>peripheral_aresetn: Reset for AXI GPIO (axi_gpio_test_pf1)</p></li>
+</ul>
+<p><strong>Function:</strong> Synchronizes the external reset signal to the 100 MHz clock domain and generates appropriately timed resets for the SmartConnect interconnect and AXI GPIO peripheral.</p>
+<p><span id="amr-clockresetmodule-future-expansion"></span></p>
 </div>
-<div class="section" id="pcie-psr-pcie-processor-system-reset">
-<h3>pcie_psr - PCIe Processor System Reset<a class="headerlink" href="#pcie-psr-pcie-processor-system-reset" title="Permalink to this heading">¶</a></h3>
-<p>This block creates a reset signal synchronous to the 249.999985MHz PCIe (dma interface) clock.</p>
-<p><span id="amrv80-clockresetmodule-usr-0-psr-user0processorsystemreset"></span></p>
 </div>
-<div class="section" id="usr-0-psr-user0-processor-system-reset">
-<h3>usr_0_psr - User0 Processor System Reset<a class="headerlink" href="#usr-0-psr-user0-processor-system-reset" title="Permalink to this heading">¶</a></h3>
-<p>Using the 100MHz synchronized reset output from pl_psr and the dcm_locked signal from the clock wizard, this block creates a reset signal synchronous to the clock wizard 299.996999MHz clock. These resets would be used for user logic.</p>
-<p><span id="amrv80-clockresetmodule-usr-1-psr-user1processorsystemreset"></span></p>
+<div class="section" id="future-expansion-user-clock-domains">
+<h2>Future Expansion - User Clock Domains<a class="headerlink" href="#future-expansion-user-clock-domains" title="Permalink to this heading">¶</a></h2>
+<p>For designs requiring custom clock frequencies, the following structure can be added:</p>
+<div class="section" id="usr-clk-wiz-optional-not-in-base-design">
+<h3>usr_clk_wiz (Optional - Not in Base Design)<a class="headerlink" href="#usr-clk-wiz-optional-not-in-base-design" title="Permalink to this heading">¶</a></h3>
+<p>A Clocking Wizard IP can use the 33.333333MHz from CIPS (pl1_ref_clk) to generate custom frequencies for user kernels (e.g., 300 MHz, 500 MHz). Additional Processor System Reset blocks would synchronize resets to these clock domains.</p>
 </div>
-<div class="section" id="usr-1-psr-user1-processor-system-reset">
-<h3>usr_1_psr - User1 Processor System Reset<a class="headerlink" href="#usr-1-psr-user1-processor-system-reset" title="Permalink to this heading">¶</a></h3>
-<p>Using the 100MHz synchronized reset output from pl_psr and the dcm_locked signal from the clock wizard, this block creates a reset signal synchronous to the clock wizard 499.994999MHz clock. These resets would be used for user logic.</p>
-<p><span id="amrv80-clockresetmodule-pcie-mgmt-pdi-reset"></span></p>
-</div>
-<div class="section" id="pcie-mgmt-pdi-reset">
-<h3>pcie_mgmt_pdi_reset<a class="headerlink" href="#pcie-mgmt-pdi-reset" title="Permalink to this heading">¶</a></h3>
-<p>This block is reserved for future growth.</p>
-<p><span id="amrv80-clockresetmodule-flashreload"></span></p>
+<div class="section" id="additional-psr-blocks-optional-not-in-base-design">
+<h3>Additional PSR Blocks (Optional - Not in Base Design)<a class="headerlink" href="#additional-psr-blocks-optional-not-in-base-design" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>pl_psr</strong>: Synchronizes CIPS reset (pl0_resetn) to 100MHz (pl0_ref_clk)</p></li>
+<li><p><strong>pcie_psr</strong>: Creates reset synchronous to PCIe clock domain</p></li>
+<li><p><strong>usr_N_psr</strong>: Creates resets synchronous to user clock domains from clocking wizard</p></li>
+</ul>
+<p><span id="amr-clockresetmodule-flashreload"></span></p>
 <div class="section" id="flash-reload">
 <h4>Flash Reload<a class="headerlink" href="#flash-reload" title="Permalink to this heading">¶</a></h4>
-<p>AMR only supports a Power-On-Reset to reload a design from flash. It does <strong>not</strong> support a hot reset to reload the flash due to the system complexity of resets which are described below.</p>
+<p>AMR uses software-based device reboot via the <code class="docutils literal notranslate"><span class="pre">device_boot</span></code> command to reload the design from flash. This requires functional AMC firmware and established AMC-to-AMI communication. GPIO-based PCIe hot reset is <strong>not</strong> supported due to the system complexity of resets described below.</p>
 <ul class="simple">
 <li><p>When PCIe Reset asserts, this reset does not naturally progress to the rest of the device.</p></li>
 <li><p>The reset structure of Versal is not structured/tested in a way that it can be reset properly without reloading the entire design from flash (in the desired time frame).</p>
@@ -196,6 +221,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><p>Some DELL servers reboot themselves if the PCIe link goes down unexpectedly.</p></li>
 </ul>
 </li>
+<li><p>When AMC-to-AMI communication is not established or if the AMC is not in a good state, a complete power cycle of the device is required.</p></li>
 </ul>
 </div>
 </div>
@@ -213,7 +239,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

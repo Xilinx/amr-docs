@@ -880,13 +880,13 @@ A common API has been developed, and used throughout AMC source code. OS specifi
     /**
      * @brief   OSAL wrapper for task/thread safe memory allocation.
      *
-     * @param   uint16_t  The number of bytes to allocate.
+     * @param   xSize  The number of bytes to allocate.
      *
      * @return  Pointer to the beginning of newly allocated memory.
      *          NULL if unsuccessful.
      *
      */
-    void* pvOSAL_MemAlloc( uint16_t xSize );
+    void* pvOSAL_MemAlloc( uint32_t xSize );
 
 <span id="operatingsystemabstractionlayer-osal-osalmemset"></span>
 
@@ -899,13 +899,13 @@ A common API has been developed, and used throughout AMC source code. OS specifi
      *
      * @param   pvDestination Pointer to the block of memory to be set.
      * @param   iValue        The value to be set.
-     * @param   usSize        The number of bytes to be set, to the specified valve.
+     * @param   usSize        The number of bytes to be set, to the specified value.
      *
      * @return  Pointer to the beginning of newly set memory.
      *          NULL if unsuccessful.
      *
      */
-    void* pvOSAL_MemSet( void* pvDestination, int iValue, uint16_t usSize );
+    void* pvOSAL_MemSet( void* pvDestination, int iValue, uint32_t usSize );
 
 <span id="operatingsystemabstractionlayer-osal-osalmemcpy"></span>
 
@@ -924,7 +924,7 @@ A common API has been developed, and used throughout AMC source code. OS specifi
      *          NULL if unsuccessful.
      *
      */
-    void* pvOSAL_MemCpy( void* pvDestination, const void* pvSource, uint16_t usSize );
+    void* pvOSAL_MemCpy( void* pvDestination, const void* pvSource, uint32_t usSize );
 
 <span id="operatingsystemabstractionlayer-osal-osalfree"></span>
 
@@ -955,13 +955,13 @@ A common API has been developed, and used throughout AMC source code. OS specifi
      *
      * @param   pvDestination  Pointer to the destination array where the content is to be copied,
      *                         type-casted to a pointer of type void*.
-     * @param   pvSource       Pointer to the source of data to be copied, type-casted to a pointer of type const void*.
+     * @param   pvSource       Pointer to the source of data to be copied, type-casted to a pointer of type void*.
      * @param   usPayload_size Number of bytes to copy.
      *
      * @return  N/A.
      *
      */
-    void vOSAL_MemMove( void *pvDestination, void *pvSource, uint16_t usPayload_size );
+    void vOSAL_MemMove( void *pvDestination, void *pvSource, uint32_t usPayload_size );
 
 <span id="operatingsystemabstractionlayer-osal-osalprintf"></span>
 
@@ -1010,7 +1010,7 @@ A common API has been developed, and used throughout AMC source code. OS specifi
      *          NULL if unsuccessful.
      *
      */
-    char* pcOSAL_StrNCpy( char *pcDestination, const char *pcSource, uint16_t usSize );
+    char* pcOSAL_StrNCpy( char *pcDestination, const char *pcSource, uint32_t usSize );
 
 <span id="operatingsystemabstractionlayer-osal-osalmemcmp"></span>
 
@@ -1028,7 +1028,7 @@ A common API has been developed, and used throughout AMC source code. OS specifi
      * @return  0 if the the contents of both memory blocks are equal, non 0 if not.
      *
      */
-    int iOSAL_MemCmp( const void  *pvMemoryOne, const void *pvMemoryTwo, uint16_t usSize );
+    int iOSAL_MemCmp( const void  *pvMemoryOne, const void *pvMemoryTwo, uint32_t usSize );
 
 <span id="operatingsystemabstractionlayer-osal-debugstatsapis"></span>
 

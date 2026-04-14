@@ -45,9 +45,14 @@ APC proxy driver event IDs.
         APC_PROXY_DRIVER_E_COPY_FAILED,
         APC_PROXY_DRIVER_E_PARTITION_SELECTED,
         APC_PROXY_DRIVER_E_PARTITION_SELECTION_FAILED,
-    
+        APC_PROXY_DRIVER_E_FPT_FLAGS_UPDATED,
+        APC_PROXY_DRIVER_E_PROGRAM_STARTED,
+        APC_PROXY_DRIVER_E_PROGRAM_COMPLETE,
+        APC_PROXY_DRIVER_E_PROGRAM_BUSY,
+        APC_PROXY_DRIVER_E_PROGRAM_FAILED,
+
         MAX_APC_PROXY_DRIVER_EVENTS
-    
+
     } APC_PROXY_DRIVER_EVENTS;
 
 Boot device IDs.
@@ -73,37 +78,50 @@ Boot device IDs.
 
 Device FPT headers.
 
-**APC\_PROXY\_DRIVER\_FPT\_HEADER**
+**APCProxyDriverFptHeader**
 
     /**
-     * @struct  APC_PROXY_DRIVER_FPT_HEADER
+     * @struct  APCProxyDriverFptHeader
      * @brief   Structure to hold the FPT Header
      */
-    typedef struct APC_PROXY_DRIVER_FPT_HEADER
+    typedef struct APCProxyDriverFptHeader
     {
         uint32_t    ulMagicNum;
         uint8_t     ucFptVersion;
         uint8_t     ucFptHeaderSize;
         uint8_t     ucEntrySize;
         uint8_t     ucNumEntries;
-    
-    } APC_PROXY_DRIVER_FPT_HEADER;
+
+    } APCProxyDriverFptHeader;
 
 Device FPT partitions.
 
-**APC\_PROXY\_DRIVER\_FPT\_PARTITION**
+**APCProxyDriverFptPartition**
 
     /**
-     * @struct  APC_PROXY_DRIVER_FPT_PARTITION
+     * @struct  APCProxyDriverFptPartition
      * @brief   Structure to hold a single FPT partition
      */
-    typedef struct APC_PROXY_DRIVER_FPT_PARTITION
+    typedef struct APCProxyDriverFptPartition
     {
         uint32_t    ulPartitionType;
         uint32_t    ulPartitionBaseAddr;
         uint32_t    ulPartitionSize;
-    
-    } APC_PROXY_DRIVER_FPT_PARTITION;
+        uint8_t     pdi_md5[MD5_SIZE];
+        uint32_t    ulPdiSize;
+        union {
+            uint32_t ulPartitionFlags;     /* User defined flags */
+            struct {
+                uint32_t powerup_flag:1;    /* Power on load user partition flag
+                                               0: Disabled, 1: Enabled */
+                uint32_t reserved1:15;      /* Reserved for future use */
+                uint32_t powerup_error:2;   /* Power on load user partition error flag
+                                               0: Not Loaded, 1: Loaded, 2: Error */
+                uint32_t reserved2:14;      /* Reserved for future use */
+            } user;
+        };
+
+    } APCProxyDriverFptPartition;
 
 <span id="amrprogrammingcontrol-apc-proxydriver-api"></span>
 
@@ -134,7 +152,7 @@ This will open the FAL using the provided handle and make use of the OSAL to cre
      *          and can be set to NULL.
      *
      */
-    int iAPC_Initialise( uint8_t ucProxyId, FW_IF_CFG *pxPrimaryFwIf, FW_IF_CFG *pxSecondaryFwIf, uint32_t ulTaskPrio, uint32_t ulTaskStack );
+    int iAPC_Initialise( uint8_t ucProxyId, FW_IF_CFG *pxPrimaryFwIf, FW_IF_CFG *pxSecondaryFwIf, XLoader_ClientInstance *pXLoaderInst, uint32_t ulTaskPrio, uint32_t ulTaskStack );
 
 <span id="amrprogrammingcontrol-apc-proxydriver-bindcallbacks"></span>
 
@@ -161,6 +179,16 @@ This API can be used to bind into a callback to be notified of events generated 
   - **APC\_PROXY\_DRIVER\_E\_PARTITION\_SELECTED**
 
   - **APC\_PROXY\_DRIVER\_E\_PARTITION\_SELECTION\_FAILED**
+
+  - **APC\_PROXY\_DRIVER\_E\_FPT\_FLAGS\_UPDATED**
+
+  - **APC\_PROXY\_DRIVER\_E\_PROGRAM\_STARTED**
+
+  - **APC\_PROXY\_DRIVER\_E\_PROGRAM\_COMPLETE**
+
+  - **APC\_PROXY\_DRIVER\_E\_PROGRAM\_BUSY**
+
+  - **APC\_PROXY\_DRIVER\_E\_PROGRAM\_FAILED**
 
 **iAPC\_BindCallback**
 
@@ -192,14 +220,17 @@ This will post a message (**APC\_MSG\_TYPE\_DOWNLOAD\_PDI**) onto the APC mailbo
      * @param   ulSrcAddr    Address (in RAM) to read the image from
      * @param   ulImageSize  Size of image (in bytes)
      * @param   usPacketNum  Image packet number
-     * @param   usPacketSize Size of image packet (in KB)
+     * @param   ulPacketSize Size of image packet (in KB)
+     * @param   pucPdiMd5    Pointer to 16-byte PDI MD5 checksum
+     * @param   ulPdiSize    Size of full PDI file in bytes
+     * @param   iLastPacket  Boolean indicating if this is the last data packet
      *
      * @return  OK           Image downloaded successfully
      *          ERROR        Image not downloaded successfully
      *
      */
     int iAPC_DownloadImage( EVL_SIGNAL *pxSignal, APC_BOOT_DEVICES xBootDevice, int iPartition, uint32_t ulSrcAddr,
-                            uint32_t ulImageSize, uint16_t usPacketNum, uint16_t usPacketSize );
+                            uint32_t ulImageSize, uint16_t usPacketNum, uint32_t ulPacketSize, uint8_t *pucPdiMd5, uint32_t ulPdiSize, int iLastPacket );
 
 <span id="amrprogrammingcontrol-apc-proxydriver-updatefpt"></span>
 
@@ -217,7 +248,7 @@ This will post a message (**APC\_MSG\_TYPE\_DOWNLOAD\_PDI**) onto the APC mailbo
      * @param   ulSrcAddr    Address (in RAM) to read the image from
      * @param   ulImageSize  Size of image (in bytes)
      * @param   usPacketNum  Image packet number
-     * @param   usPacketSize Size of image packet (in KB)
+     * @param   ulPacketSize Size of image packet (in KB)
      * @param   iLastPacket  Boolean indicating if this is the last data packet
      *
      * @return  OK           Image downloaded successfully
@@ -225,7 +256,7 @@ This will post a message (**APC\_MSG\_TYPE\_DOWNLOAD\_PDI**) onto the APC mailbo
      *
      */
     int iAPC_UpdateFpt( EVL_SIGNAL *pxSignal, APC_BOOT_DEVICES xBootDevice, uint32_t ulSrcAddr, uint32_t ulImageSize,
-                        uint16_t usPacketNum, uint16_t usPacketSize, int iLastPacket );
+                        uint16_t usPacketNum, uint32_t ulPacketSize, int iLastPacket );
 
 <span id="amrprogrammingcontrol-apc-proxydriver-copyimage"></span>
 
@@ -290,6 +321,97 @@ This will post a message (**APC\_MSG\_TYPE\_ENABLE\_HOT\_RESET**) onto the APC m
      */
     int iAPC_EnableHotReset( EVL_SIGNAL *pxSignal );
 
+<span id="amrprogrammingcontrol-apc-proxydriver-pdiprogramimage"></span>
+
+### PDI Program Image
+
+This will post a message onto the APC mailbox to be handled within the internal APC task to program a PDI image to memory.
+
+**iAPC\_PdiProgram**
+
+    /**
+     * @brief   Program PDI image to a location in memory
+     *
+     * @param   pxSignal            Current event occurance (used for tracking)
+     * @param   pxDownloadRequest   Target boot device and parameters
+     * @param   ulSrcAddr           Address (in RAM) to read the image from
+     *
+     * @return  OK                  PDI programmed successfully
+     *          ERROR               PDI programming failed
+     */
+    int iAPC_PdiProgram( EVL_SIGNAL *pxSignal, const AMIProxyPdiDownloadRequest *pxDownloadRequest, uint32_t ulSrcAddr );
+
+<span id="amrprogrammingcontrol-apc-proxydriver-setfptpartitionflags"></span>
+
+### Set FPT Partition Flags
+
+This will update the flags of a Flash Partition Table (FPT) partition in both the cached copy and the flash storage.
+
+**iAPC\_SetFptPartitionFlags**
+
+    /**
+     * @brief   Set/Update the flags of a Flash Partition Table (FPT) Partition
+     *
+     * @param   pxSignal        Current event occurance (used for tracking)
+     * @param   xBootDevice     Target boot device
+     * @param   iPartition      Index of partition to update (0 is the 1st partition)
+     * @param   ulFlags         New flags value to set
+     *
+     * @return  OK              FPT partition flags updated successfully
+     *          ERROR           FPT partition flags not updated successfully
+     *
+     * @note    This function updates the partition flags in both the cached copy
+     *          and the flash storage
+     */
+    int iAPC_SetFptPartitionFlags( EVL_SIGNAL *pxSignal, APC_BOOT_DEVICES xBootDevice, int iPartition, uint32_t ulFlags );
+
+<span id="amrprogrammingcontrol-apc-proxydriver-setfptpartition"></span>
+
+### Set FPT Partition
+
+This will update an FPT partition entry in both the cached copy and the flash storage.
+
+**iAPC\_SetFptPartition**
+
+    /**
+     * @brief   Set/Update an FPT Partition entry
+     *
+     * @param   pxSignal        Current event occurance (used for tracking)
+     * @param   xBootDevice     Target boot device
+     * @param   iPartition      Index of partition to update (0 is the 1st partition)
+     * @param   pucPdiMd5       Pointer to 16-byte PDI MD5 checksum (NULL to skip update)
+     * @param   ulPdiSize       Size of the PDI file in bytes
+     * @param   ulFlags         New flags value to set
+     *
+     * @return  OK              FPT partition updated successfully
+     *          ERROR           FPT partition not updated successfully
+     *
+     * @note    This function updates the partition in both the cached copy
+     *          and the flash storage
+     */
+    int iAPC_SetFptPartition( EVL_SIGNAL *pxSignal, APC_BOOT_DEVICES xBootDevice, int iPartition, uint8_t *pucPdiMd5, uint32_t ulPdiSize, uint32_t ulFlags );
+
+<span id="amrprogrammingcontrol-apc-proxydriver-readflashraw"></span>
+
+### Read Flash Raw
+
+This will read raw bytes from flash memory.
+
+**iAPC\_ReadFlashRaw**
+
+    /**
+     * @brief   Read raw bytes from flash
+     *
+     * @param   xBootDevice     Target boot device
+     * @param   ulOffset        Offset in flash to read from
+     * @param   pucBuffer       Buffer to store the read data
+     * @param   ulLength        Number of bytes to read
+     *
+     * @return  OK              Data read successfully
+     *          ERROR           Data not read successfully
+     */
+    int iAPC_ReadFlashRaw( APC_BOOT_DEVICES xBootDevice, uint32_t ulOffset, uint8_t *pucBuffer, uint32_t ulLength );
+
 <span id="amrprogrammingcontrol-apc-proxydriver-getfptheader"></span>
 
 ### Get FPT Header
@@ -308,7 +430,7 @@ This will copy the locally stored Flash Partition Table (FPT) header data into t
      *          ERROR           FPT header not retrieved successfully
      *
      */
-    int iAPC_GetFptHeader( APC_BOOT_DEVICES xBootDevice, APC_PROXY_DRIVER_FPT_HEADER *pxFptHeader );
+    int iAPC_GetFptHeader( APC_BOOT_DEVICES xBootDevice, APCProxyDriverFptHeader *pxFptHeader );
 
 <span id="amrprogrammingcontrol-apc-proxydriver-getfptpartition"></span>
 
@@ -329,7 +451,7 @@ This will copy the locally stored Flash Partition Table (FPT) partition data int
      *          ERROR           FPT partition not retrieved successfully
      *
      */
-    int iAPC_GetFptPartition( APC_BOOT_DEVICES xBootDevice, int iPartition, APC_PROXY_DRIVER_FPT_PARTITION *pxFptPartition );
+    int iAPC_GetFptPartition( APC_BOOT_DEVICES xBootDevice, int iPartition, APCProxyDriverFptPartition *pxFptPartition );
 
 <span id="amrprogrammingcontrol-apc-proxydriver-printstatistics"></span>
 
@@ -429,7 +551,7 @@ This function should only be called once. It requires an unique ID for the proxy
 
 **iAPC\_Initialise Example**
 
-    if( OK == iAPC_Initialise( AMC_EVENT_UNIQUE_ID_APC, &xPrimaryIf, &xSecondaryIf, AMC_TASK_PRIO_DEFAULT, AMC_APC_TASK_STACK ) )
+    if( OK == iAPC_Initialise( AMC_CFG_UNIQUE_ID_APC, &xPrimaryIf, &xSecondaryIf, &xLoaderInst, AMC_TASK_PRIO_DEFAULT, AMC_APC_TASK_STACK ) )
     {
         AMC_PRINTF( "APC Proxy Driver initialised\r\n" );
     }
@@ -451,7 +573,7 @@ Define a function based on the function pointer prototype and bind in using the 
     {
         int iStatus = ERROR;
     
-        if( ( NULL != pxSignal ) && ( AMC_EVENT_UNIQUE_ID_APC == pxSignal->ucModule ) )
+        if( ( NULL != pxSignal ) && ( AMC_CFG_UNIQUE_ID_APC == pxSignal->ucModule ) )
         {
             switch( pxSignal->ucEventType )
             {
@@ -465,6 +587,11 @@ Define a function based on the function pointer prototype and bind in using the 
                 case APC_PROXY_DRIVER_E_COPY_BUSY:
                 case APC_PROXY_DRIVER_E_PARTITION_SELECTED:
                 case APC_PROXY_DRIVER_E_PARTITION_SELECTION_FAILED:
+                case APC_PROXY_DRIVER_E_FPT_FLAGS_UPDATED:
+                case APC_PROXY_DRIVER_E_PROGRAM_STARTED:
+                case APC_PROXY_DRIVER_E_PROGRAM_COMPLETE:
+                case APC_PROXY_DRIVER_E_PROGRAM_BUSY:
+                case APC_PROXY_DRIVER_E_PROGRAM_FAILED:
                     /* TODO: handle events */
                     iStatus = OK;
                     break;
@@ -605,7 +732,7 @@ Example of retrieving the FPT header.
 
 **iAPC\_GetFptHeader Example**
 
-    APC_PROXY_DRIVER_FPT_HEADER xFptHeader = { 0 };
+    APCProxyDriverFptHeader xFptHeader = { 0 };
     APC_BOOT_DEVICES xBootDev = APC_BOOT_DEVICE_PRIMARY;
     
     if( OK != iAPC_GetFptHeader(  xBootDev, &xFptHeader ) )
@@ -633,7 +760,7 @@ Example of retrieving an FPT partition.
 **iAPC\_GetFptPartition Example**
 
     int iPartition = 0; /* set to desired partition number */
-    APC_PROXY_DRIVER_FPT_PARTITION xFptPartition = { 0 };
+    APCProxyDriverFptPartition xFptPartition = { 0 };
     APC_BOOT_DEVICES xBootDev = APC_BOOT_DEVICE_PRIMARY;
     
     if( OK != iAPC_GetFptPartition( xBootDev, iPartition, &xFptPartition ) )

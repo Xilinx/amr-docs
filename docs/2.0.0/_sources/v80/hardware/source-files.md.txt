@@ -1,123 +1,240 @@
 # AMR V80 - Source File Overview
 
+> **For common build concepts**, see [Common Source Files](../../hardware/source-files.md)
+>
+> This document describes V80-specific build structure: alveo_v80 directory organization.
+
+<span id="amrv80-sourcefileoverview-overview"></span>
+
+## Overview
+
+The V80 hardware design files are organized under build_v80/amr_vivado_designs/alveo_v80/ with the v80_base design providing the base platform implementation.
+
 <span id="amrv80-sourcefileoverview-hardwaredirectorytree"></span>
 
 ## Hardware Directory Tree
 
-**Hardware Source**
+**V80 Hardware Source**
 
-    amr
-    ├── fw/AMC
-    └── hw
-        └── amd_v80_gen5x8_25.1
-            ├── build_all.sh
-            ├── fpt
-            │   ├── fpt_pdi_gen.py
-            │   └── pdi_combine.bif
-            └── src
-                ├── bd
-                │   └── create_bd_design.tcl
-                ├── build_design.tcl
-                ├── constraints
-                │   ├── impl.pins.xdc
-                │   ├── impl.xdc
-                │   ├── opt.post.tcl
-                │   ├── place.pre.tcl
-                │   └── write_device_image.pre.tcl
-                ├── create_design.tcl
-                └── iprepo
-                    ├── cmd_queue_v2_0
-                    ├── hw_discovery_v1_0
-                    ├── shell_utils_uuid_rom_v2_0
-                    └── smbus_v1_1*
-    
-    *       : This location does not exist. The user must populate this location.
+    build_v80
+    └── amr_vivado_designs
+        ├── README.md
+        ├── LICENSE (MIT)
+        ├── Jenkinsfile
+        ├── alveo_v80
+        │   ├── scripts
+        │   │   └── gen_sdt.tcl
+        │   └── v80_base
+        │       ├── Makefile
+        │       ├── project                  (Generated: .xpr, .xsa)
+        │       ├── scripts
+        │       │   ├── main.tcl
+        │       │   └── config_bd.tcl
+        │       ├── xdc
+        │       │   ├── impl.xdc
+        │       │   └── impl.pins.xdc        (364 lines, 64.8 KB)
+        │       └── ip
+        │           └── smbus_v1_1*          (SystemVerilog custom IP)
+        │               ├── component.xml
+        │               ├── bd
+        │               │   └── bd.tcl
+        │               ├── hdl
+        │               │   └── smbus_v1_1_vl_rfs.sv
+        │               └── xgui
+        │                   └── smbus_v1_1.tcl
+        └── emb_plus_ve2302                  (VE2302 FPGA platforms)
+            ├── platforms
+            │   ├── scripts
+            │   │   ├── gen_sdt.tcl
+            │   │   ├── gen_sdt_dfx.tcl
+            │   │   └── fix_dtsi.tcl
+            │   ├── ve2302_1gEth             (1G Ethernet design)
+            │   ├── ve2302_10g_mrmac         (10G Ethernet with MRMAC)
+            │   ├── ve2302_gmsl              (GMSL pipeline)
+            │   ├── ve2302_xdma_gmsl         (GMSL + XDMA/PCIe)
+            │   └── ve2302_xdma_base         (DFX base design)
+            └── dfx                           (Dynamic Function eXchange)
+                ├── common
+                │   └── bd
+                │       └── static_interface.tcl
+                ├── bram_gpio
+                ├── eth_1g
+                ├── eth_10g
+                │   └── ip
+                │       └── MRMAC_AXI_MUX_V1_1  (Custom MRMAC MUX IP)
+                └── training
 
-<span id="amrv80-sourcefileoverview-amr"></span>
+    *       : SMBus IP must be downloaded from https://www.xilinx.com/member/v80.html
 
-## amr
+<span id="amrv80-sourcefileoverview-buildv80"></span>
 
-This is the top level directory containing the source files for creating the AMR design and the build script. When executed, the build\_all.sh script builds the hardware design, firmware, FPT binary, and final PDI.
+## build_v80
 
-<span id="amrv80-sourcefileoverview-hw"></span>
+This is the top level directory containing the Vivado design sources for the AMR V80 hardware platform.
 
-### hw
+<span id="amrv80-sourcefileoverview-amrvivadodesigns"></span>
 
-The hw directory contains the files necessary to build the hardware design.
+### amr_vivado_designs
 
-<span id="amrv80-sourcefileoverview-amd-v80-gen5x8-25-1"></span>
+The amr_vivado_designs directory contains all hardware design files for multiple FPGA platforms (Alveo V80 and VE2302). The repository supports Makefile-based builds with CI/CD integration via Jenkins.
 
-#### amd\_v80\_gen5x8\_25.1
+<span id="amrv80-sourcefileoverview-alveov80"></span>
 
-This is the top level directory for the AMD Gen5x8 example design. The directory name is the same as the VBNV, and is used throughout the design.
+#### alveo_v80
 
-<span id="amrv80-sourcefileoverview-build-all-sh"></span>
+This directory contains the Alveo V80 FPGA design targeting the xcv80-lsva4737-2MHP-e-S part with Vivado 2025.2 tools.
 
-##### build\_all.sh
+<span id="amrv80-sourcefileoverview-v80base"></span>
 
-This is the main build shell. Executing this shell will launch Vivado<sup>TM</sup>, build the AMR hardware design, compile the AMC firmware, and generate the PDI files. For the AMC FW to be compiled, this script expects the fw/AMC folder at the same level as the hw directory. This is indicated by the asterisk in the Hardware Directory Tree above.
+##### v80_base
 
-<span id="amrv80-sourcefileoverview-fpt"></span>
+This is the V80 base platform design directory.
 
-##### fpt
+**Makefile** - Main build automation script supporting:
+  - `make xsa [JOBS=8]` - Generate Xilinx Support Archive (.xsa file)
+  - `make sdt` - Generate System Device Tree files using sdtgen
+  - `make all` - Complete build (XSA + SDT)
+  - `make clean` - Remove generated artifacts
+  - Default parallel synthesis jobs: 8 (configurable via JOBS parameter)
 
-  - pdi\_combine.bif - This file is used in the build\_all.sh to combine the FW amc.elf with the HW PDI.
-    
-      - output: build/amd\_v80\_gen5x8\_25.1\_nofpt.pdi
+**project/** - Generated Vivado project directory containing:
+  - v80_base.xpr (Vivado project file)
+  - v80_base.xsa (Xilinx Support Archive - hardware definition)
 
-  - fpt\_pdi\_gen.py - This file is used in the build\_all.sh to create the final FPT PDI
-    
-      - output: amd\_v80\_gen5x8\_25.1.pdi
+<span id="amrv80-sourcefileoverview-v80scripts"></span>
 
-<span id="amrv80-sourcefileoverview-src"></span>
+###### scripts
 
-##### src
+  - **main.tcl** - Main Vivado build script that:
+    - Creates the Vivado project
+    - Sets board part (xilinx.com:v80:part0:1.0)
+    - Loads XDC constraint files
+    - Updates IP catalog with custom IP repositories
+    - Sources config_bd.tcl to generate block design
+    - Runs synthesis and implementation
+    - Generates and validates XSA file
+    - Creates hardware documentation (README.hw)
 
-  - **bd** - This is the Block Design generation directory which contains the TCL file necessary to build the AMD Vivado™ AMR design.
-    
-      - create\_bd\_design.tcl - This TCL file is used by Vivado to create the base AMR design. Since the GTs are not used in this design, the interface ports have been commented out. The user may uncomment them as required for their design.
+  - **config_bd.tcl** - Block design configuration script that instantiates and configures:
+    - **Versal CIPS** (CPM5 PCIe Gen5x8, RPU, PMC configuration)
+    - **AXI NoC instances** (3 total):
+      - axi_noc_cips: PCIe to PL routing (M00_AXI, M01_AXI) and memory controller connections
+      - axi_noc_mc_ddr4_0: Discrete DDR (4GB) controller interface
+      - axi_noc_mc_ddr4_1: DDR DIMM (32GB) controller interface
+    - **PF1 Hierarchy** (hierarchical block):
+      - SmartConnect: AXI interconnect (1 slave, 1 master)
+      - AXI GPIO: Test GPIO with loopback (default 0xF1)
+      - Processor System Reset: Reset synchronization
+    - **No management IP blocks** (GCQ, SMBus, UUID ROM, EEPROM) instantiated in base design
 
-  - **build\_design.tcl** - This script uses Vivado to create the XSA and run synthesis and implementation.
+<span id="amrv80-sourcefileoverview-v80xdc"></span>
 
-  - **contraints** - This directory contains the constraints required for Vivado implementation to generate a PDI.
-    
-      - impl.pins.xdc - This file contains the top level I/O pin names, locations, and IO standards for the DDR, DIMM, GTYPs, GTMs, and clocks.
-        
-          - *Note*: Since the GTs are not used in the base V80 design, these pins have been commented out.
-    
-      - 
-        
-        
-        
-        
-        
-        impl.xdc - This file defines strictly enforced pblocks for each SLR. A strictly enforced pblock does not allow cells to be moved outside pblock boundaries. The base logic is assigned to SLR0, while user logic can be assigned to SLR0, SLR1, and SLR2 as needed.
-        
-        
-        
-        
-        
-        The NMU for the PCIe Management SmartConnect (pcie\_slr0\_mgmt\_sc) is LOC’d to keep the base logic resources close to the CIPS in SLR0.
-        
-        
-        
-        
-    
-      - opt.post.tcl - This file turns on bitstream compression and enables NPI DMA mode to accelerate device download. It also disables BUFG insertion in placement to prevent clock changes.
-    
-      - place.pre.tcl - The PCIe Management PDI Reset logic currently is not used in AMR, but it was added for future growth. Currently, the settings in this file connect the reset to a PMC interrupt. The response to this interrupt has not been defined.
-    
-      - write\_device\_image.pre.tcl - This file generates the UUID for the AMR design which is stored in the UUID of the base logic.
+###### xdc
 
-  - **create\_design.tcl** - This file is used by Vivado to create the project, create the BD, add the constraint files, and set the processing order for creating the AMR design.
+  - **impl.pins.xdc** - Pin placement and I/O standard constraints (364 lines, 64.8 KB)
+    - DDR4 CH0 (Components): Address, data, control signals for memory controller 0
+      - Banks: 700, 701, 702
+      - IOSTANDARD: SSTL12 (address/control), POD12 (DM), DIFF_POD12 (DQS)
+      - VCCO: 1V2
+      - 72-bit data width (DQ[0-71], DM_n[0-8], DQS pairs)
+    - DDR4 CH1 (RDIMMs): Pin assignments for memory controller 1
+      - Banks: 703, 704, 705
+      - Similar signal structure with parity support
 
-  - **iprepo** - This directory contains all the additional IP necessary to build the AMR design that is not included in the Vivado released SW.
-    
-      - cmd\_queue\_v2\_0
-    
-      - hw\_discovery\_v1\_0
-    
-      - shell\_utils\_uuid\_rom\_v2\_0
-    
-      - smbus\_v1\_1 - This IP must be added from the lounge by the user due to licensing requirements (<https://www.xilinx.com/member/v80.html>). Vivado will not build the AMR design if this IP is not present. This is indicated by the asterisk in the Hardware Directory Tree above.
+  - **impl.xdc** - Implementation constraints (2.6 KB)
+    - SLR pblock definitions:
+      - pblock_SLR0: CLOCKREGION_X0Y0:CLOCKREGION_X12Y0, X0Y1:X9Y4
+      - pblock_SLR1: CLOCKREGION_X0Y5:CLOCKREGION_X9Y7
+      - pblock_SLR2: CLOCKREGION_X0Y8:CLOCKREGION_X9Y10, X0Y11:X8Y11
+    - Timing path exceptions and false paths
+    - NOC_NSU512 placement: LOC NOC_NSU512_X0Y0
+    - Reset synchronization false paths
+
+<span id="amrv80-sourcefileoverview-v80ip"></span>
+
+###### ip
+
+  - **smbus_v1_1/** - Custom SMBus controller IP (SystemVerilog-based) - **NOT INSTANTIATED IN BASE DESIGN**
+    - **component.xml** - IP component definition (232 KB, 4598 lines)
+    - **bd/bd.tcl** - Block design for SMBus internal structure
+    - **hdl/smbus_v1_1_vl_rfs.sv** - SystemVerilog RTL implementation
+    - **xgui/smbus_v1_1.tcl** - GUI configuration interface
+    - *IMPORTANT*: This IP must be downloaded from the Xilinx member area (<https://www.xilinx.com/member/v80.html>) and placed in the ip/ directory for the design to build successfully
+    - *STATUS*: Available in IP repository but **not instantiated** in v80_base block design; M_AXI_LPD interface enabled but not connected (reserved for future SMBus instantiation)
+
+<span id="amrv80-sourcefileoverview-embplusve2302"></span>
+
+#### emb_plus_ve2302
+
+This directory contains multiple platform designs for the VE2302 Versal embedded FPGA targeting Vivado 2026.1 tools. It includes both flat (non-DFX) designs and Dynamic Function eXchange (DFX) capable designs.
+
+<span id="amrv80-sourcefileoverview-ve2302platforms"></span>
+
+##### platforms
+
+Multiple platform designs, each with similar structure (Makefile, scripts/, xdc/, and optional ip/):
+
+  - **ve2302_1gEth** - Dual-channel 1G Ethernet design using standard MAC
+
+  - **ve2302_10g_mrmac** - Dual 10G Ethernet design utilizing MRMAC (MultiRate MAC) hard blocks in Versal
+
+  - **ve2302_gmsl** - Versal GMSL (Gigabit Multimedia Serial Link) pipeline for video applications
+
+  - **ve2302_xdma_gmsl** - GMSL pipeline with XDMA/PCIe support
+
+  - **ve2302_xdma_base** - DFX-enabled base design with PCIe/XDMA, serves as base for reconfigurable modules
+
+Each platform build generates:
+  - XSA file (hardware definition)
+  - SDT files (system device tree)
+  - For DFX designs: partial PDI files and Debian packages
+
+<span id="amrv80-sourcefileoverview-dfx"></span>
+
+##### dfx (Dynamic Function eXchange)
+
+Reconfigurable modules that can be dynamically loaded into the ve2302_xdma_base design:
+
+  - **common/bd/static_interface.tcl** - Defines the static (unchanging) interface between base design and reconfigurable partition
+
+  - **bram_gpio/** - BRAM storage + GPIO interface reconfigurable module
+
+  - **eth_1g/** - Single 1G Ethernet reconfigurable module
+
+  - **eth_10g/** - Single 10G Ethernet with MRMAC reconfigurable module
+    - Contains custom **MRMAC_AXI_MUX_V1_1** IP (38 KB component.xml)
+    - Custom Verilog modules: mrmac_10g_mux.v, axis_dwidth_converter_rx/, axis_dwidth_converter_tx/
+
+  - **training/** - Reference training reconfigurable module
+
+DFX build outputs:
+  - Base XSA: ve2302_xdma_base.xsa
+  - Module XSAs: ve2302_xdma_base_{module}.xsa
+  - Partial PDIs: {module}_partial.pdi
+  - Debian packages: amr-{module}-dma-test-ve2302_2.0.deb
+
+<span id="amrv80-sourcefileoverview-sdtgeneration"></span>
+
+##### SDT (System Device Tree) Generation
+
+  - **gen_sdt.tcl** - Generates device tree for flat designs
+    - Uses sdtgen utility with board-specific device tree (versal-emb-plus-ve2302-reva)
+    - Outputs to project_sdt/ directory
+
+  - **gen_sdt_dfx.tcl** - Generates device tree for DFX designs with multiple XSA file support
+
+  - **fix_dtsi.tcl** - Post-processing script for device tree files
+
+<span id="amrv80-sourcefileoverview-cicd"></span>
+
+### CI/CD Integration
+
+**Jenkinsfile** - Jenkins pipeline configuration providing:
+  - Multi-host deployment support
+  - Commit ID tracking (source + submodules)
+  - Remote build invocation via LSF (Load Sharing Facility)
+  - XSA artifact deployment
+  - Debian package deployment
+  - Build success symlink management
+  - Branch-specific deployment logic
 

@@ -1,4 +1,4 @@
-# AMR OutOfBand Telemetry Application
+# AMR OutOfBand Telemetry Application<sup>1</sup>
 
 <span id="amroutofbandtelemetryapplication-overview"></span>
 
@@ -106,3 +106,4 @@ The request type (below) is then used to form up the response back from the BMC 
 </tbody>
 </table>
 
+  *<sup>1</sup>Alveo only*

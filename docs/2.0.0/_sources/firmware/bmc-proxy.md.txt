@@ -328,15 +328,15 @@ The initialize function takes in 15 parameters:
                          uint32_t ulFwIfPort,
                          uint32_t ulTaskPrio,
                          uint32_t ulTaskStack,
-                         PLDM_NUMERIC_SENSOR_PDR *pxPdrTemperatureSensors,
+                         PLDMNumericSensorPdr *pxPdrTemperatureSensors,
                          int iTotalPdrTemperature,
-                         PLDM_NUMERIC_SENSOR_PDR *pxPdrVoltageSensors,
+                         PLDMNumericSensorPdr *pxPdrVoltageSensors,
                          int iTotalPdrVoltage,
-                         PLDM_NUMERIC_SENSOR_PDR *pxPdrCurrentSensors,
+                         PLDMNumericSensorPdr *pxPdrCurrentSensors,
                          int iTotalPdrCurrent,
-                         PLDM_NUMERIC_SENSOR_PDR *pxPdrPowerSensors,
+                         PLDMNumericSensorPdr *pxPdrPowerSensors,
                          int iTotalPdrPower,
-                         PLDM_NUMERIC_SENSOR_NAME_PDR *pxPdrSensorNames,
+                         PLDMNumericSensorNamePdr *pxPdrSensorNames,
                          int iTotalPdrName,
                          uint8_t *pucUuid );
 
@@ -348,7 +348,7 @@ Applications can bind into the callback to listen to incoming events and handle 
 
 Current list of supported events:
 
-  - BMC\_PROXY\_DRIVER\_E\_SMBUS\_MSG\_ARRIVAL
+  - BMC\_PROXY\_DRIVER\_E\_MSG\_ARRIVAL
 
   - BMC\_PROXY\_DRIVER\_E\_GET\_PDR
 
@@ -567,7 +567,7 @@ The initialize function needs a unique id for the proxy, a handle to a FW\_IF (a
 
 **iBMC\_Initialise Example**
 
-    if( OK == iBMC_Initialise( AMC_EVENT_UNIQUE_ID_BMC, &xSMBusIf, 0, AMC_TASK_PRIO_DEFAULT, AMC_TASK_DEFAULT_STACK,
+    if( OK == iBMC_Initialise( AMC_CFG_UNIQUE_ID_BMC, &xSMBusIf, 0, AMC_TASK_PRIO_DEFAULT, AMC_TASK_DEFAULT_STACK,
                                    pxPdrTemperatureSensors, TOTAL_PDR_TEMPERATURE,
                                    pxPdrVoltageSensors,     TOTAL_PDR_VOLTAGE,
                                    pxPdrCurrentSensors,     TOTAL_PDR_CURRENT,
@@ -589,7 +589,7 @@ Define a function based on the function pointer prototype and bind in using the 
     {
         int iStatus = ERROR;
     
-        if( ( NULL != pxSignal ) && ( AMC_EVENT_UNIQUE_ID_BMC == pxSignal->ucModule ) )
+        if( ( NULL != pxSignal ) && ( AMC_CFG_UNIQUE_ID_BMC == pxSignal->ucModule ) )
         {
             switch( pxSignal->ucEventType )
             {
@@ -618,7 +618,7 @@ Example of calling the response (iBMC\_GetSensorInfoResponse) from within the ca
     {
         int iStatus = ERROR;
     
-        if( ( NULL != pxSignal ) && ( AMC_EVENT_UNIQUE_ID_BMC == pxSignal->ucModule ) )
+        if( ( NULL != pxSignal ) && ( AMC_CFG_UNIQUE_ID_BMC == pxSignal->ucModule ) )
         {
             if( MAX_BMC_PROXY_DRIVER_EVENTS >= pxSignal->ucEventType )
             {
@@ -682,7 +682,7 @@ Example of requesting the data associated with an event (iBMC\_GetSensorIdReques
     {
         int iStatus = ERROR;
     
-        if( ( NULL != pxSignal ) && ( AMC_EVENT_UNIQUE_ID_BMC == pxSignal->ucModule ) )
+        if( ( NULL != pxSignal ) && ( AMC_CFG_UNIQUE_ID_BMC == pxSignal->ucModule ) )
         {
             if( MAX_BMC_PROXY_DRIVER_EVENTS >= pxSignal->ucEventType )
             {

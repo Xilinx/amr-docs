@@ -3,22 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
-  <title>AMR V80 - CIPS Configuration &mdash; AMR  documentation</title>
+  <title>AMR - CIPS Configuration &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
@@ -38,11 +23,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -86,19 +67,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development/source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/asdm-application.html">AMR ASDM Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/inband-telemetry.html">AMR InBand Telemetry Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../firmware/asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
@@ -130,7 +118,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>AMR V80 - CIPS Configuration</li>
+      <li>AMR - CIPS Configuration</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/v80/hardware/cips-config.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -140,18 +128,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="amr-v80-cips-configuration">
-<h1>AMR V80 - CIPS Configuration<a class="headerlink" href="#amr-v80-cips-configuration" title="Permalink to this heading">¶</a></h1>
-<p><span id="amrv80-cipsconfiguration-cips"></span></p>
+  <div class="section" id="amr-cips-configuration">
+<h1>AMR - CIPS Configuration<a class="headerlink" href="#amr-cips-configuration" title="Permalink to this heading">¶</a></h1>
+<p><span id="amr-cipsconfiguration-cips"></span></p>
 <div class="section" id="cips">
 <h2>CIPS<a class="headerlink" href="#cips" title="Permalink to this heading">¶</a></h2>
 <p>The processing system (PS), platform management controller (PMC), and CCIX PCIe module (CPM) modules are grouped together and configured using the control, interface, and processing system (CIPS) IP core. The PS contains the APUs, RPUs, and peripherals (I2C, UART, SPI, etc.). It shares the DDRMC with the PL via the NoC. The PMC is responsible for boot and configuration management, power management, reliability and safety functions, dynamic function eXchange (DFX), life cycle management and I/O peripherals. The CPM provides the primary interfaces for designs, such as AMR, following the server system methodology. It has hardened connections to the NoC which is used to access the DDR and other hardened IP. The CIPS configuration is described below. All settings differing from the default settings are indicated in the GUI captures below.</p>
 <p>A description of the CIPS configuration options can be found in <a class="reference external" href="https://docs.xilinx.com/r/en-US/pg352-cips">https://docs.xilinx.com/r/en-US/pg352-cips</a>.</p>
-<p><span id="amrv80-cipsconfiguration-ccixpciemodule-cpm5"></span></p>
+<p><span id="amr-cipsconfiguration-ccixpciemodule-cpm5"></span></p>
 </div>
 <div class="section" id="ccix-pcie-module-cpm5">
 <h2>CCIX PCIe Module (CPM5)<a class="headerlink" href="#ccix-pcie-module-cpm5" title="Permalink to this heading">¶</a></h2>
-<p><span id="amrv80-cipsconfiguration-cpm5guiconfiguration"></span></p>
+<p><span id="amr-cipsconfiguration-cpm5guiconfiguration"></span></p>
 <div class="section" id="cpm5-gui-configuration">
 <h3>CPM5 GUI Configuration<a class="headerlink" href="#cpm5-gui-configuration" title="Permalink to this heading">¶</a></h3>
 <p>A description of the CPM configuration options can be found here:</p>
@@ -159,22 +147,33 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg347-cpm-dma-bridge">https://docs.xilinx.com/r/en-US/pg347-cpm-dma-bridge</a></p></li>
 <li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg347-cpm-dma-bridge/CPM5-GUI-Customization">https://docs.xilinx.com/r/en-US/pg347-cpm-dma-bridge/CPM5-GUI-Customization</a></p></li>
 </ul>
-<p><span id="amrv80-cipsconfiguration-cpm5basicconfiguration"></span></p>
+<p><span id="amr-cipsconfiguration-cpm5basicconfiguration"></span></p>
 <div class="section" id="cpm5-basic-configuration">
 <h4>CPM5 Basic Configuration<a class="headerlink" href="#cpm5-basic-configuration" title="Permalink to this heading">¶</a></h4>
 <p>In the CPM5 Basic Configuration window, there are two PCIe Controllers to choose from. When selecting a PCIe controller, AMR follows the same guidance listed here: <a class="reference external" href="https://docs.xilinx.com/r/en-US/pg347-cpm-dma-bridge/General-Guidance-for-CPM5">https://docs.xilinx.com/r/en-US/pg347-cpm-dma-bridge/General-Guidance-for-CPM5</a>. In addition to this, AMR is only using 8 lanes, and to be in PCI SIG compliance, the bottom 8 lanes must be used. As a result, PCIe® controller 1 must be used.</p>
 <p>AMR V80 is a Gen 5x8 design supporting 32GT/s raw bandwidth.</p>
 <p><img alt="image1" src="../../_images/grey_arrow_down2.png" /></p>
 <p><img alt="image2" src="../../_images/1107374422.png" /></p>
-<p><span id="amrv80-cipsconfiguration-cpm5pciecontroller1configuration"></span></p>
+<p><span id="amr-cipsconfiguration-cpm5pciecontroller1configuration"></span></p>
 </div>
 <div class="section" id="cpm5-pcie-controller-1-configuration">
 <h4>CPM5 PCIE Controller 1 Configuration<a class="headerlink" href="#cpm5-pcie-controller-1-configuration" title="Permalink to this heading">¶</a></h4>
-<p><span id="amrv80-cipsconfiguration-basic"></span></p>
+<p><span id="amr-cipsconfiguration-basic"></span></p>
 <div class="section" id="basic">
 <h5>Basic<a class="headerlink" href="#basic" title="Permalink to this heading">¶</a></h5>
 <p><strong>Configuration Mode: Advanced</strong></p>
-<p>AMR uses PCIe extended configuration space. There are multiple settings that need to be enabled to allow for this functionality. First, the mode must be changed to advanced. This enables the MSI-X cap, advanced options, and interface options GUI tabs. Then, in the advanced options tab, the configuration space must be changed to ‘Extended Large’. This will allow the PCIe extended configuration space to be extended from its default configuration. Finally, in the Interfaces tab, enable ‘Extended Config Interface’. This interface connects to the HW discovery IP, which provides vendor specific extended configuration information.</p>
+<p>AMR uses Advanced configuration mode to access MSI-X capabilities and other advanced PCIe features. The mode is set to Advanced to enable the MSI-X cap, advanced options, and interface options GUI tabs.</p>
+<p><strong>Current Configuration:</strong></p>
+<ul class="simple">
+<li><p>Extended Config Interface (CFG_EXT_IF): Disabled (0)</p></li>
+<li><p>Extended PCIe Config Space: None (not using extended configuration space)</p></li>
+</ul>
+<p><strong>Note:</strong> The current design does not utilize PCIe extended configuration space or vendor-specific extended capabilities (VSEC). To enable these features in future designs:</p>
+<ol class="arabic simple">
+<li><p>Set EXT_PCIE_CFG_SPACE_ENABLED to ‘Extended_Large’</p></li>
+<li><p>Enable CFG_EXT_IF (Extended Config Interface)</p></li>
+<li><p>Connect to hardware discovery IP for VSEC support</p></li>
+</ol>
 <p><strong>Functional Mode: QDMA</strong></p>
 <p>Used for high bandwidth DDR accesses.</p>
 <p><img alt="image3" src="../../_images/grey_arrow_down2.png" /></p>
@@ -188,7 +187,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>AMR PCIe uses the synchronous clock from the PCIe edge connector.</p>
 <p><img alt="image5" src="../../_images/grey_arrow_down2.png" /></p>
 <p><img alt="image6" src="../../_images/1107374419.png" /></p>
-<p><span id="amrv80-cipsconfiguration-pfids"></span></p>
+<p><span id="amr-cipsconfiguration-pfids"></span></p>
 </div>
 <div class="section" id="pf-ids">
 <h5>PF IDs<a class="headerlink" href="#pf-ids" title="Permalink to this heading">¶</a></h5>
@@ -210,19 +209,33 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 <p><img alt="image7" src="../../_images/grey_arrow_down2.png" /></p>
 <p><img alt="image8" src="../../_images/1107374425.png" /></p>
-<p><span id="amrv80-cipsconfiguration-pciebars"></span></p>
+<p><span id="amr-cipsconfiguration-pciebars"></span></p>
 </div>
 <div class="section" id="pcie-bars">
 <h5>PCIE: BARs<a class="headerlink" href="#pcie-bars" title="Permalink to this heading">¶</a></h5>
 <p>The configuration for the PF0 AXI Bridge Master and PF1 DMA is shown below. These options enable the Master AXI interface within the CIPS IP and is used to interface with AXI peripherals, and also allows for PCIe Host DMA transfers to the memory devices.</p>
-<p>CPM5 can support up to six 32-bit BARs or three 64-bit BARs per PF. AMR only requires two physical functions. PF0 uses a single 64-bit BAR mapping to a 256MB address space (BAR0). As a result, PCIe BAR0 is mapped to the first 256MB of the PL memory space: 0x201_0000_0000 - 0x201_0FFF_FFFF (256MB). For additional information on address mapping in AMD Versal™ devices, refer to the following link: <a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map</a>. Since the address space for PCIe and AXI is different, address translation is required.</p>
-<p>PF1 is configured to use the DMA.</p>
+<p>CPM5 can support up to six 32-bit BARs or three 64-bit BARs per PF. AMR requires two physical functions:</p>
+<p><strong>PF0 Configuration:</strong></p>
+<ul class="simple">
+<li><p>BAR0: 16 MB, 64-bit, non-prefetchable, AXI_Bridge_Master</p></li>
+<li><p>BAR2: Disabled (4 KB configured but not enabled)</p></li>
+<li><p>Address Mapping: PCIe BAR0 → AXI address 0x0000020100000000</p></li>
+<li><p>Address Range: 0x201_0000_0000 - 0x201_00FF_FFFF (16 MB)</p></li>
+<li><p>Purpose: Management interface with access to PL peripherals</p></li>
+</ul>
+<p><strong>PF1 Configuration:</strong></p>
+<ul class="simple">
+<li><p>BAR0: 512 KB, 64-bit, prefetchable, DMA</p></li>
+<li><p>BAR2: 256 MB, 64-bit, prefetchable, AXI_Bridge_Master</p></li>
+<li><p>Address Mapping (BAR2): PCIe BAR2 → AXI address 0x0000020200000000</p></li>
+<li><p>Address Range (BAR2): 0x202_0000_0000 - 0x202_0FFF_FFFF (256 MB)</p></li>
+<li><p>Purpose: DMA transfers (BAR0) and test GPIO access via PL (BAR2)</p></li>
+</ul>
+<p>For additional information on address mapping in AMD Versal™ devices, refer to: <a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map</a>. Since the address space for PCIe and AXI is different, address translation is required and configured through PCIEBAR2AXIBAR registers.</p>
 <p><img alt="image9" src="../../_images/grey_arrow_down2.png" /></p>
 <p>PF0</p>
 <p><img alt="image10" src="../../_images/1107374407.png" /></p>
-<p>PF1</p>
-<p><img alt="image11" src="../../_images/1107374410.png" /></p>
-<p><span id="amrv80-cipsconfiguration-pcie-dma"></span></p>
+<p><span id="amr-cipsconfiguration-pcie-dma"></span></p>
 </div>
 <div class="section" id="pcie-dma">
 <h5>PCIe: DMA<a class="headerlink" href="#pcie-dma" title="Permalink to this heading">¶</a></h5>
@@ -233,26 +246,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>MSI-X capabilities for PF1 were enabled to be used in conjunction with the DMA.</p>
 <p><img alt="image14" src="../../_images/grey_arrow_down2.png" /></p>
 <p><a class="reference download internal" download="" href="../../_downloads/1d656b7e0e9729d63b6a67bdb7b4a9e9/1107374416.png"><span class="xref download myst"><img alt="image15" src="../../_images/1107374416.png" /></span></a></p>
-<p><span id="amrv80-cipsconfiguration-advancedoptions"></span></p>
+<p><span id="amr-cipsconfiguration-advancedoptions"></span></p>
 </div>
 <div class="section" id="advanced-options">
 <h5>Advanced Options<a class="headerlink" href="#advanced-options" title="Permalink to this heading">¶</a></h5>
-<p>AMR uses vendor specific extended capabilities (VSEC) with the large extended configuration space. The extended capabilities contain the entries for the HW Discovery IP, UUID, gcq_m2r, and AXI remapping (<a class="reference internal" href="#../base-logic/"><span class="xref myst">AMR V80 - Base Logic</span></a>). To minimize design complexity, AMR does not enable virtualization capabilities, so ARI and ACS are disabled.</p>
-<p><strong>Verify Alternate Routing ID (ARI) Capability:</strong> <strong>Unselectable</strong></p>
-<p><strong>Disable Access Control Services (ACS) Capability: De-Selected</strong></p>
-<p><strong>Verify Advanced Error Reporting (AER) Capability: Selected</strong></p>
-<p><strong>PCI Express Extended Configuration Space Enabled: Extended Large</strong></p>
-<p><img alt="image16" src="../../_images/grey_arrow_down2.png" /></p>
-<p><img alt="image17" src="../../_images/1107374395.png" /></p>
-<p><span id="amrv80-cipsconfiguration-enableinterfaceoptions"></span></p>
-</div>
-<div class="section" id="enable-interface-options">
-<h5>Enable Interface Options<a class="headerlink" href="#enable-interface-options" title="Permalink to this heading">¶</a></h5>
-<p>The Extend Config Interface option enables the interface to allow PCIe to transfer configuration information with the user application. In AMR, this port, pcie1_cfg_ext, is connected to the Hardware Discovery IP.</p>
-<p><strong>Extended Config Interface: Select</strong></p>
-<p><img alt="image18" src="../../_images/grey_arrow_down2.png" /></p>
-<p><img alt="image19" src="../../_images/1107374404.png" /></p>
-<p><span id="amrv80-cipsconfiguration-cpm5tclconfiguration"></span></p>
+<p>AMR uses vendor specific extended capabilities (VSEC) with the large extended configuration space. The extended capabilities contain the entries for the AXI remapping (<a class="reference internal" href="#../base-logic/"><span class="xref myst">AMR - Base Logic</span></a>). To minimize design complexity, AMR does not enable virtualization capabilities, so ARI and ACS are disabled.</p>
+<p><span id="amr-cipsconfiguration-cpm5tclconfiguration"></span></p>
 </div>
 </div>
 </div>
@@ -264,10 +263,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>CPM_PCIE0_MODES {None} \</p>
 <p>CPM_PCIE1_ACS_CAP_ON {0} \</p>
 <p>CPM_PCIE1_ARI_CAP_ENABLED {0} \</p>
-<p>CPM_PCIE1_CFG_EXT_IF {1} \</p>
+<p>CPM_PCIE1_CFG_EXT_IF {0} \</p>
 <p>CPM_PCIE1_CFG_VEND_ID {10ee} \</p>
 <p>CPM_PCIE1_COPY_PF0_QDMA_ENABLED {0} \</p>
-<p>CPM_PCIE1_EXT_PCIE_CFG_SPACE_ENABLED {Extended_Large} \</p>
+<p>CPM_PCIE1_EXT_PCIE_CFG_SPACE_ENABLED {None} \</p>
 <p>CPM_PCIE1_FUNCTIONAL_MODE {QDMA} \</p>
 <p>CPM_PCIE1_MAX_LINK_SPEED {32.0_GT/s} \</p>
 <p>CPM_PCIE1_MODES {DMA} \</p>
@@ -287,9 +286,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>CPM_PCIE1_PF0_AXIBAR2PCIE_HIGHADDR_5 {0x000000817FFFFFFFF} \</p>
 <p>CPM_PCIE1_PF0_BAR0_QDMA_64BIT {1} \</p>
 <p>CPM_PCIE1_PF0_BAR0_QDMA_ENABLED {1} \</p>
-<p>CPM_PCIE1_PF0_BAR0_QDMA_PREFETCHABLE {1} \</p>
+<p>CPM_PCIE1_PF0_BAR0_QDMA_PREFETCHABLE {0} \</p>
 <p>CPM_PCIE1_PF0_BAR0_QDMA_SCALE {Megabytes} \</p>
-<p>CPM_PCIE1_PF0_BAR0_QDMA_SIZE {256} \</p>
+<p>CPM_PCIE1_PF0_BAR0_QDMA_SIZE {16} \</p>
 <p>CPM_PCIE1_PF0_BAR0_QDMA_TYPE {AXI_Bridge_Master} \</p>
 <p>CPM_PCIE1_PF0_BAR2_QDMA_64BIT {0} \</p>
 <p>CPM_PCIE1_PF0_BAR2_QDMA_ENABLED {0} \</p>
@@ -307,16 +306,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>CPM_PCIE1_PF0_PCIEBAR2AXIBAR_QDMA_0 {0x0000020100000000} \</p>
 <p>CPM_PCIE1_PF0_SUB_CLASS_VALUE {00} \</p>
 <p>CPM_PCIE1_PF1_BAR0_QDMA_64BIT {1} \</p>
-<p>CPM_PCIE1_PF1_BAR0_QDMA_ENABLED {0} \</p>
+<p>CPM_PCIE1_PF1_BAR0_QDMA_ENABLED {1} \</p>
 <p>CPM_PCIE1_PF1_BAR0_QDMA_PREFETCHABLE {1} \</p>
 <p>CPM_PCIE1_PF1_BAR0_QDMA_SCALE {Kilobytes} \</p>
-<p>CPM_PCIE1_PF1_BAR0_QDMA_SIZE {4} \</p>
+<p>CPM_PCIE1_PF1_BAR0_QDMA_SIZE {512} \</p>
 <p>CPM_PCIE1_PF1_BAR0_QDMA_TYPE {DMA} \</p>
-<p>CPM_PCIE1_PF1_BAR2_QDMA_64BIT {0} \</p>
-<p>CPM_PCIE1_PF1_BAR2_QDMA_ENABLED {0} \</p>
-<p>CPM_PCIE1_PF1_BAR2_QDMA_PREFETCHABLE {0} \</p>
-<p>CPM_PCIE1_PF1_BAR2_QDMA_SCALE {Kilobytes} \</p>
-<p>CPM_PCIE1_PF1_BAR2_QDMA_SIZE {4} \</p>
+<p>CPM_PCIE1_PF1_BAR2_QDMA_64BIT {1} \</p>
+<p>CPM_PCIE1_PF1_BAR2_QDMA_ENABLED {1} \</p>
+<p>CPM_PCIE1_PF1_BAR2_QDMA_PREFETCHABLE {1} \</p>
+<p>CPM_PCIE1_PF1_BAR2_QDMA_SCALE {Megabytes} \</p>
+<p>CPM_PCIE1_PF1_BAR2_QDMA_SIZE {256} \</p>
 <p>CPM_PCIE1_PF1_BAR2_QDMA_TYPE {AXI_Bridge_Master} \</p>
 <p>CPM_PCIE1_PF1_BASE_CLASS_VALUE {12} \</p>
 <p>CPM_PCIE1_PF1_CFG_DEV_ID {50b5} \</p>
@@ -330,7 +329,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>CPM_PCIE1_PL_LINK_CAP_MAX_LINK_WIDTH {X8} \</p>
 <p>CPM_PCIE1_TL_PF_ENABLE_REG {2} \</p>
 <p>} \</p>
-<p><span id="amrv80-cipsconfiguration-pspmc"></span></p>
+<p><span id="amr-cipsconfiguration-pspmc"></span></p>
 </div>
 </div>
 <div class="section" id="ps-pmc">
@@ -338,16 +337,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>There are numerous processor subsystem (PS) and platform management controller (PMC) settings. These settings (indicated below) align to the AMR design requirements. A description of the CIPS configuration options can be found in <a class="reference external" href="https://docs.xilinx.com/r/en-US/pg352-cips">https://docs.xilinx.com/r/en-US/pg352-cips</a>. Information on the PS/PMC can be found here: <a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Processing-System-Architecture">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Processing-System-Architecture</a>.</p>
 <p>Processing Subsystem (RPU and APU)</p>
 <p>The PS includes two Arm® Cortex®-R5F RPU processors and two Arm Cortex-A72 APU processors. These provide programmers with real-time and application operating environments.</p>
-<p><span id="amrv80-cipsconfiguration-platformmanagementcontroller-pmc"></span></p>
+<p><span id="amr-cipsconfiguration-platformmanagementcontroller-pmc"></span></p>
 <div class="section" id="platform-management-controller-pmc">
 <h3>Platform Management Controller (PMC)<a class="headerlink" href="#platform-management-controller-pmc" title="Permalink to this heading">¶</a></h3>
 <p>When the system starts up, it is controlled by the PMC.</p>
-<p><span id="amrv80-cipsconfiguration-pspmcguiconfiguration"></span></p>
+<p><span id="amr-cipsconfiguration-pspmcguiconfiguration"></span></p>
 </div>
 <div class="section" id="ps-pmc-gui-configuration">
 <h3>PS PMC GUI Configuration<a class="headerlink" href="#ps-pmc-gui-configuration" title="Permalink to this heading">¶</a></h3>
 <p>There are numerous PS/PMC configuration settings. The settings below were made per the AMR design requirements.</p>
-<p><span id="amrv80-cipsconfiguration-bootmode"></span></p>
+<p><span id="amr-cipsconfiguration-bootmode"></span></p>
 <div class="section" id="boot-mode">
 <h4>Boot Mode<a class="headerlink" href="#boot-mode" title="Permalink to this heading">¶</a></h4>
 <p>The Versal device is connected to 2Gb (256MB) OSPI for configuration and 64GB eMMC for storage. Both devices are 8-bits. These connections need to be enabled in PS PMC.</p>
@@ -363,12 +362,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p><img alt="image21" src="../../_images/grey_arrow_down2.png" /></p>
 <p><img alt="image22" src="../../_images/1107374386.png" /></p>
 <p><img alt="image23" src="../../_images/1107374392.png" /></p>
-<p><span id="amrv80-cipsconfiguration-peripherals"></span></p>
+<p><span id="amr-cipsconfiguration-peripherals"></span></p>
 </div>
 <div class="section" id="peripherals">
 <h4>Peripherals<a class="headerlink" href="#peripherals" title="Permalink to this heading">¶</a></h4>
 <p>Enable the peripherals as indicated below. These connections are dependent upon the Versal device connections to the board and are described below. The pin locations for the peripheral are not set in the ‘Peripheral’ tab. Instead, they are set in the ‘IO’ tab</p>
-<p><span id="amrv80-cipsconfiguration-pciereset"></span></p>
+<p><span id="amr-cipsconfiguration-pciereset"></span></p>
 <div class="section" id="pcie-reset">
 <h5>PCIe Reset<a class="headerlink" href="#pcie-reset" title="Permalink to this heading">¶</a></h5>
 <p>PCIe reset from the host is connected to the PMC MIO pins through a buffer. There is a reset for each PCIe controller to support bifurcation. Enable the PCIe reset, then to set the actual pin, switch to the IO tab.</p>
@@ -379,7 +378,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/PCIe-Resets-on-MIO-Pins">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/PCIe-Resets-on-MIO-Pins</a></p>
 <p><img alt="image24" src="../../_images/grey_arrow_down2.png" /></p>
 <p><img alt="image25" src="../../_images/1107374446.png" /></p>
-<p><span id="amrv80-cipsconfiguration-uart0-uart1"></span></p>
+<p><span id="amr-cipsconfiguration-uart0-uart1"></span></p>
 </div>
 <div class="section" id="uart0-uart1">
 <h5>UART0 / UART1<a class="headerlink" href="#uart0-uart1" title="Permalink to this heading">¶</a></h5>
@@ -394,7 +393,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p><img alt="image27" src="../../_images/1107374428.png" /></p>
 <p><strong>UART1</strong></p>
 <p><img alt="image28" src="../../_images/1107374581.png" /></p>
-<p><span id="amrv80-cipsconfiguration-spi0"></span></p>
+<p><span id="amr-cipsconfiguration-spi0"></span></p>
 </div>
 <div class="section" id="spi0">
 <h5>SPI0<a class="headerlink" href="#spi0" title="Permalink to this heading">¶</a></h5>
@@ -407,7 +406,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p><img alt="image29" src="../../_images/grey_arrow_down2.png" /></p>
 <p><strong>SPI0</strong></p>
 <p><img alt="image30" src="../../_images/1107374566.png" /></p>
-<p><span id="amrv80-cipsconfiguration-lpd-i2c0-lpd-i2c1"></span></p>
+<p><span id="amr-cipsconfiguration-lpd-i2c0-lpd-i2c1"></span></p>
 </div>
 <div class="section" id="lpd-i2c0-lpd-i2c1">
 <h5>LPD_I2C0 / LPD_I2C1<a class="headerlink" href="#lpd-i2c0-lpd-i2c1" title="Permalink to this heading">¶</a></h5>
@@ -422,7 +421,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p><img alt="image32" src="../../_images/1107374572.png" /></p>
 <p><strong>LPD_I2C1</strong></p>
 <p><img alt="image33" src="../../_images/1107374557.png" /></p>
-<p><span id="amrv80-cipsconfiguration-ttc0-ttc1-ttc2-ttc3"></span></p>
+<p><span id="amr-cipsconfiguration-ttc0-ttc1-ttc2-ttc3"></span></p>
 </div>
 <div class="section" id="ttc0-ttc1-ttc2-ttc3">
 <h5>TTC0 / TTC1 / TTC2 / TTC3<a class="headerlink" href="#ttc0-ttc1-ttc2-ttc3" title="Permalink to this heading">¶</a></h5>
@@ -437,7 +436,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p><img alt="image37" src="../../_images/1107374560.png" /></p>
 <p><strong>TTC3</strong></p>
 <p><img alt="image38" src="../../_images/1107374551.png" /></p>
-<p><span id="amrv80-cipsconfiguration-io"></span></p>
+<p><span id="amr-cipsconfiguration-io"></span></p>
 </div>
 </div>
 <div class="section" id="io">
@@ -452,47 +451,47 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 <p><img alt="image39" src="../../_images/grey_arrow_down2.png" /></p>
 <p><img alt="image40" src="../../_images/1107374548.png" /></p>
-<p><span id="amrv80-cipsconfiguration-debug"></span></p>
+<p><span id="amr-cipsconfiguration-debug"></span></p>
 </div>
 <div class="section" id="debug">
 <h4>Debug<a class="headerlink" href="#debug" title="Permalink to this heading">¶</a></h4>
 <p>None of the debug settings are used. Leave all settings at Default.</p>
-<p><span id="amrv80-cipsconfiguration-plbscan"></span></p>
+<p><span id="amr-cipsconfiguration-plbscan"></span></p>
 <div class="section" id="pl-bscan">
 <h5>PL BSCAN<a class="headerlink" href="#pl-bscan" title="Permalink to this heading">¶</a></h5>
 <p><img alt="image41" src="../../_images/grey_arrow_down2.png" /></p>
 <p><img alt="image42" src="../../_images/1107374539.png" /></p>
-<p><span id="amrv80-cipsconfiguration-crosstrigger"></span></p>
+<p><span id="amr-cipsconfiguration-crosstrigger"></span></p>
 </div>
 <div class="section" id="cross-trigger">
 <h5>Cross Trigger<a class="headerlink" href="#cross-trigger" title="Permalink to this heading">¶</a></h5>
 <p><img alt="image43" src="../../_images/grey_arrow_down2.png" /></p>
 <p><img alt="image44" src="../../_images/1107374545.png" /></p>
-<p><span id="amrv80-cipsconfiguration-psparalleltrace"></span></p>
+<p><span id="amr-cipsconfiguration-psparalleltrace"></span></p>
 </div>
 <div class="section" id="ps-parallel-trace">
 <h5>PS Parallel Trace<a class="headerlink" href="#ps-parallel-trace" title="Permalink to this heading">¶</a></h5>
 <p><img alt="image45" src="../../_images/grey_arrow_down2.png" /></p>
 <p><img alt="image46" src="../../_images/1107374554.png" /></p>
-<p><span id="amrv80-cipsconfiguration-hsdp"></span></p>
+<p><span id="amr-cipsconfiguration-hsdp"></span></p>
 </div>
 <div class="section" id="hsdp">
 <h5>HSDP<a class="headerlink" href="#hsdp" title="Permalink to this heading">¶</a></h5>
 <p><img alt="image47" src="../../_images/grey_arrow_down2.png" /></p>
 <p><img alt="image48" src="../../_images/1107374536.png" /></p>
-<p><span id="amrv80-cipsconfiguration-clocking"></span></p>
+<p><span id="amr-cipsconfiguration-clocking"></span></p>
 </div>
 </div>
 <div class="section" id="clocking">
 <h4>Clocking<a class="headerlink" href="#clocking" title="Permalink to this heading">¶</a></h4>
-<p><span id="amrv80-cipsconfiguration-inputclocks"></span></p>
+<p><span id="amr-cipsconfiguration-inputclocks"></span></p>
 <div class="section" id="input-clocks">
 <h5>Input Clocks<a class="headerlink" href="#input-clocks" title="Permalink to this heading">¶</a></h5>
 <p>Change the input REF_CLK to match the board oscillator clock frequency (from 33.333MHz to 33.333333MHz).</p>
 <p>REF_CLK: 33.333333</p>
 <p><img alt="image49" src="../../_images/grey_arrow_down2.png" /></p>
 <p><img alt="image50" src="../../_images/1107374533.png" /></p>
-<p><span id="amrv80-cipsconfiguration-outputclocks"></span></p>
+<p><span id="amr-cipsconfiguration-outputclocks"></span></p>
 </div>
 <div class="section" id="output-clocks">
 <h5>Output Clocks<a class="headerlink" href="#output-clocks" title="Permalink to this heading">¶</a></h5>
@@ -514,12 +513,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>Leave all settings at Default. XilSEM is not used in AMR.</p>
 <p><img alt="image57" src="../../_images/grey_arrow_down2.png" /></p>
 <p><img alt="image58" src="../../_images/1107374521.png" /></p>
-<p><span id="amrv80-cipsconfiguration-sysmon"></span></p>
+<p><span id="amr-cipsconfiguration-sysmon"></span></p>
 </div>
 </div>
 <div class="section" id="sysmon">
 <h4>Sysmon<a class="headerlink" href="#sysmon" title="Permalink to this heading">¶</a></h4>
-<p><span id="amrv80-cipsconfiguration-slr0-1"></span></p>
+<p><span id="amr-cipsconfiguration-slr0-1"></span></p>
 <div class="section" id="slr0">
 <h5>SLR0<a class="headerlink" href="#slr0" title="Permalink to this heading">¶</a></h5>
 <p><strong>Basic Configuration</strong></p>
@@ -573,7 +572,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>None of the external supplies are monitored in AMR.</p>
 <p><img alt="image66" src="../../_images/grey_arrow_down2.png" /></p>
 <p><img alt="image67" src="../../_images/1107374506.png" /></p>
-<p><span id="amrv80-cipsconfiguration-slr1-1"></span></p>
+<p><span id="amr-cipsconfiguration-slr1-1"></span></p>
 </div>
 <div class="section" id="slr1">
 <h5>SLR1<a class="headerlink" href="#slr1" title="Permalink to this heading">¶</a></h5>
@@ -581,7 +580,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>None of the supplies in SLR1 are monitored in AMR.</p>
 <p><img alt="image68" src="../../_images/grey_arrow_down2.png" /></p>
 <p><img alt="image69" src="../../_images/1107374518.png" /></p>
-<p><span id="amrv80-cipsconfiguration-slr2-1"></span></p>
+<p><span id="amr-cipsconfiguration-slr2-1"></span></p>
 </div>
 <div class="section" id="slr2">
 <h5>SLR2<a class="headerlink" href="#slr2" title="Permalink to this heading">¶</a></h5>
@@ -589,7 +588,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>None of the supplies in SLR2 are monitored in AMR V80.</p>
 <p><img alt="image70" src="../../_images/grey_arrow_down2.png" /></p>
 <p><img alt="image71" src="../../_images/1107374494.png" /></p>
-<p><span id="amrv80-cipsconfiguration-devicesecurity"></span></p>
+<p><span id="amr-cipsconfiguration-devicesecurity"></span></p>
 </div>
 </div>
 <div class="section" id="device-security">
@@ -638,7 +637,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p><img alt="image78" src="../../_images/grey_arrow_down2.png" /></p>
 <p><img alt="image79" src="../../_images/1107374443.png" /></p>
 <p><img alt="image80" src="../../_images/1107374449.png" /></p>
-<p><span id="amrv80-cipsconfiguration-tamper"></span></p>
+<p><span id="amr-cipsconfiguration-tamper"></span></p>
 </div>
 </div>
 <div class="section" id="tamper">
@@ -677,18 +676,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p><img alt="image87" src="../../_images/grey_arrow_down2.png" /></p>
 <p><img alt="image88" src="../../_images/1107374497.png" /></p>
 <p><img alt="image89" src="../../_images/1107374482.png" /></p>
-<p><span id="amrv80-cipsconfiguration-psplinterfaces"></span></p>
+<p><span id="amr-cipsconfiguration-psplinterfaces"></span></p>
 </div>
 </div>
 <div class="section" id="ps-pl-interfaces">
 <h4>PS PL Interfaces<a class="headerlink" href="#ps-pl-interfaces" title="Permalink to this heading">¶</a></h4>
 <p>AMR only uses one PL reset from CIPS and it is enabled here. This reset is used to create multiple derived resets synchronized to various PL clock domains.</p>
-<p>The PL Master AXI LPD interface connects to the RPU SmartConnect. This allows for RPU communication with the SMBus IP and the PCIe host through the General Command Queue (GCQ).</p>
-<p>‘Number of PL Resets: 1’ creates the CIPS pl0_resetn output.</p>
-<p>Select “M_AXI_LPD” and set “Data Width” to 32. This creates the 32-bit &#64;100MHz AXI4 M_AXI_LPD port on CIPs.</p>
+<p><strong>Current Base Design:</strong></p>
+<ul class="simple">
+<li><p>‘Number of PL Resets: 1’ creates the CIPS pl0_resetn output</p></li>
+<li><p>M_AXI_LPD is enabled (32-bit &#64; 100MHz) but <strong>not connected</strong> in the base design</p></li>
+<li><p>This interface is reserved for future firmware/hardware expansion (e.g., SMBus IP, management peripherals)</p></li>
+</ul>
+<p><strong>Note:</strong> The General Command Queue (GCQ) is implemented as a <strong>software abstraction</strong> in firmware using shared DDR memory, not as a hardware IP block in the current V80 base design.</p>
 <p><img alt="image90" src="../../_images/grey_arrow_down2.png" /></p>
 <p><img alt="image91" src="../../_images/1107374488.png" /></p>
-<p><span id="amrv80-cipsconfiguration-noc"></span></p>
+<p><span id="amr-cipsconfiguration-noc"></span></p>
 </div>
 <div class="section" id="noc">
 <h4>NoC<a class="headerlink" href="#noc" title="Permalink to this heading">¶</a></h4>
@@ -720,13 +723,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>AMR does not have any PMC NoC connections in SLR2.</p>
 <p><img alt="image96" src="../../_images/grey_arrow_down2.png" /></p>
 <p><a class="reference download internal" download="" href="../../_downloads/2ad45ff576d9e9de4c1182d31f0affdd/1107374467.png"><span class="xref download myst"><img alt="image97" src="../../_images/1107374467.png" /></span></a></p>
-<p><span id="amrv80-cipsconfiguration-interrupts"></span></p>
+<p><span id="amr-cipsconfiguration-interrupts"></span></p>
 </div>
 </div>
 <div class="section" id="interrupts">
 <h4>Interrupts<a class="headerlink" href="#interrupts" title="Permalink to this heading">¶</a></h4>
-<p>AMR uses two PL to PS LPD interrupts: one for the GCQ between the RPU (IRQ 0) and PCIe Host, and the other for SMBus (IRQ 1).</p>
-<p>Enable LPD interrupts: IRQ 0 &amp; 1. This creates the pl_ps_irq0 &amp; pl_ps_irq1 interrupt ports on CIPS.</p>
+<p><strong>Interrupt Configuration (for future expansion):</strong></p>
+<p>The base design configures interrupt infrastructure but does not currently use PL-to-PS interrupts:</p>
+<ul class="simple">
+<li><p>LPD interrupts IRQ 0 &amp; 1 can be enabled for future use (creates pl_ps_irq0 &amp; pl_ps_irq1 ports)</p></li>
+<li><p><strong>Current Base Design</strong>: No PL interrupts are connected</p></li>
+<li><p><strong>Future Use</strong>: IRQ 0 could be used for firmware GCQ signaling, IRQ 1 for SMBus events</p></li>
+</ul>
 <p>Enable Inter Processor Interrupts. The Inter Processor Interrupts allows one processor to interrupt another processor. The PMC and PSM Interrupts are enabled by default, and use the first three IPI agents. To allow R5 interrupts to the PMC and PSM, AMR uses four additional agents; IPI3, IPI4, IPI5, and IPI6. Two agents are used for each R5 processor. These can be changed as deemed necessary.</p>
 <ul class="simple">
 <li><p>IPI 0:2: N/C</p></li>
@@ -735,7 +743,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 <p><img alt="image98" src="../../_images/grey_arrow_down2.png" /></p>
 <p><img alt="image99" src="../../_images/1107374434.png" /></p>
-<p><span id="amrv80-cipsconfiguration-power"></span></p>
+<p><span id="amr-cipsconfiguration-power"></span></p>
 </div>
 <div class="section" id="power">
 <h4>Power<a class="headerlink" href="#power" title="Permalink to this heading">¶</a></h4>
@@ -909,7 +917,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

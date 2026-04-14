@@ -3,21 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
   <title>How-to install and run a pre-built AMR design on an ALVEO V80 card &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
@@ -36,15 +21,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="AMR Management Controller (AMC) - Architecture and Design" href="../../firmware/amc-architecture.html" />
-    <link rel="prev" title="Hardware Design - V80" href="../hardware/index.html" /> 
+    <link rel="next" title="Hardware Design - RAVE (VE2302)" href="../../rave/hardware/index.html" />
+    <link rel="prev" title="Hardware Design - V80 (Alveo)" href="../hardware/index.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -88,13 +69,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development/source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">V80 Platform Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../install-and-run.html">How-to install and run a pre-built AMR design on an ALVEO V80 card</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../install-host.html">AMR Installing the Deployment package onto the Host Server</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../deployment-archive.html">AMR Deployment Archive</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../hardware/index.html">Hardware Design - V80</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hardware/index.html">Hardware Design - V80 (Alveo)</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">How-to install and run a pre-built AMR design on an ALVEO V80 card</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#before-you-begin">Before You Begin</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#dependencies">Dependencies</a></li>
@@ -104,6 +87,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#amr-installation">AMR Installation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing-amr">Testing AMR</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#ami-tool-overview">ami_tool Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ami">AMI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bdf-device-serial-number-uuid-amc-state">BDF     | Device        | Serial Number | UUID                             | AMC        | State</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#ami-tool-mfg-info">ami_tool mfg_info</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ami-tool-sensors">ami_tool sensors</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#xbtest-d-bdf-c-verify">xbtest -d &lt;BDF&gt; -c verify</a></li>
@@ -117,15 +104,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 </li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/asdm-application.html">AMR ASDM Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/inband-telemetry.html">AMR InBand Telemetry Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../firmware/asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
@@ -192,13 +182,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><p>Get the latest AMR installation package for your Alveo card.</p>
 <ol class="arabic simple">
 <li><p>For the most recent version of the example design, refer to the table in <a class="reference internal" href="#../release-information/"><span class="xref myst">AMR Release Information</span></a>..md</p>
-<ol class="arabic simple">
-<li><p><em>AMR Git Release Tag</em> directs you to the latest release of source code on GitHub, which can be downloaded as a <code class="docutils literal notranslate"><span class="pre">.zip</span></code> or <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> file.</p></li>
-<li><p><em>AMR Deployment Archive</em> is a <code class="docutils literal notranslate"><span class="pre">.zip</span></code> of the AMR installation package. It is pre-built from the same source code in the <em>AMR Git Release Tag</em>, using the Vivado™ tools version noted in the <a class="reference internal" href="#../release-information/"><span class="xref myst">AMR Release Information</span></a> table..md</p></li>
-</ol>
+<ul class="simple">
+<li><p><em>xbtest Deployment Archive</em> is a <code class="docutils literal notranslate"><span class="pre">.zip</span></code> of the AMR installation package. It is pre-built from the xbtest source code, using the Vivado™ tools version noted in the <a class="reference internal" href="#../release-information/"><span class="xref myst">AMR Release Information</span></a></p></li>
+</ul>
 </li>
-<li><p>Download the latest <em>AMR Deployment Archive</em> to the server that contains your Alveo card.</p></li>
-<li><p>Unzip the archive, and find the <code class="docutils literal notranslate"><span class="pre">amr_install.sh</span></code> script (which will be used in the AMR installation). Review the <a class="reference internal" href="#../../deployment/deployment-archive"><span class="xref myst">AMR Deployment Archive</span></a> for details on the extracted files and directory structure..md</p></li>
+<li><p>Download the latest <em>xbtest Deployment Archive</em> to the server that contains your Alveo card.</p></li>
+<li><p>Unzip the archive, and find the <code class="docutils literal notranslate"><span class="pre">design.pdi</span></code> (which will be used in the xbtest installation). Review the <a class="reference internal" href="#../../deployment/deployment-archive"><span class="xref myst">AMR Deployment Archive</span></a> for details on the extracted files and directory structure.</p></li>
 </ol>
 </li>
 <li><p>Unlike prior Alveo platforms, AMR does not use the Xilinx RunTime Library (XRT). Instead, AMR includes the AMR Management Interface (AMI) as part of the example design. Before AMR installation, ensure that XRT has been removed. It’s not possible to have AMI and XRT running on the same host at the same time.</p>
@@ -225,12 +214,20 @@ sudo<span class="w"> </span>yum<span class="w"> </span>remove<span class="w"> </
 </div>
 <div class="section" id="amr-installation">
 <h2>AMR Installation<a class="headerlink" href="#amr-installation" title="Permalink to this heading">¶</a></h2>
-<p>Installing AMR is a two-step process. First, you will install the pre-built AMR package onto the host. Second, you will program AMR into flash on your Alveo card.</p>
-<p>To install the package onto the host, navigate to the directory with the amr_install.sh script, and execute this script.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo ./amr_install.sh
+<p>Installing AMR is a two-step process. First, you will install the pre-built AMR package onto the host or you can rebuild the AMR sw packages as mentioned in <a class="reference internal" href="#../getting-started/rebuild.md"><span class="xref myst">Rebuild</span></a> Second, you will program xbtest into flash on your Alveo card.</p>
+<p>To install the package onto the host, navigate to the directory with the debian or rpm packages depending on your host OS. Install libami*, amitool*, ami* packages</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1. Installing debian packages:
+    sudo dpkg -i libami_x.x.x.xxx.xxx_amd64.deb
+    sudo dpkg -i ami_x.x.x.xxx.xxx_amd64.deb
+    sudo dpkg -i amitool_x.x.x.xxx.xxx_amd64.deb
+
+2. Installing rpm pakcages:
+    sudo rpm -ivh libami_x.x.x.xxx.xxx_amd64.rpm
+    sudo rpm -ivh ami_x.x.x.xxx.xxx_amd64.deb
+    sudo rpm -ivh amitool_x.x.x.xxx.xxx_amd64.deb
 </pre></div>
 </div>
-<p>If successfully installed, the console will display “AMR Installation Complete.” For further information, see <a class="reference internal" href="../install-host.html"><span class="doc std std-doc">Installing AMR Deployment package onto the Host Server</span></a> for detailed instructions with a complete example output.</p>
+<p>Note: Install libami* package before amitool* and ami* packages.</p>
 <p>To program AMR onto your Alveo card for the first time, update the Flash Partition Table ](FPT) image in flash using Vivado HW Manager and JTAG. Refer to <a class="reference internal" href="#../update-fpt/"><span class="xref myst">AMR Updating FPT Image in Flash</span></a> for step-by-step instructions. If successful, Vivado HW Manager will report this with a pop-up message: “Flash programming completed successfully.” Cold boot the server to boot AMR from flash.</p>
 <p><span id="how-toinstallandrunapre-builtamrdesignonanalveocard-testingamr"></span></p>
 </div>
@@ -241,43 +238,39 @@ sudo<span class="w"> </span>yum<span class="w"> </span>remove<span class="w"> </
 <div class="section" id="ami-tool-overview">
 <h3>ami_tool Overview<a class="headerlink" href="#ami-tool-overview" title="Permalink to this heading">¶</a></h3>
 <p>The overview command shows basic information including the AMI version, the BDF, the device name, the currently programmed design’s UUID, and the device state. Take note of the BDF of your card (<strong>21:00.0</strong> in the example below), which will be used in subsequent commands.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ami_tool overview
-
-AMI
----------------------
-Version          | 2.4.0  (0)
-Branch
-Hash             | 898e7542b3ce3dd7f8cef299c152b809541fd039
-Hash Date        | 20250918
-Driver Version   | 2.4.0  (0)
-
-
-BDF       | Device          | UUID                               | AMC          | State
-------------------------------
-e2:00.0   | ALVEO V80 INT   | 709c2688cb801825929d52552b83354b   | 2.4.0  (0)   | READY
-</pre></div>
 </div>
+</div>
+<div class="section" id="ami">
+<h2>AMI<a class="headerlink" href="#ami" title="Permalink to this heading">¶</a></h2>
+<p>Version        | 2.0.0  (0)
+Branch
+Hash           | 15a98eb71fdee61c662ff155227c0525dc3cbbd7
+Hash Date      | 20260317
+Driver Version | 2.0.0  (0)</p>
+</div>
+<div class="section" id="bdf-device-serial-number-uuid-amc-state">
+<h2>BDF     | Device        | Serial Number | UUID                             | AMC        | State<a class="headerlink" href="#bdf-device-serial-number-uuid-amc-state" title="Permalink to this heading">¶</a></h2>
+<p>21:00.0 | ALVEO V80 INT | XFL1GF4VJ1KW  | 00000000000000000000000032314bde | 2.0.0  (0) | READY</p>
 <p>If the device state is NOT_READY, cold reboot the system.</p>
 <p>Confirm the AMI driver version matches the AMC version on the device before continuing (compatibility is indicated by having the same Major &amp; Minor version numbers in the AMI/AMC Major.Minor.Patch version number format). If they do not match, AMI behavior is undefined.</p>
 <p><span id="how-toinstallandrunapre-builtamrdesignonanalveocard-ami-toolmfg-info"></span></p>
-</div>
 <div class="section" id="ami-tool-mfg-info">
 <h3>ami_tool mfg_info<a class="headerlink" href="#ami-tool-mfg-info" title="Permalink to this heading">¶</a></h3>
 <p>The mfg_info command displays the card manufacturing information stored on an EEPROM. The values will vary from card to card.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ami_tool mfg_info -d &lt;BDF&gt;
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~% ami_tool mfg_info -d c1:00.0
 
 Manufacturing Information
-------------------------
-Eeprom Version              | 4.0
-Product Name                | ALVEO V80 PQ
-Board Revision              | 1
-Serial Number               | XFL1VQUAH0XJ
-Mac Address 1               | 00:0a:35:22:4c:10
-Mac Address N               | 00:0a:35:22:4c:1f
-Manufacturing Date          | Thu Jan  9 13:58:00 2025
-UUID                        | bf913201-be72-a4bc-4f48-c044d3e752d5
-Board Part Num              | A-V80-P64G-PQ-G
-Mfg Part Num                | 043-05113-01
+----------------------------------------------------------------
+Eeprom Version            | 4.0
+Product Name              | ALVEO V80 INT
+Board Revision            | B
+Serial Number             | XFL1GF4VJ1KW
+Mac Address 1             | 00:0a:35:16:57:80
+Mac Address N             | 00:0a:35:16:57:8f
+Manufacturing Date        | Sun Dec 24 23:08:00 2023
+UUID                      | c03f60a9-4ed9-77b0-604d-fda13994c847
+Board Part Num            | A-V80-P64G-PQ-G
+Mfg Part Num              | 043-05113-01
 </pre></div>
 </div>
 <p><span id="how-toinstallandrunapre-builtamrdesignonanalveocard-ami-toolsensors"></span></p>
@@ -285,61 +278,63 @@ Mfg Part Num                | 043-05113-01
 <div class="section" id="ami-tool-sensors">
 <h3>ami_tool sensors<a class="headerlink" href="#ami-tool-sensors" title="Permalink to this heading">¶</a></h3>
 <p>The sensors command displays the available sensors and their values. The values may vary. For removable sensors (such as QSFP devices), the Status may appear as “invalid”; this indicates that no device is inserted. The <strong>*</strong> displayed after a sensor status indicates that the value retrieved was from a cached store - i.e., the value had been previously updated within the refresh timeframe (1 second).</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ami_tool sensors -d &lt;BDF&gt;
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>~$ ami_tool sensors -d 21:00.0
 
-Name            |      Value | Status
---------------
-1V2_GTXAVTT     |   31.000 C | valid
-                |    8.000 A | valid
-                |    1.200 V | valid
---------------
-0V88_VCC_CPM5   |   28.000 C | valid*
-                |    3.000 A | valid*
-                |    0.880 V | valid*
---------------
-PCB             |   30.000 C | valid*
---------------
-Device          |   40.000 C | valid*
---------------
-VCCINT          |   35.000 C | valid*
-                |   23.000 A | valid*
-                |    0.800 V | valid*
---------------
-Module_0        |    0.000 C | valid*
---------------
-Module_1        |    0.000 C | invalid
---------------
-Module_2        |    0.000 C | invalid
---------------
-Module_3        |    0.000 C | invalid
---------------
-DIMM            |   27.000 C | valid*
---------------
-1V2_VCC_HBM     |   35.000 C | valid*
-                |    4.000 A | valid*
-                |    1.199 V | valid*
---------------
-Total_Power     |   54.695 W | valid
---------------
-12V_AUX1        |    0.859 A | valid*
-                |   12.144 V | valid*
---------------
-12V_AUX2        |    1.119 A | valid*
-                |   12.136 V | valid*
---------------
-1V2_VCCO_DIMM   |    1.100 A | valid*
-                |    1.200 V | valid*
---------------
-3V3_PEX         |    1.759 A | valid*
-                |    3.312 V | valid*
---------------
-12V_PEX         |    2.040 A | valid*
-                |   12.168 V | valid*
---------------
-3V3_QSFP        |    0.020 A | valid*
-                |    3.312 V | valid*
---------------
-1V5_VCCAUX      |    1.498 V | valid*
+Name                          |    Value | Status
+--------------------------------------------------
+1V2_GTXAVTT                   | 25.000 C | valid
+                              |  2.000 A | valid
+                              |  1.200 V | valid
+--------------------------------------------------
+0V88_VCC_CPM5                 | 25.000 C | valid*
+                              |  3.000 A | valid*
+                              |  0.879 V | valid*
+--------------------------------------------------
+PCB                           | 22.000 C | valid*
+--------------------------------------------------
+Device                        | 31.000 C | valid*
+--------------------------------------------------
+VCCINT                        | 28.000 C | valid*
+                              | 13.000 A | valid*
+                              |  0.800 V | valid*
+--------------------------------------------------
+Module_0                      |  0.000 C | invalid
+--------------------------------------------------
+Module_1                      |  0.000 C | invalid
+--------------------------------------------------
+Module_2                      |  0.000 C | invalid
+--------------------------------------------------
+Module_3                      |  0.000 C | invalid
+--------------------------------------------------
+DIMM                          | 25.000 C | valid*
+--------------------------------------------------
+1V2_VCC_HBM                   | 28.000 C | valid*
+                              |  4.000 A | valid*
+                              |  1.199 V | valid*
+--------------------------------------------------
+Total_Power                   | 33.150 W | valid
+--------------------------------------------------
+# of 12V_AUX cables connected |        2 | valid*
+--------------------------------------------------
+12V_AUX1                      |  0.580 A | valid*
+                              | 12.216 V | valid*
+--------------------------------------------------
+12V_AUX2                      |  0.720 A | valid*
+                              | 12.208 V | valid*
+--------------------------------------------------
+1V2_VCCO_DIMM                 |  1.060 A | valid*
+                              |  1.200 V | valid*
+--------------------------------------------------
+3V3_PEX                       |  0.720 A | valid*
+                              |  3.304 V | valid*
+--------------------------------------------------
+12V_PEX                       |  1.199 A | valid*
+                              | 12.208 V | valid*
+--------------------------------------------------
+3V3_QSFP                      |  0.020 A | valid*
+                              |  3.312 V | valid*
+--------------------------------------------------
+1V5_VCCAUX                    |  1.501 V | valid*
 </pre></div>
 </div>
 <p><span id="how-toinstallandrunapre-builtamrdesignonanalveocard-xbtest-d-bdf-cverify"></span></p>
@@ -501,15 +496,15 @@ PASS      :: GEN_024 :: GENERAL      :: RESULT: ALL TESTS PASSED
           
 				  
 				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../hardware/index.html" class="btn btn-neutral float-left" title="Hardware Design - V80" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../../firmware/amc-architecture.html" class="btn btn-neutral float-right" title="AMR Management Controller (AMC) - Architecture and Design" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../hardware/index.html" class="btn btn-neutral float-left" title="Hardware Design - V80 (Alveo)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../rave/hardware/index.html" class="btn btn-neutral float-right" title="Hardware Design - RAVE (VE2302)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

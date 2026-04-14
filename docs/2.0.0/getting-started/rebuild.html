@@ -3,21 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
   <title>How-to Rebuild an AMR Design for Yourself &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
@@ -40,11 +25,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="prev" title="AMR Overview" href="../overview/amr-overview.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -107,19 +88,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../v80/index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/asdm-application.html">AMR ASDM Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/inband-telemetry.html">AMR InBand Telemetry Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../firmware/asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
@@ -174,7 +162,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <ul class="simple">
 <li><p>Use the AMD Vivado™ version associated with the AMR release</p></li>
 <li><p>Python 3.6.8 or later.</p></li>
-<li><p>Cmake 3.5.0 or later.</p></li>
+<li><p>Cmake 3.7.0 or later.</p></li>
 </ul>
 <p>System Memory Requirements</p>
 <ul class="simple">
@@ -200,13 +188,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </div>
 <div class="section" id="building-ospi-images-through-yocto">
 <h2>Building OSPI Images through Yocto:<a class="headerlink" href="#building-ospi-images-through-yocto" title="Permalink to this heading">¶</a></h2>
+<p>Use yocto procedure to build all necessary binary OSPI images and packages. The following commands will build the AMR OSPI package and create the necessary artifacts. The AMR package is built using the Yocto https://github.com/Xilinx/meta-embedded-plus template. The final artifacts will be in the build/tmp/deploy/images/emb_plus_ve2302_amr (for rave) and build/tmp/deploy/images/alveo-v80-amr (for v80)</p>
 <ol class="arabic">
-<li><p>Rave:
-Use the Yocto procedure to build all necessary binary OSPI images and packages. The AMR package is built using the Yocto meta-embedded-plus template. The final artifacts will be in the build/tmp/deploy/images/emb_plus_ve2302_amr folder.</p>
-<p>MACHINE=emb-plus-ve2302-amr bitbake emb-plus-ospi-amr</p>
+<li><p>Rave
+Build OSPI image:
+MACHINE=emb-plus-ve2302-amr bitbake emb-plus-ospi-amr</p>
+<p>Build APU image:
+MACHINE=emb-plus-ve2302-amr bitbake emb-plus-apu-image</p>
 </li>
-<li><p>V80:
-TBD</p></li>
+<li><p>V80
+Build OSPI image:
+MACHINE=alveo-v80-amr bitbake emb-plus-ospi-amr</p>
+<p>Build APU image:
+MACHINE=alveo-v80-amr bitbake emb-plus-apu-image</p>
+</li>
 </ol>
 <p>For building x86 packages refer <a class="reference internal" href="#how-torebuildanamrdesignforyourself-software"><span class="xref myst">software build section</span></a></p>
 </div>
@@ -238,12 +233,9 @@ TBD</p></li>
 <p>The following steps will guide you through setting up your Vivado environment and building an AMR V80/RAVE PDI from the cloned source code.</p>
 <ol class="arabic">
 <li><p>Set up the desired version of Vivado in your environment by sourcing the <code class="docutils literal notranslate"><span class="pre">settings64.](c)sh</span></code> script from your Vivado install directory.</p>
-<ul class="simple">
-<li></li>
-</ul>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    # for csh
     $ source settings64.csh
-    
+
     # for bash
     $ source settings64.sh
 </pre></div>
@@ -253,15 +245,19 @@ TBD</p></li>
 ./build.sh -profile &lt;v80|rave&gt;</p></li>
 </ol>
 <!-- end list -->
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- For more information on the build script, refer to [AMR Build Scripts](../build-scripts/)
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- For more information on the build script, refer to [AMR Build Scripts](../development/build-scripts.md)
 
    ```bash
     # To build V80 hardware, firmware and software
       cd amr
-      ./build_all.sh -profile v80
+      ./build.sh -profile v80
     ```
 
-- To confirm that the build completed successfully, review the generated output and verify that the required output files from each build step are present as indicated in the next section.
+To confirm that the build completed successfully, review the generated output folders
+    - build_amc : contains fw build output
+    - build_ami : contains sw build output
+    - build_v80 : contains hw build output
+verify that the required output files are present.
 </pre></div>
 </div>
 <p><span id="how-torebuildanamrdesignforyourself-firmware"></span></p>
@@ -272,7 +268,7 @@ TBD</p></li>
 <ol class="arabic simple">
 <li><p>On your development server, navigate to the AMC directory in &lt;AMR cloned repo&gt;/fw/AMC/.</p></li>
 <li><p>Run the script
-./scripts/build_amc.sh -xsa &lt;hw_xsa&gt; -profile &lt;v80/rave&gt;
+./scripts/build.sh -xsa &lt;hw_xsa&gt; -profile &lt;v80/rave&gt;
 which will build the firmware and generate amr_ospi_fpt.bin, amr_ospi.bin. After successfully building, the firmware package will be in &lt;AMR&gt;/fw/AMI/build_amc/. Copy this to your deployment server.</p></li>
 </ol>
 <p><span id="how-torebuildanamrdesignforyourself-software"></span></p>
@@ -282,7 +278,7 @@ which will build the firmware and generate amr_ospi_fpt.bin, amr_ospi.bin. After
 <p>The following steps will guide you through building the AMI software from the cloned source code.</p>
 <ol class="arabic">
 <li><p>On your development server, navigate to the AMI directory in &lt;AMR cloned repo&gt;/sw/AMI/.</p></li>
-<li><p>Run scripts/build_ami.sh, which will build the software and generate three debian/rpm files.</p>
+<li><p>Run scripts/build.sh, which will build the software and generate three debian/rpm files.</p>
 <ul class="simple">
 <li><p>ami_<version>.<hash>.<date>_amd64.deb example: ami_2.0.0-0.0a8a8683.20260216_amd64.deb</p></li>
 <li><p>amitool_<version>.<hash>.<date>_amd64.deb example: amitool_2.0.0-0.0a8a8683.20260216_amd64.deb</p></li>
@@ -290,15 +286,15 @@ which will build the firmware and generate amr_ospi_fpt.bin, amr_ospi.bin. After
 After successfully building, the software package will be in &lt;AMR&gt;/sw/AMI/build_ami/&gt;. Copy this to your deployment server.</p></li>
 </ul>
 </li>
-<li><p>On your deployment server, install the AMI package.. Make sure to install libami_<version>.<hash>.<date>_amd64.deb before installing other debian files.</p>
+<li><p>On your deployment server, install the AMI package.. Make sure to install libami_<version>.<hash>.<date><em>amd64.deb before installing amitool</em><version>.<hash>.<date>_amd64.deb.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># development server</span>
 <span class="nb">cd</span><span class="w"> </span>&lt;AMR&gt;/sw/AMI
-bash<span class="w"> </span>scripts/build_ami.sh
+bash<span class="w"> </span>scripts/build.sh
 
 <span class="c1"># deployment server</span>
+sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>&lt;path/to/ami_xxx.deb&gt;
 sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>&lt;path/to/libami_xxx.deb&gt;
 sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>&lt;path/to/amitool_xxx.deb&gt;
-sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>&lt;path/to/ami_xxx.deb&gt;
 </pre></div>
 </div>
 </li>
@@ -308,9 +304,9 @@ sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </spa
 </div>
 <div class="section" id="review-the-generated-output">
 <h2>Review the Generated Output<a class="headerlink" href="#review-the-generated-output" title="Permalink to this heading">¶</a></h2>
-<p>By default, the <code class="docutils literal notranslate"><span class="pre">build.sh</span></code> script creates a build directory which would contain fw and sw images. Review your output directory to confirm it looks like the following.</p>
+<p>By default, the <code class="docutils literal notranslate"><span class="pre">build.sh</span></code> script creates a build directory which would contain fw and sw images. Review your output directory to confirm it looks like the following. For AMR build_amr</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;AMR&gt;
-├── build/
+├── build_amc
 │   ├── amc.elf*
 │   ├── amd_fpt.bin*
 │   ├── amr_ospi_all_0_sync_offsets.txt
@@ -321,14 +317,16 @@ sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </spa
 │   ├── CMakeCache.txt
 │   ├── CMakeFiles
 │   ├── cmake_install.cmake
-│   ├── Makefile
+│   └── Makefile
+├── build_ami
 │   ├── ami
-    ├── driver
-    ├── libami
+│   ├── driver
+│   ├── libami
 │   ├── ami_2.0.0-0.0a8a8683.20260224_amd64.deb
-    ├── amitool_2.0.0-0.0a8a8683.20260224_amd64.deb
-    └── libami_2.0.0-0.0a8a8683.20260224_amd64.deb
-
+│   ├── amitool_2.0.0-0.0a8a8683.20260224_amd64.deb
+│   └── libami_2.0.0-0.0a8a8683.20260224_amd64.deb
+├── build_v80
+│   └── amr_vivado_designs
 ├── build.sh
 ├── fw/
 ├── scripts/
@@ -393,7 +391,7 @@ Will do a hot reset to boot into partition 0. This may take a minute...
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

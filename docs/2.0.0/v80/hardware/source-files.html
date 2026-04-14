@@ -3,21 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
   <title>AMR V80 - Source File Overview &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
@@ -38,11 +23,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -86,19 +67,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development/source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/asdm-application.html">AMR ASDM Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/inband-telemetry.html">AMR InBand Telemetry Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../firmware/asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
@@ -142,118 +130,269 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
              
   <div class="section" id="amr-v80-source-file-overview">
 <h1>AMR V80 - Source File Overview<a class="headerlink" href="#amr-v80-source-file-overview" title="Permalink to this heading">¶</a></h1>
+<blockquote>
+<div><p><strong>For common build concepts</strong>, see <a class="reference internal" href="../../hardware/source-files.html"><span class="std std-doc">Common Source Files</span></a></p>
+<p>This document describes V80-specific build structure: alveo_v80 directory organization.</p>
+</div></blockquote>
+<p><span id="amrv80-sourcefileoverview-overview"></span></p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
+<p>The V80 hardware design files are organized under build_v80/amr_vivado_designs/alveo_v80/ with the v80_base design providing the base platform implementation.</p>
 <p><span id="amrv80-sourcefileoverview-hardwaredirectorytree"></span></p>
+</div>
 <div class="section" id="hardware-directory-tree">
 <h2>Hardware Directory Tree<a class="headerlink" href="#hardware-directory-tree" title="Permalink to this heading">¶</a></h2>
-<p><strong>Hardware Source</strong></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>amr
-├── fw/AMC
-└── hw
-    └── amd_v80_gen5x8_25.1
-        ├── build_all.sh
-        ├── fpt
-        │   ├── fpt_pdi_gen.py
-        │   └── pdi_combine.bif
-        └── src
-            ├── bd
-            │   └── create_bd_design.tcl
-            ├── build_design.tcl
-            ├── constraints
-            │   ├── impl.pins.xdc
-            │   ├── impl.xdc
-            │   ├── opt.post.tcl
-            │   ├── place.pre.tcl
-            │   └── write_device_image.pre.tcl
-            ├── create_design.tcl
-            └── iprepo
-                ├── cmd_queue_v2_0
-                ├── hw_discovery_v1_0
-                ├── shell_utils_uuid_rom_v2_0
-                └── smbus_v1_1*
+<p><strong>V80 Hardware Source</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>build_v80
+└── amr_vivado_designs
+    ├── README.md
+    ├── LICENSE (MIT)
+    ├── Jenkinsfile
+    ├── alveo_v80
+    │   ├── scripts
+    │   │   └── gen_sdt.tcl
+    │   └── v80_base
+    │       ├── Makefile
+    │       ├── project                  (Generated: .xpr, .xsa)
+    │       ├── scripts
+    │       │   ├── main.tcl
+    │       │   └── config_bd.tcl
+    │       ├── xdc
+    │       │   ├── impl.xdc
+    │       │   └── impl.pins.xdc        (364 lines, 64.8 KB)
+    │       └── ip
+    │           └── smbus_v1_1*          (SystemVerilog custom IP)
+    │               ├── component.xml
+    │               ├── bd
+    │               │   └── bd.tcl
+    │               ├── hdl
+    │               │   └── smbus_v1_1_vl_rfs.sv
+    │               └── xgui
+    │                   └── smbus_v1_1.tcl
+    └── emb_plus_ve2302                  (VE2302 FPGA platforms)
+        ├── platforms
+        │   ├── scripts
+        │   │   ├── gen_sdt.tcl
+        │   │   ├── gen_sdt_dfx.tcl
+        │   │   └── fix_dtsi.tcl
+        │   ├── ve2302_1gEth             (1G Ethernet design)
+        │   ├── ve2302_10g_mrmac         (10G Ethernet with MRMAC)
+        │   ├── ve2302_gmsl              (GMSL pipeline)
+        │   ├── ve2302_xdma_gmsl         (GMSL + XDMA/PCIe)
+        │   └── ve2302_xdma_base         (DFX base design)
+        └── dfx                           (Dynamic Function eXchange)
+            ├── common
+            │   └── bd
+            │       └── static_interface.tcl
+            ├── bram_gpio
+            ├── eth_1g
+            ├── eth_10g
+            │   └── ip
+            │       └── MRMAC_AXI_MUX_V1_1  (Custom MRMAC MUX IP)
+            └── training
 
-*       : This location does not exist. The user must populate this location.
+*       : SMBus IP must be downloaded from https://www.xilinx.com/member/v80.html
 </pre></div>
 </div>
-<p><span id="amrv80-sourcefileoverview-amr"></span></p>
+<p><span id="amrv80-sourcefileoverview-buildv80"></span></p>
 </div>
-<div class="section" id="amr">
-<h2>amr<a class="headerlink" href="#amr" title="Permalink to this heading">¶</a></h2>
-<p>This is the top level directory containing the source files for creating the AMR design and the build script. When executed, the build_all.sh script builds the hardware design, firmware, FPT binary, and final PDI.</p>
-<p><span id="amrv80-sourcefileoverview-hw"></span></p>
-<div class="section" id="hw">
-<h3>hw<a class="headerlink" href="#hw" title="Permalink to this heading">¶</a></h3>
-<p>The hw directory contains the files necessary to build the hardware design.</p>
-<p><span id="amrv80-sourcefileoverview-amd-v80-gen5x8-25-1"></span></p>
-<div class="section" id="amd-v80-gen5x8-25-1">
-<h4>amd_v80_gen5x8_25.1<a class="headerlink" href="#amd-v80-gen5x8-25-1" title="Permalink to this heading">¶</a></h4>
-<p>This is the top level directory for the AMD Gen5x8 example design. The directory name is the same as the VBNV, and is used throughout the design.</p>
-<p><span id="amrv80-sourcefileoverview-build-all-sh"></span></p>
-<div class="section" id="build-all-sh">
-<h5>build_all.sh<a class="headerlink" href="#build-all-sh" title="Permalink to this heading">¶</a></h5>
-<p>This is the main build shell. Executing this shell will launch Vivado<sup>TM</sup>, build the AMR hardware design, compile the AMC firmware, and generate the PDI files. For the AMC FW to be compiled, this script expects the fw/AMC folder at the same level as the hw directory. This is indicated by the asterisk in the Hardware Directory Tree above.</p>
-<p><span id="amrv80-sourcefileoverview-fpt"></span></p>
-</div>
-<div class="section" id="fpt">
-<h5>fpt<a class="headerlink" href="#fpt" title="Permalink to this heading">¶</a></h5>
+<div class="section" id="build-v80">
+<h2>build_v80<a class="headerlink" href="#build-v80" title="Permalink to this heading">¶</a></h2>
+<p>This is the top level directory containing the Vivado design sources for the AMR V80 hardware platform.</p>
+<p><span id="amrv80-sourcefileoverview-amrvivadodesigns"></span></p>
+<div class="section" id="amr-vivado-designs">
+<h3>amr_vivado_designs<a class="headerlink" href="#amr-vivado-designs" title="Permalink to this heading">¶</a></h3>
+<p>The amr_vivado_designs directory contains all hardware design files for multiple FPGA platforms (Alveo V80 and VE2302). The repository supports Makefile-based builds with CI/CD integration via Jenkins.</p>
+<p><span id="amrv80-sourcefileoverview-alveov80"></span></p>
+<div class="section" id="alveo-v80">
+<h4>alveo_v80<a class="headerlink" href="#alveo-v80" title="Permalink to this heading">¶</a></h4>
+<p>This directory contains the Alveo V80 FPGA design targeting the xcv80-lsva4737-2MHP-e-S part with Vivado 2025.2 tools.</p>
+<p><span id="amrv80-sourcefileoverview-v80base"></span></p>
+<div class="section" id="v80-base">
+<h5>v80_base<a class="headerlink" href="#v80-base" title="Permalink to this heading">¶</a></h5>
+<p>This is the V80 base platform design directory.</p>
+<p><strong>Makefile</strong> - Main build automation script supporting:</p>
 <ul class="simple">
-<li><p>pdi_combine.bif - This file is used in the build_all.sh to combine the FW amc.elf with the HW PDI.</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">xsa</span> <span class="pre">[JOBS=8]</span></code> - Generate Xilinx Support Archive (.xsa file)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">sdt</span></code> - Generate System Device Tree files using sdtgen</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">all</span></code> - Complete build (XSA + SDT)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code> - Remove generated artifacts</p></li>
+<li><p>Default parallel synthesis jobs: 8 (configurable via JOBS parameter)</p></li>
+</ul>
+<p><strong>project/</strong> - Generated Vivado project directory containing:</p>
+<ul class="simple">
+<li><p>v80_base.xpr (Vivado project file)</p></li>
+<li><p>v80_base.xsa (Xilinx Support Archive - hardware definition)</p></li>
+</ul>
+<p><span id="amrv80-sourcefileoverview-v80scripts"></span></p>
+<div class="section" id="scripts">
+<h6>scripts<a class="headerlink" href="#scripts" title="Permalink to this heading">¶</a></h6>
+<ul class="simple">
+<li><p><strong>main.tcl</strong> - Main Vivado build script that:</p>
 <ul>
-<li><p>output: build/amd_v80_gen5x8_25.1_nofpt.pdi</p></li>
+<li><p>Creates the Vivado project</p></li>
+<li><p>Sets board part (xilinx.com:v80:part0:1.0)</p></li>
+<li><p>Loads XDC constraint files</p></li>
+<li><p>Updates IP catalog with custom IP repositories</p></li>
+<li><p>Sources config_bd.tcl to generate block design</p></li>
+<li><p>Runs synthesis and implementation</p></li>
+<li><p>Generates and validates XSA file</p></li>
+<li><p>Creates hardware documentation (README.hw)</p></li>
 </ul>
 </li>
-<li><p>fpt_pdi_gen.py - This file is used in the build_all.sh to create the final FPT PDI</p>
+<li><p><strong>config_bd.tcl</strong> - Block design configuration script that instantiates and configures:</p>
 <ul>
-<li><p>output: amd_v80_gen5x8_25.1.pdi</p></li>
-</ul>
-</li>
-</ul>
-<p><span id="amrv80-sourcefileoverview-src"></span></p>
-</div>
-<div class="section" id="src">
-<h5>src<a class="headerlink" href="#src" title="Permalink to this heading">¶</a></h5>
+<li><p><strong>Versal CIPS</strong> (CPM5 PCIe Gen5x8, RPU, PMC configuration)</p></li>
+<li><p><strong>AXI NoC instances</strong> (3 total):</p>
 <ul>
-<li><p><strong>bd</strong> - This is the Block Design generation directory which contains the TCL file necessary to build the AMD Vivado™ AMR design.</p>
-<ul class="simple">
-<li><p>create_bd_design.tcl - This TCL file is used by Vivado to create the base AMR design. Since the GTs are not used in this design, the interface ports have been commented out. The user may uncomment them as required for their design.</p></li>
+<li><p>axi_noc_cips: PCIe to PL routing (M00_AXI, M01_AXI) and memory controller connections</p></li>
+<li><p>axi_noc_mc_ddr4_0: Discrete DDR (4GB) controller interface</p></li>
+<li><p>axi_noc_mc_ddr4_1: DDR DIMM (32GB) controller interface</p></li>
 </ul>
 </li>
-<li><p><strong>build_design.tcl</strong> - This script uses Vivado to create the XSA and run synthesis and implementation.</p></li>
-<li><p><strong>contraints</strong> - This directory contains the constraints required for Vivado implementation to generate a PDI.</p>
-<ul class="simple">
-<li><p>impl.pins.xdc - This file contains the top level I/O pin names, locations, and IO standards for the DDR, DIMM, GTYPs, GTMs, and clocks.</p>
+<li><p><strong>PF1 Hierarchy</strong> (hierarchical block):</p>
 <ul>
-<li><p><em>Note</em>: Since the GTs are not used in the base V80 design, these pins have been commented out.</p></li>
+<li><p>SmartConnect: AXI interconnect (1 slave, 1 master)</p></li>
+<li><p>AXI GPIO: Test GPIO with loopback (default 0xF1)</p></li>
+<li><p>Processor System Reset: Reset synchronization</p></li>
 </ul>
 </li>
-<li></li>
+<li><p><strong>No management IP blocks</strong> (GCQ, SMBus, UUID ROM, EEPROM) instantiated in base design</p></li>
 </ul>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>impl.xdc - This file defines strictly enforced pblocks for each SLR. A strictly enforced pblock does not allow cells to be moved outside pblock boundaries. The base logic is assigned to SLR0, while user logic can be assigned to SLR0, SLR1, and SLR2 as needed.
-
-
-
-
-
-The NMU for the PCIe Management SmartConnect (pcie\_slr0\_mgmt\_sc) is LOC’d to keep the base logic resources close to the CIPS in SLR0.
-</pre></div>
+</li>
+</ul>
+<p><span id="amrv80-sourcefileoverview-v80xdc"></span></p>
 </div>
+<div class="section" id="xdc">
+<h6>xdc<a class="headerlink" href="#xdc" title="Permalink to this heading">¶</a></h6>
 <ul class="simple">
-<li><p>opt.post.tcl - This file turns on bitstream compression and enables NPI DMA mode to accelerate device download. It also disables BUFG insertion in placement to prevent clock changes.</p></li>
-<li><p>place.pre.tcl - The PCIe Management PDI Reset logic currently is not used in AMR, but it was added for future growth. Currently, the settings in this file connect the reset to a PMC interrupt. The response to this interrupt has not been defined.</p></li>
-<li><p>write_device_image.pre.tcl - This file generates the UUID for the AMR design which is stored in the UUID of the base logic.</p></li>
+<li><p><strong>impl.pins.xdc</strong> - Pin placement and I/O standard constraints (364 lines, 64.8 KB)</p>
+<ul>
+<li><p>DDR4 CH0 (Components): Address, data, control signals for memory controller 0</p>
+<ul>
+<li><p>Banks: 700, 701, 702</p></li>
+<li><p>IOSTANDARD: SSTL12 (address/control), POD12 (DM), DIFF_POD12 (DQS)</p></li>
+<li><p>VCCO: 1V2</p></li>
+<li><p>72-bit data width (DQ[0-71], DM_n[0-8], DQS pairs)</p></li>
 </ul>
 </li>
-<li><p><strong>create_design.tcl</strong> - This file is used by Vivado to create the project, create the BD, add the constraint files, and set the processing order for creating the AMR design.</p></li>
-<li><p><strong>iprepo</strong> - This directory contains all the additional IP necessary to build the AMR design that is not included in the Vivado released SW.</p>
+<li><p>DDR4 CH1 (RDIMMs): Pin assignments for memory controller 1</p>
+<ul>
+<li><p>Banks: 703, 704, 705</p></li>
+<li><p>Similar signal structure with parity support</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>impl.xdc</strong> - Implementation constraints (2.6 KB)</p>
+<ul>
+<li><p>SLR pblock definitions:</p>
+<ul>
+<li><p>pblock_SLR0: CLOCKREGION_X0Y0:CLOCKREGION_X12Y0, X0Y1:X9Y4</p></li>
+<li><p>pblock_SLR1: CLOCKREGION_X0Y5:CLOCKREGION_X9Y7</p></li>
+<li><p>pblock_SLR2: CLOCKREGION_X0Y8:CLOCKREGION_X9Y10, X0Y11:X8Y11</p></li>
+</ul>
+</li>
+<li><p>Timing path exceptions and false paths</p></li>
+<li><p>NOC_NSU512 placement: LOC NOC_NSU512_X0Y0</p></li>
+<li><p>Reset synchronization false paths</p></li>
+</ul>
+</li>
+</ul>
+<p><span id="amrv80-sourcefileoverview-v80ip"></span></p>
+</div>
+<div class="section" id="ip">
+<h6>ip<a class="headerlink" href="#ip" title="Permalink to this heading">¶</a></h6>
 <ul class="simple">
-<li><p>cmd_queue_v2_0</p></li>
-<li><p>hw_discovery_v1_0</p></li>
-<li><p>shell_utils_uuid_rom_v2_0</p></li>
-<li><p>smbus_v1_1 - This IP must be added from the lounge by the user due to licensing requirements (<a class="reference external" href="https://www.xilinx.com/member/v80.html">https://www.xilinx.com/member/v80.html</a>). Vivado will not build the AMR design if this IP is not present. This is indicated by the asterisk in the Hardware Directory Tree above.</p></li>
+<li><p><strong>smbus_v1_1/</strong> - Custom SMBus controller IP (SystemVerilog-based) - <strong>NOT INSTANTIATED IN BASE DESIGN</strong></p>
+<ul>
+<li><p><strong>component.xml</strong> - IP component definition (232 KB, 4598 lines)</p></li>
+<li><p><strong>bd/bd.tcl</strong> - Block design for SMBus internal structure</p></li>
+<li><p><strong>hdl/smbus_v1_1_vl_rfs.sv</strong> - SystemVerilog RTL implementation</p></li>
+<li><p><strong>xgui/smbus_v1_1.tcl</strong> - GUI configuration interface</p></li>
+<li><p><em>IMPORTANT</em>: This IP must be downloaded from the Xilinx member area (<a class="reference external" href="https://www.xilinx.com/member/v80.html">https://www.xilinx.com/member/v80.html</a>) and placed in the ip/ directory for the design to build successfully</p></li>
+<li><p><em>STATUS</em>: Available in IP repository but <strong>not instantiated</strong> in v80_base block design; M_AXI_LPD interface enabled but not connected (reserved for future SMBus instantiation)</p></li>
 </ul>
 </li>
 </ul>
+<p><span id="amrv80-sourcefileoverview-embplusve2302"></span></p>
 </div>
 </div>
+</div>
+<div class="section" id="emb-plus-ve2302">
+<h4>emb_plus_ve2302<a class="headerlink" href="#emb-plus-ve2302" title="Permalink to this heading">¶</a></h4>
+<p>This directory contains multiple platform designs for the VE2302 Versal embedded FPGA targeting Vivado 2026.1 tools. It includes both flat (non-DFX) designs and Dynamic Function eXchange (DFX) capable designs.</p>
+<p><span id="amrv80-sourcefileoverview-ve2302platforms"></span></p>
+<div class="section" id="platforms">
+<h5>platforms<a class="headerlink" href="#platforms" title="Permalink to this heading">¶</a></h5>
+<p>Multiple platform designs, each with similar structure (Makefile, scripts/, xdc/, and optional ip/):</p>
+<ul class="simple">
+<li><p><strong>ve2302_1gEth</strong> - Dual-channel 1G Ethernet design using standard MAC</p></li>
+<li><p><strong>ve2302_10g_mrmac</strong> - Dual 10G Ethernet design utilizing MRMAC (MultiRate MAC) hard blocks in Versal</p></li>
+<li><p><strong>ve2302_gmsl</strong> - Versal GMSL (Gigabit Multimedia Serial Link) pipeline for video applications</p></li>
+<li><p><strong>ve2302_xdma_gmsl</strong> - GMSL pipeline with XDMA/PCIe support</p></li>
+<li><p><strong>ve2302_xdma_base</strong> - DFX-enabled base design with PCIe/XDMA, serves as base for reconfigurable modules</p></li>
+</ul>
+<p>Each platform build generates:</p>
+<ul class="simple">
+<li><p>XSA file (hardware definition)</p></li>
+<li><p>SDT files (system device tree)</p></li>
+<li><p>For DFX designs: partial PDI files and Debian packages</p></li>
+</ul>
+<p><span id="amrv80-sourcefileoverview-dfx"></span></p>
+</div>
+<div class="section" id="dfx-dynamic-function-exchange">
+<h5>dfx (Dynamic Function eXchange)<a class="headerlink" href="#dfx-dynamic-function-exchange" title="Permalink to this heading">¶</a></h5>
+<p>Reconfigurable modules that can be dynamically loaded into the ve2302_xdma_base design:</p>
+<ul class="simple">
+<li><p><strong>common/bd/static_interface.tcl</strong> - Defines the static (unchanging) interface between base design and reconfigurable partition</p></li>
+<li><p><strong>bram_gpio/</strong> - BRAM storage + GPIO interface reconfigurable module</p></li>
+<li><p><strong>eth_1g/</strong> - Single 1G Ethernet reconfigurable module</p></li>
+<li><p><strong>eth_10g/</strong> - Single 10G Ethernet with MRMAC reconfigurable module</p>
+<ul>
+<li><p>Contains custom <strong>MRMAC_AXI_MUX_V1_1</strong> IP (38 KB component.xml)</p></li>
+<li><p>Custom Verilog modules: mrmac_10g_mux.v, axis_dwidth_converter_rx/, axis_dwidth_converter_tx/</p></li>
+</ul>
+</li>
+<li><p><strong>training/</strong> - Reference training reconfigurable module</p></li>
+</ul>
+<p>DFX build outputs:</p>
+<ul class="simple">
+<li><p>Base XSA: ve2302_xdma_base.xsa</p></li>
+<li><p>Module XSAs: ve2302_xdma_base_{module}.xsa</p></li>
+<li><p>Partial PDIs: {module}_partial.pdi</p></li>
+<li><p>Debian packages: amr-{module}-dma-test-ve2302_2.0.deb</p></li>
+</ul>
+<p><span id="amrv80-sourcefileoverview-sdtgeneration"></span></p>
+</div>
+<div class="section" id="sdt-system-device-tree-generation">
+<h5>SDT (System Device Tree) Generation<a class="headerlink" href="#sdt-system-device-tree-generation" title="Permalink to this heading">¶</a></h5>
+<ul class="simple">
+<li><p><strong>gen_sdt.tcl</strong> - Generates device tree for flat designs</p>
+<ul>
+<li><p>Uses sdtgen utility with board-specific device tree (versal-emb-plus-ve2302-reva)</p></li>
+<li><p>Outputs to project_sdt/ directory</p></li>
+</ul>
+</li>
+<li><p><strong>gen_sdt_dfx.tcl</strong> - Generates device tree for DFX designs with multiple XSA file support</p></li>
+<li><p><strong>fix_dtsi.tcl</strong> - Post-processing script for device tree files</p></li>
+</ul>
+<p><span id="amrv80-sourcefileoverview-cicd"></span></p>
+</div>
+</div>
+</div>
+<div class="section" id="ci-cd-integration">
+<h3>CI/CD Integration<a class="headerlink" href="#ci-cd-integration" title="Permalink to this heading">¶</a></h3>
+<p><strong>Jenkinsfile</strong> - Jenkins pipeline configuration providing:</p>
+<ul class="simple">
+<li><p>Multi-host deployment support</p></li>
+<li><p>Commit ID tracking (source + submodules)</p></li>
+<li><p>Remote build invocation via LSF (Load Sharing Facility)</p></li>
+<li><p>XSA artifact deployment</p></li>
+<li><p>Debian package deployment</p></li>
+<li><p>Build success symlink management</p></li>
+<li><p>Branch-specific deployment logic</p></li>
+</ul>
 </div>
 </div>
 </div>
@@ -269,7 +408,7 @@ The NMU for the PCIe Management SmartConnect (pcie\_slr0\_mgmt\_sc) is LOC’d t
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

@@ -6,39 +6,25 @@
 
   - Support for Vivado™ 2026.1 toolset.
 
-  - Support for RHEL 9.4 with kernel 5.14, and Ubuntu 24.04 with kernel 6.8
-
   - Enhanced OSPI flash write performance optimization for faster device programming.
 
-  - Partition flag read/write functionality for advanced flash management and partition control.
+  - Partition flag read/write functionality for advanced flash management and partition control, including power-on load configuration.
 
-  - RPM package support for Red Hat distributions in addition to existing Debian packages.
+  - Improved firmware architecture with board profile system supporting rave (standard reference) and v80 variants for flexible platform deployment.
 
-  - Enhanced V80 board profile with eMMC storage support, SMBus interface, and QSFP module control.
+  - Three-partition FPT structure (two boot PDIs + one user partition) with 128-byte header and entries.
 
-  - Improved firmware architecture with board profile system supporting rave (standard reference) and v80 (enhanced) variants for flexible platform deployment
-
-<span id="amroverview-obsoletefeatures"></span>
-
-### Obsolete Features
-
-  - The following OS versions and kernels are no longer officially supported:
-
-      - Ubuntu 22.04 with kernels 5.4.0 and 5.15.0
-
-      - RHEL 8.3 with kernel 4.18.0
-
-  - V70 board profile has been removed in favor of the unified rave (standard) and v80 (enhanced) board profiles
+  - PS subsystems with RPU0 (AMR), RPU1 and APU.
 
 <span id="amroverview-supportedkernelsanddistributions"></span>
 
 ## Supported Kernels and Distributions for V80
 
-| <span data-colorid="kdq9nyngzr">Operating System</span> | <span data-colorid="uu37qyp26c">Architecture</span> | <span data-colorid="zgwzhugq9a">Supported Versions</span> | <span data-colorid="g2qoz68626">Kernel-Version</span> |
-| ------------------- | ----------------- | ------------------- | ------------------- |
-| <span data-colorid="w6a3hfta9z">Ubuntu</span>           | <span data-colorid="dwhflvbtbg">x86\_64</span>      | <span data-colorid="bmtdp27dz1">24.04</span>              | <span data-colorid="ytedsyen0b">6.8.0</span>          |
-| <span data-colorid="w6a3hfta9z">Ubuntu</span>           | <span data-colorid="dwhflvbtbg">x86\_64</span>      | <span data-colorid="bmtdp27dz1">24.04.3</span>              | <span data-colorid="ytedsyen0b">6.17.12</span>          |
-| <span data-colorid="a9kve1ggv2">RHEL</span>             | <span data-colorid="vt4guanqx8">x86\_64</span>      | <span data-colorid="tmrzs0i204">9.7</span>                | <span data-colorid="el6txwhuye">6.19.3</span>         |
+
+| <span data-colorid="kdq9nyngzr">Operating System</span> | <span data-colorid="uu37qyp26c">Architecture</span> | <span data-colorid="zgwzhugq9a">Supported Versions</span>        | <span data-colorid="g2qoz68626">Kernel-Version</span>             |
+| ------------------------------------------------------- | --------------------------------------------------- | ---------------------------------------------------------------- | ----------------------------------------------------------------- |
+| <span data-colorid="w6a3hfta9z">Ubuntu</span>           | <span data-colorid="dwhflvbtbg">x86\_64</span>      | <span data-colorid="bmtdp27dz1">22.04<br>24.04<br>24.04.3</span> | <span data-colorid="ytedsyen0b">5.15.0<br>6.8.0<br>6.17.12</span> |
+| <span data-colorid="a9kve1ggv2">RHEL</span>             | <span data-colorid="vt4guanqx8">x86\_64</span>      | <span data-colorid="tmrzs0i204">8.3<br>9.7</span>                | <span data-colorid="el6txwhuye">4.18.0<br>6.19.3</span>           |
 
 Please note:
 
@@ -72,21 +58,25 @@ This section contains an overview of the AMD Adaptive Management Runtime (AMR). 
 
 The Alveo V80 is a high performance data processing card in a PCIe form factor containing a Versal HBM FPGA device, DDR memory, and a variety of communication interfaces. The Alveo V80 has a broad range of market applications in high-performance compute, analytics, networking, storage, fintech, and blockchain. The following diagram provides a high level overview of the primary card features and interfaces. See the Alveo V80 Data Center Accelerator Card Data Sheet (DS1013) for information on the card and its capabilities.
 
+> **Note:** Queue DMA (QDMA) functionality is supported exclusively on the Alveo V80 platform. QDMA is not available on RAVE (Embedded+) platforms, which utilize XDMA for PCIe data transfer operations.
+
 [![image1](../images/1107373415.png)](../images/1107373415.png)
 
 <span id="amroverview-rave"></span>
 
-### Rave (Standard Alveo Platform)
+### Rave (Embedded+ Platform)
 
-The Rave platform represents the standard reference implementation for Alveo boards featuring Versal devices. Rave provides essential PCIe connectivity and basic management capabilities suitable for a wide range of applications. Key characteristics include:
+The Rave platform represents the standard reference implementation for Embedded+ boards featuring Versal devices. Rave provides essential PCIe connectivity and basic management capabilities suitable for a wide range of applications. Key characteristics include:
 
   - Single I2C bus configuration for device communication
   - EEPROM version 1.0 support for board information storage
   - Standard OSPI flash management for device programming
   - In-band telemetry via PCIe for card monitoring and control
-  - Streamlined architecture optimized for standard Alveo deployment scenarios
+  - Streamlined architecture optimized for Embedded+ platform deployment scenarios
 
 The Rave profile serves as the baseline platform configuration, providing core functionality while minimizing complexity for applications that do not require advanced storage or expansion interfaces.
+
+![RAVE Platform Block Diagram](../images/rave_block.png)
 
 <span id="amroverview-alveoversalexampledesign"></span>
 
@@ -104,9 +94,9 @@ Some notable characteristics of the AMR include:
     
       - The AMR’s design flow produces full programming images for the FPGA, which simplifies the overall design flow and avoids other management overheads associated with dynamic function exchange.
 
-  - The AMR's firmware provides a reference implementation of card management functions for both in-band (PCIe) and out-of-band (SMBUS/BMC) sensor access and card control, plus other application-level card management functions. This includes writing new PDIs into the card's OSPI flash configuration memory across three partitions (two boot PDIs and one user design), with enhanced write performance, partition flag management, and automatic partition loading on power-up.
+  - The AMR's firmware provides a reference implementation of card management functions for in-band (PCIe) sensor access and card control, plus other application-level card management functions. This includes writing new PDIs into the card's OSPI flash configuration memory across three partitions (two boot PDIs and one user design), with enhanced write performance, partition flag management, and automatic partition loading on power-up. **Note:** Out-of-band SMBus/BMC support is not implemented; users must establish SMBus functionality based on their requirements.
 
-  - The AMR supports two board profiles: rave (standard reference implementation) and v80 (enhanced with eMMC storage, SMBus interface, and QSFP module control), allowing flexible deployment across different Alveo and Embedded+ platforms.
+  - The AMR supports two board profiles: rave (standard reference implementation) and v80 (with eMMC storage, SMBus interface, and QSFP module control), allowing flexible deployment across different Alveo and Embedded+ platforms.
 
 <span id="amroverview-amrhardwarearchitecture"></span>
 
@@ -114,7 +104,7 @@ Some notable characteristics of the AMR include:
 
 The AMR includes platform-specific base hardware designs that demonstrate PCIe connectivity and management capabilities. For detailed information on the hardware architecture for each supported platform, please refer to:
 
-  - [V80 Hardware Architecture](../hardware/v80-hardware) - Enhanced platform with eMMC, QSFP, and SMBus support
+  - [V80 Hardware Architecture](../hardware/v80-hardware) - Platform with eMMC, QSFP, and SMBus support
   - [Rave Hardware Architecture](../hardware/rave-hardware) - Standard reference platform architecture
 
 <span id="amroverview-amrsoftwarearchitecture"></span>
@@ -157,5 +147,5 @@ The diagram above shows a high level overview of the AMR build process. Notable 
 
   - Use of Vitis™ embedded software flow to compile AMR firmware image for inclusion into final programming image.
 
-  - Profile-based configuration system enabling different board variants (rave for standard Alveo, v80 for enhanced platforms) to be built from a unified source tree.
+  - Profile-based configuration system enabling different board variants (rave for Embedded+ platforms, v80 for Alveo platforms) to be built from a unified source tree.
 

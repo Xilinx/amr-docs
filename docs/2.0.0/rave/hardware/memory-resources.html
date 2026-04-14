@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AMR RAVE - Memory Resources &mdash; AMR  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/_static/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+            <a href="../../index.html" class="icon icon-home"> AMR
+            <img src="../../_static/xilinx-header-logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">AMR Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/amr-overview.html">AMR Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AMR Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/rebuild.html">How-to Rebuild an AMR Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AMR System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../system-architecture/board-management.html">AMR - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../system-architecture/device-programming.html">AMR - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../system-architecture/host-communication.html">AMR - Host to Card Communication</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AMR Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/install-card.html">AMR Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/update-fpt.html">AMR Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/update-pdi.html">AMR Updating PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/debug.html">AMR Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/jtag-recovery.html">AMR JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/ami-tool-guide.html">AMR Management Interface userguide (ami_tool)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../development/build-scripts.html">AMR Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development/source-control.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../v80/index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Hardware Design - RAVE (VE2302)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/asdm-application.html">AMR ASDM Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/inband-telemetry.html">AMR InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/osal.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/profiles-cmake.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../software/ami.html">AMR Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software/qdma.html">AMR QDMA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices/abbreviations.html">AMR - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">AMR Release Information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: black" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AMR</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>AMR RAVE - Memory Resources</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/rave/hardware/memory-resources.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="amr-rave-memory-resources">
+<h1>AMR RAVE - Memory Resources<a class="headerlink" href="#amr-rave-memory-resources" title="Permalink to this heading">¶</a></h1>
+<blockquote>
+<div><p><strong>For common memory concepts</strong>, see <a class="reference internal" href="../../hardware/memory-resources.html"><span class="std std-doc">Common Memory Resources</span></a></p>
+<p>This document describes RAVE-specific memory configuration: LPDDR4 (8-16GB).</p>
+</div></blockquote>
+<p><span id="amrrave-memoryresources-overview"></span></p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
+<p>The RAVE platform provides 8 GB or 16 GB of LPDDR4 memory (depending on variant) serving all memory requirements for the VE2302 device. The memory is organized as two channels with x32 configuration, operating at 200 MHz for 400 MT/s effective data rate.</p>
+<p><span id="amrrave-memoryresources-lpddr4"></span></p>
+</div>
+<div class="section" id="lpddr4-configuration">
+<h2>LPDDR4 Configuration<a class="headerlink" href="#lpddr4-configuration" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="memory-organization">
+<h3>Memory Organization<a class="headerlink" href="#memory-organization" title="Permalink to this heading">¶</a></h3>
+<p>The LPDDR4 memory is soldered directly to the board (not socketed) in a configuration determined by the platform variant.</p>
+<p><strong>Memory Configuration:</strong></p>
+<ul class="simple">
+<li><p>Capacity: 8-16 GB total (variant-dependent)</p></li>
+<li><p>Channels: 2 channels</p></li>
+<li><p>Width: x32 per channel</p></li>
+</ul>
+<p><strong>Note:</strong> For detailed memory organization by platform variant, refer to the <a class="reference external" href="https://www.amd.com/en/products/embedded/embedded-plus.html">Sapphire RAVE1 EDGE+</a>.</p>
+</div>
+<div class="section" id="memory-controller-configuration">
+<h3>Memory Controller Configuration<a class="headerlink" href="#memory-controller-configuration" title="Permalink to this heading">¶</a></h3>
+<p>The Versal integrated DDRMC controls the LPDDR4 with the following characteristics:</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Controller Type</strong></td>
+<td>LPDDR4_SDRAM</td>
+</tr>
+<tr>
+<td><strong>Operating Frequency</strong></td>
+<td>200 MHz</td>
+</tr>
+<tr>
+<td><strong>Data Rate</strong></td>
+<td>400 MT/s (DDR)</td>
+</tr>
+<tr>
+<td><strong>Data Width</strong></td>
+<td>72-bit (64-bit data + 8-bit ECC)</td>
+</tr>
+<tr>
+<td><strong>Channels</strong></td>
+<td>2 channels</td>
+</tr>
+<tr>
+<td><strong>Banks</strong></td>
+<td>700, 701, 702</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pin-assignment">
+<h3>Pin Assignment<a class="headerlink" href="#pin-assignment" title="Permalink to this heading">¶</a></h3>
+<p>The LPDDR4 connects to the VE2302 through dedicated memory banks (Banks 700, 701, 702) with data signals, data masks, data strobes, and address/control signals.</p>
+<p><strong>Note:</strong> For complete pin assignments, refer to the hardware design repository.</p>
+<p><span id="amrrave-memoryresources-memoryusage"></span></p>
+</div>
+</div>
+<div class="section" id="memory-usage-allocation">
+<h2>Memory Usage Allocation<a class="headerlink" href="#memory-usage-allocation" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="rpu-firmware-execution">
+<h3>RPU Firmware Execution<a class="headerlink" href="#rpu-firmware-execution" title="Permalink to this heading">¶</a></h3>
+<p>The RPU (R5 processors) use a portion of LPDDR4 for:</p>
+<ul class="simple">
+<li><p>Firmware code sections (.text, .rodata)</p></li>
+<li><p>Firmware data (.data, .bss)</p></li>
+<li><p>Stack and heap for R5 cores</p></li>
+<li><p>Firmware data structures and buffers</p></li>
+</ul>
+<p>Typical firmware footprint ranges from a few megabytes to tens of megabytes depending on the application complexity and feature set.</p>
+</div>
+<div class="section" id="software-gcq-buffers">
+<h3>Software GCQ Buffers<a class="headerlink" href="#software-gcq-buffers" title="Permalink to this heading">¶</a></h3>
+<p>Inter-processor communication through the software GCQ mechanism uses shared LPDDR4 regions:</p>
+<ul class="simple">
+<li><p>Submission queue ring buffers</p></li>
+<li><p>Completion queue ring buffers</p></li>
+<li><p>Message payload storage</p></li>
+<li><p>Synchronized access between RPU and host</p></li>
+</ul>
+<p>The GCQ buffer allocation is typically a few megabytes, sized based on the expected message throughput and queue depths.</p>
+</div>
+<div class="section" id="user-application-data">
+<h3>User Application Data<a class="headerlink" href="#user-application-data" title="Permalink to this heading">¶</a></h3>
+<p>The remaining LPDDR4 capacity is available for user applications:</p>
+<ul class="simple">
+<li><p>DMA buffers for PCIe transfers</p></li>
+<li><p>Application working memory</p></li>
+<li><p>Frame buffers for video processing</p></li>
+<li><p>Model storage for AI inference</p></li>
+<li><p>Network packet buffers</p></li>
+</ul>
+<p><strong>Available capacity:</strong></p>
+<ul class="simple">
+<li><p>VPR-4616/5050: Approximately 7-7.5 GB after firmware and GCQ</p></li>
+<li><p>VPR-5050A: Approximately 15-15.5 GB after firmware and GCQ</p></li>
+</ul>
+<p><span id="amrrave-memoryresources-performancecharacteristics"></span></p>
+</div>
+</div>
+<div class="section" id="performance-characteristics">
+<h2>Performance Characteristics<a class="headerlink" href="#performance-characteristics" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="bandwidth">
+<h3>Bandwidth<a class="headerlink" href="#bandwidth" title="Permalink to this heading">¶</a></h3>
+<p>The LPDDR4 provides theoretical peak bandwidth through the dual-channel configuration:</p>
+<ul class="simple">
+<li><p>Per channel: ~6.4 GB/s (400 MT/s × 32-bit × 2 / 8)</p></li>
+<li><p>Total theoretical: ~12.8 GB/s (both channels)</p></li>
+<li><p>Effective bandwidth: ~10-11 GB/s (accounting for protocol overhead)</p></li>
+</ul>
+<p>Actual achieved bandwidth depends on access patterns, NoC contention, QoS settings, and whether both channels are utilized efficiently.</p>
+</div>
+<div class="section" id="latency">
+<h3>Latency<a class="headerlink" href="#latency" title="Permalink to this heading">¶</a></h3>
+<p>LPDDR4 latency is influenced by:</p>
+<ul class="simple">
+<li><p>Memory controller scheduling</p></li>
+<li><p>NoC traversal time</p></li>
+<li><p>Row/bank conflicts</p></li>
+<li><p>Refresh cycles</p></li>
+</ul>
+<p>Typical random access latency ranges from 100-200 nanoseconds, while sequential access benefits from read/write buffering and prefetching within the memory controller.</p>
+<p><span id="amrrave-memoryresources-memorycontroller"></span></p>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Memory Controller Configuration<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="ddrmc-settings">
+<h3>DDRMC Settings<a class="headerlink" href="#ddrmc-settings" title="Permalink to this heading">¶</a></h3>
+<p>The AXI NoC IP configures the LPDDR4 memory controller with these settings:</p>
+<div class="highlight-tcl notranslate"><div class="highlight"><pre><span></span>CONFIG.CONTROLLERTYPE {LPDDR4_SDRAM}
+CONFIG.MC_MEMORY_DEVICETYPE {Components}
+CONFIG.MC_COMPONENT_WIDTH {x32}
+CONFIG.MC_DATAWIDTH {72}
+CONFIG.MC_INPUTCLK0_PERIOD {5000}
+CONFIG.MC_NO_CHANNELS {Dual}
+CONFIG.MC_RANK {1} # or 2 for VPR-5050A
+CONFIG.MC_INIT_MEM_USING_ECC_SCRUB {true}
+</pre></div>
+</div>
+</div>
+<div class="section" id="ecc-configuration">
+<h3>ECC Configuration<a class="headerlink" href="#ecc-configuration" title="Permalink to this heading">¶</a></h3>
+<p>The memory controller is configured with ECC (Error Correction Code) enabled:</p>
+<ul class="simple">
+<li><p>72-bit data width (64-bit data + 8-bit ECC)</p></li>
+<li><p>Single-bit error correction</p></li>
+<li><p>Double-bit error detection</p></li>
+<li><p>Memory initialization using ECC scrub</p></li>
+</ul>
+<p>ECC provides data integrity protection important for automotive and industrial applications where reliability is critical.</p>
+</div>
+<div class="section" id="memory-controller-ports">
+<h3>Memory Controller Ports<a class="headerlink" href="#memory-controller-ports" title="Permalink to this heading">¶</a></h3>
+<p>The LPDDR4 memory controller provides four ports for NoC connectivity:</p>
+<ul class="simple">
+<li><p>Port 0: Typically RPU, PMC, and PCIe DMA traffic</p></li>
+<li><p>Port 1: Typically PCIe DMA traffic</p></li>
+<li><p>Ports 2-3: Available for additional connections</p></li>
+</ul>
+<p>The RAVE base design typically uses ports 0 and 1, with additional ports available for user application memory masters.</p>
+<p><span id="amrrave-memoryresources-nocintegration"></span></p>
+</div>
+</div>
+<div class="section" id="noc-integration">
+<h2>NoC Integration<a class="headerlink" href="#noc-integration" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="ddrmc-nsu-connection">
+<h3>DDRMC NSU Connection<a class="headerlink" href="#ddrmc-nsu-connection" title="Permalink to this heading">¶</a></h3>
+<p>The LPDDR4 memory controller connects to the NoC through DDRMC_NSU (NoC Slave Unit) interfaces. Each port has an associated DDRMC_NSU that converts NoC packet domain traffic directly to the memory controller domain without intermediate AXI protocol conversion.</p>
+</div>
+<div class="section" id="access-patterns">
+<h3>Access Patterns<a class="headerlink" href="#access-patterns" title="Permalink to this heading">¶</a></h3>
+<p>Multiple masters access LPDDR4 through the NoC:</p>
+<ul class="simple">
+<li><p><strong>RPU</strong>: Via LPD_AXI_NOC_0 (128-bit &#64; 800MHz)</p></li>
+<li><p><strong>PMC</strong>: Via PMC_NOC_AXI_0 (128-bit &#64; 400MHz)</p></li>
+<li><p><strong>PCIe DMA</strong>: Via XDMA IP through NMU_512</p></li>
+<li><p><strong>PL Masters</strong>: Via additional NMU interfaces (if configured)</p></li>
+</ul>
+<p>The NoC arbitrates between these masters based on QoS settings, with the NoC compiler determining optimal routing to memory controller ports.</p>
+<p><span id="amrrave-memoryresources-capacityplanning"></span></p>
+</div>
+</div>
+<div class="section" id="capacity-planning">
+<h2>Capacity Planning<a class="headerlink" href="#capacity-planning" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="design-considerations">
+<h3>Design Considerations<a class="headerlink" href="#design-considerations" title="Permalink to this heading">¶</a></h3>
+<p>When planning memory allocation for RAVE applications:</p>
+<p><strong>Firmware Overhead:</strong></p>
+<ul class="simple">
+<li><p>Reserve 100-500 MB for RPU firmware depending on complexity</p></li>
+<li><p>Include space for firmware data structures and runtime buffers</p></li>
+</ul>
+<p><strong>Software GCQ:</strong></p>
+<ul class="simple">
+<li><p>Reserve 10-50 MB for inter-processor communication queues</p></li>
+<li><p>Size based on message rate and queue depth requirements</p></li>
+</ul>
+<p><strong>Available for Applications:</strong></p>
+<ul class="simple">
+<li><p>VPR-4616/5050: Plan for 7-7.5 GB usable capacity</p></li>
+<li><p>VPR-5050A: Plan for 15-15.5 GB usable capacity</p></li>
+</ul>
+</div>
+<div class="section" id="memory-constrained-designs">
+<h3>Memory-Constrained Designs<a class="headerlink" href="#memory-constrained-designs" title="Permalink to this heading">¶</a></h3>
+<p>For applications approaching memory limits:</p>
+<ul class="simple">
+<li><p>Optimize data structures for compactness</p></li>
+<li><p>Use streaming architectures where possible</p></li>
+<li><p>Leverage compression techniques</p></li>
+<li><p>Consider external storage (eMMC in VPR-5050A)</p></li>
+<li><p>Offload processing to Ryzen if appropriate</p></li>
+</ul>
+<p><span id="amrrave-memoryresources-upgradetoVPR5050A"></span></p>
+</div>
+</div>
+<div class="section" id="platform-variant-memory-differences">
+<h2>Platform Variant Memory Differences<a class="headerlink" href="#platform-variant-memory-differences" title="Permalink to this heading">¶</a></h2>
+<p>Platform variants offer different LPDDR4 capacities (8GB or 16GB) to meet various application requirements. Higher capacity variants provide more working memory for larger datasets, video frames, and AI applications while maintaining the same dual-channel configuration and operating frequency.</p>
+<p><strong>Note:</strong> For variant-specific memory configurations, refer to the <a class="reference external" href="https://www.amd.com/en/products/embedded/embedded-plus.html">Sapphire RAVE1 EDGE+</a>.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../hardware/memory-resources.html"><span class="std std-doc">Common Memory Resources</span></a> - Memory controller concepts</p></li>
+<li><p><a class="reference internal" href="memory-map.html"><span class="std std-doc">RAVE Memory Map</span></a> - LPDDR4 address assignments</p></li>
+<li><p><a class="reference internal" href="noc-config.html"><span class="std std-doc">RAVE NoC Configuration</span></a> - NoC to memory routing</p></li>
+<li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/ds989-versal-edge">VE2302 Device Documentation</a> - VE2302 specifications</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          
+				  
+				  <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
+      <span class="lastupdated">Last updated on April 14, 2026.
+      </span></p>
+  </div>
+
+
+
+										<div class="aem-Grid aem-Grid--16">
+											<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+												<div class="container-fluid sub-footer">
+
+													                    <div class="row">
+                        <div class="col-xs-24">
+                          <p><a target="_blank" href="https://www.amd.com/en/corporate/copyright">Terms and Conditions</a> | <a target="_blank" href="https://www.amd.com/en/corporate/privacy">Privacy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/cookies">Cookie Policy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/trademarks">Trademarks</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf">Statement on Forced Labor</a> | <a target="_blank" href="https://www.amd.com/en/corporate/competition">Fair and Open Competition</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf">UK Tax Strategy</a> | <a target="_blank" href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA">Inclusive Terminology</a> | <a href="#cookiessettings" class="ot-sdk-show-settings">Cookies Settings</a></p>
+                        </div>
+                    </div>
+												</div>
+											</div>
+										</div>
+										
+</br>
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

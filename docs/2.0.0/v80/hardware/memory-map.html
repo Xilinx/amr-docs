@@ -3,21 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
   <title>AMR V80 - Memory Map &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
@@ -38,11 +23,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -86,19 +67,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development/source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/asdm-application.html">AMR ASDM Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/inband-telemetry.html">AMR InBand Telemetry Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../firmware/asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
@@ -143,14 +131,29 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div class="section" id="amr-v80-memory-map">
 <h1>AMR V80 - Memory Map<a class="headerlink" href="#amr-v80-memory-map" title="Permalink to this heading">¶</a></h1>
 <p>AMR uses the address mapping illustrated below.</p>
-<p><span id="amrv80-memorymap-memorymapping"></span></p>
+<p><span id="amr-memorymap-memorymapping"></span></p>
 <div class="section" id="memory-mapping">
 <h2>Memory Mapping<a class="headerlink" href="#memory-mapping" title="Permalink to this heading">¶</a></h2>
 <p>This table shows the recommended functions that can access the DDR Memories. The light grey rows and columns related to the APU, PCIe User, and PCIe DMA are not currently used, but they are captured for future growth. The <strong>Yes/No</strong> entries indicate the recommended memory access. There is not an active control that prohibits unintended access to the DDR. For example, if caution is not exercised, the APU or PL could access DDR locations intended for the RPU (RPU execution).</p>
-<p>Address remapping must be used for the PCIe to access the 128MB of memory starting at 0x000_3800_0000. The address remap is configured in the AXI NoC CIPS (axi_noc_cips).</p>
+<p>Address remapping is configured for PCIe access to the PL memory space through the AXI NoC CIPS (axi_noc_cips):</p>
+<p><strong>PF0 Address Remapping:</strong></p>
+<ul class="simple">
+<li><p>PCIe BAR0 Address: 0x201_0000_0000</p></li>
+<li><p>Remaps to AXI Address: 0x1000_0000 (local address space)</p></li>
+<li><p>Aperture Size: 8 MB</p></li>
+<li><p>Configured in axi_noc_cips M00_AXI and S00_AXI/S01_AXI REMAPS</p></li>
+</ul>
+<p><strong>PF1 Address Remapping:</strong></p>
+<ul class="simple">
+<li><p>PCIe BAR2 Address: 0x202_0000_0000</p></li>
+<li><p>Remaps to AXI Address: No remap (direct addressing)</p></li>
+<li><p>Aperture Size: 1 GB</p></li>
+<li><p>Configured in axi_noc_cips M01_AXI</p></li>
+</ul>
+<p>The address remap configuration is implemented in the AXI NoC CIPS (axi_noc_cips) IP block.</p>
 <p><img alt="images/1107374801.png" src="../../_images/1107374801.png" /></p>
 <p>N/A* The RPU is only 32-bit addressing, so it cannot access more than 4GB of DDR.</p>
-<p><span id="amrv80-memorymap-amrmemorymap"></span></p>
+<p><span id="amr-memorymap-amrmemorymap"></span></p>
 </div>
 <div class="section" id="amr-memory-map">
 <h2>AMR Memory Map<a class="headerlink" href="#amr-memory-map" title="Permalink to this heading">¶</a></h2>
@@ -160,22 +163,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/4-GB-Processor-System-Address-Map">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/4-GB-Processor-System-Address-Map</a></p></li>
 <li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map</a></p></li>
 </ul>
-<p><span id="amrv80-memorymap-amr4gmemoryspace-ddrlower2g-ps-pmc"></span></p>
+<p><span id="amr-memorymap-amr4gmemoryspace-ddrlower2g-ps-pmc"></span></p>
 <div class="section" id="amr-4g-memory-space-ddr-lower-2g-ps-pmc">
 <h3>AMR 4G Memory Space - DDR Lower 2G &amp; PS/PMC<a class="headerlink" href="#amr-4g-memory-space-ddr-lower-2g-ps-pmc" title="Permalink to this heading">¶</a></h3>
 <p><img alt="images/1107374801.png" src="../../_images/1107374801.png" /></p>
-<p><span id="amrv80-memorymap-amrhbmmemoryspace"></span></p>
+<p><span id="amr-memorymap-amrhbmmemoryspace"></span></p>
 </div>
 <div class="section" id="amr-hbm-memory-space">
 <h3>AMR HBM Memory Space<a class="headerlink" href="#amr-hbm-memory-space" title="Permalink to this heading">¶</a></h3>
 <p><img alt="images/1107374822.png" src="../../_images/1107374822.png" /></p>
-<p><span id="amrv80-memorymap-pf0baraddressing"></span></p>
+<p><span id="amr-memorymap-pf0baraddressing"></span></p>
 </div>
 <div class="section" id="amr-pl-memory-space">
 <h3>AMR PL Memory Space<a class="headerlink" href="#amr-pl-memory-space" title="Permalink to this heading">¶</a></h3>
 <p><img alt="images/1107374813.png" src="../../_images/1107374813.png" /></p>
-<p>PCIe® Management functions are in blue.</p>
-<p><span id="amrv80-memorymap-amrddrupper2ganddimm32gmemoryspace"></span></p>
+<p><strong>PL Memory Space - Current Base Design:</strong></p>
+<ul class="simple">
+<li><p><strong>PF0 BAR0</strong>: 0x201_0000_0000 - 0x201_007F_FFFF (8 MB) - No hardware IP instantiated, address space reserved</p></li>
+<li><p><strong>PF1 BAR2</strong>: 0x202_0000_0000 - 0x202_0FFF_FFFF (256 MB via 1GB aperture) - SmartConnect → AXI GPIO test</p></li>
+</ul>
+<p><strong>Note:</strong> PCIe® Management functions shown in diagram may reference hardware that is not instantiated in the base design. The base design provides address space for future expansion but does not include management IP blocks (GCQ, UUID ROM, EEPROM controllers) in PL.</p>
+<p><span id="amr-memorymap-amrddrupper2ganddimm32gmemoryspace"></span></p>
 </div>
 <div class="section" id="amr-ddr-upper-2g-and-dimm-32g-memory-space">
 <h3>AMR DDR Upper 2G and DIMM 32G Memory Space<a class="headerlink" href="#amr-ddr-upper-2g-and-dimm-32g-memory-space" title="Permalink to this heading">¶</a></h3>
@@ -195,7 +203,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

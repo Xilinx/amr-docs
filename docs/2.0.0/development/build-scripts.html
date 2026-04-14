@@ -3,21 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
   <title>AMR Build Scripts &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
@@ -40,11 +25,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="prev" title="AMR Management Interface userguide (ami_tool)" href="../deployment/ami-tool-guide.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -89,7 +70,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="#build-steps">Build Steps</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#hw-step">hw step</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#fw-step">fw step</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#fpt-step">fpt step</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pdi-step">pdi step</a></li>
 </ul>
 </li>
@@ -97,19 +77,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
 <li class="toctree-l1"><a class="reference internal" href="source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../v80/index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/asdm-application.html">AMR ASDM Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/inband-telemetry.html">AMR InBand Telemetry Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../firmware/asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
@@ -165,25 +152,24 @@ $ ./build.sh -profile v80
 <h2>Build Steps<a class="headerlink" href="#build-steps" title="Permalink to this heading">¶</a></h2>
 <p>The build script divides the build flow into a number of separate steps.</p>
 <ul class="simple">
-<li><p>hw - builds the hardware design into an XSA file</p></li>
-<li><p>fw - using the XSA file, compiles the firmware into an elf file</p></li>
-<li><p>fpt - creates the flash partition table as a binary file</p></li>
+<li><p>hw - Builds the hardware design and exports an XSA file</p></li>
+<li><p>fw - using the XSA file, compiles the AMC firmware into an elf file</p></li>
 <li><p>pdi - uses the outputs of previous steps to generate the device programming files</p></li>
 </ul>
 <p><span id="amrbuildscripts-hwstep"></span></p>
 <div class="section" id="hw-step">
 <h3>hw step<a class="headerlink" href="#hw-step" title="Permalink to this heading">¶</a></h3>
-<p>The hw step of the build flow operates on the AMR hardware design described here. A /build directory is created, where the implemented hardware design and Vivado log are generated. The xpr file for this project is located here <strong>amr/build_v80/amr_vivado_designs/alveo_v80/v80_base/project</strong>. Similary for Rave it should be located under build_rave.</p>
-<p>This Vivado project is used to generate the BD design, run Synthesis &amp; Implementation, and create the initial PDI. The write_hw_platform command is run on the implemented design to create an XSA (named amd_<version>.xsa), which is used as a hardware handoff file to the AMC build in the fw build step.</p>
+<p>The hw step of the build flow operates on the AMR hardware design described here. A /build_v80 directory is created, where the implemented hardware design and Vivado log are generated. The xpr file for this project is located here <strong>amr/build_v80/amr_vivado_designs/alveo_v80/v80_base/project</strong>. Similary for Rave it will be located under build_rave.</p>
+<p>This Vivado project is used to generate the BD design, run Synthesis &amp; Implementation, and create the initial PDI. The write_hw_platform command is run on the implemented design to create an XSA (named v80_base.xsa), which is used as a hardware handoff file to the AMC build in the fw build step.</p>
 <p><span id="amrbuildscripts-fwstep"></span></p>
 </div>
 <div class="section" id="fw-step">
 <h3>fw step<a class="headerlink" href="#fw-step" title="Permalink to this heading">¶</a></h3>
-<p>The fw step of the build flow operates on the AMR AMC firmware design described here: <a class="reference internal" href="../firmware/index.html"><span class="doc std std-doc">Firmware Design - AMR</span></a>. The fw step builds the AMC firmware and generates a FPT binary.</p>
-<p>The AMC build is run in the AMC source code directory (i.e., <strong>&lt;amr&gt;/fw/AMC</strong>) using the AMC’s own build script <strong>(&lt;amr&gt;/fw/AMC/scripts/build_amc.sh).</strong></p>
-<p>The AMC’s build_amc.sh can take a number of different build options (which are detailed in the AMC’s <a class="reference internal" href="#Profiles-and-CMake-build-process"><span class="xref myst">Profiles and CMake build process</span></a> page), but the the AMR build flow executes it with these specific options.</p>
+<p>The fw step of the build flow operates on the AMR AMC firmware design described here: <a class="reference internal" href="../firmware/index.html"><span class="doc std std-doc">Firmware Design - AMR</span></a>. The fw step builds the AMC firmware and generates final PDIs.</p>
+<p>The AMC build is run in the AMC source code directory (i.e., <strong>&lt;amr&gt;/fw/AMC</strong>) using the AMC’s own build script <strong>(&lt;amr&gt;/fw/AMC/scripts/build.sh).</strong></p>
+<p>The AMC’s build.sh can take a number of different build options (which are detailed in the AMC’s <a class="reference internal" href="#Profiles-and-CMake-build-process"><span class="xref myst">Profiles and CMake build process</span></a> page), but the the AMR build flow executes it with these specific options.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>```bash
-  ./scripts/build_amc.sh -help
+  ./scripts/build.sh -help
   =================================== AMC Build script ====================================
 
   -profile &lt;profile_name&gt; : set the board profile to build (rave|v80)
@@ -198,7 +184,7 @@ $ ./build.sh -profile v80
     if both XSA and SDT are provided, then the SDT will be used to generate the BSP
 
   E.g.: To build from scratch:
-  ./scripts/build_amc.sh -xsa /path/to/example.xsa -profile &lt;v80|rave&gt;
+  ./scripts/build.sh -xsa /path/to/example.xsa -profile &lt;v80|rave&gt;
 
 ```
 </pre></div>
@@ -206,13 +192,7 @@ $ ./build.sh -profile v80
 <p>The <strong>profile</strong> is the v80 or rave and the <strong>xsa</strong> is the xsa generated in the hw step.</p>
 <p>The resultant ELF file from the AMC build is then stored in the fw directory (<strong>&lt;amr&gt;/fw/AMC/build_amc/amc.elf</strong>)</p>
 <p><strong>Tip:</strong> If the firmware has changed and the hardware design has not, the hardware XSA does not need to be re-built when compiling the firmware. Following command can be used to build amc only
-./scripts/build_amc.sh -xsa /path/to/example.xsa -profile &lt;v80|rave&gt; -amc</p>
-<p><span id="amrbuildscripts-fptstep"></span></p>
-</div>
-<div class="section" id="fpt-step">
-<h3>fpt step<a class="headerlink" href="#fpt-step" title="Permalink to this heading">¶</a></h3>
-<p>Another important concept of the AMR design is the FPT (see <a class="reference internal" href="../system-architecture/device-programming.html"><span class="doc std std-doc">AMR - Device Programming</span></a>) as this defines how the flash memory is organized.</p>
-<p>The execution of the gen_fpt.py takes place during the fpt step, and the resultant binary file is stored in the fw directory (<strong>&lt;amr&gt;/fw/AMC/build/fpt.bin</strong>).</p>
+./scripts/build.sh -xsa /path/to/example.xsa -profile &lt;v80|rave&gt; -amc</p>
 <p><span id="amrbuildscripts-pdistep"></span></p>
 </div>
 <div class="section" id="pdi-step">
@@ -221,7 +201,7 @@ $ ./build.sh -profile v80
 <p>First, the amr_ospi.bin is created when bootgen is called to combine the PDI generated in the hw step with the AMC ELF which was generated in the fw step. This PDI contains the complete AMR design and is intended to be written to a flash partition over PCIe using AMI.</p>
 <p><a class="reference download internal" download="" href="../_downloads/d0568c52640d4030f52a14f68d47d1c3/1107374131.png"><span class="xref download myst"><img alt="image2" src="../_images/1107374131.png" /></span></a></p>
 <p>The amr_ospi_fpt.bin is intended to be written to flash over JTAG using HW Manager. This PDI sets up the flash so that it can be used by AMC/AMI.</p>
-<p>This basically means that it contains the FPT at the beginning of the memory, which AMI/AMC can then process to determine where in flash it can write different PDIs. Padding is added between the amr_ospi_fpt.bin and the amr_ospi.bin to ensure that the amr_ospi.bin is aligned to a 32KB boundary (this is a requirement of the PMC boot search).</p>
+<p>This basically means that it contains the FPT at the beginning of the OSPI flash memory, which AMI/AMC can then process to determine where in flash it can write different PDIs. Padding is added between the amr_ospi_fpt.bin and the amr_ospi.bin to ensure that the amr_ospi.bin is aligned to a 32KB boundary (this is a requirement of the PMC boot search).</p>
 <p>Effectively, the amr_ospi_fpt.bin configures the flash to contain the FPT along with amr_ospi.bin in the 1st PDI Partition.</p>
 <p>Writing amr_ospi_fpt.bin to flash is only required if the FPT has been modified. Otherwise, if the FPT in flash is still valid, then the amr_ospi.bin can be written to one of the PDI partitions over PCIe using AMI.</p>
 </div>
@@ -242,7 +222,7 @@ $ ./build.sh -profile v80
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

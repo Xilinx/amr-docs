@@ -1,5 +1,7 @@
 # AMR QDMA
 
+> **Note:** Queue DMA (QDMA) functionality is supported exclusively on the Alveo V80 platform. QDMA is not available on RAVE (Embedded+) platforms, which utilize XDMA for PCIe data transfer operations.
+
 Xilinx QDMA
 
 The Xilinx PCI Express Multi Queue DMA (QDMA) IP provides high-performance direct memory access (DMA) via PCI Express.
@@ -23,22 +25,24 @@ The identifier can be found by issuing the following command:
     ```
     lspci -vd 10ee:
     21:00.0 Processing accelerators: Xilinx Corporation Device 50b4
-            Subsystem: Xilinx Corporation Device 000e
-            Physical Slot: 2-1
-            Flags: bus master, fast devsel, latency 0, NUMA node 2, IOMMU group 27
-            Memory at 2bf70000000 (64-bit, prefetchable) [size=256M]
-            Capabilities: <access denied>
-            Kernel driver in use: ami
-            Kernel modules: ami
+        Subsystem: Xilinx Corporation Device 000e
+        Physical Slot: 7-1
+        Flags: bus master, fast devsel, latency 0, NUMA node 1, IOMMU group 76
+        Memory at 96000000 (64-bit, non-prefetchable) [size=8M]
+        Capabilities: <access denied>
+        Kernel driver in use: ami
+        Kernel modules: ami
 
     21:00.1 Processing accelerators: Xilinx Corporation Device 50b5
-            Subsystem: Xilinx Corporation Device 000e
-            Physical Slot: 2-1
-            Flags: bus master, fast devsel, latency 0, NUMA node 2, IOMMU group 27
-            Memory at 2bf80000000 (64-bit, prefetchable) [size=512K]
-            Capabilities: <access denied>
-            Kernel driver in use: qdma-pf
-            Kernel modules: qdma_pf, ami, qdma_vf
+        Subsystem: Xilinx Corporation Device 000e
+        Physical Slot: 7-1
+        Flags: bus master, fast devsel, latency 0, NUMA node 1, IOMMU group 76
+        Memory at 10120000000 (64-bit, prefetchable) [size=512K]
+        Memory at 10110000000 (64-bit, prefetchable) [size=256M]
+        Capabilities: <access denied>
+        Kernel modules: qdma_pf, ami, qdma_vf
+        Kernel driver in use: qdma-pf
+
     ```
 
 At the same line with 21:00.1, you can see the PCIe identifier as `50b5`. It should be added to end of `src/pci_ids.h` in the following form:
@@ -60,22 +64,23 @@ The QDMA driver can then be built:
     lspci -vd 10ee:
     ```
     21:00.0 Processing accelerators: Xilinx Corporation Device 50b4
-            Subsystem: Xilinx Corporation Device 000e
-            Physical Slot: 2-1
-            Flags: bus master, fast devsel, latency 0, NUMA node 2, IOMMU group 27
-            Memory at 2bf70000000 (64-bit, prefetchable) [size=256M]
-            Capabilities: <access denied>
-            Kernel driver in use: ami
-            Kernel modules: ami
+        Subsystem: Xilinx Corporation Device 000e
+        Physical Slot: 7-1
+        Flags: bus master, fast devsel, latency 0, NUMA node 1, IOMMU group 76
+        Memory at 96000000 (64-bit, non-prefetchable) [size=8M]
+        Capabilities: <access denied>
+        Kernel driver in use: ami
+        Kernel modules: ami
     
     21:00.1 Processing accelerators: Xilinx Corporation Device 50b5
-            Subsystem: Xilinx Corporation Device 000e
-            Physical Slot: 2-1
-            Flags: bus master, fast devsel, latency 0, NUMA node 2, IOMMU group 27
-            Memory at 2bf80000000 (64-bit, prefetchable) [size=512K]
-            Capabilities: <access denied>
-            Kernel driver in use: qdma-pf
-            Kernel modules: qdma_pf, ami, qdma_vf
+        Subsystem: Xilinx Corporation Device 000e
+        Physical Slot: 7-1
+        Flags: bus master, fast devsel, latency 0, NUMA node 1, IOMMU group 76
+        Memory at 10120000000 (64-bit, prefetchable) [size=512K]
+        Memory at 10110000000 (64-bit, prefetchable) [size=256M]
+        Capabilities: <access denied>
+        Kernel modules: qdma_pf, ami, qdma_vf
+        Kernel driver in use: qdma-pf
 
 <span id="amrqdma-examples"></span>
 

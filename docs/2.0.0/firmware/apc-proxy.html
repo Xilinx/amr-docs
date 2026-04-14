@@ -3,21 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
   <title>AMR Programming Control (APC) Proxy Driver &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
@@ -36,15 +21,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="AMR Sensor Control (ASC) Proxy Driver" href="asc-proxy.html" />
+    <link rel="next" title="AMR External Device Control (AXC) Proxy Driver" href="axc-proxy.html" />
     <link rel="prev" title="AMR Management Interface (AMI) Proxy Driver" href="ami-proxy.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -88,16 +69,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../v80/index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asdm-application.html">AMR ASDM Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inband-telemetry.html">AMR InBand Telemetry Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">AMR Programming Control (APC) Proxy Driver</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a><ul>
@@ -113,6 +102,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#copy-image">Copy Image</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#set-next-partition">Set Next Partition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#enable-hot-reset">Enable Hot Reset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pdi-program-image">PDI Program Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-fpt-partition-flags">Set FPT Partition Flags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-fpt-partition">Set FPT Partition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#read-flash-raw">Read Flash Raw</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#get-fpt-header">Get FPT Header</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#get-fpt-partition">Get FPT Partition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#print-statistics">Print Statistics</a></li>
@@ -144,7 +137,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
@@ -223,6 +215,11 @@ typedef enum APC_PROXY_DRIVER_EVENTS
     APC_PROXY_DRIVER_E_COPY_FAILED,
     APC_PROXY_DRIVER_E_PARTITION_SELECTED,
     APC_PROXY_DRIVER_E_PARTITION_SELECTION_FAILED,
+    APC_PROXY_DRIVER_E_FPT_FLAGS_UPDATED,
+    APC_PROXY_DRIVER_E_PROGRAM_STARTED,
+    APC_PROXY_DRIVER_E_PROGRAM_COMPLETE,
+    APC_PROXY_DRIVER_E_PROGRAM_BUSY,
+    APC_PROXY_DRIVER_E_PROGRAM_FAILED,
 
     MAX_APC_PROXY_DRIVER_EVENTS
 
@@ -250,12 +247,12 @@ typedef enum
 <div class="section" id="structs">
 <h3>Structs<a class="headerlink" href="#structs" title="Permalink to this heading">¶</a></h3>
 <p>Device FPT headers.</p>
-<p><strong>APC_PROXY_DRIVER_FPT_HEADER</strong></p>
+<p><strong>APCProxyDriverFptHeader</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
- * @struct  APC_PROXY_DRIVER_FPT_HEADER
+ * @struct  APCProxyDriverFptHeader
  * @brief   Structure to hold the FPT Header
  */
-typedef struct APC_PROXY_DRIVER_FPT_HEADER
+typedef struct APCProxyDriverFptHeader
 {
     uint32_t    ulMagicNum;
     uint8_t     ucFptVersion;
@@ -263,22 +260,35 @@ typedef struct APC_PROXY_DRIVER_FPT_HEADER
     uint8_t     ucEntrySize;
     uint8_t     ucNumEntries;
 
-} APC_PROXY_DRIVER_FPT_HEADER;
+} APCProxyDriverFptHeader;
 </pre></div>
 </div>
 <p>Device FPT partitions.</p>
-<p><strong>APC_PROXY_DRIVER_FPT_PARTITION</strong></p>
+<p><strong>APCProxyDriverFptPartition</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
- * @struct  APC_PROXY_DRIVER_FPT_PARTITION
+ * @struct  APCProxyDriverFptPartition
  * @brief   Structure to hold a single FPT partition
  */
-typedef struct APC_PROXY_DRIVER_FPT_PARTITION
+typedef struct APCProxyDriverFptPartition
 {
     uint32_t    ulPartitionType;
     uint32_t    ulPartitionBaseAddr;
     uint32_t    ulPartitionSize;
+    uint8_t     pdi_md5[MD5_SIZE];
+    uint32_t    ulPdiSize;
+    union {
+        uint32_t ulPartitionFlags;     /* User defined flags */
+        struct {
+            uint32_t powerup_flag:1;    /* Power on load user partition flag
+                                           0: Disabled, 1: Enabled */
+            uint32_t reserved1:15;      /* Reserved for future use */
+            uint32_t powerup_error:2;   /* Power on load user partition error flag
+                                           0: Not Loaded, 1: Loaded, 2: Error */
+            uint32_t reserved2:14;      /* Reserved for future use */
+        } user;
+    };
 
-} APC_PROXY_DRIVER_FPT_PARTITION;
+} APCProxyDriverFptPartition;
 </pre></div>
 </div>
 <p><span id="amrprogrammingcontrol-apc-proxydriver-api"></span></p>
@@ -308,7 +318,7 @@ typedef struct APC_PROXY_DRIVER_FPT_PARTITION
  *          and can be set to NULL.
  *
  */
-int iAPC_Initialise( uint8_t ucProxyId, FW_IF_CFG *pxPrimaryFwIf, FW_IF_CFG *pxSecondaryFwIf, uint32_t ulTaskPrio, uint32_t ulTaskStack );
+int iAPC_Initialise( uint8_t ucProxyId, FW_IF_CFG *pxPrimaryFwIf, FW_IF_CFG *pxSecondaryFwIf, XLoader_ClientInstance *pXLoaderInst, uint32_t ulTaskPrio, uint32_t ulTaskStack );
 </pre></div>
 </div>
 <p><span id="amrprogrammingcontrol-apc-proxydriver-bindcallbacks"></span></p>
@@ -327,6 +337,11 @@ int iAPC_Initialise( uint8_t ucProxyId, FW_IF_CFG *pxPrimaryFwIf, FW_IF_CFG *pxS
 <li><p><strong>APC_PROXY_DRIVER_E_COPY_FAILED</strong></p></li>
 <li><p><strong>APC_PROXY_DRIVER_E_PARTITION_SELECTED</strong></p></li>
 <li><p><strong>APC_PROXY_DRIVER_E_PARTITION_SELECTION_FAILED</strong></p></li>
+<li><p><strong>APC_PROXY_DRIVER_E_FPT_FLAGS_UPDATED</strong></p></li>
+<li><p><strong>APC_PROXY_DRIVER_E_PROGRAM_STARTED</strong></p></li>
+<li><p><strong>APC_PROXY_DRIVER_E_PROGRAM_COMPLETE</strong></p></li>
+<li><p><strong>APC_PROXY_DRIVER_E_PROGRAM_BUSY</strong></p></li>
+<li><p><strong>APC_PROXY_DRIVER_E_PROGRAM_FAILED</strong></p></li>
 </ul>
 <p><strong>iAPC_BindCallback</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
@@ -356,14 +371,17 @@ int iAPC_BindCallback( EVL_CALLBACK *pxCallback );
  * @param   ulSrcAddr    Address (in RAM) to read the image from
  * @param   ulImageSize  Size of image (in bytes)
  * @param   usPacketNum  Image packet number
- * @param   usPacketSize Size of image packet (in KB)
+ * @param   ulPacketSize Size of image packet (in KB)
+ * @param   pucPdiMd5    Pointer to 16-byte PDI MD5 checksum
+ * @param   ulPdiSize    Size of full PDI file in bytes
+ * @param   iLastPacket  Boolean indicating if this is the last data packet
  *
  * @return  OK           Image downloaded successfully
  *          ERROR        Image not downloaded successfully
  *
  */
 int iAPC_DownloadImage( EVL_SIGNAL *pxSignal, APC_BOOT_DEVICES xBootDevice, int iPartition, uint32_t ulSrcAddr,
-                        uint32_t ulImageSize, uint16_t usPacketNum, uint16_t usPacketSize );
+                        uint32_t ulImageSize, uint16_t usPacketNum, uint32_t ulPacketSize, uint8_t *pucPdiMd5, uint32_t ulPdiSize, int iLastPacket );
 </pre></div>
 </div>
 <p><span id="amrprogrammingcontrol-apc-proxydriver-updatefpt"></span></p>
@@ -380,7 +398,7 @@ int iAPC_DownloadImage( EVL_SIGNAL *pxSignal, APC_BOOT_DEVICES xBootDevice, int 
  * @param   ulSrcAddr    Address (in RAM) to read the image from
  * @param   ulImageSize  Size of image (in bytes)
  * @param   usPacketNum  Image packet number
- * @param   usPacketSize Size of image packet (in KB)
+ * @param   ulPacketSize Size of image packet (in KB)
  * @param   iLastPacket  Boolean indicating if this is the last data packet
  *
  * @return  OK           Image downloaded successfully
@@ -388,7 +406,7 @@ int iAPC_DownloadImage( EVL_SIGNAL *pxSignal, APC_BOOT_DEVICES xBootDevice, int 
  *
  */
 int iAPC_UpdateFpt( EVL_SIGNAL *pxSignal, APC_BOOT_DEVICES xBootDevice, uint32_t ulSrcAddr, uint32_t ulImageSize,
-                    uint16_t usPacketNum, uint16_t usPacketSize, int iLastPacket );
+                    uint16_t usPacketNum, uint32_t ulPacketSize, int iLastPacket );
 </pre></div>
 </div>
 <p><span id="amrprogrammingcontrol-apc-proxydriver-copyimage"></span></p>
@@ -451,6 +469,93 @@ int iAPC_SetNextPartition( EVL_SIGNAL *pxSignal, int iPartition );
 int iAPC_EnableHotReset( EVL_SIGNAL *pxSignal );
 </pre></div>
 </div>
+<p><span id="amrprogrammingcontrol-apc-proxydriver-pdiprogramimage"></span></p>
+</div>
+<div class="section" id="pdi-program-image">
+<h3>PDI Program Image<a class="headerlink" href="#pdi-program-image" title="Permalink to this heading">¶</a></h3>
+<p>This will post a message onto the APC mailbox to be handled within the internal APC task to program a PDI image to memory.</p>
+<p><strong>iAPC_PdiProgram</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Program PDI image to a location in memory
+ *
+ * @param   pxSignal            Current event occurance (used for tracking)
+ * @param   pxDownloadRequest   Target boot device and parameters
+ * @param   ulSrcAddr           Address (in RAM) to read the image from
+ *
+ * @return  OK                  PDI programmed successfully
+ *          ERROR               PDI programming failed
+ */
+int iAPC_PdiProgram( EVL_SIGNAL *pxSignal, const AMIProxyPdiDownloadRequest *pxDownloadRequest, uint32_t ulSrcAddr );
+</pre></div>
+</div>
+<p><span id="amrprogrammingcontrol-apc-proxydriver-setfptpartitionflags"></span></p>
+</div>
+<div class="section" id="set-fpt-partition-flags">
+<h3>Set FPT Partition Flags<a class="headerlink" href="#set-fpt-partition-flags" title="Permalink to this heading">¶</a></h3>
+<p>This will update the flags of a Flash Partition Table (FPT) partition in both the cached copy and the flash storage.</p>
+<p><strong>iAPC_SetFptPartitionFlags</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Set/Update the flags of a Flash Partition Table (FPT) Partition
+ *
+ * @param   pxSignal        Current event occurance (used for tracking)
+ * @param   xBootDevice     Target boot device
+ * @param   iPartition      Index of partition to update (0 is the 1st partition)
+ * @param   ulFlags         New flags value to set
+ *
+ * @return  OK              FPT partition flags updated successfully
+ *          ERROR           FPT partition flags not updated successfully
+ *
+ * @note    This function updates the partition flags in both the cached copy
+ *          and the flash storage
+ */
+int iAPC_SetFptPartitionFlags( EVL_SIGNAL *pxSignal, APC_BOOT_DEVICES xBootDevice, int iPartition, uint32_t ulFlags );
+</pre></div>
+</div>
+<p><span id="amrprogrammingcontrol-apc-proxydriver-setfptpartition"></span></p>
+</div>
+<div class="section" id="set-fpt-partition">
+<h3>Set FPT Partition<a class="headerlink" href="#set-fpt-partition" title="Permalink to this heading">¶</a></h3>
+<p>This will update an FPT partition entry in both the cached copy and the flash storage.</p>
+<p><strong>iAPC_SetFptPartition</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Set/Update an FPT Partition entry
+ *
+ * @param   pxSignal        Current event occurance (used for tracking)
+ * @param   xBootDevice     Target boot device
+ * @param   iPartition      Index of partition to update (0 is the 1st partition)
+ * @param   pucPdiMd5       Pointer to 16-byte PDI MD5 checksum (NULL to skip update)
+ * @param   ulPdiSize       Size of the PDI file in bytes
+ * @param   ulFlags         New flags value to set
+ *
+ * @return  OK              FPT partition updated successfully
+ *          ERROR           FPT partition not updated successfully
+ *
+ * @note    This function updates the partition in both the cached copy
+ *          and the flash storage
+ */
+int iAPC_SetFptPartition( EVL_SIGNAL *pxSignal, APC_BOOT_DEVICES xBootDevice, int iPartition, uint8_t *pucPdiMd5, uint32_t ulPdiSize, uint32_t ulFlags );
+</pre></div>
+</div>
+<p><span id="amrprogrammingcontrol-apc-proxydriver-readflashraw"></span></p>
+</div>
+<div class="section" id="read-flash-raw">
+<h3>Read Flash Raw<a class="headerlink" href="#read-flash-raw" title="Permalink to this heading">¶</a></h3>
+<p>This will read raw bytes from flash memory.</p>
+<p><strong>iAPC_ReadFlashRaw</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Read raw bytes from flash
+ *
+ * @param   xBootDevice     Target boot device
+ * @param   ulOffset        Offset in flash to read from
+ * @param   pucBuffer       Buffer to store the read data
+ * @param   ulLength        Number of bytes to read
+ *
+ * @return  OK              Data read successfully
+ *          ERROR           Data not read successfully
+ */
+int iAPC_ReadFlashRaw( APC_BOOT_DEVICES xBootDevice, uint32_t ulOffset, uint8_t *pucBuffer, uint32_t ulLength );
+</pre></div>
+</div>
 <p><span id="amrprogrammingcontrol-apc-proxydriver-getfptheader"></span></p>
 </div>
 <div class="section" id="get-fpt-header">
@@ -467,7 +572,7 @@ int iAPC_EnableHotReset( EVL_SIGNAL *pxSignal );
  *          ERROR           FPT header not retrieved successfully
  *
  */
-int iAPC_GetFptHeader( APC_BOOT_DEVICES xBootDevice, APC_PROXY_DRIVER_FPT_HEADER *pxFptHeader );
+int iAPC_GetFptHeader( APC_BOOT_DEVICES xBootDevice, APCProxyDriverFptHeader *pxFptHeader );
 </pre></div>
 </div>
 <p><span id="amrprogrammingcontrol-apc-proxydriver-getfptpartition"></span></p>
@@ -487,7 +592,7 @@ int iAPC_GetFptHeader( APC_BOOT_DEVICES xBootDevice, APC_PROXY_DRIVER_FPT_HEADER
  *          ERROR           FPT partition not retrieved successfully
  *
  */
-int iAPC_GetFptPartition( APC_BOOT_DEVICES xBootDevice, int iPartition, APC_PROXY_DRIVER_FPT_PARTITION *pxFptPartition );
+int iAPC_GetFptPartition( APC_BOOT_DEVICES xBootDevice, int iPartition, APCProxyDriverFptPartition *pxFptPartition );
 </pre></div>
 </div>
 <p><span id="amrprogrammingcontrol-apc-proxydriver-printstatistics"></span></p>
@@ -574,7 +679,7 @@ int iAPC_GetState( MODULE_STATE *pxState );
 <h3>Initialize Driver<a class="headerlink" href="#initialize-driver" title="Permalink to this heading">¶</a></h3>
 <p>This function should only be called once. It requires an unique ID for the proxy, used for signaling new events from the proxy, along with a handle to a FW_IF (already created and initialized), proxy driver task priority and stack size.</p>
 <p><strong>iAPC_Initialise Example</strong></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if( OK == iAPC_Initialise( AMC_EVENT_UNIQUE_ID_APC, &amp;xPrimaryIf, &amp;xSecondaryIf, AMC_TASK_PRIO_DEFAULT, AMC_APC_TASK_STACK ) )
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if( OK == iAPC_Initialise( AMC_CFG_UNIQUE_ID_APC, &amp;xPrimaryIf, &amp;xSecondaryIf, &amp;xLoaderInst, AMC_TASK_PRIO_DEFAULT, AMC_APC_TASK_STACK ) )
 {
     AMC_PRINTF( &quot;APC Proxy Driver initialised\r\n&quot; );
 }
@@ -595,7 +700,7 @@ static int iApcCallback( EVL_SIGNAL *pxSignal )
 {
     int iStatus = ERROR;
 
-    if( ( NULL != pxSignal ) &amp;&amp; ( AMC_EVENT_UNIQUE_ID_APC == pxSignal-&gt;ucModule ) )
+    if( ( NULL != pxSignal ) &amp;&amp; ( AMC_CFG_UNIQUE_ID_APC == pxSignal-&gt;ucModule ) )
     {
         switch( pxSignal-&gt;ucEventType )
         {
@@ -609,6 +714,11 @@ static int iApcCallback( EVL_SIGNAL *pxSignal )
             case APC_PROXY_DRIVER_E_COPY_BUSY:
             case APC_PROXY_DRIVER_E_PARTITION_SELECTED:
             case APC_PROXY_DRIVER_E_PARTITION_SELECTION_FAILED:
+            case APC_PROXY_DRIVER_E_FPT_FLAGS_UPDATED:
+            case APC_PROXY_DRIVER_E_PROGRAM_STARTED:
+            case APC_PROXY_DRIVER_E_PROGRAM_COMPLETE:
+            case APC_PROXY_DRIVER_E_PROGRAM_BUSY:
+            case APC_PROXY_DRIVER_E_PROGRAM_FAILED:
                 /* TODO: handle events */
                 iStatus = OK;
                 break;
@@ -743,7 +853,7 @@ else
 <h4>Get FPT header<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h4>
 <p>Example of retrieving the FPT header.</p>
 <p><strong>iAPC_GetFptHeader Example</strong></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>APC_PROXY_DRIVER_FPT_HEADER xFptHeader = { 0 };
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>APCProxyDriverFptHeader xFptHeader = { 0 };
 APC_BOOT_DEVICES xBootDev = APC_BOOT_DEVICE_PRIMARY;
 
 if( OK != iAPC_GetFptHeader(  xBootDev, &amp;xFptHeader ) )
@@ -770,7 +880,7 @@ else
 <p>Example of retrieving an FPT partition.</p>
 <p><strong>iAPC_GetFptPartition Example</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>int iPartition = 0; /* set to desired partition number */
-APC_PROXY_DRIVER_FPT_PARTITION xFptPartition = { 0 };
+APCProxyDriverFptPartition xFptPartition = { 0 };
 APC_BOOT_DEVICES xBootDev = APC_BOOT_DEVICE_PRIMARY;
 
 if( OK != iAPC_GetFptPartition( xBootDev, iPartition, &amp;xFptPartition ) )
@@ -800,14 +910,14 @@ else
 				  
 				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="ami-proxy.html" class="btn btn-neutral float-left" title="AMR Management Interface (AMI) Proxy Driver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="asc-proxy.html" class="btn btn-neutral float-right" title="AMR Sensor Control (ASC) Proxy Driver" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="axc-proxy.html" class="btn btn-neutral float-right" title="AMR External Device Control (AXC) Proxy Driver" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

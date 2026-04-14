@@ -3,21 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
   <title>V80 Platform Documentation &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
@@ -36,15 +21,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="How-to install and run a pre-built AMR design on an ALVEO V80 card" href="install-and-run.html" />
-    <link rel="prev" title="Source Configuration Control" href="../development/source-control.html" /> 
+    <link rel="next" title="AMR Deployment Archive" href="deployment-archive.html" />
+    <link rel="prev" title="Hardware Design - AMR Common" href="../hardware/index.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -88,26 +69,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">V80 Platform Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="install-and-run.html">How-to install and run a pre-built AMR design on an ALVEO V80 card</a></li>
-<li class="toctree-l2"><a class="reference internal" href="install-host.html">AMR Installing the Deployment package onto the Host Server</a></li>
 <li class="toctree-l2"><a class="reference internal" href="deployment-archive.html">AMR Deployment Archive</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hardware/index.html">Hardware Design - V80</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hardware/index.html">Hardware Design - V80 (Alveo)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run.html">How-to install and run a pre-built AMR design on an ALVEO V80 card</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/asdm-application.html">AMR ASDM Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/inband-telemetry.html">AMR InBand Telemetry Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../firmware/asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
@@ -154,23 +140,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>This section contains V80-specific documentation including installation, deployment, hardware design, and testing.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="install-and-run.html">How-to install and run a pre-built AMR design on an ALVEO V80 card</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="install-and-run.html#before-you-begin">Before You Begin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="install-and-run.html#amr-installation">AMR Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="install-and-run.html#testing-amr">Testing AMR</a></li>
-<li class="toctree-l2"><a class="reference internal" href="install-and-run.html#next-steps">Next Steps</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="install-host.html">AMR Installing the Deployment package onto the Host Server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deployment-archive.html">AMR Deployment Archive</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="deployment-archive.html#amr-deployment-archive-contents">AMR Deployment Archive Contents</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="hardware/index.html">Hardware Design - V80</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hardware/index.html">Hardware Design - V80 (Alveo)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hardware/index.html#v80-platform-overview">V80 Platform Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hardware/index.html#v80-specific-hardware-documentation">V80-Specific Hardware Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hardware/index.html#key-v80-features">Key V80 Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hardware/index.html#v80-target-applications">V80 Target Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hardware/index.html#technical-specifications-summary">Technical Specifications Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hardware/index.html#references">References</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="xbtest/install-and-run.html">How-to install and run a pre-built AMR design on an ALVEO V80 card</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run.html#before-you-begin">Before You Begin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run.html#amr-installation">AMR Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run.html#testing-amr">Testing AMR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run.html#ami">AMI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run.html#bdf-device-serial-number-uuid-amc-state">BDF     | Device        | Serial Number | UUID                             | AMC        | State</a></li>
 <li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run.html#next-steps">Next Steps</a></li>
 </ul>
 </li>
@@ -184,15 +172,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
 				  
 				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../development/source-control.html" class="btn btn-neutral float-left" title="Source Configuration Control" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="install-and-run.html" class="btn btn-neutral float-right" title="How-to install and run a pre-built AMR design on an ALVEO V80 card" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../hardware/index.html" class="btn btn-neutral float-left" title="Hardware Design - AMR Common" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="deployment-archive.html" class="btn btn-neutral float-right" title="AMR Deployment Archive" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

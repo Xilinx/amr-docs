@@ -3,22 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
-  <title>AMR V80 - Memory Map &mdash; AMR  documentation</title>
+  <title>AMR - Address Mapping Concepts (Common) &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -38,11 +23,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -86,19 +67,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Hardware Design - AMR Common</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../v80/index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/asdm-application.html">AMR ASDM Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/inband-telemetry.html">AMR InBand Telemetry Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../firmware/asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
@@ -130,7 +118,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>AMR V80 - Memory Map</li>
+      <li>AMR - Address Mapping Concepts (Common)</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/hardware/memory-map.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -140,47 +128,245 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="amr-v80-memory-map">
-<h1>AMR V80 - Memory Map<a class="headerlink" href="#amr-v80-memory-map" title="Permalink to this heading">¶</a></h1>
-<p>AMR uses the address mapping illustrated below.</p>
-<p><span id="amrv80-memorymap-memorymapping"></span></p>
-<div class="section" id="memory-mapping">
-<h2>Memory Mapping<a class="headerlink" href="#memory-mapping" title="Permalink to this heading">¶</a></h2>
-<p>This table shows the recommended functions that can access the DDR Memories. The light grey rows and columns related to the APU, PCIe User, and PCIe DMA are not currently used, but they are captured for future growth. The <strong>Yes/No</strong> entries indicate the recommended memory access. There is not an active control that prohibits unintended access to the DDR. For example, if caution is not exercised, the APU or PL could access DDR locations intended for the RPU (RPU execution).</p>
-<p>Address remapping must be used for the PCIe to access the 128MB of memory starting at 0x000_3800_0000. The address remap is configured in the AXI NoC CIPS (axi_noc_cips).</p>
-<p><img alt="images/1107374801.png" src="../_images/1107374801.png" /></p>
-<p>N/A* The RPU is only 32-bit addressing, so it cannot access more than 4GB of DDR.</p>
-<p><span id="amrv80-memorymap-amrmemorymap"></span></p>
-</div>
-<div class="section" id="amr-memory-map">
-<h2>AMR Memory Map<a class="headerlink" href="#amr-memory-map" title="Permalink to this heading">¶</a></h2>
-<p>This table shows the memory map of AMR. The greyed out rows are not used in AMR, but they are available for future growth.</p>
-<p>A complete AMD Versal™ Address map can be found here:</p>
+  <div class="section" id="amr-address-mapping-concepts-common">
+<h1>AMR - Address Mapping Concepts (Common)<a class="headerlink" href="#amr-address-mapping-concepts-common" title="Permalink to this heading">¶</a></h1>
+<blockquote>
+<div><p><strong>For platform-specific address maps</strong>, see:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/4-GB-Processor-System-Address-Map">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/4-GB-Processor-System-Address-Map</a></p></li>
-<li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map</a></p></li>
+<li><p><a class="reference internal" href="../v80/hardware/memory-map.html"><span class="std std-doc">V80 Memory Map</span></a> - V80 address space with HBM regions</p></li>
+<li><p><a class="reference internal" href="../rave/hardware/memory-map.html"><span class="std std-doc">RAVE Memory Map</span></a> - RAVE address space with LPDDR4</p></li>
 </ul>
-<p><span id="amrv80-memorymap-amr4gmemoryspace-ddrlower2g-ps-pmc"></span></p>
-<div class="section" id="amr-4g-memory-space-ddr-lower-2g-ps-pmc">
-<h3>AMR 4G Memory Space - DDR Lower 2G &amp; PS/PMC<a class="headerlink" href="#amr-4g-memory-space-ddr-lower-2g-ps-pmc" title="Permalink to this heading">¶</a></h3>
-<p><img alt="images/1107374801.png" src="../_images/1107374801.png" /></p>
-<p><span id="amrv80-memorymap-amrhbmmemoryspace"></span></p>
+</div></blockquote>
+<p><span id="amr-memorymap-overview"></span></p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
+<p>This document describes <strong>common address mapping concepts</strong> for all AMR platforms. All platforms require address translation between PCIe and AXI address domains.</p>
+<p>All AMR platforms follow common address mapping patterns despite platform-specific implementation differences. PCIe addressing uses 64-bit addresses in the terabyte range starting from 0x200_0000_0000 and above, while AXI addressing employs local address spaces typically starting from lower values. Translation between these address domains occurs through PCIEBAR2AXIBAR registers (configured in either CPM or PCIe IP depending on platform) and through NoC REMAPS parameters in the AXI NoC IP configuration. The two physical functions (PF0 for management, PF1 for user) occupy separate address ranges enabling independent access control and address space management.</p>
+<p><span id="amr-memorymap-versaladdressspace"></span></p>
 </div>
-<div class="section" id="amr-hbm-memory-space">
-<h3>AMR HBM Memory Space<a class="headerlink" href="#amr-hbm-memory-space" title="Permalink to this heading">¶</a></h3>
-<p><img alt="images/1107374822.png" src="../_images/1107374822.png" /></p>
-<p><span id="amrv80-memorymap-pf0baraddressing"></span></p>
+<div class="section" id="versal-address-space-common">
+<h2>Versal Address Space (Common)<a class="headerlink" href="#versal-address-space-common" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="gb-address-space-32-bit">
+<h3>4GB Address Space (32-bit)<a class="headerlink" href="#gb-address-space-32-bit" title="Permalink to this heading">¶</a></h3>
+<p><strong>Range:</strong> 0x000_0000_0000 - 0x000_FFFF_FFFF</p>
+<p>The 4GB address space contains the PS and PMC peripheral registers providing control and status access to integrated peripherals. The lower DDR memory region occupies a portion of this space, accessible through standard memory addressing. On-Chip Memory (OCM) provides fast local memory for critical code and data. This address range represents the maximum directly addressable by the RPU due to its 32-bit addressing limitation, influencing firmware memory allocation strategies.</p>
+<p><strong>Reference:</strong> <a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/4-GB-Processor-System-Address-Map">Versal 4GB Address Map</a></p>
 </div>
-<div class="section" id="amr-pl-memory-space">
-<h3>AMR PL Memory Space<a class="headerlink" href="#amr-pl-memory-space" title="Permalink to this heading">¶</a></h3>
-<p><img alt="images/1107374813.png" src="../_images/1107374813.png" /></p>
-<p>PCIe® Management functions are in blue.</p>
-<p><span id="amrv80-memorymap-amrddrupper2ganddimm32gmemoryspace"></span></p>
+<div class="section" id="tb-address-space-64-bit">
+<h3>16TB Address Space (64-bit)<a class="headerlink" href="#tb-address-space-64-bit" title="Permalink to this heading">¶</a></h3>
+<p><strong>Range:</strong> 0x000_0000_0000 - 0x0FF_FFFF_FFFF</p>
+<p>The 16TB address space encompasses the complete 4GB space described above along with extended regions for larger memory allocations. Upper DDR regions occupy addresses above the 4GB boundary, accessible through 64-bit addressing from capable masters. High-Bandwidth Memory (HBM) address space exists on platforms featuring HBM devices, providing dedicated addressing for the HBM controller access. Programmable logic address space begins at 0x200_0000_0000 and above, with PCIe BARs typically mapped into this region.</p>
+<p><strong>Reference:</strong> <a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map">Versal 16TB Address Map</a></p>
+<p><span id="amr-memorymap-pcieaddresstranslation"></span></p>
 </div>
-<div class="section" id="amr-ddr-upper-2g-and-dimm-32g-memory-space">
-<h3>AMR DDR Upper 2G and DIMM 32G Memory Space<a class="headerlink" href="#amr-ddr-upper-2g-and-dimm-32g-memory-space" title="Permalink to this heading">¶</a></h3>
-<p><img alt="images/1107374792.png" src="../_images/1107374792.png" /></p>
 </div>
+<div class="section" id="pcie-to-axi-address-translation">
+<h2>PCIe to AXI Address Translation<a class="headerlink" href="#pcie-to-axi-address-translation" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="translation-mechanism">
+<h3>Translation Mechanism<a class="headerlink" href="#translation-mechanism" title="Permalink to this heading">¶</a></h3>
+<p><strong>All platforms translate PCIe addresses to AXI:</strong></p>
+<p><strong>PCIe Address Space:</strong></p>
+<ul class="simple">
+<li><p>TB-range 64-bit addresses</p></li>
+<li><p>Example: 0x201_0000_0000 (PF0), 0x202_0000_0000 (PF1)</p></li>
+</ul>
+<p><strong>AXI Local Address Space:</strong></p>
+<ul class="simple">
+<li><p>Typically 0x0000_0000 or 0x1000_0000 base</p></li>
+<li><p>Smaller address ranges</p></li>
+</ul>
+<p><strong>Translation Configured In:</strong></p>
+<ul class="simple">
+<li><p><strong>V80</strong>: CPM5 PCIEBAR2AXIBAR_QDMA_* registers</p></li>
+<li><p><strong>RAVE</strong>: PCIe IP PCIEBAR2AXIBAR configuration</p></li>
+<li><p><strong>Both</strong>: NoC REMAPS parameter in AXI NoC IP</p></li>
+</ul>
+</div>
+<div class="section" id="noc-address-remapping">
+<h3>NoC Address Remapping<a class="headerlink" href="#noc-address-remapping" title="Permalink to this heading">¶</a></h3>
+<p><strong>AXI NoC IP REMAPS configuration:</strong></p>
+<div class="highlight-tcl notranslate"><div class="highlight"><pre><span></span><span class="nv">CONFIG.REMAPS</span><span class="w"> </span><span class="k">{</span><span class="nv">M00_INI</span><span class="w"> </span><span class="k">{{</span><span class="nv">0x201_0000_0000</span><span class="w"> </span><span class="mh">0x1000</span>_0000<span class="w"> </span><span class="mi">8</span>M<span class="k">}}}</span>
+</pre></div>
+</div>
+<p><strong>Syntax:</strong></p>
+<ul class="simple">
+<li><p>PCIe address: 0x201_0000_0000</p></li>
+<li><p>AXI local address: 0x1000_0000</p></li>
+<li><p>Size: 8M</p></li>
+</ul>
+<p><span id="amr-memorymap-physicalfunctions"></span></p>
+</div>
+</div>
+<div class="section" id="physical-function-address-spaces">
+<h2>Physical Function Address Spaces<a class="headerlink" href="#physical-function-address-spaces" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="pf0-management-address-space">
+<h3>PF0 (Management) Address Space<a class="headerlink" href="#pf0-management-address-space" title="Permalink to this heading">¶</a></h3>
+<p><strong>Common Pattern:</strong></p>
+<ul class="simple">
+<li><p>Address range in TB space (0x201_xxxx_xxxx)</p></li>
+<li><p>BAR0 provides management register access</p></li>
+<li><p>Size varies by platform (V80: 8MB, RAVE: configurable)</p></li>
+<li><p>No hardware IP in base design (address space reserved)</p></li>
+</ul>
+</div>
+<div class="section" id="pf1-user-dma-address-space">
+<h3>PF1 (User/DMA) Address Space<a class="headerlink" href="#pf1-user-dma-address-space" title="Permalink to this heading">¶</a></h3>
+<p><strong>Common Pattern:</strong></p>
+<ul class="simple">
+<li><p>Address range in TB space (0x202_xxxx_xxxx)</p></li>
+<li><p>BAR0: DMA registers and descriptors</p></li>
+<li><p>BAR2: AXI bridge to PL (test GPIO, user logic)</p></li>
+<li><p>Size varies by platform</p></li>
+</ul>
+<p><span id="amr-memorymap-ddrmemoryregions"></span></p>
+</div>
+</div>
+<div class="section" id="ddr-memory-regions-common-concepts">
+<h2>DDR Memory Regions (Common Concepts)<a class="headerlink" href="#ddr-memory-regions-common-concepts" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="lower-ddr-0x000-0000-0000-0x000-7fff-ffff">
+<h3>Lower DDR (0x000_0000_0000 - 0x000_7FFF_FFFF)<a class="headerlink" href="#lower-ddr-0x000-0000-0000-0x000-7fff-ffff" title="Permalink to this heading">¶</a></h3>
+<p>This lower DDR region serves multiple purposes during system operation. The PMC uses portions of this space during boot and configuration activities. The RPU firmware execution requires memory in this region for code sections, initialized data, BSS sections, stack allocation, and heap management. Software GCQ buffers reside in this region to enable efficient RPU access without address extension. Remaining portions are available for general firmware use including data structures, buffers, and runtime allocations.</p>
+</div>
+<div class="section" id="upper-ddr-0x500-0000-0000">
+<h3>Upper DDR (0x500_0000_0000+)<a class="headerlink" href="#upper-ddr-0x500-0000-0000" title="Permalink to this heading">¶</a></h3>
+<p>The upper DDR regions provide additional memory capacity beyond the 32-bit addressable range. These regions hold user application data, DMA transfer buffers, and extended data structures that do not require direct RPU access. The PCIe host and other 64-bit capable masters access these regions through the NoC. Specific address ranges and total upper DDR capacity vary significantly by platform depending on the memory architecture and installed memory devices.</p>
+<p><span id="amr-memorymap-pladdressspace"></span></p>
+</div>
+</div>
+<div class="section" id="pl-address-space-common-concept">
+<h2>PL Address Space (Common Concept)<a class="headerlink" href="#pl-address-space-common-concept" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="pl-region-base-addresses">
+<h3>PL Region Base Addresses<a class="headerlink" href="#pl-region-base-addresses" title="Permalink to this heading">¶</a></h3>
+<p><strong>Typical PL address range:</strong></p>
+<ul class="simple">
+<li><p>Starts at 0x200_0000_0000+ (TB range)</p></li>
+<li><p>Divided by Physical Function</p></li>
+</ul>
+<p><strong>Common Allocation:</strong></p>
+<ul class="simple">
+<li><p>0x201_xxxx_xxxx: PF0 address space</p></li>
+<li><p>0x202_xxxx_xxxx: PF1 address space</p></li>
+<li><p>0x203_xxxx_xxxx+: Additional PFs (if enabled)</p></li>
+</ul>
+</div>
+<div class="section" id="local-axi-address-space-in-pl">
+<h3>Local AXI Address Space in PL<a class="headerlink" href="#local-axi-address-space-in-pl" title="Permalink to this heading">¶</a></h3>
+<p><strong>After NoC remapping:</strong></p>
+<ul class="simple">
+<li><p>PL IP typically sees local addresses</p></li>
+<li><p>Example: 0x1000_0000 base address</p></li>
+<li><p>SmartConnect further routes to peripherals</p></li>
+</ul>
+<p><span id="amr-memorymap-platformspecific"></span></p>
+</div>
+</div>
+<div class="section" id="platform-specific-address-maps">
+<h2>Platform-Specific Address Maps<a class="headerlink" href="#platform-specific-address-maps" title="Permalink to this heading">¶</a></h2>
+<p>For detailed address maps with specific ranges:</p>
+<div class="section" id="v80-address-map">
+<h3>V80 Address Map<a class="headerlink" href="#v80-address-map" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference internal" href="../v80/hardware/memory-map.html"><span class="std std-doc">V80 Memory Map</span></a></p>
+<p><strong>V80-Specific Address Regions:</strong></p>
+<ul class="simple">
+<li><p>PF0: 0x201_0000_0000 - 0x201_007F_FFFF (8MB)</p></li>
+<li><p>PF1: 0x202_0000_0000 - 0x202_0FFF_FFFF (256MB via 1GB aperture)</p></li>
+<li><p>DDR: 4GB discrete SDRAM + 32GB DIMM</p></li>
+<li><p><strong>HBM</strong>: Dedicated address space (V80 only)</p></li>
+</ul>
+</div>
+<div class="section" id="rave-address-map">
+<h3>RAVE Address Map<a class="headerlink" href="#rave-address-map" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference internal" href="../rave/hardware/memory-map.html"><span class="std std-doc">RAVE Memory Map</span></a></p>
+<p><strong>RAVE-Specific Address Regions:</strong></p>
+<ul class="simple">
+<li><p>PF0: Configurable in PCIe IP</p></li>
+<li><p>PF1: Configurable in PCIe IP</p></li>
+<li><p>LPDDR4: 8-16GB total</p></li>
+<li><p><strong>No HBM regions</strong></p></li>
+</ul>
+<p><span id="amr-memorymap-addressremapping"></span></p>
+</div>
+</div>
+<div class="section" id="address-remapping-examples">
+<h2>Address Remapping Examples<a class="headerlink" href="#address-remapping-examples" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="example-1-pf0-management-space-v80">
+<h3>Example 1: PF0 Management Space (V80)<a class="headerlink" href="#example-1-pf0-management-space-v80" title="Permalink to this heading">¶</a></h3>
+<p><strong>PCIe Side (Host View):</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BAR0</span><span class="p">:</span> <span class="mh">0x201_0000_0000</span> <span class="o">-</span> <span class="mh">0x201_007F_FFFF</span> <span class="p">(</span><span class="mi">8</span><span class="n">MB</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>AXI Side (Versal View):</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Local</span><span class="p">:</span> <span class="mh">0x1000_0000</span> <span class="o">-</span> <span class="mh">0x107F_FFFF</span> <span class="p">(</span><span class="mi">8</span><span class="n">MB</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Configuration:</strong></p>
+<ul class="simple">
+<li><p>CPM5: PCIEBAR2AXIBAR_QDMA_0 = 0x0201_0000_0000</p></li>
+<li><p>NoC: REMAPS {M00_INI {{0x201_0000_0000 0x1000_0000 8M}}}</p></li>
+</ul>
+</div>
+<div class="section" id="example-2-software-gcq-buffer">
+<h3>Example 2: Software GCQ Buffer<a class="headerlink" href="#example-2-software-gcq-buffer" title="Permalink to this heading">¶</a></h3>
+<p><strong>Host Access via PCIe:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Mapped region in PF0 BAR (e.g., 0x201_0800_0000)
+  ↓ (NoC remap)
+DRAM physical address (e.g., 0x000_1000_0000)
+</pre></div>
+</div>
+<p><strong>RPU Access:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Direct</span> <span class="n">DRAM</span> <span class="n">address</span><span class="p">:</span> <span class="mh">0x000_1000_0000</span>
+</pre></div>
+</div>
+<p><strong>Both access same physical DDR location</strong> via different address paths.</p>
+<p><span id="amr-memorymap-designguidelines"></span></p>
+</div>
+</div>
+<div class="section" id="design-guidelines">
+<h2>Design Guidelines<a class="headerlink" href="#design-guidelines" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="allocating-pl-address-space">
+<h3>Allocating PL Address Space<a class="headerlink" href="#allocating-pl-address-space" title="Permalink to this heading">¶</a></h3>
+<p>When adding custom IP:</p>
+<ol class="arabic simple">
+<li><p><strong>Check available address space</strong></p>
+<ul class="simple">
+<li><p>PF0: Management space (platform-dependent size)</p></li>
+<li><p>PF1: User space (platform-dependent size)</p></li>
+</ul>
+</li>
+<li><p><strong>Use SmartConnect for routing</strong></p>
+<ul class="simple">
+<li><p>Connect to PF0/PF1 AXI interfaces</p></li>
+<li><p>SmartConnect decodes local addresses</p></li>
+</ul>
+</li>
+<li><p><strong>Update address maps</strong></p>
+<ul class="simple">
+<li><p>Document IP base addresses</p></li>
+<li><p>Update NoC REMAPS if needed</p></li>
+<li><p>Ensure no conflicts</p></li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="shared-memory-for-ipc">
+<h3>Shared Memory for IPC<a class="headerlink" href="#shared-memory-for-ipc" title="Permalink to this heading">¶</a></h3>
+<p><strong>Software GCQ pattern:</strong></p>
+<ul class="simple">
+<li><p>Allocate DRAM region accessible by both host and RPU</p></li>
+<li><p>Configure NoC remap for host PCIe access</p></li>
+<li><p>RPU accesses directly via DDR address</p></li>
+<li><p>Synchronize via firmware protocols</p></li>
+</ul>
+<p><span id="amr-memorymap-references"></span></p>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../v80/hardware/memory-map.html"><span class="std std-doc">V80 Memory Map</span></a> - V80-specific addresses</p></li>
+<li><p><a class="reference internal" href="../rave/hardware/memory-map.html"><span class="std std-doc">RAVE Memory Map</span></a> - RAVE-specific addresses</p></li>
+<li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map">Versal Address Maps</a> - Complete Versal addressing</p></li>
+</ul>
 </div>
 </div>
 
@@ -195,7 +381,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

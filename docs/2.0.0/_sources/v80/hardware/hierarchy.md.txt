@@ -1,12 +1,16 @@
 # AMR V80 - Hierarchy Overview
 
+> **For common Versal architecture concepts**, see [Common Hierarchy](../../hardware/hierarchy.md)
+>
+> This document describes the V80 platform-specific hierarchy and block diagram.
+
 <span id="amrv80-hierarchyoverview-introduction"></span>
 
 ## Introduction
 
-The AMR design is a PCIe® based design that is used to demonstrate the capabilities of the card, firmware, and drivers. The design is composed of three major blocks: CIPS, Base Logic, and Clocks and Resets. The NoC interconnect is used to route AXI traffic across the device.
+The V80 design is a PCIe accelerator card implementing a high-performance architecture with CPM5 hardened PCIe Gen5 x8, HBM memory, and extensive NoC connectivity. The design leverages hardened silicon blocks to maximize performance while minimizing programmable logic resource consumption.
 
-<span id="amrv80-hierarchyoverview-blockdiagram"></span>
+<span id="amr-hierarchyoverview-blockdiagram"></span>
 
 ## Block Diagram
 
@@ -14,7 +18,7 @@ The following is the block diagram of the design, highlighting the connectivity 
 
 ![images/1107374308.png](../../images/1107374308.png)
 
-<span id="amrv80-hierarchyoverview-control-interfacesandprocessingsystem"></span>
+<span id="amr-hierarchyoverview-control-interfacesandprocessingsystem"></span>
 
 ## Control, Interfaces and Processing System
 
@@ -26,7 +30,7 @@ The Control, interfaces, and processing system (CIPS) IP configures the various 
 | Real-time Processing Unit      | The RPU block contains the R5 processor that is used for running the AMC firmware on the device. This is part of the processing system low-power domain (PS LPD). The primary purpose of this block in this design is to handle the board management functions of the card.                                                                       | [Versal TRM - LPD Architecture](https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/LPD-Interconnect-Diagram)                        |
 | Platform Management Controller | The PMC block contains a MicroBlaze-based processor subsystem. It is primarily responsible for managing the bootup, configuration, and internal monitoring of the device. It interfaces with the external flash devices to read/write device images for device configuration. This compulsory unit is required for the Versal device to function. | [Versal TRM - PMC Architecture](https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Platform-Management-Controller-Architecture)     |
 
-<span id="amrv80-hierarchyoverview-programmablelogic-pl"></span>
+<span id="amr-hierarchyoverview-programmablelogic-pl"></span>
 
 ## Programmable Logic (PL)
 
@@ -43,21 +47,24 @@ The PL region contains the soft logic IP and I/O connections. It is separated in
 <tbody>
 <tr class="odd">
 <td><p>Base Logic</p></td>
-<td><p>The base logic region primarily contains peripheral IPs that are used by the R5 processor to handle the card and driver management firmware. This includes the SMBus IP, command queues, and identification ROMs.</p>
+<td><p>The base logic region contains test and management IP accessible through PCIe Physical Functions:</p>
 <ul>
-<li><p><em><strong>IMPORTANT:</strong></em> SMBus IP is not included with the AMR design sources. The IP must be downloaded separately from a lounge (<a href="https://www.xilinx.com/member/v80" class="external-link">https://www.xilinx.com/member/v80.html</a>) and added to the IP repository of the AMR hardware design (&lt;amr&gt;/hw/<span class="legacy-color-text-blue1">amd_&lt;board&gt;_gen5x8_25.1</span>/src/iprepo/) before building the design.</p></li>
+<li><p><strong>PF0 (Management Function):</strong> 16MB BAR0 for management register access via AXI_Bridge_Master</p></li>
+<li><p><strong>PF1 (Test Function):</strong> Hierarchical block with SmartConnect, AXI GPIO (loopback test), and reset synchronization. Accessible via 256MB BAR2 (AXI_Bridge_Master) and 512KB BAR0 (DMA).</p></li>
+<li><p><em><strong>IMPORTANT:</strong></em> SMBus IP v1.1 is available in the IP repository (ip/smbus_v1_1/) but not instantiated in the base design. The IP must be downloaded separately from <a href="https://www.xilinx.com/member/v80" class="external-link">https://www.xilinx.com/member/v80.html</a> and added to the IP repository before building the design.</p></li>
 </ul></td>
-<td><p><a href="../base-logic.md">AMR V80 - Base Logic</a></p></td>
+<td><p><a href="base-logic.md">AMR V80 - Base Logic</a></p></td>
 </tr>
 <tr class="even">
 <td><p>Clocks and Resets</p></td>
-<td><p>The clock and resets region contains the clocking wizards and reset synchronizer blocks for the user application. It also contains the logic to facilitate hot-reset/PDI reload of the device.</p></td>
-<td><p><a href="../clock-reset.md">AMR V80 - Clock Reset Module</a></p></td>
+<td><p>The base design uses CIPS-generated clocks (100 MHz, 33.33 MHz, 250 MHz) and processor system reset blocks for reset synchronization. The PF1 hierarchy contains a proc_sys_reset block for the GPIO test logic. The design supports future expansion with clocking wizards and additional reset synchronizers for user kernels.</p>
+<p><strong>Note:</strong> AMR supports Power-On-Reset to reload designs from flash but does not support hot-reset/PDI reload due to system complexity.</p></td>
+<td><p><a href="clock-reset.md">AMR V80 - Clock Reset Module</a></p></td>
 </tr>
 </tbody>
 </table>
 
-<span id="amrv80-hierarchyoverview-nocinterconnect"></span>
+<span id="amr-hierarchyoverview-nocinterconnect"></span>
 
 ## NoC Interconnect
 

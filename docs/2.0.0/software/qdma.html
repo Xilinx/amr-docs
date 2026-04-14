@@ -3,21 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
   <title>AMR QDMA &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
@@ -40,11 +25,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="prev" title="AMR Management Interface (AMI)" href="ami.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -88,19 +69,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../v80/index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/asdm-application.html">AMR ASDM Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/inband-telemetry.html">AMR InBand Telemetry Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../firmware/asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../firmware/fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
@@ -149,6 +137,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
              
   <div class="section" id="amr-qdma">
 <h1>AMR QDMA<a class="headerlink" href="#amr-qdma" title="Permalink to this heading">¶</a></h1>
+<blockquote>
+<div><p><strong>Note:</strong> Queue DMA (QDMA) functionality is supported exclusively on the Alveo V80 platform. QDMA is not available on RAVE (Embedded+) platforms, which utilize XDMA for PCIe data transfer operations.</p>
+</div></blockquote>
 <p>Xilinx QDMA</p>
 <p>The Xilinx PCI Express Multi Queue DMA (QDMA) IP provides high-performance direct memory access (DMA) via PCI Express.</p>
 <p>Both the linux kernel driver and the DPDK driver can be run on a PCI Express root port host PC to interact with the QDMA endpoint IP via PCI Express.</p>
@@ -165,22 +156,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>```
 lspci -vd 10ee:
 21:00.0 Processing accelerators: Xilinx Corporation Device 50b4
-        Subsystem: Xilinx Corporation Device 000e
-        Physical Slot: 2-1
-        Flags: bus master, fast devsel, latency 0, NUMA node 2, IOMMU group 27
-        Memory at 2bf70000000 (64-bit, prefetchable) [size=256M]
-        Capabilities: &lt;access denied&gt;
-        Kernel driver in use: ami
-        Kernel modules: ami
+    Subsystem: Xilinx Corporation Device 000e
+    Physical Slot: 7-1
+    Flags: bus master, fast devsel, latency 0, NUMA node 1, IOMMU group 76
+    Memory at 96000000 (64-bit, non-prefetchable) [size=8M]
+    Capabilities: &lt;access denied&gt;
+    Kernel driver in use: ami
+    Kernel modules: ami
 
 21:00.1 Processing accelerators: Xilinx Corporation Device 50b5
-        Subsystem: Xilinx Corporation Device 000e
-        Physical Slot: 2-1
-        Flags: bus master, fast devsel, latency 0, NUMA node 2, IOMMU group 27
-        Memory at 2bf80000000 (64-bit, prefetchable) [size=512K]
-        Capabilities: &lt;access denied&gt;
-        Kernel driver in use: qdma-pf
-        Kernel modules: qdma_pf, ami, qdma_vf
+    Subsystem: Xilinx Corporation Device 000e
+    Physical Slot: 7-1
+    Flags: bus master, fast devsel, latency 0, NUMA node 1, IOMMU group 76
+    Memory at 10120000000 (64-bit, prefetchable) [size=512K]
+    Memory at 10110000000 (64-bit, prefetchable) [size=256M]
+    Capabilities: &lt;access denied&gt;
+    Kernel modules: qdma_pf, ami, qdma_vf
+    Kernel driver in use: qdma-pf
+
 ```
 </pre></div>
 </div>
@@ -202,22 +195,23 @@ make install-mods
 lspci -vd 10ee:
 ```
 21:00.0 Processing accelerators: Xilinx Corporation Device 50b4
-        Subsystem: Xilinx Corporation Device 000e
-        Physical Slot: 2-1
-        Flags: bus master, fast devsel, latency 0, NUMA node 2, IOMMU group 27
-        Memory at 2bf70000000 (64-bit, prefetchable) [size=256M]
-        Capabilities: &lt;access denied&gt;
-        Kernel driver in use: ami
-        Kernel modules: ami
+    Subsystem: Xilinx Corporation Device 000e
+    Physical Slot: 7-1
+    Flags: bus master, fast devsel, latency 0, NUMA node 1, IOMMU group 76
+    Memory at 96000000 (64-bit, non-prefetchable) [size=8M]
+    Capabilities: &lt;access denied&gt;
+    Kernel driver in use: ami
+    Kernel modules: ami
 
 21:00.1 Processing accelerators: Xilinx Corporation Device 50b5
-        Subsystem: Xilinx Corporation Device 000e
-        Physical Slot: 2-1
-        Flags: bus master, fast devsel, latency 0, NUMA node 2, IOMMU group 27
-        Memory at 2bf80000000 (64-bit, prefetchable) [size=512K]
-        Capabilities: &lt;access denied&gt;
-        Kernel driver in use: qdma-pf
-        Kernel modules: qdma_pf, ami, qdma_vf
+    Subsystem: Xilinx Corporation Device 000e
+    Physical Slot: 7-1
+    Flags: bus master, fast devsel, latency 0, NUMA node 1, IOMMU group 76
+    Memory at 10120000000 (64-bit, prefetchable) [size=512K]
+    Memory at 10110000000 (64-bit, prefetchable) [size=256M]
+    Capabilities: &lt;access denied&gt;
+    Kernel modules: qdma_pf, ami, qdma_vf
+    Kernel driver in use: qdma-pf
 </pre></div>
 </div>
 <p><span id="amrqdma-examples"></span></p>
@@ -468,7 +462,7 @@ pci_device=00
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

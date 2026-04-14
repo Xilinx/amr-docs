@@ -3,21 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
   <title>Firmware Interface (FW_IF) Abstraction Layer &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
@@ -40,11 +25,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="prev" title="Board Management Controller (BMC) Proxy Driver" href="bmc-proxy.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -88,19 +69,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../v80/index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asdm-application.html">AMR ASDM Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inband-telemetry.html">AMR InBand Telemetry Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Firmware Interface (FW_IF) Abstraction Layer</a><ul>
@@ -320,15 +308,16 @@ typedef enum _FW_IF_ERRORS
 <p>Within each common protocol header is an “INIT_CONFIG” - a structure used during initialization of the driver but not needed for individual instances of that interface.</p>
 <p><strong>Example init config</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/*
- * @struct  FW_IF_SMBUS_INIT_CFG
+ * @struct  FWIfSMBusInitCfg
  * @brief   config options for smbus initialisation (generic across all smbus interfaces)
  */
-typedef struct _FW_IF_SMBUS_INIT_CFG
+typedef struct
 {
-    uint32_t        baseAddr;
-    uint32_t        baudRate;
+    uint32_t  ulBaseAddr;
+    uint32_t  ulBaudRate;
+    uint8_t   pucCommandProtocols[ MAX_FW_IF_SMBUS_COMMAND_PROTOCOL ];
 
-} FW_IF_SMBUS_INIT_CFG;
+} FWIfSMBusInitCfg;
 </pre></div>
 </div>
 <p>In this example, <strong>baseAddr</strong> and <strong>baudRate</strong> are configuration values that will be required for all implementation’s of an SMBus driver.</p>
@@ -337,11 +326,11 @@ typedef struct _FW_IF_SMBUS_INIT_CFG
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/*
  * @brief   initialisation function for smbus interfaces (generic across all smbus interfaces)
  *
- * @param   cfg     pointer to the config to initialise the driver with
+ * @param   pxCfg   pointer to the config to initialise the driver with
  *
  * @return  See FW_IF_ERRORS
  */
-extern uint32_t FW_IF_smbus_init( FW_IF_SMBUS_INIT_CFG * cfg );
+uint32_t ulFW_IF_SMBUS_Init( FWIfSMBusInitCfg *pxCfg );
 </pre></div>
 </div>
 <p>The initialization function should only pass in a pointer to the initialization structure, so that porting a user application from one driver to another takes minimal effort (only the structure contents and the name of the function need changed).</p>
@@ -356,29 +345,29 @@ extern uint32_t FW_IF_smbus_init( FW_IF_SMBUS_INIT_CFG * cfg );
 <p>An instance can be thought of as a port or an address on a driver that can be used for a single stream of read/write data (it may be write-only or read-only in practice).</p>
 <p>For example, a single SMBus driver might allow up to 7 instances to be created on it. Within the FW_IF, these can be handled as 7 individual and separate interfaces.</p>
 <p>Each interface has public methods and private data, held in a config.</p>
-<p><strong>FW_IF_CFG</strong></p>
+<p><strong>FWIfCfg</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/*
- * @struct  FW_IF_CFG
+ * @struct  FWIfCfg
  * @brief   Structure to hold a fw_if instance
  */
-typedef struct _FW_IF_CFG
+typedef struct
 {
-    uint32_t                upperFirewall;
+    uint32_t            upperFirewall;
 
-    FW_IF_open          *   open;
-    FW_IF_close         *   close;
-    FW_IF_write         *   write;
-    FW_IF_read          *   read;
-    FW_IF_ioctrl        *   ioctrl;
-    FW_IF_bindCallback  *   bindCallback;
+    FW_IF_open          *open;
+    FW_IF_close         *close;
+    FW_IF_write         *write;
+    FW_IF_read          *read;
+    FW_IF_ioctrl        *ioctrl;
+    FW_IF_bindCallback  *bindCallback;
 
-    FW_IF_callback      *   raiseEvent;
+    FW_IF_callback      *raiseEvent;
 
-    void                *   cfg;
+    void                *cfg;
 
-    uint32_t                lowerFirewall;
+    uint32_t            lowerFirewall;
 
-} FW_IF_CFG;
+} FWIfCfg;
 </pre></div>
 </div>
 <p><strong>Note: The user application is responsible for the storage of the interface structure.</strong></p>
@@ -393,7 +382,7 @@ typedef struct _FW_IF_CFG
  * @enum    FW_IF_SMBUS_ROLE
  * @brief   Controller or Target
  */
-typedef enum _FW_IF_SMBUS_ROLE
+typedef enum
 {
     FW_IF_SMBUS_ROLE_CONTROLLER = 0,
     FW_IF_SMBUS_ROLE_TARGET,
@@ -405,16 +394,21 @@ typedef enum _FW_IF_SMBUS_ROLE
 ...
 
 /*
- * @struct  FW_IF_SMBUS_CFG
+ * @struct  FWIfSMBusCfg
  * @brief   config options for smbus interfaces (generic across all smbus interfaces)
  */
-typedef struct _FW_IF_SMBUS_CFG
+typedef struct
 {
-    uint32_t            port;
-    FW_IF_SMBUS_ROLE    role;
-    uint8_t             udid[ FW_IF_SMBUS_UDID_LEN ];
+    uint32_t             ulPort;
+    FW_IF_SMBUS_ROLE     xRole;
+    FW_IF_SMBUS_ARP      xArpCapability;
+    FW_IF_SMBUS_PROTOCOL xProtocol;
+    uint8_t              pucUdid[ FW_IF_SMBUS_UDID_LEN ];
+    FW_IF_SMBUS_STATE    xState;
+    uint8_t              ucInstance;
+    FW_IF_SMBUS_PEC      xPecCapability;
 
-} FW_IF_SMBUS_CFG;
+} FWIfSMBusCfg;
 </pre></div>
 </div>
 <p>In this example, <strong>port</strong>, <strong>arpCapable</strong> and <strong>udid</strong> are configuration values that each interface needs to know about itself.</p>
@@ -424,17 +418,17 @@ typedef struct _FW_IF_SMBUS_CFG
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/*
  * @brief   creates an instance of the smbus interface
  *
- * @param   fwIf        fw_if handle to the interface instance
- * @param   smbusCfg    unique data of this instance (port, address, etc)
+ * @param   pxFwIf      fw_if handle to the interface instance
+ * @param   pxSmbusCfg  unique data of this instance (port, address, etc)
  *
  * @return  See FW_IF_ERRORS
  */
-extern uint32_t FW_IF_smbus_create( FW_IF_CFG *fwIf, FW_IF_SMBUS_CFG *smbusCfg );
+uint32_t ulFW_IF_SMBUS_Create( FWIfCfg *pxFwIf, FWIfSMBusCfg *pxSmbusCfg );
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>The parameter <strong>*fw_if</strong> is the handle to the interface that will be used for all subsequent calls (e.g. <strong>open</strong>, <strong>write</strong>, etc). It must be initialised in the user application as an empty structure.</p></li>
-<li><p>The parameter <strong>*smbusCfg</strong> is a pointer to the instance configuration structure shown previously - within the implementation, the contents will be copied to the private structure of the <strong>fw_if</strong> handle.</p></li>
+<li><p>The parameter <strong>*pxFwIf</strong> is the handle to the interface that will be used for all subsequent calls (e.g. <strong>open</strong>, <strong>write</strong>, etc). It must be initialised in the user application as an empty structure.</p></li>
+<li><p>The parameter <strong>*pxSmbusCfg</strong> is a pointer to the instance configuration structure shown previously - within the implementation, the contents will be copied to the private structure of the <strong>pxFwIf</strong> handle.</p></li>
 </ul>
 <p><strong>Note - the user application is responsible for the storage of the configuration structure.</strong></p>
 <p><span id="firmwareinterface-fw-if-abstractionlayer-opening-closinganinterface"></span></p>
@@ -448,11 +442,11 @@ extern uint32_t FW_IF_smbus_create( FW_IF_CFG *fwIf, FW_IF_SMBUS_CFG *smbusCfg )
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/*
  * @brief   Open the specific fw_if
  *
- * @param   fwIf        Pointer to this fw_if
+ * @param   pvFwIf      Pointer to this fw_if
  *
  * @return  See FW_IF_ERRORS
  */
-typedef uint32_t ( FW_IF_open )( void *fwIf );
+typedef uint32_t ( FW_IF_open )( void *pvFwIf );
 </pre></div>
 </div>
 <p>Within the SMBus example, this will create a target device with the values provided in the <strong>device creation function</strong>.</p>
@@ -461,11 +455,11 @@ typedef uint32_t ( FW_IF_open )( void *fwIf );
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/*
  * @brief   Close the specific fw_if
  *
- * @param   fwIf        Pointer to this fw_if
+ * @param   pvFwIf      Pointer to this fw_if
  *
  * @return  See FW_IF_ERRORS
  */
-typedef uint32_t ( FW_IF_close )( void *fwIf );
+typedef uint32_t ( FW_IF_close )( void *pvFwIf );
 </pre></div>
 </div>
 <p>This must close the interface. Within the SMBus example, this will delete the previously created target device.</p>
@@ -480,15 +474,15 @@ typedef uint32_t ( FW_IF_close )( void *fwIf );
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/*
  * @brief   Writes data from an instance of the specific fw_if
  *
- * @param   fwIf        Pointer to this fw_if
- * @param   dstPort     Remote port to write to
- * @param   data        Data buffer to write
- * @param   size        Number of bytes in data buffer
- * @param   timeoutMs   Time (in ms) to wait for write to complete
+ * @param   pvFwIf      Pointer to this fw_if
+ * @param   ullDstPort  Remote port to write to
+ * @param   pucData     Data buffer to write
+ * @param   ulSize      Number of bytes in data buffer
+ * @param   ulTimeoutMs Time (in ms) to wait for write to complete
  *
  * @return  See FW_IF_ERRORS
  */
-typedef uint32_t ( FW_IF_write )( void *fwIf, uint32_t dstPort, uint8_t * data, uint32_t size, uint32_t timeoutMs );
+typedef uint32_t ( FW_IF_write )( void *pvFwIf, uint64_t ullDstPort, uint8_t *pucData, uint32_t ulSize, uint32_t ulTimeoutMs );
 </pre></div>
 </div>
 <p>For the <strong>timeoutMs</strong> parameter, the additional <strong>#defines</strong> may also be used:</p>
@@ -507,16 +501,16 @@ typedef uint32_t ( FW_IF_write )( void *fwIf, uint32_t dstPort, uint8_t * data, 
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/*
  * @brief   Reads data from an instance of the specific fw_if
  *
- * @param   fwIf        Pointer to this fw_if
- * @param   srcPort     Remote port to read from
- * @param   data        Data buffer to read
- * @param   size        Pointer to maximum number of bytes allowed in data buffer
- *                          This value is updated to the actual number of bytes read
- * @param   timeoutMs   Time (in ms) to wait for read to complete
+ * @param   pvFwIf      Pointer to this fw_if
+ * @param   ullSrcPort  Remote port to read from
+ * @param   pucData     Data buffer to read
+ * @param   pulSize     Pointer to maximum number of bytes allowed in data buffer
+ *                      This value is updated to the actual number of bytes read
+ * @param   ulTimeoutMs Time (in ms) to wait for read to complete
  *
  * @return  See FW_IF_ERRORS
  */
-typedef uint32_t ( FW_IF_read )( void *fwIf, uint32_t srcPort, uint8_t * data, uint32_t * size, uint32_t timeoutMs );
+typedef uint32_t ( FW_IF_read )( void *pvFwIf, uint64_t ullSrcPort, uint8_t *pucData, uint32_t *pulSize, uint32_t ulTimeoutMs );
 </pre></div>
 </div>
 <p>For the <strong>timeoutMs</strong> parameter, the additional <strong>#defines</strong> may also be used:</p>
@@ -571,13 +565,13 @@ typedef enum _FW_IF_SMBUS_EVENTS
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/*
  * @brief   Callback to raise to calling layer
  *
- * @param   eventId     Unique ID to identify the event
- * @param   data        Pointer to data buffer
- * @param   size        Number of bytes in data
+ * @param   usEventId   Unique ID to identify the event
+ * @param   pucData     Pointer to data buffer
+ * @param   ulSize      Number of bytes in data
  *
  * @return  See FW_IF_ERRORS
  */
-typedef uint32_t ( FW_IF_callback )( uint16_t eventId, uint8_t * data, uint32_t size );
+typedef uint32_t ( FW_IF_callback )( uint16_t usEventId, uint8_t *pucData, uint32_t ulSize );
 </pre></div>
 </div>
 <p>If a user application wishes to receive real-time events from an interface, they must implement the above function.</p>
@@ -592,12 +586,12 @@ typedef uint32_t ( FW_IF_callback )( uint16_t eventId, uint8_t * data, uint32_t 
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/*
  * @brief   Binds a user-defined callback into the fw_if
  *
- * @parmam  fwIf        Pointer too this fw_if
- * @param   newFunc     Function pointer to call
+ * @param   pvFwIf      Pointer to this fw_if
+ * @param   pxNewFunc   Function pointer to call
  *
  * @return  See FW_IF_ERRORS
  */
-typedef uint32_t ( FW_IF_bindCallback )( void *fwIf, FW_IF_callback * newFunc );
+typedef uint32_t ( FW_IF_bindCallback )( void *pvFwIf, FW_IF_callback *pxNewFunc );
 </pre></div>
 </div>
 <p>A user does not need to bind a callback if they do not need one.</p>
@@ -610,15 +604,15 @@ typedef uint32_t ( FW_IF_bindCallback )( void *fwIf, FW_IF_callback * newFunc );
 <p>There is some IO ctrl that is common to all protocols, and so is defined the <strong>common header.</strong></p>
 <p><strong>FW_IF_COMMON_IOCTRL_OPTIONS</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/*
- *  @enum   FW_IF_RX_MODE
+ *  @enum   FW_IF_DRIVER_RX_MODE
  *  @brief  Mode of Rx operation
  */
-typedef enum _FW_IF_RX_MODE
+typedef enum
 {
     FW_IF_RX_MODE_POLLING   = 0x01,         /* driver must be polled for new data */
     FW_IF_RX_MODE_EVENT     = 0x02,         /* driver will raise an event to announce new data */
 
-} FW_IF_RX_MODE;
+} FW_IF_DRIVER_RX_MODE;
 
 /*
  * @enum    FW_IF_COMMON_IOCTRL_OPTIONS
@@ -666,13 +660,13 @@ typedef enum _FW_IF_SMBUS_IOCTRL_OPTIONS
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/*
  * @brief   Set/get specific IO options to/from the specific fw_if
  *
- * @param   fwIf        Pointer to this fw_if
- * @param   option      Unique IO Ctrl option to set/get
- * @param   value       Pointer to value to set/get
+ * @param   pvFwIf      Pointer to this fw_if
+ * @param   ulOption    Unique IO Ctrl option to set/get
+ * @param   pvValue     Pointer to value to set/get
  *
  * @return  See FW_IF_ERRORS
  */
-typedef uint32_t ( FW_IF_ioctrl )( void *fwIf, uint32_t option, void * value );
+typedef uint32_t ( FW_IF_ioctrl )( void *pvFwIf, uint32_t ulOption, void *pvValue );
 </pre></div>
 </div>
 <ul class="simple">
@@ -695,13 +689,14 @@ typedef uint32_t ( FW_IF_ioctrl )( void *fwIf, uint32_t option, void * value );
 <h3>Initialising the driver<a class="headerlink" href="#initialising-the-driver" title="Permalink to this heading">¶</a></h3>
 <p>This function should only be called once. Drivers should be developed to cater for this, either with an API that returns the initialization status or by returning a recognizable return code if a user attempts to initialize the driver a 2nd time.</p>
 <p><strong>Driver initialise example</strong></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>FW_IF_SMBUS_INIT_CFG mySmbusIf =
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>FWIfSMBusInitCfg mySmbusIf =
  {
-     0x12345678, /* baseAddr */
-     100000      /* baudRate */
+     .ulBaseAddr = 0x12345678,
+     .ulBaudRate = 100000,
+     .pucCommandProtocols = { 0 }
  };
 
- if( FW_IF_ERRORS_NONE == FW_IF_smbus_init( &amp;mySmbusIf ) )
+ if( FW_IF_ERRORS_NONE == ulFW_IF_SMBUS_Init( &amp;mySmbusIf ) )
  {
      printf( &quot;SMBus initialised OK\r\n&quot; );
  }
@@ -711,10 +706,10 @@ typedef uint32_t ( FW_IF_ioctrl )( void *fwIf, uint32_t option, void * value );
  }
 </pre></div>
 </div>
-<p>Within the <strong>FW_IF_smbus_init()</strong> function, the implementation:</p>
+<p>Within the <strong>ulFW_IF_SMBUS_Init()</strong> function, the implementation:</p>
 <ol class="arabic simple">
 <li><p>Checks if the driver has not already been initialized.</p></li>
-<li><p>Takes a local copy of the <strong>FW_IF_SMBUS_INIT_CFG</strong> structure (it only needs one local copy, so no dynamic memory allocation is required).</p></li>
+<li><p>Takes a local copy of the <strong>FWIfSMBusInitCfg</strong> structure (it only needs one local copy, so no dynamic memory allocation is required).</p></li>
 <li><p>Calls the driver-specific initialization function.</p></li>
 </ol>
 <p><span id="firmwareinterface-fw-if-abstractionlayer-creatinganinterfaceinstance"></span></p>
@@ -722,44 +717,44 @@ typedef uint32_t ( FW_IF_ioctrl )( void *fwIf, uint32_t option, void * value );
 <div class="section" id="creating-an-interface-instance">
 <h3>Creating an interface instance<a class="headerlink" href="#creating-an-interface-instance" title="Permalink to this heading">¶</a></h3>
 <p><strong>Interface creation example</strong></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>static FW_IF_CFG myIf = { 0 };     /* always initialised as empty */
-static FW_IF_CFG *pIf = &amp;myIf;      /* not necessary, but it&#39;s helpful to consider the FW_IF as a handle, not a struct */
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>static FWIfCfg myIf = { 0 };     /* always initialised as empty */
+static FWIfCfg *pIf = &amp;myIf;     /* not necessary, but it&#39;s helpful to consider the FW_IF as a handle, not a struct */
 
-static FW_IF_SMBUS_CFG cfg =
+static FWIfSMBusCfg cfg =
 {
-    0x56,                           /* port */
-    FW_IF_SMBUS_ROLE_CONTROLLER,    /* role */
-    { 0x11, ... }                   /* udid */
+    .ulPort = 0x56,
+    .xRole = FW_IF_SMBUS_ROLE_CONTROLLER,
+    .pucUdid = { 0x11, 0x00, /* ... */ }
 };
 
 ...
 
-if( FW_IF_ERRORS_NONE == FW_IF_smbus_create( pIf, &amp;cfg ) )
+if( FW_IF_ERRORS_NONE == ulFW_IF_SMBUS_Create( pIf, &amp;cfg ) )
 {
-    printf( &quot;SMBus %02X created OK\r\n&quot;, cfg.port );
+    printf( &quot;SMBus %02X created OK\r\n&quot;, cfg.ulPort );
 }
 else
 {
-    printf( &quot;Error creating SMBus %02X\r\n&quot;, cfg.port );
+    printf( &quot;Error creating SMBus %02X\r\n&quot;, cfg.ulPort );
 }
 </pre></div>
 </div>
-<p>Within the <strong>FW_IF_smbus_create()</strong> function, the implementation:</p>
+<p>Within the <strong>ulFW_IF_SMBUS_Create()</strong> function, the implementation:</p>
 <ol class="arabic simple">
 <li><p>Sanity checks the config.</p></li>
-<li><p>Populates the variables within <strong>FW_IF_CFG</strong> parameter with the local implementation functions.</p></li>
-<li><p>Copies the contents of the <strong>FW_IF_SMBUS_CFG</strong> to the private data area of the handle.</p></li>
+<li><p>Populates the variables within <strong>FWIfCfg</strong> parameter with the local implementation functions.</p></li>
+<li><p>Copies the contents of the <strong>FWIfSMBusCfg</strong> to the private data area of the handle.</p></li>
 </ol>
 <p><strong>Interface creation example implementation</strong></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>uint32_t FW_IF_smbus_create( FW_IF_CFG *fwIf, FW_IF_SMBUS_CFG *smbusCfg )
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>uint32_t ulFW_IF_SMBUS_Create( FWIfCfg *pxFwIf, FWIfSMBusCfg *pxSmbusCfg )
 {
     uint32_t status = FW_IF_ERRORS_NONE;
 
-    if( ( NULL != fwIf ) &amp;&amp; ( NULL != smbusCfg ) )
+    if( ( NULL != pxFwIf ) &amp;&amp; ( NULL != pxSmbusCfg ) )
     {
-        if( MAX_FW_IF_SMBUS_ROLE &gt; smbusCfg-&gt;role ) &amp;&amp; ( NULL != smbusCfg-&gt;udid ) )
+        if( ( MAX_FW_IF_SMBUS_ROLE &gt; pxSmbusCfg-&gt;xRole ) &amp;&amp; ( NULL != pxSmbusCfg-&gt;pucUdid ) )
         {
-            FW_IF_CFG myLocalIf =
+            FWIfCfg myLocalIf =
             {
                 .upperFirewall  = SMBUS_UPPER_FIREWALL,
                 .open           = &amp;smbusOpen,
@@ -768,15 +763,15 @@ else
                 .read           = &amp;smbusRead,
                 .ioctrl         = &amp;smbusIoctrl,
                 .bindCallback   = &amp;smbusBindCallback,
-                .cfg            = ( void* )smbusCfg,
+                .cfg            = ( void* )pxSmbusCfg,
                 .lowerFirewall  = SMBUS_LOWER_FIREWALL
             };
 
-            memcpy( fwIf, &amp;myLocalIf, sizeof( FW_IF_CFG ) );
+            memcpy( pxFwIf, &amp;myLocalIf, sizeof( FWIfCfg ) );
 
-            FW_IF_SMBUS_CFG *thisSmbusCfg = ( FW_IF_SMBUS_CFG* )fwIf-&gt;cfg;
+            FWIfSMBusCfg *thisSmbusCfg = ( FWIfSMBusCfg* )pxFwIf-&gt;cfg;
 
-            printf( &quot;smbus_create for port %u\r\n&quot;, thisSmbusCfg-&gt;port );
+            printf( &quot;smbus_create for port %u\r\n&quot;, thisSmbusCfg-&gt;ulPort );
         }
         else
         {
@@ -811,7 +806,7 @@ else
 <p>Within the <strong>FW_IF_open</strong> implementation, the function:</p>
 <ol class="arabic simple">
 <li><p>Checks if the driver is initialized.</p></li>
-<li><p>Creates a target device on the SMBus with the address set to the <strong>port</strong> variable in the <strong>FW_IF_SMBUS_CFG</strong> structure (pointed to by the <strong>*cfg</strong> pointer in the <strong>FW_IF_CFG</strong> handle).</p></li>
+<li><p>Creates a target device on the SMBus with the address set to the <strong>ulPort</strong> variable in the <strong>FWIfSMBusCfg</strong> structure (pointed to by the <strong>*cfg</strong> pointer in the <strong>FWIfCfg</strong> handle).</p></li>
 </ol>
 <p>To close:</p>
 <p><strong>Interface close example</strong></p>
@@ -924,14 +919,14 @@ else
 <li><p>Handles it accordingly.</p></li>
 </ol>
 <p><strong>Interface ioctrl example implementation</strong></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>static uint32_t smbusIoctrl( void *fwIf, uint32_t option, void * value )
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>static uint32_t smbusIoctrl( void *pvFwIf, uint32_t ulOption, void *pvValue )
 {
     uint32_t status = FW_IF_ERRORS_NONE;
 
-    FW_IF_CFG *thisIf = ( FW_IF_CFG* )fwIf;
-    FW_IF_SMBUS_CFG *thisSmbusCfg = ( FW_IF_SMBUS_CFG* )thisIf-&gt;cfg;
+    FWIfCfg *thisIf = ( FWIfCfg* )pvFwIf;
+    FWIfSMBusCfg *thisSmbusCfg = ( FWIfSMBusCfg* )thisIf-&gt;cfg;
 
-    switch( option )
+    switch( ulOption )
     {
         case FW_IF_SMBUS_IOCTRL_SET_CONTROLLER:
             iIsController = FW_IF_TRUE;
@@ -946,7 +941,7 @@ else
             break;
     }
 
-    printf( &quot;smbus_ioctrl for port %u (option %u)\r\n&quot;, thisSmbusCfg-&gt;port, option );
+    printf( &quot;smbus_ioctrl for port %u (option %u)\r\n&quot;, thisSmbusCfg-&gt;ulPort, ulOption );
 
     return status;
 }
@@ -959,23 +954,23 @@ else
 <h3>Callbacks and Binding<a class="headerlink" href="#callbacks-and-binding" title="Permalink to this heading">¶</a></h3>
 <p>The user application must implement its own version of the <strong>FW_IF_callback</strong> function.</p>
 <p><strong>Interface FW_IF_callback example</strong></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>uint32_t myLocalFunc( uint16_t eventId, uint8_t * data, uint32_t size )
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>uint32_t myLocalFunc( uint16_t usEventId, uint8_t *pucData, uint32_t ulSize )
 {
     uint32_t status = FW_IF_ERRORS_NONE;
     int i = 0;
 
-    printf( &quot;Callback called: %u\r\n&quot;, eventId );
+    printf( &quot;Callback called: %u\r\n&quot;, usEventId );
 
-    switch( eventId )
+    switch( usEventId )
     {
         case FW_IF_SMBUS_EVENT_NEW_RX_DATA:
-            printf( &quot;New data arrived (%u bytes(s))\r\n&quot;, size, size );
+            printf( &quot;New data arrived (%u bytes(s))\r\n&quot;, ulSize );
 
-            if( ( FW_IF_SMBUS_MAX_DATA &gt;= size ) &amp;&amp; ( NULL != data ) )
+            if( ( FW_IF_SMBUS_MAX_DATA &gt;= ulSize ) &amp;&amp; ( NULL != pucData ) )
             {
-                for( i = 0; i &lt; size; i-- )
+                for( i = 0; i &lt; ulSize; i++ )
                 {
-                    printf( &quot;Data[%02d] : %02d\r\n&quot;, i, data[i] );
+                    printf( &quot;Data[%02d] : %02d\r\n&quot;, i, pucData[i] );
                 }
             }
             else
@@ -990,9 +985,9 @@ else
             break;
 
         case FW_IF_SMBUS_EVENT_ADDRESS_CHANGE:
-            if( NULL != data )
+            if( NULL != pucData )
             {
-                printf( &quot;Port ID changed to 0x%02X\r\n, *( uint32_t* )data );
+                printf( &quot;Port ID changed to 0x%02X\r\n&quot;, *( uint32_t* )pucData );
             }
             else
             {
@@ -1028,21 +1023,21 @@ else
 }
 </pre></div>
 </div>
-<p>Within the <strong>FW_IF_write</strong> implementation, the function stores the function pointer as the <strong>raiseEvent</strong> variable in the <strong>FW_IF_CFG</strong> handle.</p>
+<p>Within the <strong>FW_IF_bindCallback</strong> implementation, the function stores the function pointer as the <strong>raiseEvent</strong> variable in the <strong>FWIfCfg</strong> handle.</p>
 <p><strong>Interface FW_IF_bindCallback example</strong></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>static uint32_t smbusBindCallback( void *fwIf, FW_IF_callback * newFunc )
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>static uint32_t smbusBindCallback( void *pvFwIf, FW_IF_callback *pxNewFunc )
 {
     uint32_t status = FW_IF_ERRORS_NONE;
 
-    FW_IF_CFG *thisIf = ( FW_IF_CFG* )fwIf;
+    FWIfCfg *thisIf = ( FWIfCfg* )pvFwIf;
 
-    if( NULL != newFunc )
+    if( NULL != pxNewFunc )
     {
-        FW_IF_SMBUS_CFG *thisSmbusCfg = ( FW_IF_SMBUS_CFG* )thisIf-&gt;cfg;
+        FWIfSMBusCfg *thisSmbusCfg = ( FWIfSMBusCfg* )thisIf-&gt;cfg;
 
-        thisIf-&gt;raiseEvent = newFunc;
+        thisIf-&gt;raiseEvent = pxNewFunc;
 
-        printf( &quot;smbusBindCallback called for port %u\r\n&quot;, thisSmbusCfg-&gt;port );
+        printf( &quot;smbusBindCallback called for port %u\r\n&quot;, thisSmbusCfg-&gt;ulPort );
     }
     else
     {
@@ -1072,7 +1067,7 @@ if( FW_IF_TRUE == thereIsAnError )
 ...
 </pre></div>
 </div>
-<p>Some local caching may be required if the <strong>FW_IF_CFG</strong> handle is not in context at the time of raising the event as each handle is associated with a specific port/address.</p>
+<p>Some local caching may be required if the <strong>FWIfCfg</strong> handle is not in context at the time of raising the event as each handle is associated with a specific port/address.</p>
 </div>
 </div>
 </div>
@@ -1091,7 +1086,7 @@ if( FW_IF_TRUE == thereIsAnError )
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

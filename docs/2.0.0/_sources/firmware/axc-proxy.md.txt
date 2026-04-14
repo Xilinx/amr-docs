@@ -1,5 +1,7 @@
 # AMR External Device Control (AXC) Proxy Driver
 
+**Note:** QSFP module control is only applicable to Alveo V80 cards.
+
 <span id="amrexternaldevicecontrol-axc-proxydriver-overview"></span>
 
 ## Overview
@@ -20,9 +22,9 @@ The Proxy APIs consist of a number of functions to set and get data from the ext
 
 ### Key pages
 
-I2C switch (PCA9545A) data sheet: [PCA9545A\_45B\_45C.pdf](assets/attachments/1107376562/1107376654.pdf)
+I2C switch (PCA9545A) data sheet: [PCA9545A\_45B\_45C.pdf](../assets/attachments/1107376562/1107376654.pdf)
 
-Low-Voltage I/O Expander (TCA6408A) data sheet: [tca6408a.pdf](assets/attachments/1107376562/1107376660.pdf)
+Low-Voltage I/O Expander (TCA6408A) data sheet: [tca6408a.pdf](../assets/attachments/1107376562/1107376660.pdf)
 
 <span id="amrexternaldevicecontrol-axc-proxydriver-keyacronyms"></span>
 
@@ -142,7 +144,7 @@ This will initialize a new external device within the AXC proxy driver, adding t
      *          ERROR            Callback not bound
      *
      */
-    int iAXC_AddExternalDevice( AXC_PROXY_DRIVER_EXTERNAL_DEVICE_CONFIG *pxExDeviceCfg );
+    int iAXC_AddExternalDevice( AXCProxyDriverExternalDeviceCfg *pxExDeviceCfg );
 
 <span id="amrexternaldevicecontrol-axc-proxydriver-bindcallbacks"></span>
 
@@ -243,7 +245,7 @@ This will read an entire memory map page from the desired QSFP. This API will no
      *
      * @note    This API will return the specified upper page from QSFP memory map
      */
-    int iAXC_GetPage( uint8_t ucExDeviceId, uint32_t ulPage, AXC_PROXY_DRIVER_PAGE_DATA *pxData );
+    int iAXC_GetPage( uint8_t ucExDeviceId, uint32_t ulPage, AXCProxyDriverPageData *pxData );
 
 <span id="amrexternaldevicecontrol-axc-proxydriver-getiostatusfromdesiredqsfp"></span>
 
@@ -284,7 +286,7 @@ This will read all IO control lines from the desired QSFP. This API will not tri
      *          ERROR           Data not retrieved successfully
      *
      */
-    int iAXC_GetAllIoStatuses( uint8_t ucExDeviceId, AXC_PROXY_DRIVER_QSFP_IO_STATUSES *pxIoStatuses );
+    int iAXC_GetAllIoStatuses( uint8_t ucExDeviceId, AXCProxyDriverQsfpIoStatuses *pxIoStatuses );
 
 <span id="amrexternaldevicecontrol-axc-proxydriver-gettemperaturefromdesiredexternaldevice"></span>
 
@@ -424,7 +426,7 @@ This function should only be called once. It requires a unique ID for the proxy,
 
 **iAQC\_Initialise Example**
 
-    if( OK == iAXC_Initialise( AMC_EVENT_UNIQUE_ID_AXC, AMC_TASK_PRIO_DEFAULT, AMC_TASK_DEFAULT_STACK ) )
+    if( OK == iAXC_Initialise( AMC_CFG_UNIQUE_ID_AXC, AMC_TASK_PRIO_DEFAULT, AMC_TASK_DEFAULT_STACK ) )
     {
         AMC_PRINTF( "AXC Proxy Driver initialised\r\n" );
     }
@@ -446,7 +448,7 @@ Define a function based on the function pointer prototype and bind in using the 
     {
         int iStatus = ERROR;
     
-        if( ( NULL != pxSignal ) && ( AMC_EVENT_UNIQUE_ID_AXC == pxSignal->ucModule ) )
+        if( ( NULL != pxSignal ) && ( AMC_CFG_UNIQUE_ID_AXC == pxSignal->ucModule ) )
         {
             switch( pxSignal->ucEventType )
             {
@@ -489,11 +491,11 @@ To add a new external device, pass in a pointer to a device config structure. Th
 **iAQC\_AddQsfpDevice Example**
 
     /* AXC Device configs */
-    AXC_PROXY_DRIVER_EXTERNAL_DEVICE_CONFIG xQsfpDevice1 = { &xQsfpIf1, 1 };
-    AXC_PROXY_DRIVER_EXTERNAL_DEVICE_CONFIG xQsfpDevice2 = { &xQsfpIf2, 2 };
-    AXC_PROXY_DRIVER_EXTERNAL_DEVICE_CONFIG xQsfpDevice3 = { &xQsfpIf3, 3 };
-    AXC_PROXY_DRIVER_EXTERNAL_DEVICE_CONFIG xQsfpDevice4 = { &xQsfpIf4, 4 };
-    AXC_PROXY_DRIVER_EXTERNAL_DEVICE_CONFIG xDimmDevice  = { &xDimmIf, 5 };
+    AXCProxyDriverExternalDeviceCfg xQsfpDevice1 = { &xQsfpIf1, 1 };
+    AXCProxyDriverExternalDeviceCfg xQsfpDevice2 = { &xQsfpIf2, 2 };
+    AXCProxyDriverExternalDeviceCfg xQsfpDevice3 = { &xQsfpIf3, 3 };
+    AXCProxyDriverExternalDeviceCfg xQsfpDevice4 = { &xQsfpIf4, 4 };
+    AXCProxyDriverExternalDeviceCfg xDimmDevice  = { &xDimmIf, 5 };
     
     if( ( OK == iAXC_AddExternalDevice( &xQsfpDevice1 ) ) &&
         ( OK == iAXC_AddExternalDevice( &xQsfpDevice2 ) ) &&
@@ -570,7 +572,7 @@ Example of reading entire upper page 00h of QSFP 1. The parameters can be adjust
 
     uint8_t iQsfpId = 1;
     uint32_t iPageNum = 0;
-    AXC_PROXY_DRIVER_QSFP_PAGE_DATA xTestPage = { { 0 } };
+    AXCProxyDriverPageData xTestPage = { { 0 } };
     int i = 0;
     
     if( OK != iAXC_GetPage( iQsfpId, iPageNum, &xTestPage ) )
@@ -619,7 +621,7 @@ Example of reading all IO statuses from QSFP 1. The parameters can be adjusted t
 **iAQC\_GetAllIoStatuses Example**
 
     uint8_t iQsfpId = 1;
-    AXC_PROXY_DRIVER_QSFP_IO_STATUSES xTestStatuses = { 0 };
+    AXCProxyDriverQsfpIoStatuses xTestStatuses = { 0 };
     
     if( OK != iAXC_GetAllIoStatuses( iQsfpId, &xTestStatuses ) )
     {
@@ -655,28 +657,4 @@ Example of reading temperature value from QSFP 1. The parameters can be adjusted
         AXC_DBG_PRINTF( "Retrieved temperature value: (%f)\r\n", fTemperatureByte );
     }
 
-**ASC\_PROXY\_DRIVER\_EVENTS**
-
-    /*
-     * @enum    ASC_PROXY_DRIVER_EVENTS
-     * @brief   Events raised by this proxy driver
-     */
-    typedef enum ASC_PROXY_DRIVER_EVENTS
-    {
-        ASC_PROXY_DRIVER_E_SENSOR_UPDATE_COMPLETE = 0,
-        ASC_PROXY_DRIVER_E_SENSOR_UNAVAILABLE,
-        ASC_PROXY_DRIVER_E_SENSOR_COMMS_FAILURE,
-        ASC_PROXY_DRIVER_E_SENSOR_WARNING,
-        ASC_PROXY_DRIVER_E_SENSOR_CRITICAL,
-        ASC_PROXY_DRIVER_E_SENSOR_FATAL,
-        ASC_PROXY_DRIVER_E_SENSOR_LOWER_WARNING,
-        ASC_PROXY_DRIVER_E_SENSOR_LOWER_CRITICAL,
-        ASC_PROXY_DRIVER_E_SENSOR_LOWER_FATAL,
-        ASC_PROXY_DRIVER_E_SENSOR_UPPER_WARNING,
-        ASC_PROXY_DRIVER_E_SENSOR_UPPER_CRITICAL,
-        ASC_PROXY_DRIVER_E_SENSOR_UPPER_FATAL,
-    
-        MAX_ASC_PROXY_DRIVER_EVENTS
-    
-    } ASC_PROXY_DRIVER_EVENTS;
 

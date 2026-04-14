@@ -1,12 +1,12 @@
-# AMR V80 - NoC Configuration
+# AMR - NoC Configuration
 
-<span id="amrv80-nocconfiguration-network-on-chip-noc-overview"></span>
+<span id="amr-nocconfiguration-network-on-chip-noc-overview"></span>
 
 ## Network-On-Chip (NoC) Overview
 
 AMD Versal™ devices are designed around a programmable NoC interconnect based on AXI-4, which provides high bandwidth, long distance, communication throughout the device. NoC connections simplify the timing requirements needed when programmable logic creates a resource burden through congested logic, cross one or more SLRs, or connect to the opposite side of the device die. AMR is a three super logic region (SLR) device. Each SLR contains two Horizontal NoCs (HNoC) and four Vertical NoCs (VNoC), which connect to each other. The two HNoCs are located on the top and bottom of each SLR and span the entire width of the SLR. In addition to connecting to the VNoCs, the bottom HNoC also connects to the CIPS and DDRs. The top HNoC in SLR2 is optimized for connecting to the HBM. The four VNoCs in each SLR span the entire height of the SLR, and connect to adjacent SLRs. Connections to and from the NoC are made with the NoC packet switches (NPS). An illustration of the NoC is provided below. It illustrates the NoC resources (NMU, NSU, VNoC, HNoC, DDRMC, HBM MCs, HBM NMUs etc). Additional Information on NoC can be found in the *Additional Resources* section.
 
-<span id="amrv80-nocconfiguration-nocdiagram"></span>
+<span id="amr-nocconfiguration-nocdiagram"></span>
 
 ### NoC Diagram
 
@@ -14,11 +14,11 @@ AMD Versal™ devices are designed around a programmable NoC interconnect based 
 
 ![image2](../../images/1107374964.png)
 
-<span id="amrv80-nocconfiguration-noccomponents"></span>
+<span id="amr-nocconfiguration-noccomponents"></span>
 
 ## NoC Components
 
-<span id="amrv80-nocconfiguration-nocmasterunits-nmu"></span>
+<span id="amr-nocconfiguration-nocmasterunits-nmu"></span>
 
 ### NoC Master Units (NMU)
 
@@ -26,7 +26,7 @@ Versal HBM series devices contain NMU\_512, NMU\_128, and HBM\_NMU connections t
 
 <https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NoC-Master-Unit>
 
-<span id="amrv80-nocconfiguration-nmu-512"></span>
+<span id="amr-nocconfiguration-nmu-512"></span>
 
 #### NMU\_512
 
@@ -34,7 +34,7 @@ This is a full featured NoC master unit (NMU). It allows AXI masters in the PL t
 
 <https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NMU512-PL>
 
-<span id="amrv80-nocconfiguration-hbm-nmu"></span>
+<span id="amr-nocconfiguration-hbm-nmu"></span>
 
 #### HBM\_NMU
 
@@ -42,7 +42,7 @@ HBM\_NMU are used to fully utilize the HBM bandwidth by providing direct access 
 
 <https://docs.xilinx.com/r/en-US/pg313-network-on-chip/HBM_NMU>
 
-<span id="amrv80-nocconfiguration-nmu-128"></span>
+<span id="amr-nocconfiguration-nmu-128"></span>
 
 #### NMU\_128
 
@@ -50,7 +50,7 @@ These NMUs are optimized for the low latency requirements of the hardened blocks
 
 <https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NMU128-Low-Latency>
 
-<span id="amrv80-nocconfiguration-nocslaveunits-nsu"></span>
+<span id="amr-nocconfiguration-nocslaveunits-nsu"></span>
 
 ### NoC Slave Units (NSU)
 
@@ -58,7 +58,7 @@ Versal HBM series devices contain NSU\_512, NSU\_128, DDRMC\_NSU, and HBM\_NSU c
 
 <https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NoC-Slave-Unit>
 
-<span id="amrv80-nocconfiguration-nsu-512"></span>
+<span id="amr-nocconfiguration-nsu-512"></span>
 
 #### NSU\_512
 
@@ -66,7 +66,7 @@ This is a full featured NoC slave unit (NSU). It allows Vertical NoC connections
 
 <https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NSU512-PL>
 
-<span id="amrv80-nocconfiguration-nsu-128"></span>
+<span id="amr-nocconfiguration-nsu-128"></span>
 
 #### NSU\_128
 
@@ -74,7 +74,7 @@ These NSUs are optimized for the low latency requirements of the hardened blocks
 
 <https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NSU128-Low-Latency>
 
-<span id="amrv80-nocconfiguration-ddrmc-nsu"></span>
+<span id="amr-nocconfiguration-ddrmc-nsu"></span>
 
 #### DDRMC\_NSU
 
@@ -82,7 +82,7 @@ Each port of a DDRMC has a partial NSU (DDRMC\_NSU). It converts the NoC packet 
 
 <https://docs.xilinx.com/r/en-US/pg313-network-on-chip/DDRMC-NSU>
 
-<span id="amrv80-nocconfiguration-hbm-nsu"></span>
+<span id="amr-nocconfiguration-hbm-nsu"></span>
 
 #### HBM\_NSU
 
@@ -90,17 +90,17 @@ Each pseudo channel of the HBM has two NSU (HBM\_NSU). It converts the NoC packe
 
 <https://docs.xilinx.com/r/en-US/pg313-network-on-chip/HBM_NSU>
 
-<span id="amrv80-nocconfiguration-nocpacketswitches-nps"></span>
+<span id="amr-nocconfiguration-nocpacketswitches-nps"></span>
 
 ### NoC Packet Switches (NPS)
 
 Connects NMUs to NSUs.
 
-<span id="amrv80-nocconfiguration-amrv80nocoverview"></span>
+<span id="amr-nocconfiguration-amrv80nocoverview"></span>
 
 ## AMR V80 NoC Overview
 
-<span id="amrv80-nocconfiguration-axinocinstantiations"></span>
+<span id="amr-nocconfiguration-axinocinstantiations"></span>
 
 ### AXI NoC Instantiations
 
@@ -108,27 +108,27 @@ AMR uses multiple AXI NoC IP instantiations to connect AXI and Inter-NoC interco
 
 The configuration of each AXI NoC instantiation is described below.
 
-  - [axi\_noc\_cips](#amrv80-nocconfiguration-axinoccips)
-    
-      - NoC to PL AXI connections to allow the PCIe® Host to access the PL management.
-    
-      - INI connections to allow the PCIe Host to access the DDR and DIMM MCs.
-    
-      - INI connections to allow the Platform management controller (PMC) access to the DDR and DIMM MCs.
-    
-      - INI connection to allow the RPU to access to the DDR MC.
+  - [axi\_noc\_cips](#amr-nocconfiguration-axinoccips)
 
-  - [axi\_noc\_mc\_ddr4\_0](#amrv80-nocconfiguration-axinocddrmc)
+      - NoC to PL AXI connections (M00_AXI, M01_AXI) to allow the PCIe® Host to access PL address space (PF0: 16MB management space, PF1: test GPIO).
+
+      - INI connections to allow the PCIe Host to access the DDR and DIMM MCs via DMA.
+
+      - INI connections to allow the Platform Management Controller (PMC) access to the DDR and DIMM MCs.
+
+      - INI connection to allow the RPU to access the DDR MC.
+
+  - [axi\_noc\_mc\_ddr4\_0](#amr-nocconfiguration-axinocddrmc)
     
       - INI connection to allow the CIPS to connect to the DDR MC. Only two of the four MC ports are used.
 
-  - [axi\_noc\_mc\_ddr4\_1](#amrv80-nocconfiguration-axinocdimmmc)
+  - [axi\_noc\_mc\_ddr4\_1](#amr-nocconfiguration-axinocdimmmc)
     
       - INI connections to allow the CIPS to connect to the DIMM MC (ports 0 and 1).
 
 AMR does not use the PS APUs, but if they were used, the AXI NoC IP could be configured to support these connections. Additional connections could also be made to the PL and memory controllers (MC).
 
-<span id="amrv80-nocconfiguration-axinocperformance"></span>
+<span id="amr-nocconfiguration-axinocperformance"></span>
 
 ### AXI NoC Performance
 
@@ -148,11 +148,11 @@ In addition to creating the traffic specification, the DDR MC and HBM Controller
 
 Additional information on the NoC, NoC performance, and performance tuning can be found in the *Additional Resources* section.
 
-<span id="amrv80-nocconfiguration-nocresources"></span>
+<span id="amr-nocconfiguration-nocresources"></span>
 
 ## NoC Resources
 
-<span id="amrv80-nocconfiguration-availablenmu-nsu"></span>
+<span id="amr-nocconfiguration-availablenmu-nsu"></span>
 
 ### Available NMU & NSU
 
@@ -160,7 +160,7 @@ The table below shows the total number of NMU and NSU in the Versal device.
 
 ![images/1107375048.png](../../images/1107375048.png)
 
-<span id="amrv80-nocconfiguration-cips-specificnmu-nsu"></span>
+<span id="amr-nocconfiguration-cips-specificnmu-nsu"></span>
 
 ### CIPS-Specific NMU & NSU
 
@@ -174,7 +174,7 @@ CCI: Cache coherent interconnect
 
 <https://docs.xilinx.com/r/en-US/pg352-cips/PS-NoC-Interfaces>
 
-<span id="amrv80-nocconfiguration-amrnmu-nsuusage"></span>
+<span id="amr-nocconfiguration-amrnmu-nsuusage"></span>
 
 ### AMR NMU & NSU Usage
 
@@ -208,7 +208,7 @@ CPM\_PCIE\_NOC\_0 and CPM\_PCIE\_NOC\_1 connect to HBM\_MC ports to exercise the
 
 Additional connections can be made to the NoC and memory ports as required by other designs. As more connections are made, additional tuning to the NoC components and DIMM/HBM addressing may be required for optimum performance.
 
-<span id="amrv80-nocconfiguration-additionalresources"></span>
+<span id="amr-nocconfiguration-additionalresources"></span>
 
 ## Additional Resources
 
@@ -232,11 +232,11 @@ If more information is needed for more advanced NoC performance tuning, it can b
 
   - <https://github.com/Xilinx/Vivado-Design-Tutorials/blob/master/Device_Architecture_Tutorials/Versal/NoC_DDRMC/Performance_Tuning/README.md>
 
-<span id="amrv80-nocconfiguration-axinoccipsconfigurations"></span>
+<span id="amr-nocconfiguration-axinoccipsconfigurations"></span>
 
 ## AXI NoC CIPS Configurations
 
-<span id="amrv80-nocconfiguration-axinoccips"></span>
+<span id="amr-nocconfiguration-axinoccips"></span>
 
 ### AXI NoC CIPS (axi\_noc\_cips)
 
@@ -246,13 +246,13 @@ The axi\_noc\_cips block connects the CIPS to the PL logic and memory controller
 
 ![image4](../../images/1107375021.png)
 
-<span id="amrv80-nocconfiguration-guiconfigurationofaxi-noc-cips"></span>
+<span id="amr-nocconfiguration-guiconfigurationofaxi-noc-cips"></span>
 
 #### GUI Configuration of axi\_noc\_cips
 
 For AMR, the NoC configuration changes are described below. More documentation can be found at <https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Configuring-the-AXI-NoC>.
 
-<span id="amrv80-nocconfiguration-general"></span>
+<span id="amr-nocconfiguration-general"></span>
 
 ##### General
 
@@ -268,19 +268,24 @@ Note: The AMR design does not utilize any of the 64 HBM AXI PL Slave interfaces.
 
 AMR connects the following slave interfaces to the CIPS master. The following table shows the AXI slave connections to axi\_noc\_cips. The frequencies in the following table were chosen to be high enough to meet the QoS requirements on the DDR and HBM interfaces without oversaturating the NoC interfaces. HBM uses two external LVDS clocks operating at 200MHz. Since the HBM is a DDR memory, any user logic trying to saturate the HBM via the HBM AXI PL Slave interfaces should utilize a clock that is 400MHz or more. It is possible for the HBM to saturate the NoC when running at 400MHz and using all 64 256-bit HBM\_NMUs (64 NMUs \* 12,800MB/s = 819.2 GB/s Total). See the Versal Adaptive SoC Programmable Network on Chip and Integrated Memory Controller 1.0 LogiCORE IP Product Guide ([PG313](https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Raw-Throughput-Evaluation)) for more information.
 
-The axi\_noc\_cips connections outlined in the tables below are further illustrated in the [NoC Connection Diagrams](#amrv80-nocconfiguration-nocconnectiondiagrams).
+The axi\_noc\_cips connections outlined in the tables below are further illustrated in the [NoC Connection Diagrams](#amr-nocconfiguration-nocconnectiondiagrams).
 
 ![images/1107375012.png](../../images/1107375012.png)
 
 **AXI Interfaces** - AXI Master
 
-AMR connects the following master interface to the PL peripheral slave device. The following table shows the axi\_noc\_cips connection to the PL peripheral. This interface is AXI4-Lite which does not require high bandwidth.
+AMR connects the following master interfaces from NoC to PL address space:
 
 ![images/1107375006.png](../../images/1107375006.png)
 
+**Current Base Design:**
+- **M00_AXI**: Routes to PF0 address space (16MB) - No hardware IP instantiated, address space reserved
+- **M01_AXI**: Routes to PF1 hierarchy (SmartConnect → AXI GPIO test)
+- These are AXI4-Lite interfaces for register/control access (not high bandwidth data transfer)
+
 **AXI Interfaces** - AXI Clocks
 
-The AXI NoC IP uses the CIPS and peripheral clocks to manage the clock domain crossings to the NoC. The table below shows numerous clocks connected to axi\_noc\_cips.
+The AXI NoC IP uses the CIPS clocks to manage clock domain crossings to the NoC. The table below shows clocks connected to axi\_noc\_cips.
 
 ![images/1107374988.png](../../images/1107374988.png)
 
@@ -304,13 +309,13 @@ AMR axi\_noc\_cips is configured to use all 32GB of the HBM memory via CIPS conn
 
 Inputs
 
-As mentioned in the [AXI Interfaces Slave section](#amrv80-nocconfiguration-cipsmaster-to-axi-noc-cipsslave) above, there are four CIPS AXI masters connected to the axi\_noc\_cips slaves.
+As mentioned in the [AXI Interfaces Slave section](#amr-nocconfiguration-cipsmaster-to-axi-noc-cipsslave) above, there are four CIPS AXI masters connected to the axi\_noc\_cips slaves.
 
 ![image7](../../images/grey_arrow_down3.png)
 
 ![image8](../../images/1107375204.png)
 
-<span id="amrv80-nocconfiguration-outputs"></span>
+<span id="amr-nocconfiguration-outputs"></span>
 
 ##### Outputs
 
@@ -320,7 +325,7 @@ As mentioned in the [AXI Interfaces Master section](#amrv80-nocconfiguration-axi
 
 ![image10](../../images/1107374997.png)
 
-<span id="amrv80-nocconfiguration-connectivity"></span>
+<span id="amr-nocconfiguration-connectivity"></span>
 
 ##### Connectivity
 
@@ -388,7 +393,7 @@ In the diagram below, the green lines in the axi\_noc\_cips block, illustrate th
 
 ![image20](../../images/1107374967.png)
 
-<span id="amrv80-nocconfiguration-qos"></span>
+<span id="amr-nocconfiguration-qos"></span>
 
 ##### QoS
 
@@ -408,7 +413,7 @@ Using ‘Best Effort’, the NoC compiler will work to satisfy the BW and latenc
 
 **Bandwidth**
 
-Different NoC paths require different bandwidths. The M0x\_AXI bandwidths are requesting 5MB/s because these are AXI4-Lite interfaces that do not require high bandwidth. The M0x\_INI interfaces are higher performance than the AXI4-Lite interfaces. These are paths from the PMC, RPU, and Host PCIe that connect to the DDR (M00\_INI and M01\_INI) and DIMM (M02\_INI and M03\_INI). A bandwidth of 800MB/s satisfies the AMR bandwidth requirements while not saturating the NoC where multiple paths connect to the same DDR port ([DDR and DIMM Port Connections](#amrv80-nocconfiguration-ddranddimmportconnections)). The HBM paths request 250MB/s on all HBM PCs.
+Different NoC paths require different bandwidths. The M0x\_AXI bandwidths are requesting 5MB/s because these are AXI4-Lite interfaces that do not require high bandwidth. The M0x\_INI interfaces are higher performance than the AXI4-Lite interfaces. These are paths from the PMC, RPU, and Host PCIe that connect to the DDR (M00\_INI and M01\_INI) and DIMM (M02\_INI and M03\_INI). A bandwidth of 800MB/s satisfies the AMR bandwidth requirements while not saturating the NoC where multiple paths connect to the same DDR port ([DDR and DIMM Port Connections](#amr-nocconfiguration-ddranddimmportconnections)). The HBM paths request 250MB/s on all HBM PCs.
 
 More information can be found here:
 
@@ -436,7 +441,7 @@ The NMU supports address remapping as a way to override the default address map 
 
   - [Memory Map](../memory-map/)
 
-  - [DDR Memory Organization](../memory-resources.md#AMRV80-MemoryResources-DiscreteDDRDiscreteDDRDiagram)
+  - [DDR Memory Organization](../memory-resources.md#AMR-MemoryResources-DiscreteDDRDiscreteDDRDiagram)
 
 ![images/1107375123.png](../../images/1107375123.png)
 
@@ -446,7 +451,7 @@ See the Address Re-mapping section of the Versal Adaptive SoC Programmable Netwo
 
 [![image26](../../images/1107375195.png)](../../images/1107375195.png)
 
-<span id="amrv80-nocconfiguration-hbmconfiguration"></span>
+<span id="amr-nocconfiguration-hbmconfiguration"></span>
 
 ##### HBM Configuration
 

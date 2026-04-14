@@ -1,0 +1,259 @@
+# AMR RAVE - Source File Overview
+
+> **For common build concepts**, see [Common Source Files](../../hardware/source-files.md)
+>
+> This document describes RAVE-specific build structure: emb_plus_ve2302 directory organization.
+
+<span id="amrrave-sourcefiles-overview"></span>
+
+## Overview
+
+The RAVE hardware design files are organized under rave/amr_vivado_designs/emb_plus_ve2302/ with multiple platform variants supporting different applications and features. The directory structure includes 
+
+
+
+DFX-capable designs with reconfigurable partitions.
+
+<span id="amrrave-sourcefiles-directorytree"></span>
+
+## RAVE Directory Structure
+
+```
+build_rave/amr_vivado_designs/
+└── emb_plus_ve2302/
+    ├── platforms/
+    │   ├── scripts/           (Common SDT generation scripts)
+    │   ├── ve2302_xdma_base/  (DFX base design)
+    │   ├── ve2302_1gEth/      (1G Ethernet design)
+    │   ├── ve2302_10g_mrmac/  (10G Ethernet with MRMAC)
+    │   ├── ve2302_gmsl/       (GMSL video pipeline)
+    │   └── ve2302_xdma_gmsl/  (GMSL with XDMA/PCIe)
+    └── dfx/
+        ├── common/            (DFX isolation interface)
+        ├── bram_gpio/         (BRAM + GPIO RM)
+        ├── eth_1g/            (1G Ethernet RM)
+        ├── eth_10g/           (10G Ethernet RM)
+        └── training/          (Reference RM)
+```
+
+<span id="amrrave-sourcefiles-platformdesigns"></span>
+
+## Platform Design Variants
+
+### ve2302_xdma_base
+
+The base DFX-capable platform design provides PCIe/XDMA functionality with a reconfigurable partition for swappable user logic. This design serves as the foundation for dynamic daughtercard support where different IP configurations can be loaded at runtime.
+
+**Key Features:**
+- XDMA or QDMA for PCIe DMA
+- Reconfigurable partition for user logic
+- Isolation interface for BLP/ULP separation
+- Generates base XSA and partial PDI support
+
+**Build Outputs:**
+- ve2302_xdma_base.xsa
+- Static region PDI
+- Reconfigurable partition ready for ULP modules
+
+### ve2302_1gEth
+
+A flat design (non-DFX) integrating dual-channel 1G Ethernet using standard Ethernet MAC IP. This design demonstrates network connectivity for industrial and embedded applications requiring standard Ethernet interfaces.
+
+The design includes Ethernet MAC controllers, DMA infrastructure for packet processing, and appropriate clock and reset management for the Ethernet subsystem.
+
+### ve2302_10g_mrmac
+
+A flat design implementing dual 10G Ethernet channels using the MRMAC (Multi-Rate MAC) hardened block in Versal. The MRMAC provides efficient 10G/25G Ethernet functionality with lower resource usage than soft MAC implementations.
+
+This design includes custom MRMAC_AXI_MUX IP (located in dfx/eth_10g/ip/) that interfaces the MRMAC to the AXI infrastructure. The mux handles width conversion and protocol adaptation between the MRMAC and AXI subsystem.
+
+### ve2302_gmsl
+
+A flat design implementing the GMSL (Gigabit Multimedia Serial Link) video processing pipeline. This design targets vision applications with camera inputs, ISP (Image Signal Processing), and video output capabilities.
+
+The GMSL deserializer IP receives camera data through high-speed serial links, with the Versal processing the video through programmable logic pipelines or AI Engine acceleration.
+
+### ve2302_xdma_gmsl
+
+A combined design integrating both GMSL video pipeline and XDMA/PCIe functionality. This configuration enables video processing applications with PCIe connectivity for host communication and control.
+
+<span id="amrrave-sourcefiles-dfxmodules"></span>
+
+## DFX Reconfigurable Modules
+
+### Common Isolation Interface
+
+The dfx/common/bd/static_interface.tcl defines the boundary between the static base logic platform (BLP) and the reconfigurable user logic platform (ULP). This isolation interface specifies the AXI interfaces, clocks, and resets that cross the partition boundary.
+
+The isolation interface remains constant across all reconfigurable modules, ensuring any ULP can be loaded into the reconfigurable partition without modifying the static logic.
+
+### bram_gpio Module
+
+A simple reconfigurable module providing BRAM storage and GPIO interfaces. This module serves as a reference example demonstrating the DFX flow and validation of the isolation interface.
+
+### eth_1g Module
+
+A reconfigurable module implementing single-channel 1G Ethernet. This ULP demonstrates how network connectivity can be dynamically added or removed through partial reconfiguration.
+
+### eth_10g Module
+
+A reconfigurable module implementing single-channel 10G Ethernet using MRMAC IP. This module includes custom IP (MRMAC_AXI_MUX_V1_1) for MRMAC integration along with axis_dwidth_converter modules for width adaptation.
+
+**Contents:**
+- MRMAC_AXI_MUX IP (custom mux logic)
+- Width conversion logic (RX/TX)
+- Verilog modules: mrmac_10g_mux.v
+
+<span id="amrrave-sourcefiles-buildstructure"></span>
+
+## Build Structure (Per Platform)
+
+Each platform directory follows a common structure:
+
+```
+ve2302_<platform>/
+├── Makefile              (Build automation)
+├── scripts/
+│   ├── main.tcl          (Vivado project creation)
+│   └── config_bd.tcl     (Block design generation)
+├── xdc/
+│   ├── impl.pins.xdc     (Pin constraints)
+│   └── impl.xdc          (Timing/placement constraints)
+└── ip/                   (Custom IP, if needed)
+```
+
+### Makefile Targets
+
+The Makefile provides build automation:
+- `make xsa` - Generate XSA hardware definition
+- `make sdt` - Generate System Device Tree
+- `make all` - Complete build (XSA + SDT)
+- `make clean` - Remove generated files
+- `JOBS=N` - Parallel synthesis jobs (default 8)
+
+### main.tcl Script
+
+The main.tcl script orchestrates the Vivado build:
+- Creates Vivado project
+- Sets board part (xilinx.com:ve2302:part0:1.0)
+- Loads XDC constraints
+- Updates IP catalog with custom IP repositories
+- Sources config_bd.tcl to generate block design
+- Runs synthesis and implementation
+- Generates and validates XSA
+
+### config_bd.tcl Script
+
+The config_bd.tcl script instantiates and configures all IP blocks:
+- CIPS (VE2302 configuration)
+- PCIe Versal IP (Gen3 x4)
+- QDMA PL IP (512 queues) or XDMA IP
+- AXI NoC instances (LPDDR4 integration)
+- SmartConnect, AXI GPIO, proc_sys_reset
+- Platform-specific IP (Ethernet, GMSL, etc.)
+- All interconnect routing and address mappings
+
+<span id="amrrave-sourcefiles-xdcconstraints"></span>
+
+## XDC Constraints
+
+### impl.pins.xdc
+
+Pin placement constraints specify the physical package pins for all I/O:
+
+**LPDDR4 Pins (Banks 700, 701, 702):**
+- DQ[0-71]: Data signals
+- DM_n[0-8]: Data mask
+- DQS pairs: Data strobe (differential)
+- Address and control signals
+- IOSTANDARD: LPDDR4 (1.1V)
+
+**GTYP Bank 103 (PCIe):**
+- TXP/TXN[0-3]: Transmit lanes to Ryzen
+- RXP/RXN[0-3]: Receive lanes from Ryzen
+- REFP/REFN: Reference clocks
+
+**GTYP Bank 104 (Expansion):**
+- TXP/TXN[0-3]: Transmit lanes to Samtec
+- RXP/RXN[0-3]: Receive lanes from Samtec
+- REFP/REFN: Reference clocks
+
+**MIO Pins:**
+- PMC Banks 500, 501: OSPI, UART, I2C, SPI, PCIe reset
+- LPD Bank 502: LEDs, I2C, monitors
+
+### impl.xdc
+
+Implementation constraints specify timing and placement:
+- Clock domain definitions
+- Timing exceptions for asynchronous crossings
+- False paths for reset synchronization
+- Pblock definitions (if using floorplanning)
+- NoC placement constraints (if needed)
+
+<span id="amrrave-sourcefiles-sdtgeneration"></span>
+
+## System Device Tree Generation
+
+### SDT Scripts
+
+The platforms/scripts/ directory contains SDT generation scripts:
+
+**gen_sdt.tcl:**
+Generates device tree for flat designs using the sdtgen utility. The script specifies the board device tree (versal-emb-plus-ve2302-reva) and outputs to project_sdt/ directory.
+
+**gen_sdt_dfx.tcl:**
+Generates device tree for DFX designs with support for multiple XSA files (base + reconfigurable modules). This enables the Linux kernel to understand the DFX partition structure.
+
+**fix_dtsi.tcl:**
+Post-processing script for device tree files, applying any necessary modifications or fixes to the generated DTSI files.
+
+<span id="amrrave-sourcefiles-buildartifacts"></span>
+
+## Build Artifacts
+
+### XSA Files
+
+The Xilinx Support Archive (XSA) contains the hardware definition:
+- Block design (BD)
+- Implemented netlist
+- Pin assignments
+- Timing constraints
+- Metadata for software tools
+
+### SDT Files
+
+System Device Tree files describe the hardware to the operating system:
+- Device tree source (.dts)
+- Device tree include (.dtsi)
+- Used by PetaLinux and embedded Linux
+
+### DFX Outputs (ve2302_xdma_base)
+
+For DFX-capable designs:
+- Static PDI (base platform)
+- Partial PDIs (each reconfigurable module)
+- Debian packages (amr-{module}-dma-test-ve2302_2.0.deb)
+- Multiple XSA files (base + modules)
+
+<span id="amrrave-sourcefiles-cicd"></span>
+
+## CI/CD Integration
+
+The Jenkinsfile provides automated build and deployment:
+- Multi-host deployment support
+- Commit tracking (source + submodules)
+- Remote build via LSF (Load Sharing Facility)
+- Artifact deployment (XSA, SDT, Debian packages)
+- Build success symlink management
+- Branch-specific deployment logic
+
+Builds trigger automatically on commits, with artifacts deployed to shared locations for team access.
+
+## References
+
+- [Common Source Files](../../hardware/source-files.md) - Build structure concepts
+- [RAVE Expansion I/O](expansion-io.md) - Daughtercard designs
+- [RAVE QDMA Configuration](qdma-config.md) - QDMA IP integration
+
+

@@ -3,22 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
-  <title>AMR V80 - NoC Configuration &mdash; AMR  documentation</title>
+  <title>AMR - NoC Configuration &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
@@ -38,11 +23,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -86,19 +67,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development/source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/asdm-application.html">AMR ASDM Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/inband-telemetry.html">AMR InBand Telemetry Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../firmware/asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../firmware/fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
@@ -130,7 +118,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>AMR V80 - NoC Configuration</li>
+      <li>AMR - NoC Configuration</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/v80/hardware/noc-config.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -140,112 +128,112 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="amr-v80-noc-configuration">
-<h1>AMR V80 - NoC Configuration<a class="headerlink" href="#amr-v80-noc-configuration" title="Permalink to this heading">¶</a></h1>
-<p><span id="amrv80-nocconfiguration-network-on-chip-noc-overview"></span></p>
+  <div class="section" id="amr-noc-configuration">
+<h1>AMR - NoC Configuration<a class="headerlink" href="#amr-noc-configuration" title="Permalink to this heading">¶</a></h1>
+<p><span id="amr-nocconfiguration-network-on-chip-noc-overview"></span></p>
 <div class="section" id="network-on-chip-noc-overview">
 <h2>Network-On-Chip (NoC) Overview<a class="headerlink" href="#network-on-chip-noc-overview" title="Permalink to this heading">¶</a></h2>
 <p>AMD Versal™ devices are designed around a programmable NoC interconnect based on AXI-4, which provides high bandwidth, long distance, communication throughout the device. NoC connections simplify the timing requirements needed when programmable logic creates a resource burden through congested logic, cross one or more SLRs, or connect to the opposite side of the device die. AMR is a three super logic region (SLR) device. Each SLR contains two Horizontal NoCs (HNoC) and four Vertical NoCs (VNoC), which connect to each other. The two HNoCs are located on the top and bottom of each SLR and span the entire width of the SLR. In addition to connecting to the VNoCs, the bottom HNoC also connects to the CIPS and DDRs. The top HNoC in SLR2 is optimized for connecting to the HBM. The four VNoCs in each SLR span the entire height of the SLR, and connect to adjacent SLRs. Connections to and from the NoC are made with the NoC packet switches (NPS). An illustration of the NoC is provided below. It illustrates the NoC resources (NMU, NSU, VNoC, HNoC, DDRMC, HBM MCs, HBM NMUs etc). Additional Information on NoC can be found in the <em>Additional Resources</em> section.</p>
-<p><span id="amrv80-nocconfiguration-nocdiagram"></span></p>
+<p><span id="amr-nocconfiguration-nocdiagram"></span></p>
 <div class="section" id="noc-diagram">
 <h3>NoC Diagram<a class="headerlink" href="#noc-diagram" title="Permalink to this heading">¶</a></h3>
 <p><img alt="image1" src="../../_images/grey_arrow_down3.png" /></p>
 <p><img alt="image2" src="../../_images/1107374964.png" /></p>
-<p><span id="amrv80-nocconfiguration-noccomponents"></span></p>
+<p><span id="amr-nocconfiguration-noccomponents"></span></p>
 </div>
 </div>
 <div class="section" id="noc-components">
 <h2>NoC Components<a class="headerlink" href="#noc-components" title="Permalink to this heading">¶</a></h2>
-<p><span id="amrv80-nocconfiguration-nocmasterunits-nmu"></span></p>
+<p><span id="amr-nocconfiguration-nocmasterunits-nmu"></span></p>
 <div class="section" id="noc-master-units-nmu">
 <h3>NoC Master Units (NMU)<a class="headerlink" href="#noc-master-units-nmu" title="Permalink to this heading">¶</a></h3>
 <p>Versal HBM series devices contain NMU_512, NMU_128, and HBM_NMU connections to the NoC. These are described in more detail below.</p>
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NoC-Master-Unit">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NoC-Master-Unit</a></p>
-<p><span id="amrv80-nocconfiguration-nmu-512"></span></p>
+<p><span id="amr-nocconfiguration-nmu-512"></span></p>
 <div class="section" id="nmu-512">
 <h4>NMU_512<a class="headerlink" href="#nmu-512" title="Permalink to this heading">¶</a></h4>
 <p>This is a full featured NoC master unit (NMU). It allows AXI masters in the PL to connect to the Vertical NoC. For memory mapped interfaces, the data width of the NMU can be configured from 32-bits to 512-bits. For AXI4-Stream interfaces, the data width of the NMU can be configured from 128-bits to 512-bits.</p>
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NMU512-PL">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NMU512-PL</a></p>
-<p><span id="amrv80-nocconfiguration-hbm-nmu"></span></p>
+<p><span id="amr-nocconfiguration-hbm-nmu"></span></p>
 </div>
 <div class="section" id="hbm-nmu">
 <h4>HBM_NMU<a class="headerlink" href="#hbm-nmu" title="Permalink to this heading">¶</a></h4>
 <p>HBM_NMU are used to fully utilize the HBM bandwidth by providing direct access from the PL to the HBM. These NMU are distributed evenly across the top of SLR2 to help ease timing closure. The data width of the HBM_NMU is configurable from 32-bits to 256-bits. It does not support the AXI4-Stream protocol.</p>
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/HBM_NMU">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/HBM_NMU</a></p>
-<p><span id="amrv80-nocconfiguration-nmu-128"></span></p>
+<p><span id="amr-nocconfiguration-nmu-128"></span></p>
 </div>
 <div class="section" id="nmu-128">
 <h4>NMU_128<a class="headerlink" href="#nmu-128" title="Permalink to this heading">¶</a></h4>
 <p>These NMUs are optimized for the low latency requirements of the hardened blocks, such as CIPS. It has a fixed 128-bit AXI data width. It does not support the AXI4-Stream protocol or master-defined destination IDs.</p>
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NMU128-Low-Latency">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NMU128-Low-Latency</a></p>
-<p><span id="amrv80-nocconfiguration-nocslaveunits-nsu"></span></p>
+<p><span id="amr-nocconfiguration-nocslaveunits-nsu"></span></p>
 </div>
 </div>
 <div class="section" id="noc-slave-units-nsu">
 <h3>NoC Slave Units (NSU)<a class="headerlink" href="#noc-slave-units-nsu" title="Permalink to this heading">¶</a></h3>
 <p>Versal HBM series devices contain NSU_512, NSU_128, DDRMC_NSU, and HBM_NSU connections to the NoC. These are described in more detail below.</p>
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NoC-Slave-Unit">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NoC-Slave-Unit</a></p>
-<p><span id="amrv80-nocconfiguration-nsu-512"></span></p>
+<p><span id="amr-nocconfiguration-nsu-512"></span></p>
 <div class="section" id="nsu-512">
 <h4>NSU_512<a class="headerlink" href="#nsu-512" title="Permalink to this heading">¶</a></h4>
 <p>This is a full featured NoC slave unit (NSU). It allows Vertical NoC connections to AXI slaves in the PL. For memory mapped interfaces, the data width of the NSU can be configured from 32-bits to 512-bits. For AXI4-Stream interfaces, the data width of the NSU can be configured from 128-bits to 512-bits.</p>
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NSU512-PL">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NSU512-PL</a></p>
-<p><span id="amrv80-nocconfiguration-nsu-128"></span></p>
+<p><span id="amr-nocconfiguration-nsu-128"></span></p>
 </div>
 <div class="section" id="nsu-128">
 <h4>NSU_128<a class="headerlink" href="#nsu-128" title="Permalink to this heading">¶</a></h4>
 <p>These NSUs are optimized for the low latency requirements of the hardened blocks, such as CIPS. It has a fixed 128-bit AXI data width. It does not support the AXI4-Stream protocol.</p>
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NSU128-Low-Latency">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NSU128-Low-Latency</a></p>
-<p><span id="amrv80-nocconfiguration-ddrmc-nsu"></span></p>
+<p><span id="amr-nocconfiguration-ddrmc-nsu"></span></p>
 </div>
 <div class="section" id="ddrmc-nsu">
 <h4>DDRMC_NSU<a class="headerlink" href="#ddrmc-nsu" title="Permalink to this heading">¶</a></h4>
 <p>Each port of a DDRMC has a partial NSU (DDRMC_NSU). It converts the NoC packet domain to the memory controller domain without first converting it to the AXI protocol.</p>
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/DDRMC-NSU">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/DDRMC-NSU</a></p>
-<p><span id="amrv80-nocconfiguration-hbm-nsu"></span></p>
+<p><span id="amr-nocconfiguration-hbm-nsu"></span></p>
 </div>
 <div class="section" id="hbm-nsu">
 <h4>HBM_NSU<a class="headerlink" href="#hbm-nsu" title="Permalink to this heading">¶</a></h4>
 <p>Each pseudo channel of the HBM has two NSU (HBM_NSU). It converts the NoC packet domain to the HBM controller domain without first converting it to the AXI protocol.</p>
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/HBM_NSU">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/HBM_NSU</a></p>
-<p><span id="amrv80-nocconfiguration-nocpacketswitches-nps"></span></p>
+<p><span id="amr-nocconfiguration-nocpacketswitches-nps"></span></p>
 </div>
 </div>
 <div class="section" id="noc-packet-switches-nps">
 <h3>NoC Packet Switches (NPS)<a class="headerlink" href="#noc-packet-switches-nps" title="Permalink to this heading">¶</a></h3>
 <p>Connects NMUs to NSUs.</p>
-<p><span id="amrv80-nocconfiguration-amrv80nocoverview"></span></p>
+<p><span id="amr-nocconfiguration-amrv80nocoverview"></span></p>
 </div>
 </div>
 <div class="section" id="amr-v80-noc-overview">
 <h2>AMR V80 NoC Overview<a class="headerlink" href="#amr-v80-noc-overview" title="Permalink to this heading">¶</a></h2>
-<p><span id="amrv80-nocconfiguration-axinocinstantiations"></span></p>
+<p><span id="amr-nocconfiguration-axinocinstantiations"></span></p>
 <div class="section" id="axi-noc-instantiations">
 <h3>AXI NoC Instantiations<a class="headerlink" href="#axi-noc-instantiations" title="Permalink to this heading">¶</a></h3>
 <p>AMR uses multiple AXI NoC IP instantiations to connect AXI and Inter-NoC interconnect (INI) interfaces to the NoC. This allows the host and RPU to interface with the PL, HBM, DDR, and DIMM through CIPS.</p>
 <p>The configuration of each AXI NoC instantiation is described below.</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#amrv80-nocconfiguration-axinoccips"><span class="xref myst">axi_noc_cips</span></a></p>
+<li><p><a class="reference internal" href="#amr-nocconfiguration-axinoccips"><span class="xref myst">axi_noc_cips</span></a></p>
 <ul>
-<li><p>NoC to PL AXI connections to allow the PCIe® Host to access the PL management.</p></li>
-<li><p>INI connections to allow the PCIe Host to access the DDR and DIMM MCs.</p></li>
-<li><p>INI connections to allow the Platform management controller (PMC) access to the DDR and DIMM MCs.</p></li>
-<li><p>INI connection to allow the RPU to access to the DDR MC.</p></li>
+<li><p>NoC to PL AXI connections (M00_AXI, M01_AXI) to allow the PCIe® Host to access PL address space (PF0: 16MB management space, PF1: test GPIO).</p></li>
+<li><p>INI connections to allow the PCIe Host to access the DDR and DIMM MCs via DMA.</p></li>
+<li><p>INI connections to allow the Platform Management Controller (PMC) access to the DDR and DIMM MCs.</p></li>
+<li><p>INI connection to allow the RPU to access the DDR MC.</p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#amrv80-nocconfiguration-axinocddrmc"><span class="xref myst">axi_noc_mc_ddr4_0</span></a></p>
+<li><p><a class="reference internal" href="#amr-nocconfiguration-axinocddrmc"><span class="xref myst">axi_noc_mc_ddr4_0</span></a></p>
 <ul>
 <li><p>INI connection to allow the CIPS to connect to the DDR MC. Only two of the four MC ports are used.</p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#amrv80-nocconfiguration-axinocdimmmc"><span class="xref myst">axi_noc_mc_ddr4_1</span></a></p>
+<li><p><a class="reference internal" href="#amr-nocconfiguration-axinocdimmmc"><span class="xref myst">axi_noc_mc_ddr4_1</span></a></p>
 <ul>
 <li><p>INI connections to allow the CIPS to connect to the DIMM MC (ports 0 and 1).</p></li>
 </ul>
 </li>
 </ul>
 <p>AMR does not use the PS APUs, but if they were used, the AXI NoC IP could be configured to support these connections. Additional connections could also be made to the PL and memory controllers (MC).</p>
-<p><span id="amrv80-nocconfiguration-axinocperformance"></span></p>
+<p><span id="amr-nocconfiguration-axinocperformance"></span></p>
 </div>
 <div class="section" id="axi-noc-performance">
 <h3>AXI NoC Performance<a class="headerlink" href="#axi-noc-performance" title="Permalink to this heading">¶</a></h3>
@@ -262,17 +250,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 <p>In addition to creating the traffic specification, the DDR MC and HBM Controllers may need to be tuned to optimize performance by modifying the MC address mapping. A description of the HBM optimizations are documented in <em>HBM Configuration</em> and the DIMM optimizations are documented in <em>DDR Address Mapping</em> for axi_noc_mc_ddr4_1.</p>
 <p>Additional information on the NoC, NoC performance, and performance tuning can be found in the <em>Additional Resources</em> section.</p>
-<p><span id="amrv80-nocconfiguration-nocresources"></span></p>
+<p><span id="amr-nocconfiguration-nocresources"></span></p>
 </div>
 </div>
 <div class="section" id="noc-resources">
 <h2>NoC Resources<a class="headerlink" href="#noc-resources" title="Permalink to this heading">¶</a></h2>
-<p><span id="amrv80-nocconfiguration-availablenmu-nsu"></span></p>
+<p><span id="amr-nocconfiguration-availablenmu-nsu"></span></p>
 <div class="section" id="available-nmu-nsu">
 <h3>Available NMU &amp; NSU<a class="headerlink" href="#available-nmu-nsu" title="Permalink to this heading">¶</a></h3>
 <p>The table below shows the total number of NMU and NSU in the Versal device.</p>
 <p><img alt="images/1107375048.png" src="../../_images/1107375048.png" /></p>
-<p><span id="amrv80-nocconfiguration-cips-specificnmu-nsu"></span></p>
+<p><span id="amr-nocconfiguration-cips-specificnmu-nsu"></span></p>
 </div>
 <div class="section" id="cips-specific-nmu-nsu">
 <h3>CIPS-Specific NMU &amp; NSU<a class="headerlink" href="#cips-specific-nmu-nsu" title="Permalink to this heading">¶</a></h3>
@@ -281,7 +269,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>NCI: Non-cache coherent interconnect</p>
 <p>CCI: Cache coherent interconnect</p>
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg352-cips/PS-NoC-Interfaces">https://docs.xilinx.com/r/en-US/pg352-cips/PS-NoC-Interfaces</a></p>
-<p><span id="amrv80-nocconfiguration-amrnmu-nsuusage"></span></p>
+<p><span id="amr-nocconfiguration-amrnmu-nsuusage"></span></p>
 </div>
 <div class="section" id="amr-nmu-nsu-usage">
 <h3>AMR NMU &amp; NSU Usage<a class="headerlink" href="#amr-nmu-nsu-usage" title="Permalink to this heading">¶</a></h3>
@@ -300,7 +288,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>CPM_PCIE_NOC_0 and CPM_PCIE_NOC_1 connect to HBM_MC ports to exercise the the NoC and HBM performance.</p>
 <p><img alt="images/1107375024.png" src="../../_images/1107375024.png" /></p>
 <p>Additional connections can be made to the NoC and memory ports as required by other designs. As more connections are made, additional tuning to the NoC components and DIMM/HBM addressing may be required for optimum performance.</p>
-<p><span id="amrv80-nocconfiguration-additionalresources"></span></p>
+<p><span id="amr-nocconfiguration-additionalresources"></span></p>
 </div>
 </div>
 <div class="section" id="additional-resources">
@@ -323,21 +311,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NoC-Performance-Tuning">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/NoC-Performance-Tuning</a></p></li>
 <li><p><a class="reference external" href="https://github.com/Xilinx/Vivado-Design-Tutorials/blob/master/Device_Architecture_Tutorials/Versal/NoC_DDRMC/Performance_Tuning/README.md">https://github.com/Xilinx/Vivado-Design-Tutorials/blob/master/Device_Architecture_Tutorials/Versal/NoC_DDRMC/Performance_Tuning/README.md</a></p></li>
 </ul>
-<p><span id="amrv80-nocconfiguration-axinoccipsconfigurations"></span></p>
+<p><span id="amr-nocconfiguration-axinoccipsconfigurations"></span></p>
 </div>
 <div class="section" id="axi-noc-cips-configurations">
 <h2>AXI NoC CIPS Configurations<a class="headerlink" href="#axi-noc-cips-configurations" title="Permalink to this heading">¶</a></h2>
-<p><span id="amrv80-nocconfiguration-axinoccips"></span></p>
+<p><span id="amr-nocconfiguration-axinoccips"></span></p>
 <div class="section" id="axi-noc-cips-axi-noc-cips">
 <h3>AXI NoC CIPS (axi_noc_cips)<a class="headerlink" href="#axi-noc-cips-axi-noc-cips" title="Permalink to this heading">¶</a></h3>
 <p>The axi_noc_cips block connects the CIPS to the PL logic and memory controllers through NoC connections. The port connections and configuration of this block are described below.</p>
 <p><img alt="image3" src="../../_images/grey_arrow_down3.png" /></p>
 <p><img alt="image4" src="../../_images/1107375021.png" /></p>
-<p><span id="amrv80-nocconfiguration-guiconfigurationofaxi-noc-cips"></span></p>
+<p><span id="amr-nocconfiguration-guiconfigurationofaxi-noc-cips"></span></p>
 <div class="section" id="gui-configuration-of-axi-noc-cips">
 <h4>GUI Configuration of axi_noc_cips<a class="headerlink" href="#gui-configuration-of-axi-noc-cips" title="Permalink to this heading">¶</a></h4>
 <p>For AMR, the NoC configuration changes are described below. More documentation can be found at <a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Configuring-the-AXI-NoC">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Configuring-the-AXI-NoC</a>.</p>
-<p><span id="amrv80-nocconfiguration-general"></span></p>
+<p><span id="amr-nocconfiguration-general"></span></p>
 <div class="section" id="general">
 <h5>General<a class="headerlink" href="#general" title="Permalink to this heading">¶</a></h5>
 <p>The general tab allows the number of AXI master and slave interfaces, INI master and slave interfaces, and integrated memory controller connections to be specified. The settings are explained below.</p>
@@ -346,13 +334,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>Note: The AMR design does not utilize any of the 64 HBM AXI PL Slave interfaces. These provide direct connections from the PL to the HBM NMUs and can be used to saturate the HBM memory bandwidth.</p>
 <p><strong>AXI Interfaces</strong> - AXI Slave</p>
 <p>AMR connects the following slave interfaces to the CIPS master. The following table shows the AXI slave connections to axi_noc_cips. The frequencies in the following table were chosen to be high enough to meet the QoS requirements on the DDR and HBM interfaces without oversaturating the NoC interfaces. HBM uses two external LVDS clocks operating at 200MHz. Since the HBM is a DDR memory, any user logic trying to saturate the HBM via the HBM AXI PL Slave interfaces should utilize a clock that is 400MHz or more. It is possible for the HBM to saturate the NoC when running at 400MHz and using all 64 256-bit HBM_NMUs (64 NMUs * 12,800MB/s = 819.2 GB/s Total). See the Versal Adaptive SoC Programmable Network on Chip and Integrated Memory Controller 1.0 LogiCORE IP Product Guide (<a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Raw-Throughput-Evaluation">PG313</a>) for more information.</p>
-<p>The axi_noc_cips connections outlined in the tables below are further illustrated in the <a class="reference internal" href="#amrv80-nocconfiguration-nocconnectiondiagrams"><span class="xref myst">NoC Connection Diagrams</span></a>.</p>
+<p>The axi_noc_cips connections outlined in the tables below are further illustrated in the <a class="reference internal" href="#amr-nocconfiguration-nocconnectiondiagrams"><span class="xref myst">NoC Connection Diagrams</span></a>.</p>
 <p><img alt="images/1107375012.png" src="../../_images/1107375012.png" /></p>
 <p><strong>AXI Interfaces</strong> - AXI Master</p>
-<p>AMR connects the following master interface to the PL peripheral slave device. The following table shows the axi_noc_cips connection to the PL peripheral. This interface is AXI4-Lite which does not require high bandwidth.</p>
+<p>AMR connects the following master interfaces from NoC to PL address space:</p>
 <p><img alt="images/1107375006.png" src="../../_images/1107375006.png" /></p>
+<p><strong>Current Base Design:</strong></p>
+<ul class="simple">
+<li><p><strong>M00_AXI</strong>: Routes to PF0 address space (16MB) - No hardware IP instantiated, address space reserved</p></li>
+<li><p><strong>M01_AXI</strong>: Routes to PF1 hierarchy (SmartConnect → AXI GPIO test)</p></li>
+<li><p>These are AXI4-Lite interfaces for register/control access (not high bandwidth data transfer)</p></li>
+</ul>
 <p><strong>AXI Interfaces</strong> - AXI Clocks</p>
-<p>The AXI NoC IP uses the CIPS and peripheral clocks to manage the clock domain crossings to the NoC. The table below shows numerous clocks connected to axi_noc_cips.</p>
+<p>The AXI NoC IP uses the CIPS clocks to manage clock domain crossings to the NoC. The table below shows clocks connected to axi_noc_cips.</p>
 <p><img alt="images/1107374988.png" src="../../_images/1107374988.png" /></p>
 <p><strong>INI Interfaces</strong> - INI Slave</p>
 <p>No Connections</p>
@@ -364,17 +358,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p><strong>Memory Controllers</strong> - HBM</p>
 <p>AMR axi_noc_cips is configured to use all 32GB of the HBM memory via CIPS connections, but is not using any of the 64 AXI Slave PL interfaces to connect to the HBM. These can be used by the user to get maximum performance to the HBM.</p>
 <p>Inputs</p>
-<p>As mentioned in the <a class="reference internal" href="#amrv80-nocconfiguration-cipsmaster-to-axi-noc-cipsslave"><span class="xref myst">AXI Interfaces Slave section</span></a> above, there are four CIPS AXI masters connected to the axi_noc_cips slaves.</p>
+<p>As mentioned in the <a class="reference internal" href="#amr-nocconfiguration-cipsmaster-to-axi-noc-cipsslave"><span class="xref myst">AXI Interfaces Slave section</span></a> above, there are four CIPS AXI masters connected to the axi_noc_cips slaves.</p>
 <p><img alt="image7" src="../../_images/grey_arrow_down3.png" /></p>
 <p><img alt="image8" src="../../_images/1107375204.png" /></p>
-<p><span id="amrv80-nocconfiguration-outputs"></span></p>
+<p><span id="amr-nocconfiguration-outputs"></span></p>
 </div>
 <div class="section" id="outputs">
 <h5>Outputs<a class="headerlink" href="#outputs" title="Permalink to this heading">¶</a></h5>
 <p>As mentioned in the <a class="reference internal" href="#amrv80-nocconfiguration-axi-noc-cipsmastertopl"><span class="xref myst">AXI Interfaces Master section</span></a> above, there are four CIPS AXI masters connected to the PL.</p>
 <p><img alt="image9" src="../../_images/grey_arrow_down3.png" /></p>
 <p><img alt="image10" src="../../_images/1107374997.png" /></p>
-<p><span id="amrv80-nocconfiguration-connectivity"></span></p>
+<p><span id="amr-nocconfiguration-connectivity"></span></p>
 </div>
 <div class="section" id="connectivity">
 <h5>Connectivity<a class="headerlink" href="#connectivity" title="Permalink to this heading">¶</a></h5>
@@ -414,7 +408,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>In the diagram below, the green lines in the axi_noc_cips block, illustrate the connections from the RPU to the DDR.</p>
 <p><img alt="image19" src="../../_images/grey_arrow_down3.png" /></p>
 <p><img alt="image20" src="../../_images/1107374967.png" /></p>
-<p><span id="amrv80-nocconfiguration-qos"></span></p>
+<p><span id="amr-nocconfiguration-qos"></span></p>
 </div>
 <div class="section" id="qos">
 <h5>QoS<a class="headerlink" href="#qos" title="Permalink to this heading">¶</a></h5>
@@ -428,7 +422,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 <p>Using ‘Best Effort’, the NoC compiler will work to satisfy the BW and latency requirements of all low latency and Isochronous paths first. After those requirements have been met, the NoC compiler will work to satisfy the BW and latency requirements with paths using best effort. With the ‘Best Effort’ setting, AMR is able to meet its requirements.</p>
 <p><strong>Bandwidth</strong></p>
-<p>Different NoC paths require different bandwidths. The M0x_AXI bandwidths are requesting 5MB/s because these are AXI4-Lite interfaces that do not require high bandwidth. The M0x_INI interfaces are higher performance than the AXI4-Lite interfaces. These are paths from the PMC, RPU, and Host PCIe that connect to the DDR (M00_INI and M01_INI) and DIMM (M02_INI and M03_INI). A bandwidth of 800MB/s satisfies the AMR bandwidth requirements while not saturating the NoC where multiple paths connect to the same DDR port (<a class="reference internal" href="#amrv80-nocconfiguration-ddranddimmportconnections"><span class="xref myst">DDR and DIMM Port Connections</span></a>). The HBM paths request 250MB/s on all HBM PCs.</p>
+<p>Different NoC paths require different bandwidths. The M0x_AXI bandwidths are requesting 5MB/s because these are AXI4-Lite interfaces that do not require high bandwidth. The M0x_INI interfaces are higher performance than the AXI4-Lite interfaces. These are paths from the PMC, RPU, and Host PCIe that connect to the DDR (M00_INI and M01_INI) and DIMM (M02_INI and M03_INI). A bandwidth of 800MB/s satisfies the AMR bandwidth requirements while not saturating the NoC where multiple paths connect to the same DDR port (<a class="reference internal" href="#amr-nocconfiguration-ddranddimmportconnections"><span class="xref myst">DDR and DIMM Port Connections</span></a>). The HBM paths request 250MB/s on all HBM PCs.</p>
 <p>More information can be found here:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Quality-of-Service">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Quality-of-Service</a></p></li>
@@ -447,13 +441,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>The NMU supports address remapping as a way to override the default address map as well as to provide simple address virtualization. AMR uses this feature to remap the PCIe address to the DDR. This allows the PCIe host to have access to the DDR for communication with the RPU.</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#../memory-map/"><span class="xref myst">Memory Map</span></a></p></li>
-<li><p><a class="reference internal" href="#../memory-resources.md#AMRV80-MemoryResources-DiscreteDDRDiscreteDDRDiagram"><span class="xref myst">DDR Memory Organization</span></a></p></li>
+<li><p><a class="reference internal" href="#../memory-resources.md#AMR-MemoryResources-DiscreteDDRDiscreteDDRDiagram"><span class="xref myst">DDR Memory Organization</span></a></p></li>
 </ul>
 <p><img alt="images/1107375123.png" src="../../_images/1107375123.png" /></p>
 <p>See the Address Re-mapping section of the Versal Adaptive SoC Programmable Network on Chip and Integrated Memory Controller 1.0 LogiCORE IP Product Guide (<a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Address-Re-mapping">PG313</a>) for more information.</p>
 <p><img alt="image25" src="../../_images/grey_arrow_down3.png" /></p>
 <p><a class="reference download internal" download="" href="../../_downloads/889c2e7666c387c2bb8ca8a323b029f5/1107375195.png"><span class="xref download myst"><img alt="image26" src="../../_images/1107375195.png" /></span></a></p>
-<p><span id="amrv80-nocconfiguration-hbmconfiguration"></span></p>
+<p><span id="amr-nocconfiguration-hbmconfiguration"></span></p>
 </div>
 <div class="section" id="hbm-configuration">
 <h5>HBM Configuration<a class="headerlink" href="#hbm-configuration" title="Permalink to this heading">¶</a></h5>
@@ -842,7 +836,7 @@ set_property -dict [list \
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

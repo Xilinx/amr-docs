@@ -16,7 +16,7 @@ Tools
 
   - Python 3.6.8 or later.
 
-  - Cmake 3.5.0 or later.
+  - Cmake 3.7.0 or later.
 
 System Memory Requirements
 
@@ -42,13 +42,20 @@ To install Python, navigate to: <https://www.python.org/downloads/>. Locate and 
 <span id="how-torebuildanamrdesignforyourself-downloadthesourcecode"></span>
 
 ## Building OSPI Images through Yocto:
-1. Rave:
-    Use the Yocto procedure to build all necessary binary OSPI images and packages. The AMR package is built using the Yocto meta-embedded-plus template. The final artifacts will be in the build/tmp/deploy/images/emb_plus_ve2302_amr folder.
-
+Use yocto procedure to build all necessary binary OSPI images and packages. The following commands will build the AMR OSPI package and create the necessary artifacts. The AMR package is built using the Yocto https://github.com/Xilinx/meta-embedded-plus template. The final artifacts will be in the build/tmp/deploy/images/emb_plus_ve2302_amr (for rave) and build/tmp/deploy/images/alveo-v80-amr (for v80)
+1. Rave
+    Build OSPI image:
     MACHINE=emb-plus-ve2302-amr bitbake emb-plus-ospi-amr
 
-2. V80:
-        TBD
+    Build APU image:
+    MACHINE=emb-plus-ve2302-amr bitbake emb-plus-apu-image
+
+2. V80
+    Build OSPI image:
+    MACHINE=alveo-v80-amr bitbake emb-plus-ospi-amr
+
+    Build APU image:
+    MACHINE=alveo-v80-amr bitbake emb-plus-apu-image
 
 For building x86 packages refer [software build section](#how-torebuildanamrdesignforyourself-software)
 
@@ -83,37 +90,32 @@ In this example, we will clone the AMR repo with the latest release (which has b
 The following steps will guide you through setting up your Vivado environment and building an AMR V80/RAVE PDI from the cloned source code.
 
 1.  Set up the desired version of Vivado in your environment by sourcing the `settings64.](c)sh` script from your Vivado install directory.
-    
-      - 
-        
-        
-        
-        
-        
+
             # for csh
             $ source settings64.csh
-            
+
             # for bash
             $ source settings64.sh
-        
-        
-        
-        
 
-2.  To build all components and generate pdi, execute 
+
+2.  To build all components and generate pdi, execute
     ./build.sh -profile <v80|rave>
 
 <!-- end list -->
 
-    - For more information on the build script, refer to [AMR Build Scripts](../build-scripts/)
+    - For more information on the build script, refer to [AMR Build Scripts](../development/build-scripts.md)
 
        ```bash
         # To build V80 hardware, firmware and software
           cd amr
-          ./build_all.sh -profile v80
+          ./build.sh -profile v80
         ```
 
-    - To confirm that the build completed successfully, review the generated output and verify that the required output files from each build step are present as indicated in the next section.
+    To confirm that the build completed successfully, review the generated output folders
+        - build_amc : contains fw build output
+        - build_ami : contains sw build output
+        - build_v80 : contains hw build output
+    verify that the required output files are present.
 
 <span id="how-torebuildanamrdesignforyourself-firmware"></span>
 ### Firmware
@@ -122,8 +124,8 @@ The following steps will guide you through setting up your Vivado environment an
 
   1.  On your development server, navigate to the AMC directory in \<AMR cloned repo\>/fw/AMC/.
 
-2.  Run the script 
-    ./scripts/build_amc.sh -xsa <hw_xsa> -profile <v80/rave>
+2.  Run the script
+    ./scripts/build.sh -xsa <hw_xsa> -profile <v80/rave>
 which will build the firmware and generate amr_ospi_fpt.bin, amr_ospi.bin. After successfully building, the firmware package will be in \<AMR\>/fw/AMI/build_amc/. Copy this to your deployment server.
 
 <span id="how-torebuildanamrdesignforyourself-software"></span>
@@ -134,33 +136,33 @@ The following steps will guide you through building the AMI software from the cl
 
 1.  On your development server, navigate to the AMI directory in \<AMR cloned repo\>/sw/AMI/.
 
-2.  Run scripts/build_ami.sh, which will build the software and generate three debian/rpm files. 
+2.  Run scripts/build.sh, which will build the software and generate three debian/rpm files.
     - ami_<version>.<hash>.<date>_amd64.deb example: ami_2.0.0-0.0a8a8683.20260216_amd64.deb
     - amitool_<version>.<hash>.<date>_amd64.deb example: amitool_2.0.0-0.0a8a8683.20260216_amd64.deb
     - libami_<version>.<hash>.<date>_amd64.deb example: libami_2.0.0-0.0a8a8683.20260216_amd64.deb
 After successfully building, the software package will be in \<AMR\>/sw/AMI/build_ami/>. Copy this to your deployment server.
 
-3.  On your deployment server, install the AMI package.. Make sure to install libami_<version>.<hash>.<date>_amd64.deb before installing other debian files.
+3.  On your deployment server, install the AMI package.. Make sure to install libami_<version>.<hash>.<date>_amd64.deb before installing amitool_<version>.<hash>.<date>_amd64.deb.
 
     ```bash
     # development server
     cd <AMR>/sw/AMI
-    bash scripts/build_ami.sh
+    bash scripts/build.sh
 
     # deployment server
+    sudo dpkg -i <path/to/ami_xxx.deb>
     sudo dpkg -i <path/to/libami_xxx.deb>
     sudo dpkg -i <path/to/amitool_xxx.deb>
-    sudo dpkg -i <path/to/ami_xxx.deb>
     ```
 
 <span id="how-torebuildanamrdesignforyourself-reviewthegeneratedoutput"></span>
 
 ## Review the Generated Output
 
-By default, the `build.sh` script creates a build directory which would contain fw and sw images. Review your output directory to confirm it looks like the following.
+By default, the `build.sh` script creates a build directory which would contain fw and sw images. Review your output directory to confirm it looks like the following. For AMR build_amr
 
     <AMR>
-    ├── build/
+    ├── build_amc
     │   ├── amc.elf*
     │   ├── amd_fpt.bin*
     │   ├── amr_ospi_all_0_sync_offsets.txt
@@ -171,19 +173,21 @@ By default, the `build.sh` script creates a build directory which would contain 
     │   ├── CMakeCache.txt
     │   ├── CMakeFiles
     │   ├── cmake_install.cmake
-    │   ├── Makefile
+    │   └── Makefile
+    ├── build_ami
     │   ├── ami
-        ├── driver
-        ├── libami
+    │   ├── driver
+    │   ├── libami
     │   ├── ami_2.0.0-0.0a8a8683.20260224_amd64.deb
-        ├── amitool_2.0.0-0.0a8a8683.20260224_amd64.deb
-        └── libami_2.0.0-0.0a8a8683.20260224_amd64.deb
-
+    │   ├── amitool_2.0.0-0.0a8a8683.20260224_amd64.deb
+    │   └── libami_2.0.0-0.0a8a8683.20260224_amd64.deb
+    ├── build_v80
+    │   └── amr_vivado_designs
     ├── build.sh
     ├── fw/
     ├── scripts/
     └── sw/
-    
+
     Important Note: Generated files followed by a '*' are required files created by each step in the build flow, which can be used as an indication that the build has completed successfully. Verify that these files exist after building the design.
 
 ## Programming and Testing the Design
@@ -196,7 +200,7 @@ To program the PDI to flash, your deployment server will need access to the new 
     # usage: sudo ami_tool cfgmem_program -d <bdf> -t <type> -i <pdi path> -p <flash partition number>
     sudo ami_tool cfgmem_program -d c1:00.0 -t primary -i <Path_to_pdi/bin file> -p 0
     ```
-    
+
     ----------------
     Device | c1:00.0
     ----------------
@@ -211,7 +215,7 @@ To program the PDI to flash, your deployment server will need access to the new 
     Partition | 0
     ----------------
     Are you sure you wish to proceed? [Y/n]: Y
-    
+
     Updating base flash image...
     [####################################################################################################] 100% |
     Image programming complete.

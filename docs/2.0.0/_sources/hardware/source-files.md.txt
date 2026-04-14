@@ -6,38 +6,33 @@
 
 **Hardware Source**
 
-    amr
-    ├── fw/AMC
-    └── hw
-        └── amd_v80_gen5x8_25.1
-            ├── build_all.sh
-            ├── fpt
-            │   ├── fpt_pdi_gen.py
-            │   └── pdi_combine.bif
-            └── src
-                ├── bd
-                │   └── create_bd_design.tcl
-                ├── build_design.tcl
-                ├── constraints
-                │   ├── impl.pins.xdc
-                │   ├── impl.xdc
-                │   ├── opt.post.tcl
-                │   ├── place.pre.tcl
-                │   └── write_device_image.pre.tcl
-                ├── create_design.tcl
-                └── iprepo
-                    ├── cmd_queue_v2_0
-                    ├── hw_discovery_v1_0
-                    ├── shell_utils_uuid_rom_v2_0
-                    └── smbus_v1_1*
-    
-    *       : This location does not exist. The user must populate this location.
+    └── amr_vivado_designs
+    └── alveo_v80
+    └── platforms
+    ├── scripts
+    │   └── gen_sdt.tcl
+    └── v80_base
+    ├── ip
+    │   └── smbus_v1_1*
+    │       ├── src
+    │       │   └── ...
+    │       ├── xgui
+    │       │   ├── smbus_v1_1.tcl
+    │       │   └── smbus_v1_1_v1_0.tcl
+    │       └── component.xml
+    ├── Makefile
+    ├── scripts
+    │   ├── config_bd.tcl
+    │   └── main.tcl
+    └── xdc
+    ├── impl.pins.xdc
+    └── impl.xdc
 
-<span id="amrv80-sourcefileoverview-amr"></span>
+  <span id="amrv80-sourcefileoverview-amr"></span>
 
 ## amr
 
-This is the top level directory containing the source files for creating the AMR design and the build script. When executed, the build\_all.sh script builds the hardware design, firmware, FPT binary, and final PDI.
+This is the top level directory containing the source files for creating the AMR design and the build script. When executed, the build.sh script builds the hardware design, firmware, and final PDI.
 
 <span id="amrv80-sourcefileoverview-hw"></span>
 
@@ -45,79 +40,43 @@ This is the top level directory containing the source files for creating the AMR
 
 The hw directory contains the files necessary to build the hardware design.
 
-<span id="amrv80-sourcefileoverview-amd-v80-gen5x8-25-1"></span>
+<span id="amrv80-sourcefileoverview-amr-v80"></span>
 
-#### amd\_v80\_gen5x8\_25.1
+##### build.sh
 
-This is the top level directory for the AMD Gen5x8 example design. The directory name is the same as the VBNV, and is used throughout the design.
+This is the main build shell. Executing this shell will launch Vivado<sup>TM</sup>, build the AMR hardware design, compile the AMC firmware, and generate the PDI files. This is indicated by the asterisk in the Hardware Directory Tree above.
 
-<span id="amrv80-sourcefileoverview-build-all-sh"></span>
+<span id="amrv80-sourcefileoverview-pdi-gen"></span>
 
-##### build\_all.sh
+##### PDI Gen - This is used in the build.sh to combine the FW amc.elf with the HW PDI.
 
-This is the main build shell. Executing this shell will launch Vivado<sup>TM</sup>, build the AMR hardware design, compile the AMC firmware, and generate the PDI files. For the AMC FW to be compiled, this script expects the fw/AMC folder at the same level as the hw directory. This is indicated by the asterisk in the Hardware Directory Tree above.
+- output: build_amc/amr_ospi_fpt.bin
+- fpt\_pdi\_gen.py - This file is used in the build.sh to create the final FPT PDI
 
-<span id="amrv80-sourcefileoverview-fpt"></span>
-
-##### fpt
-
-  - pdi\_combine.bif - This file is used in the build\_all.sh to combine the FW amc.elf with the HW PDI.
-    
-      - output: build/amd\_v80\_gen5x8\_25.1\_nofpt.pdi
-
-  - fpt\_pdi\_gen.py - This file is used in the build\_all.sh to create the final FPT PDI
-    
-      - output: amd\_v80\_gen5x8\_25.1.pdi
+  - output: amr_ospi.bin and amr_ospi_fpt.bin
 
 <span id="amrv80-sourcefileoverview-src"></span>
 
 ##### src
 
-  - **bd** - This is the Block Design generation directory which contains the TCL file necessary to build the AMD Vivado™ AMR design.
-    
-      - create\_bd\_design.tcl - This TCL file is used by Vivado to create the base AMR design. Since the GTs are not used in this design, the interface ports have been commented out. The user may uncomment them as required for their design.
+- **bd** - This is the Block Design generation directory which contains the TCL file necessary to build the AMD Vivado™ AMR design.
 
-  - **build\_design.tcl** - This script uses Vivado to create the XSA and run synthesis and implementation.
+  - create\_bd\_design.tcl - This TCL file is used by Vivado to create the base AMR design. Since the GTs are not used in this design, the interface ports have been commented out. The user may uncomment them as required for their design.
+- **build\_design.tcl** - This script uses Vivado to create the XSA and run synthesis and implementation.
+- **contraints** - This directory contains the constraints required for Vivado implementation to generate a PDI.
 
-  - **contraints** - This directory contains the constraints required for Vivado implementation to generate a PDI.
-    
-      - impl.pins.xdc - This file contains the top level I/O pin names, locations, and IO standards for the DDR, DIMM, GTYPs, GTMs, and clocks.
-        
-          - *Note*: Since the GTs are not used in the base V80 design, these pins have been commented out.
-    
-      - 
-        
-        
-        
-        
-        
-        impl.xdc - This file defines strictly enforced pblocks for each SLR. A strictly enforced pblock does not allow cells to be moved outside pblock boundaries. The base logic is assigned to SLR0, while user logic can be assigned to SLR0, SLR1, and SLR2 as needed.
-        
-        
-        
-        
-        
-        The NMU for the PCIe Management SmartConnect (pcie\_slr0\_mgmt\_sc) is LOC’d to keep the base logic resources close to the CIPS in SLR0.
-        
-        
-        
-        
-    
-      - opt.post.tcl - This file turns on bitstream compression and enables NPI DMA mode to accelerate device download. It also disables BUFG insertion in placement to prevent clock changes.
-    
-      - place.pre.tcl - The PCIe Management PDI Reset logic currently is not used in AMR, but it was added for future growth. Currently, the settings in this file connect the reset to a PMC interrupt. The response to this interrupt has not been defined.
-    
-      - write\_device\_image.pre.tcl - This file generates the UUID for the AMR design which is stored in the UUID of the base logic.
+  - impl.pins.xdc - This file contains the top level I/O pin names, locations, and IO standards for the DDR, DIMM, GTYPs, GTMs, and clocks.
 
+    - *Note*: Since the GTs are not used in the base V80 design, these pins have been commented out.
+
+  impl.xdc - This file defines strictly enforced pblocks for each SLR. A strictly enforced pblock does not allow cells to be moved outside pblock boundaries. The base logic is assigned to SLR0, while user logic can be assigned to SLR0, SLR1, and SLR2 as needed.
+
+  The NMU for the PCIe Management SmartConnect (pcie\_slr0\_mgmt\_sc) is LOC’d to keep the base logic resources close to the CIPS in SLR0.
+
+  - opt.post.tcl - This file turns on bitstream compression and enables NPI DMA mode to accelerate device download. It also disables BUFG insertion in placement to prevent clock changes.
+  - place.pre.tcl - The PCIe Management PDI Reset logic currently is not used in AMR, but it was added for future growth. Currently, the settings in this file connect the reset to a PMC interrupt. The response to this interrupt has not been defined.
+  - write\_device\_image.pre.tcl - This file generates the UUID for the AMR design which is stored in the UUID of the base logic.
   - **create\_design.tcl** - This file is used by Vivado to create the project, create the BD, add the constraint files, and set the processing order for creating the AMR design.
-
   - **iprepo** - This directory contains all the additional IP necessary to build the AMR design that is not included in the Vivado released SW.
-    
-      - cmd\_queue\_v2\_0
-    
-      - hw\_discovery\_v1\_0
-    
-      - shell\_utils\_uuid\_rom\_v2\_0
-    
-      - smbus\_v1\_1 - This IP must be added from the lounge by the user due to licensing requirements (<https://www.xilinx.com/member/v80.html>). Vivado will not build the AMR design if this IP is not present. This is indicated by the asterisk in the Hardware Directory Tree above.
 
+    - smbus\_v1\_1 - This IP is used by the v80 to communicate with server board management controller.

@@ -266,7 +266,7 @@ The verbosity of the AMC messages can be updated with the **debug\_verbosity** c
 
 ### **Resets and reboots**
 
-Performing a reset after an issue has occurred can help to understand the impact and scope of the issue. For example, if the issue is cleared by a hot reset, the issue is not wide-ranging, but if a full power cycle is required, the issue is more significant.
+Performing a reset after an issue has occurred can help to understand the impact and scope of the issue. For example, if the issue is cleared by a software device reboot, the issue is not wide-ranging, but if a full power cycle is required, the issue is more significant.
 
 Several types of reset are possible for amr design:
 
@@ -274,11 +274,11 @@ Several types of reset are possible for amr design:
 
   - server cold reboot : shut down server using BMC, boot up server using BMC
 
-  - server warm reboot reboot server using BMC
+  - server warm reboot : reboot server using BMC
 
   - Host PCI reset (removes the PCI device from the host and forces a bus rescan; this does not remove power from the device): **ami\_tool reload -t pci -d \<bdf\>**
 
-  - PCIe hot reset (aka in-band reset - reset the FPGA but does not reprogram it from flash) : **ami\_tool reload -t sbr -d \<bdf\>**
+  - Software device reboot (firmware-controlled reboot from a flash partition): **ami\_tool device\_boot -d \<bdf\> -p \<partition\>**
 
   - AMI driver reload (put driver into clean state without reprogramming): **ami\_tool reload -t driver -d \<bdf\>**
 

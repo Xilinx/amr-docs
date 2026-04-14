@@ -64,20 +64,19 @@ Note - if the ami\_tool reports AMC other than READY then it is highly advised n
 
 See [/wiki/spaces/XPS/pages/1093308807](../../deployment/ami-tool-guide#overview2overview) for more more information on the different AMC states.
 
-    ami_tool overview
-    
-    
+    ~$ ami_tool overview
+
      AMI
     ---------------------------------------------------------
     Version        | 2.0.0  (0)
-    Branch
-    Hash           | b3851ec2d223e6c35e567e245dc380049d2ba139
-    Hash Date      | 20260226
+    Branch         |
+    Hash           | 15a98eb71fdee61c662ff155227c0525dc3cbbd7
+    Hash Date      | 20260317
     Driver Version | 2.0.0  (0)
 
 
-    BDF     | Device        | UUID                             | AMC        | State
-    -------------------------------------------------------------------------------
-    c1:00.0 | ALVEO V80 INT | 00000000000000000000000014862935 | 2.0.0  (0) | READY
+    BDF     | Device        | Serial Number | UUID                             | AMC        | State
+    -----------------------------------------------------------------------------------------------
+    21:00.0 | ALVEO V80 INT | XFL1GF4VJ1KW  | 00000000000000000000000032314bde | 2.0.0  (0) | READY
 
 

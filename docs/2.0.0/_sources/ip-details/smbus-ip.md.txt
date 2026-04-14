@@ -1,8 +1,10 @@
 # SMBus IP v1.1 - Product Guide
 
-Overview
+## Overview
 
-The SMBus IP provides a mechanism through which a Versal ACAP based system may interact with external devices that are compliant to the [System Management Bus ](SMBus) v3.2 Specification](http://smbus.org/specs/SMBus_3_2_20220112.pdf). SMBus is a two-wire open-drain interface based on the principles of operation defined by the [I2C Bus Specification](https:/www.nxp.com/docs/en/user-guide/UM10204.pdf). It provides a standardized control path that enables devices to pass system and power management related messages.
+**Important:** SMBus support is not implemented in the current AMR release. The SMBus IP and associated infrastructure are provided for reference, but functional SMBus communication and protocol handling are not present. Users must implement and establish SMBus support based on their specific requirements.
+
+The SMBus IP provides a mechanism through which a Versal ACAP based system may interact with external devices that are compliant to the [System Management Bus (SMBus) v3.2 Specification](http://smbus.org/specs/SMBus_3_2_20220112.pdf). SMBus is a two-wire open-drain interface based on the principles of operation defined by the [I2C Bus Specification](https://www.nxp.com/docs/en/user-guide/UM10204.pdf). It provides a standardized control path that enables devices to pass system and power management related messages.
 
 The SMBus IP is designed to be implemented within the PL region of a Versal ACAP and requires connection to I/O Buffers located within an appropriate HDIO bank, these IOBs must be configured to meet the electrical requirements outlined in the SMBus Specification. The IP implements an AXI4-Lite Subordinate memory mapped control interface to enable a processor to interact with other external SMBus devices, the IP supports operation as both a Controller and a multi-device Target to enable multiple management protocols to be implemented simultaneously.
 

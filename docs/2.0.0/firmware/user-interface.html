@@ -3,21 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="03af8d57-0a04-47a6-8f10-322fa00d8fc7" ></script>
-<script type="text/javascript">
-function OptanonWrapper() { }
-</script>
-<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
-<!-- Google Tag Manager -->
-<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
-<!-- End Google Tag Manager -->
   <title>User Interface &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
@@ -38,11 +23,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
-<!-- End Google Tag Manager --> 
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
@@ -86,19 +67,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../v80/index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="asdm-application.html">AMR ASDM Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inband-telemetry.html">AMR InBand Telemetry Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="outofband-telemetry.html">AMR OutOfBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
 <li class="toctree-l1"><a class="reference internal" href="ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="asc-proxy.html">AMR Sensor Control (ASC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
@@ -142,271 +130,395 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
              
   <div class="section" id="user-interface">
 <h1>User Interface<a class="headerlink" href="#user-interface" title="Permalink to this heading">¶</a></h1>
-<p>This page outlines the low-level mechanisms via which the AMI kernel driver exposes functionality to userspace code.</p>
-<p>Refer to <a class="reference internal" href="../deployment/ami-tool-guide.html"><span class="doc std std-doc">AMR Management Interface userguide (ami_tool)</span></a> for details of how to use <strong>ami_tool</strong> (the command line interface tool).</p>
-<p><span id="userinterface-characterdevicefiles"></span></p>
-<div class="section" id="character-device-files">
-<h2>Character Device Files<a class="headerlink" href="#character-device-files" title="Permalink to this heading">¶</a></h2>
-<p>Each compatible PCI device gets its own character device file under <strong>/dev/amiX</strong> where ‘X’ may be an arbitrary number. There is one special device file at <strong>/dev/ami0</strong> which is a global file created only once during driver initialisation. <strong>Currently, usage of this file is not supported and may be removed in the future.</strong></p>
-<p>Example cdev tree:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>. /dev/
+<p>This page outlines the low-level mechanisms via which the AMI kernel driver exposes<br />
+functionality to userspace code.</p>
+<p>Refer to <a class="reference internal" href="../deployment/ami-tool-guide.html"><span class="doc std std-doc">AMR Management Interface userguide
+(ami_tool)</span></a> for details of how to use
+<strong>ami_tool</strong> (the command line interface tool).</p>
+<p>Character Device Files
+Each compatible PCI device gets its own character device file under
+/dev/ami-bdf-XX:XX.X where the suffix is the PCI Bus:Device.Function (BDF) identifier.
+There is one special device file at /dev/ami0 which is a global driver device created
+once during driver initialization. Currently, usage of this global device file is not
+supported and may be removed in the future.</p>
+<p>Example cdev tree with two devices at PCI addresses e2:00.0 and e2:00.1:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/dev/
 ├── ami0
-├── ami1
-├── ami2
-├── ami3
-├── ami4
+├── ami-bdf-e2:00.0
+├── ami-bdf-e2:00.1
 </pre></div>
 </div>
 <p><span id="userinterface-sysfs"></span></p>
-</div>
 <div class="section" id="sysfs">
 <h2>SYSFS<a class="headerlink" href="#sysfs" title="Permalink to this heading">¶</a></h2>
-<p>See <a class="reference external" href="https://docs.kernel.org/filesystems/sysfs">sysfs - _The_ filesystem for exporting kernel objects — The Linux Kernel documentation</a></p>
-<p>Where possible, device attributes are exposed via the sysfs subsystem. This is an easy-to-use mechanism that maps driver attributes to objects which look and behave like standard Linux files. These can be opened, read, and (depending on permissions) written to.</p>
-<p>When a user reads or writes to a sysfs node, a callback is triggered in the driver code. A sysfs tree is created automatically for each PCI device with some standard attributes. This is located at a path that looks like <strong>/sys/devices/pci0000:c0/0000:c0:01.1/0000:c1:00.0.</strong></p>
-<p>The domain (0000) and device (c1:00.0) may be different depending on your setup. Note that the sysfs tree may also be accessed at <strong>/sys/class/hwmon/hwmonX/device</strong> or <strong>/sys/bus/pci/devices/0000:c1:00.0</strong>; this may be more useful, especially if you refer to the <strong>ami_tool overview</strong> command.</p>
-<p>Example sysfs tree (standard PCI attributes have been stripped):</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>. /sys/class/hwmon/hwmon3/device
-├── logic_uuid
-├── hwmon
-│   └── hwmon3
-│       ├── curr1_average
-│       ├── curr1_input
-│       ├── curr1_label
-│       ├── curr1_max
-│       ├── curr1_status
-│       ├── curr2_average
-│       ├── curr2_input
-│       ├── curr2_label
-│       ├── curr2_max
-│       ├── curr2_status
-│       ├── curr3_average
-│       ├── curr3_input
-│       ├── curr3_label
-│       ├── curr3_max
-│       ├── curr3_status
-│       ├── device -&gt; ../../../0000:c1:00.0
-│       ├── in0_average
-│       ├── in0_input
-│       ├── in0_label
-│       ├── in0_max
-│       ├── in0_status
-│       ├── in1_average
-│       ├── in1_input
-│       ├── in1_label
-│       ├── in1_max
-│       ├── in1_status
-│       ├── in2_average
-│       ├── in2_input
-│       ├── in2_label
-│       ├── in2_max
-│       ├── in2_status
-│       ├── name
-│       ├── power
-│       │   ├── async
-│       │   ├── autosuspend_delay_ms
-│       │   ├── control
-│       │   ├── runtime_active_kids
-│       │   ├── runtime_active_time
-│       │   ├── runtime_enabled
-│       │   ├── runtime_status
-│       │   ├── runtime_suspended_time
-│       │   └── runtime_usage
-│       ├── power1_average
-│       ├── power1_input
-│       ├── power1_label
-│       ├── power1_max
-│       ├── power1_status
-│       ├── subsystem -&gt; ../../../../../../class/hwmon
-│       ├── temp1_input
-│       ├── temp1_label
-│       ├── temp1_max
-│       ├── temp1_status
-│       ├── temp2_input
-│       ├── temp2_label
-│       ├── temp2_max
-│       ├── temp2_status
-│       ├── temp3_input
-│       ├── temp3_label
-│       ├── temp3_max
-│       ├── temp3_status
-│       ├── uevent
-│       └── update_interval
-</pre></div>
-</div>
+<p>See https://docs.kernel.org/filesystems/sysfs</p>
+<p>Where possible, device attributes are exposed via the sysfs subsystem. This is an<br />
+easy-to-use mechanism that maps driver attributes to objects which look and behave<br />
+like standard Linux files. These can be opened, read, and (depending on permissions)<br />
+written to.</p>
+<p>When a user reads or writes to a sysfs node, a callback is triggered in the driver<br />
+code. A sysfs tree is created automatically for each PCI device with some standard<br />
+attributes. This is located at a path that looks like<br />
+/sys/devices/pci0000:XX/0000:XX:YY.Z/0000:XX:YY.Z where the domain (0000), bus (XX),<br />
+device (YY), and function (Z) will vary depending on your system setup.</p>
+<p>The sysfs tree may also be accessed via:</p>
+<ul class="simple">
+<li><p>/sys/bus/pci/devices/0000:XX:YY.Z - Direct access via PCI device BDF</p></li>
+<li><p>/sys/class/hwmon/hwmonX/device - Access via hwmon interface (only available for PF0)</p></li>
+</ul>
+<p>Note: The hwmon interface is only created for Physical Function 0 (PF0). Other<br />
+functions (like PF1) will not have hwmon entries but can still be accessed via the PCI
+device path.</p>
+<p>Driver-Level Attributes</p>
+<p>Global driver attributes are located at /sys/bus/pci/drivers/ami/:</p>
+<ul class="simple">
+<li><p>devices - Shows mapping of BDF addresses to device nodes and hwmon IDs</p></li>
+<li><p>version - Driver version information</p></li>
+<li><p>ami_debug_enabled - Enable/disable debug output (read/write)</p></li>
+</ul>
+<p>Device-Level Attributes</p>
+<p>Per-device attributes are located at /sys/bus/pci/devices/0000:XX:YY.Z/:</p>
+<ul class="simple">
+<li><p>logic_uuid - Logic UUID from vendor-specific extended capability</p></li>
+<li><p>link_speed_max - Maximum PCIe link speed</p></li>
+<li><p>link_speed_current - Current PCIe link speed</p></li>
+<li><p>link_width_max - Maximum PCIe link width</p></li>
+<li><p>link_width_current - Current PCIe link width</p></li>
+<li><p>dev_state - Device state (INIT, READY, MISSING_INFO, NO_AMC, INIT_ERROR, SHUTDOWN,<br />
+COMPAT)</p></li>
+<li><p>dev_name - Device name (ami-bdf-XX:YY.Z)</p></li>
+<li><p>amc_version - AMC firmware version</p></li>
+</ul>
+<p>Example sysfs tree for PF0 with hwmon (standard PCI attributes have been stripped):</p>
+<p>/sys/class/hwmon/hwmon3/device<br />
+├── logic_uuid<br />
+├── link_speed_max<br />
+├── link_speed_current<br />
+├── link_width_max<br />
+├── link_width_current<br />
+├── dev_state<br />
+├── dev_name<br />
+├── amc_version<br />
+├── hwmon<br />
+│   └── hwmon3<br />
+│       ├── curr1_average<br />
+│       ├── curr1_input<br />
+│       ├── curr1_label<br />
+│       ├── curr1_max<br />
+│       ├── curr1_status<br />
+│       ├── curr2_average<br />
+│       ├── curr2_input<br />
+│       ├── curr2_label<br />
+│       ├── curr2_max<br />
+│       ├── curr2_status<br />
+│       ├── curr3_average<br />
+│       ├── curr3_input<br />
+│       ├── curr3_label<br />
+│       ├── curr3_max<br />
+│       ├── curr3_status<br />
+│       ├── device -&gt; ../../../0000:XX:YY.0<br />
+│       ├── in0_average<br />
+│       ├── in0_input<br />
+│       ├── in0_label<br />
+│       ├── in0_max<br />
+│       ├── in0_status<br />
+│       ├── in1_average<br />
+│       ├── in1_input<br />
+│       ├── in1_label<br />
+│       ├── in1_max<br />
+│       ├── in1_status<br />
+│       ├── in2_average<br />
+│       ├── in2_input<br />
+│       ├── in2_label<br />
+│       ├── in2_max<br />
+│       ├── in2_status<br />
+│       ├── name<br />
+│       ├── power<br />
+│       │   ├── async<br />
+│       │   ├── autosuspend_delay_ms<br />
+│       │   ├── control<br />
+│       │   ├── runtime_active_kids<br />
+│       │   ├── runtime_active_time<br />
+│       │   ├── runtime_enabled<br />
+│       │   ├── runtime_status<br />
+│       │   ├── runtime_suspended_time<br />
+│       │   └── runtime_usage<br />
+│       ├── power1_average<br />
+│       ├── power1_input<br />
+│       ├── power1_label<br />
+│       ├── power1_max<br />
+│       ├── power1_status<br />
+│       ├── subsystem -&gt; ../../../../../../class/hwmon<br />
+│       ├── temp1_input<br />
+│       ├── temp1_label<br />
+│       ├── temp1_max<br />
+│       ├── temp1_status<br />
+│       ├── temp2_input<br />
+│       ├── temp2_label<br />
+│       ├── temp2_max<br />
+│       ├── temp2_status<br />
+│       ├── temp3_input<br />
+│       ├── temp3_label<br />
+│       ├── temp3_max<br />
+│       ├── temp3_status<br />
+│       ├── uevent<br />
+│       └── update_interval</p>
 <p><span id="userinterface-driverattributes"></span></p>
 <div class="section" id="driver-attributes">
 <h3>Driver Attributes<a class="headerlink" href="#driver-attributes" title="Permalink to this heading">¶</a></h3>
-<p>Typically, SYSFS is used to expose device attributes, however, the driver itself may also expose some of its own global attributes. These can be located at <strong>/sys/bus/pci/drivers/ami</strong>. Currently, the following attributes are supported:</p>
+<p>Driver Attributes</p>
+<p>Typically, sysfs is used to expose device attributes; however, the driver itself may<br />
+also expose some of its own global attributes. These can be located at<br />
+/sys/bus/pci/drivers/ami. Currently, the following attributes are supported:</p>
 <ul class="simple">
-<li><p><strong>devices</strong> - when read, returns a map of all PCI devices registered with the driver in the format <strong>“&lt;BDF&gt; &lt;cdev_num&gt;</strong> &lt;hwmon_num&gt;”. This map can be used to determine where to look for the device you are interested in. For example, the map “c1:00.0 3 4” means that the device with BDF c1:00.0 has a character device file at /dev/ami3 and a hwmon tree at /sys/class/hwmon/hwmon4. A hwmon number value of -1 means that the device does not support the functionality. All devices will have a vaild character device, however. The first line read from the ‘devices’ file is a number representing the total number of devices attached to the driver.</p></li>
-<li><p><strong>version</strong> - when read, returns the current driver version in the format “<strong>MAJOR.MINOR.PATCH -COMMITS *STATUS”</strong>.</p></li>
+<li><p>devices - When read, returns a map of all PCI devices registered with the driver.<br />
+The first line is the total number of devices attached to the driver. Each subsequent
+line follows the format “<BDF> &lt;minor_num&gt; &lt;hwmon_num&gt;”. This map can be used to<br />
+determine where to look for the device you are interested in. For example, the entry<br />
+“e2:00.0 1 3” means that the device with BDF e2:00.0 has:</p>
+<ul>
+<li><p>A character device file at /dev/ami-bdf-e2:00.0 (minor number 1)</p></li>
+<li><p>A hwmon tree at /sys/class/hwmon/hwmon3</p></li>
+</ul>
+</li>
+</ul>
+<p>A hwmon number value of -1 means that the device does not support hwmon functionality
+(typically PF1 and higher). All devices will have a valid character device file. Note
+that the minor number shown is for informational purposes; the device file name is<br />
+based on the BDF address, not the minor number.</p>
+<ul class="simple">
+<li><p>version - When read, returns the current driver version in the format<br />
+“MAJOR.MINOR.PATCH +COMMITS *STATUS”</p></li>
 </ul>
 <p><span id="userinterface-hwmon"></span></p>
 </div>
 </div>
 <div class="section" id="hwmon">
 <h2>HWMON<a class="headerlink" href="#hwmon" title="Permalink to this heading">¶</a></h2>
-<p>See <a class="reference external" href="https://docs.kernel.org/hwmon/hwmon-kernel-api">The Linux Hardware Monitoring kernel API — The Linux Kernel documentation</a></p>
-<p>HWMON builds on the sysfs subsystem to provide sensor monitoring. This creates an attribute tree at <strong>/sys/class/hwmon/hwmonX</strong>.</p>
-<p>For an example of the HWMON interface see the section above. For all intents and purposes, hwmon behaves exactly the same as sysfs.</p>
+<p>See https://docs.kernel.org/hwmon/hwmon-kernel-api</p>
+<p>HWMON builds on the sysfs subsystem to provide sensor monitoring for temperature,<br />
+voltage, current, and power sensors. This creates an attribute tree at<br />
+/sys/class/hwmon/hwmonX.</p>
+<p>Important: HWMON is only available for Physical Function 0 (PF0) and requires:</p>
+<ul class="simple">
+<li><p>A valid AMC (Alveo Management Controller) connection</p></li>
+<li><p>The device is not in compatibility mode</p></li>
+<li><p>Successful sensor discovery at driver probe time</p></li>
+</ul>
+<p>If these conditions are not met, the device will not have a hwmon interface.</p>
+<p>Supported Sensors</p>
+<p>The AMI driver exposes the following sensor types via hwmon:</p>
+<ul class="simple">
+<li><p>Temperature sensors (tempX_*) - Up to 20 sensors</p></li>
+<li><p>Voltage sensors (inX_*) - Up to 20 sensors</p></li>
+<li><p>Current sensors (currX_*) - Up to 20 sensors</p></li>
+<li><p>Power sensors (powerX_*) - Up to 5 sensors</p></li>
+</ul>
+<p>Sensor Attributes</p>
+<p>For each sensor, the following attributes may be available (depending on what the<br />
+hardware supports):</p>
+<ul class="simple">
+<li><p>_input - Current/instantaneous value</p></li>
+<li><p>_average - Average value since boot</p></li>
+<li><p>_max - Historical maximum value (also used as warning threshold)</p></li>
+<li><p>_crit - Critical threshold</p></li>
+<li><p>_lcrit - Lower critical threshold</p></li>
+<li><p>_max_alarm - Warning threshold alarm status</p></li>
+<li><p>_crit_alarm - Critical threshold alarm status</p></li>
+<li><p>_lcrit_alarm - Lower critical threshold alarm status</p></li>
+<li><p>_label - Human-readable sensor name</p></li>
+<li><p>_status - Sensor status information</p></li>
+</ul>
+<p>Not all sensors support all attributes. The available attributes are dynamically<br />
+discovered from the AMC firmware via the ASDM (Alveo Sensor Data Model) API at driver
+initialization time.</p>
+<p>For an example of the HWMON interface structure, see the sysfs section above. For all
+intents and purposes, hwmon behaves exactly the same as sysfs - attributes are exposed
+as files that can be read (and in some cases written) using standard file I/O<br />
+operations.</p>
 <p><span id="userinterface-ioctl"></span></p>
 </div>
 <div class="section" id="ioctl">
 <h2>IOCTL<a class="headerlink" href="#ioctl" title="Permalink to this heading">¶</a></h2>
-<p>IOCTL provides a way to perform arbitrary actions on character device files. An IOCTL is uniquely defined by a magic number and is executed with the <a class="reference external" href="https://man7.org/linux/man-pages/man2/ioctl.2">ioctl()</a> call. Each IOCTL can be thought of as a unique (and undocumented) system call which can take any arbitrary argument and copy memory between kernel/user space.</p>
-<p>These are used sparingly and only when no other solution exists. The below table defines the IOCTL calls supported by the AMI driver.</p>
+<p>IOCTL provides a way to perform arbitrary actions on character device files. An IOCTL
+is uniquely defined by a magic number and is executed with the<br />
+<a class="reference external" href="https://man7.org/linux/man-pages/man2/ioctl.2">ioctl()</a> call. Each IOCTL can be<br />
+thought of as a unique (and undocumented) system call which can take any arbitrary<br />
+argument and copy memory between kernel/user space.</p>
+<p>These are used sparingly and only when no other solution exists. The below table<br />
+defines the IOCTL calls supported by the AMI driver.</p>
 <p><strong>#define AMI_IOC_MAGIC ‘a’</strong></p>
-<table border="1" class="docutils">
+<table class="colwidths-auto docutils align-default">
 <thead>
-<tr>
-<th>IOCTL</th>
-<th>Definition</th>
-<th>Input</th>
-<th>Output</th>
-<th>Requires Elevated Permissions</th>
-<th>Superuser Only</th>
-<th>Required Device State</th>
+<tr class="row-odd"><th class="head"><p>IOCTL</p></th>
+<th class="head"><p>Number</p></th>
+<th class="head"><p>Direction</p></th>
+<th class="head"><p>Input Type</p></th>
+<th class="head"><p>Output</p></th>
+<th class="head"><p>Elevated Permissions</p></th>
+<th class="head"><p>Required Device State</p></th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>AMI_IOC_DOWNLOAD_PDI</td>
-<td>_IOW(AMI_IOC_MAGIC, 0, struct ami_ioc_data_payload*)</td>
-<td>struct ami_ioc_data_payload* populated with the PDI image data</td>
-<td>N/A</td>
-<td>Yes</td>
-<td>No</td>
-<td>READY, MISSING_INFO, or COMPAT</td>
+<tr class="row-even"><td><p>AMI_IOC_DOWNLOAD_PDI</p></td>
+<td><p>0</p></td>
+<td><p>_IOW</p></td>
+<td><p>struct ami_ioc_data_payload*</p></td>
+<td><p>N/A</p></td>
+<td><p>Yes</p></td>
+<td><p>READY, MISSING_INFO, or COMPAT</p></td>
 </tr>
-<tr>
-<td>AMI_IOC_READ_BAR</td>
-<td>_IOWR(AMI_IOC_MAGIC, 1, struct ami_ioc_bar_data*)</td>
-<td>struct ami_ioc_bar_data* with attributes appropriately set</td>
-<td>Data will be copied to buffer at the given address</td>
-<td>Yes</td>
-<td>No</td>
-<td>Any state except INIT and SHUTDOWN</td>
+<tr class="row-odd"><td><p>AMI_IOC_READ_BAR</p></td>
+<td><p>1</p></td>
+<td><p>_IOWR</p></td>
+<td><p>struct ami_ioc_bar_data*</p></td>
+<td><p>Buffer populated</p></td>
+<td><p>Yes</p></td>
+<td><p>Any except INIT and SHUTDOWN</p></td>
 </tr>
-<tr>
-<td>AMI_IOC_WRITE_BAR</td>
-<td>_IOW(AMI_IOC_MAGIC, 2, struct ami_ioc_bar_data*)</td>
-<td>struct ami_ioc_bar_data* with attributes appropriately set - buffer at given address must be populated with data to write</td>
-<td>N/A</td>
-<td>Yes</td>
-<td>No</td>
-<td>Any state except INIT and SHUTDOWN</td>
+<tr class="row-even"><td><p>AMI_IOC_WRITE_BAR</p></td>
+<td><p>2</p></td>
+<td><p>_IOW</p></td>
+<td><p>struct ami_ioc_bar_data*</p></td>
+<td><p>N/A</p></td>
+<td><p>Yes</p></td>
+<td><p>Any except INIT and SHUTDOWN</p></td>
 </tr>
-<tr>
-<td>AMI_IOC_GET_SENSOR_VALUE</td>
-<td>_IOWR(AMI_IOC_MAGIC, 3, struct ami_ioc_sensor_value*)</td>
-<td>struct ami_ioc_sensor_value* with "hwmon_channel" and "sensor_type" set appropriately</td>
-<td>"val", "status", and "fresh" attributes of the given struct will be populated</td>
-<td>No</td>
-<td>No</td>
-<td>READY or MISSING_INFO</td>
+<tr class="row-odd"><td><p>AMI_IOC_GET_SENSOR_VALUE</p></td>
+<td><p>3</p></td>
+<td><p>_IOWR</p></td>
+<td><p>struct ami_ioc_sensor_value*</p></td>
+<td><p>Struct populated</p></td>
+<td><p>No</p></td>
+<td><p>READY or MISSING_INFO</p></td>
 </tr>
-<tr>
-<td>AMI_IOC_DEVICE_BOOT</td>
-<td>_IOW(AMI_IOC_MAGIC, 4, struct ami_ioc_data_payload*)</td>
-<td>struct ami_ioc_data_payload* with "partition" field set</td>
-<td>N/A</td>
-<td>Yes</td>
-<td>No</td>
-<td>READY, MISSING_INFO, or COMPAT</td>
+<tr class="row-even"><td><p>AMI_IOC_DEVICE_BOOT</p></td>
+<td><p>4</p></td>
+<td><p>_IOW</p></td>
+<td><p>struct ami_ioc_data_payload*</p></td>
+<td><p>N/A</p></td>
+<td><p>Yes</p></td>
+<td><p>READY, MISSING_INFO, or COMPAT</p></td>
 </tr>
-<tr>
-<td>AMI_IOC_COPY_PARTITION</td>
-<td>_IOW(AMI_IOC_MAGIC, 5, struct ami_ioc_data_payload*)</td>
-<td>struct ami_ioc_data_payload* with "src" and "dest" fields set</td>
-<td>N/A</td>
-<td>Yes</td>
-<td>No</td>
-<td>READY or MISSING_INFO</td>
+<tr class="row-odd"><td><p>AMI_IOC_COPY_PARTITION</p></td>
+<td><p>5</p></td>
+<td><p>_IOW</p></td>
+<td><p>struct ami_ioc_data_payload*</p></td>
+<td><p>N/A</p></td>
+<td><p>Yes</p></td>
+<td><p>READY or MISSING_INFO</p></td>
 </tr>
-<tr>
-<td>AMI_IOC_SET_SENSOR_REFRESH</td>
-<td>_IOW(AMI_IOC_MAGIC, 6, uint16_t)</td>
-<td>new sensor refresh specified</td>
-<td>N/A</td>
-<td>No</td>
-<td>No</td>
-<td>READY or MISSING_INFO</td>
+<tr class="row-even"><td><p>AMI_IOC_SET_SENSOR_REFRESH</p></td>
+<td><p>6</p></td>
+<td><p>_IOW</p></td>
+<td><p>uint16_t</p></td>
+<td><p>N/A</p></td>
+<td><p>No</p></td>
+<td><p>READY or MISSING_INFO</p></td>
 </tr>
-<tr>
-<td>AMI_IOC_GET_FPT_HDR</td>
-<td>_IOR(AMI_IOC_MAGIC, 7, struct ami_ioc_fpt_hdr_value*)</td>
-<td>struct ami_ioc_fpt_hdr_value*</td>
-<td>Provided struct is populated</td>
-<td>No</td>
-<td>No</td>
-<td>READY or MISSING_INFO</td>
+<tr class="row-odd"><td><p>AMI_IOC_GET_FPT_HDR</p></td>
+<td><p>7</p></td>
+<td><p>_IOR</p></td>
+<td><p>struct ami_ioc_fpt_hdr_value*</p></td>
+<td><p>Struct populated</p></td>
+<td><p>No</p></td>
+<td><p>READY or MISSING_INFO</p></td>
 </tr>
-<tr>
-<td>AMI_IOC_GET_FPT_PARTITION</td>
-<td>_IOWR(AMI_IOC_MAGIC, 8, struct ami_ioc_fpt_partition_value*)</td>
-<td>struct ami_ioc_fpt_partition_value* with "partition" field set</td>
-<td>Remaining fields in provided struct are populated</td>
-<td>No</td>
-<td>No</td>
-<td>READY or MISSING_INFO</td>
+<tr class="row-even"><td><p>AMI_IOC_GET_FPT_PARTITION</p></td>
+<td><p>8</p></td>
+<td><p>_IOWR</p></td>
+<td><p>struct ami_ioc_fpt_partition_value*</p></td>
+<td><p>Struct populated</p></td>
+<td><p>No</p></td>
+<td><p>READY or MISSING_INFO</p></td>
 </tr>
-<tr>
-<td>AMI_IOC_READ_EEPROM</td>
-<td>_IOWR(AMI_IOC_MAGIC, 9, struct ami_ioc_eeprom_payload*)</td>
-<td>struct ami_ioc_eeprom_data* with "len", "addr", and "offset" fields set</td>
-<td>Data read from EEPROM</td>
-<td>No</td>
-<td>No</td>
-<td>READY or MISSING_INFO</td>
+<tr class="row-odd"><td><p>AMI_IOC_SET_FPT_PARTITION</p></td>
+<td><p>9</p></td>
+<td><p>_IOWR</p></td>
+<td><p>struct ami_ioc_fpt_partition_value*</p></td>
+<td><p>Struct updated</p></td>
+<td><p>Yes</p></td>
+<td><p>READY or MISSING_INFO</p></td>
 </tr>
-<tr>
-<td>AMI_IOC_WRITE_EEPROM</td>
-<td>_IOW(AMI_IOC_MAGIC, 10, struct ami_ioc_eeprom_payload*)</td>
-<td>struct ami_ioc_eeprom_data* with "len", "addr", and "offset" fields set</td>
-<td>N/A</td>
-<td>No</td>
-<td>No</td>
-<td>READY or MISSING_INFO</td>
+<tr class="row-even"><td><p>AMI_IOC_READ_EEPROM</p></td>
+<td><p>10</p></td>
+<td><p>_IOWR</p></td>
+<td><p>struct ami_ioc_eeprom_payload*</p></td>
+<td><p>EEPROM data</p></td>
+<td><p>No</p></td>
+<td><p>READY or MISSING_INFO</p></td>
 </tr>
-<tr>
-<td>AMI_IOC_APP_SETUP</td>
-<td>_IOW(AMI_IOC_MAGIC, 11, enum ami_ioc_app_setup)</td>
-<td>enum ami_ioc_app_setup</td>
-<td>N/A</td>
-<td>No</td>
-<td>No</td>
-<td>Any state except INIT and SHUTDOWN</td>
+<tr class="row-odd"><td><p>AMI_IOC_WRITE_EEPROM</p></td>
+<td><p>11</p></td>
+<td><p>_IOW</p></td>
+<td><p>struct ami_ioc_eeprom_payload*</p></td>
+<td><p>N/A</p></td>
+<td><p>No</p></td>
+<td><p>READY or MISSING_INFO</p></td>
 </tr>
-<tr>
-<td>AMI_IOC_READ_MODULE</td>
-<td>_IOW(AMI_IOC_MAGIC, 12, struct ami_ioc_module_payload*)</td>
-<td>struct ami_ioc_module_payload* with all fields set</td>
-<td>Data read from module</td>
-<td>No</td>
-<td>No</td>
-<td>READY or MISSING_INFO</td>
+<tr class="row-even"><td><p>AMI_IOC_APP_SETUP</p></td>
+<td><p>12</p></td>
+<td><p>_IOW</p></td>
+<td><p>enum ami_ioc_app_setup</p></td>
+<td><p>N/A</p></td>
+<td><p>No</p></td>
+<td><p>Any except INIT and SHUTDOWN</p></td>
 </tr>
-<tr>
-<td>AMI_IOC_WRITE_MODULE</td>
-<td>_IOW(AMI_IOC_MAGIC, 13, struct ami_ioc_module_payload*)</td>
-<td>struct ami_ioc_module_payload* with all fields set</td>
-<td>N/A</td>
-<td>No</td>
-<td>No</td>
-<td>READY or MISSING_INFO</td>
+<tr class="row-odd"><td><p>AMI_IOC_READ_MODULE</p></td>
+<td><p>13</p></td>
+<td><p>_IOW</p></td>
+<td><p>struct ami_ioc_module_payload*</p></td>
+<td><p>Module data</p></td>
+<td><p>No</p></td>
+<td><p>READY or MISSING_INFO</p></td>
 </tr>
-<tr>
-<td>AMI_IOC_DEBUG_VERBOSITY</td>
-<td>_IOW(AMI_IOC_MAGIC, 14, uint8_t)</td>
-<td>The debug level to set</td>
-<td>N/A</td>
-<td>No</td>
-<td>No</td>
-<td>READY or MISSING_INFO</td>
+<tr class="row-even"><td><p>AMI_IOC_WRITE_MODULE</p></td>
+<td><p>14</p></td>
+<td><p>_IOW</p></td>
+<td><p>struct ami_ioc_module_payload*</p></td>
+<td><p>N/A</p></td>
+<td><p>No</p></td>
+<td><p>READY or MISSING_INFO</p></td>
+</tr>
+<tr class="row-odd"><td><p>AMI_IOC_DEBUG_VERBOSITY</p></td>
+<td><p>15</p></td>
+<td><p>_IOW</p></td>
+<td><p>uint8_t</p></td>
+<td><p>N/A</p></td>
+<td><p>No</p></td>
+<td><p>READY or MISSING_INFO</p></td>
 </tr>
 </tbody>
 </table>
+<div class="section" id="ioctl-details">
+<h3>IOCTL Details<a class="headerlink" href="#ioctl-details" title="Permalink to this heading">¶</a></h3>
+<div class="section" id="input-output-descriptions">
+<h4>Input/Output Descriptions<a class="headerlink" href="#input-output-descriptions" title="Permalink to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>AMI_IOC_DOWNLOAD_PDI</strong>: Input struct populated with PDI image data</p></li>
+<li><p><strong>AMI_IOC_READ_BAR</strong>: Input struct with bar/offset/length set; output data copied to
+buffer</p></li>
+<li><p><strong>AMI_IOC_WRITE_BAR</strong>: Input struct with bar/offset/length set and buffer populated
+with data to write</p></li>
+<li><p><strong>AMI_IOC_GET_SENSOR_VALUE</strong>: Input with hwmon_channel and sensor_type; output<br />
+populates val, status, and fresh fields</p></li>
+<li><p><strong>AMI_IOC_DEVICE_BOOT</strong>: Input with partition field set</p></li>
+<li><p><strong>AMI_IOC_COPY_PARTITION</strong>: Input with src and dest fields set</p></li>
+<li><p><strong>AMI_IOC_SET_SENSOR_REFRESH</strong>: Input specifies new sensor refresh timeout</p></li>
+<li><p><strong>AMI_IOC_GET_FPT_HDR</strong>: Output populates FPT header information</p></li>
+<li><p><strong>AMI_IOC_GET_FPT_PARTITION</strong>: Input with partition field set; output populates<br />
+remaining fields</p></li>
+<li><p><strong>AMI_IOC_SET_FPT_PARTITION</strong>: Input/output with all fields appropriately set</p></li>
+<li><p><strong>AMI_IOC_READ_EEPROM</strong>: Input with len, addr, and offset; output contains EEPROM<br />
+data</p></li>
+<li><p><strong>AMI_IOC_WRITE_EEPROM</strong>: Input with len, addr, offset, and data to write</p></li>
+<li><p><strong>AMI_IOC_APP_SETUP</strong>: Input specifies application setup action</p></li>
+<li><p><strong>AMI_IOC_READ_MODULE</strong>: Input with module parameters; output contains module data</p></li>
+<li><p><strong>AMI_IOC_WRITE_MODULE</strong>: Input with module parameters and data to write</p></li>
+<li><p><strong>AMI_IOC_DEBUG_VERBOSITY</strong>: Input specifies debug level</p></li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 
@@ -421,7 +533,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on March 10, 2026.
+      <span class="lastupdated">Last updated on April 14, 2026.
       </span></p>
   </div>
 

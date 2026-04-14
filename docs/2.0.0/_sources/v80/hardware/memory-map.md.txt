@@ -2,19 +2,33 @@
 
 AMR uses the address mapping illustrated below.
 
-<span id="amrv80-memorymap-memorymapping"></span>
+<span id="amr-memorymap-memorymapping"></span>
 
 ## Memory Mapping
 
 This table shows the recommended functions that can access the DDR Memories. The light grey rows and columns related to the APU, PCIe User, and PCIe DMA are not currently used, but they are captured for future growth. The **Yes/No** entries indicate the recommended memory access. There is not an active control that prohibits unintended access to the DDR. For example, if caution is not exercised, the APU or PL could access DDR locations intended for the RPU (RPU execution).
 
-Address remapping must be used for the PCIe to access the 128MB of memory starting at 0x000\_3800\_0000. The address remap is configured in the AXI NoC CIPS (axi\_noc\_cips).
+Address remapping is configured for PCIe access to the PL memory space through the AXI NoC CIPS (axi\_noc\_cips):
+
+**PF0 Address Remapping:**
+- PCIe BAR0 Address: 0x201\_0000\_0000
+- Remaps to AXI Address: 0x1000\_0000 (local address space)
+- Aperture Size: 8 MB
+- Configured in axi_noc_cips M00_AXI and S00_AXI/S01_AXI REMAPS
+
+**PF1 Address Remapping:**
+- PCIe BAR2 Address: 0x202\_0000\_0000
+- Remaps to AXI Address: No remap (direct addressing)
+- Aperture Size: 1 GB
+- Configured in axi_noc_cips M01_AXI
+
+The address remap configuration is implemented in the AXI NoC CIPS (axi\_noc\_cips) IP block.
 
 ![images/1107374801.png](../../images/1107374801.png)
 
 N/A\* The RPU is only 32-bit addressing, so it cannot access more than 4GB of DDR.
 
-<span id="amrv80-memorymap-amrmemorymap"></span>
+<span id="amr-memorymap-amrmemorymap"></span>
 
 ## AMR Memory Map
 
@@ -26,27 +40,31 @@ A complete AMD Versal™ Address map can be found here:
 
   - <https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map>
 
-<span id="amrv80-memorymap-amr4gmemoryspace-ddrlower2g-ps-pmc"></span>
+<span id="amr-memorymap-amr4gmemoryspace-ddrlower2g-ps-pmc"></span>
 
 ### AMR 4G Memory Space - DDR Lower 2G & PS/PMC
 
 ![images/1107374801.png](../../images/1107374801.png)
 
-<span id="amrv80-memorymap-amrhbmmemoryspace"></span>
+<span id="amr-memorymap-amrhbmmemoryspace"></span>
 
 ### AMR HBM Memory Space
 
 ![images/1107374822.png](../../images/1107374822.png)
 
-<span id="amrv80-memorymap-pf0baraddressing"></span>
+<span id="amr-memorymap-pf0baraddressing"></span>
 
 ### AMR PL Memory Space
 
 ![images/1107374813.png](../../images/1107374813.png)
 
-PCIe® Management functions are in blue.
+**PL Memory Space - Current Base Design:**
+- **PF0 BAR0**: 0x201_0000_0000 - 0x201_007F_FFFF (8 MB) - No hardware IP instantiated, address space reserved
+- **PF1 BAR2**: 0x202_0000_0000 - 0x202_0FFF_FFFF (256 MB via 1GB aperture) - SmartConnect → AXI GPIO test
 
-<span id="amrv80-memorymap-amrddrupper2ganddimm32gmemoryspace"></span>
+**Note:** PCIe® Management functions shown in diagram may reference hardware that is not instantiated in the base design. The base design provides address space for future expansion but does not include management IP blocks (GCQ, UUID ROM, EEPROM controllers) in PL.
+
+<span id="amr-memorymap-amrddrupper2ganddimm32gmemoryspace"></span>
 
 ### AMR DDR Upper 2G and DIMM 32G Memory Space
 
