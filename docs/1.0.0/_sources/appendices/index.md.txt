@@ -1,3 +1,0 @@
-# Appendices
-
-  - [AMR - List of Abbreviations](abbreviations/)
