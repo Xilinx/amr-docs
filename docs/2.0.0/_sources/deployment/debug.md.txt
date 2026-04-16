@@ -10,7 +10,7 @@ The debug techniques are listed here in approximate increasing order of complexi
 
 ### **Programming**
 
-If an issue occurs during a cfgmem\_fpt/cfgmem\_program ([AMR Management Interface userguide ](ami\_tool)\#overview](../../deployment/ami-tool-guide#overview)) please go straight to [AMR Updating FPT Image in Flash](../update-fpt/) to recover the card.
+If an issue occurs during a cfgmem\_fpt/cfgmem\_program ([AMR Management Interface userguide](ami-tool-guide#overview)) please go straight to [AMR Updating FPT Image in Flash](update-fpt.md) to recover the card.
 
 <span id="amrdebugtechniques-cardstatus"></span>
 
