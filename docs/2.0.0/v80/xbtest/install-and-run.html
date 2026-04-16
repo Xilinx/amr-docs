@@ -167,7 +167,7 @@
 <p><span id="how-toinstallandrunapre-builtamrdesignonanalveocard-dependencies"></span></p>
 <div class="section" id="dependencies">
 <h3>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this heading">¶</a></h3>
-<p>Supported OS and kernel. See <a class="reference internal" href="#../overview/amr-overview.md#AMROverview-SupportedKernelsandDistributions"><span class="xref myst">Supported Kernels and Distributions</span></a></p>
+<p>Supported OS and kernel. See <a class="reference internal" href="../../overview/amr-overview.html#AMROverview-SupportedKernelsandDistributions"><span class="std std-ref">Supported Kernels and Distributions</span></a></p>
 <p><em>Note</em>: root/sudo permissions are required.</p>
 <p>Tools</p>
 <ul class="simple">
@@ -181,9 +181,9 @@
 <li><p>Confirm the server is running a supported OS. Follow the instructions provided in the <em>Alveo V80 Data Center Accelerator Cards Installation Guide</em> (<a class="reference external" href="https://docs.amd.com/go/en-US/ug1617-alveo-v80">UG1617</a>) to physically install the card in your server.</p></li>
 <li><p>Get the latest AMR installation package for your Alveo card.</p>
 <ol class="arabic simple">
-<li><p>For the most recent version of the example design, refer to the table in <a class="reference internal" href="#../release-information/"><span class="xref myst">AMR Release Information</span></a>..md</p>
+<li><p>For the most recent version of the example design, refer to <a class="reference internal" href="../../release-notes.html"><span class="std std-doc">AMR Release Notes</span></a>.</p>
 <ul class="simple">
-<li><p><em>xbtest Deployment Archive</em> is a <code class="docutils literal notranslate"><span class="pre">.zip</span></code> of the AMR installation package. It is pre-built from the xbtest source code, using the Vivado™ tools version noted in the <a class="reference internal" href="#../release-information/"><span class="xref myst">AMR Release Information</span></a></p></li>
+<li><p><em>xbtest Deployment Archive</em> is a <code class="docutils literal notranslate"><span class="pre">.zip</span></code> of the AMR installation package. It is pre-built from the xbtest source code, using the Vivado™ tools version noted in the <a class="reference internal" href="../../release-notes.html"><span class="std std-doc">AMR Release Notes</span></a></p></li>
 </ul>
 </li>
 <li><p>Download the latest <em>xbtest Deployment Archive</em> to the server that contains your Alveo card.</p></li>
@@ -214,7 +214,7 @@ sudo<span class="w"> </span>yum<span class="w"> </span>remove<span class="w"> </
 </div>
 <div class="section" id="amr-installation">
 <h2>AMR Installation<a class="headerlink" href="#amr-installation" title="Permalink to this heading">¶</a></h2>
-<p>Installing AMR is a two-step process. First, you will install the pre-built AMR package onto the host or you can rebuild the AMR sw packages as mentioned in <a class="reference internal" href="#../getting-started/rebuild.md"><span class="xref myst">Rebuild</span></a> Second, you will program xbtest into flash on your Alveo card.</p>
+<p>Installing AMR is a two-step process. First, you will install the pre-built AMR package onto the host or you can rebuild the AMR sw packages as mentioned in <a class="reference internal" href="../../getting-started/rebuild.html"><span class="std std-doc">Rebuild</span></a>. Second, you will program xbtest into flash on your Alveo card.</p>
 <p>To install the package onto the host, navigate to the directory with the debian or rpm packages depending on your host OS. Install libami*, amitool*, ami* packages</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1. Installing debian packages:
     sudo dpkg -i libami_x.x.x.xxx.xxx_amd64.deb
@@ -228,7 +228,7 @@ sudo<span class="w"> </span>yum<span class="w"> </span>remove<span class="w"> </
 </pre></div>
 </div>
 <p>Note: Install libami* package before amitool* and ami* packages.</p>
-<p>To program AMR onto your Alveo card for the first time, update the Flash Partition Table ](FPT) image in flash using Vivado HW Manager and JTAG. Refer to <a class="reference internal" href="#../update-fpt/"><span class="xref myst">AMR Updating FPT Image in Flash</span></a> for step-by-step instructions. If successful, Vivado HW Manager will report this with a pop-up message: “Flash programming completed successfully.” Cold boot the server to boot AMR from flash.</p>
+<p>To program AMR onto your Alveo card for the first time, update the Flash Partition Table (FPT) image in flash using Vivado HW Manager and JTAG. Refer to <a class="reference internal" href="../../deployment/update-fpt.html"><span class="std std-doc">AMR Updating FPT Image in Flash</span></a> for step-by-step instructions. If successful, Vivado HW Manager will report this with a pop-up message: “Flash programming completed successfully.” Cold boot the server to boot AMR from flash.</p>
 <p><span id="how-toinstallandrunapre-builtamrdesignonanalveocard-testingamr"></span></p>
 </div>
 <div class="section" id="testing-amr">
@@ -470,7 +470,7 @@ PASS      :: GEN_024 :: GENERAL      :: RESULT: ALL TESTS PASSED
 </div>
 <div class="section" id="troubleshooting">
 <h3>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading">¶</a></h3>
-<p>For debugging information, see <a class="reference internal" href="../../deployment/debug.html"><span class="doc std std-doc">AMR Debug Techniques</span></a>..md</p>
+<p>For debugging information, see <a class="reference internal" href="../../deployment/debug.html"><span class="std std-doc">AMR Debug Techniques</span></a>.</p>
 <p><span id="how-toinstallandrunapre-builtamrdesignonanalveocard-nextsteps"></span></p>
 </div>
 </div>
@@ -479,14 +479,14 @@ PASS      :: GEN_024 :: GENERAL      :: RESULT: ALL TESTS PASSED
 <p>This getting started guide covered AMR installation and basic hardware testing commands. If you would like to explore the full set of hardware test commands available, see:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../deployment/ami-tool-guide.html"><span class="doc std std-doc">AMR Management Interface userguide</span></a></p></li>
-<li><p><a class="reference internal" href="#xbtest-Userguide"><span class="xref myst">xbtest User Guide / Usage / command line options</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="../../_downloads/e669e1f661e7075794c7b97e3a57cd25/command-line-options.html"><span class="xref download myst">xbtest User Guide / Usage / command line options</span></a></p></li>
 </ul>
 <p>Notably, some interesting commands to try are:</p>
 <ul class="simple">
-<li><p>the AMI cfgmem_program command, which updates the PDI in flash over the PCIe interface. See <a class="reference internal" href="#../update-pdi/"><span class="xref myst">AMR Updating Design PDI in Flash</span></a></p></li>
-<li><p>additional pre-canned xbtest tests are available to test other features on the card. Please refer to <a class="reference internal" href="#xbtest/user-guide/source/index"><span class="xref myst">xbtest User Guide / Pre-canned tests section</span></a>. The available pre-canned tests are: gtm_prbs, gtyp_prbs, memory, mmio, power, stress, and verify.</p></li>
+<li><p>the AMI cfgmem_program command, which updates the PDI in flash over the PCIe interface. See <a class="reference internal" href="../../deployment/update-pdi.html"><span class="std std-doc">AMR Updating Design PDI in Flash</span></a></p></li>
+<li><p>additional pre-canned xbtest tests are available to test other features on the card. Please refer to <a class="reference download internal" download="" href="../../_downloads/32b2c59bb5a04d5d5128eca62c65298f/pre-canned-tests.html"><span class="xref download myst">xbtest User Guide / Pre-canned tests section</span></a>. The available pre-canned tests are: gtm_prbs, gtyp_prbs, memory, mmio, power, stress, and verify.</p></li>
 </ul>
-<p>For a quick look at how to build AMR, refer to the getting started guide: <a class="reference internal" href="#rebuild/"><span class="xref myst">How-to Rebuild an AMR Design for Yourself</span></a>.</p>
+<p>For a quick look at how to build AMR, refer to the getting started guide: <a class="reference internal" href="../../getting-started/rebuild.html"><span class="std std-doc">How-to Rebuild an AMR Design for Yourself</span></a>.</p>
 </div>
 </div>
 

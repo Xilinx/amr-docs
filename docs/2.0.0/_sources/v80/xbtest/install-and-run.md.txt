@@ -10,7 +10,7 @@ This is a getting started guide for the Adaptive Management Runtime (AMR) to be 
 
 ### Dependencies
 
-Supported OS and kernel. See [Supported Kernels and Distributions](../overview/amr-overview.md#AMROverview-SupportedKernelsandDistributions)
+Supported OS and kernel. See [Supported Kernels and Distributions](../../overview/amr-overview.md#AMROverview-SupportedKernelsandDistributions)
 
 *Note*: root/sudo permissions are required.
 
@@ -26,9 +26,9 @@ Tools
 
 2.  Get the latest AMR installation package for your Alveo card.
     
-    1.  For the most recent version of the example design, refer to the table in [AMR Release Information](../release-information/)..md
+    1.  For the most recent version of the example design, refer to [AMR Release Notes](../../release-notes.md).
         
-        -  *xbtest Deployment Archive* is a `.zip` of the AMR installation package. It is pre-built from the xbtest source code, using the Vivado™ tools version noted in the [AMR Release Information](../release-information/)
+        -  *xbtest Deployment Archive* is a `.zip` of the AMR installation package. It is pre-built from the xbtest source code, using the Vivado™ tools version noted in the [AMR Release Notes](../../release-notes.md)
     
     2.  Download the latest *xbtest Deployment Archive* to the server that contains your Alveo card.
     
@@ -60,7 +60,7 @@ Tools
 
 ## AMR Installation
 
-Installing AMR is a two-step process. First, you will install the pre-built AMR package onto the host or you can rebuild the AMR sw packages as mentioned in [Rebuild](../getting-started/rebuild.md) Second, you will program xbtest into flash on your Alveo card.
+Installing AMR is a two-step process. First, you will install the pre-built AMR package onto the host or you can rebuild the AMR sw packages as mentioned in [Rebuild](../../getting-started/rebuild.md). Second, you will program xbtest into flash on your Alveo card.
 
 To install the package onto the host, navigate to the directory with the debian or rpm packages depending on your host OS. Install libami*, amitool*, ami* packages
 
@@ -77,7 +77,7 @@ To install the package onto the host, navigate to the directory with the debian 
 Note: Install libami* package before amitool* and ami* packages.
 
 
-To program AMR onto your Alveo card for the first time, update the Flash Partition Table ](FPT) image in flash using Vivado HW Manager and JTAG. Refer to [AMR Updating FPT Image in Flash](../update-fpt/) for step-by-step instructions. If successful, Vivado HW Manager will report this with a pop-up message: “Flash programming completed successfully.” Cold boot the server to boot AMR from flash.
+To program AMR onto your Alveo card for the first time, update the Flash Partition Table (FPT) image in flash using Vivado HW Manager and JTAG. Refer to [AMR Updating FPT Image in Flash](../../deployment/update-fpt.md) for step-by-step instructions. If successful, Vivado HW Manager will report this with a pop-up message: “Flash programming completed successfully.” Cold boot the server to boot AMR from flash.
 
 <span id="how-toinstallandrunapre-builtamrdesignonanalveocard-testingamr"></span>
 
@@ -329,7 +329,7 @@ Successful completion of this test is indicated by 0 Errors, 0 Failures, and the
 
 ### Troubleshooting
 
-For debugging information, see [AMR Debug Techniques](../../deployment/debug)..md
+For debugging information, see [AMR Debug Techniques](../../deployment/debug.md).
 
 <span id="how-toinstallandrunapre-builtamrdesignonanalveocard-nextsteps"></span>
 
@@ -339,13 +339,13 @@ This getting started guide covered AMR installation and basic hardware testing c
 
   - [AMR Management Interface userguide](../../deployment/ami-tool-guide)
 
-  - [xbtest User Guide / Usage / command line options](xbtest-Userguide)
+  - [xbtest User Guide / Usage / command line options](user-guide/source/docs/usage/command-line-options.html)
 
 Notably, some interesting commands to try are:
 
-  - the AMI cfgmem\_program command, which updates the PDI in flash over the PCIe interface. See [AMR Updating Design PDI in Flash](../update-pdi/)
+  - the AMI cfgmem\_program command, which updates the PDI in flash over the PCIe interface. See [AMR Updating Design PDI in Flash](../../deployment/update-pdi.md)
 
-  - additional pre-canned xbtest tests are available to test other features on the card. Please refer to [xbtest User Guide / Pre-canned tests section](xbtest/user-guide/source/index). The available pre-canned tests are: gtm\_prbs, gtyp\_prbs, memory, mmio, power, stress, and verify.
+  - additional pre-canned xbtest tests are available to test other features on the card. Please refer to [xbtest User Guide / Pre-canned tests section](user-guide/source/pre-canned-tests.html). The available pre-canned tests are: gtm\_prbs, gtyp\_prbs, memory, mmio, power, stress, and verify.
 
-For a quick look at how to build AMR, refer to the getting started guide: [How-to Rebuild an AMR Design for Yourself](rebuild/).
+For a quick look at how to build AMR, refer to the getting started guide: [How-to Rebuild an AMR Design for Yourself](../../getting-started/rebuild.md).
 
