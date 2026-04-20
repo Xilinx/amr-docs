@@ -339,13 +339,13 @@ This getting started guide covered AMR installation and basic hardware testing c
 
   - [AMR Management Interface userguide](../../deployment/ami-tool-guide)
 
-  - [xbtest User Guide / Usage / command line options](../../docs/usage/command-line-options.html)
+  - [xbtest User Guide / Usage / command line options](./user-guide/source/docs/usage/command-line-options.html)
 
 Notably, some interesting commands to try are:
 
   - the AMI cfgmem\_program command, which updates the PDI in flash over the PCIe interface. See [AMR Updating Design PDI in Flash](../../deployment/update-pdi.md)
 
-  - additional pre-canned xbtest tests are available to test other features on the card. Please refer to [xbtest User Guide / Pre-canned tests section](../../docs/pre-canned-tests/pre-canned-tests-description.html). The available pre-canned tests are: gtm\_prbs, gtyp\_prbs, memory, mmio, power, stress, and verify.
+  - additional pre-canned xbtest tests are available to test other features on the card. Please refer to [xbtest User Guide / Pre-canned tests section](./user-guide/source/docs/pre-canned-tests/pre-canned-tests-description.html). The available pre-canned tests are: gtm\_prbs, gtyp\_prbs, memory, mmio, power, stress, and verify.
 
 For a quick look at how to build AMR, refer to the getting started guide: [How-to Rebuild an AMR Design for Yourself](../../getting-started/rebuild.md).
 
