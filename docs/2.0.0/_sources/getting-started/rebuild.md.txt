@@ -120,13 +120,13 @@ The following steps will guide you through setting up your Vivado environment an
 <span id="how-torebuildanamrdesignforyourself-firmware"></span>
 ### Firmware
 
-  The following steps will guide you through building the AMI firmware from the cloned source code.
+  The following steps will guide you through building the AMC firmware from the cloned source code.
 
   1.  On your development server, navigate to the AMC directory in \<AMR cloned repo\>/fw/AMC/.
 
 2.  Run the script
     ./scripts/build.sh -xsa <hw_xsa> -profile <v80/rave>
-which will build the firmware and generate amr_ospi_fpt.bin, amr_ospi.bin. After successfully building, the firmware package will be in \<AMR\>/fw/AMI/build_amc/. Copy this to your deployment server.
+which will build the firmware and generate amr_ospi_fpt.bin, amr_ospi.bin. After successfully building, the firmware package will be in \<AMR\>/fw/AMC/build_amc/. Copy this to your deployment server.
 
 <span id="how-torebuildanamrdesignforyourself-software"></span>
 
@@ -164,8 +164,6 @@ By default, the `build.sh` script creates a build directory which would contain 
     <AMR>
     ├── build_amc
     │   ├── amc.elf*
-    │   ├── amd_fpt.bin*
-    │   ├── amr_ospi_all_0_sync_offsets.txt
     │   ├── amr_ospi.bin
     │   ├── amr_ospi_fpt.bin
     │   ├── amr_ospi_pdi.bif*

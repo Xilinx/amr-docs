@@ -264,12 +264,12 @@ verify that the required output files are present.
 </div>
 <div class="section" id="firmware">
 <h3>Firmware<a class="headerlink" href="#firmware" title="Permalink to this heading">¶</a></h3>
-<p>The following steps will guide you through building the AMI firmware from the cloned source code.</p>
+<p>The following steps will guide you through building the AMC firmware from the cloned source code.</p>
 <ol class="arabic simple">
 <li><p>On your development server, navigate to the AMC directory in &lt;AMR cloned repo&gt;/fw/AMC/.</p></li>
 <li><p>Run the script
 ./scripts/build.sh -xsa &lt;hw_xsa&gt; -profile &lt;v80/rave&gt;
-which will build the firmware and generate amr_ospi_fpt.bin, amr_ospi.bin. After successfully building, the firmware package will be in &lt;AMR&gt;/fw/AMI/build_amc/. Copy this to your deployment server.</p></li>
+which will build the firmware and generate amr_ospi_fpt.bin, amr_ospi.bin. After successfully building, the firmware package will be in &lt;AMR&gt;/fw/AMC/build_amc/. Copy this to your deployment server.</p></li>
 </ol>
 <p><span id="how-torebuildanamrdesignforyourself-software"></span></p>
 </div>
@@ -308,8 +308,6 @@ sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </spa
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;AMR&gt;
 ├── build_amc
 │   ├── amc.elf*
-│   ├── amd_fpt.bin*
-│   ├── amr_ospi_all_0_sync_offsets.txt
 │   ├── amr_ospi.bin
 │   ├── amr_ospi_fpt.bin
 │   ├── amr_ospi_pdi.bif*
@@ -391,7 +389,7 @@ Will do a hot reset to boot into partition 0. This may take a minute...
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on April 20, 2026.
+      <span class="lastupdated">Last updated on April 22, 2026.
       </span></p>
   </div>
 
