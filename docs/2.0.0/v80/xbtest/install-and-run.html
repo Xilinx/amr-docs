@@ -243,17 +243,19 @@ sudo ami_tool cfgmem_fpt -d &lt;B:D.F&gt; -i &lt;flash_setup/fpt_setup_amd_v80_g
 </div>
 <div class="section" id="amr-installation-with-existing-aved-xbtest">
 <h2>AMR installation with existing AVED/xbtest<a class="headerlink" href="#amr-installation-with-existing-aved-xbtest" title="Permalink to this heading">¶</a></h2>
-<p>Follow the steps below to install AMR fw/sw with existing AVED/xbtest
-1. Ensure the existing AVED / xbtest environment is functional
-2. AMI and AMC versions are compatible (matched)
-3. AMC is in READY state before proceeding
-4. Build the AMR sources [Rebuild] (../../getting-started/rebuild.md)
-5. Program the AMR OSPI fpt image using the ami_tool cfgmem_fpt command
-```
-sudo ami_tool cfgmem_fpt -d <BDF> -i &lt;amr_ospi_fpt.bin&gt; -t primary</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>   ```
+<p>Follow the steps below to install AMR fw/sw with existing AVED/xbtest</p>
+<ul>
+<li><p>Ensure the existing AVED / xbtest environment is functional</p></li>
+<li><p>AMI and AMC versions are compatible (matched)</p></li>
+<li><p>AMC is in READY state before proceeding</p></li>
+<li><p>Build the AMR sources [Rebuild] (../../getting-started/rebuild.md)</p></li>
+<li><p>Program the AMR OSPI fpt image using the ami_tool cfgmem_fpt command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="n">sudo</span> <span class="n">ami_tool</span> <span class="n">cfgmem_fpt</span> <span class="o">-</span><span class="n">d</span> <span class="o">&lt;</span><span class="n">BDF</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">i</span> <span class="o">&lt;</span><span class="n">amr_ospi_fpt</span><span class="o">.</span><span class="n">bin</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">t</span> <span class="n">primary</span>
+
 </pre></div>
 </div>
+</li>
+</ul>
 </div>
 <div class="section" id="install-the-amr-software-packages">
 <h2>Install the AMR software packages<a class="headerlink" href="#install-the-amr-software-packages" title="Permalink to this heading">¶</a></h2>

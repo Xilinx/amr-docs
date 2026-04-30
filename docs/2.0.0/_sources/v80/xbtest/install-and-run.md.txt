@@ -88,15 +88,16 @@ To install the package onto the host, navigate to the directory with the aved_in
 
 ## AMR installation with existing AVED/xbtest 
 Follow the steps below to install AMR fw/sw with existing AVED/xbtest
-    1. Ensure the existing AVED / xbtest environment is functional
-    2. AMI and AMC versions are compatible (matched)
-    3. AMC is in READY state before proceeding
-    4. Build the AMR sources [Rebuild] (../../getting-started/rebuild.md)
-    5. Program the AMR OSPI fpt image using the ami_tool cfgmem_fpt command
-       ```
+-   Ensure the existing AVED / xbtest environment is functional
+-   AMI and AMC versions are compatible (matched)
+-   AMC is in READY state before proceeding
+-   Build the AMR sources [Rebuild] (../../getting-started/rebuild.md)
+-   Program the AMR OSPI fpt image using the ami_tool cfgmem_fpt command
+    
+    ```
        sudo ami_tool cfgmem_fpt -d <BDF> -i <amr_ospi_fpt.bin> -t primary
 
-       ```
+    ```
 ## Install the AMR software packages
 
 To install the package onto the host, navigate to the directory with the debian or rpm packages depending on your host OS. Install libami*, amitool*, ami* packages
