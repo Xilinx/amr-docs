@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>How-to install and run a pre-built AMR design on an ALVEO V80 card &mdash; AMR  documentation</title>
+  <title>How-to install and run a pre-built Xbtest design on an ALVEO V80 card &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
@@ -78,14 +78,17 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">V80 Platform Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../deployment-archive.html">AMR Deployment Archive</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../hardware/index.html">Hardware Design - V80 (Alveo)</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">How-to install and run a pre-built AMR design on an ALVEO V80 card</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">How-to install and run a pre-built Xbtest design on an ALVEO V80 card</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#before-you-begin">Before You Begin</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#dependencies">Dependencies</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#preparing-for-amr-installation">Preparing for AMR Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#preparing-for-xbtest-installation">Preparing for Xbtest Installation</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#amr-installation">AMR Installation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#testing-amr">Testing AMR</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#xbtest-installation-with-an-existing-amr">Xbtest installation with an existing AMR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aved-installation">AVED Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#amr-installation-with-existing-aved-xbtest">AMR installation with existing AVED/xbtest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-the-amr-software-packages">Install the AMR software packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing-xbtest">Testing xbtest</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#ami-tool-overview">ami_tool Overview</a></li>
 </ul>
 </li>
@@ -148,7 +151,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../index.html">V80 Platform Documentation</a> &raquo;</li>
-      <li>How-to install and run a pre-built AMR design on an ALVEO V80 card</li>
+      <li>How-to install and run a pre-built Xbtest design on an ALVEO V80 card</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/v80/xbtest/install-and-run.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -158,39 +161,38 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="how-to-install-and-run-a-pre-built-amr-design-on-an-alveo-v80-card">
-<h1>How-to install and run a pre-built AMR design on an ALVEO V80 card<a class="headerlink" href="#how-to-install-and-run-a-pre-built-amr-design-on-an-alveo-v80-card" title="Permalink to this heading">¶</a></h1>
-<p>This is a getting started guide for the Adaptive Management Runtime (AMR) to be used with the provided pre-built AMR package file. This guide offers instruction in installing the package on your server and running key commands to test and evaluate the design example. The pre-built example image includes the AMR base design. This provides a turnkey card capable of running through the canned tests in the xbtest suite. For the AMR source files, only the AMR base design is included - the xbtest IP is not included and instead would be replaced with a user application.</p>
-<p><span id="how-toinstallandrunapre-builtamrdesignonanalveocard-beforeyoubegin"></span></p>
+  <div class="section" id="how-to-install-and-run-a-pre-built-xbtest-design-on-an-alveo-v80-card">
+<h1>How-to install and run a pre-built Xbtest design on an ALVEO V80 card<a class="headerlink" href="#how-to-install-and-run-a-pre-built-xbtest-design-on-an-alveo-v80-card" title="Permalink to this heading">¶</a></h1>
+<p>Note: For xbtest we have to revert to AVED design as xbtest with AMR design not supported in this release. Below are the instructions to install AMI and xbtest with prebuilt xbtest design images.</p>
+<p><span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-beforeyoubegin"></span></p>
 <div class="section" id="before-you-begin">
 <h2>Before You Begin<a class="headerlink" href="#before-you-begin" title="Permalink to this heading">¶</a></h2>
-<p><span id="how-toinstallandrunapre-builtamrdesignonanalveocard-dependencies"></span></p>
+<p><span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-dependencies"></span></p>
 <div class="section" id="dependencies">
 <h3>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this heading">¶</a></h3>
 <p>Supported OS and kernel. See <a class="reference internal" href="../../overview/amr-overview.html#amroverview-supportedkernelsanddistributions"><span class="std std-ref">Supported Kernels and Distributions</span></a></p>
 <p><em>Note</em>: root/sudo permissions are required.</p>
 <p>Tools</p>
 <ul class="simple">
-<li><p>Vivado™ 2026.1</p></li>
+<li><p>Vivado™ 2025.2</p></li>
 </ul>
-<p><span id="how-toinstallandrunapre-builtamrdesignonanalveocard-preparingforamrinstallation"></span></p>
+<p><span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-preparingforxbtestinstallation"></span></p>
 </div>
-<div class="section" id="preparing-for-amr-installation">
-<h3>Preparing for AMR Installation<a class="headerlink" href="#preparing-for-amr-installation" title="Permalink to this heading">¶</a></h3>
+<div class="section" id="preparing-for-xbtest-installation">
+<h3>Preparing for Xbtest Installation<a class="headerlink" href="#preparing-for-xbtest-installation" title="Permalink to this heading">¶</a></h3>
 <ol class="arabic">
 <li><p>Confirm the server is running a supported OS. Follow the instructions provided in the <em>Alveo V80 Data Center Accelerator Cards Installation Guide</em> (<a class="reference external" href="https://docs.amd.com/go/en-US/ug1617-alveo-v80">UG1617</a>) to physically install the card in your server.</p></li>
-<li><p>Get the latest AMR installation package for your Alveo card.</p>
+<li><p>Get the latest Xbtest installation package for your Alveo card.</p>
 <ol class="arabic simple">
-<li><p>For the most recent version of the example design, refer to <a class="reference internal" href="../../release-notes.html"><span class="std std-doc">AMR Release Notes</span></a>.</p>
+<li><p>For the most recent version of the example design, refer to <a class="reference internal" href="../../release-notes.html"><span class="std std-doc">Release Notes</span></a>.</p>
 <ul class="simple">
-<li><p><em>xbtest Deployment Archive</em> is a <code class="docutils literal notranslate"><span class="pre">.zip</span></code> of the AMR installation package. It is pre-built from the xbtest source code, using the Vivado™ tools version noted in the <a class="reference internal" href="../../release-notes.html"><span class="std std-doc">AMR Release Notes</span></a></p></li>
+<li><p><em>xbtest Deployment Archive</em> is a <code class="docutils literal notranslate"><span class="pre">.zip</span></code> of the xbtest installation package. It is pre-built from the xbtest source code, using the Vivado™ tools version noted in the <a class="reference internal" href="../../release-notes.html"><span class="std std-doc">Release Notes</span></a></p></li>
 </ul>
 </li>
 <li><p>Download the latest <em>xbtest Deployment Archive</em> to the server that contains your Alveo card.</p></li>
-<li><p>Unzip the archive, and find the <code class="docutils literal notranslate"><span class="pre">design.pdi</span></code> (which will be used in the xbtest installation). Review <a class="reference internal" href="../../deployment/install-card.html"><span class="std std-doc">AMR Installing the Design onto the Card</span></a> for details on deployment package usage and programming flow.</p></li>
+<li><p>Unzip the archive.</p></li>
+<li><p>Unlike prior Alveo platforms, AVED does not use the Xilinx RunTime Library (XRT). Instead, AVED includes the AVED Management Interface (AMI) as part of the example design. Before AVED installation, ensure that XRT has been removed. It’s not possible to have AMI and XRT running on the same host at the same time.</p></li>
 </ol>
-</li>
-<li><p>Unlike prior Alveo platforms, AMR does not use the Xilinx RunTime Library (XRT). Instead, AMR includes the AMR Management Interface (AMI) as part of the example design. Before AMR installation, ensure that XRT has been removed. It’s not possible to have AMI and XRT running on the same host at the same time.</p>
 <p><strong>Ubuntu:</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check if XRT is installed</span>
 apt<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>xrt
@@ -209,32 +211,70 @@ sudo<span class="w"> </span>yum<span class="w"> </span>remove<span class="w"> </
 </div>
 </li>
 </ol>
-<p><span id="how-toinstallandrunapre-builtamrdesignonanalveocard-amrinstallationanchor"></span></p>
+<p><span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-xbtestinstallationanchor"></span></p>
 </div>
 </div>
-<div class="section" id="amr-installation">
-<h2>AMR Installation<a class="headerlink" href="#amr-installation" title="Permalink to this heading">¶</a></h2>
-<p>Installing AMR is a two-step process. First, you will install the pre-built AMR package onto the host or you can rebuild the AMR sw packages as mentioned in <a class="reference internal" href="../../getting-started/rebuild.html"><span class="std std-doc">Rebuild</span></a>. Second, you will program xbtest into flash on your Alveo card.</p>
-<p>To install the package onto the host, navigate to the directory with the debian or rpm packages depending on your host OS. Install libami*, amitool*, ami* packages</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1. Installing debian packages:
-    sudo dpkg -i libami_x.x.x.xxx.xxx_amd64.deb
-    sudo dpkg -i ami_x.x.x.xxx.xxx_amd64.deb
-    sudo dpkg -i amitool_x.x.x.xxx.xxx_amd64.deb
-
-2. Installing rpm pakcages:
-    sudo rpm -ivh libami_x.x.x.xxx.xxx_amd64.rpm
-    sudo rpm -ivh ami_x.x.x.xxx.xxx_amd64.deb
-    sudo rpm -ivh amitool_x.x.x.xxx.xxx_amd64.deb
+<div class="section" id="xbtest-installation-with-an-existing-amr">
+<h2>Xbtest installation with an existing AMR<a class="headerlink" href="#xbtest-installation-with-an-existing-amr" title="Permalink to this heading">¶</a></h2>
+<p>Follow the steps below to install AVED/xbtest fw/sw with existing AMR installation</p>
+<ul>
+<li><p>Ensure the existing AMR environment is functional</p></li>
+<li><p>AMI and AMC versions are compatible (matched)</p></li>
+<li><p>AMC is in READY state before proceeding</p></li>
+<li><p>Unzip the the xbtest installation package that was downloaded from latest release as mentioned in above section.</p></li>
+<li><p>Program the OSPI fpt image(flash_setup/fpt_setup_amd_v80_gen5x8_25.1_exdes_1_yyymmdd.pdi) using the ami_tool cfgmem_fpt command or  through jatg mentioned below.</p></li>
+<li><p>using the ami_tool cfgmem_fpt:</p>
+<p>cd amd_v80_gen5x8_25.1_xbtest_stress_20251113 (this is just an example release package, make sure to replace this with latest)
+sudo ami_tool cfgmem_fpt -d &lt;B:D.F&gt; -i &lt;flash_setup/fpt_setup_amd_v80_gen5x8_25.1_exdes_1_yyymmdd.pdi&gt; -p 0 -t primary</p>
+</li>
+<li><p>Using vivado HW Manager and Jtag:</p>
+<p>update the Flash Partition Table (FPT) image in flash using Vivado HW Manager and JTAG. Refer to <a class="reference internal" href="../../deployment/update-fpt.html"><span class="std std-doc">Updating FPT Image in Flash</span></a> for step-by-step instructions. If successful, Vivado HW Manager will report this with a pop-up message: “Flash programming completed successfully.” Cold boot the server to boot from flash.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="aved-installation">
+<h2>AVED Installation<a class="headerlink" href="#aved-installation" title="Permalink to this heading">¶</a></h2>
+<p>Installing AVED is a two-step process. First, you will install the pre-built AVED package onto the host. Second, you will program AVED into flash on your Alveo card.</p>
+<p>To install the package onto the host, navigate to the directory with the aved_install.sh script, and execute this script.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">   </span>$<span class="w"> </span>sudo<span class="w"> </span>./aved_install.sh
 </pre></div>
 </div>
-<p>Note: Install libami* package before amitool* and ami* packages.</p>
-<p>To program AMR onto your Alveo card for the first time, update the Flash Partition Table (FPT) image in flash using Vivado HW Manager and JTAG. Refer to <a class="reference internal" href="../../deployment/update-fpt.html"><span class="std std-doc">AMR Updating FPT Image in Flash</span></a> for step-by-step instructions. If successful, Vivado HW Manager will report this with a pop-up message: “Flash programming completed successfully.” Cold boot the server to boot AMR from flash.</p>
-<p><span id="how-toinstallandrunapre-builtamrdesignonanalveocard-testingamr"></span></p>
+<p><span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-AMRinstallation"></span></p>
 </div>
-<div class="section" id="testing-amr">
-<h2>Testing AMR<a class="headerlink" href="#testing-amr" title="Permalink to this heading">¶</a></h2>
-<p>Two sets of tools are provided to test the AMR design running in hardware: a suite of AMI commands (<code class="docutils literal notranslate"><span class="pre">ami_tool</span> <span class="pre">&lt;command&gt;</span></code>) and xbtest testcases (<code class="docutils literal notranslate"><span class="pre">xbtest</span> <span class="pre">-d</span> <span class="pre">&lt;Bus:Device.Function(BDF)&gt;</span> <span class="pre">-c</span> <span class="pre">&lt;testcase&gt;</span></code>). A subset of these tools are illustrated below.</p>
-<p><span id="how-toinstallandrunapre-builtamrdesignonanalveocard-ami-tooloverview"></span></p>
+<div class="section" id="amr-installation-with-existing-aved-xbtest">
+<h2>AMR installation with existing AVED/xbtest<a class="headerlink" href="#amr-installation-with-existing-aved-xbtest" title="Permalink to this heading">¶</a></h2>
+<p>Follow the steps below to install AMR fw/sw with existing AVED/xbtest
+1. Ensure the existing AVED / xbtest environment is functional
+2. AMI and AMC versions are compatible (matched)
+3. AMC is in READY state before proceeding
+4. Build the AMR sources [Rebuild] (../../getting-started/rebuild.md)
+5. Program the AMR OSPI fpt image using the ami_tool cfgmem_fpt command
+```
+sudo ami_tool cfgmem_fpt -d <BDF> -i &lt;amr_ospi_fpt.bin&gt; -t primary</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>   ```
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-the-amr-software-packages">
+<h2>Install the AMR software packages<a class="headerlink" href="#install-the-amr-software-packages" title="Permalink to this heading">¶</a></h2>
+<p>To install the package onto the host, navigate to the directory with the debian or rpm packages depending on your host OS. Install libami*, amitool*, ami* packages</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="mf">1.</span> <span class="n">Installing</span> <span class="n">debian</span> <span class="n">packages</span><span class="p">:</span>
+        <span class="n">sudo</span> <span class="n">dpkg</span> <span class="o">-</span><span class="n">i</span> <span class="n">libami_x</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">xxx</span><span class="o">.</span><span class="n">xxx_amd64</span><span class="o">.</span><span class="n">deb</span>
+        <span class="n">sudo</span> <span class="n">dpkg</span> <span class="o">-</span><span class="n">i</span> <span class="n">ami_x</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">xxx</span><span class="o">.</span><span class="n">xxx_amd64</span><span class="o">.</span><span class="n">deb</span>
+        <span class="n">sudo</span> <span class="n">dpkg</span> <span class="o">-</span><span class="n">i</span> <span class="n">amitool_x</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">xxx</span><span class="o">.</span><span class="n">xxx_amd64</span><span class="o">.</span><span class="n">deb</span>
+
+    <span class="mf">2.</span> <span class="n">Installing</span> <span class="n">rpm</span> <span class="n">pakcages</span><span class="p">:</span>
+        <span class="n">sudo</span> <span class="n">rpm</span> <span class="o">-</span><span class="n">ivh</span> <span class="n">libami_x</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">xxx</span><span class="o">.</span><span class="n">xxx_amd64</span><span class="o">.</span><span class="n">rpm</span>
+        <span class="n">sudo</span> <span class="n">rpm</span> <span class="o">-</span><span class="n">ivh</span> <span class="n">ami_x</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">xxx</span><span class="o">.</span><span class="n">xxx_amd64</span><span class="o">.</span><span class="n">deb</span>
+        <span class="n">sudo</span> <span class="n">rpm</span> <span class="o">-</span><span class="n">ivh</span> <span class="n">amitool_x</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">xxx</span><span class="o">.</span><span class="n">xxx_amd64</span><span class="o">.</span><span class="n">deb</span>
+</pre></div>
+</div>
+<p><span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-testing"></span></p>
+</div>
+<div class="section" id="testing-xbtest">
+<h2>Testing xbtest<a class="headerlink" href="#testing-xbtest" title="Permalink to this heading">¶</a></h2>
+<p>Two sets of tools are provided to test the xbtest design running in hardware: a suite of AMI commands (<code class="docutils literal notranslate"><span class="pre">ami_tool</span> <span class="pre">&lt;command&gt;</span></code>) and xbtest testcases (<code class="docutils literal notranslate"><span class="pre">xbtest</span> <span class="pre">-d</span> <span class="pre">&lt;Bus:Device.Function(BDF)&gt;</span> <span class="pre">-c</span> <span class="pre">&lt;testcase&gt;</span></code>). A subset of these tools are illustrated below.</p>
+<p><span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-ami-tooloverview"></span></p>
 <div class="section" id="ami-tool-overview">
 <h3>ami_tool Overview<a class="headerlink" href="#ami-tool-overview" title="Permalink to this heading">¶</a></h3>
 <p>The overview command shows basic information including the AMI version, the BDF, the device name, the currently programmed design’s UUID, and the device state. Take note of the BDF of your card (<strong>21:00.0</strong> in the example below), which will be used in subsequent commands.</p>
@@ -253,7 +293,7 @@ Driver Version | 2.0.0  (0)</p>
 <p>21:00.0 | ALVEO V80 INT | XFL1GF4VJ1KW  | 00000000000000000000000032314bde | 2.0.0  (0) | READY</p>
 <p>If the device state is NOT_READY, cold reboot the system.</p>
 <p>Confirm the AMI driver version matches the AMC version on the device before continuing (compatibility is indicated by having the same Major &amp; Minor version numbers in the AMI/AMC Major.Minor.Patch version number format). If they do not match, AMI behavior is undefined.</p>
-<p><span id="how-toinstallandrunapre-builtamrdesignonanalveocard-ami-toolmfg-info"></span></p>
+<p><span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-ami-toolmfg-info"></span></p>
 <div class="section" id="ami-tool-mfg-info">
 <h3>ami_tool mfg_info<a class="headerlink" href="#ami-tool-mfg-info" title="Permalink to this heading">¶</a></h3>
 <p>The mfg_info command displays the card manufacturing information stored on an EEPROM. The values will vary from card to card.</p>
@@ -273,7 +313,7 @@ Board Part Num            | A-V80-P64G-PQ-G
 Mfg Part Num              | 043-05113-01
 </pre></div>
 </div>
-<p><span id="how-toinstallandrunapre-builtamrdesignonanalveocard-ami-toolsensors"></span></p>
+<p><span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-ami-toolsensors"></span></p>
 </div>
 <div class="section" id="ami-tool-sensors">
 <h3>ami_tool sensors<a class="headerlink" href="#ami-tool-sensors" title="Permalink to this heading">¶</a></h3>
@@ -337,7 +377,7 @@ Total_Power                   | 33.150 W | valid
 1V5_VCCAUX                    |  1.501 V | valid*
 </pre></div>
 </div>
-<p><span id="how-toinstallandrunapre-builtamrdesignonanalveocard-xbtest-d-bdf-cverify"></span></p>
+<p><span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-xbtest-d-bdf-cverify"></span></p>
 </div>
 <div class="section" id="xbtest-d-bdf-c-verify">
 <h3>xbtest -d &lt;BDF&gt; -c verify<a class="headerlink" href="#xbtest-d-bdf-c-verify" title="Permalink to this heading">¶</a></h3>
@@ -348,7 +388,7 @@ Total_Power                   | 33.150 W | valid
 INFO      :: GEN_016 :: GENERAL      :: Scanning installed xbtest HW designs...
 STATUS    :: MGT_002 :: TIMER        :: Start 1s tick function
 INFO      :: GEN_016 :: GENERAL      :: e2:00.0 :: Getting card configuration
-INFO      :: GEN_064 :: GENERAL      :: e2:00.0 :: Starting test 1 of 1. Executing: xbtest -d e2:00.0 -j /opt/amd/amr/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/xbtest/test/verify.json -i /opt/amd/amr/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/design.pdi -e /opt/amd/amr/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/xbtest/metadata/xbtest_pfm_def.json
+INFO      :: GEN_064 :: GENERAL      :: e2:00.0 :: Starting test 1 of 1. Executing: xbtest -d e2:00.0 -j /opt/amd/aved/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/xbtest/test/verify.json -i /opt/amd/aved/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/design.pdi -e /opt/amd/aved/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/xbtest/metadata/xbtest_pfm_def.json
 INFO      :: GEN_039 :: GENERAL      :: #####################################################################################################
 INFO      :: GEN_039 :: GENERAL      :: xbtest version: 7.1.0
 INFO      :: GEN_016 :: GENERAL      ::          - SW Build    : 4064028 on Thu Aug 21 17:31:15 2025
@@ -399,7 +439,7 @@ INFO      :: GEN_040 :: GENERAL      :: ########################################
 PASS      :: GEN_024 :: GENERAL      :: RESULT: ALL TESTS PASSED
 </pre></div>
 </div>
-<p><span id="how-toinstallandrunapre-builtamrdesignonanalveocard-xbtest-d-bdf-cmemory"></span></p>
+<p><span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-xbtest-d-bdf-cmemory"></span></p>
 </div>
 <div class="section" id="xbtest-d-bdf-c-memory">
 <h3>xbtest -d &lt;BDF&gt; -c memory<a class="headerlink" href="#xbtest-d-bdf-c-memory" title="Permalink to this heading">¶</a></h3>
@@ -409,7 +449,7 @@ PASS      :: GEN_024 :: GENERAL      :: RESULT: ALL TESTS PASSED
 INFO      :: GEN_016 :: GENERAL      :: Scanning installed xbtest HW designs...
 STATUS    :: MGT_002 :: TIMER        :: Start 1s tick function
 INFO      :: GEN_016 :: GENERAL      :: e2:00.0 :: Getting card configuration
-INFO      :: GEN_064 :: GENERAL      :: e2:00.0 :: Starting test 1 of 1. Executing: xbtest -d e2:00.0 -j /opt/amd/amr/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/xbtest/test/memory.json -i /opt/amd/amr/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/design.pdi -e /opt/amd/amr/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/xbtest/metadata/xbtest_pfm_def.json
+INFO      :: GEN_064 :: GENERAL      :: e2:00.0 :: Starting test 1 of 1. Executing: xbtest -d e2:00.0 -j /opt/amd/aved/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/xbtest/test/memory.json -i /opt/amd/aved/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/design.pdi -e /opt/amd/aved/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/xbtest/metadata/xbtest_pfm_def.json
 INFO      :: GEN_039 :: GENERAL      :: #####################################################################################################
 INFO      :: GEN_039 :: GENERAL      :: xbtest version: 7.1.0
 INFO      :: GEN_016 :: GENERAL      ::          - SW Build    : 4064028 on Thu Aug 21 17:31:15 2025
@@ -466,12 +506,12 @@ INFO      :: GEN_040 :: GENERAL      :: ########################################
 PASS      :: GEN_024 :: GENERAL      :: RESULT: ALL TESTS PASSED
 </pre></div>
 </div>
-<p><span id="how-toinstallandrunapre-builtamrdesignonanalveocard-troubleshooting"></span></p>
+<p><span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-troubleshooting"></span></p>
 </div>
 <div class="section" id="troubleshooting">
 <h3>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading">¶</a></h3>
 <p>For debugging information, see <a class="reference internal" href="../../deployment/debug.html"><span class="std std-doc">AMR Debug Techniques</span></a>.</p>
-<p><span id="how-toinstallandrunapre-builtamrdesignonanalveocard-nextsteps"></span></p>
+<p><span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-nextsteps"></span></p>
 </div>
 </div>
 <div class="section" id="next-steps">
@@ -486,7 +526,6 @@ PASS      :: GEN_024 :: GENERAL      :: RESULT: ALL TESTS PASSED
 <li><p>the AMI cfgmem_program command, which updates the PDI in flash over the PCIe interface. See <a class="reference internal" href="../../deployment/update-pdi.html"><span class="std std-doc">AMR Updating Design PDI in Flash</span></a></p></li>
 <li><p>additional pre-canned xbtest tests are available to test other features on the card. Please refer to <a class="reference download internal" download="" href="../../_downloads/2b33b302cea2c7a4076ba275e5e31952/pre-canned-tests-description.html"><span class="xref download myst">xbtest User Guide / Pre-canned tests section</span></a>. The available pre-canned tests are: gtm_prbs, gtyp_prbs, memory, mmio, power, stress, and verify.</p></li>
 </ul>
-<p>For a quick look at how to build AMR, refer to the getting started guide: <a class="reference internal" href="../../getting-started/rebuild.html"><span class="std std-doc">How-to Rebuild an AMR Design for Yourself</span></a>.</p>
 </div>
 </div>
 
@@ -504,7 +543,7 @@ PASS      :: GEN_024 :: GENERAL      :: RESULT: ALL TESTS PASSED
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on April 22, 2026.
+      <span class="lastupdated">Last updated on April 30, 2026.
       </span></p>
   </div>
 

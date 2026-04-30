@@ -1,12 +1,12 @@
-# How-to install and run a pre-built AMR design on an ALVEO V80 card
+# How-to install and run a pre-built Xbtest design on an ALVEO V80 card
 
-This is a getting started guide for the Adaptive Management Runtime (AMR) to be used with the provided pre-built AMR package file. This guide offers instruction in installing the package on your server and running key commands to test and evaluate the design example. The pre-built example image includes the AMR base design. This provides a turnkey card capable of running through the canned tests in the xbtest suite. For the AMR source files, only the AMR base design is included - the xbtest IP is not included and instead would be replaced with a user application.
+Note: For xbtest we have to revert to AVED design as xbtest with AMR design not supported in this release. Below are the instructions to install AMI and xbtest with prebuilt xbtest design images.
 
-<span id="how-toinstallandrunapre-builtamrdesignonanalveocard-beforeyoubegin"></span>
+<span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-beforeyoubegin"></span>
 
 ## Before You Begin
 
-<span id="how-toinstallandrunapre-builtamrdesignonanalveocard-dependencies"></span>
+<span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-dependencies"></span>
 
 ### Dependencies
 
@@ -16,25 +16,24 @@ Supported OS and kernel. See [Supported Kernels and Distributions](../../overvie
 
 Tools
 
-  - Vivado™ 2026.1
+  - Vivado™ 2025.2
 
-<span id="how-toinstallandrunapre-builtamrdesignonanalveocard-preparingforamrinstallation"></span>
+<span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-preparingforxbtestinstallation"></span>
 
-### Preparing for AMR Installation
+### Preparing for Xbtest Installation
 
 1.  Confirm the server is running a supported OS. Follow the instructions provided in the *Alveo V80 Data Center Accelerator Cards Installation Guide* ([UG1617](https://docs.amd.com/go/en-US/ug1617-alveo-v80)) to physically install the card in your server.
 
-2.  Get the latest AMR installation package for your Alveo card.
-    
-    1.  For the most recent version of the example design, refer to [AMR Release Notes](../../release-notes.md).
+2.  Get the latest Xbtest installation package for your Alveo card.
+
+    1.  For the most recent version of the example design, refer to [Release Notes](../../release-notes.md).
         
-        -  *xbtest Deployment Archive* is a `.zip` of the AMR installation package. It is pre-built from the xbtest source code, using the Vivado™ tools version noted in the [AMR Release Notes](../../release-notes.md)
+        -  *xbtest Deployment Archive* is a `.zip` of the xbtest installation package. It is pre-built from the xbtest source code, using the Vivado™ tools version noted in the [Release Notes](../../release-notes.md)
     
     2.  Download the latest *xbtest Deployment Archive* to the server that contains your Alveo card.
     
-    3.  Unzip the archive, and find the `design.pdi` (which will be used in the xbtest installation). Review [AMR Installing the Design onto the Card](../../deployment/install-card.md) for details on deployment package usage and programming flow.
-
-3.  Unlike prior Alveo platforms, AMR does not use the Xilinx RunTime Library (XRT). Instead, AMR includes the AMR Management Interface (AMI) as part of the example design. Before AMR installation, ensure that XRT has been removed. It’s not possible to have AMI and XRT running on the same host at the same time.
+    3.  Unzip the archive.
+    4.  Unlike prior Alveo platforms, AVED does not use the Xilinx RunTime Library (XRT). Instead, AVED includes the AVED Management Interface (AMI) as part of the example design. Before AVED installation, ensure that XRT has been removed. It’s not possible to have AMI and XRT running on the same host at the same time.
 
     **Ubuntu:**
 
@@ -56,14 +55,53 @@ Tools
     sudo yum remove xrt
     ```
 
-<span id="how-toinstallandrunapre-builtamrdesignonanalveocard-amrinstallationanchor"></span>
+<span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-xbtestinstallationanchor"></span>
 
-## AMR Installation
+## Xbtest installation with an existing AMR
 
-Installing AMR is a two-step process. First, you will install the pre-built AMR package onto the host or you can rebuild the AMR sw packages as mentioned in [Rebuild](../../getting-started/rebuild.md). Second, you will program xbtest into flash on your Alveo card.
+Follow the steps below to install AVED/xbtest fw/sw with existing AMR installation
+
+-   Ensure the existing AMR environment is functional
+-   AMI and AMC versions are compatible (matched)
+-   AMC is in READY state before proceeding  
+-   Unzip the the xbtest installation package that was downloaded from latest release as mentioned in above section.
+-   Program the OSPI fpt image(flash_setup/fpt_setup_amd_v80_gen5x8_25.1_exdes_1_yyymmdd.pdi) using the ami_tool cfgmem_fpt command or  through jatg mentioned below.
+-   using the ami_tool cfgmem_fpt:
+
+    cd amd_v80_gen5x8_25.1_xbtest_stress_20251113 (this is just an example release package, make sure to replace this with latest)
+    sudo ami_tool cfgmem_fpt -d <B:D.F> -i <flash_setup/fpt_setup_amd_v80_gen5x8_25.1_exdes_1_yyymmdd.pdi> -p 0 -t primary
+
+-   Using vivado HW Manager and Jtag:
+
+    update the Flash Partition Table (FPT) image in flash using Vivado HW Manager and JTAG. Refer to [Updating FPT Image in Flash](../../deployment/update-fpt.md) for step-by-step instructions. If successful, Vivado HW Manager will report this with a pop-up message: “Flash programming completed successfully.” Cold boot the server to boot from flash.
+
+## AVED Installation
+Installing AVED is a two-step process. First, you will install the pre-built AVED package onto the host. Second, you will program AVED into flash on your Alveo card.
+
+To install the package onto the host, navigate to the directory with the aved_install.sh script, and execute this script.
+
+ ```bash
+    $ sudo ./aved_install.sh
+ ```
+
+ <span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-AMRinstallation"></span>
+
+## AMR installation with existing AVED/xbtest 
+Follow the steps below to install AMR fw/sw with existing AVED/xbtest
+    1. Ensure the existing AVED / xbtest environment is functional
+    2. AMI and AMC versions are compatible (matched)
+    3. AMC is in READY state before proceeding
+    4. Build the AMR sources [Rebuild] (../../getting-started/rebuild.md)
+    5. Program the AMR OSPI fpt image using the ami_tool cfgmem_fpt command
+       ```
+       sudo ami_tool cfgmem_fpt -d <BDF> -i <amr_ospi_fpt.bin> -t primary
+
+       ```
+## Install the AMR software packages
 
 To install the package onto the host, navigate to the directory with the debian or rpm packages depending on your host OS. Install libami*, amitool*, ami* packages
 
+```
     1. Installing debian packages:
         sudo dpkg -i libami_x.x.x.xxx.xxx_amd64.deb
         sudo dpkg -i ami_x.x.x.xxx.xxx_amd64.deb
@@ -73,19 +111,15 @@ To install the package onto the host, navigate to the directory with the debian 
         sudo rpm -ivh libami_x.x.x.xxx.xxx_amd64.rpm
         sudo rpm -ivh ami_x.x.x.xxx.xxx_amd64.deb
         sudo rpm -ivh amitool_x.x.x.xxx.xxx_amd64.deb
+```
 
-Note: Install libami* package before amitool* and ami* packages.
+<span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-testing"></span>
 
+## Testing xbtest
 
-To program AMR onto your Alveo card for the first time, update the Flash Partition Table (FPT) image in flash using Vivado HW Manager and JTAG. Refer to [AMR Updating FPT Image in Flash](../../deployment/update-fpt.md) for step-by-step instructions. If successful, Vivado HW Manager will report this with a pop-up message: “Flash programming completed successfully.” Cold boot the server to boot AMR from flash.
+Two sets of tools are provided to test the xbtest design running in hardware: a suite of AMI commands (`ami_tool <command>`) and xbtest testcases (`xbtest -d <Bus:Device.Function(BDF)> -c <testcase>`). A subset of these tools are illustrated below.
 
-<span id="how-toinstallandrunapre-builtamrdesignonanalveocard-testingamr"></span>
-
-## Testing AMR
-
-Two sets of tools are provided to test the AMR design running in hardware: a suite of AMI commands (`ami_tool <command>`) and xbtest testcases (`xbtest -d <Bus:Device.Function(BDF)> -c <testcase>`). A subset of these tools are illustrated below.
-
-<span id="how-toinstallandrunapre-builtamrdesignonanalveocard-ami-tooloverview"></span>
+<span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-ami-tooloverview"></span>
 
 ### ami\_tool Overview
 
@@ -108,7 +142,7 @@ If the device state is NOT\_READY, cold reboot the system.
 
 Confirm the AMI driver version matches the AMC version on the device before continuing (compatibility is indicated by having the same Major & Minor version numbers in the AMI/AMC Major.Minor.Patch version number format). If they do not match, AMI behavior is undefined.
 
-<span id="how-toinstallandrunapre-builtamrdesignonanalveocard-ami-toolmfg-info"></span>
+<span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-ami-toolmfg-info"></span>
 
 ### ami\_tool mfg\_info
 
@@ -129,7 +163,7 @@ The mfg\_info command displays the card manufacturing information stored on an E
     Board Part Num            | A-V80-P64G-PQ-G
     Mfg Part Num              | 043-05113-01
 
-<span id="how-toinstallandrunapre-builtamrdesignonanalveocard-ami-toolsensors"></span>
+<span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-ami-toolsensors"></span>
 
 ### ami\_tool sensors
 
@@ -194,7 +228,7 @@ The sensors command displays the available sensors and their values. The values 
     1V5_VCCAUX                    |  1.501 V | valid*
 
 
-<span id="how-toinstallandrunapre-builtamrdesignonanalveocard-xbtest-d-bdf-cverify"></span>
+<span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-xbtest-d-bdf-cverify"></span>
 
 ### xbtest -d \<BDF\> -c verify
 
@@ -207,7 +241,7 @@ Successful completion of this test is indicated by 0 Errors, 0 Failures, and the
     INFO      :: GEN_016 :: GENERAL      :: Scanning installed xbtest HW designs...
     STATUS    :: MGT_002 :: TIMER        :: Start 1s tick function
     INFO      :: GEN_016 :: GENERAL      :: e2:00.0 :: Getting card configuration
-    INFO      :: GEN_064 :: GENERAL      :: e2:00.0 :: Starting test 1 of 1. Executing: xbtest -d e2:00.0 -j /opt/amd/amr/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/xbtest/test/verify.json -i /opt/amd/amr/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/design.pdi -e /opt/amd/amr/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/xbtest/metadata/xbtest_pfm_def.json
+    INFO      :: GEN_064 :: GENERAL      :: e2:00.0 :: Starting test 1 of 1. Executing: xbtest -d e2:00.0 -j /opt/amd/aved/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/xbtest/test/verify.json -i /opt/amd/aved/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/design.pdi -e /opt/amd/aved/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/xbtest/metadata/xbtest_pfm_def.json
     INFO      :: GEN_039 :: GENERAL      :: #####################################################################################################
     INFO      :: GEN_039 :: GENERAL      :: xbtest version: 7.1.0
     INFO      :: GEN_016 :: GENERAL      ::          - SW Build    : 4064028 on Thu Aug 21 17:31:15 2025
@@ -257,7 +291,7 @@ Successful completion of this test is indicated by 0 Errors, 0 Failures, and the
     INFO      :: GEN_040 :: GENERAL      :: #####################################################################################################
     PASS      :: GEN_024 :: GENERAL      :: RESULT: ALL TESTS PASSED
 
-<span id="how-toinstallandrunapre-builtamrdesignonanalveocard-xbtest-d-bdf-cmemory"></span>
+<span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-xbtest-d-bdf-cmemory"></span>
 
 ### xbtest -d \<BDF\> -c memory
 
@@ -269,7 +303,7 @@ Successful completion of this test is indicated by 0 Errors, 0 Failures, and the
     INFO      :: GEN_016 :: GENERAL      :: Scanning installed xbtest HW designs...
     STATUS    :: MGT_002 :: TIMER        :: Start 1s tick function
     INFO      :: GEN_016 :: GENERAL      :: e2:00.0 :: Getting card configuration
-    INFO      :: GEN_064 :: GENERAL      :: e2:00.0 :: Starting test 1 of 1. Executing: xbtest -d e2:00.0 -j /opt/amd/amr/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/xbtest/test/memory.json -i /opt/amd/amr/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/design.pdi -e /opt/amd/amr/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/xbtest/metadata/xbtest_pfm_def.json
+    INFO      :: GEN_064 :: GENERAL      :: e2:00.0 :: Starting test 1 of 1. Executing: xbtest -d e2:00.0 -j /opt/amd/aved/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/xbtest/test/memory.json -i /opt/amd/aved/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/design.pdi -e /opt/amd/aved/amd_v80_gen5x8_25.1_exdes_1_xbtest_stress/xbtest/metadata/xbtest_pfm_def.json
     INFO      :: GEN_039 :: GENERAL      :: #####################################################################################################
     INFO      :: GEN_039 :: GENERAL      :: xbtest version: 7.1.0
     INFO      :: GEN_016 :: GENERAL      ::          - SW Build    : 4064028 on Thu Aug 21 17:31:15 2025
@@ -325,13 +359,13 @@ Successful completion of this test is indicated by 0 Errors, 0 Failures, and the
     INFO      :: GEN_040 :: GENERAL      :: #####################################################################################################
     PASS      :: GEN_024 :: GENERAL      :: RESULT: ALL TESTS PASSED
 
-<span id="how-toinstallandrunapre-builtamrdesignonanalveocard-troubleshooting"></span>
+<span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-troubleshooting"></span>
 
 ### Troubleshooting
 
 For debugging information, see [AMR Debug Techniques](../../deployment/debug.md).
 
-<span id="how-toinstallandrunapre-builtamrdesignonanalveocard-nextsteps"></span>
+<span id="how-toinstallandrunapre-builtxbtestdesignonanalveocard-nextsteps"></span>
 
 ## Next Steps
 
@@ -346,6 +380,4 @@ Notably, some interesting commands to try are:
   - the AMI cfgmem\_program command, which updates the PDI in flash over the PCIe interface. See [AMR Updating Design PDI in Flash](../../deployment/update-pdi.md)
 
   - additional pre-canned xbtest tests are available to test other features on the card. Please refer to [xbtest User Guide / Pre-canned tests section](./user-guide/source/docs/pre-canned-tests/pre-canned-tests-description.html). The available pre-canned tests are: gtm\_prbs, gtyp\_prbs, memory, mmio, power, stress, and verify.
-
-For a quick look at how to build AMR, refer to the getting started guide: [How-to Rebuild an AMR Design for Yourself](../../getting-started/rebuild.md).
 
