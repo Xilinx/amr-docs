@@ -20,7 +20,9 @@
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="AMR - Board Management Solution" href="../system-architecture/board-management.html" />
+    <link rel="prev" title="How-to Install Prebuilt AMR Packages" href="install-prebuilt.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,6 +44,31 @@
               <p class="caption" role="heading"><span class="caption-text">AMR Overview</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../overview/amr-overview.html">AMR Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AMR Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install-prebuilt.html">How-to Install Prebuilt AMR Packages</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How-to Build an AMR Design for Yourself</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#build-approaches">Build Approaches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#before-you-begin">Before You Begin</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#build-dependencies">Build Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-test-dependencies-for-v80">Hardware Test Dependencies for V80</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-python-from-python-org">Install Python from python.org</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#building-ospi-images-through-yocto">Building OSPI Images through Yocto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#download-the-source-code">Download the Source Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#build-the-design">Build the Design</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#build-hardware-firmware-software-together-with-below-command">Build Hardware, Firmware, Software together with below command.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#firmware">Firmware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#software">Software</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#review-the-generated-output">Review the Generated Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#programming-and-testing-the-design">Programming and Testing the Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AMR System Architecture</span></p>
 <ul>
@@ -282,9 +309,9 @@ which will build the firmware and generate amr_ospi_fpt.bin, amr_ospi.bin. After
 <li><p>On your development server, navigate to the AMI directory in &lt;AMR cloned repo&gt;/sw/AMI/.</p></li>
 <li><p>Run scripts/build.sh, which will build the software and generate three debian/rpm files.</p>
 <ul class="simple">
-<li><p>ami_<version>.<hash>.<date>_amd64.deb example: ami_2.0.0-0.0a8a8683.20260216_amd64.deb</p></li>
-<li><p>amitool_<version>.<hash>.<date>_amd64.deb example: amitool_2.0.0-0.0a8a8683.20260216_amd64.deb</p></li>
-<li><p>libami_<version>.<hash>.<date>_amd64.deb example: libami_2.0.0-0.0a8a8683.20260216_amd64.deb
+<li><p>ami_<version>.<hash>.<date>_amd64.deb example: ami_3.0.0-0.0a8a8683.20260216_amd64.deb</p></li>
+<li><p>amitool_<version>.<hash>.<date>_amd64.deb example: amitool_3.0.0-0.0a8a8683.20260216_amd64.deb</p></li>
+<li><p>libami_<version>.<hash>.<date>_amd64.deb example: libami_3.0.0-0.0a8a8683.20260216_amd64.deb
 After successfully building, the software package will be in &lt;AMR&gt;/sw/AMI/build_ami/&gt;. Copy this to your deployment server.</p></li>
 </ul>
 </li>
@@ -322,9 +349,9 @@ sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </spa
 │   ├── ami
 │   ├── driver
 │   ├── libami
-│   ├── ami_2.0.0-0.0a8a8683.20260224_amd64.deb
-│   ├── amitool_2.0.0-0.0a8a8683.20260224_amd64.deb
-│   └── libami_2.0.0-0.0a8a8683.20260224_amd64.deb
+│   ├── ami_3.0.0-0.0a8a8683.20260224_amd64.deb
+│   ├── amitool_3.0.0-0.0a8a8683.20260224_amd64.deb
+│   └── libami_3.0.0-0.0a8a8683.20260224_amd64.deb
 ├── build_v80
 │   └── amr_vivado_designs
 ├── build.sh
@@ -382,7 +409,10 @@ Will do a hot reset to boot into partition 0. This may take a minute...
           </div>
           
 				  
-				  <footer>
+				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="install-prebuilt.html" class="btn btn-neutral float-left" title="How-to Install Prebuilt AMR Packages" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../system-architecture/board-management.html" class="btn btn-neutral float-right" title="AMR - Board Management Solution" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

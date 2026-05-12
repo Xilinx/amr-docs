@@ -163,9 +163,9 @@ The following steps will guide you through building the AMI software from the cl
 1.  On your development server, navigate to the AMI directory in \<AMR cloned repo\>/sw/AMI/.
 
 2.  Run scripts/build.sh, which will build the software and generate three debian/rpm files.
-    - ami_<version>.<hash>.<date>_amd64.deb example: ami_2.0.0-0.0a8a8683.20260216_amd64.deb
-    - amitool_<version>.<hash>.<date>_amd64.deb example: amitool_2.0.0-0.0a8a8683.20260216_amd64.deb
-    - libami_<version>.<hash>.<date>_amd64.deb example: libami_2.0.0-0.0a8a8683.20260216_amd64.deb
+    - ami_<version>.<hash>.<date>_amd64.deb example: ami_3.0.0-0.0a8a8683.20260216_amd64.deb
+    - amitool_<version>.<hash>.<date>_amd64.deb example: amitool_3.0.0-0.0a8a8683.20260216_amd64.deb
+    - libami_<version>.<hash>.<date>_amd64.deb example: libami_3.0.0-0.0a8a8683.20260216_amd64.deb
 After successfully building, the software package will be in \<AMR\>/sw/AMI/build_ami/>. Copy this to your deployment server.
 
 3.  On your deployment server, install the AMI package.. Make sure to install libami_<version>.<hash>.<date>_amd64.deb before installing amitool_<version>.<hash>.<date>_amd64.deb.
@@ -202,9 +202,9 @@ By default, the `build.sh` script creates a build directory which would contain 
     │   ├── ami
     │   ├── driver
     │   ├── libami
-    │   ├── ami_2.0.0-0.0a8a8683.20260224_amd64.deb
-    │   ├── amitool_2.0.0-0.0a8a8683.20260224_amd64.deb
-    │   └── libami_2.0.0-0.0a8a8683.20260224_amd64.deb
+    │   ├── ami_3.0.0-0.0a8a8683.20260224_amd64.deb
+    │   ├── amitool_3.0.0-0.0a8a8683.20260224_amd64.deb
+    │   └── libami_3.0.0-0.0a8a8683.20260224_amd64.deb
     ├── build_v80
     │   └── amr_vivado_designs
     ├── build.sh

@@ -128,11 +128,11 @@ Displays the version information of the currently installed AMI API and AMI Driv
 #### Example output
 
     ~$ ami_tool --version
-    API Version     |  2.0.0  (0)
+    API Version     |  3.0.0  (0)
     API Branch      |
     API Hash        |  b3851ec2d223e6c35e567e245dc380049d2ba139
     API Hash Date   |  20260226
-    Driver Version  |  2.0.0  (0)
+    Driver Version  |  3.0.0  (0)
     ~$
 
 <span id="id4"></span>
@@ -224,16 +224,16 @@ This output can be logged to a file using the **-o** option, and the logged form
 
      AMI
     ---------------------------------------------------------
-    Version        | 2.0.0  (0)
+    Version        | 3.0.0  (0)
     Branch         |
     Hash           | 15a98eb71fdee61c662ff155227c0525dc3cbbd7
     Hash Date      | 20260317
-    Driver Version | 2.0.0  (0)
+    Driver Version | 3.0.0  (0)
 
 
     BDF     | Device        | Serial Number | UUID                             | AMC        | State
     -----------------------------------------------------------------------------------------------
-    21:00.0 | ALVEO V80 PQ | XFL1GF4VJ1KW  | 00000000000000000000000032314bde | 2.0.0  (0) | READY
+    21:00.0 | ALVEO V80 PQ | XFL1GF4VJ1KW  | 00000000000000000000000032314bde | 3.0.0  (0) | READY
 
 
 <span id="id8"></span>

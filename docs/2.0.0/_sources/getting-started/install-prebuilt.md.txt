@@ -197,9 +197,9 @@ sudo dpkg -i amitool_<version>.<hash>.<date>_amd64.deb
 **Example:**
 
 ```bash
-sudo dpkg -i libami_2.0.0-0.0a8a8683.20260216_amd64.deb
-sudo dpkg -i ami_2.0.0-0.0a8a8683.20260216_amd64.deb
-sudo dpkg -i amitool_2.0.0-0.0a8a8683.20260216_amd64.deb
+sudo dpkg -i libami_3.0.0-0.0a8a8683.20260216_amd64.deb
+sudo dpkg -i ami_3.0.0-0.0a8a8683.20260216_amd64.deb
+sudo dpkg -i amitool_3.0.0-0.0a8a8683.20260216_amd64.deb
 ```
 
 <span id="how-toinstallprebuiltamrpackages-rhelinstallation"></span>
@@ -257,16 +257,16 @@ Expected output:
 ```
 AMI
 ---------------------------------------------------------
-Version        | 2.0.0  (0)
+Version        | 3.0.0  (0)
 Branch         |
 Hash           | a8a8683...
 Hash Date      | 20260216
-Driver Version | 2.0.0  (0)
+Driver Version | 3.0.0  (0)
 
 
 BDF     | Device        | Serial Number | UUID                             | AMC        | State
 -----------------------------------------------------------------------------------------------
-c1:00.0 | ALVEO V80 PQ | XFL1GF4VJ1KW  | 00000000000000000000000032314bde | 2.0.0  (0) | READY
+c1:00.0 | ALVEO V80 PQ | XFL1GF4VJ1KW  | 00000000000000000000000032314bde | 3.0.0  (0) | READY
 ```
 
 **Important Notes:**

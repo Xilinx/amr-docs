@@ -16,7 +16,7 @@ Release Information
    * - **Property**
      - **Value**
    * - Version
-     - 2.0.0
+     - 3.0.0
    * - Release Date
      - April 15, 2026
    * - Vivado Version
@@ -38,8 +38,8 @@ Release Information
    :caption: AMR Getting Started
    :hidden:
 
-   getting-started/install-and-run
-   getting-started/rebuild
+   getting-started/install-prebuilt
+   getting-started/build
 
 .. toctree::
    :maxdepth: 2

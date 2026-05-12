@@ -20,7 +20,9 @@
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How-to Build an AMR Design for Yourself" href="build.html" />
+    <link rel="prev" title="AMR Overview" href="../overview/amr-overview.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,6 +44,32 @@
               <p class="caption" role="heading"><span class="caption-text">AMR Overview</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../overview/amr-overview.html">AMR Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AMR Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How-to Install Prebuilt AMR Packages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#download-prebuilt-packages">Download Prebuilt Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-1-program-ospi-firmware-to-device">Step 1: Program OSPI Firmware to Device</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#method-1-using-ami-tool-cfgmem-fpt-if-ami-already-installed-and-amc-is-in-ready-state">Method 1: Using ami_tool cfgmem_fpt (If AMI Already Installed and AMC is in READY state)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#method-2-flash-through-jtag-using-vivado-hardware-manager-recommended-for-initial-setup">Method 2: Flash Through JTAG Using Vivado Hardware Manager (Recommended for Initial Setup)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#method-3-flash-through-embpf-bootfw-update-tool-command-line-jtag">Method 3: Flash Through embpf-bootfw-update-tool (Command-Line JTAG)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-2-install-ami-software-packages">Step 2: Install AMI Software Packages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#remove-xrt-if-present">Remove XRT if Present</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ubuntu-installation">Ubuntu Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rhel-installation">RHEL Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-3-verify-installation">Step 3: Verify Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#check-driver-is-loaded">Check Driver is Loaded</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#verify-device-detection">Verify Device Detection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="build.html">How-to Build an AMR Design for Yourself</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AMR System Architecture</span></p>
 <ul>
@@ -286,9 +314,9 @@ sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </spa
 </pre></div>
 </div>
 <p><strong>Example:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>libami_2.0.0-0.0a8a8683.20260216_amd64.deb
-sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>ami_2.0.0-0.0a8a8683.20260216_amd64.deb
-sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>amitool_2.0.0-0.0a8a8683.20260216_amd64.deb
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>libami_3.0.0-0.0a8a8683.20260216_amd64.deb
+sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>ami_3.0.0-0.0a8a8683.20260216_amd64.deb
+sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>amitool_3.0.0-0.0a8a8683.20260216_amd64.deb
 </pre></div>
 </div>
 <p><span id="how-toinstallprebuiltamrpackages-rhelinstallation"></span></p>
@@ -337,16 +365,16 @@ lsmod<span class="w"> </span><span class="p">|</span><span class="w"> </span>gre
 <p>Expected output:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AMI</span>
 <span class="o">---------------------------------------------------------</span>
-<span class="n">Version</span>        <span class="o">|</span> <span class="mf">2.0.0</span>  <span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">Version</span>        <span class="o">|</span> <span class="mf">3.0.0</span>  <span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">Branch</span>         <span class="o">|</span>
 <span class="n">Hash</span>           <span class="o">|</span> <span class="n">a8a8683</span><span class="o">...</span>
 <span class="n">Hash</span> <span class="n">Date</span>      <span class="o">|</span> <span class="mi">20260216</span>
-<span class="n">Driver</span> <span class="n">Version</span> <span class="o">|</span> <span class="mf">2.0.0</span>  <span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">Driver</span> <span class="n">Version</span> <span class="o">|</span> <span class="mf">3.0.0</span>  <span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
 
 <span class="n">BDF</span>     <span class="o">|</span> <span class="n">Device</span>        <span class="o">|</span> <span class="n">Serial</span> <span class="n">Number</span> <span class="o">|</span> <span class="n">UUID</span>                             <span class="o">|</span> <span class="n">AMC</span>        <span class="o">|</span> <span class="n">State</span>
 <span class="o">-----------------------------------------------------------------------------------------------</span>
-<span class="n">c1</span><span class="p">:</span><span class="mf">00.0</span> <span class="o">|</span> <span class="n">ALVEO</span> <span class="n">V80</span> <span class="n">PQ</span> <span class="o">|</span> <span class="n">XFL1GF4VJ1KW</span>  <span class="o">|</span> <span class="mi">00000000000000000000000032314</span><span class="n">bde</span> <span class="o">|</span> <span class="mf">2.0.0</span>  <span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">|</span> <span class="n">READY</span>
+<span class="n">c1</span><span class="p">:</span><span class="mf">00.0</span> <span class="o">|</span> <span class="n">ALVEO</span> <span class="n">V80</span> <span class="n">PQ</span> <span class="o">|</span> <span class="n">XFL1GF4VJ1KW</span>  <span class="o">|</span> <span class="mi">00000000000000000000000032314</span><span class="n">bde</span> <span class="o">|</span> <span class="mf">3.0.0</span>  <span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">|</span> <span class="n">READY</span>
 </pre></div>
 </div>
 <p><strong>Important Notes:</strong></p>
@@ -381,7 +409,10 @@ lsmod<span class="w"> </span><span class="p">|</span><span class="w"> </span>gre
           </div>
           
 				  
-				  <footer>
+				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../overview/amr-overview.html" class="btn btn-neutral float-left" title="AMR Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="build.html" class="btn btn-neutral float-right" title="How-to Build an AMR Design for Yourself" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
