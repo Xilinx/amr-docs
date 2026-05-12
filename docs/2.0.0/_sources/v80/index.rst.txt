@@ -7,8 +7,7 @@ This section contains V80-specific documentation including installation, deploym
 .. toctree::
    :maxdepth: 2
 
-   install-and-run
-   install-host
    deployment-archive
+   switch-aved-amr
    hardware/index
-   xbtest/install-and-run
+   xbtest/install-and-run-xbtest

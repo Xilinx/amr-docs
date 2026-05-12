@@ -1,5 +1,7 @@
 # AMR Overview
 
+AMD Adaptive Management Runtime (AMR) provides comprehensive platform management capabilities for Alveo and Embedded+ boards featuring Versal devices, supporting multiple platforms including rave and v80, with AMR serving as the enhanced replacement for AVED on Alveo V80 accelerators.
+
 <span id="amroverview-newinthisrelease"></span>
 
 ## New In This Release
@@ -15,24 +17,6 @@
   - Three-partition FPT structure (two boot PDIs + one user partition) with 128-byte header and entries.
 
   - PS subsystems with RPU0 (AMR), RPU1 and APU.
-
-<span id="amroverview-supportedkernelsanddistributions"></span>
-
-## Supported Kernels and Distributions for V80
-
-
-| <span data-colorid="kdq9nyngzr">Operating System</span> | <span data-colorid="uu37qyp26c">Architecture</span> | <span data-colorid="zgwzhugq9a">Supported Versions</span>        | <span data-colorid="g2qoz68626">Kernel-Version</span>             |
-| ------------------------------------------------------- | --------------------------------------------------- | ---------------------------------------------------------------- | ----------------------------------------------------------------- |
-| <span data-colorid="w6a3hfta9z">Ubuntu</span>           | <span data-colorid="dwhflvbtbg">x86\_64</span>      | <span data-colorid="bmtdp27dz1">22.04<br>24.04<br>24.04.3</span> | <span data-colorid="ytedsyen0b">5.15.0<br>6.8.0<br>6.17.12</span> |
-| <span data-colorid="a9kve1ggv2">RHEL</span>             | <span data-colorid="vt4guanqx8">x86\_64</span>      | <span data-colorid="tmrzs0i204">8.3<br>9.7</span>                | <span data-colorid="el6txwhuye">4.18.0<br>6.19.3</span>           |
-
-Please note:
-
-  - The Example Design has been tested with the operating systems in the above table.
-
-  - AMR may work with other versions of these operating systems, but they have not been tested.
-
-  - All supported operating systems are tested with general access versions (GA). [Ubuntu Hardware Enablement](https://wiki.ubuntu.com/Kernel/LTSEnablementStack) (HWE) is not supported. By default, HWE is disabled by Ubuntu Server versions and enabled by desktop versions.
 
 <span id="amroverview-introduction"></span>
 
@@ -58,9 +42,31 @@ This section contains an overview of the AMD Adaptive Management Runtime (AMR). 
 
 The Alveo V80 is a high performance data processing card in a PCIe form factor containing a Versal HBM FPGA device, DDR memory, and a variety of communication interfaces. The Alveo V80 has a broad range of market applications in high-performance compute, analytics, networking, storage, fintech, and blockchain. The following diagram provides a high level overview of the primary card features and interfaces. See the Alveo V80 Data Center Accelerator Card Data Sheet (DS1013) for information on the card and its capabilities.
 
+<span id="amroverview-supportedkernelsanddistributions"></span>
+
+### Supported Kernels and Distributions for V80
+
+
+| <span data-colorid="kdq9nyngzr">Operating System</span> | <span data-colorid="uu37qyp26c">Architecture</span> | <span data-colorid="zgwzhugq9a">Supported Versions</span>        | <span data-colorid="g2qoz68626">Kernel-Version</span>             |
+| ------------------------------------------------------- | --------------------------------------------------- | ---------------------------------------------------------------- | ----------------------------------------------------------------- |
+| <span data-colorid="w6a3hfta9z">Ubuntu</span>           | <span data-colorid="dwhflvbtbg">x86\_64</span>      | <span data-colorid="bmtdp27dz1">22.04<br>24.04<br>24.04.3</span> | <span data-colorid="ytedsyen0b">5.15.0<br>6.8.0<br>6.17.12</span> |
+| <span data-colorid="a9kve1ggv2">RHEL</span>             | <span data-colorid="vt4guanqx8">x86\_64</span>      | <span data-colorid="tmrzs0i204">8.3<br>9.7</span>                | <span data-colorid="el6txwhuye">4.18.0<br>6.19.3</span>           |
+
+Please note:
+
+  - The Example Design has been tested with the operating systems in the above table.
+
+  - AMR may work with other versions of these operating systems, but they have not been tested.
+
+  - All supported operating systems are tested with general access versions (GA). [Ubuntu Hardware Enablement](https://wiki.ubuntu.com/Kernel/LTSEnablementStack) (HWE) is not supported. By default, HWE is disabled by Ubuntu Server versions and enabled by desktop versions.
+
 > **Note:** Queue DMA (QDMA) functionality is supported exclusively on the Alveo V80 platform. QDMA is not available on RAVE (Embedded+) platforms, which utilize XDMA for PCIe data transfer operations.
 
 [![image1](../images/1107373415.png)](../images/1107373415.png)
+
+To get started with AMR on V80 Refer [getting-started](../getting-started/index.md)
+
+**Note:** If you need to switch between AVED and AMR on V80, refer to [Switching Between AVED and AMR](../v80/switch-aved-amr.md) for detailed instructions on seamlessly transitioning between the two platforms.
 
 <span id="amroverview-rave"></span>
 
@@ -77,6 +83,8 @@ The Rave platform represents the standard reference implementation for Embedded+
 The Rave profile serves as the baseline platform configuration, providing core functionality while minimizing complexity for applications that do not require advanced storage or expansion interfaces.
 
 ![RAVE Platform Block Diagram](../images/rave_block.png)
+
+To get started with AMR on V80 Refer [getting-started](../getting-started/index.md)
 
 <span id="amroverview-alveoversalexampledesign"></span>
 
@@ -104,8 +112,8 @@ Some notable characteristics of the AMR include:
 
 The AMR includes platform-specific base hardware designs that demonstrate PCIe connectivity and management capabilities. For detailed information on the hardware architecture for each supported platform, please refer to:
 
-  - [V80 Hardware Architecture](../hardware/v80-hardware) - Platform with eMMC, QSFP, and SMBus support
-  - [Rave Hardware Architecture](../hardware/rave-hardware) - Standard reference platform architecture
+  - [V80 Hardware Architecture](../v80/hardware/index) - Platform with eMMC, QSFP, and SMBus support
+  - [Rave Hardware Architecture](../rave/hardware/index) - Standard reference platform architecture
 
 <span id="amroverview-amrsoftwarearchitecture"></span>
 

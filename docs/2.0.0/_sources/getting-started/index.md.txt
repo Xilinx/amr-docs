@@ -1,8 +1,10 @@
 # AMR Getting Started
 
-  - [How-to Rebuild an AMR Design for Yourself](rebuild.md)
+  - [How-to Install Prebuilt AMR Packages](install-prebuilt.md)
 
-   - [How-to install and run a pre-built xbtest on V80 card](../v80/xbtest/install-and-run.md)
+  - [How-to Build an AMR Design for Yourself](build.md)
+
+  - [How-to install and run a pre-built xbtest on V80 card](../v80/xbtest/install-and-run-xbtest.md)
 
 
 

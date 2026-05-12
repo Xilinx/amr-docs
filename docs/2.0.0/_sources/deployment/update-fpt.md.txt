@@ -77,6 +77,6 @@ See [/wiki/spaces/XPS/pages/1093308807](../../deployment/ami-tool-guide#overview
 
     BDF     | Device        | Serial Number | UUID                             | AMC        | State
     -----------------------------------------------------------------------------------------------
-    21:00.0 | ALVEO V80 INT | XFL1GF4VJ1KW  | 00000000000000000000000032314bde | 2.0.0  (0) | READY
+    21:00.0 | ALVEO V80 PQ | XFL1GF4VJ1KW  | 00000000000000000000000032314bde | 2.0.0  (0) | READY
 
 

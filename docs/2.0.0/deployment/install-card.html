@@ -45,10 +45,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../overview/amr-overview.html">AMR Overview</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">AMR Getting Started</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../getting-started/rebuild.html">How-to Rebuild an AMR Design for Yourself</a></li>
-</ul>
 <p class="caption" role="heading"><span class="caption-text">AMR System Architecture</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../system-architecture/board-management.html">AMR - Board Management Solution</a></li>
@@ -57,7 +53,12 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AMR Deployment</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">AMR Installing the Design onto the Card</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">AMR Installing the Design onto the Card</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#method-1-using-ami-tool-over-pcie">Method 1: Using ami_tool over PCIe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#method-2-using-vivado-hardware-manager-via-jtag">Method 2: Using Vivado Hardware Manager via JTAG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#method-3-using-embpf-bootfw-update-tool-command-line-jtag">Method 3: Using embpf-bootfw-update-tool (Command-Line JTAG)</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="update-fpt.html">AMR Updating FPT Image in Flash</a></li>
 <li class="toctree-l1"><a class="reference internal" href="update-pdi.html">AMR Updating PDI in Flash</a></li>
 <li class="toctree-l1"><a class="reference internal" href="debug.html">AMR Debug Techniques</a></li>
@@ -79,7 +80,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rave/hardware/index.html">Hardware Design - RAVE VPR-4616</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
@@ -132,12 +133,53 @@
              
   <div class="section" id="amr-installing-the-design-onto-the-card">
 <h1>AMR Installing the Design onto the Card<a class="headerlink" href="#amr-installing-the-design-onto-the-card" title="Permalink to this heading">¶</a></h1>
-<p>After installing the AMR, the next step is to update the design in the OSPI flash.</p>
+<p>After installing the AMR, the next step is to update the design in the OSPI flash. There are three methods available:</p>
+<div class="section" id="method-1-using-ami-tool-over-pcie">
+<h2>Method 1: Using ami_tool over PCIe<a class="headerlink" href="#method-1-using-ami-tool-over-pcie" title="Permalink to this heading">¶</a></h2>
+<p>When the FPT is known to be the same, you can update the AMR design over PCIe® using the AMI tool. In this case, the amr_ospi.bin from the compiled build folder is used instead of the amr_ospi_fpt.bin. Only the PDI_BOOT partition is updated in flash (not the FPT).</p>
+<p>The steps to do this are found in <a class="reference internal" href="update-pdi.html"><span class="std std-doc">AMR Updating Design PDI in Flash</span></a>.</p>
+</div>
+<div class="section" id="method-2-using-vivado-hardware-manager-via-jtag">
+<h2>Method 2: Using Vivado Hardware Manager via JTAG<a class="headerlink" href="#method-2-using-vivado-hardware-manager-via-jtag" title="Permalink to this heading">¶</a></h2>
 <p>As the FPT you are installing may not align with the FPT that is currently on your card, it is important that you update the OSPI flash with the amr_ospi-fpt.bin over JTAG using the AMD Vivado™ HW manager. This will ensure that the correct FPT is in flash.</p>
-<p>The steps to do this are found in <a class="reference internal" href="#../update-fpt/"><span class="xref myst">Updating AMR FPT Image in Flash</span></a>.</p>
-<p>In general, when the FPT is known to be the same, it is also possible to update the AMR design over PCIe® using the AMI tool. In this case, the amr_ospi.bin from the compiled build folder is used instead of the amr_ospi_fpt.bin. Only the PDI_BOOT partition is updated in flash ](not the FPT).</p>
-<p>The steps to do this are found in <a class="reference internal" href="#../update-pdi/"><span class="xref myst">AMR Updating Design PDI in Flash</span></a>.</p>
+<p>The steps to do this are found in <a class="reference internal" href="update-fpt.html"><span class="std std-doc">Updating AMR FPT Image in Flash</span></a>.</p>
 <p><strong>Note:</strong> Especially when picking up a new card, it’s worth noting that the deployment archive will always contain a version of AMI which is compatible with the AMC FW which is in the amr_ospi_fpt.bin pdi. To avoid any confusion, updating the amr_ospi_fpt.bin over JTAG is the simplest and recommended approach.</p>
+</div>
+<div class="section" id="method-3-using-embpf-bootfw-update-tool-command-line-jtag">
+<h2>Method 3: Using embpf-bootfw-update-tool (Command-Line JTAG)<a class="headerlink" href="#method-3-using-embpf-bootfw-update-tool-command-line-jtag" title="Permalink to this heading">¶</a></h2>
+<p>This method provides a command-line alternative to the Vivado Hardware Manager GUI for programming OSPI via JTAG.</p>
+<p><strong>Steps:</strong></p>
+<ol class="arabic">
+<li><p>Clone the embpf-bootfw-update-tool repository:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Xilinx/embpf-bootfw-update-tool
+<span class="nb">cd</span><span class="w"> </span>embpf-bootfw-update-tool
+</pre></div>
+</div>
+</li>
+<li><p>Source the Vivado settings to set up the environment:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/path/to/Vivado/2026.1/settings64.sh
+</pre></div>
+</div>
+</li>
+<li><p>Run the programming script with your platform and OSPI image:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>prog_spi.sh<span class="w"> </span>-d<span class="w"> </span>&lt;v80<span class="p">|</span>rave&gt;<span class="w"> </span>-V<span class="w"> </span>-i<span class="w"> </span>&lt;path/to/amr_ospi_fpt.bin&gt;
+</pre></div>
+</div>
+</li>
+</ol>
+<p><strong>Example for V80:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>prog_spi.sh<span class="w"> </span>-d<span class="w"> </span>v80<span class="w"> </span>-V<span class="w"> </span>-i<span class="w"> </span>/path/to/amr_ospi_fpt.bin
+</pre></div>
+</div>
+<p><strong>Example for RAVE:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>prog_spi.sh<span class="w"> </span>-d<span class="w"> </span>rave<span class="w"> </span>-V<span class="w"> </span>-i<span class="w"> </span>/path/to/amr_ospi_fpt.bin
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>After programming completes, perform a <strong>cold reboot</strong> of the host server</p></li>
+</ol>
+<p><strong>Tool repository:</strong> https://github.com/Xilinx/embpf-bootfw-update-tool</p>
+</div>
 </div>
 
 
@@ -154,7 +196,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on April 30, 2026.
+      <span class="lastupdated">Last updated on May 12, 2026.
       </span></p>
   </div>
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AMR V80 - Clock Reset Module &mdash; AMR  documentation</title>
+  <title>How-to Install and Run xbtest on V80 Card &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
@@ -20,7 +20,9 @@
         <script src="../../_static/doctools.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Hardware Design - RAVE VPR-4616" href="../../rave/hardware/index.html" />
+    <link rel="prev" title="Hardware Design - V80 (Alveo)" href="../hardware/index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -68,8 +70,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../../hardware/index.html">Hardware Design - AMR Common</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">V80 Platform Documentation</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">V80 Platform Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../deployment-archive.html">AMR Deployment Archive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../switch-aved-amr.html">Switching Between AVED and AMR on V80</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hardware/index.html">Hardware Design - V80 (Alveo)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">How-to Install and Run xbtest on V80 Card</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#important-note">Important Note</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
 <ul>
@@ -114,9 +126,10 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>AMR V80 - Clock Reset Module</li>
+          <li><a href="../index.html">V80 Platform Documentation</a> &raquo;</li>
+      <li>How-to Install and Run xbtest on V80 Card</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../../_sources/v80/hardware/clock-reset.md.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/v80/xbtest/install-and-run-xbtest.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -124,103 +137,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="amr-v80-clock-reset-module">
-<h1>AMR V80 - Clock Reset Module<a class="headerlink" href="#amr-v80-clock-reset-module" title="Permalink to this heading">¶</a></h1>
-<blockquote>
-<div><p><strong>For common clock/reset concepts</strong>, see <a class="reference internal" href="../../hardware/clock-reset.html"><span class="std std-doc">Common Clock Reset</span></a></p>
-<p>This document describes V80-specific clock and reset configuration.</p>
-</div></blockquote>
-<p><span id="amrv80-clockresetmodule-overview"></span></p>
-<div class="section" id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
-<p>The V80 base design uses CIPS-generated clocks (100 MHz, 33.33 MHz, 250 MHz) directly without clock generation IP. A single processor system reset block in the PF1 hierarchy provides reset synchronization for the test logic. The design can be extended with clocking wizards and additional reset blocks when user kernels require custom clock domains.</p>
-<p><span id="amr-clockresetmodule-sub-blocks"></span></p>
+  <div class="section" id="how-to-install-and-run-xbtest-on-v80-card">
+<h1>How-to Install and Run xbtest on V80 Card<a class="headerlink" href="#how-to-install-and-run-xbtest-on-v80-card" title="Permalink to this heading">¶</a></h1>
+<p><span id="how-toinstallandrunxbtestonv80card-note"></span></p>
+<div class="section" id="important-note">
+<h2>Important Note<a class="headerlink" href="#important-note" title="Permalink to this heading">¶</a></h2>
+<p><strong>xbtest is not supported with AMR in this release.</strong></p>
+<p>For xbtest functionality on V80 cards, you must use the AVED 2025.2 release instead of AMR.</p>
+<p>Please refer to the AVED documentation for complete xbtest installation and usage instructions:</p>
+<p><strong>AVED xbtest Documentation:</strong>
+<a class="reference external" href="https://xilinx.github.io/AVED/amd_v80_gen5x8_exdes_1_20231204/How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html">https://xilinx.github.io/AVED/amd_v80_gen5x8_exdes_1_20231204/How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html</a></p>
+<p><span id="how-toinstallandrunxbtestonv80card-nextsteps"></span></p>
 </div>
-<div class="section" id="cips-clock-outputs">
-<h2>CIPS Clock Outputs<a class="headerlink" href="#cips-clock-outputs" title="Permalink to this heading">¶</a></h2>
-<p>The CIPS IP provides multiple PL reference clocks for use in the programmable logic:</p>
-<table border="1" class="docutils">
-<thead>
-<tr>
-<th>Clock Signal</th>
-<th>Frequency</th>
-<th>Usage in Base Design</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>pl0_ref_clk</td>
-<td>100 MHz</td>
-<td>PF1 hierarchy (SmartConnect, GPIO, proc_sys_reset_0)</td>
-</tr>
-<tr>
-<td>pl1_ref_clk</td>
-<td>33.3333 MHz</td>
-<td>Available for future expansion (user clocking wizard input)</td>
-</tr>
-<tr>
-<td>pl2_ref_clk</td>
-<td>250 MHz</td>
-<td>NoC AXI interfaces (axi_noc_cips aclk4)</td>
-</tr>
-</tbody>
-</table>
-<p><span id="amr-clockresetmodule-base-design-resets"></span></p>
-</div>
-<div class="section" id="base-design-reset-structure">
-<h2>Base Design Reset Structure<a class="headerlink" href="#base-design-reset-structure" title="Permalink to this heading">¶</a></h2>
-<p><span id="amr-clockresetmodule-pf1-proc-sys-reset"></span></p>
-<div class="section" id="pf1-proc-sys-reset-0">
-<h3>PF1 proc_sys_reset_0<a class="headerlink" href="#pf1-proc-sys-reset-0" title="Permalink to this heading">¶</a></h3>
-<p>This processor system reset block (xilinx.com:ip:proc_sys_reset:5.0) is instantiated within the PF1 hierarchical block:</p>
-<p><strong>Inputs:</strong></p>
+<div class="section" id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this heading">¶</a></h2>
+<p>If you need AMR functionality without xbtest, refer to:</p>
 <ul class="simple">
-<li><p>ext_reset_in: Connected to PF1 aresetn (external reset input)</p></li>
-<li><p>slowest_sync_clk: Connected to pl0_ref_clk (100 MHz)</p></li>
+<li><p><a class="reference internal" href="../../getting-started/install-prebuilt.html"><span class="std std-doc">How-to Install Prebuilt AMR Packages</span></a></p></li>
+<li><p><a class="reference internal" href="../../getting-started/build.html"><span class="std std-doc">How-to Build an AMR Design for Yourself</span></a></p></li>
+<li><p><a class="reference internal" href="../../deployment/ami-tool-guide.html"><span class="std std-doc">AMR Management Interface userguide</span></a></p></li>
 </ul>
-<p><strong>Outputs:</strong></p>
-<ul class="simple">
-<li><p>interconnect_aresetn: Reset for SmartConnect (smartconnect_pf1)</p></li>
-<li><p>peripheral_aresetn: Reset for AXI GPIO (axi_gpio_test_pf1)</p></li>
-</ul>
-<p><strong>Function:</strong> Synchronizes the external reset signal to the 100 MHz clock domain and generates appropriately timed resets for the SmartConnect interconnect and AXI GPIO peripheral.</p>
-<p><span id="amr-clockresetmodule-future-expansion"></span></p>
-</div>
-</div>
-<div class="section" id="future-expansion-user-clock-domains">
-<h2>Future Expansion - User Clock Domains<a class="headerlink" href="#future-expansion-user-clock-domains" title="Permalink to this heading">¶</a></h2>
-<p>For designs requiring custom clock frequencies, the following structure can be added:</p>
-<div class="section" id="usr-clk-wiz-optional-not-in-base-design">
-<h3>usr_clk_wiz (Optional - Not in Base Design)<a class="headerlink" href="#usr-clk-wiz-optional-not-in-base-design" title="Permalink to this heading">¶</a></h3>
-<p>A Clocking Wizard IP can use the 33.333333MHz from CIPS (pl1_ref_clk) to generate custom frequencies for user kernels (e.g., 300 MHz, 500 MHz). Additional Processor System Reset blocks would synchronize resets to these clock domains.</p>
-</div>
-<div class="section" id="additional-psr-blocks-optional-not-in-base-design">
-<h3>Additional PSR Blocks (Optional - Not in Base Design)<a class="headerlink" href="#additional-psr-blocks-optional-not-in-base-design" title="Permalink to this heading">¶</a></h3>
-<ul class="simple">
-<li><p><strong>pl_psr</strong>: Synchronizes CIPS reset (pl0_resetn) to 100MHz (pl0_ref_clk)</p></li>
-<li><p><strong>pcie_psr</strong>: Creates reset synchronous to PCIe clock domain</p></li>
-<li><p><strong>usr_N_psr</strong>: Creates resets synchronous to user clock domains from clocking wizard</p></li>
-</ul>
-<p><span id="amr-clockresetmodule-flashreload"></span></p>
-<div class="section" id="flash-reload">
-<h4>Flash Reload<a class="headerlink" href="#flash-reload" title="Permalink to this heading">¶</a></h4>
-<p>AMR uses software-based device reboot via the <code class="docutils literal notranslate"><span class="pre">device_boot</span></code> command to reload the design from flash. This requires functional AMC firmware and established AMC-to-AMI communication. GPIO-based PCIe hot reset is <strong>not</strong> supported due to the system complexity of resets described below.</p>
-<ul class="simple">
-<li><p>When PCIe Reset asserts, this reset does not naturally progress to the rest of the device.</p></li>
-<li><p>The reset structure of Versal is not structured/tested in a way that it can be reset properly without reloading the entire design from flash (in the desired time frame).</p>
-<ul>
-<li><p>The programmatic way to reset NOC, PS, DDR, HBM, etc is by issuing a POR and reloading the design from flash.</p></li>
-</ul>
-</li>
-<li><p>The device POR cannot be issued until the host has issued the PCIe reset sequence or adverse behavior on the host may be observed.</p>
-<ul>
-<li><p>Some DELL servers reboot themselves if the PCIe link goes down unexpectedly.</p></li>
-</ul>
-</li>
-<li><p>When AMC-to-AMI communication is not established or if the AMC is not in a good state, a complete power cycle of the device is required.</p></li>
-</ul>
-</div>
-</div>
 </div>
 </div>
 
@@ -229,7 +165,10 @@
           </div>
           
 				  
-				  <footer>
+				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../hardware/index.html" class="btn btn-neutral float-left" title="Hardware Design - V80 (Alveo)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../rave/hardware/index.html" class="btn btn-neutral float-right" title="Hardware Design - RAVE VPR-4616" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

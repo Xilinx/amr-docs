@@ -1,14 +1,58 @@
 # AMR Installing the Design onto the Card
 
-After installing the AMR, the next step is to update the design in the OSPI flash.
+After installing the AMR, the next step is to update the design in the OSPI flash. There are three methods available:
+
+## Method 1: Using ami_tool over PCIe
+
+When the FPT is known to be the same, you can update the AMR design over PCIe® using the AMI tool. In this case, the amr_ospi.bin from the compiled build folder is used instead of the amr_ospi_fpt.bin. Only the PDI_BOOT partition is updated in flash (not the FPT).
+
+The steps to do this are found in [AMR Updating Design PDI in Flash](update-pdi.md).
+
+## Method 2: Using Vivado Hardware Manager via JTAG
 
 As the FPT you are installing may not align with the FPT that is currently on your card, it is important that you update the OSPI flash with the amr_ospi-fpt.bin over JTAG using the AMD Vivado™ HW manager. This will ensure that the correct FPT is in flash.
 
-The steps to do this are found in [Updating AMR FPT Image in Flash](../update-fpt/).
+The steps to do this are found in [Updating AMR FPT Image in Flash](update-fpt.md).
 
-In general, when the FPT is known to be the same, it is also possible to update the AMR design over PCIe® using the AMI tool. In this case, the amr_ospi.bin from the compiled build folder is used instead of the amr_ospi_fpt.bin. Only the PDI\_BOOT partition is updated in flash ](not the FPT).
+**Note:** Especially when picking up a new card, it's worth noting that the deployment archive will always contain a version of AMI which is compatible with the AMC FW which is in the amr_ospi_fpt.bin pdi. To avoid any confusion, updating the amr_ospi_fpt.bin over JTAG is the simplest and recommended approach.
 
-The steps to do this are found in [AMR Updating Design PDI in Flash](../update-pdi/).
+## Method 3: Using embpf-bootfw-update-tool (Command-Line JTAG)
 
-**Note:** Especially when picking up a new card, it’s worth noting that the deployment archive will always contain a version of AMI which is compatible with the AMC FW which is in the amr_ospi_fpt.bin pdi. To avoid any confusion, updating the amr_ospi_fpt.bin over JTAG is the simplest and recommended approach.
+This method provides a command-line alternative to the Vivado Hardware Manager GUI for programming OSPI via JTAG.
 
+**Steps:**
+
+1. Clone the embpf-bootfw-update-tool repository:
+
+   ```bash
+   git clone https://github.com/Xilinx/embpf-bootfw-update-tool
+   cd embpf-bootfw-update-tool
+   ```
+
+2. Source the Vivado settings to set up the environment:
+
+   ```bash
+   source /path/to/Vivado/2026.1/settings64.sh
+   ```
+
+3. Run the programming script with your platform and OSPI image:
+
+   ```bash
+   bash prog_spi.sh -d <v80|rave> -V -i <path/to/amr_ospi_fpt.bin>
+   ```
+
+**Example for V80:**
+
+```bash
+bash prog_spi.sh -d v80 -V -i /path/to/amr_ospi_fpt.bin
+```
+
+**Example for RAVE:**
+
+```bash
+bash prog_spi.sh -d rave -V -i /path/to/amr_ospi_fpt.bin
+```
+
+4. After programming completes, perform a **cold reboot** of the host server
+
+**Tool repository:** https://github.com/Xilinx/embpf-bootfw-update-tool

@@ -147,7 +147,7 @@ Displays the version information of the currently installed AMI API and AMI Driv
 
 ## Usage - Commands
 
-  - [overview](#overview)
+  - [overview](#overview-command)
 
   - [pcieinfo](#pcieinfo)
 
@@ -189,7 +189,7 @@ Displays the version information of the currently installed AMI API and AMI Driv
 
 ---
 
-<span id="id5"></span>
+<span id="overview-command"></span>
 
 ### overview
 
@@ -233,7 +233,7 @@ This output can be logged to a file using the **-o** option, and the logged form
 
     BDF     | Device        | Serial Number | UUID                             | AMC        | State
     -----------------------------------------------------------------------------------------------
-    21:00.0 | ALVEO V80 INT | XFL1GF4VJ1KW  | 00000000000000000000000032314bde | 2.0.0  (0) | READY
+    21:00.0 | ALVEO V80 PQ | XFL1GF4VJ1KW  | 00000000000000000000000032314bde | 2.0.0  (0) | READY
 
 
 <span id="id8"></span>
@@ -1116,7 +1116,7 @@ This output can be logged to a file using the **-o** option and the logged forma
     Manufacturing Information
     ----------------------------------------------------------------
     Eeprom Version            | 4.0
-    Product Name              | ALVEO V80 INT
+    Product Name              | ALVEO V80 PQ
     Board Revision            | B
     Serial Number             | XFL1F4ZZBHNY
     Mac Address 1             | 00:0a:35:16:57:80

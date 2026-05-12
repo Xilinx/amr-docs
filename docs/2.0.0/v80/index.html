@@ -45,10 +45,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../overview/amr-overview.html">AMR Overview</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">AMR Getting Started</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../getting-started/rebuild.html">How-to Rebuild an AMR Design for Yourself</a></li>
-</ul>
 <p class="caption" role="heading"><span class="caption-text">AMR System Architecture</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../system-architecture/board-management.html">AMR - Board Management Solution</a></li>
@@ -77,14 +73,15 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">V80 Platform Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="deployment-archive.html">AMR Deployment Archive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="switch-aved-amr.html">Switching Between AVED and AMR on V80</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hardware/index.html">Hardware Design - V80 (Alveo)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run.html">How-to install and run a pre-built Xbtest design on an ALVEO V80 card</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run-xbtest.html">How-to Install and Run xbtest on V80 Card</a></li>
 </ul>
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../rave/hardware/index.html">Hardware Design - RAVE (VE2302)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rave/hardware/index.html">Hardware Design - RAVE VPR-4616</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
@@ -144,6 +141,17 @@
 <li class="toctree-l2"><a class="reference internal" href="deployment-archive.html#amr-deployment-archive-contents">AMR Deployment Archive Contents</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="switch-aved-amr.html">Switching Between AVED and AMR on V80</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="switch-aved-amr.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="switch-aved-amr.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="switch-aved-amr.html#switching-from-amr-to-aved-xbtest">Switching from AMR to AVED/xbtest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="switch-aved-amr.html#amr-installation-with-existing-aved-xbtest">AMR Installation with Existing AVED/xbtest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="switch-aved-amr.html#install-the-amr-software-packages">Install the AMR Software Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="switch-aved-amr.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="switch-aved-amr.html#verification-checklist">Verification Checklist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="switch-aved-amr.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="hardware/index.html">Hardware Design - V80 (Alveo)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="hardware/index.html#v80-platform-overview">V80 Platform Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hardware/index.html#v80-specific-hardware-documentation">V80-Specific Hardware Documentation</a></li>
@@ -153,16 +161,9 @@
 <li class="toctree-l2"><a class="reference internal" href="hardware/index.html#references">References</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="xbtest/install-and-run.html">How-to install and run a pre-built Xbtest design on an ALVEO V80 card</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run.html#before-you-begin">Before You Begin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run.html#xbtest-installation-with-an-existing-amr">Xbtest installation with an existing AMR</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run.html#aved-installation">AVED Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run.html#amr-installation-with-existing-aved-xbtest">AMR installation with existing AVED/xbtest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run.html#install-the-amr-software-packages">Install the AMR software packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run.html#testing-xbtest">Testing xbtest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run.html#ami">AMI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run.html#bdf-device-serial-number-uuid-amc-state">BDF     | Device        | Serial Number | UUID                             | AMC        | State</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run.html#next-steps">Next Steps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xbtest/install-and-run-xbtest.html">How-to Install and Run xbtest on V80 Card</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run-xbtest.html#important-note">Important Note</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run-xbtest.html#next-steps">Next Steps</a></li>
 </ul>
 </li>
 </ul>
@@ -183,7 +184,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on April 30, 2026.
+      <span class="lastupdated">Last updated on May 12, 2026.
       </span></p>
   </div>
 

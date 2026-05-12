@@ -1,8 +1,8 @@
-# Hardware Design - RAVE (VE2302)
+# Hardware Design - RAVE VPR-4616
 
 > **For common hardware concepts**, see [Common Hardware Documentation](../../hardware/index.md)
 >
-> This section contains RAVE (VE2302) platform-specific hardware design documentation.
+> This section contains RAVE VPR-4616 platform-specific hardware design documentation.
 
 ## RAVE Platform Overview
 
