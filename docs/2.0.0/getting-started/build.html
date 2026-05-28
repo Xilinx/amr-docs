@@ -96,11 +96,11 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../v80/index.html">V80 Platform Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Platform Documentation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../rave/hardware/index.html">Hardware Design - RAVE VPR-4616</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RAVE/hardware/index.html">Hardware Design - RAVE VPR-4616</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
@@ -124,7 +124,7 @@
 <p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../appendices/abbreviations.html">AMR - List of Abbreviations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release-notes.html">AMR Release Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AMR-release-information.html">AMR Release Information</a></li>
 </ul>
 
         </div>
@@ -216,7 +216,7 @@
 <li><p><strong>V80:</strong> <code class="docutils literal notranslate"><span class="pre">build/tmp/deploy/images/alveo-v80-amr/</span></code></p></li>
 </ul>
 <ol class="arabic">
-<li><p>Rave
+<li><p>RAVE
 Build OSPI image:
 MACHINE=emb-plus-ve2302-amr bitbake emb-plus-ospi-amr</p>
 <p>Build APU image:
@@ -236,7 +236,7 @@ MACHINE=alveo-v80-amr bitbake emb-plus-apu-image</p>
 <p><strong>Use this approach for development builds with local changes.</strong></p>
 <p>Get the latest AMR source code for development.</p>
 <ol class="arabic simple">
-<li><p>Refer to the <a class="reference internal" href="../release-notes.html"><span class="std std-doc">AMR release notes</span></a> to find the latest example design version. the <em>amr git release branch</em> will direct you to the release branch source code in github.</p></li>
+<li><p>Refer to the <a class="reference internal" href="../AMR-release-information.html"><span class="std std-doc">AMR Release Information</span></a> to find the latest example design version. the <em>amr git release branch</em> will direct you to the release branch source code in github.</p></li>
 <li><p>Clone the latest release branch AMR source code repository. Confirm that you cloned the repository to a development server with sufficient system memory to build AMR, either locally on the server or remotely through LSF.</p></li>
 <li><p>Make a note of the listed Vivado tool version used to build this source code, as AMR has been verified to build with this tool version. You will use the same Vivado version to build AMR.</p></li>
 </ol>

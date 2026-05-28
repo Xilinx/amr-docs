@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AMR RAVE - Source File Overview &mdash; AMR  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/_static/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+            <a href="../../index.html" class="icon icon-home"> AMR
+            <img src="../../_static/xilinx-header-logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">AMR Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/amr-overview.html">AMR Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AMR Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/install-prebuilt.html">How-to Install Prebuilt AMR Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/build.html">How-to Build an AMR Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AMR System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../system-architecture/board-management.html">AMR - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../system-architecture/device-programming.html">AMR - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../system-architecture/host-communication.html">AMR - Host to Card Communication</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AMR Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/install-card.html">AMR Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/update-fpt.html">AMR Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/update-pdi.html">AMR Updating PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/debug.html">AMR Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/jtag-recovery.html">AMR JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/ami-tool-guide.html">AMR Management Interface userguide (ami_tool)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../development/build-scripts.html">AMR Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development/source-control.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../V80/index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Hardware Design - RAVE VPR-4616</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/asdm-application.html">AMR ASDM Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/inband-telemetry.html">AMR InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/osal.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/profiles-cmake.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../software/ami.html">AMR Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software/qdma.html">AMR QDMA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices/abbreviations.html">AMR - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AMR-release-information.html">AMR Release Information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: black" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AMR</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>AMR RAVE - Source File Overview</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/RAVE/hardware/source-files.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="amr-rave-source-file-overview">
+<h1>AMR RAVE - Source File Overview<a class="headerlink" href="#amr-rave-source-file-overview" title="Permalink to this heading">¶</a></h1>
+<blockquote>
+<div><p><strong>For common build concepts</strong>, see <a class="reference internal" href="../../hardware/source-files.html"><span class="std std-doc">Common Source Files</span></a></p>
+<p>This document describes RAVE-specific build structure: emb_plus_ve2302 directory organization.</p>
+</div></blockquote>
+<p><span id="amrrave-sourcefiles-overview"></span></p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
+<p>The RAVE hardware design files are organized under rave/amr_vivado_designs/emb_plus_ve2302/ with multiple platform variants supporting different applications and features. The directory structure includes</p>
+<p>DFX-capable designs with reconfigurable partitions.</p>
+<p><span id="amrrave-sourcefiles-directorytree"></span></p>
+</div>
+<div class="section" id="rave-directory-structure">
+<h2>RAVE Directory Structure<a class="headerlink" href="#rave-directory-structure" title="Permalink to this heading">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>build_rave/amr_vivado_designs/
+└── emb_plus_ve2302/
+    ├── platforms/
+    │   ├── scripts/           (Common SDT generation scripts)
+    │   ├── ve2302_xdma_base/  (DFX base design)
+    │   ├── ve2302_1gEth/      (1G Ethernet design)
+    │   ├── ve2302_10g_mrmac/  (10G Ethernet with MRMAC)
+    │   ├── ve2302_gmsl/       (GMSL video pipeline)
+    │   └── ve2302_xdma_gmsl/  (GMSL with XDMA/PCIe)
+    └── dfx/
+        ├── common/            (DFX isolation interface)
+        ├── bram_gpio/         (BRAM + GPIO RM)
+        ├── eth_1g/            (1G Ethernet RM)
+        ├── eth_10g/           (10G Ethernet RM)
+        └── training/          (Reference RM)
+</pre></div>
+</div>
+<p><span id="amrrave-sourcefiles-platformdesigns"></span></p>
+</div>
+<div class="section" id="platform-design-variants">
+<h2>Platform Design Variants<a class="headerlink" href="#platform-design-variants" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="ve2302-xdma-base">
+<h3>ve2302_xdma_base<a class="headerlink" href="#ve2302-xdma-base" title="Permalink to this heading">¶</a></h3>
+<p>The base DFX-capable platform design provides PCIe/XDMA functionality with a reconfigurable partition for swappable user logic. This design serves as the foundation for dynamic daughtercard support where different IP configurations can be loaded at runtime.</p>
+<p><strong>Key Features:</strong></p>
+<ul class="simple">
+<li><p>XDMA or QDMA for PCIe DMA</p></li>
+<li><p>Reconfigurable partition for user logic</p></li>
+<li><p>Isolation interface for BLP/ULP separation</p></li>
+<li><p>Generates base XSA and partial PDI support</p></li>
+</ul>
+<p><strong>Build Outputs:</strong></p>
+<ul class="simple">
+<li><p>ve2302_xdma_base.xsa</p></li>
+<li><p>Static region PDI</p></li>
+<li><p>Reconfigurable partition ready for ULP modules</p></li>
+</ul>
+</div>
+<div class="section" id="ve2302-1geth">
+<h3>ve2302_1gEth<a class="headerlink" href="#ve2302-1geth" title="Permalink to this heading">¶</a></h3>
+<p>A flat design (non-DFX) integrating dual-channel 1G Ethernet using standard Ethernet MAC IP. This design demonstrates network connectivity for industrial and embedded applications requiring standard Ethernet interfaces.</p>
+<p>The design includes Ethernet MAC controllers, DMA infrastructure for packet processing, and appropriate clock and reset management for the Ethernet subsystem.</p>
+</div>
+<div class="section" id="ve2302-10g-mrmac">
+<h3>ve2302_10g_mrmac<a class="headerlink" href="#ve2302-10g-mrmac" title="Permalink to this heading">¶</a></h3>
+<p>A flat design implementing dual 10G Ethernet channels using the MRMAC (Multi-Rate MAC) hardened block in Versal. The MRMAC provides efficient 10G/25G Ethernet functionality with lower resource usage than soft MAC implementations.</p>
+<p>This design includes custom MRMAC_AXI_MUX IP (located in dfx/eth_10g/ip/) that interfaces the MRMAC to the AXI infrastructure. The mux handles width conversion and protocol adaptation between the MRMAC and AXI subsystem.</p>
+</div>
+<div class="section" id="ve2302-gmsl">
+<h3>ve2302_gmsl<a class="headerlink" href="#ve2302-gmsl" title="Permalink to this heading">¶</a></h3>
+<p>A flat design implementing the GMSL (Gigabit Multimedia Serial Link) video processing pipeline. This design targets vision applications with camera inputs, ISP (Image Signal Processing), and video output capabilities.</p>
+<p>The GMSL deserializer IP receives camera data through high-speed serial links, with the Versal processing the video through programmable logic pipelines or AI Engine acceleration.</p>
+</div>
+<div class="section" id="ve2302-xdma-gmsl">
+<h3>ve2302_xdma_gmsl<a class="headerlink" href="#ve2302-xdma-gmsl" title="Permalink to this heading">¶</a></h3>
+<p>A combined design integrating both GMSL video pipeline and XDMA/PCIe functionality. This configuration enables video processing applications with PCIe connectivity for host communication and control.</p>
+<p><span id="amrrave-sourcefiles-dfxmodules"></span></p>
+</div>
+</div>
+<div class="section" id="dfx-reconfigurable-modules">
+<h2>DFX Reconfigurable Modules<a class="headerlink" href="#dfx-reconfigurable-modules" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="common-isolation-interface">
+<h3>Common Isolation Interface<a class="headerlink" href="#common-isolation-interface" title="Permalink to this heading">¶</a></h3>
+<p>The dfx/common/bd/static_interface.tcl defines the boundary between the static base logic platform (BLP) and the reconfigurable user logic platform (ULP). This isolation interface specifies the AXI interfaces, clocks, and resets that cross the partition boundary.</p>
+<p>The isolation interface remains constant across all reconfigurable modules, ensuring any ULP can be loaded into the reconfigurable partition without modifying the static logic.</p>
+</div>
+<div class="section" id="bram-gpio-module">
+<h3>bram_gpio Module<a class="headerlink" href="#bram-gpio-module" title="Permalink to this heading">¶</a></h3>
+<p>A simple reconfigurable module providing BRAM storage and GPIO interfaces. This module serves as a reference example demonstrating the DFX flow and validation of the isolation interface.</p>
+</div>
+<div class="section" id="eth-1g-module">
+<h3>eth_1g Module<a class="headerlink" href="#eth-1g-module" title="Permalink to this heading">¶</a></h3>
+<p>A reconfigurable module implementing single-channel 1G Ethernet. This ULP demonstrates how network connectivity can be dynamically added or removed through partial reconfiguration.</p>
+</div>
+<div class="section" id="eth-10g-module">
+<h3>eth_10g Module<a class="headerlink" href="#eth-10g-module" title="Permalink to this heading">¶</a></h3>
+<p>A reconfigurable module implementing single-channel 10G Ethernet using MRMAC IP. This module includes custom IP (MRMAC_AXI_MUX_V1_1) for MRMAC integration along with axis_dwidth_converter modules for width adaptation.</p>
+<p><strong>Contents:</strong></p>
+<ul class="simple">
+<li><p>MRMAC_AXI_MUX IP (custom mux logic)</p></li>
+<li><p>Width conversion logic (RX/TX)</p></li>
+<li><p>Verilog modules: mrmac_10g_mux.v</p></li>
+</ul>
+<p><span id="amrrave-sourcefiles-buildstructure"></span></p>
+</div>
+</div>
+<div class="section" id="build-structure-per-platform">
+<h2>Build Structure (Per Platform)<a class="headerlink" href="#build-structure-per-platform" title="Permalink to this heading">¶</a></h2>
+<p>Each platform directory follows a common structure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ve2302_&lt;platform&gt;/
+├── Makefile              (Build automation)
+├── scripts/
+│   ├── main.tcl          (Vivado project creation)
+│   └── config_bd.tcl     (Block design generation)
+├── xdc/
+│   ├── impl.pins.xdc     (Pin constraints)
+│   └── impl.xdc          (Timing/placement constraints)
+└── ip/                   (Custom IP, if needed)
+</pre></div>
+</div>
+<div class="section" id="makefile-targets">
+<h3>Makefile Targets<a class="headerlink" href="#makefile-targets" title="Permalink to this heading">¶</a></h3>
+<p>The Makefile provides build automation:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">xsa</span></code> - Generate XSA hardware definition</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">sdt</span></code> - Generate System Device Tree</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">all</span></code> - Complete build (XSA + SDT)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code> - Remove generated files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">JOBS=N</span></code> - Parallel synthesis jobs (default 8)</p></li>
+</ul>
+</div>
+<div class="section" id="main-tcl-script">
+<h3>main.tcl Script<a class="headerlink" href="#main-tcl-script" title="Permalink to this heading">¶</a></h3>
+<p>The main.tcl script orchestrates the Vivado build:</p>
+<ul class="simple">
+<li><p>Creates Vivado project</p></li>
+<li><p>Sets board part (xilinx.com:ve2302:part0:1.0)</p></li>
+<li><p>Loads XDC constraints</p></li>
+<li><p>Updates IP catalog with custom IP repositories</p></li>
+<li><p>Sources config_bd.tcl to generate block design</p></li>
+<li><p>Runs synthesis and implementation</p></li>
+<li><p>Generates and validates XSA</p></li>
+</ul>
+</div>
+<div class="section" id="config-bd-tcl-script">
+<h3>config_bd.tcl Script<a class="headerlink" href="#config-bd-tcl-script" title="Permalink to this heading">¶</a></h3>
+<p>The config_bd.tcl script instantiates and configures all IP blocks:</p>
+<ul class="simple">
+<li><p>CIPS (VE2302 configuration)</p></li>
+<li><p>PCIe Versal IP (Gen3 x4)</p></li>
+<li><p>QDMA PL IP (512 queues) or XDMA IP</p></li>
+<li><p>AXI NoC instances (LPDDR4 integration)</p></li>
+<li><p>SmartConnect, AXI GPIO, proc_sys_reset</p></li>
+<li><p>Platform-specific IP (Ethernet, GMSL, etc.)</p></li>
+<li><p>All interconnect routing and address mappings</p></li>
+</ul>
+<p><span id="amrrave-sourcefiles-xdcconstraints"></span></p>
+</div>
+</div>
+<div class="section" id="xdc-constraints">
+<h2>XDC Constraints<a class="headerlink" href="#xdc-constraints" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="impl-pins-xdc">
+<h3>impl.pins.xdc<a class="headerlink" href="#impl-pins-xdc" title="Permalink to this heading">¶</a></h3>
+<p>Pin placement constraints specify the physical package pins for all I/O:</p>
+<p><strong>LPDDR4 Pins (Banks 700, 701, 702):</strong></p>
+<ul class="simple">
+<li><p>DQ[0-71]: Data signals</p></li>
+<li><p>DM_n[0-8]: Data mask</p></li>
+<li><p>DQS pairs: Data strobe (differential)</p></li>
+<li><p>Address and control signals</p></li>
+<li><p>IOSTANDARD: LPDDR4 (1.1V)</p></li>
+</ul>
+<p><strong>GTYP Bank 103 (PCIe):</strong></p>
+<ul class="simple">
+<li><p>TXP/TXN[0-3]: Transmit lanes to Ryzen</p></li>
+<li><p>RXP/RXN[0-3]: Receive lanes from Ryzen</p></li>
+<li><p>REFP/REFN: Reference clocks</p></li>
+</ul>
+<p><strong>GTYP Bank 104 (Expansion):</strong></p>
+<ul class="simple">
+<li><p>TXP/TXN[0-3]: Transmit lanes to Samtec</p></li>
+<li><p>RXP/RXN[0-3]: Receive lanes from Samtec</p></li>
+<li><p>REFP/REFN: Reference clocks</p></li>
+</ul>
+<p><strong>MIO Pins:</strong></p>
+<ul class="simple">
+<li><p>PMC Banks 500, 501: OSPI, UART, I2C, SPI, PCIe reset</p></li>
+<li><p>LPD Bank 502: LEDs, I2C, monitors</p></li>
+</ul>
+</div>
+<div class="section" id="impl-xdc">
+<h3>impl.xdc<a class="headerlink" href="#impl-xdc" title="Permalink to this heading">¶</a></h3>
+<p>Implementation constraints specify timing and placement:</p>
+<ul class="simple">
+<li><p>Clock domain definitions</p></li>
+<li><p>Timing exceptions for asynchronous crossings</p></li>
+<li><p>False paths for reset synchronization</p></li>
+<li><p>Pblock definitions (if using floorplanning)</p></li>
+<li><p>NoC placement constraints (if needed)</p></li>
+</ul>
+<p><span id="amrrave-sourcefiles-sdtgeneration"></span></p>
+</div>
+</div>
+<div class="section" id="system-device-tree-generation">
+<h2>System Device Tree Generation<a class="headerlink" href="#system-device-tree-generation" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="sdt-scripts">
+<h3>SDT Scripts<a class="headerlink" href="#sdt-scripts" title="Permalink to this heading">¶</a></h3>
+<p>The platforms/scripts/ directory contains SDT generation scripts:</p>
+<p><strong>gen_sdt.tcl:</strong>
+Generates device tree for flat designs using the sdtgen utility. The script specifies the board device tree (versal-emb-plus-ve2302-reva) and outputs to project_sdt/ directory.</p>
+<p><strong>gen_sdt_dfx.tcl:</strong>
+Generates device tree for DFX designs with support for multiple XSA files (base + reconfigurable modules). This enables the Linux kernel to understand the DFX partition structure.</p>
+<p><strong>fix_dtsi.tcl:</strong>
+Post-processing script for device tree files, applying any necessary modifications or fixes to the generated DTSI files.</p>
+<p><span id="amrrave-sourcefiles-buildartifacts"></span></p>
+</div>
+</div>
+<div class="section" id="build-artifacts">
+<h2>Build Artifacts<a class="headerlink" href="#build-artifacts" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="xsa-files">
+<h3>XSA Files<a class="headerlink" href="#xsa-files" title="Permalink to this heading">¶</a></h3>
+<p>The Xilinx Support Archive (XSA) contains the hardware definition:</p>
+<ul class="simple">
+<li><p>Block design (BD)</p></li>
+<li><p>Implemented netlist</p></li>
+<li><p>Pin assignments</p></li>
+<li><p>Timing constraints</p></li>
+<li><p>Metadata for software tools</p></li>
+</ul>
+</div>
+<div class="section" id="sdt-files">
+<h3>SDT Files<a class="headerlink" href="#sdt-files" title="Permalink to this heading">¶</a></h3>
+<p>System Device Tree files describe the hardware to the operating system:</p>
+<ul class="simple">
+<li><p>Device tree source (.dts)</p></li>
+<li><p>Device tree include (.dtsi)</p></li>
+<li><p>Used by PetaLinux and embedded Linux</p></li>
+</ul>
+</div>
+<div class="section" id="dfx-outputs-ve2302-xdma-base">
+<h3>DFX Outputs (ve2302_xdma_base)<a class="headerlink" href="#dfx-outputs-ve2302-xdma-base" title="Permalink to this heading">¶</a></h3>
+<p>For DFX-capable designs:</p>
+<ul class="simple">
+<li><p>Static PDI (base platform)</p></li>
+<li><p>Partial PDIs (each reconfigurable module)</p></li>
+<li><p>Debian packages (amr-{module}-dma-test-ve2302_2.0.deb)</p></li>
+<li><p>Multiple XSA files (base + modules)</p></li>
+</ul>
+<p><span id="amrrave-sourcefiles-cicd"></span></p>
+</div>
+</div>
+<div class="section" id="ci-cd-integration">
+<h2>CI/CD Integration<a class="headerlink" href="#ci-cd-integration" title="Permalink to this heading">¶</a></h2>
+<p>The Jenkinsfile provides automated build and deployment:</p>
+<ul class="simple">
+<li><p>Multi-host deployment support</p></li>
+<li><p>Commit tracking (source + submodules)</p></li>
+<li><p>Remote build via LSF (Load Sharing Facility)</p></li>
+<li><p>Artifact deployment (XSA, SDT, Debian packages)</p></li>
+<li><p>Build success symlink management</p></li>
+<li><p>Branch-specific deployment logic</p></li>
+</ul>
+<p>Builds trigger automatically on commits, with artifacts deployed to shared locations for team access.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../hardware/source-files.html"><span class="std std-doc">Common Source Files</span></a> - Build structure concepts</p></li>
+<li><p><a class="reference internal" href="expansion-io.html"><span class="std std-doc">RAVE Expansion I/O</span></a> - Daughtercard designs</p></li>
+<li><p><a class="reference internal" href="xdma-config.html"><span class="std std-doc">RAVE XDMA Configuration</span></a> - XDMA IP integration</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          
+				  
+				  <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
+      <span class="lastupdated">Last updated on May 28, 2026.
+      </span></p>
+  </div>
+
+
+
+										<div class="aem-Grid aem-Grid--16">
+											<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+												<div class="container-fluid sub-footer">
+
+													                    <div class="row">
+                        <div class="col-xs-24">
+                          <p><a target="_blank" href="https://www.amd.com/en/corporate/copyright">Terms and Conditions</a> | <a target="_blank" href="https://www.amd.com/en/corporate/privacy">Privacy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/cookies">Cookie Policy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/trademarks">Trademarks</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf">Statement on Forced Labor</a> | <a target="_blank" href="https://www.amd.com/en/corporate/competition">Fair and Open Competition</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf">UK Tax Strategy</a> | <a target="_blank" href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA">Inclusive Terminology</a> | <a href="#cookiessettings" class="ot-sdk-show-settings">Cookies Settings</a></p>
+                        </div>
+                    </div>
+												</div>
+											</div>
+										</div>
+										
+</br>
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

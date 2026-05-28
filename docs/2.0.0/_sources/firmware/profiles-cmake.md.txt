@@ -128,7 +128,7 @@ All future device drivers added to AMC should follow this design pattern.
 
 Similarly, the Firmware abstraction layer of AMC has been designed to be abstracted from the target platform. Each FAL implementation has been written with a common header file, providing a common API over the abstracted firmware, but with separate source files for AMC (AMR).
 
-Just as with the device drivers, cmake will include the appropriate source code paths, depending on the profile specified by the user (Rave, v80, etc.).
+Just as with the device drivers, cmake will include the appropriate source code paths, depending on the profile specified by the user (rave, v80, etc.).
 
 See the following example of gcq, ospi and qsfp FALs. All future FAL implementations added to AMC should follow this design pattern.
 

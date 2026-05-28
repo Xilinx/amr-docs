@@ -4,7 +4,7 @@
 
   - [How-to Build an AMR Design for Yourself](build.md)
 
-  - [How-to install and run a pre-built xbtest on V80 card](../v80/xbtest/install-and-run-xbtest.md)
+  - [How-to install and run a pre-built xbtest on V80 card](../V80/xbtest/install-and-run-xbtest.md)
 
 
 

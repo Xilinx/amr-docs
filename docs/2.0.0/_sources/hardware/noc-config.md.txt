@@ -1,8 +1,8 @@
 # AMR - NoC Interconnect Overview (Common)
 
 > **For platform-specific NoC configurations**, see:
-> - [V80 NoC Configuration](../v80/hardware/noc-config.md) - CPM5 hardened NoC, HBM connections
-> - [RAVE NoC Configuration](../rave/hardware/noc-config.md) - PL PCIe NMU_512, LPDDR4 only
+> - [V80 NoC Configuration](../V80/hardware/noc-config.md) - CPM5 hardened NoC, HBM connections
+> - [RAVE NoC Configuration](../RAVE/hardware/noc-config.md) - PL PCIe NMU_512, LPDDR4 only
 
 <span id="amr-nocconfiguration-overview"></span>
 
@@ -204,7 +204,7 @@ Common tuning approaches for NoC performance optimization include adjusting QoS 
 For complete NoC configurations including connection diagrams, routing, and QoS settings:
 
 ### V80 NoC Topology
-[V80 NoC Configuration](../v80/hardware/noc-config.md)
+[V80 NoC Configuration](../V80/hardware/noc-config.md)
 
 **V80-Specific NoC Features:**
 - CPM5 hardened connection (NMU_128)
@@ -214,7 +214,7 @@ For complete NoC configurations including connection diagrams, routing, and QoS 
 - Complex topology with multiple memory types
 
 ### RAVE NoC Topology
-[RAVE NoC Configuration](../rave/hardware/noc-config.md)
+[RAVE NoC Configuration](../RAVE/hardware/noc-config.md)
 
 **RAVE-Specific NoC Features:**
 - PL PCIe IP connection (NMU_512)

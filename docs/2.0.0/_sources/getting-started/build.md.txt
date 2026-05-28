@@ -66,7 +66,7 @@ The Yocto build system is used to build all necessary binary OSPI images and pac
 The final artifacts will be located in:
 - **RAVE:** `build/tmp/deploy/images/emb_plus_ve2302_amr/`
 - **V80:** `build/tmp/deploy/images/alveo-v80-amr/`
-1. Rave
+1. RAVE
     Build OSPI image:
     MACHINE=emb-plus-ve2302-amr bitbake emb-plus-ospi-amr
 
@@ -88,7 +88,7 @@ For building x86 packages refer [software build section](#how-tobuildanamrdesign
 
 Get the latest AMR source code for development.
 
-1.  Refer to the [AMR release notes](../release-notes.md) to find the latest example design version. the *amr git release branch* will direct you to the release branch source code in github.
+1.  Refer to the [AMR Release Information](../AMR-release-information.md) to find the latest example design version. the *amr git release branch* will direct you to the release branch source code in github.
 
 2.  Clone the latest release branch AMR source code repository. Confirm that you cloned the repository to a development server with sufficient system memory to build AMR, either locally on the server or remotely through LSF.
 

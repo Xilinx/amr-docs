@@ -66,13 +66,13 @@ Please note:
 
 To get started with AMR on V80, refer to [getting-started](../getting-started/index.md).
 
-**Note:** If you need to switch between AVED and AMR on V80, refer to [Switching Between AVED and AMR](../v80/switch-aved-amr.md) for detailed instructions on seamlessly transitioning between the two platforms.
+**Note:** If you need to switch between AVED and AMR on V80, refer to [Switching Between AVED and AMR](../V80/switch-aved-amr.md) for detailed instructions on seamlessly transitioning between the two platforms.
 
 <span id="amroverview-rave"></span>
 
-### Rave (Embedded+ Platform)
+### RAVE (Embedded+ Platform)
 
-The Rave platform represents the standard reference implementation for Embedded+ boards featuring Versal devices. Rave provides essential PCIe connectivity and basic management capabilities suitable for a wide range of applications. Key characteristics include:
+The RAVE platform represents the standard reference implementation for Embedded+ boards featuring Versal devices. RAVE provides essential PCIe connectivity and basic management capabilities suitable for a wide range of applications. Key characteristics include:
 
   - Single I2C bus configuration for device communication
   - EEPROM version 1.0 support for board information storage
@@ -80,7 +80,7 @@ The Rave platform represents the standard reference implementation for Embedded+
   - In-band telemetry via PCIe for card monitoring and control
   - Streamlined architecture optimized for Embedded+ platform deployment scenarios
 
-The Rave profile serves as the baseline platform configuration, providing core functionality while minimizing complexity for applications that do not require advanced storage or expansion interfaces.
+The rave profile serves as the baseline platform configuration, providing core functionality while minimizing complexity for applications that do not require advanced storage or expansion interfaces.
 
 ![RAVE Platform Block Diagram](../images/rave_block.png)
 
@@ -112,8 +112,8 @@ Some notable characteristics of the AMR include:
 
 The AMR includes platform-specific base hardware designs that demonstrate PCIe connectivity and management capabilities. For detailed information on the hardware architecture for each supported platform, please refer to:
 
-  - [V80 Hardware Architecture](../v80/hardware/index.md) - Platform with eMMC, QSFP, and SMBus support
-  - [Rave Hardware Architecture](../rave/hardware/index.md) - Standard reference platform architecture
+  - [V80 Hardware Architecture](../V80/hardware/index.md) - Platform with eMMC, QSFP, and SMBus support
+  - [RAVE Hardware Architecture](../RAVE/hardware/index.md) - Standard reference platform architecture
 
 <span id="amroverview-amrsoftwarearchitecture"></span>
 

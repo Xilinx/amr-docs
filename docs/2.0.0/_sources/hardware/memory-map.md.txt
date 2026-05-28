@@ -1,8 +1,8 @@
 # AMR - Address Mapping Concepts (Common)
 
 > **For platform-specific address maps**, see:
-> - [V80 Memory Map](../v80/hardware/memory-map.md) - V80 address space with HBM regions
-> - [RAVE Memory Map](../rave/hardware/memory-map.md) - RAVE address space with LPDDR4
+> - [V80 Memory Map](../V80/hardware/memory-map.md) - V80 address space with HBM regions
+> - [RAVE Memory Map](../RAVE/hardware/memory-map.md) - RAVE address space with LPDDR4
 
 <span id="amr-memorymap-overview"></span>
 
@@ -127,7 +127,7 @@ The upper DDR regions provide additional memory capacity beyond the 32-bit addre
 For detailed address maps with specific ranges:
 
 ### V80 Address Map
-[V80 Memory Map](../v80/hardware/memory-map.md)
+[V80 Memory Map](../V80/hardware/memory-map.md)
 
 **V80-Specific Address Regions:**
 - PF0: 0x201_0000_0000 - 0x201_007F_FFFF (8MB)
@@ -136,7 +136,7 @@ For detailed address maps with specific ranges:
 - **HBM**: Dedicated address space (V80 only)
 
 ### RAVE Address Map
-[RAVE Memory Map](../rave/hardware/memory-map.md)
+[RAVE Memory Map](../RAVE/hardware/memory-map.md)
 
 **RAVE-Specific Address Regions:**
 - PF0: Configurable in PCIe IP
@@ -213,7 +213,7 @@ When adding custom IP:
 
 ## References
 
-- [V80 Memory Map](../v80/hardware/memory-map.md) - V80-specific addresses
-- [RAVE Memory Map](../rave/hardware/memory-map.md) - RAVE-specific addresses
+- [V80 Memory Map](../V80/hardware/memory-map.md) - V80-specific addresses
+- [RAVE Memory Map](../RAVE/hardware/memory-map.md) - RAVE-specific addresses
 - [Versal Address Maps](https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map) - Complete Versal addressing
 

@@ -201,7 +201,7 @@ xbtest writes sensor data into several CSV files. These can be analyzed as text 
 
 xbtest can be useful to test the card capabilities and to push it to its limits. This is more often helpful for exposing or reproducing an issue, rather than triaging or debugging an issue. However, xbtest does provide an easy method for continuously reading card sensors such as power and temperature, which can be useful in some debug situations.
 
-For xbtest documentation, see [xbtest Userguide](../v80/xbtest/install-and-run-xbtest.md).
+For xbtest documentation, see [xbtest Userguide](../V80/xbtest/install-and-run-xbtest.md).
 
 <span id="amrdebugtechniques-serverlogsandsensors"></span>
 

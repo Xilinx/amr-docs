@@ -5,7 +5,7 @@ The AMR Git repository contains a shell script which can be used to build any of
 
 Example Build Command
 
-The following command demonstrates how to build a V80 design. For Rave set the appropriate -profile option
+The following command demonstrates how to build a V80 design. For RAVE set the appropriate -profile option
 
     $ cd <amr>
     $ ./build.sh -profile v80
@@ -26,7 +26,7 @@ The build script divides the build flow into a number of separate steps.
 
 ### hw step
 
-The hw step of the build flow operates on the AMR hardware design described here. A /build_v80 directory is created, where the implemented hardware design and Vivado log are generated. The xpr file for this project is located here **amr/build_v80/amr_vivado_designs/alveo_v80/v80_base/project**. Similarly for Rave it will be located under build_rave.
+The hw step of the build flow operates on the AMR hardware design described here. A /build_v80 directory is created, where the implemented hardware design and Vivado log are generated. The xpr file for this project is located here **amr/build_v80/amr_vivado_designs/alveo_v80/v80_base/project**. Similarly for RAVE it will be located under build_rave.
 
 This Vivado project is used to generate the BD design, run Synthesis & Implementation, and create the initial PDI. The write\_hw\_platform command is run on the implemented design to create an XSA (named v80_base.xsa), which is used as a hardware handoff file to the AMC build in the fw build step.
 

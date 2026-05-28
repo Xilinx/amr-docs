@@ -49,7 +49,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#supported-platforms">Supported Platforms</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#alveo-v80">Alveo V80</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#supported-kernels-and-distributions-for-v80">Supported Kernels and Distributions for V80</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rave-embedded-platform">Rave (Embedded+ Platform)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rave-embedded-platform">RAVE (Embedded+ Platform)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#adaptive-management-runtime">Adaptive Management Runtime</a></li>
 </ul>
 </li>
@@ -90,11 +90,11 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../v80/index.html">V80 Platform Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Platform Documentation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../rave/hardware/index.html">Hardware Design - RAVE VPR-4616</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RAVE/hardware/index.html">Hardware Design - RAVE VPR-4616</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
@@ -118,7 +118,7 @@
 <p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../appendices/abbreviations.html">AMR - List of Abbreviations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release-notes.html">AMR Release Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AMR-release-information.html">AMR Release Information</a></li>
 </ul>
 
         </div>
@@ -217,12 +217,12 @@
 </div></blockquote>
 <p><a class="reference download internal" download="" href="../_downloads/ae7b4c937f1537f5834fd132ead1bf49/1107373415.png"><span class="xref download myst"><img alt="image1" src="../_images/1107373415.png" /></span></a></p>
 <p>To get started with AMR on V80, refer to <a class="reference internal" href="../getting-started/index.html"><span class="std std-doc">getting-started</span></a>.</p>
-<p><strong>Note:</strong> If you need to switch between AVED and AMR on V80, refer to <a class="reference internal" href="../v80/switch-aved-amr.html"><span class="std std-doc">Switching Between AVED and AMR</span></a> for detailed instructions on seamlessly transitioning between the two platforms.</p>
+<p><strong>Note:</strong> If you need to switch between AVED and AMR on V80, refer to <a class="reference internal" href="../V80/switch-aved-amr.html"><span class="std std-doc">Switching Between AVED and AMR</span></a> for detailed instructions on seamlessly transitioning between the two platforms.</p>
 <p><span id="amroverview-rave"></span></p>
 </div>
 <div class="section" id="rave-embedded-platform">
-<h3>Rave (Embedded+ Platform)<a class="headerlink" href="#rave-embedded-platform" title="Permalink to this heading">¶</a></h3>
-<p>The Rave platform represents the standard reference implementation for Embedded+ boards featuring Versal devices. Rave provides essential PCIe connectivity and basic management capabilities suitable for a wide range of applications. Key characteristics include:</p>
+<h3>RAVE (Embedded+ Platform)<a class="headerlink" href="#rave-embedded-platform" title="Permalink to this heading">¶</a></h3>
+<p>The RAVE platform represents the standard reference implementation for Embedded+ boards featuring Versal devices. RAVE provides essential PCIe connectivity and basic management capabilities suitable for a wide range of applications. Key characteristics include:</p>
 <ul class="simple">
 <li><p>Single I2C bus configuration for device communication</p></li>
 <li><p>EEPROM version 1.0 support for board information storage</p></li>
@@ -230,7 +230,7 @@
 <li><p>In-band telemetry via PCIe for card monitoring and control</p></li>
 <li><p>Streamlined architecture optimized for Embedded+ platform deployment scenarios</p></li>
 </ul>
-<p>The Rave profile serves as the baseline platform configuration, providing core functionality while minimizing complexity for applications that do not require advanced storage or expansion interfaces.</p>
+<p>The rave profile serves as the baseline platform configuration, providing core functionality while minimizing complexity for applications that do not require advanced storage or expansion interfaces.</p>
 <p><img alt="RAVE Platform Block Diagram" src="../_images/rave_block.png" /></p>
 <p>To get started with AMR on RAVE, refer to <a class="reference internal" href="../getting-started/index.html"><span class="std std-doc">getting-started</span></a>.</p>
 <p><span id="amroverview-alveoversalexampledesign"></span></p>
@@ -257,8 +257,8 @@
 <h2>AMR Hardware Architecture<a class="headerlink" href="#amr-hardware-architecture" title="Permalink to this heading">¶</a></h2>
 <p>The AMR includes platform-specific base hardware designs that demonstrate PCIe connectivity and management capabilities. For detailed information on the hardware architecture for each supported platform, please refer to:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../v80/hardware/index.html"><span class="std std-doc">V80 Hardware Architecture</span></a> - Platform with eMMC, QSFP, and SMBus support</p></li>
-<li><p><a class="reference internal" href="../rave/hardware/index.html"><span class="std std-doc">Rave Hardware Architecture</span></a> - Standard reference platform architecture</p></li>
+<li><p><a class="reference internal" href="../V80/hardware/index.html"><span class="std std-doc">V80 Hardware Architecture</span></a> - Platform with eMMC, QSFP, and SMBus support</p></li>
+<li><p><a class="reference internal" href="../RAVE/hardware/index.html"><span class="std std-doc">RAVE Hardware Architecture</span></a> - Standard reference platform architecture</p></li>
 </ul>
 <p><span id="amroverview-amrsoftwarearchitecture"></span></p>
 </div>

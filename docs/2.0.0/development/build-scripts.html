@@ -84,11 +84,11 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../v80/index.html">V80 Platform Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Platform Documentation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../rave/hardware/index.html">Hardware Design - RAVE VPR-4616</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RAVE/hardware/index.html">Hardware Design - RAVE VPR-4616</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
@@ -112,7 +112,7 @@
 <p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../appendices/abbreviations.html">AMR - List of Abbreviations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release-notes.html">AMR Release Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AMR-release-information.html">AMR Release Information</a></li>
 </ul>
 
         </div>
@@ -143,7 +143,7 @@
 <h1>AMR Build Scripts<a class="headerlink" href="#amr-build-scripts" title="Permalink to this heading">¶</a></h1>
 <p>The AMR Git repository contains a shell script which can be used to build any of the AMR example designs. <code class="docutils literal notranslate"><span class="pre">build.sh</span></code> is the main build script, which calls other build scripts for each step of the build.</p>
 <p>Example Build Command</p>
-<p>The following command demonstrates how to build a V80 design. For Rave set the appropriate -profile option</p>
+<p>The following command demonstrates how to build a V80 design. For RAVE set the appropriate -profile option</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ cd &lt;amr&gt;
 $ ./build.sh -profile v80
 </pre></div>
@@ -160,7 +160,7 @@ $ ./build.sh -profile v80
 <p><span id="amrbuildscripts-hwstep"></span></p>
 <div class="section" id="hw-step">
 <h3>hw step<a class="headerlink" href="#hw-step" title="Permalink to this heading">¶</a></h3>
-<p>The hw step of the build flow operates on the AMR hardware design described here. A /build_v80 directory is created, where the implemented hardware design and Vivado log are generated. The xpr file for this project is located here <strong>amr/build_v80/amr_vivado_designs/alveo_v80/v80_base/project</strong>. Similarly for Rave it will be located under build_rave.</p>
+<p>The hw step of the build flow operates on the AMR hardware design described here. A /build_v80 directory is created, where the implemented hardware design and Vivado log are generated. The xpr file for this project is located here <strong>amr/build_v80/amr_vivado_designs/alveo_v80/v80_base/project</strong>. Similarly for RAVE it will be located under build_rave.</p>
 <p>This Vivado project is used to generate the BD design, run Synthesis &amp; Implementation, and create the initial PDI. The write_hw_platform command is run on the implemented design to create an XSA (named v80_base.xsa), which is used as a hardware handoff file to the AMC build in the fw build step.</p>
 <p><span id="amrbuildscripts-fwstep"></span></p>
 </div>

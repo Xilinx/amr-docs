@@ -85,14 +85,14 @@ Release Information
    :caption: V80 Platform
    :hidden:
 
-   v80/index
+   V80/index
 
 .. toctree::
    :maxdepth: 2
    :caption: RAVE Platform
    :hidden:
 
-   rave/hardware/index
+   RAVE/hardware/index
 
 .. toctree::
    :maxdepth: 2
@@ -126,4 +126,4 @@ Release Information
    :hidden:
 
    appendices/abbreviations
-   release-notes
+   AMR-release-information

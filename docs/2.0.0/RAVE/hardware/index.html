@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hardware Design - RAVE VPR-4616 &mdash; AMR  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/_static/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="AMR Management Controller (AMC) - Architecture and Design" href="../../firmware/amc-architecture.html" />
+    <link rel="prev" title="How-to Install and Run xbtest on V80 Card" href="../../V80/xbtest/install-and-run-xbtest.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+            <a href="../../index.html" class="icon icon-home"> AMR
+            <img src="../../_static/xilinx-header-logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">AMR Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/amr-overview.html">AMR Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AMR Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/install-prebuilt.html">How-to Install Prebuilt AMR Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/build.html">How-to Build an AMR Design for Yourself</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AMR System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../system-architecture/board-management.html">AMR - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../system-architecture/device-programming.html">AMR - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../system-architecture/host-communication.html">AMR - Host to Card Communication</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AMR Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/install-card.html">AMR Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/update-fpt.html">AMR Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/update-pdi.html">AMR Updating PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/debug.html">AMR Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/jtag-recovery.html">AMR JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/ami-tool-guide.html">AMR Management Interface userguide (ami_tool)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../development/build-scripts.html">AMR Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development/source-control.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../hardware/index.html">Hardware Design - AMR Common</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../V80/index.html">V80 Platform Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Hardware Design - RAVE VPR-4616</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#rave-platform-overview">RAVE Platform Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rave-specific-hardware-documentation">RAVE-Specific Hardware Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rave-platform-variants">RAVE Platform Variants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#key-rave-features">Key RAVE Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pl-based-pcie-and-xdma">PL-Based PCIe and XDMA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lpddr4-memory">LPDDR4 Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#peripheral-integration">Peripheral Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#expansion-i-o-and-daughtercards">Expansion I/O and Daughtercards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#technical-specifications-summary">Technical Specifications Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/asdm-application.html">AMR ASDM Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/inband-telemetry.html">AMR InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/osal.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../firmware/profiles-cmake.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../software/ami.html">AMR Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../software/qdma.html">AMR QDMA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices/abbreviations.html">AMR - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../AMR-release-information.html">AMR Release Information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: black" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AMR</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Hardware Design - RAVE VPR-4616</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/RAVE/hardware/index.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="hardware-design-rave-vpr-4616">
+<h1>Hardware Design - RAVE VPR-4616<a class="headerlink" href="#hardware-design-rave-vpr-4616" title="Permalink to this heading">¶</a></h1>
+<blockquote>
+<div><p><strong>For common hardware concepts</strong>, see <a class="reference internal" href="../../hardware/index.html"><span class="std std-doc">Common Hardware Documentation</span></a></p>
+<p>This section contains RAVE VPR-4616 platform-specific hardware design documentation.</p>
+</div></blockquote>
+<div class="section" id="rave-platform-overview">
+<h2>RAVE Platform Overview<a class="headerlink" href="#rave-platform-overview" title="Permalink to this heading">¶</a></h2>
+<p>RAVE (Ryzen APU + Versal Edge) is a Mini-ITX embedded platform combining an AMD Ryzen processor with a Versal VE2302 FPGA device. The platform provides a complete standalone system optimized for edge computing, industrial, and automotive applications with balanced performance, power consumption, and cost.</p>
+<p>The VE2302 is a Versal Edge-series device featuring GTYP transceivers for Gen3 PCIe connectivity and integrated LPDDR4 memory controllers. The platform connects the VE2302 to an on-board Ryzen R2314 or V2000-series processor via PCIe Gen3 x4, creating a hybrid processing architecture suitable for embedded and edge deployments.</p>
+<p>The design implements PCIe and XDMA functionality using programmable logic IP blocks since the Edge-series devices do not include CPM hardened blocks. A 160-pin Samtec expansion connector provides access to additional GTYP transceivers and I/O signals, enabling application-specific daughtercards for networking, vision, and custom interfaces.</p>
+</div>
+<div class="section" id="rave-specific-hardware-documentation">
+<h2>RAVE-Specific Hardware Documentation<a class="headerlink" href="#rave-specific-hardware-documentation" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="hierarchy.html"><span class="std std-doc">RAVE - Hierarchy Overview</span></a> - RAVE block diagram and architecture</p></li>
+<li><p><a class="reference internal" href="cips-config.html"><span class="std std-doc">RAVE - CIPS Configuration</span></a> - VE2302 CIPS configuration</p></li>
+<li><p><a class="reference internal" href="pcie-config.html"><span class="std std-doc">RAVE - PCIe Configuration</span></a> - PL PCIe IP implementation (Gen3 x4)</p></li>
+<li><p><a class="reference internal" href="xdma-config.html"><span class="std std-doc">RAVE - XDMA Configuration</span></a> - XDMA PL IP setup (2 PFs)</p></li>
+<li><p><a class="reference internal" href="memory-resources.html"><span class="std std-doc">RAVE - Memory Resources</span></a> - 8-16GB LPDDR4 configuration</p></li>
+<li><p><a class="reference internal" href="memory-map.html"><span class="std std-doc">RAVE - Memory Map</span></a> - RAVE address mapping</p></li>
+<li><p><a class="reference internal" href="noc-config.html"><span class="std std-doc">RAVE - NoC Configuration</span></a> - RAVE NoC topology</p></li>
+<li><p><a class="reference internal" href="base-logic.html"><span class="std std-doc">RAVE - Base Logic</span></a> - RAVE PF0/PF1 implementation</p></li>
+<li><p><a class="reference internal" href="peripherals.html"><span class="std std-doc">RAVE - Peripherals</span></a> - Board-ID EEPROM, TPM, eMMC, USB, LEDs</p></li>
+<li><p><a class="reference internal" href="expansion-io.html"><span class="std std-doc">RAVE - Expansion I/O</span></a> - Samtec connector, daughtercard ecosystem</p></li>
+<li><p><a class="reference internal" href="clock-reset.html"><span class="std std-doc">RAVE - Clock Reset Module</span></a> - RAVE clock/reset configuration</p></li>
+<li><p><a class="reference internal" href="source-files.html"><span class="std std-doc">RAVE - Source File Overview</span></a> - RAVE build structure</p></li>
+</ul>
+</div>
+<div class="section" id="rave-platform-variants">
+<h2>RAVE Platform Variants<a class="headerlink" href="#rave-platform-variants" title="Permalink to this heading">¶</a></h2>
+<p>The RAVE family includes multiple hardware variants developed by Sapphire Technologies and AMD, each targeting specific market requirements and feature sets.</p>
+<p><strong>Platform Variants:</strong></p>
+<ul class="simple">
+<li><p><strong>VPR-4616</strong>: Initial platform with 8GB LPDDR4</p></li>
+<li><p><strong>VPR-5050</strong>: Enhanced processor variant</p></li>
+<li><p><strong>VPR-5050A</strong>: Most feature-rich variant with 16GB LPDDR4, eMMC, USB 2.0 host</p></li>
+</ul>
+<p><strong>Common Features:</strong></p>
+<ul class="simple">
+<li><p>VE2302 Versal device with PCIe Gen3 x4 connectivity</p></li>
+<li><p>160-pin expansion connector for daughtercards</p></li>
+<li><p>Mini-ITX form factor</p></li>
+</ul>
+<p><strong>Note:</strong> For complete platform specifications, variant differences, and feature lists, see the <a class="reference external" href="https://www.amd.com/en/products/embedded/embedded-plus.html">Sapphire RAVE1 EDGE+</a> and related Sapphire product documentation.</p>
+</div>
+<div class="section" id="key-rave-features">
+<h2>Key RAVE Features<a class="headerlink" href="#key-rave-features" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="pl-based-pcie-and-xdma">
+<h3>PL-Based PCIe and XDMA<a class="headerlink" href="#pl-based-pcie-and-xdma" title="Permalink to this heading">¶</a></h3>
+<p>The RAVE platform implements PCIe connectivity through the PCIe Versal IP instantiated in programmable logic. The VE2302 device uses GTYP Bank 103 for the x4 PCIe link operating at Gen3 speeds (8.0 GT/s), providing approximately 4 GB/s of raw bandwidth to the on-board Ryzen processor.</p>
+<p>XDMA functionality comes from the XDMA PL IP supporting DMA operations through multiple channels. The XDMA provides efficient data transfer between host and device memory through AXI interfaces. The configuration uses 2 physical functions: PF0 (device ID 0x5710) for management and PF1 (device ID 0x5711) for user/DMA operations.</p>
+<blockquote>
+<div><p><strong>Note:</strong> Legacy RAVE designs supported QDMA (Queue DMA) with a 512-queue architecture. The platform has been migrated to XDMA for improved simplicity and compatibility with the VE2302 Embedded+ platform requirements.</p>
+</div></blockquote>
+<p>The soft logic implementation for both PCIe and XDMA IP blocks represents a substantial portion of the available programmable logic. This resource usage must be factored into overall design planning when adding user applications and custom logic.</p>
+</div>
+<div class="section" id="lpddr4-memory">
+<h3>LPDDR4 Memory<a class="headerlink" href="#lpddr4-memory" title="Permalink to this heading">¶</a></h3>
+<p>The RAVE platform includes 8 GB or 16 GB of LPDDR4 memory (depending on variant) organized as two channels with x32 configuration. The memory operates at 200 MHz providing 400 MT/s effective data rate through double-data-rate operation.</p>
+<p>The LPDDR4 serves all memory requirements for the Versal device including firmware execution, inter-processor communication, user application data, and DMA buffers. Memory controller integration through the NoC enables access from the RPU, PMC, PCIe host, and programmable logic masters.</p>
+</div>
+<div class="section" id="peripheral-integration">
+<h3>Peripheral Integration<a class="headerlink" href="#peripheral-integration" title="Permalink to this heading">¶</a></h3>
+<p>RAVE includes extensive peripheral integration supporting standalone embedded operation. A Board-ID EEPROM (M24C64) stores platform identification and configuration data accessible via I2C at address 0x57. The TPM 2.0 security module (SLB9670) provides hardware-based cryptographic operations and secure key storage through an SPI interface.</p>
+<p>The FTDI FT4232HQ USB-to-UART bridge enables multiple serial interfaces for debug and console access from the host system. Four status LEDs connected to MIO pins provide visual indication of system state and application status.</p>
+<p>Enhanced variants (VPR-5050A) add eMMC storage via Versal MIO for persistent on-device data and a USB 2.0 host controller via Versal MIO for direct USB peripheral connectivity.</p>
+</div>
+<div class="section" id="expansion-i-o-and-daughtercards">
+<h3>Expansion I/O and Daughtercards<a class="headerlink" href="#expansion-i-o-and-daughtercards" title="Permalink to this heading">¶</a></h3>
+<p>The 160-pin Samtec SEAM/SEAF expansion connector brings out GTYP Bank 104 transceivers (4 lanes), XPIO signals, and HDIO signals from the VE2302. This enables a daughtercard ecosystem including 1G Ethernet cards, 10G/25G Ethernet cards with dual SFP+ interfaces, and GMSL camera cards for vision applications.</p>
+</div>
+</div>
+<div class="section" id="technical-specifications-summary">
+<h2>Technical Specifications Summary<a class="headerlink" href="#technical-specifications-summary" title="Permalink to this heading">¶</a></h2>
+<p><strong>Versal Device:</strong> VE2302 Versal Edge-series optimized for embedded applications</p>
+<p><strong>PCIe Connectivity:</strong> Gen3 x4 through GTYP Bank 103</p>
+<ul class="simple">
+<li><p>Device IDs: 0x5700 (PF0 management), 0x5701 (PF1 user/DMA)</p></li>
+</ul>
+<p><strong>Memory:</strong> LPDDR4 configuration (variant-dependent: 8GB or 16GB)</p>
+<p><strong>Note:</strong> For detailed memory configurations, processor variants, and complete technical specifications, refer to the <a class="reference external" href="https://www.amd.com/en/products/embedded/embedded-plus.html">Sapphire RAVE1 EDGE+</a> and Sapphire product documentation.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../hardware/index.html"><span class="std std-doc">Common Hardware Documentation</span></a> - Shared Versal/CIPS/NoC concepts</p></li>
+<li><p><a class="reference external" href="https://www.amd.com/en/products/embedded/embedded-plus.html">Sapphire RAVE1 EDGE+</a> - RAVE product information</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          
+				  
+				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../V80/xbtest/install-and-run-xbtest.html" class="btn btn-neutral float-left" title="How-to Install and Run xbtest on V80 Card" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../firmware/amc-architecture.html" class="btn btn-neutral float-right" title="AMR Management Controller (AMC) - Architecture and Design" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
+      <span class="lastupdated">Last updated on May 28, 2026.
+      </span></p>
+  </div>
+
+
+
+										<div class="aem-Grid aem-Grid--16">
+											<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+												<div class="container-fluid sub-footer">
+
+													                    <div class="row">
+                        <div class="col-xs-24">
+                          <p><a target="_blank" href="https://www.amd.com/en/corporate/copyright">Terms and Conditions</a> | <a target="_blank" href="https://www.amd.com/en/corporate/privacy">Privacy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/cookies">Cookie Policy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/trademarks">Trademarks</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf">Statement on Forced Labor</a> | <a target="_blank" href="https://www.amd.com/en/corporate/competition">Fair and Open Competition</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf">UK Tax Strategy</a> | <a target="_blank" href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA">Inclusive Terminology</a> | <a href="#cookiessettings" class="ot-sdk-show-settings">Cookies Settings</a></p>
+                        </div>
+                    </div>
+												</div>
+											</div>
+										</div>
+										
+</br>
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

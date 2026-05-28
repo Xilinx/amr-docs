@@ -1,8 +1,8 @@
 # AMR - Memory Architecture Concepts (Common)
 
 > **For platform-specific memory configurations**, see:
-> - [V80 Memory Resources](../v80/hardware/memory-resources.md) - HBM + DDR4 DIMM + Discrete SDRAM (68GB)
-> - [RAVE Memory Resources](../rave/hardware/memory-resources.md) - LPDDR4 only (8-16GB)
+> - [V80 Memory Resources](../V80/hardware/memory-resources.md) - HBM + DDR4 DIMM + Discrete SDRAM (68GB)
+> - [RAVE Memory Resources](../RAVE/hardware/memory-resources.md) - LPDDR4 only (8-16GB)
 
 <span id="amr-memoryresources-overview"></span>
 
@@ -104,7 +104,7 @@ Memory performance is influenced by several factors that interact in complex way
 For detailed memory configurations, see platform-specific documentation:
 
 ### V80 Memory Configuration
-[V80 Memory Resources](../v80/hardware/memory-resources.md)
+[V80 Memory Resources](../V80/hardware/memory-resources.md)
 
 **V80-Specific:**
 - ✓ **HBM**: 32 GB (2× 16GB stacks, 16 controllers)
@@ -114,7 +114,7 @@ For detailed memory configurations, see platform-specific documentation:
 - ✓ **HBM Bandwidth**: ~460 GB/s
 
 ### RAVE Memory Configuration
-[RAVE Memory Resources](../rave/hardware/memory-resources.md)
+[RAVE Memory Resources](../RAVE/hardware/memory-resources.md)
 
 **RAVE-Specific:**
 - ✓ **LPDDR4**: 8 GB or 16 GB (soldered)
