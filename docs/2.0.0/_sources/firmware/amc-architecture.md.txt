@@ -14,7 +14,7 @@ The AMR Management Controller (AMC) provides management and control of the AMR u
 
   - BMC communication ([Board Management Controller (BMC) Proxy Driver](bmc-proxy.md))
 
-  - Sensor control ([AMR Sensor Control (ASC) Proxy Driver](asc-proxy.md)) and data storage ([AMR ASDM Application](asdm-application.md))
+  - Sensor control ([AMR Sensor Control (ASC) Proxy Driver](axc-proxy.md)) and data storage ([AMR ASDM Application](asdm-application.md))
 
   - QSFP control<sup>1</sup> ([AMR External Device Control (AXC) Proxy Driver](axc-proxy.md))
 
@@ -38,7 +38,7 @@ Event driven architecture is provided by the Event Library (EVL).
 
 ### Firmware Interface Abstraction Layer (FAL)
 
-[Firmware Interface ](FW\_IF) Abstraction Layer - Data Center Group - Xilinx Enterprise Wiki](Firmware-Interface-%28FW_IF%29-Abstraction-Layer)
+See [Firmware Interface Abstraction Layer (FAL)](fw-if-layer.md) for details.
 
 Firmware Interface Abstraction Layer (FAL)
 
@@ -79,7 +79,7 @@ Firmware Interface Abstraction Layer (FAL)
 
 ### Operating System Abstraction Layer (OSAL)
 
-[Operating System Abstraction Layer ](OSAL) - Data Center Group - Xilinx Enterprise Wiki](Operating-System-Abstraction-Layer-\(OSAL\))
+See [Operating System Abstraction Layer (OSAL)](osal.md) for details.
 
  Operating System Abstraction Layer (OSAL)
 
@@ -266,7 +266,7 @@ Available Profiles:
 - v80 - Versal V80 board configuration
 - rave - RAVE board configuration
 
-See [Profiles and CMake build process\#Profiles](Profiles-and-CMake-build-process#ProfilesandCMakebuildprocess-Profiles) for a more detailed description of how profiles are used to port AMC across different platforms.
+See [Profiles and CMake build process#Profiles](profiles-cmake.md#profilesandcmakebuildprocess-profiles) for a more detailed description of how profiles are used to port AMC across different platforms.
 
 <span id="amrmanagementcontroller-amc-architectureanddesign-proxydrivers"></span>
 
@@ -807,7 +807,7 @@ typedef int ( EVL_CALLBACK )( EVL_SIGNAL *pxSignal );
 Event binding
 
 Each proxy driver also holds a local uint8_t variable to store their "Proxy ID" (a
-single byte unique to that that proxy driver).
+single byte unique to that proxy driver).
 
 During initialization, the proxy driver takes in a unit8_t variable that the proxy
 driver stores as their proxy ID.
@@ -828,7 +828,7 @@ int iAMI_Initialise( uint8_t ucProxyId, FW_IF_CFG *pxFwIf, uint32_t ulFwIfPort,
         pxThis->pxFwIf     = pxFwIf;
         pxThis->ulFwIfPort = ulFwIfPort;
 
-        /* initalise evl record*/
+        /* initialise evl record*/
         if ( OK != iEVL_CreateRecord( &pxThis->pxEvlRecord ) )
         {
             printf( AMI_NAME, "Error initialising EVL_RECORD\r\n" );

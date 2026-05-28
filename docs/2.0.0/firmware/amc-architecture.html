@@ -197,7 +197,7 @@
 <li><p>Out-Of-Band telemetry<sup>1</sup> (<a class="reference internal" href="outofband-telemetry.html"><span class="std std-doc">AMR OutOfBand Telemetry Application</span></a>)</p></li>
 <li><p>Host (AMI) communication (<a class="reference internal" href="ami-proxy.html"><span class="std std-doc">AMR Management Interface (AMI) Proxy Driver</span></a>)</p></li>
 <li><p>BMC communication (<a class="reference internal" href="bmc-proxy.html"><span class="std std-doc">Board Management Controller (BMC) Proxy Driver</span></a>)</p></li>
-<li><p>Sensor control (<a class="reference internal" href="#asc-proxy.md"><span class="xref myst">AMR Sensor Control (ASC) Proxy Driver</span></a>) and data storage (<a class="reference internal" href="asdm-application.html"><span class="std std-doc">AMR ASDM Application</span></a>)</p></li>
+<li><p>Sensor control (<a class="reference internal" href="axc-proxy.html"><span class="std std-doc">AMR Sensor Control (ASC) Proxy Driver</span></a>) and data storage (<a class="reference internal" href="asdm-application.html"><span class="std std-doc">AMR ASDM Application</span></a>)</p></li>
 <li><p>QSFP control<sup>1</sup> (<a class="reference internal" href="axc-proxy.html"><span class="std std-doc">AMR External Device Control (AXC) Proxy Driver</span></a>)</p></li>
 <li><p>Download and programming to flash (<a class="reference internal" href="apc-proxy.html"><span class="std std-doc">AMR Programming Control (APC) Proxy Driver</span></a>)</p></li>
 </ul>
@@ -215,7 +215,7 @@
 <p><span id="amrmanagementcontroller-amc-architectureanddesign-firmwareinterfaceabstractionlayer-fal"></span></p>
 <div class="section" id="firmware-interface-abstraction-layer-fal">
 <h3>Firmware Interface Abstraction Layer (FAL)<a class="headerlink" href="#firmware-interface-abstraction-layer-fal" title="Permalink to this heading">¶</a></h3>
-<p><a class="reference internal" href="#FW_IF"><span class="xref myst">Firmware Interface </span></a> Abstraction Layer - Data Center Group - Xilinx Enterprise Wiki](Firmware-Interface-%28FW_IF%29-Abstraction-Layer)</p>
+<p>See <a class="reference internal" href="fw-if-layer.html"><span class="std std-doc">Firmware Interface Abstraction Layer (FAL)</span></a> for details.</p>
 <p>Firmware Interface Abstraction Layer (FAL)</p>
 <p>The FAL (Firmware Interface Abstraction Layer) provides a generic interface
 abstraction for firmware components within the AMC (Alveo Management Controller). It
@@ -251,7 +251,7 @@ ioctrl, bind_callback) defined in fw_if.h.</p>
 </div>
 <div class="section" id="operating-system-abstraction-layer-osal">
 <h3>Operating System Abstraction Layer (OSAL)<a class="headerlink" href="#operating-system-abstraction-layer-osal" title="Permalink to this heading">¶</a></h3>
-<p><a class="reference internal" href="#OSAL"><span class="xref myst">Operating System Abstraction Layer </span></a> - Data Center Group - Xilinx Enterprise Wiki](Operating-System-Abstraction-Layer-(OSAL))</p>
+<p>See <a class="reference internal" href="osal.html"><span class="std std-doc">Operating System Abstraction Layer (OSAL)</span></a> for details.</p>
 <p>Operating System Abstraction Layer (OSAL)</p>
 <p>The OSAL allows the AMC to be ported to a different RTOS without requiring code
 changes in the AMC applications or higher-level layers.</p>
@@ -409,7 +409,7 @@ the AMC core or its layers.</p>
 <li><p>v80 - Versal V80 board configuration</p></li>
 <li><p>rave - RAVE board configuration</p></li>
 </ul>
-<p>See <a class="reference internal" href="#Profiles-and-CMake-build-process#ProfilesandCMakebuildprocess-Profiles"><span class="xref myst">Profiles and CMake build process#Profiles</span></a> for a more detailed description of how profiles are used to port AMC across different platforms.</p>
+<p>See <a class="reference internal" href="profiles-cmake.html#profilesandcmakebuildprocess-profiles"><span class="std std-ref">Profiles and CMake build process#Profiles</span></a> for a more detailed description of how profiles are used to port AMC across different platforms.</p>
 <p><span id="amrmanagementcontroller-amc-architectureanddesign-proxydrivers"></span></p>
 </div>
 <div class="section" id="proxy-drivers">
@@ -974,7 +974,7 @@ typedef int ( EVL_CALLBACK )( EVL_SIGNAL *pxSignal );
 Event binding
 
 Each proxy driver also holds a local uint8_t variable to store their &quot;Proxy ID&quot; (a
-single byte unique to that that proxy driver).
+single byte unique to that proxy driver).
 
 During initialization, the proxy driver takes in a unit8_t variable that the proxy
 driver stores as their proxy ID.
@@ -995,7 +995,7 @@ int iAMI_Initialise( uint8_t ucProxyId, FW_IF_CFG *pxFwIf, uint32_t ulFwIfPort,
         pxThis-&gt;pxFwIf     = pxFwIf;
         pxThis-&gt;ulFwIfPort = ulFwIfPort;
 
-        /* initalise evl record*/
+        /* initialise evl record*/
         if ( OK != iEVL_CreateRecord( &amp;pxThis-&gt;pxEvlRecord ) )
         {
             printf( AMI_NAME, &quot;Error initialising EVL_RECORD\r\n&quot; );
@@ -1511,7 +1511,7 @@ Applications handling: BIM, Out-of-Band Telemetry
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 12, 2026.
+      <span class="lastupdated">Last updated on May 28, 2026.
       </span></p>
   </div>
 

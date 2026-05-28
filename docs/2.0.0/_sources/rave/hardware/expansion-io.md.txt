@@ -8,8 +8,6 @@
 
 ## Overview
 
-![RAVE Expansion Connector](../../images/rave_expansion_connector.png)
-
 **Note:** Image shows 160-pin Samtec connector, GTYP Bank 104 routing, daughtercard ecosystem.
 
 The RAVE platforms include a 160-pin Samtec SEAM/SEAF expansion connector providing access to:

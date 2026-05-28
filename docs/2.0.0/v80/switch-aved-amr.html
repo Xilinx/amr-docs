@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>&lt;no title&gt; &mdash; AMR  documentation</title>
+  <title>Switching Between AVED and AMR on V80 &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -75,8 +75,46 @@
 <li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">Hardware Design - AMR Common</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">V80 Platform Documentation</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">V80 Platform Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="deployment-archive.html">AMR Deployment Archive</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Switching Between AVED and AMR on V80</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#switching-from-amr-to-aved-xbtest">Switching from AMR to AVED/xbtest</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#steps">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#amr-installation-with-existing-aved-xbtest">AMR Installation with Existing AVED/xbtest</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#install-the-amr-software-packages">Install the AMR Software Packages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ubuntu-installing-debian-packages">Ubuntu - Installing Debian Packages:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rhel-installing-rpm-packages">RHEL - Installing RPM Packages:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#device-not-in-ready-state">Device Not in READY State</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#driver-conflicts">Driver Conflicts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#firmware-programming-fails">Firmware Programming Fails</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#package-installation-fails">Package Installation Fails</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#verification-checklist">Verification Checklist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#next-steps">Next Steps</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#after-switching-to-amr">After Switching to AMR:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#after-switching-to-aved">After Switching to AVED:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hardware/index.html">Hardware Design - V80 (Alveo)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run-xbtest.html">How-to Install and Run xbtest on V80 Card</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
 <ul>
@@ -122,7 +160,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="index.html">V80 Platform Documentation</a> &raquo;</li>
-      <li>&lt;no title&gt;</li>
+      <li>Switching Between AVED and AMR on V80</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/v80/switch-aved-amr.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -132,7 +170,219 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
+  <div class="section" id="switching-between-aved-and-amr-on-v80">
+<h1>Switching Between AVED and AMR on V80<a class="headerlink" href="#switching-between-aved-and-amr-on-v80" title="Permalink to this heading">¶</a></h1>
+<p>This guide provides detailed instructions for switching between AVED (Alveo Versal Example Design) and AMR (Adaptive Management Runtime) on Alveo V80 cards.</p>
+<p><span id="switchingbetweenavedandamr-overview"></span></p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
+<p>AVED and AMR are two different platform management solutions for Alveo V80 cards:</p>
+<ul class="simple">
+<li><p><strong>AVED</strong>: Legacy platform management solution with xbtest support</p></li>
+<li><p><strong>AMR</strong>: New platform management solution replacing AVED, with enhanced features but without xbtest support in this release</p></li>
+</ul>
+<p>You may need to switch between these solutions depending on your requirements:</p>
+<ul class="simple">
+<li><p>Switch to <strong>AVED</strong> if you need xbtest functionality</p></li>
+<li><p>Switch to <strong>AMR</strong> for the latest platform management features and ongoing support</p></li>
+</ul>
+<p><strong>Important:</strong> You cannot run AVED and AMR simultaneously on the same system. The switching process requires complete removal of one solution before installing the other.</p>
+<p><span id="switchingbetweenavedandamr-prerequisites"></span></p>
+</div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Root or sudo permissions</p></li>
+<li><p>Physical installation of Alveo V80 card in your system</p></li>
+<li><p>For firmware programming: Either Vivado Hardware Manager (2026.1) with micro-USB cable, or ami_tool if current installation is functional</p></li>
+<li><p>Appropriate installation packages:</p>
+<ul>
+<li><p>For AVED: Download from <a class="reference external" href="https://xilinx.github.io/AVED/amd_v80_gen5x8_exdes_1_20231204/AVED%2BRelease%2BInformation.html">AVED 2025.2 Release</a></p></li>
+<li><p>For AMR: Download from <a class="reference internal" href="../release-notes.html"><span class="std std-doc">AMR Release Notes</span></a></p></li>
+</ul>
+</li>
+</ul>
+<p><span id="switchingbetweenavedandamr-xbtestinstallation"></span></p>
+</div>
+<div class="section" id="switching-from-amr-to-aved-xbtest">
+<h2>Switching from AMR to AVED/xbtest<a class="headerlink" href="#switching-from-amr-to-aved-xbtest" title="Permalink to this heading">¶</a></h2>
+<p>Follow the steps below if you have an existing AMR installation and want to switch to AVED/xbtest for xbtest functionality.</p>
+<p><span id="switchingbetweenavedandamr-xbtestprerequisites"></span></p>
+<div class="section" id="id1">
+<h3>Prerequisites<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Ensure the existing AMR environment is functional</p></li>
+<li><p>AMI and AMC versions are compatible (matched)</p></li>
+<li><p>AMC is in READY state before proceeding</p></li>
+</ul>
+</div>
+<div class="section" id="steps">
+<h3>Steps<a class="headerlink" href="#steps" title="Permalink to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Unzip the xbtest installation package that was downloaded from the <a class="reference external" href="https://xilinx.github.io/AVED/amd_v80_gen5x8_exdes_1_20231204/AVED%2BRelease%2BInformation.html">AVED 2025.2 Release</a>.</p></li>
+<li><p>Program the OSPI FPT image using one of the following methods:</p></li>
+</ol>
+<div class="section" id="method-1-using-ami-tool-cfgmem-fpt">
+<h4>Method 1: Using ami_tool cfgmem_fpt<a class="headerlink" href="#method-1-using-ami-tool-cfgmem-fpt" title="Permalink to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>amd_v80_gen5x8_25.1_xbtest_stress_20251113<span class="w">  </span><span class="c1"># Replace with your actual release package</span>
+sudo<span class="w"> </span>ami_tool<span class="w"> </span>cfgmem_fpt<span class="w"> </span>-d<span class="w"> </span>&lt;BDF&gt;<span class="w"> </span>-i<span class="w"> </span>flash_setup/fpt_setup_amd_v80_gen5x8_25.1_exdes_1_yyymmdd.pdi<span class="w"> </span>-p<span class="w"> </span><span class="m">0</span><span class="w"> </span>-t<span class="w"> </span>primary
+</pre></div>
+</div>
+<p><strong>Note:</strong> Replace <code class="docutils literal notranslate"><span class="pre">amd_v80_gen5x8_25.1_xbtest_stress_20251113</span></code> with your actual release package name, and replace <code class="docutils literal notranslate"><span class="pre">yyymmdd</span></code> with the actual date in the filename.</p>
+</div>
+<div class="section" id="method-2-using-vivado-hw-manager-and-jtag">
+<h4>Method 2: Using Vivado HW Manager and JTAG<a class="headerlink" href="#method-2-using-vivado-hw-manager-and-jtag" title="Permalink to this heading">¶</a></h4>
+<p>Update the Flash Partition Table (FPT) image in flash using Vivado HW Manager and JTAG. Refer to <a class="reference internal" href="../deployment/update-fpt.html"><span class="std std-doc">Updating FPT Image in Flash</span></a> for step-by-step instructions. If successful, Vivado HW Manager will report this with a pop-up message: “Flash programming completed successfully.”</p>
+<p>Cold boot the server to boot from flash.</p>
+<p><span id="switchingbetweenavedandamr-amrinstallation"></span></p>
+</div>
+</div>
+</div>
+<div class="section" id="amr-installation-with-existing-aved-xbtest">
+<h2>AMR Installation with Existing AVED/xbtest<a class="headerlink" href="#amr-installation-with-existing-aved-xbtest" title="Permalink to this heading">¶</a></h2>
+<p>Follow the steps below to install AMR firmware/software with existing AVED/xbtest.</p>
+<div class="section" id="id2">
+<h3>Prerequisites<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Ensure the existing AVED/xbtest environment is functional</p></li>
+<li><p>AMI and AMC versions are compatible (matched)</p></li>
+<li><p>AMC is in READY state before proceeding</p></li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h3>Steps<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
+<ol class="arabic">
+<li><p>Build the AMR sources from <a class="reference internal" href="../getting-started/build.html"><span class="std std-doc">How-to Build an AMR Design for Yourself</span></a> or download prebuilt AMR images from <a class="reference internal" href="../release-notes.html"><span class="std std-doc">AMR Release Notes</span></a></p></li>
+<li><p>Program the AMR OSPI FPT image using the ami_tool cfgmem_fpt command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ami_tool<span class="w"> </span>cfgmem_fpt<span class="w"> </span>-d<span class="w"> </span>&lt;BDF&gt;<span class="w"> </span>-i<span class="w"> </span>&lt;amr_ospi_fpt.bin&gt;<span class="w"> </span>-t<span class="w"> </span>primary
+</pre></div>
+</div>
+</li>
+</ol>
+<p><span id="switchingbetweenavedandamr-installamrpackages"></span></p>
+</div>
+</div>
+<div class="section" id="install-the-amr-software-packages">
+<h2>Install the AMR Software Packages<a class="headerlink" href="#install-the-amr-software-packages" title="Permalink to this heading">¶</a></h2>
+<p>To install the package onto the host, navigate to the directory with the debian or rpm packages depending on your host OS. Install <code class="docutils literal notranslate"><span class="pre">libami*</span></code>, <code class="docutils literal notranslate"><span class="pre">ami*</span></code>, <code class="docutils literal notranslate"><span class="pre">amitool*</span></code> packages.</p>
+<div class="section" id="ubuntu-installing-debian-packages">
+<h3>Ubuntu - Installing Debian Packages:<a class="headerlink" href="#ubuntu-installing-debian-packages" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>libami_x.x.x.xxx.xxx_amd64.deb
+sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>ami_x.x.x.xxx.xxx_amd64.deb
+sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>amitool_x.x.x.xxx.xxx_amd64.deb
+</pre></div>
+</div>
+</div>
+<div class="section" id="rhel-installing-rpm-packages">
+<h3>RHEL - Installing RPM Packages:<a class="headerlink" href="#rhel-installing-rpm-packages" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>rpm<span class="w"> </span>-ivh<span class="w"> </span>libami_x.x.x.xxx.xxx_amd64.rpm
+sudo<span class="w"> </span>rpm<span class="w"> </span>-ivh<span class="w"> </span>ami_x.x.x.xxx.xxx_amd64.rpm
+sudo<span class="w"> </span>rpm<span class="w"> </span>-ivh<span class="w"> </span>amitool_x.x.x.xxx.xxx_amd64.rpm
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading">¶</a></h2>
+<p><span id="switchingbetweenavedandamr-devicenotready"></span></p>
+<div class="section" id="device-not-in-ready-state">
+<h3>Device Not in READY State<a class="headerlink" href="#device-not-in-ready-state" title="Permalink to this heading">¶</a></h3>
+<p>If the device is not in READY state after switching:</p>
+<ol class="arabic simple">
+<li><p>Perform a <strong>cold reboot</strong> (power cycle) of the system</p></li>
+<li><p>Verify the correct firmware was programmed</p></li>
+<li><p>Check that all software packages are from the same release version</p></li>
+<li><p>Verify that the previous solution’s packages were completely removed</p></li>
+</ol>
+<p><span id="switchingbetweenavedandamr-driverconflicts"></span></p>
+</div>
+<div class="section" id="driver-conflicts">
+<h3>Driver Conflicts<a class="headerlink" href="#driver-conflicts" title="Permalink to this heading">¶</a></h3>
+<p>If you encounter driver loading issues:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># List all loaded drivers</span>
+lsmod<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;ami|aved&#39;</span>
+
+<span class="c1"># Remove any conflicting drivers</span>
+sudo<span class="w"> </span>rmmod<span class="w"> </span>ami
+sudo<span class="w"> </span>rmmod<span class="w"> </span>aved
+
+<span class="c1"># Reload the correct driver</span>
+sudo<span class="w"> </span>modprobe<span class="w"> </span>ami<span class="w">   </span><span class="c1"># For AMR</span>
+<span class="c1"># or</span>
+sudo<span class="w"> </span>modprobe<span class="w"> </span>aved<span class="w">  </span><span class="c1"># For AVED</span>
+</pre></div>
+</div>
+<p><span id="switchingbetweenavedandamr-firmwareprogrammingfails"></span></p>
+</div>
+<div class="section" id="firmware-programming-fails">
+<h3>Firmware Programming Fails<a class="headerlink" href="#firmware-programming-fails" title="Permalink to this heading">¶</a></h3>
+<p>If OSPI programming fails:</p>
+<ol class="arabic simple">
+<li><p>Verify Vivado version matches the requirements (2026.1 for AMR, 2025.2 for AVED)</p></li>
+<li><p>Check that the JTAG connection is stable</p></li>
+<li><p>If flash is corrupted, use JTAG Boot Recovery: <a class="reference internal" href="../deployment/jtag-recovery.html"><span class="std std-doc">AMR JTAG Boot Recovery</span></a></p></li>
+<li><p>Ensure you selected the correct configuration memory part (cfgmem-2048-ospi-x8-single for V80)</p></li>
+</ol>
+<p><span id="switchingbetweenavedandamr-packageinstallationfails"></span></p>
+</div>
+<div class="section" id="package-installation-fails">
+<h3>Package Installation Fails<a class="headerlink" href="#package-installation-fails" title="Permalink to this heading">¶</a></h3>
+<p>If package installation fails:</p>
+<p><strong>Ubuntu:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fix broken dependencies</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-f
+
+<span class="c1"># Check for conflicts</span>
+dpkg<span class="w"> </span>-l<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;ami|aved&#39;</span>
+</pre></div>
+</div>
+<p><strong>RHEL:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clean package database</span>
+sudo<span class="w"> </span>yum<span class="w"> </span>clean<span class="w"> </span>all
+
+<span class="c1"># Check for conflicts</span>
+rpm<span class="w"> </span>-qa<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;ami|aved&#39;</span>
+</pre></div>
+</div>
+<p>For more detailed debugging information, see <a class="reference internal" href="../deployment/debug.html"><span class="std std-doc">AMR Debug Techniques</span></a>.</p>
+<p><span id="switchingbetweenavedandamr-verification"></span></p>
+</div>
+</div>
+<div class="section" id="verification-checklist">
+<h2>Verification Checklist<a class="headerlink" href="#verification-checklist" title="Permalink to this heading">¶</a></h2>
+<p>After switching, verify the following:</p>
+<ul class="simple">
+<li><p>[ ] Previous solution’s packages are completely removed</p></li>
+<li><p>[ ] New firmware is programmed successfully</p></li>
+<li><p>[ ] System has been cold rebooted</p></li>
+<li><p>[ ] New software packages are installed</p></li>
+<li><p>[ ] Driver is loaded (<code class="docutils literal notranslate"><span class="pre">lsmod</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">ami</span></code> or <code class="docutils literal notranslate"><span class="pre">lsmod</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">aved</span></code>)</p></li>
+<li><p>[ ] Device is detected and in READY state (via tool overview command)</p></li>
+<li><p>[ ] Software and firmware versions match</p></li>
+<li><p>[ ] Basic functionality works (e.g., sensor reading, manufacturing info)</p></li>
+</ul>
+<p><span id="switchingbetweenavedandamr-nextsteps"></span></p>
+</div>
+<div class="section" id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="after-switching-to-amr">
+<h3>After Switching to AMR:<a class="headerlink" href="#after-switching-to-amr" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Review <a class="reference internal" href="../deployment/ami-tool-guide.html"><span class="std std-doc">AMI Tool Guide</span></a> for available commands</p></li>
+<li><p>Learn about <a class="reference internal" href="../system-architecture/device-programming.html"><span class="std std-doc">Device Programming</span></a></p></li>
+<li><p>Explore <a class="reference internal" href="../getting-started/install-prebuilt.html"><span class="std std-doc">AMR Getting Started</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="after-switching-to-aved">
+<h3>After Switching to AVED:<a class="headerlink" href="#after-switching-to-aved" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Refer to <a class="reference external" href="https://xilinx.github.io/AVED/amd_v80_gen5x8_exdes_1_20231204/">AVED Documentation</a></p></li>
+<li><p>For xbtest usage, see <a class="reference internal" href="xbtest/install-and-run-xbtest.html"><span class="std std-doc">xbtest Installation and Testing</span></a></p></li>
+</ul>
+</div>
+</div>
+</div>
+
 
            </div>
           </div>
@@ -147,7 +397,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 12, 2026.
+      <span class="lastupdated">Last updated on May 28, 2026.
       </span></p>
   </div>
 

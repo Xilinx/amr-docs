@@ -10,7 +10,7 @@ The debug techniques are listed here in approximate increasing order of complexi
 
 ### **Programming**
 
-If an issue occurs during a cfgmem\_fpt/cfgmem\_program ([AMR Management Interface userguide](ami-tool-guide#overview)) please go straight to [AMR Updating FPT Image in Flash](update-fpt.md) to recover the card.
+If an issue occurs during a cfgmem\_fpt/cfgmem\_program ([AMR Management Interface userguide](ami-tool-guide.md#amrmanagementinterfaceuserguide-ami-tool-overview)) please go straight to [AMR Updating FPT Image in Flash](update-fpt.md) to recover the card.
 
 <span id="amrdebugtechniques-cardstatus"></span>
 
@@ -18,7 +18,7 @@ If an issue occurs during a cfgmem\_fpt/cfgmem\_program ([AMR Management Interfa
 
 Once an error has occurred, it can be useful to check the card status and health to see what is still working and what is not. Some useful checks are:
 
-For AMI specific commands see - [AMR Management Interface userguide (ami\_tool)](../../deployment/ami-tool-guide#overview).
+For AMI specific commands see - [AMR Management Interface userguide (ami\_tool)](ami-tool-guide.md#amrmanagementinterfaceuserguide-ami-tool-overview).
 
   - **lspci device check**
     
@@ -189,7 +189,7 @@ For AMI specific commands see - [AMR Management Interface userguide (ami\_tool)]
         
           - Check for expected value
         
-          - See [Sensors and Hardware Monitoring](sensors/) for thresholds
+          - See [Sensors and Hardware Monitoring](../software/card-detection.md) for thresholds
 
 <span id="amrdebugtechniques-xbtestlogsandcsvfiles"></span>
 
@@ -201,7 +201,7 @@ xbtest writes sensor data into several CSV files. These can be analyzed as text 
 
 xbtest can be useful to test the card capabilities and to push it to its limits. This is more often helpful for exposing or reproducing an issue, rather than triaging or debugging an issue. However, xbtest does provide an easy method for continuously reading card sensors such as power and temperature, which can be useful in some debug situations.
 
-For xbtest documentation, see [xbtest Userguide](../index.html#xbtest-userguide).
+For xbtest documentation, see [xbtest Userguide](../v80/xbtest/install-and-run-xbtest.md).
 
 <span id="amrdebugtechniques-serverlogsandsensors"></span>
 

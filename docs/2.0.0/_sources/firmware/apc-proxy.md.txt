@@ -214,7 +214,7 @@ This will post a message (**APC\_MSG\_TYPE\_DOWNLOAD\_PDI**) onto the APC mailbo
     /**
      * @brief   Download an image to a location in NV memory
      *
-     * @param   pxSignal     Current event occurance (used for tracking)
+     * @param   pxSignal     Current event occurrence (used for tracking)
      * @param   xBootDevice  Target boot device
      * @param   iPartition   The partition in the FPT to store this image in
      * @param   ulSrcAddr    Address (in RAM) to read the image from
@@ -243,7 +243,7 @@ This will post a message (**APC\_MSG\_TYPE\_DOWNLOAD\_PDI**) onto the APC mailbo
     /**
      * @brief   Download an image with an FPT to a location in NV memory
      *
-     * @param   pxSignal     Current event occurance (used for tracking)
+     * @param   pxSignal     Current event occurrence (used for tracking)
      * @param   xBootDevice  Target boot device
      * @param   ulSrcAddr    Address (in RAM) to read the image from
      * @param   ulImageSize  Size of image (in bytes)
@@ -269,7 +269,7 @@ This will post a message (**APC\_MSG\_TYPE\_COPY\_PDI**) onto the APC mailbox to
     /**
      * @brief   Copy an image from one partition to another
      *
-     * @param   pxSignal        Current event occurance (used for tracking)
+     * @param   pxSignal        Current event occurrence (used for tracking)
      * @param   xSrcBootDevice  Target boot device to copy from
      * @param   iSrcPartition   The partition in the FPT to copy this image from
      * @param   xDestBootDevice Target boot device to copy to
@@ -295,7 +295,7 @@ This will post a message (**APC\_MSG\_TYPE\_PARTITION\_SELECT**) onto the APC ma
     /**
      * @brief   Select which partition to boot from
      *
-     * @param   pxSignal    Current event occurance (used for tracking)
+     * @param   pxSignal    Current event occurrence (used for tracking)
      * @param   iPartition  The partition to boot from on the next reset
      *
      * @return  OK          Partition successfully selected
@@ -314,7 +314,7 @@ This will post a message (**APC\_MSG\_TYPE\_ENABLE\_HOT\_RESET**) onto the APC m
     /**
      * @brief   Enable the hot reset capability
      *
-     * @param   pxSignal    Current event occurance (used for tracking)
+     * @param   pxSignal    Current event occurrence (used for tracking)
      *
      * @return  OK          Hot reset successfully enabled
      *          ERROR       Hot reset not enabled
@@ -332,7 +332,7 @@ This will post a message onto the APC mailbox to be handled within the internal 
     /**
      * @brief   Program PDI image to a location in memory
      *
-     * @param   pxSignal            Current event occurance (used for tracking)
+     * @param   pxSignal            Current event occurrence (used for tracking)
      * @param   pxDownloadRequest   Target boot device and parameters
      * @param   ulSrcAddr           Address (in RAM) to read the image from
      *
@@ -350,9 +350,9 @@ This will update the flags of a Flash Partition Table (FPT) partition in both th
 **iAPC\_SetFptPartitionFlags**
 
     /**
-     * @brief   Set/Update the flags of a Flash Partition Table (FPT) Partition
+ * @brief   Set or update the flags of a Flash Partition Table (FPT) partition
      *
-     * @param   pxSignal        Current event occurance (used for tracking)
+     * @param   pxSignal        Current event occurrence (used for tracking)
      * @param   xBootDevice     Target boot device
      * @param   iPartition      Index of partition to update (0 is the 1st partition)
      * @param   ulFlags         New flags value to set
@@ -374,9 +374,9 @@ This will update an FPT partition entry in both the cached copy and the flash st
 **iAPC\_SetFptPartition**
 
     /**
-     * @brief   Set/Update an FPT Partition entry
+ * @brief   Set or update an FPT partition entry
      *
-     * @param   pxSignal        Current event occurance (used for tracking)
+     * @param   pxSignal        Current event occurrence (used for tracking)
      * @param   xBootDevice     Target boot device
      * @param   iPartition      Index of partition to update (0 is the 1st partition)
      * @param   pucPdiMd5       Pointer to 16-byte PDI MD5 checksum (NULL to skip update)

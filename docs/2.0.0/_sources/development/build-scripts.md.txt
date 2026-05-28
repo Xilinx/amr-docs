@@ -26,7 +26,7 @@ The build script divides the build flow into a number of separate steps.
 
 ### hw step
 
-The hw step of the build flow operates on the AMR hardware design described here. A /build_v80 directory is created, where the implemented hardware design and Vivado log are generated. The xpr file for this project is located here **amr/build_v80/amr_vivado_designs/alveo_v80/v80_base/project**. Similary for Rave it will be located under build_rave.
+The hw step of the build flow operates on the AMR hardware design described here. A /build_v80 directory is created, where the implemented hardware design and Vivado log are generated. The xpr file for this project is located here **amr/build_v80/amr_vivado_designs/alveo_v80/v80_base/project**. Similarly for Rave it will be located under build_rave.
 
 This Vivado project is used to generate the BD design, run Synthesis & Implementation, and create the initial PDI. The write\_hw\_platform command is run on the implemented design to create an XSA (named v80_base.xsa), which is used as a hardware handoff file to the AMC build in the fw build step.
 
@@ -34,11 +34,11 @@ This Vivado project is used to generate the BD design, run Synthesis & Implement
 
 ### fw step
 
-The fw step of the build flow operates on the AMR AMC firmware design described here: [Firmware Design - AMR](../firmware/index). The fw step builds the AMC firmware and generates final PDIs.
+The fw step of the build flow operates on the AMR AMC firmware design described here: [Firmware Design - AMR](../firmware/index.md). The fw step builds the AMC firmware and generates final PDIs.
 
 The AMC build is run in the AMC source code directory (i.e., **\<amr\>/fw/AMC**) using the AMC’s own build script **(\<amr\>/fw/AMC/scripts/build.sh).**
 
-The AMC’s build.sh can take a number of different build options (which are detailed in the AMC’s [Profiles and CMake build process](Profiles-and-CMake-build-process) page), but the the AMR build flow executes it with these specific options.
+The AMC’s build.sh can take a number of different build options (which are detailed in the AMC’s [Profiles and CMake build process](../firmware/profiles-cmake.md) page), but the AMR build flow executes it with these specific options.
 
     ```bash
       ./scripts/build.sh -help

@@ -63,7 +63,7 @@ This is the main build shell. Executing this shell will launch Vivado<sup>TM</su
 
   - create\_bd\_design.tcl - This TCL file is used by Vivado to create the base AMR design. Since the GTs are not used in this design, the interface ports have been commented out. The user may uncomment them as required for their design.
 - **build\_design.tcl** - This script uses Vivado to create the XSA and run synthesis and implementation.
-- **contraints** - This directory contains the constraints required for Vivado implementation to generate a PDI.
+- **constraints** - This directory contains the constraints required for Vivado implementation to generate a PDI.
 
   - impl.pins.xdc - This file contains the top level I/O pin names, locations, and IO standards for the DDR, DIMM, GTYPs, GTMs, and clocks.
 

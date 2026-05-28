@@ -216,7 +216,7 @@ By default, the `build.sh` script creates a build directory which would contain 
 
 ## Programming and Testing the Design
 
-In this section, you will use the AMI cfgmem\_program command to program your new design PDI to flash. As a prerequisite, review [AMR - Device Programming](../system-architecture/device-programming/) Verify your deployment server and Alveo card are properly set up, and note the card BDF which you will use to program the PDI.
+In this section, you will use the AMI cfgmem\_program command to program your new design PDI to flash. As a prerequisite, review [AMR - Device Programming](../system-architecture/device-programming.md). Verify your deployment server and Alveo card are properly set up, and note the card BDF which you will use to program the PDI.
 
 To program the PDI to flash, your deployment server will need access to the new design PDI. You will use the AMI cfgmem\_program command, specifying the card BDF, path to the design PDI, and which flash partition to program. In this example, the BDF is c1:00.0 and the PDI will be programmed to flash partition 0. Successful programming is indicated by the message “`OK. Image has been programmed successfully.`” A hot reset is automatically performed to boot the updated design in partition 0. The incoming UUID may be reported as “N/A” if no UUID metadata is provided with the PDI. This is normal behavior and does not affect the programming.
 
@@ -251,6 +251,6 @@ To program the PDI to flash, your deployment server will need access to the new 
 
 This getting started guide outlined the steps to download the AMR source code, build the AMR, and program the PDI using AMI. If you would like to explore other available hardware test commands, see:
 
-  - [AMR Management Interface userguide](../../deployment/ami-tool-guide)
+  - [AMR Management Interface userguide](../deployment/ami-tool-guide.md)
 
 

@@ -16,7 +16,7 @@ Applications deriving from AMR are inherently PCIe® centric. This section gives
 
 ### Hardware Discovery
 
-On boot, the host system enumerates the set of PCIe cards in the system and attaches the reference AMR host OS drivers to instances of the Alveo cards it finds running AMR base hardware designs. A full PCIe-based management interface is not available until the AMR host OS driver has attached to the card and acquired a small amount of metadata from the card about its hardware design content. Once the AMR PCIe host driver is attached, the [AMR management interface](../software/ami) is available to allow the current design content of the AMR cards to be inspected, controlled, and updated.
+On boot, the host system enumerates the set of PCIe cards in the system and attaches the reference AMR host OS drivers to instances of the Alveo cards it finds running AMR base hardware designs. A full PCIe-based management interface is not available until the AMR host OS driver has attached to the card and acquired a small amount of metadata from the card about its hardware design content. Once the AMR PCIe host driver is attached, the [AMR management interface](../software/ami.md) is available to allow the current design content of the AMR cards to be inspected, controlled, and updated.
 
 <span id="amr-hosttocardcommunication-pciebarlayout"></span>
 

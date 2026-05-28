@@ -147,7 +147,7 @@
              
   <div class="section" id="amr-overview">
 <h1>AMR Overview<a class="headerlink" href="#amr-overview" title="Permalink to this heading">¶</a></h1>
-<p>AMD Adaptive Management Runtime (AMR) provides comprehensive platform management capabilities for Alveo and Embedded+ boards featuring Versal devices, supporting multiple platforms including rave and v80, with AMR serving as the enhanced replacement for AVED on Alveo V80 accelerators.</p>
+<p>AMD Adaptive Management Runtime (AMR) provides comprehensive platform management capabilities for Alveo and Embedded+ boards featuring Versal devices, supporting multiple platforms including RAVE and V80, with AMR serving as the enhanced replacement for AVED on Alveo V80 accelerators.</p>
 <p><span id="amroverview-newinthisrelease"></span></p>
 <div class="section" id="new-in-this-release">
 <h2>New In This Release<a class="headerlink" href="#new-in-this-release" title="Permalink to this heading">¶</a></h2>
@@ -155,7 +155,7 @@
 <li><p>Support for Vivado™ 2026.1 toolset.</p></li>
 <li><p>Enhanced OSPI flash write performance optimization for faster device programming.</p></li>
 <li><p>Partition flag read/write functionality for advanced flash management and partition control, including power-on load configuration.</p></li>
-<li><p>Improved firmware architecture with board profile system supporting rave (standard reference) and v80 variants for flexible platform deployment.</p></li>
+<li><p>Improved firmware architecture with board profile system supporting RAVE (standard reference) and V80 variants for flexible platform deployment.</p></li>
 <li><p>Three-partition FPT structure (two boot PDIs + one user partition) with 128-byte header and entries.</p></li>
 <li><p>PS subsystems with RPU0 (AMR), RPU1 and APU.</p></li>
 </ul>
@@ -165,7 +165,7 @@
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h2>
 <p>This section contains an overview of the AMD Adaptive Management Runtime (AMR). AMR provides basic management capabilities for Alveo and Embedded+ boards featuring a Versal device connected to an x86 host via PCIe. The AMR has the following design components:</p>
 <ul class="simple">
-<li><p>The base hardware design for establishing PCIe® host connectivity and logic for common <a class="reference internal" href="../system-architecture/index.html"><span class="doc std std-doc">system management</span></a> operations.</p></li>
+<li><p>The base hardware design for establishing PCIe® host connectivity and logic for common <a class="reference internal" href="../system-architecture/index.html"><span class="std std-doc">system management</span></a> operations.</p></li>
 <li><p>AMC (Adaptive Management Controller): Firmware running on RPU-0 with FreeRTOS that implements a management interface to a companion host operating system driver and utility application so that the basic features of the card can be managed within the development and deployment systems.</p></li>
 <li><p>AMI (Adaptive Management Interface): Host-side software including a kernel driver, API library, and CLI tool for interfacing with AMC firmware.</p></li>
 <li><p>Build flow scripts including CMake-based firmware compilation and Vivado hardware design generation, demonstrating a full end-to-end build process for the base hardware design and software components described above.</p></li>
@@ -177,7 +177,7 @@
 <p><span id="amroverview-alveov80"></span></p>
 <div class="section" id="alveo-v80">
 <h3>Alveo V80<a class="headerlink" href="#alveo-v80" title="Permalink to this heading">¶</a></h3>
-<p>The Alveo V80 is a high performance data processing card in a PCIe form factor containing a Versal HBM FPGA device, DDR memory, and a variety of communication interfaces. The Alveo V80 has a broad range of market applications in high-performance compute, analytics, networking, storage, fintech, and blockchain. The following diagram provides a high level overview of the primary card features and interfaces. See the Alveo V80 Data Center Accelerator Card Data Sheet (DS1013) for information on the card and its capabilities.</p>
+<p>The Alveo V80 is a high-performance data processing card in a PCIe form factor containing a Versal HBM FPGA device, DDR memory, and a variety of communication interfaces. The Alveo V80 has a broad range of market applications in high-performance compute, analytics, networking, storage, fintech, and blockchain. The following diagram provides a high-level overview of the primary card features and interfaces. See the Alveo V80 Data Center Accelerator Card Data Sheet (DS1013) for information on the card and its capabilities.</p>
 <p><span id="amroverview-supportedkernelsanddistributions"></span></p>
 </div>
 <div class="section" id="supported-kernels-and-distributions-for-v80">
@@ -216,7 +216,7 @@
 <div><p><strong>Note:</strong> Queue DMA (QDMA) functionality is supported exclusively on the Alveo V80 platform. QDMA is not available on RAVE (Embedded+) platforms, which utilize XDMA for PCIe data transfer operations.</p>
 </div></blockquote>
 <p><a class="reference download internal" download="" href="../_downloads/ae7b4c937f1537f5834fd132ead1bf49/1107373415.png"><span class="xref download myst"><img alt="image1" src="../_images/1107373415.png" /></span></a></p>
-<p>To get started with AMR on V80 Refer <a class="reference internal" href="../getting-started/index.html"><span class="std std-doc">getting-started</span></a></p>
+<p>To get started with AMR on V80, refer to <a class="reference internal" href="../getting-started/index.html"><span class="std std-doc">getting-started</span></a>.</p>
 <p><strong>Note:</strong> If you need to switch between AVED and AMR on V80, refer to <a class="reference internal" href="../v80/switch-aved-amr.html"><span class="std std-doc">Switching Between AVED and AMR</span></a> for detailed instructions on seamlessly transitioning between the two platforms.</p>
 <p><span id="amroverview-rave"></span></p>
 </div>
@@ -232,12 +232,12 @@
 </ul>
 <p>The Rave profile serves as the baseline platform configuration, providing core functionality while minimizing complexity for applications that do not require advanced storage or expansion interfaces.</p>
 <p><img alt="RAVE Platform Block Diagram" src="../_images/rave_block.png" /></p>
-<p>To get started with AMR on V80 Refer <a class="reference internal" href="../getting-started/index.html"><span class="std std-doc">getting-started</span></a></p>
+<p>To get started with AMR on RAVE, refer to <a class="reference internal" href="../getting-started/index.html"><span class="std std-doc">getting-started</span></a>.</p>
 <p><span id="amroverview-alveoversalexampledesign"></span></p>
 </div>
 <div class="section" id="adaptive-management-runtime">
 <h3>Adaptive Management Runtime<a class="headerlink" href="#adaptive-management-runtime" title="Permalink to this heading">¶</a></h3>
-<p>The AMR provides a robust starting point for application designers who wish to build and rapidly deploy solutions on Alveo V80 hardware. To support a broad range of markets, the AMR is delivered as a Vivado centric design with a well documented design architecture. The combination of the AMR base hardware design and companion software layers embodies Alveo’s best practice solutions to common application functions such as card management, device programming, and host to card data exchange. The following diagram shows an overview of the AMR in the context of the Alveo V80 FPGA resources.</p>
+<p>The AMR provides a robust starting point for application designers who wish to build and rapidly deploy solutions on Alveo V80 hardware. To support a broad range of markets, the AMR is delivered as a Vivado-centric design with a well-documented design architecture. The combination of the AMR base hardware design and companion software layers embodies Alveo’s best practice solutions to common application functions such as card management, device programming, and host-to-card data exchange. The following diagram shows an overview of the AMR in the context of the Alveo V80 FPGA resources.</p>
 <p><a class="reference download internal" download="" href="../_downloads/0ef289ed314f433c3192cbf9c919a329/1107373421.png"><span class="xref download myst"><img alt="image2" src="../_images/1107373421.png" /></span></a></p>
 <p>Some notable characteristics of the AMR include:</p>
 <ul class="simple">
@@ -257,15 +257,15 @@
 <h2>AMR Hardware Architecture<a class="headerlink" href="#amr-hardware-architecture" title="Permalink to this heading">¶</a></h2>
 <p>The AMR includes platform-specific base hardware designs that demonstrate PCIe connectivity and management capabilities. For detailed information on the hardware architecture for each supported platform, please refer to:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../v80/hardware/index.html"><span class="doc std std-doc">V80 Hardware Architecture</span></a> - Platform with eMMC, QSFP, and SMBus support</p></li>
-<li><p><a class="reference internal" href="../rave/hardware/index.html"><span class="doc std std-doc">Rave Hardware Architecture</span></a> - Standard reference platform architecture</p></li>
+<li><p><a class="reference internal" href="../v80/hardware/index.html"><span class="std std-doc">V80 Hardware Architecture</span></a> - Platform with eMMC, QSFP, and SMBus support</p></li>
+<li><p><a class="reference internal" href="../rave/hardware/index.html"><span class="std std-doc">Rave Hardware Architecture</span></a> - Standard reference platform architecture</p></li>
 </ul>
 <p><span id="amroverview-amrsoftwarearchitecture"></span></p>
 </div>
 <div class="section" id="amr-software-architecture">
 <h2>AMR Software Architecture<a class="headerlink" href="#amr-software-architecture" title="Permalink to this heading">¶</a></h2>
 <p><img alt="images/1107373409.png" src="../_images/1107373409.png" /></p>
-<p>The <a class="reference internal" href="../firmware/index.html"><span class="doc std std-doc">AMR management controller</span></a> (AMC) is reference firmware targeted to run on the card’s RPU processors. The AMC firmware runs on RPU-0 under FreeRTOS and is organized into a layered architecture:</p>
+<p>The <a class="reference internal" href="../firmware/index.html"><span class="std std-doc">AMR management controller</span></a> (AMC) is the reference firmware targeted to run on the card’s RPU processors. The AMC firmware runs on RPU-0 under FreeRTOS and is organized into a layered architecture:</p>
 <ul class="simple">
 <li><p>Firmware Abstraction Layer (FAL) providing protocol-agnostic hardware interfaces for OSPI, eMMC, SMBus, GCQ, and UART.</p></li>
 <li><p>Operating System Abstraction Layer (OSAL) enabling OS portability.</p></li>
@@ -274,17 +274,17 @@
 <p>There are four major groups of functionality provided in this reference firmware implementation:</p>
 <ul class="simple">
 <li><p>Monitoring of card sensor state and other low level card control behaviors are provided in the form of an in-band (PCIe®) telemetry interface.</p></li>
-<li><p>A remote management interface that is built on standard communication protocols (SMBus) to interface and service requests from well known server management software infrastructure, such as OpenBMC.</p></li>
+<li><p>A remote management interface that is built on standard communication protocols (SMBus) to interface and service requests from well-known server management software infrastructure, such as OpenBMC.</p></li>
 <li><p>To support application development and later deployment, AMC also provides services to program and inspect the card’s OSPI flash configuration memory across three partitions (two boot PDIs and one user design), with enhanced write performance and partition flag management.</p></li>
-<li><p>A companion application (ami_tool) allows access to application runtime services (for example clock management) to cards with AMR-derived designs in the system via the PCIe host driver provided as part of the <a class="reference internal" href="../software/ami.html"><span class="doc std std-doc">AMR Management Interface</span></a>) (AMI).</p></li>
+<li><p>A companion application (ami_tool) allows access to application runtime services (for example, clock management) on cards with AMR-derived designs in the system via the PCIe host driver provided as part of the <a class="reference internal" href="../software/ami.html"><span class="std std-doc">AMR Management Interface</span></a> (AMI).</p></li>
 </ul>
 <p><span id="amroverview-amrdesignflow"></span></p>
 </div>
 <div class="section" id="amr-design-flow">
 <h2>AMR Design Flow<a class="headerlink" href="#amr-design-flow" title="Permalink to this heading">¶</a></h2>
-<p>As a Vivado™-centric design, the AMR is built on the same standard design flows that are well known to the broad community of Vivado and Versal™ application developers. Because AMR includes a hardware base design and firmware images, AMR’s design’s source files are delivered in a particular source directory structure. A shell script is provided to encapsulate the complete <a class="reference internal" href="../development/index.html"><span class="doc std std-doc">build flow</span></a> from end to end.</p>
+<p>As a Vivado™-centric design, the AMR is built on the same standard design flows that are well known to the broad community of Vivado and Versal™ application developers. Because AMR includes a hardware base design and firmware images, AMR’s source files are delivered in a particular source directory structure. A shell script is provided to encapsulate the complete <a class="reference internal" href="../development/index.html"><span class="std std-doc">build flow</span></a> from end to end.</p>
 <p><img alt="images/1107373430.png" src="../_images/1107373430.png" /></p>
-<p>The diagram above shows a high level overview of the AMR build process. Notable aspects of the build process are:</p>
+<p>The diagram above shows a high-level overview of the AMR build process. Notable aspects of the build process are:</p>
 <ul class="simple">
 <li><p>Use of familiar Vivado design steps (capture of design in IP integrator, synthesis and implementation) with Vivado 2026.1 toolset and CMake-based firmware compilation for generation of the application programming image.</p>
 <ul>
@@ -311,7 +311,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 12, 2026.
+      <span class="lastupdated">Last updated on May 28, 2026.
       </span></p>
   </div>
 

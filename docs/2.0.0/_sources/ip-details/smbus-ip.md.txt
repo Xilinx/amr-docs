@@ -76,7 +76,7 @@ The SMBus IP implements a 32-bit AXI4-Lite Subordinate interface that provides a
 
 ### Controller Receive FIFO
 
-The Controller Receive FIFO stores bytes that are received by the SMBus IP during Controller Read operations until the processor is ready to read and process theses bytes. The FIFO is arranged as 8-bits x 64 and incorporates a processor programmable fill threshold interrupt that may be configured in order to regulate the rate at which the processor is notified about available data.
+The Controller Receive FIFO stores bytes that are received by the SMBus IP during Controller Read operations until the processor is ready to read and process these bytes. The FIFO is arranged as 8-bits x 64 and incorporates a processor programmable fill threshold interrupt that may be configured in order to regulate the rate at which the processor is notified about available data.
 
 <span id="smbusipv1-1-productguide-controllerdescriptorfifo"></span>
 
@@ -114,7 +114,7 @@ The Controller Sequence Control function operates as an SMBus Controller and wor
 
 ### Target Receive FIFO
 
-The Target Receive FIFO stores bytes that are received by the SMBus IP during Target Write operations until the processor is ready to read and process theses bytes. The FIFO is arranged as 8-bits x 64 and incorporates a processor programmable fill threshold interrupt that may be configured in order to regulate the rate at which the processor is notified about available data.
+The Target Receive FIFO stores bytes that are received by the SMBus IP during Target Write operations until the processor is ready to read and process these bytes. The FIFO is arranged as 8-bits x 64 and incorporates a processor programmable fill threshold interrupt that may be configured in order to regulate the rate at which the processor is notified about available data.
 
 <span id="smbusipv1-1-productguide-targetdescriptorfifo"></span>
 

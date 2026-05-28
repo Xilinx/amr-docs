@@ -1,6 +1,6 @@
 # AMR Deployment
 
-  - [AMR Installing the Deployment package onto the Host Server](install-host.md)
+  - [AMR Installing the Deployment package onto the Host Server](install-card.md)
 
   - [AMR Installing the Design onto the Card](install-card.md)
 

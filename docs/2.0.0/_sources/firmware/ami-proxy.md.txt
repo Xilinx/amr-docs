@@ -94,7 +94,7 @@ This API can be used to bind into a callback to be notified of events generated 
 
 ### PDI Download Response
 
-This will post a message onto the mailbox to be handled within the the internal task to send a response back over the FAL that the PDI download request has completed successfully/failed.
+This will post a message onto the mailbox to be handled within the internal task to send a response back over the FAL that the PDI download request has completed successfully/failed.
 
 **iAMI\_SetPdiDownloadCompleteResponse**
 
@@ -103,7 +103,7 @@ This will post a message onto the mailbox to be handled within the the internal 
     /*
      * @brief   Set the response after the PDI download has completed
      *
-     * @param   pxSignal    Current event occurance (used for tracking)
+     * @param   pxSignal    Current event occurrence (used for tracking)
      * @param   xResult     The result of the pdi download request
      *
      * @return  OK          Data passed to proxy driver successfully
@@ -115,14 +115,14 @@ This will post a message onto the mailbox to be handled within the the internal 
 
 ### PDI Copy Response
 
-This will post a message onto the mailbox to be handled within the the internal task to send a response back over the FAL that the PDI copy request has completed successfully/failed.
+This will post a message onto the mailbox to be handled within the internal task to send a response back over the FAL that the PDI copy request has completed successfully/failed.
 
 **iAMI\_SetPdiCopyCompleteResponse**
 
     /**
      * @brief   Set the response after the PDI copy has completed
      *
-     * @param   pxSignal    Current event occurance (used for tracking)
+     * @param   pxSignal    Current event occurrence (used for tracking)
      * @param   xResult     The result of the pdi copy request
      *
      * @return  OK          Data passed to proxy driver successfully
@@ -134,14 +134,14 @@ This will post a message onto the mailbox to be handled within the the internal 
 
 ### PDI Program Response
 
-This will post a message onto the mailbox to be handled within the the internal task to send a response back over the FAL that the PDI program request has completed successfully/failed.
+This will post a message onto the mailbox to be handled within the internal task to send a response back over the FAL that the PDI program request has completed successfully/failed.
 
 **iAMI\_SetPdiProgramCompleteResponse**
 
     /**
      * @brief   Set the response after the PDI program has completed
      *
-     * @param   pxSignal    Current event occurance (used for tracking)
+     * @param   pxSignal    Current event occurrence (used for tracking)
      * @param   xResult     The result of the pdi program request
      *
      * @return  OK          Data passed to proxy driver successfully
@@ -153,14 +153,14 @@ This will post a message onto the mailbox to be handled within the the internal 
 
 ### Sensor Complete Response
 
-This will post a message onto the mailbox to be handled within the the internal task to send a response back over the FAL that the sensor read request has completed successfully/failed.
+This will post a message onto the mailbox to be handled within the internal task to send a response back over the FAL that the sensor read request has completed successfully/failed.
 
 **iAMI\_SetSensorCompleteResponse**
 
     /*
      * @brief   Set the response after the sensor request has completed
      *
-     * @param   pxSignal    Current event occurance (used for tracking)
+     * @param   pxSignal    Current event occurrence (used for tracking)
      * @param   xResult     The result of the sensor request
      *
      * @return  OK          Data passed to proxy driver successfully
@@ -172,14 +172,14 @@ This will post a message onto the mailbox to be handled within the the internal 
 
 ### Identity Response
 
-This will post a message onto the mailbox to be handled within the the internal task to send a response back over the FAL that the identity read request has completed successfully/failed.
+This will post a message onto the mailbox to be handled within the internal task to send a response back over the FAL that the identity read request has completed successfully/failed.
 
 **iAMI\_SetIdentityResponse**
 
     /*
      * @brief   Set the identity response
      *
-     * @param   pxSignal                Current event occurance (used for tracking)
+     * @param   pxSignal                Current event occurrence (used for tracking)
      * @param   xResult                 The result of the identity request
      * @param   pxIdentityResponse      The structure containing the version information
      *
@@ -192,14 +192,14 @@ This will post a message onto the mailbox to be handled within the the internal 
 
 ### Boot Select Response
 
-This will post a message onto the mailbox to be handled within the the internal task to send a back over the FAL that the boot select request has completed successfully/failed.
+This will post a message onto the mailbox to be handled within the internal task to send a response back over the FAL that the boot select request has completed successfully/failed.
 
 **iAMI\_SetBootSelectCompleteResponse**
 
     /**
      * @brief   Set the response after the Boot select has completed
      *
-     * @param   pxSignal    Current event occurance (used for tracking)
+     * @param   pxSignal    Current event occurrence (used for tracking)
      * @param   xResult     The result of the boot select request
      *
      * @return  OK          Data passed to proxy driver successfully
@@ -211,14 +211,14 @@ This will post a message onto the mailbox to be handled within the the internal 
 
 ### EEPROM read/write Response
 
-This will post a message onto the mailbox to be handled within the the internal task to send a back over the FAL that the EEPROM read/write request has completed successfully/failed.
+This will post a message onto the mailbox to be handled within the internal task to send a response back over the FAL that the EEPROM read/write request has completed successfully/failed.
 
 **iAMI\_SetEepromReadWriteCompleteResponse**
 
     /**
      * @brief   Set the response after the EEPROM read/write has completed
      *
-     * @param   pxSignal    Current event occurance (used for tracking)
+     * @param   pxSignal    Current event occurrence (used for tracking)
      * @param   xResult     The result of the boot select request
      *
      * @return  OK          Data passed to proxy driver successfully
@@ -230,14 +230,14 @@ This will post a message onto the mailbox to be handled within the the internal 
 
 ### Module read/write Response
 
-This will post a message onto the mailbox to be handled within the the internal task to send a back over the FAL that the Module read/write request has completed successfully/failed.
+This will post a message onto the mailbox to be handled within the internal task to send a response back over the FAL that the Module read/write request has completed successfully/failed.
 
 **iAMI\_SetModuleReadWriteCompleteResponse**
 
     /**
      * @brief Set the response after the module read/write has completed
      *
-     * @param pxSignal Current event occurance (used for tracking)
+     * @param pxSignal Current event occurrence (used for tracking)
      * @param xResult The result of the module rd/wr request
      *
      * @return OK Data passed to proxy driver successfully
@@ -249,14 +249,14 @@ This will post a message onto the mailbox to be handled within the the internal 
 
 ### Debug Verbosity Response
 
-This will post a message onto the mailbox to be handled within the the internal task to send a back over the FAL that the debug verbosity request has completed successfully/failed.
+This will post a message onto the mailbox to be handled within the internal task to send a response back over the FAL that the debug verbosity request has completed successfully/failed.
 
 **iAMI\_SetDebugVerbosityResponse**
 
     /**
      * @brief   Set the response after the debug verbosity request has completed
      *
-     * @param   pxSignal    Current event occurance (used for tracking)
+     * @param   pxSignal    Current event occurrence (used for tracking)
      * @param   xResult     The result of the debug verbosity request
      *
      * @return  OK          Data passed to proxy driver successfully
@@ -268,14 +268,14 @@ This will post a message onto the mailbox to be handled within the the internal 
 
 ### FPT Flags Response
 
-This will post a message onto the mailbox to be handled within the the internal task to send a response back over the FAL that the FPT flags request has completed successfully/failed.
+This will post a message onto the mailbox to be handled within the internal task to send a response back over the FAL that the FPT flags request has completed successfully/failed.
 
 **iAMI\_SetFptFlagsResponse**
 
     /**
      * @brief   Set the response after the FPT flags request has completed
      *
-     * @param   pxSignal    Current event occurance (used for tracking)
+     * @param   pxSignal    Current event occurrence (used for tracking)
      * @param   xResult     The result of the request
      * @param   ulFlags     The flags value (for read requests)
      *
@@ -335,7 +335,7 @@ This API will be used by the application to obtain the data associated with the 
     /**
      * @brief   Get the PDI program request
      *
-     * @param   pxSignal                Current event occurance (used for tracking)
+     * @param   pxSignal                Current event occurrence (used for tracking)
      * @param   pxProgramRequest        Pointer to program pdi structure
      *
      * @return  OK                      Data retrieved from proxy driver successfully
@@ -375,7 +375,7 @@ This API will be used by the application to obtain the data associated with the 
     /**
      * @brief   Get the Boot Select request
      *
-     * @param   pxSignal                Current event occurance (used for tracking)
+     * @param   pxSignal                Current event occurrence (used for tracking)
      * @param   pxBootSelectRequest     Pointer boot select request structure
      *
      * @return  OK                      Data retrieved from proxy driver successfully
@@ -395,7 +395,7 @@ This API will be used by the application to obtain the data associated with the 
     /**
      * @brief   Get the eeprom read write request
      *
-     * @param   pxSignal                    Current event occurance (used for tracking)
+     * @param   pxSignal                    Current event occurrence (used for tracking)
      * @param   pxEepromReadWriteRequest    Pointer sensor request structure
      *
      * @return  OK                          Data retrieved from proxy driver successfully
@@ -416,7 +416,7 @@ This API will be used by the application to obtain the data associated with the 
     /**
      * @brief Get the module read write request
      *
-     * @param pxSignal Current event occurance (used for tracking)
+     * @param pxSignal Current event occurrence (used for tracking)
      * @param pxModuleReadWriteRequest Pointer sensor request structure
      *
      * @return OK Data retrieved from proxy driver successfully
@@ -436,7 +436,7 @@ This API will be used by the application to obtain the data associated with the 
     /**
      * @brief   Get the debug verbosity request
      *
-     * @param   pxSignal                    Current event occurance (used for tracking)
+     * @param   pxSignal                    Current event occurrence (used for tracking)
      * @param   pucDebugVerbosityRequest    Pointer to store requested debug verbosity
      *
      * @return  OK                          Data retrieved from proxy driver successfully
@@ -456,7 +456,7 @@ This API will be used by the application to obtain the data associated with the 
     /**
      * @brief   Get the FPT flags request
      *
-     * @param   pxSignal                Current event occurance (used for tracking)
+     * @param   pxSignal                Current event occurrence (used for tracking)
      * @param   pxFptFlagsRequest       Pointer to FPT flags request structure
      *
      * @return  OK                      Data retrieved from proxy driver successfully

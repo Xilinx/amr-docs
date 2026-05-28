@@ -366,7 +366,7 @@ int iAPC_BindCallback( EVL_CALLBACK *pxCallback );
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Download an image to a location in NV memory
  *
- * @param   pxSignal     Current event occurance (used for tracking)
+ * @param   pxSignal     Current event occurrence (used for tracking)
  * @param   xBootDevice  Target boot device
  * @param   iPartition   The partition in the FPT to store this image in
  * @param   ulSrcAddr    Address (in RAM) to read the image from
@@ -394,7 +394,7 @@ int iAPC_DownloadImage( EVL_SIGNAL *pxSignal, APC_BOOT_DEVICES xBootDevice, int 
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Download an image with an FPT to a location in NV memory
  *
- * @param   pxSignal     Current event occurance (used for tracking)
+ * @param   pxSignal     Current event occurrence (used for tracking)
  * @param   xBootDevice  Target boot device
  * @param   ulSrcAddr    Address (in RAM) to read the image from
  * @param   ulImageSize  Size of image (in bytes)
@@ -419,7 +419,7 @@ int iAPC_UpdateFpt( EVL_SIGNAL *pxSignal, APC_BOOT_DEVICES xBootDevice, uint32_t
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Copy an image from one partition to another
  *
- * @param   pxSignal        Current event occurance (used for tracking)
+ * @param   pxSignal        Current event occurrence (used for tracking)
  * @param   xSrcBootDevice  Target boot device to copy from
  * @param   iSrcPartition   The partition in the FPT to copy this image from
  * @param   xDestBootDevice Target boot device to copy to
@@ -444,7 +444,7 @@ int iAPC_CopyImage( EVL_SIGNAL *pxSignal, APC_BOOT_DEVICES xSrcBootDevice, int i
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Select which partition to boot from
  *
- * @param   pxSignal    Current event occurance (used for tracking)
+ * @param   pxSignal    Current event occurrence (used for tracking)
  * @param   iPartition  The partition to boot from on the next reset
  *
  * @return  OK          Partition successfully selected
@@ -462,7 +462,7 @@ int iAPC_SetNextPartition( EVL_SIGNAL *pxSignal, int iPartition );
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Enable the hot reset capability
  *
- * @param   pxSignal    Current event occurance (used for tracking)
+ * @param   pxSignal    Current event occurrence (used for tracking)
  *
  * @return  OK          Hot reset successfully enabled
  *          ERROR       Hot reset not enabled
@@ -479,7 +479,7 @@ int iAPC_EnableHotReset( EVL_SIGNAL *pxSignal );
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Program PDI image to a location in memory
  *
- * @param   pxSignal            Current event occurance (used for tracking)
+ * @param   pxSignal            Current event occurrence (used for tracking)
  * @param   pxDownloadRequest   Target boot device and parameters
  * @param   ulSrcAddr           Address (in RAM) to read the image from
  *
@@ -496,22 +496,33 @@ int iAPC_PdiProgram( EVL_SIGNAL *pxSignal, const AMIProxyPdiDownloadRequest *pxD
 <p>This will update the flags of a Flash Partition Table (FPT) partition in both the cached copy and the flash storage.</p>
 <p><strong>iAPC_SetFptPartitionFlags</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
- * @brief   Set/Update the flags of a Flash Partition Table (FPT) Partition
- *
- * @param   pxSignal        Current event occurance (used for tracking)
- * @param   xBootDevice     Target boot device
- * @param   iPartition      Index of partition to update (0 is the 1st partition)
- * @param   ulFlags         New flags value to set
- *
- * @return  OK              FPT partition flags updated successfully
- *          ERROR           FPT partition flags not updated successfully
- *
- * @note    This function updates the partition flags in both the cached copy
- *          and the flash storage
- */
-int iAPC_SetFptPartitionFlags( EVL_SIGNAL *pxSignal, APC_BOOT_DEVICES xBootDevice, int iPartition, uint32_t ulFlags );
 </pre></div>
 </div>
+<ul>
+<li><p>&#64;brief   Set or update the flags of a Flash Partition Table (FPT) partition
+*</p>
+<ul>
+<li><p>&#64;param   pxSignal        Current event occurrence (used for tracking)</p></li>
+<li><p>&#64;param   xBootDevice     Target boot device</p></li>
+<li><p>&#64;param   iPartition      Index of partition to update (0 is the 1st partition)</p></li>
+<li><p>&#64;param   ulFlags         New flags value to set</p></li>
+<li></li>
+<li><p>&#64;return  OK              FPT partition flags updated successfully</p></li>
+<li><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>     ERROR           FPT partition flags not updated successfully
+</pre></div>
+</div>
+</li>
+<li></li>
+<li><p>&#64;note    This function updates the partition flags in both the cached copy</p></li>
+<li><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>     and the flash storage
+</pre></div>
+</div>
+</li>
+</ul>
+<p>*/
+int iAPC_SetFptPartitionFlags( EVL_SIGNAL *pxSignal, APC_BOOT_DEVICES xBootDevice, int iPartition, uint32_t ulFlags );</p>
+</li>
+</ul>
 <p><span id="amrprogrammingcontrol-apc-proxydriver-setfptpartition"></span></p>
 </div>
 <div class="section" id="set-fpt-partition">
@@ -519,24 +530,35 @@ int iAPC_SetFptPartitionFlags( EVL_SIGNAL *pxSignal, APC_BOOT_DEVICES xBootDevic
 <p>This will update an FPT partition entry in both the cached copy and the flash storage.</p>
 <p><strong>iAPC_SetFptPartition</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
- * @brief   Set/Update an FPT Partition entry
- *
- * @param   pxSignal        Current event occurance (used for tracking)
- * @param   xBootDevice     Target boot device
- * @param   iPartition      Index of partition to update (0 is the 1st partition)
- * @param   pucPdiMd5       Pointer to 16-byte PDI MD5 checksum (NULL to skip update)
- * @param   ulPdiSize       Size of the PDI file in bytes
- * @param   ulFlags         New flags value to set
- *
- * @return  OK              FPT partition updated successfully
- *          ERROR           FPT partition not updated successfully
- *
- * @note    This function updates the partition in both the cached copy
- *          and the flash storage
- */
-int iAPC_SetFptPartition( EVL_SIGNAL *pxSignal, APC_BOOT_DEVICES xBootDevice, int iPartition, uint8_t *pucPdiMd5, uint32_t ulPdiSize, uint32_t ulFlags );
 </pre></div>
 </div>
+<ul>
+<li><p>&#64;brief   Set or update an FPT partition entry
+*</p>
+<ul>
+<li><p>&#64;param   pxSignal        Current event occurrence (used for tracking)</p></li>
+<li><p>&#64;param   xBootDevice     Target boot device</p></li>
+<li><p>&#64;param   iPartition      Index of partition to update (0 is the 1st partition)</p></li>
+<li><p>&#64;param   pucPdiMd5       Pointer to 16-byte PDI MD5 checksum (NULL to skip update)</p></li>
+<li><p>&#64;param   ulPdiSize       Size of the PDI file in bytes</p></li>
+<li><p>&#64;param   ulFlags         New flags value to set</p></li>
+<li></li>
+<li><p>&#64;return  OK              FPT partition updated successfully</p></li>
+<li><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>     ERROR           FPT partition not updated successfully
+</pre></div>
+</div>
+</li>
+<li></li>
+<li><p>&#64;note    This function updates the partition in both the cached copy</p></li>
+<li><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>     and the flash storage
+</pre></div>
+</div>
+</li>
+</ul>
+<p>*/
+int iAPC_SetFptPartition( EVL_SIGNAL *pxSignal, APC_BOOT_DEVICES xBootDevice, int iPartition, uint8_t *pucPdiMd5, uint32_t ulPdiSize, uint32_t ulFlags );</p>
+</li>
+</ul>
 <p><span id="amrprogrammingcontrol-apc-proxydriver-readflashraw"></span></p>
 </div>
 <div class="section" id="read-flash-raw">
@@ -918,7 +940,7 @@ else
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 12, 2026.
+      <span class="lastupdated">Last updated on May 28, 2026.
       </span></p>
   </div>
 

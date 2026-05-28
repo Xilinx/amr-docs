@@ -100,7 +100,7 @@ The **profile\_pdr.h** header file provides profile (hardware) specific definiti
 
 The **profile\_sensors.h** header file provides profile (hardware) specific definitions for all sensors.
 
-This profile is where sensor thresholds and limits are set - if a sensor value exceeds the “critical” value, the AMI (on the host interface) will kill any host processes that are using the in-band interface (see [Sensors and Hardware Monitoring](sensors/)). To add/change thresholds, simply change the value in the relevant sensor\_profile. To disable a threshold, set it to **ASC\_SENSOR\_INVALID\_VAL** (-1).
+This profile is where sensor thresholds and limits are set - if a sensor value exceeds the “critical” value, the AMI (on the host interface) will kill any host processes that are using the in-band interface (see [Sensors and Hardware Monitoring](sensors.md)). To add/change thresholds, simply change the value in the relevant sensor\_profile. To disable a threshold, set it to **ASC\_SENSOR\_INVALID\_VAL** (-1).
 
 <span id="profilesandcmakebuildprocess-devicedrivers"></span>
 

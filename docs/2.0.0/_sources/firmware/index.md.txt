@@ -12,7 +12,7 @@
 
   - [AMR Programming Control (APC) Proxy Driver](apc-proxy.md)
 
-  - [AMR Sensor Control (ASC) Proxy Driver](asc-proxy.md)
+  - [AMR Sensor Control (ASC) Proxy Driver](axc-proxy.md)
 
   - [AMR External Device Control (AXC) Proxy Driver](axc-proxy.md)
 

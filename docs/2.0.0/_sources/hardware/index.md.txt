@@ -10,7 +10,7 @@ This section contains hardware design documentation **common to all AMR platform
 
 ## Common Hardware Documentation
 
-  - [Platform Comparison](comparison.md) - V80 vs RAVE comparison and selection guide
+  - [Platform Comparison](../overview/amr-overview.md#amroverview-supportedplatforms) - V80 vs RAVE comparison and selection guide
 
   - [Versal Architecture Overview](hierarchy.md) - Common Versal concepts (CIPS, PL, NoC)
 

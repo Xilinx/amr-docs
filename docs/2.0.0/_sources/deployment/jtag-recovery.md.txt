@@ -83,5 +83,5 @@ Read the device status back again and verify the boot bits are now 0000.
 
 Once the flash JTAG boot mode has been enabled, follow the normal procedure for updating the image.
 
-[AMR Updating FPT Image in Flash](../update-fpt/)
+[AMR Updating FPT Image in Flash](update-fpt.md)
 

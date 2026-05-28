@@ -16,8 +16,6 @@ The PCIe IP provides Gen3 x4 connectivity between the VE2302 and the on-board Ry
 
 ## PL PCIe Versal IP
 
-![RAVE PCIe IP Configuration](../../images/rave_pcie_ip_config.png)
-
 **Note:** Image shows PCIe Versal IP configured for Gen3 x4, GTYP Bank 103, device IDs 0x5700/0x5701.
 
 ### IP Information

@@ -61,7 +61,7 @@ Once the GCQ driver has been configured, the AMI kernel driver will spawn three 
 </tr>
 <tr class="odd">
 <td>Response Thread</td>
-<td>Handles waiting for and parsing responses from from the AMC via the FAL GCQ.</td>
+<td>Handles waiting for and parsing responses from the AMC via the FAL GCQ.</td>
 </tr>
 </tbody>
 </table>

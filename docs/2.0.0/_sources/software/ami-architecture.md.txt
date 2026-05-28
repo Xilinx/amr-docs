@@ -13,7 +13,7 @@
   - An API (libami), providing a user-space abstraction to the kernel 
   driver.                                                             
                                                                       
-  - A command line tool ([amitool](../../deployment/ami-tool-guide)), 
+  - A command line tool ([amitool](../deployment/ami-tool-guide.md)), 
   providing a human-readable interface to the API.                    
                                                                       
   **Note:** The AMI is an **example** design demonstrating how an AMR 
@@ -81,23 +81,23 @@
   ### Command Line Tool                                               
                                                                       
   [AMR Management Interface User Guide                                
-  (amitool)](../../deployment/ami-tool-guide)                         
+  (amitool)](../deployment/ami-tool-guide.md)                         
                                                                       
   ### API Abstraction                                                 
                                                                       
-  [AMI - API Description](ami-api/)                                   
+  [AMI - API Description](ami-api.md)                                   
                                                                       
   ### Driver Interaction                                              
                                                                       
-  [AMI - Kernel Driver Interaction](ami-kernel-driver/)               
+  [AMI - Kernel Driver Interaction](ami-kernel-driver.md)               
                                                                       
   ### Sensor Control                                                  
                                                                       
-  [Sensors and Hardware Monitoring](sensors/)
+  [Sensors and Hardware Monitoring](card-detection.md)
 
   ### Device Reboot
 
-  [AMI - Device Reboot](ami-hot-reset/)                                   
+  [AMI - Device Reboot](ami-hot-reset.md)                                   
                                                                       
   ## Version Compatibility                                            
                                                                       

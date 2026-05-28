@@ -68,7 +68,7 @@ Below are some important notes regarding the parsing of ASDM data:
 
 As mentioned above, some of the sensors have threshold fields configured (a value of “0” indicates that the threshold is not set or used). When the **Upper Critical** value is reached, the AMI driver kills any processes attached to that device.
 
-The thresholds are set by the card’s management firmware (see [Profiles and CMake build process\#SensorsProfile](Profiles-and-CMake-build-process#ProfilesandCMakebuildprocess-SensorsProfile)). These values can be seen from running the [ami\_tool sensors](../../deployment/ami-tool-guide) command with the “**-x limits**” flag, as shown below for the V80:
+The thresholds are set by the card’s management firmware (see [Profiles and CMake build process#SensorsProfile](profiles-cmake.md#profilesandcmakebuildprocess-sensorsprofile)). These values can be seen from running the [ami\_tool sensors](../deployment/ami-tool-guide.md) command with the “**-x limits**” flag, as shown below for the V80:
 
 **Sensor limits**
 

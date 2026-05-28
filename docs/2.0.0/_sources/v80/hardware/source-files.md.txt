@@ -64,7 +64,7 @@ The V80 hardware design files are organized under build_v80/amr_vivado_designs/a
                 │       └── MRMAC_AXI_MUX_V1_1  (Custom MRMAC MUX IP)
                 └── training
 
-    *       : SMBus IP must be downloaded from https://www.xilinx.com/member/v80.html
+    *       : SMBus IP must be downloaded from <https://account.amd.com/en/member/v80.html>
 
 <span id="amrv80-sourcefileoverview-buildv80"></span>
 
@@ -159,7 +159,7 @@ This is the V80 base platform design directory.
     - **bd/bd.tcl** - Block design for SMBus internal structure
     - **hdl/smbus_v1_1_vl_rfs.sv** - SystemVerilog RTL implementation
     - **xgui/smbus_v1_1.tcl** - GUI configuration interface
-    - *IMPORTANT*: This IP must be downloaded from the Xilinx member area (<https://www.xilinx.com/member/v80.html>) and placed in the ip/ directory for the design to build successfully
+    - *IMPORTANT*: This IP must be downloaded from the AMD member area (<https://account.amd.com/en/member/v80.html>) and placed in the ip/ directory for the design to build successfully
     - *STATUS*: Available in IP repository but **not instantiated** in v80_base block design; M_AXI_LPD interface enabled but not connected (reserved for future SMBus instantiation)
 
 <span id="amrv80-sourcefileoverview-embplusve2302"></span>

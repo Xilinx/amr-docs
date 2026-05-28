@@ -286,7 +286,7 @@
 <p><img alt="images/1107375102.png" src="../../_images/1107375102.png" /></p>
 <p>The host and RPU, which operates in the LPD, communicate through the use of the DDR.</p>
 <p><img alt="images/1107375150.png" src="../../_images/1107375150.png" /></p>
-<p>CPM_PCIE_NOC_0 and CPM_PCIE_NOC_1 connect to HBM_MC ports to exercise the the NoC and HBM performance.</p>
+<p>CPM_PCIE_NOC_0 and CPM_PCIE_NOC_1 connect to HBM_MC ports to exercise the NoC and HBM performance.</p>
 <p><img alt="images/1107375024.png" src="../../_images/1107375024.png" /></p>
 <p>Additional connections can be made to the NoC and memory ports as required by other designs. As more connections are made, additional tuning to the NoC components and DIMM/HBM addressing may be required for optimum performance.</p>
 <p><span id="amr-nocconfiguration-additionalresources"></span></p>
@@ -441,8 +441,8 @@
 <h5>Address Remap<a class="headerlink" href="#address-remap" title="Permalink to this heading">¶</a></h5>
 <p>The NMU supports address remapping as a way to override the default address map as well as to provide simple address virtualization. AMR uses this feature to remap the PCIe address to the DDR. This allows the PCIe host to have access to the DDR for communication with the RPU.</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#../memory-map/"><span class="xref myst">Memory Map</span></a></p></li>
-<li><p><a class="reference internal" href="#../memory-resources.md#AMR-MemoryResources-DiscreteDDRDiscreteDDRDiagram"><span class="xref myst">DDR Memory Organization</span></a></p></li>
+<li><p><a class="reference internal" href="memory-map.html"><span class="std std-doc">Memory Map</span></a></p></li>
+<li><p><a class="reference internal" href="memory-resources.html#AMRV80-MemoryResources-DiscreteDDRDiagram"><span class="std std-ref">DDR Memory Organization</span></a></p></li>
 </ul>
 <p><img alt="images/1107375123.png" src="../../_images/1107375123.png" /></p>
 <p>See the Address Re-mapping section of the Versal Adaptive SoC Programmable Network on Chip and Integrated Memory Controller 1.0 LogiCORE IP Product Guide (<a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Address-Re-mapping">PG313</a>) for more information.</p>
@@ -549,7 +549,7 @@ set_property -dict [list \
 <p>M01_INI connects to the CIPS RPU through the axi_noc_cips.</p>
 <p><em>INI Master</em> - No Connections</p>
 <p><strong>Memory Controllers - DDR4</strong></p>
-<p>AMR uses a single memory controller with four ports. Access to the the 4GB DDR is design-specific as defined in the <a class="reference internal" href="#../memory-resources.md#AMRV80-MemoryResources-DiscreteDDRDiagram"><span class="xref myst">Discrete DDR Diagram</span></a>. There are two 2G address ranges that address this DDR:</p>
+<p>AMR uses a single memory controller with four ports. Access to the 4GB DDR is design-specific as defined in the <a class="reference internal" href="memory-resources.html#AMRV80-MemoryResources-DiscreteDDRDiagram"><span class="std std-ref">Discrete DDR Diagram</span></a>. There are two 2G address ranges that address this DDR:</p>
 <ul class="simple">
 <li><p>DDR LOW0 - 0x000_0000_0000 - 0x000_7FFF_FFFF</p></li>
 <li><p>DDR CH1 - 0x500_8000_0000 - 0x500_FFFF_FFFF</p></li>
@@ -720,7 +720,7 @@ set_property -dict [list \
 <p>M3_INI connects to the CIPS PCIe through the axi_noc_cips.</p>
 <p><em>INI Master</em> - No Connections</p>
 <p><strong>Memory Controllers - DDR4</strong></p>
-<p>AMR V80 uses a single memory controller with four ports. Access to the the 32GB DIMM is design specific as defined in the <a class="reference internal" href="#../memory-resources.md#AMRV80-MemoryResources-DIMMDiagram"><span class="xref myst">DIMM Diagram</span></a>. There is one address range that addresses this DDR:</p>
+<p>AMR V80 uses a single memory controller with four ports. Access to the 32GB DIMM is design specific as defined in the <a class="reference internal" href="memory-resources.html#AMRV80-MemoryResources-DIMMDiagram"><span class="std std-ref">DIMM Diagram</span></a>. There is one address range that addresses this DDR:</p>
 <ul class="simple">
 <li><p>DDR CH2 - 0x600_0000_0000 - 0x67F_FFFF_FFFF</p></li>
 </ul>
@@ -837,7 +837,7 @@ set_property -dict [list \
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 12, 2026.
+      <span class="lastupdated">Last updated on May 28, 2026.
       </span></p>
   </div>
 

@@ -254,6 +254,6 @@ Builds trigger automatically on commits, with artifacts deployed to shared locat
 
 - [Common Source Files](../../hardware/source-files.md) - Build structure concepts
 - [RAVE Expansion I/O](expansion-io.md) - Daughtercard designs
-- [RAVE QDMA Configuration](qdma-config.md) - QDMA IP integration
+- [RAVE XDMA Configuration](xdma-config.md) - XDMA IP integration
 
 

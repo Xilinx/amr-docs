@@ -4,7 +4,7 @@ This page outlines the low-level mechanisms via which the AMI kernel driver expo
   functionality to userspace code.
 
   Refer to [AMR Management Interface userguide
-  (ami\_tool)](../../deployment/ami-tool-guide) for details of how to use
+  (ami\_tool)](../deployment/ami-tool-guide.md) for details of how to use
   **ami\_tool** (the command line interface tool).
 
   Character Device Files

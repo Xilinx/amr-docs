@@ -297,7 +297,7 @@
 <p><span id="operatingsystemabstractionlayer-osal-overview"></span></p>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
-<p>The OSAL has been developed to allow AMC source to be agnostic to any target operating system, allowing target OS to be configured at compilation via the cmake build process (see - <a class="reference internal" href="#Profiles-and-CMake-build-process"><span class="xref myst">Profiles and CMake build process</span></a>).</p>
+<p>The OSAL has been developed to allow AMC source to be agnostic to any target operating system, allowing target OS to be configured at compilation via the CMake build process (see <a class="reference internal" href="profiles-cmake.html"><span class="std std-doc">Profiles and CMake build process</span></a>).</p>
 <p>A common API has been developed, and used throughout AMC source code. OS specific source implementations of the OSAL prevent any code changes throughout AMC when porting to a new OS. Two implementations of the OSAL are currently available with AMC (Linux and FreeRTOS).</p>
 <p><span id="operatingsystemabstractionlayer-osal-api"></span></p>
 </div>
@@ -347,22 +347,36 @@ int iOSAL_GetOsVersion( char pcOs[ OSAL_OS_NAME_LEN ],
  * @param   ppvTaskHandle        Pointer-to-pointer that will be cast to appropriate OS Task Handle data type
  * @param   pvStartTask          Pointer to Start Task function
  * @param   usStartTaskStackSize The number of bytes to allocate for use as the start task&#39;s stack.
- * @param   ulStartTaskPriority  The priority at which the the created start task will execute
- *
- * @return  OSAL_ERRORS_NONE                no errors, call was successful
- *          OSAL_ERRORS_PARAMS              invalid parameters passed in to function
- *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to function
- *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
- *
- * @note    If successful, this function should never return.
- */
-int iOSAL_StartOS( int         iRoundRobinEnabled,
-                   void**      ppvTaskHandle,
-                   void        ( *pvStartTask )( void ),
-                   uint16_t    usStartTaskStackSize,
-                   uint32_t    ulStartTaskPriority );
 </pre></div>
 </div>
+<ul>
+<li><p>&#64;param   ulStartTaskPriority  The priority at which the created start task will execute
+*</p>
+<ul>
+<li><p>&#64;return  OSAL_ERRORS_NONE                no errors, call was successful</p></li>
+<li><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>     OSAL_ERRORS_PARAMS              invalid parameters passed in to function
+</pre></div>
+</div>
+</li>
+<li><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>     OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to function
+</pre></div>
+</div>
+</li>
+<li><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>     OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+</pre></div>
+</div>
+</li>
+<li></li>
+<li><p>&#64;note    If successful, this function should never return.
+<em>/
+int iOSAL_StartOS( int         iRoundRobinEnabled,
+void</em>*      ppvTaskHandle,
+void        ( *pvStartTask )( void ),
+uint16_t    usStartTaskStackSize,
+uint32_t    ulStartTaskPriority );</p></li>
+</ul>
+</li>
+</ul>
 <p><span id="operatingsystemabstractionlayer-osal-gettickcountsinceschedulerstarted"></span></p>
 </div>
 <div class="section" id="get-tick-count-since-scheduler-started">
@@ -439,31 +453,45 @@ uint32_t ulOSAL_GetUptimeMsFromISR( void );
  * @param   pvTaskFunction  Pointer to Task function
  * @param   usTaskStackSize The number of bytes to allocate for use as the task&#39;s stack.
  * @param   pvTaskParam     The value to be passed as the parameter to the Task function
- * @param   ulTaskPriority  The priority at which the the created task will execute
- * @param   pcTaskName      Descriptive name for the task
- *
- * @return  OSAL_ERRORS_NONE                no errors, call was successful
- *          OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to function
- *          OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
- *          OSAL_ERRORS_OS_NOT_STARTED      OS has not been started
- *
- * @note    The Task Handle must be initialised as NULL.
- */
-int iOSAL_Task_Create( void**      ppvTaskHandle,
-                       void        ( *pvTaskFunction )( void* pvTaskParam ),
-                       uint16_t    usTaskStackSize,
-                       void*       pvTaskParam,
-                       uint32_t    ulTaskPriority,
-                       const char* pcTaskName );
 </pre></div>
 </div>
+<ul>
+<li><p>&#64;param   ulTaskPriority  The priority at which the created task will execute</p>
+<ul>
+<li><p>&#64;param   pcTaskName      Descriptive name for the task</p></li>
+<li></li>
+<li><p>&#64;return  OSAL_ERRORS_NONE                no errors, call was successful</p></li>
+<li><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>     OSAL_ERRORS_INVALID_HANDLE      invalid / un-initialised handle passed into to function
+</pre></div>
+</div>
+</li>
+<li><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>     OSAL_ERRORS_OS_IMPLEMENTATION   error code returned from os implementation
+</pre></div>
+</div>
+</li>
+<li><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>     OSAL_ERRORS_OS_NOT_STARTED      OS has not been started
+</pre></div>
+</div>
+</li>
+<li></li>
+<li><p>&#64;note    The Task Handle must be initialised as NULL.
+<em>/
+int iOSAL_Task_Create( void</em>*      ppvTaskHandle,
+void        ( <em>pvTaskFunction )( void</em> pvTaskParam ),
+uint16_t    usTaskStackSize,
+void*       pvTaskParam,
+uint32_t    ulTaskPriority,
+const char* pcTaskName );</p></li>
+</ul>
+</li>
+</ul>
 <p><span id="operatingsystemabstractionlayer-osal-deleteosaltask"></span></p>
 </div>
 <div class="section" id="delete-osal-task">
 <h4>Delete OSAL Task<a class="headerlink" href="#delete-osal-task" title="Permalink to this heading">¶</a></h4>
 <p><strong>iOSAL_Task_Delete</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
- * @brief   Remove OSAL task from RTOS Kernal.
+ * @brief   Remove OSAL task from RTOS Kernel.
  *
  * @param   ppvTaskHandle   Pointer-to-pointer that will be cast to appropriate OS Task Handle data type
  *
@@ -792,7 +820,7 @@ int iOSAL_MBox_Destroy( void** ppvMBoxHandle );
 <h4>Pend to OSAL Mailbox<a class="headerlink" href="#pend-to-osal-mailbox" title="Permalink to this heading">¶</a></h4>
 <p><strong>iOSAL_MBox_Pend</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
- * @brief   Recieve an item from a message Mailbox, to which the handle refers.
+ * @brief   Receive an item from a message Mailbox, to which the handle refers.
  *
  * @param   pvMBoxHandle   Pointer that will be cast to appropriate OS Mailbox Handle data type.
  * @param   pvMBoxBuffer   A pointer to the buffer into which the received item will be copied.
@@ -1313,12 +1341,14 @@ char* pcOSAL_StrNCpy( char *pcDestination, const char *pcSource, uint32_t usSize
  * @param   pvMemoryTwo Pointer to the second memory block.
  * @param   usSize      Number of bytes to compare.
  *
- * @return  0 if the the contents of both memory blocks are equal, non 0 if not.
- *
- */
-int iOSAL_MemCmp( const void  *pvMemoryOne, const void *pvMemoryTwo, uint32_t usSize );
 </pre></div>
 </div>
+<ul class="simple">
+<li><p>&#64;return  0 if the contents of both memory blocks are equal, non 0 if not.
+*
+*/
+int iOSAL_MemCmp( const void  *pvMemoryOne, const void *pvMemoryTwo, uint32_t usSize );</p></li>
+</ul>
 <p><span id="operatingsystemabstractionlayer-osal-debugstatsapis"></span></p>
 </div>
 </div>
@@ -2205,7 +2235,7 @@ vOSAL_ClearAllStats();
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 12, 2026.
+      <span class="lastupdated">Last updated on May 28, 2026.
       </span></p>
   </div>
 

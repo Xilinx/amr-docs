@@ -156,7 +156,7 @@ MSI-X capabilities for PF1 were enabled to be used in conjunction with the DMA.
 
 ##### Advanced Options
 
-AMR uses vendor specific extended capabilities (VSEC) with the large extended configuration space. The extended capabilities contain the entries for the AXI remapping ([AMR - Base Logic](../base-logic/)). To minimize design complexity, AMR does not enable virtualization capabilities, so ARI and ACS are disabled.
+AMR uses vendor specific extended capabilities (VSEC) with the large extended configuration space. The extended capabilities contain the entries for the AXI remapping ([AMR - Base Logic](base-logic.md)). To minimize design complexity, AMR does not enable virtualization capabilities, so ARI and ACS are disabled.
 
 
 <span id="amr-cipsconfiguration-cpm5tclconfiguration"></span>

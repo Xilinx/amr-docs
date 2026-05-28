@@ -252,14 +252,14 @@ int iAMI_BindCallback( EVL_CALLBACK *pxCallback );
 </div>
 <div class="section" id="pdi-download-response">
 <h3>PDI Download Response<a class="headerlink" href="#pdi-download-response" title="Permalink to this heading">¶</a></h3>
-<p>This will post a message onto the mailbox to be handled within the the internal task to send a response back over the FAL that the PDI download request has completed successfully/failed.</p>
+<p>This will post a message onto the mailbox to be handled within the internal task to send a response back over the FAL that the PDI download request has completed successfully/failed.</p>
 <p><strong>iAMI_SetPdiDownloadCompleteResponse</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/* Set Functions **************************************************************/
 
 /*
  * @brief   Set the response after the PDI download has completed
  *
- * @param   pxSignal    Current event occurance (used for tracking)
+ * @param   pxSignal    Current event occurrence (used for tracking)
  * @param   xResult     The result of the pdi download request
  *
  * @return  OK          Data passed to proxy driver successfully
@@ -272,12 +272,12 @@ int iAMI_SetPdiDownloadCompleteResponse( EVL_SIGNAL *pxSignal, AMI_PROXY_RESULT 
 </div>
 <div class="section" id="pdi-copy-response">
 <h3>PDI Copy Response<a class="headerlink" href="#pdi-copy-response" title="Permalink to this heading">¶</a></h3>
-<p>This will post a message onto the mailbox to be handled within the the internal task to send a response back over the FAL that the PDI copy request has completed successfully/failed.</p>
+<p>This will post a message onto the mailbox to be handled within the internal task to send a response back over the FAL that the PDI copy request has completed successfully/failed.</p>
 <p><strong>iAMI_SetPdiCopyCompleteResponse</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Set the response after the PDI copy has completed
  *
- * @param   pxSignal    Current event occurance (used for tracking)
+ * @param   pxSignal    Current event occurrence (used for tracking)
  * @param   xResult     The result of the pdi copy request
  *
  * @return  OK          Data passed to proxy driver successfully
@@ -290,12 +290,12 @@ int iAMI_SetPdiCopyCompleteResponse( EVL_SIGNAL *pxSignal, AMI_PROXY_RESULT xRes
 </div>
 <div class="section" id="pdi-program-response">
 <h3>PDI Program Response<a class="headerlink" href="#pdi-program-response" title="Permalink to this heading">¶</a></h3>
-<p>This will post a message onto the mailbox to be handled within the the internal task to send a response back over the FAL that the PDI program request has completed successfully/failed.</p>
+<p>This will post a message onto the mailbox to be handled within the internal task to send a response back over the FAL that the PDI program request has completed successfully/failed.</p>
 <p><strong>iAMI_SetPdiProgramCompleteResponse</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Set the response after the PDI program has completed
  *
- * @param   pxSignal    Current event occurance (used for tracking)
+ * @param   pxSignal    Current event occurrence (used for tracking)
  * @param   xResult     The result of the pdi program request
  *
  * @return  OK          Data passed to proxy driver successfully
@@ -308,12 +308,12 @@ int iAMI_SetPdiProgramCompleteResponse( EVL_SIGNAL *pxSignal, AMI_PROXY_RESULT x
 </div>
 <div class="section" id="sensor-complete-response">
 <h3>Sensor Complete Response<a class="headerlink" href="#sensor-complete-response" title="Permalink to this heading">¶</a></h3>
-<p>This will post a message onto the mailbox to be handled within the the internal task to send a response back over the FAL that the sensor read request has completed successfully/failed.</p>
+<p>This will post a message onto the mailbox to be handled within the internal task to send a response back over the FAL that the sensor read request has completed successfully/failed.</p>
 <p><strong>iAMI_SetSensorCompleteResponse</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/*
  * @brief   Set the response after the sensor request has completed
  *
- * @param   pxSignal    Current event occurance (used for tracking)
+ * @param   pxSignal    Current event occurrence (used for tracking)
  * @param   xResult     The result of the sensor request
  *
  * @return  OK          Data passed to proxy driver successfully
@@ -326,12 +326,12 @@ int iAMI_SetSensorCompleteResponse( EVL_SIGNAL *pxSignal, AMI_PROXY_RESULT xResu
 </div>
 <div class="section" id="identity-response">
 <h3>Identity Response<a class="headerlink" href="#identity-response" title="Permalink to this heading">¶</a></h3>
-<p>This will post a message onto the mailbox to be handled within the the internal task to send a response back over the FAL that the identity read request has completed successfully/failed.</p>
+<p>This will post a message onto the mailbox to be handled within the internal task to send a response back over the FAL that the identity read request has completed successfully/failed.</p>
 <p><strong>iAMI_SetIdentityResponse</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/*
  * @brief   Set the identity response
  *
- * @param   pxSignal                Current event occurance (used for tracking)
+ * @param   pxSignal                Current event occurrence (used for tracking)
  * @param   xResult                 The result of the identity request
  * @param   pxIdentityResponse      The structure containing the version information
  *
@@ -345,12 +345,12 @@ int iAMI_SetIdentityResponse( EVL_SIGNAL *pxSignal, AMI_PROXY_RESULT xResult, AM
 </div>
 <div class="section" id="boot-select-response">
 <h3>Boot Select Response<a class="headerlink" href="#boot-select-response" title="Permalink to this heading">¶</a></h3>
-<p>This will post a message onto the mailbox to be handled within the the internal task to send a back over the FAL that the boot select request has completed successfully/failed.</p>
+<p>This will post a message onto the mailbox to be handled within the internal task to send a response back over the FAL that the boot select request has completed successfully/failed.</p>
 <p><strong>iAMI_SetBootSelectCompleteResponse</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Set the response after the Boot select has completed
  *
- * @param   pxSignal    Current event occurance (used for tracking)
+ * @param   pxSignal    Current event occurrence (used for tracking)
  * @param   xResult     The result of the boot select request
  *
  * @return  OK          Data passed to proxy driver successfully
@@ -363,12 +363,12 @@ int iAMI_SetBootSelectCompleteResponse( EVL_SIGNAL *pxSignal, AMI_PROXY_RESULT x
 </div>
 <div class="section" id="eeprom-read-write-response">
 <h3>EEPROM read/write Response<a class="headerlink" href="#eeprom-read-write-response" title="Permalink to this heading">¶</a></h3>
-<p>This will post a message onto the mailbox to be handled within the the internal task to send a back over the FAL that the EEPROM read/write request has completed successfully/failed.</p>
+<p>This will post a message onto the mailbox to be handled within the internal task to send a response back over the FAL that the EEPROM read/write request has completed successfully/failed.</p>
 <p><strong>iAMI_SetEepromReadWriteCompleteResponse</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Set the response after the EEPROM read/write has completed
  *
- * @param   pxSignal    Current event occurance (used for tracking)
+ * @param   pxSignal    Current event occurrence (used for tracking)
  * @param   xResult     The result of the boot select request
  *
  * @return  OK          Data passed to proxy driver successfully
@@ -381,12 +381,12 @@ int iAMI_SetEepromReadWriteCompleteResponse( EVL_SIGNAL *pxSignal, AMI_PROXY_RES
 </div>
 <div class="section" id="module-read-write-response">
 <h3>Module read/write Response<a class="headerlink" href="#module-read-write-response" title="Permalink to this heading">¶</a></h3>
-<p>This will post a message onto the mailbox to be handled within the the internal task to send a back over the FAL that the Module read/write request has completed successfully/failed.</p>
+<p>This will post a message onto the mailbox to be handled within the internal task to send a response back over the FAL that the Module read/write request has completed successfully/failed.</p>
 <p><strong>iAMI_SetModuleReadWriteCompleteResponse</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief Set the response after the module read/write has completed
  *
- * @param pxSignal Current event occurance (used for tracking)
+ * @param pxSignal Current event occurrence (used for tracking)
  * @param xResult The result of the module rd/wr request
  *
  * @return OK Data passed to proxy driver successfully
@@ -399,12 +399,12 @@ int iAMI_SetModuleReadWriteCompleteResponse( EVL_SIGNAL *pxSignal, AMI_PROXY_RES
 </div>
 <div class="section" id="debug-verbosity-response">
 <h3>Debug Verbosity Response<a class="headerlink" href="#debug-verbosity-response" title="Permalink to this heading">¶</a></h3>
-<p>This will post a message onto the mailbox to be handled within the the internal task to send a back over the FAL that the debug verbosity request has completed successfully/failed.</p>
+<p>This will post a message onto the mailbox to be handled within the internal task to send a response back over the FAL that the debug verbosity request has completed successfully/failed.</p>
 <p><strong>iAMI_SetDebugVerbosityResponse</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Set the response after the debug verbosity request has completed
  *
- * @param   pxSignal    Current event occurance (used for tracking)
+ * @param   pxSignal    Current event occurrence (used for tracking)
  * @param   xResult     The result of the debug verbosity request
  *
  * @return  OK          Data passed to proxy driver successfully
@@ -417,12 +417,12 @@ int iAMI_SetDebugVerbosityResponse( EVL_SIGNAL *pxSignal, AMI_PROXY_RESULT xResu
 </div>
 <div class="section" id="fpt-flags-response">
 <h3>FPT Flags Response<a class="headerlink" href="#fpt-flags-response" title="Permalink to this heading">¶</a></h3>
-<p>This will post a message onto the mailbox to be handled within the the internal task to send a response back over the FAL that the FPT flags request has completed successfully/failed.</p>
+<p>This will post a message onto the mailbox to be handled within the internal task to send a response back over the FAL that the FPT flags request has completed successfully/failed.</p>
 <p><strong>iAMI_SetFptFlagsResponse</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Set the response after the FPT flags request has completed
  *
- * @param   pxSignal    Current event occurance (used for tracking)
+ * @param   pxSignal    Current event occurrence (used for tracking)
  * @param   xResult     The result of the request
  * @param   ulFlags     The flags value (for read requests)
  *
@@ -479,7 +479,7 @@ int iAMI_GetPdiCopyRequest( EVL_SIGNAL *pxSignal,
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Get the PDI program request
  *
- * @param   pxSignal                Current event occurance (used for tracking)
+ * @param   pxSignal                Current event occurrence (used for tracking)
  * @param   pxProgramRequest        Pointer to program pdi structure
  *
  * @return  OK                      Data retrieved from proxy driver successfully
@@ -517,7 +517,7 @@ int iAMI_GetSensorRequest( EVL_SIGNAL *pxSignal, AMIProxySensorRequest *pxSensor
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Get the Boot Select request
  *
- * @param   pxSignal                Current event occurance (used for tracking)
+ * @param   pxSignal                Current event occurrence (used for tracking)
  * @param   pxBootSelectRequest     Pointer boot select request structure
  *
  * @return  OK                      Data retrieved from proxy driver successfully
@@ -536,7 +536,7 @@ int iAMI_GetBootSelectRequest( EVL_SIGNAL *pxSignal, AMIProxyBootSelectRequest *
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Get the eeprom read write request
  *
- * @param   pxSignal                    Current event occurance (used for tracking)
+ * @param   pxSignal                    Current event occurrence (used for tracking)
  * @param   pxEepromReadWriteRequest    Pointer sensor request structure
  *
  * @return  OK                          Data retrieved from proxy driver successfully
@@ -556,7 +556,7 @@ int iAMI_GetEepromReadWriteRequest( EVL_SIGNAL *pxSignal,
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief Get the module read write request
  *
- * @param pxSignal Current event occurance (used for tracking)
+ * @param pxSignal Current event occurrence (used for tracking)
  * @param pxModuleReadWriteRequest Pointer sensor request structure
  *
  * @return OK Data retrieved from proxy driver successfully
@@ -575,7 +575,7 @@ int iAMI_GetModuleReadWriteRequest( EVL_SIGNAL *pxSignal, AMIProxyModuleRWReques
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Get the debug verbosity request
  *
- * @param   pxSignal                    Current event occurance (used for tracking)
+ * @param   pxSignal                    Current event occurrence (used for tracking)
  * @param   pucDebugVerbosityRequest    Pointer to store requested debug verbosity
  *
  * @return  OK                          Data retrieved from proxy driver successfully
@@ -594,7 +594,7 @@ int iAMI_GetDebugVerbosityRequest( EVL_SIGNAL *pxSignal, uint8_t *pucDebugVerbos
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Get the FPT flags request
  *
- * @param   pxSignal                Current event occurance (used for tracking)
+ * @param   pxSignal                Current event occurrence (used for tracking)
  * @param   pxFptFlagsRequest       Pointer to FPT flags request structure
  *
  * @return  OK                      Data retrieved from proxy driver successfully
@@ -864,7 +864,7 @@ int iAmiCallback( EVL_SIGNAL *pxSignal )
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 12, 2026.
+      <span class="lastupdated">Last updated on May 28, 2026.
       </span></p>
   </div>
 

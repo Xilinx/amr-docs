@@ -4,7 +4,7 @@
 
 ## Overview
 
-The OSAL has been developed to allow AMC source to be agnostic to any target operating system, allowing target OS to be configured at compilation via the cmake build process (see - [Profiles and CMake build process](Profiles-and-CMake-build-process)).
+The OSAL has been developed to allow AMC source to be agnostic to any target operating system, allowing target OS to be configured at compilation via the CMake build process (see [Profiles and CMake build process](profiles-cmake.md)).
 
 A common API has been developed, and used throughout AMC source code. OS specific source implementations of the OSAL prevent any code changes throughout AMC when porting to a new OS. Two implementations of the OSAL are currently available with AMC (Linux and FreeRTOS).
 
@@ -59,7 +59,7 @@ A common API has been developed, and used throughout AMC source code. OS specifi
      * @param   ppvTaskHandle        Pointer-to-pointer that will be cast to appropriate OS Task Handle data type
      * @param   pvStartTask          Pointer to Start Task function
      * @param   usStartTaskStackSize The number of bytes to allocate for use as the start task's stack.
-     * @param   ulStartTaskPriority  The priority at which the the created start task will execute
+ * @param   ulStartTaskPriority  The priority at which the created start task will execute
      *
      * @return  OSAL_ERRORS_NONE                no errors, call was successful
      *          OSAL_ERRORS_PARAMS              invalid parameters passed in to function
@@ -151,7 +151,7 @@ A common API has been developed, and used throughout AMC source code. OS specifi
      * @param   pvTaskFunction  Pointer to Task function
      * @param   usTaskStackSize The number of bytes to allocate for use as the task's stack.
      * @param   pvTaskParam     The value to be passed as the parameter to the Task function
-     * @param   ulTaskPriority  The priority at which the the created task will execute
+ * @param   ulTaskPriority  The priority at which the created task will execute
      * @param   pcTaskName      Descriptive name for the task
      *
      * @return  OSAL_ERRORS_NONE                no errors, call was successful
@@ -175,7 +175,7 @@ A common API has been developed, and used throughout AMC source code. OS specifi
 **iOSAL\_Task\_Delete**
 
     /**
-     * @brief   Remove OSAL task from RTOS Kernal.
+     * @brief   Remove OSAL task from RTOS Kernel.
      *
      * @param   ppvTaskHandle   Pointer-to-pointer that will be cast to appropriate OS Task Handle data type
      *
@@ -504,7 +504,7 @@ A common API has been developed, and used throughout AMC source code. OS specifi
 **iOSAL\_MBox\_Pend**
 
     /**
-     * @brief   Recieve an item from a message Mailbox, to which the handle refers.
+     * @brief   Receive an item from a message Mailbox, to which the handle refers.
      *
      * @param   pvMBoxHandle   Pointer that will be cast to appropriate OS Mailbox Handle data type.
      * @param   pvMBoxBuffer   A pointer to the buffer into which the received item will be copied.
@@ -1025,7 +1025,7 @@ A common API has been developed, and used throughout AMC source code. OS specifi
      * @param   pvMemoryTwo Pointer to the second memory block.
      * @param   usSize      Number of bytes to compare.
      *
-     * @return  0 if the the contents of both memory blocks are equal, non 0 if not.
+ * @return  0 if the contents of both memory blocks are equal, non 0 if not.
      *
      */
     int iOSAL_MemCmp( const void  *pvMemoryOne, const void *pvMemoryTwo, uint32_t usSize );

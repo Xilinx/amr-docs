@@ -48,7 +48,7 @@ The number on the first line indicates how many devices are currently attached t
 
 **\<BDF\> \<cdev\> \<hwmon\>**
 
-where \<BDF\> is the device BDF, \<cdev\> is the character device number (/dev/amiX) and \<hwmon\> is the number of the hwmon directory belonging to the device (/sys/class/hwmon/hwmonX). For a more detailed explanation of how each of these components are used, see [User Interface](user-interface/).
+where \<BDF\> is the device BDF, \<cdev\> is the character device number (/dev/amiX) and \<hwmon\> is the number of the hwmon directory belonging to the device (/sys/class/hwmon/hwmonX). For a more detailed explanation of how each of these components are used, see [User Interface](../firmware/user-interface.md).
 
 The following diagram shows a simplified initialization flow and shows how the user can interact with the underlying driver to access their desired device (in this example, the devices have two supported PF’s).
 

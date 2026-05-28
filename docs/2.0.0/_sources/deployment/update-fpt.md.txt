@@ -62,7 +62,7 @@ Upon clicking OK, the initialization PDI is downloaded to the FPGA and used to t
 
 Note - if the ami\_tool reports AMC other than READY then it is highly advised not to run cfgmem\_program commands. This is most likely due to either a) something went wrong with the FPT update, or b) the wrong PDI was used for the FPT update.
 
-See [/wiki/spaces/XPS/pages/1093308807](../../deployment/ami-tool-guide#overview2overview) for more more information on the different AMC states.
+See [AMI Tool Overview](ami-tool-guide.md#amrmanagementinterfaceuserguide-ami-tool-overview) for more information on the different AMC states.
 
     ~$ ami_tool overview
 

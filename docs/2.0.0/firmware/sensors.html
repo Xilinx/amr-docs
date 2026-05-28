@@ -176,7 +176,7 @@
 <div class="section" id="thresholds">
 <h2>Thresholds<a class="headerlink" href="#thresholds" title="Permalink to this heading">¶</a></h2>
 <p>As mentioned above, some of the sensors have threshold fields configured (a value of “0” indicates that the threshold is not set or used). When the <strong>Upper Critical</strong> value is reached, the AMI driver kills any processes attached to that device.</p>
-<p>The thresholds are set by the card’s management firmware (see <a class="reference internal" href="#Profiles-and-CMake-build-process#ProfilesandCMakebuildprocess-SensorsProfile"><span class="xref myst">Profiles and CMake build process#SensorsProfile</span></a>). These values can be seen from running the <a class="reference internal" href="../deployment/ami-tool-guide.html"><span class="doc std std-doc">ami_tool sensors</span></a> command with the “<strong>-x limits</strong>” flag, as shown below for the V80:</p>
+<p>The thresholds are set by the card’s management firmware (see <a class="reference internal" href="profiles-cmake.html#profilesandcmakebuildprocess-sensorsprofile"><span class="std std-ref">Profiles and CMake build process#SensorsProfile</span></a>). These values can be seen from running the <a class="reference internal" href="../deployment/ami-tool-guide.html"><span class="std std-doc">ami_tool sensors</span></a> command with the “<strong>-x limits</strong>” flag, as shown below for the V80:</p>
 <p><strong>Sensor limits</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%  ami_tool sensors -d 21 -x limits
 
@@ -376,7 +376,7 @@ VCCINT:         34.00 A  (avg = -33.00 A, highest = -34.00 A)
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 12, 2026.
+      <span class="lastupdated">Last updated on May 28, 2026.
       </span></p>
   </div>
 

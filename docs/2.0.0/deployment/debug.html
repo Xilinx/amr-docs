@@ -163,13 +163,13 @@
 <p><span id="amrdebugtechniques-programming"></span></p>
 <div class="section" id="programming">
 <h3><strong>Programming</strong><a class="headerlink" href="#programming" title="Permalink to this heading">¶</a></h3>
-<p>If an issue occurs during a cfgmem_fpt/cfgmem_program (<a class="reference internal" href="#ami-tool-guide#overview"><span class="xref myst">AMR Management Interface userguide</span></a>) please go straight to <a class="reference internal" href="update-fpt.html"><span class="std std-doc">AMR Updating FPT Image in Flash</span></a> to recover the card.</p>
+<p>If an issue occurs during a cfgmem_fpt/cfgmem_program (<a class="reference internal" href="ami-tool-guide.html#amrmanagementinterfaceuserguide-ami-tool-overview"><span class="std std-ref">AMR Management Interface userguide</span></a>) please go straight to <a class="reference internal" href="update-fpt.html"><span class="std std-doc">AMR Updating FPT Image in Flash</span></a> to recover the card.</p>
 <p><span id="amrdebugtechniques-cardstatus"></span></p>
 </div>
 <div class="section" id="card-status">
 <h3><strong>Card status</strong><a class="headerlink" href="#card-status" title="Permalink to this heading">¶</a></h3>
 <p>Once an error has occurred, it can be useful to check the card status and health to see what is still working and what is not. Some useful checks are:</p>
-<p>For AMI specific commands see - <a class="reference internal" href="#../../deployment/ami-tool-guide#overview"><span class="xref myst">AMR Management Interface userguide (ami_tool)</span></a>.</p>
+<p>For AMI specific commands see - <a class="reference internal" href="ami-tool-guide.html#amrmanagementinterfaceuserguide-ami-tool-overview"><span class="std std-ref">AMR Management Interface userguide (ami_tool)</span></a>.</p>
 <ul>
 <li><p><strong>lspci device check</strong></p>
 <ul class="simple">
@@ -326,7 +326,7 @@
 <ul>
 <li><p>Check entry is present in json</p></li>
 <li><p>Check for expected value</p></li>
-<li><p>See <a class="reference internal" href="#sensors/"><span class="xref myst">Sensors and Hardware Monitoring</span></a> for thresholds</p></li>
+<li><p>See <a class="reference internal" href="../software/card-detection.html"><span class="std std-doc">Sensors and Hardware Monitoring</span></a> for thresholds</p></li>
 </ul>
 </li>
 </ul>
@@ -339,7 +339,7 @@
 <p>For errors that occurred while xbtest was running, check the xbest logs for context and error reporting.</p>
 <p>xbtest writes sensor data into several CSV files. These can be analyzed as text or imported into Microsoft Excel to analyze the data graphically.</p>
 <p>xbtest can be useful to test the card capabilities and to push it to its limits. This is more often helpful for exposing or reproducing an issue, rather than triaging or debugging an issue. However, xbtest does provide an easy method for continuously reading card sensors such as power and temperature, which can be useful in some debug situations.</p>
-<p>For xbtest documentation, see <a class="reference internal" href="#../index.html#xbtest-userguide"><span class="xref myst">xbtest Userguide</span></a>.</p>
+<p>For xbtest documentation, see <a class="reference internal" href="../v80/xbtest/install-and-run-xbtest.html"><span class="std std-doc">xbtest Userguide</span></a>.</p>
 <p><span id="amrdebugtechniques-serverlogsandsensors"></span></p>
 </div>
 <div class="section" id="server-logs-and-sensors">
@@ -522,7 +522,7 @@ INFO: 512 words written successfully
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 12, 2026.
+      <span class="lastupdated">Last updated on May 28, 2026.
       </span></p>
   </div>
 

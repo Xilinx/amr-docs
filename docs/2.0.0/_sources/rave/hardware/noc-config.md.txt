@@ -8,8 +8,6 @@
 
 ## Overview
 
-![RAVE NoC Topology](../../images/rave_noc_topology.png)
-
 **Note:** Image shows RAVE NoC with PL PCIe NMU_512 connections, LPDDR4 controller, no HBM.
 
 The RAVE NoC configuration routes traffic between the PL-based PCIe/XDMA IP blocks, CIPS components (RPU, PMC), and the LPDDR4 memory controller. The topology uses NMU and NSU interfaces for programmable logic connections, along with hardened interfaces for CIPS blocks.

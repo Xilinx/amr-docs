@@ -287,7 +287,7 @@ See [AMI Tool Overview](../deployment/ami-tool-guide.md#amrmanagementinterfaceus
 Now that AMR is installed, you can:
 
 - Explore the full set of AMI commands in the [AMI Tool Guide](../deployment/ami-tool-guide.md)
-- Learn about [Device Programming](../system-architecture/device-programming/index.md)
+- Learn about [Device Programming](../system-architecture/device-programming.md)
 - Update PDI images in flash using [AMR Updating Design PDI in Flash](../deployment/update-pdi.md)
 - Review [Debug Techniques](../deployment/debug.md) for troubleshooting
 - For V80 platforms, see [xbtest Installation and Testing](../v80/xbtest/install-and-run-xbtest.md)

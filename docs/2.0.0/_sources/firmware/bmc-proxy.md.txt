@@ -383,7 +383,7 @@ Function used to respond to the BMC\_PROXY\_DRIVER\_E\_GET\_SENSOR\_INFO event.
     /**
      * @brief   Response to a Sensor Info request
      *
-     * @param   pxSignal        Current event occurence (used for tracking)
+     * @param   pxSignal        Current event occurrence (used for tracking)
      * @param   usSensorId      Sensor Id
      * @param   ssSensorInfo    Sensor Value
      * @param   ucSensorState   Sensor Operational State
@@ -409,7 +409,7 @@ Responds back to a request from the proxy to enable a sensor.
     /**
     * @brief Response to an enable sensor request
     *
-    * @param pxSignal Current event occurence (used for tracking)
+    * @param pxSignal Current event occurrence (used for tracking)
     * @param xBmcResponse Enable sensor response
     *
     * @return OK Command was successful

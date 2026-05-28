@@ -62,5 +62,5 @@ Subsequent boots from any of the available PDI\_BOOT partitions can be performed
 
 When using this approach it is important to make sure that the version of AMI is compatible with the version of AMC which is running on the card (compatibility is indicated by having the same Major & Minor version numbers in the AMI/AMC **Major.Minor.Patch** version number format.)
 
-Further details on how to use the AMI tool to update the design PDI can be found here [AMR Management Interface userguide (ami\_tool)](../../deployment/ami-tool-guide)
+Further details on how to use the AMI tool to update the design PDI can be found here [AMR Management Interface userguide (ami\_tool)](ami-tool-guide.md)
 

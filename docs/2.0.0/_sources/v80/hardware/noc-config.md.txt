@@ -202,7 +202,7 @@ The host and RPU, which operates in the LPD, communicate through the use of the 
 
 ![images/1107375150.png](../../images/1107375150.png)
 
-CPM\_PCIE\_NOC\_0 and CPM\_PCIE\_NOC\_1 connect to HBM\_MC ports to exercise the the NoC and HBM performance.
+CPM\_PCIE\_NOC\_0 and CPM\_PCIE\_NOC\_1 connect to HBM\_MC ports to exercise the NoC and HBM performance.
 
 ![images/1107375024.png](../../images/1107375024.png)
 
@@ -439,9 +439,9 @@ After the implemented design has been opened in AMD Vivado™, the NoC performan
 
 The NMU supports address remapping as a way to override the default address map as well as to provide simple address virtualization. AMR uses this feature to remap the PCIe address to the DDR. This allows the PCIe host to have access to the DDR for communication with the RPU.
 
-  - [Memory Map](../memory-map/)
+  - [Memory Map](memory-map.md)
 
-  - [DDR Memory Organization](../memory-resources.md#AMR-MemoryResources-DiscreteDDRDiscreteDDRDiagram)
+  - [DDR Memory Organization](memory-resources.md#AMRV80-MemoryResources-DiscreteDDRDiagram)
 
 ![images/1107375123.png](../../images/1107375123.png)
 
@@ -593,7 +593,7 @@ M01\_INI connects to the CIPS RPU through the axi\_noc\_cips.
 
 **Memory Controllers - DDR4**
 
-AMR uses a single memory controller with four ports. Access to the the 4GB DDR is design-specific as defined in the [Discrete DDR Diagram](../memory-resources.md#AMRV80-MemoryResources-DiscreteDDRDiagram). There are two 2G address ranges that address this DDR:
+AMR uses a single memory controller with four ports. Access to the 4GB DDR is design-specific as defined in the [Discrete DDR Diagram](memory-resources.md#AMRV80-MemoryResources-DiscreteDDRDiagram). There are two 2G address ranges that address this DDR:
 
   - DDR LOW0 - 0x000\_0000\_0000 - 0x000\_7FFF\_FFFF
 
@@ -831,7 +831,7 @@ M3\_INI connects to the CIPS PCIe through the axi\_noc\_cips.
 
 **Memory Controllers - DDR4**
 
-AMR V80 uses a single memory controller with four ports. Access to the the 32GB DIMM is design specific as defined in the [DIMM Diagram](../memory-resources.md#AMRV80-MemoryResources-DIMMDiagram). There is one address range that addresses this DDR:
+AMR V80 uses a single memory controller with four ports. Access to the 32GB DIMM is design specific as defined in the [DIMM Diagram](memory-resources.md#AMRV80-MemoryResources-DIMMDiagram). There is one address range that addresses this DDR:
 
   - DDR CH2 - 0x600\_0000\_0000 - 0x67F\_FFFF\_FFFF
 
