@@ -72,11 +72,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../hardware/index.html">Hardware Design - AMR Common</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">V80 Board</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../V80/index.html">V80 Platform Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../V80/index.html">V80 Board Documentation</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">RAVE Board</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Hardware Design - RAVE VPR-4616</a></li>
 </ul>
@@ -139,7 +139,7 @@
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
 <p><strong>Note:</strong> Image shows 160-pin Samtec connector, GTYP Bank 104 routing, daughtercard ecosystem.</p>
-<p>The RAVE platforms include a 160-pin Samtec SEAM/SEAF expansion connector providing access to:</p>
+<p>The RAVE Boards include a 160-pin Samtec SEAM/SEAF expansion connector providing access to:</p>
 <ul class="simple">
 <li><p>GT transceivers (GTYP Bank 104)</p></li>
 <li><p>High-speed I/O (XPIO)</p></li>
@@ -395,13 +395,13 @@ ami_tool<span class="w"> </span>pdi_program<span class="w"> </span>-i<span class
 </div>
 <div class="section" id="reference-designs">
 <h2>Reference Designs<a class="headerlink" href="#reference-designs" title="Permalink to this heading">¶</a></h2>
-<div class="section" id="available-rave-vivado-platforms">
-<h3>Available RAVE Vivado Platforms<a class="headerlink" href="#available-rave-vivado-platforms" title="Permalink to this heading">¶</a></h3>
-<p><strong>From:</strong> https://gitenterprise.xilinx.com/PAEG/amr_vivado_designs/tree/main/emb_plus_ve2302</p>
+<div class="section" id="available-rave-vivado-boards">
+<h3>Available RAVE Vivado boards<a class="headerlink" href="#available-rave-vivado-boards" title="Permalink to this heading">¶</a></h3>
+<p><strong>From:</strong> https://github.com/Xilinx/amr_vivado_designs.git</p>
 <table border="1" class="docutils">
 <thead>
 <tr>
-<th>Platform</th>
+<th>board</th>
 <th>Daughtercard</th>
 <th>Description</th>
 </tr>
@@ -687,7 +687,7 @@ ami_tool<span class="w"> </span>pdi_program<span class="w"> </span>-i<span class
 <span class="nv">set_property</span><span class="w"> </span>PACKAGE_PIN<span class="w"> </span><span class="o">&lt;</span>pin<span class="o">&gt;</span><span class="w"> </span><span class="k">[</span><span class="nv">get_ports</span><span class="w"> </span>exp_refclk0_n<span class="k">]</span>
 </pre></div>
 </div>
-<p><strong>See:</strong> RAVE platform XDC files for complete pin assignments.</p>
+<p><strong>See:</strong> RAVE Board XDC files for complete pin assignments.</p>
 <p><span id="amrrave-expansionio-limitations"></span></p>
 </div>
 </div>
@@ -743,8 +743,8 @@ ami_tool<span class="w"> </span>pdi_program<span class="w"> </span>-i<span class
 <ul class="simple">
 <li><p><a class="reference internal" href="peripherals.html"><span class="std std-doc">RAVE Peripherals</span></a> - On-board peripherals</p></li>
 <li><p><a class="reference internal" href="pcie-config.html"><span class="std std-doc">RAVE PCIe Configuration</span></a> - PCIe uses Bank 103</p></li>
-<li><p><a class="reference external" href="https://www.amd.com/en/products/embedded/embedded-plus.html">Sapphire RAVE1 EDGE+</a> - RAVE platform info</p></li>
-<li><p>Vivado Platform Designs - https://gitenterprise.xilinx.com/PAEG/amr_vivado_designs/tree/main/emb_plus_ve2302</p></li>
+<li><p><a class="reference external" href="https://www.amd.com/en/products/embedded/embedded-plus.html">Sapphire RAVE1 EDGE+</a> - RAVE Board info</p></li>
+<li><p>Vivado Designs - https://github.com/Xilinx/amr_vivado_designs.git</p></li>
 </ul>
 </div>
 </div>
@@ -760,7 +760,7 @@ ami_tool<span class="w"> </span>pdi_program<span class="w"> </span>-i<span class
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 28, 2026.
+      <span class="lastupdated">Last updated on June 02, 2026.
       </span></p>
   </div>
 

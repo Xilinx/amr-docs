@@ -306,7 +306,7 @@ Some examples include:
 
 ### **Hardware read/write**
 
-Use **ami\_tool bar\_rd** *and* **bar\_wr** to read or write from memory-mapped registers or memories within the platform
+Use **ami\_tool bar\_rd** *and* **bar\_wr** to read or write from memory-mapped registers or memories within the board
 
 **bar\_rd**
 

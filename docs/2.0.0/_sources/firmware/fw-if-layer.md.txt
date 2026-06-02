@@ -10,7 +10,7 @@
 
 The Firmware Interface (FW\_IF) is an abstraction layer to any driver, providing a common API regardless of the physical interface.
 
-The purpose of this layer is to allow user applications to be developed agnostic of the platform they are to be used on, and (as far as is possible) agnostic of the protocol they are using.
+The purpose of this layer is to allow user applications to be developed agnostic of the boards they are to be used on, and (as far as is possible) agnostic of the protocol they are using.
 
 To an extent, this is object oriented (OO) as it allows the user application to treat each interface as an object with public methods.
 
@@ -40,11 +40,11 @@ To an extent, this is object oriented (OO) as it allows the user application to 
 </tr>
 <tr class="odd">
 <td>Common header</td>
-<td><strong>fw_if.h</strong> - the header file common to all interfaces and instances, agnostic to the protocol or the platform.</td>
+<td><strong>fw_if.h</strong> - the header file common to all interfaces and instances, agnostic to the protocol or the board.</td>
 </tr>
 <tr class="even">
 <td>Common protocol header</td>
-<td><strong>fw_if_XXX.h</strong> (e.g. <strong>fw_if_smbus.h</strong>) - the header file specific to a protocol but common to all platform-implementations of that protocol.</td>
+<td><strong>fw_if_XXX.h</strong> (e.g. <strong>fw_if_smbus.h</strong>) - the header file specific to a protocol but common to all board-implementations of that protocol.</td>
 </tr>
 </tbody>
 </table>
@@ -77,7 +77,7 @@ There should never be any overlap or ‘merging’ of protocols. Instead, each s
 
 #### Common
 
-Within each protocol is the common header file, named **fw\_if\_XXX.h**, where “XXX” is the protocol (e.g. **fw\_if\_smbus.h**). This is the public header file which is **specific to the protocol** but **agnostic to the platform**.
+Within each protocol is the common header file, named **fw\_if\_XXX.h**, where “XXX” is the protocol (e.g. **fw\_if\_smbus.h**). This is the public header file which is **specific to the protocol** but **agnostic to the board**.
 
 This file provides the API for the **init()** and **create()** functions of a protocol, and the protocol-specific configuration structures, enums, and events.
 
@@ -87,7 +87,7 @@ If a system was changing from one protocol to another, this is the only aspect t
 
 #### Implementation
 
-Each protocol directory then has the source file for that platform(e.g. **v80**, **linux**, etc) and protocol (e.g. **fw\_if\_smbus\_amr.c**). It should implement the generic API provided in **fw\_if.h**, and the protocol-specific API provided in the common protocol header file (in this example, **fw\_if\_smbus.h**).
+Each protocol directory then has the source file for that board(e.g. **v80**, **linux**, etc) and protocol (e.g. **fw\_if\_smbus\_amr.c**). It should implement the generic API provided in **fw\_if.h**, and the protocol-specific API provided in the common protocol header file (in this example, **fw\_if\_smbus.h**).
 
 <span id="firmwareinterface-fw-if-abstractionlayer-api"></span>
 

@@ -75,7 +75,7 @@ The PMC manages boot and configuration with OSPI flash interface and NoC connect
 - Enable: PS_I2C0_PERIPHERAL
 
 **PMC_I2C / LPD_I2C1:**
-- Configuration varies by platform
+- Configuration varies by board
 - Purpose: Additional I2C devices
 
 ### UART Interfaces
@@ -97,9 +97,9 @@ The PMC manages boot and configuration with OSPI flash interface and NoC connect
 - Purpose: TPM 2.0 security module access
 - Enable: PMC SPI configuration
 
-### Platform-Specific Peripherals
+### Board-specific Peripherals
 
-Some platform variants include additional peripherals:
+Some board variants include additional peripherals:
 
 **USB 2.0 Host Controller:**
 - Available on select variants

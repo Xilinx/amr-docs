@@ -32,7 +32,7 @@ Software GCQ buffers for inter-processor communication are allocated in this reg
 
 The remaining LPDDR4 capacity is mapped into the extended address space above 4GB. This memory is accessible through 64-bit addressing from the PCIe host and through NoC from various masters.
 
-User application data and XDMA buffers typically reside in these upper regions. The total available space depends on the platform variant, with approximately 7-7.5 GB available in 8GB configurations and 15-15.5 GB available in 16GB configurations after accounting for firmware and GCQ overhead.
+User application data and XDMA buffers typically reside in these upper regions. The total available space depends on the board variant, with approximately 7-7.5 GB available in 8GB configurations and 15-15.5 GB available in 16GB configurations after accounting for firmware and GCQ overhead.
 
 <span id="amrrave-memorymap-pladdressspace"></span>
 
@@ -111,7 +111,7 @@ The usable capacity accounts for firmware and GCQ overhead, providing approximat
 | 0x202_01xx_xxxx  | PF1 BAR2 (64 KB)     | Host via PCIe PF1 (AXI-Lite peripherals) |
 | 0x202_1xxx_xxxx  | PF1 BAR4 (256 MB)    | Host via PCIe PF1 (AXI bypass/memory)    |
 
-Specific address ranges depend on the BAR sizes configured in the XDMA IP and the LPDDR4 capacity of the platform variant. PF0 uses device ID 0x5710, and PF1 uses device ID 0x5711 (vendor ID 0x10EE).
+Specific address ranges depend on the BAR sizes configured in the XDMA IP and the LPDDR4 capacity of the board variant. PF0 uses device ID 0x5710, and PF1 uses device ID 0x5711 (vendor ID 0x10EE).
 
 ## References
 

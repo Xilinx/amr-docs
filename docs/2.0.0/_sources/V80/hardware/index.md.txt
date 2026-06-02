@@ -2,15 +2,15 @@
 
 > **For common hardware concepts**, see [Common Hardware Documentation](../../hardware/index.md)
 >
-> This section contains V80 (Alveo) platform-specific hardware design documentation.
+> This section contains V80 (Alveo) Board-specific hardware design documentation.
 
-## V80 Platform Overview
+## V80 Board Overview
 
-The V80 is a PCIe accelerator card featuring the Versal V80 HBM-series device. The platform provides high-performance computing capabilities with hardened PCIe Gen5 connectivity and high-bandwidth memory resources optimized for data center and cloud deployments.
+The V80 is a PCIe accelerator card featuring the Versal V80 HBM-series device. The board provides high-performance computing capabilities with hardened PCIe Gen5 connectivity and high-bandwidth memory resources optimized for data center and cloud deployments.
 
 The V80 includes CPM5 (Coherent PCIe Module) which integrates PCIe Gen5 x8 controller and QDMA functionality in hardened silicon. This eliminates the need for soft logic PCIe and DMA IP, preserving programmable logic resources for user applications. The device also features 32 GB of integrated HBM (High-Bandwidth Memory) providing exceptional memory bandwidth for compute-intensive workloads.
 
-The platform design targets maximum performance with PCIe bandwidth of approximately 32 GB/s and HBM memory bandwidth approaching 460 GB/s. Total memory capacity reaches 68 GB through the combination of HBM, DDR DIMM, and discrete DDR resources.
+The board design targets maximum performance with PCIe bandwidth of approximately 32 GB/s and HBM memory bandwidth approaching 460 GB/s. Total memory capacity reaches 68 GB through the combination of HBM, DDR DIMM, and discrete DDR resources.
 
 ## V80-Specific Hardware Documentation
 
@@ -54,13 +54,13 @@ This memory architecture enables diverse workload requirements with the flexibil
 
 The V80 delivers approximately 32 GB/s of PCIe bandwidth through the Gen5 x8 interface. HBM memory bandwidth approaches 460 GB/s peak throughput. The combination of high PCIe bandwidth and exceptional memory bandwidth enables demanding applications including AI inference, video processing, and real-time analytics.
 
-The platform supports data center deployment scenarios where multiple V80 cards can be installed in a single server, providing scalable compute and memory resources. The PCIe form factor integrates seamlessly with standard server infrastructure.
+The board supports data center deployment scenarios where multiple V80 cards can be installed in a single server, providing scalable compute and memory resources. The PCIe form factor integrates seamlessly with standard server infrastructure.
 
 ## V80 Target Applications
 
-The V80 platform is optimized for data center and cloud computing environments requiring maximum performance. Target applications include AI and machine learning inference workloads that benefit from high memory bandwidth, video processing pipelines that demand both PCIe and memory throughput, and high-performance computing tasks requiring large memory capacity.
+The V80 Board is optimized for data center and cloud computing environments requiring maximum performance. Target applications include AI and machine learning inference workloads that benefit from high memory bandwidth, video processing pipelines that demand both PCIe and memory throughput, and high-performance computing tasks requiring large memory capacity.
 
-The platform excels in scenarios where multiple accelerator cards are deployed in a single server, with the PCIe form factor enabling dense compute configurations. Cloud service providers can leverage the V80 for multi-tenant inference services, while enterprise data centers can deploy the platform for analytics and processing workloads.
+The board excels in scenarios where multiple accelerator cards are deployed in a single server, with the PCIe form factor enabling dense compute configurations. Cloud service providers can leverage the V80 for multi-tenant inference services, while enterprise data centers can deploy the board for analytics and processing workloads.
 
 ## Technical Specifications Summary
 

@@ -113,7 +113,7 @@ The V80 base logic implementation uses **CPM5 hardened PCIe** with minimal PL IP
 
 ## PF1 Hierarchical Block
 
-The PF1 hierarchy is **common across platforms** but with V80-specific clock/address configuration:
+The PF1 hierarchy is **common across boards** but with V80-specific clock/address configuration:
 
 | Component | IP Type | Instance Name | V80 Configuration |
 |-----------|---------|---------------|-------------------|

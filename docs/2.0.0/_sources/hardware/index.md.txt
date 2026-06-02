@@ -1,8 +1,8 @@
 # Hardware Design - AMR Common
 
-This section contains hardware design documentation **common to all AMR platforms** (V80, RAVE). For platform-specific details, see the individual platform documentation.
+This section contains hardware design documentation **common to all AMR boards** (V80, RAVE). For board-specific details, see the individual board documentation.
 
-## Platform Documentation
+## Board Documentation
 
   - [V80 Hardware Design](../V80/hardware/index.md) - Alveo V80 (CPM5, HBM)
 
@@ -10,7 +10,7 @@ This section contains hardware design documentation **common to all AMR platform
 
 ## Common Hardware Documentation
 
-  - [Platform Comparison](../overview/amr-overview.md#amroverview-supportedplatforms) - V80 vs RAVE comparison and selection guide
+  - [Board Comparison](../overview/amr-overview.md#amroverview-supportedboards) - V80 vs RAVE comparison and selection guide
 
   - [Versal Architecture Overview](hierarchy.md) - Common Versal concepts (CIPS, PL, NoC)
 
@@ -31,14 +31,14 @@ This section contains hardware design documentation **common to all AMR platform
 ## Key Common Design Principles
 
 ### Minimal Base Design
-All AMR platforms follow a minimal base design philosophy:
+All AMR boards follow a minimal base design philosophy:
 - No management IP blocks in PL (no GCQ hardware, UUID ROM, EEPROM controllers)
 - Firmware-based management using RPU (R5 processors)
 - Software GCQ implementation using shared DDR memory
 - Expansion points available (M_AXI_LPD, address space, interrupts)
 
-### Platform-Agnostic Concepts
-The following concepts are shared across all platforms:
+### Boards-Agnostic Concepts
+The following concepts are shared across all boards:
 - Versal CIPS architecture (RPU, PMC, PS)
 - NoC interconnect fundamentals
 - Memory controller architecture
@@ -46,8 +46,8 @@ The following concepts are shared across all platforms:
 - 2 Physical Functions (PF0 management, PF1 user/DMA)
 - QDMA for DMA transfers (different implementations)
 
-### Platform-Specific Implementations
-See individual platform documentation for:
+### Board-Specific Implementations
+See individual board documentation for:
 - **V80**: CPM5 hardened PCIe, HBM memory, Gen5x8 configuration
 - **RAVE**: PL-based PCIe IP, LPDDR4 memory, expansion I/O, peripherals
 

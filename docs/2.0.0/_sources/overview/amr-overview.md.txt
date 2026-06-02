@@ -1,6 +1,6 @@
 # AMR Overview
 
-AMD Adaptive Management Runtime (AMR) provides comprehensive platform management capabilities for Alveo and Embedded+ boards featuring Versal devices, supporting multiple platforms including RAVE and V80, with AMR serving as the enhanced replacement for AVED on Alveo V80 accelerators.
+Adaptive Management Runtime (AMR) is the next-generation platform software stack for Alveo V80 and RAVE product lines designed to enable a more modular, software-defined approach to system bring-up and device management. In contrast to the legacy AVED model (for V80) — where platform initialization, management functions, and programmable logic (PL) were tightly coupled within a single, static configuration — AMR decouples control, configuration, and application layers through a lightweight runtime and mailbox-based communication model. This allows the platform to boot with minimal dependencies and dynamically load or reconfigure functionality (such as PL images) at runtime. The result is improved flexibility for partial and segmented configurations, more robust system control without reliance on PL-based mechanisms, and a clearer separation between infrastructure and application logic. For users, this translates into faster iteration, easier integration into automated workflows, and a more scalable foundation for deploying and managing Alveo V80 and RAVE systems in production environments.
 
 <span id="amroverview-newinthisrelease"></span>
 
@@ -32,9 +32,9 @@ This section contains an overview of the AMD Adaptive Management Runtime (AMR). 
 
   - Build flow scripts including CMake-based firmware compilation and Vivado hardware design generation, demonstrating a full end-to-end build process for the base hardware design and software components described above.
 
-<span id="amroverview-supportedplatforms"></span>
+<span id="amroverview-supportedboards"></span>
 
-## Supported Platforms
+## Supported boards
 
 <span id="amroverview-alveov80"></span>
 
@@ -60,19 +60,19 @@ Please note:
 
   - All supported operating systems are tested with general access versions (GA). [Ubuntu Hardware Enablement](https://wiki.ubuntu.com/Kernel/LTSEnablementStack) (HWE) is not supported. By default, HWE is disabled by Ubuntu Server versions and enabled by desktop versions.
 
-> **Note:** Queue DMA (QDMA) functionality is supported exclusively on the Alveo V80 platform. QDMA is not available on RAVE (Embedded+) platforms, which utilize XDMA for PCIe data transfer operations.
+> **Note:** Queue DMA (QDMA) functionality is supported exclusively on the Alveo V80 Board. QDMA is not available on RAVE (Embedded+) boards, which utilize XDMA for PCIe data transfer operations.
 
 [![image1](../images/1107373415.png)](../images/1107373415.png)
 
 To get started with AMR on V80, refer to [getting-started](../getting-started/index.md).
 
-**Note:** If you need to switch between AVED and AMR on V80, refer to [Switching Between AVED and AMR](../V80/switch-aved-amr.md) for detailed instructions on seamlessly transitioning between the two platforms.
+**Note:** If you need to switch between AVED and AMR on V80, refer to [Switching Between AVED and AMR](../V80/switch-aved-amr.md) for detailed instructions on seamlessly transitioning between the two boards.
 
 <span id="amroverview-rave"></span>
 
-### RAVE (Embedded+ Platform)
+### RAVE (Embedded+ Board)
 
-The RAVE platform represents the standard reference implementation for Embedded+ boards featuring Versal devices. RAVE provides essential PCIe connectivity and basic management capabilities suitable for a wide range of applications. Key characteristics include:
+The RAVE Board represents the standard reference implementation for Embedded+ boards featuring Versal devices. RAVE provides essential PCIe connectivity and basic management capabilities suitable for a wide range of applications. Key characteristics include:
 
   - Single I2C bus configuration for device communication
   - EEPROM version 1.0 support for board information storage
@@ -82,7 +82,7 @@ The RAVE platform represents the standard reference implementation for Embedded+
 
 The rave profile serves as the baseline platform configuration, providing core functionality while minimizing complexity for applications that do not require advanced storage or expansion interfaces.
 
-![RAVE Platform Block Diagram](../images/rave_block.png)
+![RAVE Board Block Diagram](../images/rave_block.png)
 
 To get started with AMR on RAVE, refer to [getting-started](../getting-started/index.md).
 
@@ -104,15 +104,15 @@ Some notable characteristics of the AMR include:
 
   - The AMR's firmware provides a reference implementation of card management functions for in-band (PCIe) sensor access and card control, plus other application-level card management functions. This includes writing new PDIs into the card's OSPI flash configuration memory across three partitions (two boot PDIs and one user design), with enhanced write performance, partition flag management, and automatic partition loading on power-up. **Note:** Out-of-band SMBus/BMC support is not implemented; users must establish SMBus functionality based on their requirements.
 
-  - The AMR supports two board profiles: rave (standard reference implementation) and v80 (with eMMC storage, SMBus interface, and QSFP module control), allowing flexible deployment across different Alveo and Embedded+ platforms.
+  - The AMR supports two board profiles: rave (standard reference implementation) and v80 (with eMMC storage, SMBus interface, and QSFP module control), allowing flexible deployment across different Alveo and Embedded+ boards.
 
 <span id="amroverview-amrhardwarearchitecture"></span>
 
 ## AMR Hardware Architecture
 
-The AMR includes platform-specific base hardware designs that demonstrate PCIe connectivity and management capabilities. For detailed information on the hardware architecture for each supported platform, please refer to:
+The AMR includes board-specific base hardware designs that demonstrate PCIe connectivity and management capabilities. For detailed information on the hardware architecture for each supported boards, please refer to:
 
-  - [V80 Hardware Architecture](../V80/hardware/index.md) - Platform with eMMC, QSFP, and SMBus support
+  - [V80 Hardware Architecture](../V80/hardware/index.md) - Board with eMMC, QSFP, and SMBus support
   - [RAVE Hardware Architecture](../RAVE/hardware/index.md) - Standard reference platform architecture
 
 <span id="amroverview-amrsoftwarearchitecture"></span>
@@ -155,5 +155,5 @@ The diagram above shows a high-level overview of the AMR build process. Notable 
 
   - Use of Vitis™ embedded software flow to compile AMR firmware image for inclusion into final programming image.
 
-  - Profile-based configuration system enabling different board variants (rave for Embedded+ platforms, v80 for Alveo platforms) to be built from a unified source tree.
+  - Profile-based configuration system enabling different board variants (rave for Embedded+ Boards, v80 for Alveo Boards) to be built from a unified source tree.
 

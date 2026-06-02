@@ -8,7 +8,7 @@
 
 ## Overview
 
-The V80 hardware design files are organized under build_v80/amr_vivado_designs/alveo_v80/ with the v80_base design providing the base platform implementation.
+The V80 hardware design files are organized under build_v80/amr_vivado_designs/alveo_v80/ with the v80_base design providing the base board implementation.
 
 <span id="amrv80-sourcefileoverview-hardwaredirectorytree"></span>
 
@@ -42,8 +42,8 @@ The V80 hardware design files are organized under build_v80/amr_vivado_designs/a
         │               │   └── smbus_v1_1_vl_rfs.sv
         │               └── xgui
         │                   └── smbus_v1_1.tcl
-        └── emb_plus_ve2302                  (VE2302 FPGA platforms)
-            ├── platforms
+        └── emb_plus_ve2302                  (VE2302 FPGA boards)
+            ├── boards
             │   ├── scripts
             │   │   ├── gen_sdt.tcl
             │   │   ├── gen_sdt_dfx.tcl
@@ -70,13 +70,13 @@ The V80 hardware design files are organized under build_v80/amr_vivado_designs/a
 
 ## build_v80
 
-This is the top level directory containing the Vivado design sources for the AMR V80 hardware platform.
+This is the top level directory containing the Vivado design sources for the AMR V80 hardware board.
 
 <span id="amrv80-sourcefileoverview-amrvivadodesigns"></span>
 
 ### amr_vivado_designs
 
-The amr_vivado_designs directory contains all hardware design files for multiple FPGA platforms (Alveo V80 and VE2302). The repository supports Makefile-based builds with CI/CD integration via Jenkins.
+The amr_vivado_designs directory contains all hardware design files for multiple FPGA boards (Alveo V80 and VE2302). The repository supports Makefile-based builds with CI/CD integration via Jenkins.
 
 <span id="amrv80-sourcefileoverview-alveov80"></span>
 
@@ -168,9 +168,9 @@ This is the V80 base platform design directory.
 
 This directory contains multiple platform designs for the VE2302 Versal embedded FPGA targeting Vivado 2026.1 tools. It includes both flat (non-DFX) designs and Dynamic Function eXchange (DFX) capable designs.
 
-<span id="amrv80-sourcefileoverview-ve2302platforms"></span>
+<span id="amrv80-sourcefileoverview-ve2302boards"></span>
 
-##### platforms
+##### boards
 
 Multiple platform designs, each with similar structure (Makefile, scripts/, xdc/, and optional ip/):
 
@@ -184,7 +184,7 @@ Multiple platform designs, each with similar structure (Makefile, scripts/, xdc/
 
   - **ve2302_xdma_base** - DFX-enabled base design with PCIe/XDMA, serves as base for reconfigurable modules
 
-Each platform build generates:
+Each board build generates:
   - XSA file (hardware definition)
   - SDT files (system device tree)
   - For DFX designs: partial PDI files and Debian packages

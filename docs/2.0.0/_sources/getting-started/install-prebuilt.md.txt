@@ -14,7 +14,7 @@ This guide provides step-by-step instructions for installing prebuilt AMD Adapti
 
 1. Refer to the [AMR Release Information](../AMR-release-information.md) to find the latest release version and download links.
 
-2. Download the deployment archive for your platform (V80 or RAVE).
+2. Download the deployment archive for your Board (V80 or RAVE).
 
 3. Extract the downloaded archive:
 
@@ -290,4 +290,4 @@ Now that AMR is installed, you can:
 - Learn about [Device Programming](../system-architecture/device-programming.md)
 - Update PDI images in flash using [AMR Updating Design PDI in Flash](../deployment/update-pdi.md)
 - Review [Debug Techniques](../deployment/debug.md) for troubleshooting
-- For V80 platforms, see [xbtest Installation and Testing](../V80/xbtest/install-and-run-xbtest.md)
+- For V80 Boards, see [xbtest Installation and Testing](../V80/xbtest/install-and-run-xbtest.md)

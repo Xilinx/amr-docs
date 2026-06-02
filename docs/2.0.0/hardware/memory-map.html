@@ -72,11 +72,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Hardware Design - AMR Common</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">V80 Board</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Platform Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Board Documentation</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">RAVE Board</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../RAVE/hardware/index.html">Hardware Design - RAVE VPR-4616</a></li>
 </ul>
@@ -132,7 +132,7 @@
   <div class="section" id="amr-address-mapping-concepts-common">
 <h1>AMR - Address Mapping Concepts (Common)<a class="headerlink" href="#amr-address-mapping-concepts-common" title="Permalink to this heading">¶</a></h1>
 <blockquote>
-<div><p><strong>For platform-specific address maps</strong>, see:</p>
+<div><p><strong>For board-specific address maps</strong>, see:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../V80/hardware/memory-map.html"><span class="std std-doc">V80 Memory Map</span></a> - V80 address space with HBM regions</p></li>
 <li><p><a class="reference internal" href="../RAVE/hardware/memory-map.html"><span class="std std-doc">RAVE Memory Map</span></a> - RAVE address space with LPDDR4</p></li>
@@ -141,8 +141,8 @@
 <p><span id="amr-memorymap-overview"></span></p>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
-<p>This document describes <strong>common address mapping concepts</strong> for all AMR platforms. All platforms require address translation between PCIe and AXI address domains.</p>
-<p>All AMR platforms follow common address mapping patterns despite platform-specific implementation differences. PCIe addressing uses 64-bit addresses in the terabyte range starting from 0x200_0000_0000 and above, while AXI addressing employs local address spaces typically starting from lower values. Translation between these address domains occurs through PCIEBAR2AXIBAR registers (configured in either CPM or PCIe IP depending on platform) and through NoC REMAPS parameters in the AXI NoC IP configuration. The two physical functions (PF0 for management, PF1 for user) occupy separate address ranges enabling independent access control and address space management.</p>
+<p>This document describes <strong>common address mapping concepts</strong> for all AMR boards. All boards require address translation between PCIe and AXI address domains.</p>
+<p>All AMR boards follow common address mapping patterns despite board-specific implementation differences. PCIe addressing uses 64-bit addresses in the terabyte range starting from 0x200_0000_0000 and above, while AXI addressing employs local address spaces typically starting from lower values. Translation between these address domains occurs through PCIEBAR2AXIBAR registers (configured in either CPM or PCIe IP depending on board) and through NoC REMAPS parameters in the AXI NoC IP configuration. The two physical functions (PF0 for management, PF1 for user) occupy separate address ranges enabling independent access control and address space management.</p>
 <p><span id="amr-memorymap-versaladdressspace"></span></p>
 </div>
 <div class="section" id="versal-address-space-common">
@@ -156,7 +156,7 @@
 <div class="section" id="tb-address-space-64-bit">
 <h3>16TB Address Space (64-bit)<a class="headerlink" href="#tb-address-space-64-bit" title="Permalink to this heading">¶</a></h3>
 <p><strong>Range:</strong> 0x000_0000_0000 - 0x0FF_FFFF_FFFF</p>
-<p>The 16TB address space encompasses the complete 4GB space described above along with extended regions for larger memory allocations. Upper DDR regions occupy addresses above the 4GB boundary, accessible through 64-bit addressing from capable masters. High-Bandwidth Memory (HBM) address space exists on platforms featuring HBM devices, providing dedicated addressing for the HBM controller access. Programmable logic address space begins at 0x200_0000_0000 and above, with PCIe BARs typically mapped into this region.</p>
+<p>The 16TB address space encompasses the complete 4GB space described above along with extended regions for larger memory allocations. Upper DDR regions occupy addresses above the 4GB boundary, accessible through 64-bit addressing from capable masters. High-Bandwidth Memory (HBM) address space exists on boards featuring HBM devices, providing dedicated addressing for the HBM controller access. Programmable logic address space begins at 0x200_0000_0000 and above, with PCIe BARs typically mapped into this region.</p>
 <p><strong>Reference:</strong> <a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map">Versal 16TB Address Map</a></p>
 <p><span id="amr-memorymap-pcieaddresstranslation"></span></p>
 </div>
@@ -165,7 +165,7 @@
 <h2>PCIe to AXI Address Translation<a class="headerlink" href="#pcie-to-axi-address-translation" title="Permalink to this heading">¶</a></h2>
 <div class="section" id="translation-mechanism">
 <h3>Translation Mechanism<a class="headerlink" href="#translation-mechanism" title="Permalink to this heading">¶</a></h3>
-<p><strong>All platforms translate PCIe addresses to AXI:</strong></p>
+<p><strong>All boards translate PCIe addresses to AXI:</strong></p>
 <p><strong>PCIe Address Space:</strong></p>
 <ul class="simple">
 <li><p>TB-range 64-bit addresses</p></li>
@@ -206,7 +206,7 @@
 <ul class="simple">
 <li><p>Address range in TB space (0x201_xxxx_xxxx)</p></li>
 <li><p>BAR0 provides management register access</p></li>
-<li><p>Size varies by platform (V80: 8MB, RAVE: configurable)</p></li>
+<li><p>Size varies by board (V80: 8MB, RAVE: configurable)</p></li>
 <li><p>No hardware IP in base design (address space reserved)</p></li>
 </ul>
 </div>
@@ -217,7 +217,7 @@
 <li><p>Address range in TB space (0x202_xxxx_xxxx)</p></li>
 <li><p>BAR0: DMA registers and descriptors</p></li>
 <li><p>BAR2: AXI bridge to PL (test GPIO, user logic)</p></li>
-<li><p>Size varies by platform</p></li>
+<li><p>Size varies by board</p></li>
 </ul>
 <p><span id="amr-memorymap-ddrmemoryregions"></span></p>
 </div>
@@ -230,7 +230,7 @@
 </div>
 <div class="section" id="upper-ddr-0x500-0000-0000">
 <h3>Upper DDR (0x500_0000_0000+)<a class="headerlink" href="#upper-ddr-0x500-0000-0000" title="Permalink to this heading">¶</a></h3>
-<p>The upper DDR regions provide additional memory capacity beyond the 32-bit addressable range. These regions hold user application data, DMA transfer buffers, and extended data structures that do not require direct RPU access. The PCIe host and other 64-bit capable masters access these regions through the NoC. Specific address ranges and total upper DDR capacity vary significantly by platform depending on the memory architecture and installed memory devices.</p>
+<p>The upper DDR regions provide additional memory capacity beyond the 32-bit addressable range. These regions hold user application data, DMA transfer buffers, and extended data structures that do not require direct RPU access. The PCIe host and other 64-bit capable masters access these regions through the NoC. Specific address ranges and total upper DDR capacity vary significantly by board depending on the memory architecture and installed memory devices.</p>
 <p><span id="amr-memorymap-pladdressspace"></span></p>
 </div>
 </div>
@@ -258,11 +258,11 @@
 <li><p>Example: 0x1000_0000 base address</p></li>
 <li><p>SmartConnect further routes to peripherals</p></li>
 </ul>
-<p><span id="amr-memorymap-platformspecific"></span></p>
+<p><span id="amr-memorymap-boardspecific"></span></p>
 </div>
 </div>
-<div class="section" id="platform-specific-address-maps">
-<h2>Platform-Specific Address Maps<a class="headerlink" href="#platform-specific-address-maps" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="board-specific-address-maps">
+<h2>Board-Specific Address Maps<a class="headerlink" href="#board-specific-address-maps" title="Permalink to this heading">¶</a></h2>
 <p>For detailed address maps with specific ranges:</p>
 <div class="section" id="v80-address-map">
 <h3>V80 Address Map<a class="headerlink" href="#v80-address-map" title="Permalink to this heading">¶</a></h3>
@@ -330,8 +330,8 @@ DRAM physical address (e.g., 0x000_1000_0000)
 <ol class="arabic simple">
 <li><p><strong>Check available address space</strong></p>
 <ul class="simple">
-<li><p>PF0: Management space (platform-dependent size)</p></li>
-<li><p>PF1: User space (platform-dependent size)</p></li>
+<li><p>PF0: Management space (board-dependent size)</p></li>
+<li><p>PF1: User space (board-dependent size)</p></li>
 </ul>
 </li>
 <li><p><strong>Use SmartConnect for routing</strong></p>
@@ -382,7 +382,7 @@ DRAM physical address (e.g., 0x000_1000_0000)
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 28, 2026.
+      <span class="lastupdated">Last updated on June 02, 2026.
       </span></p>
   </div>
 

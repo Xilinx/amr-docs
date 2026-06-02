@@ -74,11 +74,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">Hardware Design - AMR Common</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">V80 Board</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Platform Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Board Documentation</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">RAVE Board</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../RAVE/hardware/index.html">Hardware Design - RAVE VPR-4616</a></li>
 </ul>
@@ -178,7 +178,7 @@
 <div class="section" id="firmware-abstraction">
 <h3>Firmware Abstraction<a class="headerlink" href="#firmware-abstraction" title="Permalink to this heading">¶</a></h3>
 <p>The Firmware Interface (FW_IF) is an abstraction layer to any driver, providing a common API regardless of the physical interface.</p>
-<p>The purpose of this layer is to allow user applications to be developed agnostic of the platform they are to be used on, and (as far as is possible) agnostic of the protocol they are using.</p>
+<p>The purpose of this layer is to allow user applications to be developed agnostic of the boards they are to be used on, and (as far as is possible) agnostic of the protocol they are using.</p>
 <p>To an extent, this is object oriented (OO) as it allows the user application to treat each interface as an object with public methods.</p>
 <p><span id="firmwareinterface-fw-if-abstractionlayer-terminology"></span></p>
 </div>
@@ -206,11 +206,11 @@
 </tr>
 <tr class="odd">
 <td>Common header</td>
-<td><strong>fw_if.h</strong> - the header file common to all interfaces and instances, agnostic to the protocol or the platform.</td>
+<td><strong>fw_if.h</strong> - the header file common to all interfaces and instances, agnostic to the protocol or the board.</td>
 </tr>
 <tr class="even">
 <td>Common protocol header</td>
-<td><strong>fw_if_XXX.h</strong> (e.g. <strong>fw_if_smbus.h</strong>) - the header file specific to a protocol but common to all platform-implementations of that protocol.</td>
+<td><strong>fw_if_XXX.h</strong> (e.g. <strong>fw_if_smbus.h</strong>) - the header file specific to a protocol but common to all board-implementations of that protocol.</td>
 </tr>
 </tbody>
 </table>
@@ -235,14 +235,14 @@
 <p><span id="firmwareinterface-fw-if-abstractionlayer-common"></span></p>
 <div class="section" id="common">
 <h4>Common<a class="headerlink" href="#common" title="Permalink to this heading">¶</a></h4>
-<p>Within each protocol is the common header file, named <strong>fw_if_XXX.h</strong>, where “XXX” is the protocol (e.g. <strong>fw_if_smbus.h</strong>). This is the public header file which is <strong>specific to the protocol</strong> but <strong>agnostic to the platform</strong>.</p>
+<p>Within each protocol is the common header file, named <strong>fw_if_XXX.h</strong>, where “XXX” is the protocol (e.g. <strong>fw_if_smbus.h</strong>). This is the public header file which is <strong>specific to the protocol</strong> but <strong>agnostic to the board</strong>.</p>
 <p>This file provides the API for the <strong>init()</strong> and <strong>create()</strong> functions of a protocol, and the protocol-specific configuration structures, enums, and events.</p>
 <p>If a system was changing from one protocol to another, this is the only aspect they would have to change their references to.</p>
 <p><span id="firmwareinterface-fw-if-abstractionlayer-implementation"></span></p>
 </div>
 <div class="section" id="implementation">
 <h4>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">¶</a></h4>
-<p>Each protocol directory then has the source file for that platform(e.g. <strong>v80</strong>, <strong>linux</strong>, etc) and protocol (e.g. <strong>fw_if_smbus_amr.c</strong>). It should implement the generic API provided in <strong>fw_if.h</strong>, and the protocol-specific API provided in the common protocol header file (in this example, <strong>fw_if_smbus.h</strong>).</p>
+<p>Each protocol directory then has the source file for that board(e.g. <strong>v80</strong>, <strong>linux</strong>, etc) and protocol (e.g. <strong>fw_if_smbus_amr.c</strong>). It should implement the generic API provided in <strong>fw_if.h</strong>, and the protocol-specific API provided in the common protocol header file (in this example, <strong>fw_if_smbus.h</strong>).</p>
 <p><span id="firmwareinterface-fw-if-abstractionlayer-api"></span></p>
 </div>
 </div>
@@ -1087,7 +1087,7 @@ if( FW_IF_TRUE == thereIsAnError )
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 28, 2026.
+      <span class="lastupdated">Last updated on June 02, 2026.
       </span></p>
   </div>
 

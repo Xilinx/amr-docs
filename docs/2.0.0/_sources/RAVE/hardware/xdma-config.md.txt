@@ -8,7 +8,7 @@
 
 ## Overview
 
-The RAVE platform uses the XDMA PL IP (xilinx.com:ip:xdma) for DMA functionality. The VE2302 device is a Versal Edge-series device that does not include a CPM block, so DMA must be implemented in soft logic within the programmable fabric.
+The RAVE Board uses the XDMA PL IP (xilinx.com:ip:xdma) for DMA functionality. The VE2302 device is a Versal Edge-series device that does not include a CPM block, so DMA must be implemented in soft logic within the programmable fabric.
 
 XDMA provides a channel-based DMA architecture supporting 2 physical functions (PF0 for management with device ID 0x5710, PF1 for user/DMA with device ID 0x5711). The IP supports multiple DMA channels with memory-mapped and streaming interfaces for efficient data transfer between host and device memory.
 

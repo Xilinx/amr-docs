@@ -72,11 +72,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../hardware/index.html">Hardware Design - AMR Common</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">V80 Board</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../V80/index.html">V80 Platform Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../V80/index.html">V80 Board Documentation</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">RAVE Board</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Hardware Design - RAVE VPR-4616</a></li>
 </ul>
@@ -133,20 +133,20 @@
 <h1>AMR RAVE - Hierarchy Overview<a class="headerlink" href="#amr-rave-hierarchy-overview" title="Permalink to this heading">¶</a></h1>
 <blockquote>
 <div><p><strong>For common Versal architecture concepts</strong>, see <a class="reference internal" href="../../hardware/hierarchy.html"><span class="std std-doc">Common Hierarchy</span></a></p>
-<p>This document describes the RAVE platform-specific hierarchy and system architecture.</p>
+<p>This document describes the RAVE Board-specific hierarchy and system architecture.</p>
 </div></blockquote>
 <p><span id="amrrave-hierarchyoverview-introduction"></span></p>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h2>
-<p>The RAVE platform architecture combines an on-board Ryzen processor with a Versal VE2302 FPGA device in a Mini-ITX form factor.</p>
-<p><img alt="RAVE Platform Block Diagram" src="../../_images/rave_block.png" /></p>
+<p>The RAVE Board architecture combines an on-board Ryzen processor with a Versal VE2302 FPGA device in a Mini-ITX form factor.</p>
+<p><img alt="RAVE Board Block Diagram" src="../../_images/rave_block.png" /></p>
 <p><strong>Note:</strong> Image shows RAVE system architecture with VE2302, PL-based PCIe/XDMA, LPDDR4 memory, Ryzen connection, and expansion I/O. The design integrates PCIe connectivity between the processors, LPDDR4 memory for the Versal device, and extensive peripheral integration for standalone embedded operation.</p>
 <p>The VE2302 implements a minimal base design in programmable logic with PCIe and XDMA IP blocks connecting to the on-board Ryzen through GTYP transceivers. The architecture supports expansion through a 160-pin Samtec connector enabling application-specific daughtercards for networking, vision, and custom I/O requirements.</p>
 <p><span id="amrrave-hierarchyoverview-systemarchitecture"></span></p>
 </div>
 <div class="section" id="system-architecture">
 <h2>System Architecture<a class="headerlink" href="#system-architecture" title="Permalink to this heading">¶</a></h2>
-<p>The RAVE platform consists of two primary processing elements operating in a hybrid configuration. The Ryzen processor provides x86 compute capabilities and hosts the operating system. The Versal VE2302 device provides FPGA acceleration and programmable I/O connectivity.</p>
+<p>The RAVE Board consists of two primary processing elements operating in a hybrid configuration. The Ryzen processor provides x86 compute capabilities and hosts the operating system. The Versal VE2302 device provides FPGA acceleration and programmable I/O connectivity.</p>
 <p>The two processors communicate through a PCIe Gen3 x4 interface implemented using GT transceivers on the Versal side. The PCIe Versal IP and XDMA PL IP in the VE2302 handle the PCIe protocol and DMA operations, consuming programmable logic resources.</p>
 <p>The Ryzen processor connects to system DDR memory through its integrated memory controller, while the VE2302 accesses its dedicated LPDDR4 memory (8-16 GB depending on variant) through the Versal integrated DDRMC. This dual-memory architecture allows each processor to operate independently while sharing data through PCIe DMA transfers.</p>
 <p><strong>Note:</strong> For processor model and memory capacity by variant, see the <a class="reference external" href="https://www.amd.com/en/products/embedded/embedded-plus.html">Sapphire RAVE1 EDGE+</a>.</p>
@@ -176,14 +176,14 @@
 </div>
 <div class="section" id="peripheral-integration">
 <h2>Peripheral Integration<a class="headerlink" href="#peripheral-integration" title="Permalink to this heading">¶</a></h2>
-<p>The RAVE platform integrates several peripherals through Versal MIO (Multiplexed I/O) pins. These peripherals support board identification, security, debug access, and visual status indication.</p>
-<p>The Board-ID EEPROM connects via I2C at address 0x57, storing platform identification and manufacturing data. The TPM 2.0 module connects via SPI, providing hardware-based cryptographic operations. A USB-to-UART bridge enables multi-channel debug access from the host system.</p>
-<p>Status LEDs connect to MIO pins providing visual indication of boot progress and system state. Some platform variants add eMMC storage and USB 2.0 host controller through additional Versal MIO connections.</p>
+<p>The RAVE Board integrates several peripherals through Versal MIO (Multiplexed I/O) pins. These peripherals support board identification, security, debug access, and visual status indication.</p>
+<p>The Board-ID EEPROM connects via I2C at address 0x57, storing board identification and manufacturing data. The TPM 2.0 module connects via SPI, providing hardware-based cryptographic operations. A USB-to-UART bridge enables multi-channel debug access from the host system.</p>
+<p>Status LEDs connect to MIO pins providing visual indication of boot progress and system state. Some board variants add eMMC storage and USB 2.0 host controller through additional Versal MIO connections.</p>
 <p><span id="amrrave-hierarchyoverview-expansionio"></span></p>
 </div>
 <div class="section" id="expansion-i-o-architecture">
 <h2>Expansion I/O Architecture<a class="headerlink" href="#expansion-i-o-architecture" title="Permalink to this heading">¶</a></h2>
-<p>The expansion connector provides access to GT transceivers, XPIO signals, and HDIO signals from the VE2302. This connector architecture enables application-specific daughtercards to extend the platform capabilities.</p>
+<p>The expansion connector provides access to GT transceivers, XPIO signals, and HDIO signals from the VE2302. This connector architecture enables application-specific daughtercards to extend the board capabilities.</p>
 <p>Available daughtercards include Ethernet cards for network connectivity and camera cards for vision processing applications. Custom daughtercards can leverage the GT transceivers for high-speed serial protocols or the parallel I/O for application-specific interfaces.</p>
 <p><strong>Note:</strong> For connector specifications and daughtercard details, see the <a class="reference external" href="https://www.amd.com/en/products/embedded/embedded-plus.html">Sapphire RAVE1 EDGE+</a> and hardware design repository.</p>
 <p><span id="amrrave-hierarchyoverview-memoryarchitecture"></span></p>
@@ -198,7 +198,7 @@
 <div class="section" id="boot-and-configuration-flow">
 <h2>Boot and Configuration Flow<a class="headerlink" href="#boot-and-configuration-flow" title="Permalink to this heading">¶</a></h2>
 <p>The RAVE boot sequence begins with the PMC reading the boot PDI from OSPI flash (128MB). The PMC initializes the LPDDR4 memory controller, loads the RPU firmware into memory, and configures the programmable logic with the PCIe and XDMA IP blocks.</p>
-<p>The RPU firmware begins execution after PMC handoff, initializing board peripherals through CIPS I2C and SPI interfaces. The firmware establishes communication with the Ryzen host by setting up software GCQ structures in shared LPDDR4 memory regions. Once PCIe link training completes between the VE2302 and Ryzen, the platform is ready for application operation.</p>
+<p>The RPU firmware begins execution after PMC handoff, initializing board peripherals through CIPS I2C and SPI interfaces. The firmware establishes communication with the Ryzen host by setting up software GCQ structures in shared LPDDR4 memory regions. Once PCIe link training completes between the VE2302 and Ryzen, the board is ready for application operation.</p>
 </div>
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
@@ -222,7 +222,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 28, 2026.
+      <span class="lastupdated">Last updated on June 02, 2026.
       </span></p>
   </div>
 

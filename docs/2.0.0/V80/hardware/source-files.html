@@ -72,11 +72,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../hardware/index.html">Hardware Design - AMR Common</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">V80 Board</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">V80 Platform Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">V80 Board Documentation</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">RAVE Board</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../RAVE/hardware/index.html">Hardware Design - RAVE VPR-4616</a></li>
 </ul>
@@ -138,7 +138,7 @@
 <p><span id="amrv80-sourcefileoverview-overview"></span></p>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
-<p>The V80 hardware design files are organized under build_v80/amr_vivado_designs/alveo_v80/ with the v80_base design providing the base platform implementation.</p>
+<p>The V80 hardware design files are organized under build_v80/amr_vivado_designs/alveo_v80/ with the v80_base design providing the base board implementation.</p>
 <p><span id="amrv80-sourcefileoverview-hardwaredirectorytree"></span></p>
 </div>
 <div class="section" id="hardware-directory-tree">
@@ -170,8 +170,8 @@
     │               │   └── smbus_v1_1_vl_rfs.sv
     │               └── xgui
     │                   └── smbus_v1_1.tcl
-    └── emb_plus_ve2302                  (VE2302 FPGA platforms)
-        ├── platforms
+    └── emb_plus_ve2302                  (VE2302 FPGA boards)
+        ├── boards
         │   ├── scripts
         │   │   ├── gen_sdt.tcl
         │   │   ├── gen_sdt_dfx.tcl
@@ -199,11 +199,11 @@
 </div>
 <div class="section" id="build-v80">
 <h2>build_v80<a class="headerlink" href="#build-v80" title="Permalink to this heading">¶</a></h2>
-<p>This is the top level directory containing the Vivado design sources for the AMR V80 hardware platform.</p>
+<p>This is the top level directory containing the Vivado design sources for the AMR V80 hardware board.</p>
 <p><span id="amrv80-sourcefileoverview-amrvivadodesigns"></span></p>
 <div class="section" id="amr-vivado-designs">
 <h3>amr_vivado_designs<a class="headerlink" href="#amr-vivado-designs" title="Permalink to this heading">¶</a></h3>
-<p>The amr_vivado_designs directory contains all hardware design files for multiple FPGA platforms (Alveo V80 and VE2302). The repository supports Makefile-based builds with CI/CD integration via Jenkins.</p>
+<p>The amr_vivado_designs directory contains all hardware design files for multiple FPGA boards (Alveo V80 and VE2302). The repository supports Makefile-based builds with CI/CD integration via Jenkins.</p>
 <p><span id="amrv80-sourcefileoverview-alveov80"></span></p>
 <div class="section" id="alveo-v80">
 <h4>alveo_v80<a class="headerlink" href="#alveo-v80" title="Permalink to this heading">¶</a></h4>
@@ -323,9 +323,9 @@
 <div class="section" id="emb-plus-ve2302">
 <h4>emb_plus_ve2302<a class="headerlink" href="#emb-plus-ve2302" title="Permalink to this heading">¶</a></h4>
 <p>This directory contains multiple platform designs for the VE2302 Versal embedded FPGA targeting Vivado 2026.1 tools. It includes both flat (non-DFX) designs and Dynamic Function eXchange (DFX) capable designs.</p>
-<p><span id="amrv80-sourcefileoverview-ve2302platforms"></span></p>
-<div class="section" id="platforms">
-<h5>platforms<a class="headerlink" href="#platforms" title="Permalink to this heading">¶</a></h5>
+<p><span id="amrv80-sourcefileoverview-ve2302boards"></span></p>
+<div class="section" id="boards">
+<h5>boards<a class="headerlink" href="#boards" title="Permalink to this heading">¶</a></h5>
 <p>Multiple platform designs, each with similar structure (Makefile, scripts/, xdc/, and optional ip/):</p>
 <ul class="simple">
 <li><p><strong>ve2302_1gEth</strong> - Dual-channel 1G Ethernet design using standard MAC</p></li>
@@ -334,7 +334,7 @@
 <li><p><strong>ve2302_xdma_gmsl</strong> - GMSL pipeline with XDMA/PCIe support</p></li>
 <li><p><strong>ve2302_xdma_base</strong> - DFX-enabled base design with PCIe/XDMA, serves as base for reconfigurable modules</p></li>
 </ul>
-<p>Each platform build generates:</p>
+<p>Each board build generates:</p>
 <ul class="simple">
 <li><p>XSA file (hardware definition)</p></li>
 <li><p>SDT files (system device tree)</p></li>
@@ -409,7 +409,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 28, 2026.
+      <span class="lastupdated">Last updated on June 02, 2026.
       </span></p>
   </div>
 

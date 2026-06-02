@@ -72,11 +72,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Hardware Design - AMR Common</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">V80 Board</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Platform Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Board Documentation</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">RAVE Board</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../RAVE/hardware/index.html">Hardware Design - RAVE VPR-4616</a></li>
 </ul>
@@ -134,12 +134,12 @@
 <p><span id="amr-baselogic-overview"></span></p>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
-<p>This document describes the common base design philosophy shared across all AMR platforms (V80, RAVE). For platform-specific implementations, refer to the V80 Base Logic or RAVE Base Logic documentation which detail the particular configurations and hardware implementations for each platform.</p>
+<p>This document describes the common base design philosophy shared across all AMR supported Boards (V80, RAVE). For board-specific implementations, refer to the V80 Base Logic or RAVE Base Logic documentation which detail the particular configurations and hardware implementations for each board.</p>
 <p><span id="amr-baselogic-minimaldesign"></span></p>
 </div>
 <div class="section" id="minimal-base-design-philosophy">
 <h2>Minimal Base Design Philosophy<a class="headerlink" href="#minimal-base-design-philosophy" title="Permalink to this heading">¶</a></h2>
-<p>All AMR platforms follow a minimal base design approach that prioritizes simplicity and firmware-based management over complex hardware IP integration. This philosophy recognizes that management and control functions can often be more efficiently implemented in software running on the RPU processors rather than through dedicated hardware logic blocks in the programmable logic fabric.</p>
+<p>All AMR supported boards follow a minimal base design approach that prioritizes simplicity and firmware-based management over complex hardware IP integration. This philosophy recognizes that management and control functions can often be more efficiently implemented in software running on the RPU processors rather than through dedicated hardware logic blocks in the programmable logic fabric.</p>
 <div class="section" id="management-through-firmware">
 <h3>Management Through Firmware<a class="headerlink" href="#management-through-firmware" title="Permalink to this heading">¶</a></h3>
 <p>The AMR base designs do not include management IP blocks in the programmable logic. There are no hardware implementations of the General Command Queue (GCQ), no UUID ROM or identification ROM blocks, no EEPROM controller IP instantiated in PL, and no hardcoded register tables implemented in programmable logic. The SMBus controller IP, while available in the IP repository, is not instantiated in the base designs.</p>
@@ -156,7 +156,7 @@
 </div>
 <div class="section" id="two-physical-functions-pattern">
 <h2>Two Physical Functions Pattern<a class="headerlink" href="#two-physical-functions-pattern" title="Permalink to this heading">¶</a></h2>
-<p>All AMR platforms utilize two PCIe Physical Functions following a consistent architectural pattern. Physical Function 0 (PF0) serves as the management function, reserved for administrator privileges and protected from non-privileged access. Physical Function 1 (PF1) provides user and DMA functionality including test infrastructure and data transfer capabilities.</p>
+<p>All AMR supported boards utilize two PCIe Physical Functions following a consistent architectural pattern. Physical Function 0 (PF0) serves as the management function, reserved for administrator privileges and protected from non-privileged access. Physical Function 1 (PF1) provides user and DMA functionality including test infrastructure and data transfer capabilities.</p>
 <div class="section" id="pf0-management-function">
 <h3>PF0 Management Function<a class="headerlink" href="#pf0-management-function" title="Permalink to this heading">¶</a></h3>
 <p>The PF0 physical function provides address space for management register access while reserving this space for future expansion in the base designs. No hardware management IP is instantiated in the base configurations, with the address space available for future designs that may require hardware management blocks.</p>
@@ -197,9 +197,9 @@
 <h2>Test Infrastructure<a class="headerlink" href="#test-infrastructure" title="Permalink to this heading">¶</a></h2>
 <div class="section" id="pf1-test-hierarchy">
 <h3>PF1 Test Hierarchy<a class="headerlink" href="#pf1-test-hierarchy" title="Permalink to this heading">¶</a></h3>
-<p>All AMR platforms include test infrastructure within the PF1 hierarchical block to validate PCIe connectivity and basic system functionality. This test logic provides a simple mechanism to verify that the PCIe link is operational and that register access through the PF1 BAR functions correctly.</p>
+<p>All AMR supported boards include test infrastructure within the PF1 hierarchical block to validate PCIe connectivity and basic system functionality. This test logic provides a simple mechanism to verify that the PCIe link is operational and that register access through the PF1 BAR functions correctly.</p>
 <p>The SmartConnect IP provides AXI interconnect functionality, routing traffic from the NoC master interface to one or more peripheral slave devices. In the base configuration, the SmartConnect typically routes to a single AXI GPIO block, though additional peripherals can be connected as needed.</p>
-<p>The AXI GPIO IP is configured for bidirectional operation with a default output value that varies by platform (typically 0xF1). The GPIO implementation includes a loopback connection where the gpio_io_o output port connects directly to the gpio_io_i input port. This loopback enables simple functional testing where software writes values to the GPIO output register and reads back the same values from the input register, verifying the complete PCIe-to-PL register access path.</p>
+<p>The AXI GPIO IP is configured for bidirectional operation with a default output value that varies by board (typically 0xF1). The GPIO implementation includes a loopback connection where the gpio_io_o output port connects directly to the gpio_io_i input port. This loopback enables simple functional testing where software writes values to the GPIO output register and reads back the same values from the input register, verifying the complete PCIe-to-PL register access path.</p>
 <p>The Processor System Reset IP provides reset synchronization for the test hierarchy. The block accepts an asynchronous reset input from CIPS (pl0_resetn) and a clock input (typically pl0_ref_clk at 100 MHz). The outputs include interconnect_aresetn for resetting the SmartConnect and peripheral_aresetn for resetting the AXI GPIO and other peripherals. This separation allows the interconnect and peripherals to reset with appropriate timing relationships.</p>
 <p><span id="amr-baselogic-firmwarebasedmanagement"></span></p>
 </div>
@@ -208,7 +208,7 @@
 <h2>Firmware-Based Management<a class="headerlink" href="#firmware-based-management" title="Permalink to this heading">¶</a></h2>
 <div class="section" id="rpu-firmware-architecture">
 <h3>RPU Firmware Architecture<a class="headerlink" href="#rpu-firmware-architecture" title="Permalink to this heading">¶</a></h3>
-<p>All AMR platforms rely on firmware executing on the RPU0 for management operations. The firmware handles boot and initialization sequences, board management including sensor monitoring and thermal management, inter-processor communication through the software GCQ, flash management including OSPI programming and Flash Partition Table (FPT) operations, and host communication through the PCIe interface.</p>
+<p>All AMR supported boards rely on firmware executing on the RPU0 for management operations. The firmware handles boot and initialization sequences, board management including sensor monitoring and thermal management, inter-processor communication through the software GCQ, flash management including OSPI programming and Flash Partition Table (FPT) operations, and host communication through the PCIe interface.</p>
 <p>The firmware architecture leverages the CIPS-integrated peripherals rather than requiring dedicated hardware in programmable logic. I2C peripherals access board sensors, EEPROMs, and power management ICs for board-level monitoring and control. SPI peripherals handle flash programming operations for firmware updates and configuration changes. UART peripherals provide debug console access and logging capabilities.</p>
 <p>Shared DDR memory serves as the communication medium for the software GCQ, with the firmware managing queue data structures and message processing. NoC connectivity enables firmware memory access for code execution, data storage, and inter-processor communication buffers.</p>
 <p>This firmware-centric approach provides several benefits. Management functionality can be updated through firmware releases without hardware modifications. The behavior can be customized for different deployment scenarios through configuration files. Error handling and recovery mechanisms can leverage the full capabilities of the R5 processor including exception handling and debugging support.</p>
@@ -216,7 +216,7 @@
 <div class="section" id="cips-peripheral-usage">
 <h3>CIPS Peripheral Usage<a class="headerlink" href="#cips-peripheral-usage" title="Permalink to this heading">¶</a></h3>
 <p>The CIPS-integrated peripherals provide all necessary I/O for board management without requiring programmable logic IP. The I2C interfaces access board sensors for temperature and voltage monitoring, communicate with EEPROMs for board identification and calibration data storage, and control power management ICs for voltage rail sequencing and monitoring.</p>
-<p>The SPI interfaces handle OSPI flash programming through the PMC, with the RPU firmware coordinating flash operations for firmware updates and configuration management. Some platforms include additional SPI devices such as TPM (Trusted Platform Module) security modules that the firmware accesses through the SPI peripheral.</p>
+<p>The SPI interfaces handle OSPI flash programming through the PMC, with the RPU firmware coordinating flash operations for firmware updates and configuration management. Some boards include additional SPI devices such as TPM (Trusted Platform Module) security modules that the firmware accesses through the SPI peripheral.</p>
 <p>The UART peripherals provide console access for debugging and system logging. The firmware outputs diagnostic messages, error reports, and status information through UART, with the host system or debug equipment capturing this output for analysis.</p>
 <p>GPIO signals implemented through MIO (Multiplexed I/O) pins control status LEDs, enable signals for power rails, and other board-level control functions. The firmware manipulates these GPIO signals through CIPS register writes, providing direct hardware control without intervening logic in the programmable fabric.</p>
 <p><span id="amr-baselogic-addressmapping"></span></p>
@@ -226,18 +226,18 @@
 <h2>Address Mapping Concepts<a class="headerlink" href="#address-mapping-concepts" title="Permalink to this heading">¶</a></h2>
 <div class="section" id="pcie-to-axi-address-translation">
 <h3>PCIe to AXI Address Translation<a class="headerlink" href="#pcie-to-axi-address-translation" title="Permalink to this heading">¶</a></h3>
-<p>All AMR platforms require address translation between the PCIe address domain and the AXI address domain. The PCIe specification uses 64-bit addresses in the terabyte range, with platform-specific BARs typically assigned addresses like 0x201_0000_0000 for PF0 and 0x202_0000_0000 for PF1.</p>
-<p>The AXI address domain in the Versal device uses local address spaces, often starting at addresses like 0x0000_0000 or 0x1000_0000. This address mismatch requires translation mechanisms implemented through platform-specific configuration registers and NoC remapping capabilities.</p>
-<p>For platforms with CPM, the PCIEBAR2AXIBAR registers in the CPM configuration perform the address translation. For platforms using PL-based PCIe IP, the PCIe IP itself provides PCIEBAR2AXIBAR configuration registers. In both cases, these registers specify how PCIe addresses map to AXI addresses.</p>
+<p>All AMR supported boards require address translation between the PCIe address domain and the AXI address domain. The PCIe specification uses 64-bit addresses in the terabyte range, with board-specific BARs typically assigned addresses like 0x201_0000_0000 for PF0 and 0x202_0000_0000 for PF1.</p>
+<p>The AXI address domain in the Versal device uses local address spaces, often starting at addresses like 0x0000_0000 or 0x1000_0000. This address mismatch requires translation mechanisms implemented through board-specific configuration registers and NoC remapping capabilities.</p>
+<p>For boards with CPM, the PCIEBAR2AXIBAR registers in the CPM configuration perform the address translation. For boards using PL-based PCIe IP, the PCIe IP itself provides PCIEBAR2AXIBAR configuration registers. In both cases, these registers specify how PCIe addresses map to AXI addresses.</p>
 <p>The NoC provides additional address remapping through the REMAPS configuration parameter in the AXI NoC IP. This parameter specifies the source PCIe address, the destination AXI or memory address, and the size of the mapped region. The NoC compiler uses this information to configure the routing fabric appropriately.</p>
 <p>The combination of PCIEBAR2AXIBAR translation and NoC remapping enables flexible address space management. Software GCQ buffers in DDR memory can be accessed through PCIe BAR offsets that the NoC translates to the corresponding physical DDR addresses. PL peripherals at local AXI addresses can be accessed through PCIe addresses that translate to those local addresses.</p>
-<p><span id="amr-baselogic-platformspecifics"></span></p>
+<p><span id="amr-baselogic-boardspecifics"></span></p>
 </div>
 </div>
-<div class="section" id="platform-specific-implementations">
-<h2>Platform-Specific Implementations<a class="headerlink" href="#platform-specific-implementations" title="Permalink to this heading">¶</a></h2>
-<p>For detailed platform-specific configurations, refer to the individual platform documentation. The V80 platform implements the base design using CPM5 hardened PCIe and QDMA with minimal programmable logic IP. The configuration includes specific BAR sizes, device IDs, and CPM5 configuration parameters detailed in the V80 Base Logic documentation.</p>
-<p>The RAVE platform implements the base design using PL PCIe IP and QDMA PL IP due to the VE2302 device architecture. The configuration includes more programmable logic IP blocks to provide PCIe and DMA functionality, peripheral integration for standalone operation, and expansion connector support. The RAVE Base Logic documentation provides the specific implementation details.</p>
+<div class="section" id="board-specific-implementations">
+<h2>Board-Specific Implementations<a class="headerlink" href="#board-specific-implementations" title="Permalink to this heading">¶</a></h2>
+<p>For detailed board-specific configurations, refer to the individual board documentation. The V80 Board implements the base design using CPM5 hardened PCIe and QDMA with minimal programmable logic IP. The configuration includes specific BAR sizes, device IDs, and CPM5 configuration parameters detailed in the V80 Base Logic documentation.</p>
+<p>The RAVE Board implements the base design using PL PCIe IP and QDMA PL IP due to the VE2302 device architecture. The configuration includes more programmable logic IP blocks to provide PCIe and DMA functionality, peripheral integration for standalone operation, and expansion connector support. The RAVE Base Logic documentation provides the specific implementation details.</p>
 <p><span id="amr-baselogic-designguidelines"></span></p>
 </div>
 <div class="section" id="design-guidelines">
@@ -245,12 +245,12 @@
 <div class="section" id="adding-custom-ip">
 <h3>Adding Custom IP<a class="headerlink" href="#adding-custom-ip" title="Permalink to this heading">¶</a></h3>
 <p>When extending AMR base designs with custom IP blocks, consider using the provided expansion points before modifying the core architecture. The M_AXI_LPD interface provides a direct connection from the RPU to programmable logic, suitable for firmware-accessible peripherals. The reserved PF0 and PF1 address spaces can accommodate additional register blocks without address conflicts. The configured PL-PS interrupt signals enable event notification from hardware to firmware.</p>
-<p>Maintain the minimal approach when adding IP by implementing only the necessary hardware acceleration or interface functions. Prefer firmware solutions when the performance requirements allow software implementation, as this maintains design flexibility and reduces resource consumption. Test additions on both platforms when creating portable IP to ensure compatibility across different device architectures.</p>
+<p>Maintain the minimal approach when adding IP by implementing only the necessary hardware acceleration or interface functions. Prefer firmware solutions when the performance requirements allow software implementation, as this maintains design flexibility and reduces resource consumption. Test additions on both boards when creating portable IP to ensure compatibility across different device architectures.</p>
 </div>
-<div class="section" id="common-vs-platform-specific-documentation">
-<h3>Common vs Platform-Specific Documentation<a class="headerlink" href="#common-vs-platform-specific-documentation" title="Permalink to this heading">¶</a></h3>
-<p>Documentation should be placed in the common hardware folder when it describes concepts, principles, or patterns that apply to all platforms regardless of the specific hardware implementation. Examples include general Versal architecture, NoC concepts, the minimal design philosophy, and firmware-based management approaches.</p>
-<p>Platform-specific documentation belongs in the individual platform folders when it describes unique hardware implementations, specific IP configurations, or features available only on that platform. Examples include CPM5 configuration (V80 only), HBM memory (V80 only), PL PCIe IP configuration (RAVE only), or daughtercard expansion (RAVE only).</p>
+<div class="section" id="common-vs-board-specific-documentation">
+<h3>Common vs Board-Specific Documentation<a class="headerlink" href="#common-vs-board-specific-documentation" title="Permalink to this heading">¶</a></h3>
+<p>Documentation should be placed in the common hardware folder when it describes concepts, principles, or patterns that apply to all boards regardless of the specific hardware implementation. Examples include general Versal architecture, NoC concepts, the minimal design philosophy, and firmware-based management approaches.</p>
+<p>Board-specific documentation belongs in the individual board folders when it describes unique hardware implementations, specific IP configurations, or features available only on that Board. Examples include CPM5 configuration (V80 only), HBM memory (V80 only), PL PCIe IP configuration (RAVE only), or daughtercard expansion (RAVE only).</p>
 </div>
 </div>
 </div>
@@ -266,7 +266,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 28, 2026.
+      <span class="lastupdated">Last updated on June 02, 2026.
       </span></p>
   </div>
 

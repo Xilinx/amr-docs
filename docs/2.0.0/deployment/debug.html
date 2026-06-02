@@ -97,11 +97,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">Hardware Design - AMR Common</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">V80 Board</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Platform Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Board Documentation</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">RAVE Board</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../RAVE/hardware/index.html">Hardware Design - RAVE VPR-4616</a></li>
 </ul>
@@ -427,7 +427,7 @@ dmesg -wT             # show live dmesg output, auto-updates when new messages a
 </div>
 <div class="section" id="hardware-read-write">
 <h3><strong>Hardware read/write</strong><a class="headerlink" href="#hardware-read-write" title="Permalink to this heading">¶</a></h3>
-<p>Use <strong>ami_tool bar_rd</strong> <em>and</em> <strong>bar_wr</strong> to read or write from memory-mapped registers or memories within the platform</p>
+<p>Use <strong>ami_tool bar_rd</strong> <em>and</em> <strong>bar_wr</strong> to read or write from memory-mapped registers or memories within the board</p>
 <p><strong>bar_rd</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>% ami_tool bar_rd -d &lt;BDF&gt; -b 2 -a 0x0000ffff -l 4
 0000ffff DEAD BEEF DEAD BEEF DEAD BEEF DEAD BEEF
@@ -522,7 +522,7 @@ INFO: 512 words written successfully
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 28, 2026.
+      <span class="lastupdated">Last updated on June 02, 2026.
       </span></p>
   </div>
 

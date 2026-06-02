@@ -8,7 +8,7 @@
 
     └── amr_vivado_designs
     └── alveo_v80
-    └── platforms
+    └── boards
     ├── scripts
     │   └── gen_sdt.tcl
     └── v80_base

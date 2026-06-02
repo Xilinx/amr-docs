@@ -1,6 +1,6 @@
 # AMR - Address Mapping Concepts (Common)
 
-> **For platform-specific address maps**, see:
+> **For board-specific address maps**, see:
 > - [V80 Memory Map](../V80/hardware/memory-map.md) - V80 address space with HBM regions
 > - [RAVE Memory Map](../RAVE/hardware/memory-map.md) - RAVE address space with LPDDR4
 
@@ -8,9 +8,9 @@
 
 ## Overview
 
-This document describes **common address mapping concepts** for all AMR platforms. All platforms require address translation between PCIe and AXI address domains.
+This document describes **common address mapping concepts** for all AMR boards. All boards require address translation between PCIe and AXI address domains.
 
-All AMR platforms follow common address mapping patterns despite platform-specific implementation differences. PCIe addressing uses 64-bit addresses in the terabyte range starting from 0x200_0000_0000 and above, while AXI addressing employs local address spaces typically starting from lower values. Translation between these address domains occurs through PCIEBAR2AXIBAR registers (configured in either CPM or PCIe IP depending on platform) and through NoC REMAPS parameters in the AXI NoC IP configuration. The two physical functions (PF0 for management, PF1 for user) occupy separate address ranges enabling independent access control and address space management.
+All AMR boards follow common address mapping patterns despite board-specific implementation differences. PCIe addressing uses 64-bit addresses in the terabyte range starting from 0x200_0000_0000 and above, while AXI addressing employs local address spaces typically starting from lower values. Translation between these address domains occurs through PCIEBAR2AXIBAR registers (configured in either CPM or PCIe IP depending on board) and through NoC REMAPS parameters in the AXI NoC IP configuration. The two physical functions (PF0 for management, PF1 for user) occupy separate address ranges enabling independent access control and address space management.
 
 <span id="amr-memorymap-versaladdressspace"></span>
 
@@ -28,7 +28,7 @@ The 4GB address space contains the PS and PMC peripheral registers providing con
 
 **Range:** 0x000_0000_0000 - 0x0FF_FFFF_FFFF
 
-The 16TB address space encompasses the complete 4GB space described above along with extended regions for larger memory allocations. Upper DDR regions occupy addresses above the 4GB boundary, accessible through 64-bit addressing from capable masters. High-Bandwidth Memory (HBM) address space exists on platforms featuring HBM devices, providing dedicated addressing for the HBM controller access. Programmable logic address space begins at 0x200_0000_0000 and above, with PCIe BARs typically mapped into this region.
+The 16TB address space encompasses the complete 4GB space described above along with extended regions for larger memory allocations. Upper DDR regions occupy addresses above the 4GB boundary, accessible through 64-bit addressing from capable masters. High-Bandwidth Memory (HBM) address space exists on boards featuring HBM devices, providing dedicated addressing for the HBM controller access. Programmable logic address space begins at 0x200_0000_0000 and above, with PCIe BARs typically mapped into this region.
 
 **Reference:** [Versal 16TB Address Map](https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map)
 
@@ -38,7 +38,7 @@ The 16TB address space encompasses the complete 4GB space described above along 
 
 ### Translation Mechanism
 
-**All platforms translate PCIe addresses to AXI:**
+**All boards translate PCIe addresses to AXI:**
 
 **PCIe Address Space:**
 - TB-range 64-bit addresses
@@ -75,7 +75,7 @@ CONFIG.REMAPS {M00_INI {{0x201_0000_0000 0x1000_0000 8M}}}
 **Common Pattern:**
 - Address range in TB space (0x201_xxxx_xxxx)
 - BAR0 provides management register access
-- Size varies by platform (V80: 8MB, RAVE: configurable)
+- Size varies by board (V80: 8MB, RAVE: configurable)
 - No hardware IP in base design (address space reserved)
 
 ### PF1 (User/DMA) Address Space
@@ -84,7 +84,7 @@ CONFIG.REMAPS {M00_INI {{0x201_0000_0000 0x1000_0000 8M}}}
 - Address range in TB space (0x202_xxxx_xxxx)
 - BAR0: DMA registers and descriptors
 - BAR2: AXI bridge to PL (test GPIO, user logic)
-- Size varies by platform
+- Size varies by board
 
 <span id="amr-memorymap-ddrmemoryregions"></span>
 
@@ -96,7 +96,7 @@ This lower DDR region serves multiple purposes during system operation. The PMC 
 
 ### Upper DDR (0x500_0000_0000+)
 
-The upper DDR regions provide additional memory capacity beyond the 32-bit addressable range. These regions hold user application data, DMA transfer buffers, and extended data structures that do not require direct RPU access. The PCIe host and other 64-bit capable masters access these regions through the NoC. Specific address ranges and total upper DDR capacity vary significantly by platform depending on the memory architecture and installed memory devices.
+The upper DDR regions provide additional memory capacity beyond the 32-bit addressable range. These regions hold user application data, DMA transfer buffers, and extended data structures that do not require direct RPU access. The PCIe host and other 64-bit capable masters access these regions through the NoC. Specific address ranges and total upper DDR capacity vary significantly by board depending on the memory architecture and installed memory devices.
 
 <span id="amr-memorymap-pladdressspace"></span>
 
@@ -120,9 +120,9 @@ The upper DDR regions provide additional memory capacity beyond the 32-bit addre
 - Example: 0x1000_0000 base address
 - SmartConnect further routes to peripherals
 
-<span id="amr-memorymap-platformspecific"></span>
+<span id="amr-memorymap-boardspecific"></span>
 
-## Platform-Specific Address Maps
+## Board-Specific Address Maps
 
 For detailed address maps with specific ranges:
 
@@ -189,8 +189,8 @@ Direct DRAM address: 0x000_1000_0000
 When adding custom IP:
 
 1. **Check available address space**
-   - PF0: Management space (platform-dependent size)
-   - PF1: User space (platform-dependent size)
+   - PF0: Management space (board-dependent size)
+   - PF1: User space (board-dependent size)
 
 2. **Use SmartConnect for routing**
    - Connect to PF0/PF1 AXI interfaces

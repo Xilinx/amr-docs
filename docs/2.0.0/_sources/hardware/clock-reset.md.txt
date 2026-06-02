@@ -1,6 +1,6 @@
 # AMR - Clock and Reset Concepts (Common)
 
-> **For platform-specific clock/reset configurations**, see:
+> **For board-specific clock/reset configurations**, see:
 > - [V80 Clock Reset](../V80/hardware/clock-reset.md) - V80 clock configuration
 > - [RAVE Clock Reset](../RAVE/hardware/clock-reset.md) - RAVE clock configuration
 
@@ -8,9 +8,9 @@
 
 ## Overview
 
-This document describes **common clock and reset concepts** shared across all AMR platforms. All platforms use CIPS-generated clocks and processor system reset IP for reset synchronization.
+This document describes **common clock and reset concepts** shared across all AMR Boards. All boards use CIPS-generated clocks and processor system reset IP for reset synchronization.
 
-All AMR platforms follow common clock and reset patterns despite implementation differences. The CIPS generates multiple PL reference clocks at standard frequencies for use by programmable logic IP blocks. Processor System Reset IP blocks synchronize asynchronous reset inputs to specific clock domains, ensuring proper reset timing relationships. Designs typically employ multiple clock domains to accommodate different IP block requirements, with some logic operating at lower frequencies for power efficiency and other logic at higher frequencies for performance. External reset inputs from CIPS are synchronized to internal clocks through the reset IP to prevent metastability and ensure reliable operation.
+All AMR boards follow common clock and reset patterns despite implementation differences. The CIPS generates multiple PL reference clocks at standard frequencies for use by programmable logic IP blocks. Processor System Reset IP blocks synchronize asynchronous reset inputs to specific clock domains, ensuring proper reset timing relationships. Designs typically employ multiple clock domains to accommodate different IP block requirements, with some logic operating at lower frequencies for power efficiency and other logic at higher frequencies for performance. External reset inputs from CIPS are synchronized to internal clocks through the reset IP to prevent metastability and ensure reliable operation.
 
 <span id="amr-clockreset-cipsclocks"></span>
 
@@ -18,7 +18,7 @@ All AMR platforms follow common clock and reset patterns despite implementation 
 
 ### Standard CIPS Clock Outputs
 
-**All AMR platforms generate these clocks from CIPS:**
+**All AMR boards generate these clocks from CIPS:**
 
 | Clock Signal | Typical Frequency | Common Usage |
 |--------------|-------------------|--------------|
@@ -33,7 +33,7 @@ PMC_CRP_PL1_REF_CTRL_FREQMHZ {33.3333333}
 PMC_CRP_PL2_REF_CTRL_FREQMHZ {250}
 ```
 
-Platform variations exist in clock usage strategies. Some platforms use these CIPS clocks directly without additional clock generation, maintaining simplicity in the base design. Other platforms may instantiate clocking wizard IP to generate additional custom frequencies when user kernels or application logic requires clock rates beyond the standard CIPS outputs.
+Board variations exist in clock usage strategies. Some boards use these CIPS clocks directly without additional clock generation, maintaining simplicity in the base design. Other boards may instantiate clocking wizard IP to generate additional custom frequencies when user kernels or application logic requires clock rates beyond the standard CIPS outputs.
 
 <span id="amr-clockreset-plresets"></span>
 
@@ -41,7 +41,7 @@ Platform variations exist in clock usage strategies. Some platforms use these CI
 
 ### CIPS Reset Output
 
-**All platforms generate PL reset:**
+**All boards generate PL reset:**
 
 | Reset Signal | Configuration |
 |--------------|---------------|
@@ -61,7 +61,7 @@ PS_NUM_FABRIC_RESETS {1}
 
 ### Purpose
 
-All platforms utilize the Processor System Reset IP (xilinx.com:ip:proc_sys_reset) to handle reset synchronization requirements. The IP synchronizes external asynchronous resets to specific clock domains, preventing metastability and ensuring clean reset assertion and deassertion. The IP generates appropriately timed resets with proper setup and hold relationships relative to the clock edges. Separate reset outputs serve different purposes, with interconnect resets for AXI switches and arbitration logic distinct from peripheral resets for endpoint IP blocks.
+All boards utilize the Processor System Reset IP (xilinx.com:ip:proc_sys_reset) to handle reset synchronization requirements. The IP synchronizes external asynchronous resets to specific clock domains, preventing metastability and ensuring clean reset assertion and deassertion. The IP generates appropriately timed resets with proper setup and hold relationships relative to the clock edges. Separate reset outputs serve different purposes, with interconnect resets for AXI switches and arbitration logic distinct from peripheral resets for endpoint IP blocks.
 
 ### Common Reset Outputs
 
@@ -97,7 +97,7 @@ peripheral_aresetn → AXI GPIO, peripherals
 | **250 MHz** | pl2_ref_clk | NoC AXI interfaces |
 | **33.33 MHz** | pl1_ref_clk | Available for clock wizard |
 
-**Platform-Specific:**
+**Board-Specific:**
 - V80: May need additional clocks for user kernels
 - RAVE: PCIe clock domain from GT, additional clocks for QDMA
 
@@ -154,7 +154,7 @@ Primary proc_sys_reset (100 MHz domain)
 - PF1 test hierarchy
 - Additional domains if needed
 
-Platform-specific implementations vary in reset block count and complexity. Some platforms maintain minimal base designs with a single processor system reset block in the PF1 hierarchy, sufficient for the basic test logic. Other platforms require multiple reset blocks to handle the various clock domains introduced by PL-based PCIe IP, QDMA IP, and user application logic, with each clock domain requiring its own synchronized reset.
+Board-specific implementations vary in reset block count and complexity. Some board maintain minimal base designs with a single processor system reset block in the PF1 hierarchy, sufficient for the basic test logic. Other boards require multiple reset blocks to handle the various clock domains introduced by PL-based PCIe IP, QDMA IP, and user application logic, with each clock domain requiring its own synchronized reset.
 
 <span id="amr-clockreset-expansionpattern"></span>
 
@@ -193,9 +193,9 @@ sudo ami_tool device_boot -d <bdf> -p <partition_number>
 
 **Important:** AMR does not support GPIO-based PCIe hot reset. Device reboots are performed through software commands that trigger firmware-initiated partition boot.
 
-<span id="amr-clockreset-platformspecific"></span>
+<span id="amr-clockreset-boardspecific"></span>
 
-## Platform-Specific Clock/Reset Details
+## Board-Specific Clock/Reset Details
 
 ### V80 Clock/Reset Configuration
 [V80 Clock Reset](../V80/hardware/clock-reset.md)

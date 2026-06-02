@@ -72,11 +72,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../hardware/index.html">Hardware Design - AMR Common</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">V80 Board</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../V80/index.html">V80 Platform Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../V80/index.html">V80 Board Documentation</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">RAVE Board</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Hardware Design - RAVE VPR-4616</a></li>
 </ul>
@@ -140,7 +140,7 @@
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
 <p>The RAVE base logic implementation provides PCIe connectivity and basic management functionality through programmable logic IP blocks. The VE2302 device requires PL-based PCIe and XDMA IP because it does not include a CPM (Coherent PCIe Module) hardened block.</p>
 <p>The base design includes the PCIe Versal IP for Gen3 x4 connectivity to the on-board Ryzen processor, along with the XDMA PL IP providing DMA functionality. This implementation consumes programmable logic resources to deliver PCIe and DMA capabilities that would otherwise be provided by hardened silicon in devices with CPM blocks.</p>
-<p>The design follows the minimal base design philosophy common across AMR platforms, with management handled primarily through firmware running on the RPU rather than dedicated hardware IP blocks in the programmable logic.</p>
+<p>The design follows the minimal base design philosophy common across AMR boards, with management handled primarily through firmware running on the RPU rather than dedicated hardware IP blocks in the programmable logic.</p>
 <p><span id="amrrave-baselogic-deviceconstraints"></span></p>
 </div>
 <div class="section" id="ve2302-device-architecture">
@@ -175,7 +175,7 @@
 <h2>PF1 Configuration<a class="headerlink" href="#pf1-configuration" title="Permalink to this heading">¶</a></h2>
 <p>The PF1 physical function supports both DMA operations and AXI bridge access to programmable logic peripherals. The function uses device ID 0x5701 and is configured with appropriate BARs for DMA register access and PL peripheral access.</p>
 <p>The XDMA IP provides the DMA functionality through its channel-based architecture. DMA channels support memory-mapped and streaming data transfer, with configuration managed through the XDMA control registers accessible via BAR space.</p>
-<p>The PF1 hierarchy typically includes test infrastructure similar to other AMR platforms, with a SmartConnect providing AXI interconnect functionality, an AXI GPIO block for loopback testing, and processor system reset blocks for reset synchronization.</p>
+<p>The PF1 hierarchy typically includes test infrastructure similar to other AMR boards, with a SmartConnect providing AXI interconnect functionality, an AXI GPIO block for loopback testing, and processor system reset blocks for reset synchronization.</p>
 <p><span id="amrrave-baselogic-nocconnection"></span></p>
 </div>
 <div class="section" id="noc-integration">
@@ -195,18 +195,18 @@
 </div>
 <div class="section" id="expansion-header-integration">
 <h2>Expansion Header Integration<a class="headerlink" href="#expansion-header-integration" title="Permalink to this heading">¶</a></h2>
-<p>The RAVE platform provides an expansion connector for application-specific daughtercards. The connector brings out GT transceivers, XPIO signals, and HDIO signals from the VE2302 device for custom I/O interfaces.</p>
+<p>The RAVE Board provides an expansion connector for application-specific daughtercards. The connector brings out GT transceivers, XPIO signals, and HDIO signals from the VE2302 device for custom I/O interfaces.</p>
 <p><strong>Note:</strong> For connector specifications and pinout details, refer to the <a class="reference external" href="https://www.amd.com/en/products/embedded/embedded-plus.html">Sapphire RAVE1 EDGE+</a> and hardware design repository.</p>
 <p><span id="amrrave-baselogic-peripheralintegration"></span></p>
 </div>
 <div class="section" id="peripheral-integration">
 <h2>Peripheral Integration<a class="headerlink" href="#peripheral-integration" title="Permalink to this heading">¶</a></h2>
-<p>The RAVE platform includes several on-board peripherals not typically found in pure FPGA accelerator cards. These peripherals support standalone embedded system operation and board management functions.</p>
-<p>The board includes a Board-ID EEPROM accessible via I2C at address 0x57. This EEPROM stores board identification information, manufacturing data, and platform-specific configuration. The firmware accesses this EEPROM through the CIPS I2C peripheral to read board identity and configuration during boot.</p>
+<p>The RAVE Board includes several on-board peripherals not typically found in pure FPGA accelerator cards. These peripherals support standalone embedded system operation and board management functions.</p>
+<p>The board includes a Board-ID EEPROM accessible via I2C at address 0x57. This EEPROM stores board identification information, manufacturing data, and Board-specific configuration. The firmware accesses this EEPROM through the CIPS I2C peripheral to read board identity and configuration during boot.</p>
 <p>A TPM 2.0 security module connects via SPI, providing hardware-based cryptographic operations and secure key storage. This enables secure boot, platform attestation, and other security features required in automotive and industrial applications.</p>
 <p>A USB-to-UART bridge provides multiple serial interfaces accessible from the host system via USB, simplifying debug and console access.</p>
 <p>Status LEDs are connected to MIO pins providing visual indication of system state, boot progress, and application status. The firmware controls these LEDs through MIO GPIO registers.</p>
-<p>Some platform variants include additional peripherals such as eMMC storage and USB 2.0 host controller via Versal MIO.</p>
+<p>Some board variants include additional peripherals such as eMMC storage and USB 2.0 host controller via Versal MIO.</p>
 <p><strong>Note:</strong> For peripheral specifications and part numbers, refer to the <a class="reference external" href="https://www.amd.com/en/products/embedded/embedded-plus.html">Sapphire RAVE1 EDGE+</a>.</p>
 <p><span id="amrrave-baselogic-designcomplexity"></span></p>
 </div>
@@ -230,7 +230,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 28, 2026.
+      <span class="lastupdated">Last updated on June 02, 2026.
       </span></p>
   </div>
 

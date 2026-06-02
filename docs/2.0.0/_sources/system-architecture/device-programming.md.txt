@@ -12,7 +12,7 @@ This page describes how AMR boots from card’s configuration storage devices an
 
 The primary configuration storage device of the Alveo V80 card is a 2Gb (256MB) OSPI memory and the card's boot mode selection pins are set to boot the card with programming images from this memory. The RAVE reference platform uses a 1Gb (128MB) OSPI memory.
 
-Additionally, the V80 platform includes a 64GB eMMC storage device that can be used as a secondary boot device or for storing additional programming images and user data. The RAVE platform does not include eMMC storage.
+Additionally, the V80 Board includes a 64GB eMMC storage device that can be used as a secondary boot device or for storing additional programming images and user data. The RAVE Board does not include eMMC storage.
 
   - Using Vivado hardware manager during application development allows JTAG download of programming images to the FPGA or the OSPI configuration storage.
 

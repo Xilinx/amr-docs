@@ -21,7 +21,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="V80 Platform Documentation" href="../V80/index.html" />
+    <link rel="next" title="V80 Board Documentation" href="../V80/index.html" />
     <link rel="prev" title="Source Configuration Control" href="../development/source-control.html" /> 
 </head>
 
@@ -73,22 +73,22 @@
 <p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Hardware Design - AMR Common</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#platform-documentation">Platform Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#board-documentation">Board Documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#common-hardware-documentation">Common Hardware Documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#key-common-design-principles">Key Common Design Principles</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#minimal-base-design">Minimal Base Design</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#platform-agnostic-concepts">Platform-Agnostic Concepts</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#platform-specific-implementations">Platform-Specific Implementations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#boards-agnostic-concepts">Boards-Agnostic Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#board-specific-implementations">Board-Specific Implementations</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">V80 Board</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Platform Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Board Documentation</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">RAVE Board</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../RAVE/hardware/index.html">Hardware Design - RAVE VPR-4616</a></li>
 </ul>
@@ -143,9 +143,9 @@
              
   <div class="section" id="hardware-design-amr-common">
 <h1>Hardware Design - AMR Common<a class="headerlink" href="#hardware-design-amr-common" title="Permalink to this heading">¶</a></h1>
-<p>This section contains hardware design documentation <strong>common to all AMR platforms</strong> (V80, RAVE). For platform-specific details, see the individual platform documentation.</p>
-<div class="section" id="platform-documentation">
-<h2>Platform Documentation<a class="headerlink" href="#platform-documentation" title="Permalink to this heading">¶</a></h2>
+<p>This section contains hardware design documentation <strong>common to all AMR boards</strong> (V80, RAVE). For board-specific details, see the individual board documentation.</p>
+<div class="section" id="board-documentation">
+<h2>Board Documentation<a class="headerlink" href="#board-documentation" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../V80/hardware/index.html"><span class="std std-doc">V80 Hardware Design</span></a> - Alveo V80 (CPM5, HBM)</p></li>
 <li><p><a class="reference internal" href="../RAVE/hardware/index.html"><span class="std std-doc">RAVE Hardware Design</span></a> - Embedded+ VE2302 (PL PCIe, LPDDR4)</p></li>
@@ -154,7 +154,7 @@
 <div class="section" id="common-hardware-documentation">
 <h2>Common Hardware Documentation<a class="headerlink" href="#common-hardware-documentation" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="../overview/amr-overview.html#amroverview-supportedplatforms"><span class="std std-ref">Platform Comparison</span></a> - V80 vs RAVE comparison and selection guide</p></li>
+<li><p><a class="reference internal" href="../overview/amr-overview.html#amroverview-supportedboards"><span class="std std-ref">Board Comparison</span></a> - V80 vs RAVE comparison and selection guide</p></li>
 <li><p><a class="reference internal" href="hierarchy.html"><span class="std std-doc">Versal Architecture Overview</span></a> - Common Versal concepts (CIPS, PL, NoC)</p></li>
 <li><p><a class="reference internal" href="cips-config.html"><span class="std std-doc">CIPS Common Configuration</span></a> - RPU, PMC, and PS peripheral concepts</p></li>
 <li><p><a class="reference internal" href="base-logic.html"><span class="std std-doc">Base Design Philosophy</span></a> - Minimal design, software GCQ, firmware-based management</p></li>
@@ -169,7 +169,7 @@
 <h2>Key Common Design Principles<a class="headerlink" href="#key-common-design-principles" title="Permalink to this heading">¶</a></h2>
 <div class="section" id="minimal-base-design">
 <h3>Minimal Base Design<a class="headerlink" href="#minimal-base-design" title="Permalink to this heading">¶</a></h3>
-<p>All AMR platforms follow a minimal base design philosophy:</p>
+<p>All AMR boards follow a minimal base design philosophy:</p>
 <ul class="simple">
 <li><p>No management IP blocks in PL (no GCQ hardware, UUID ROM, EEPROM controllers)</p></li>
 <li><p>Firmware-based management using RPU (R5 processors)</p></li>
@@ -177,9 +177,9 @@
 <li><p>Expansion points available (M_AXI_LPD, address space, interrupts)</p></li>
 </ul>
 </div>
-<div class="section" id="platform-agnostic-concepts">
-<h3>Platform-Agnostic Concepts<a class="headerlink" href="#platform-agnostic-concepts" title="Permalink to this heading">¶</a></h3>
-<p>The following concepts are shared across all platforms:</p>
+<div class="section" id="boards-agnostic-concepts">
+<h3>Boards-Agnostic Concepts<a class="headerlink" href="#boards-agnostic-concepts" title="Permalink to this heading">¶</a></h3>
+<p>The following concepts are shared across all boards:</p>
 <ul class="simple">
 <li><p>Versal CIPS architecture (RPU, PMC, PS)</p></li>
 <li><p>NoC interconnect fundamentals</p></li>
@@ -189,9 +189,9 @@
 <li><p>QDMA for DMA transfers (different implementations)</p></li>
 </ul>
 </div>
-<div class="section" id="platform-specific-implementations">
-<h3>Platform-Specific Implementations<a class="headerlink" href="#platform-specific-implementations" title="Permalink to this heading">¶</a></h3>
-<p>See individual platform documentation for:</p>
+<div class="section" id="board-specific-implementations">
+<h3>Board-Specific Implementations<a class="headerlink" href="#board-specific-implementations" title="Permalink to this heading">¶</a></h3>
+<p>See individual board documentation for:</p>
 <ul class="simple">
 <li><p><strong>V80</strong>: CPM5 hardened PCIe, HBM memory, Gen5x8 configuration</p></li>
 <li><p><strong>RAVE</strong>: PL-based PCIe IP, LPDDR4 memory, expansion I/O, peripherals</p></li>
@@ -207,14 +207,14 @@
 				  
 				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../development/source-control.html" class="btn btn-neutral float-left" title="Source Configuration Control" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../V80/index.html" class="btn btn-neutral float-right" title="V80 Platform Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../V80/index.html" class="btn btn-neutral float-right" title="V80 Board Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 28, 2026.
+      <span class="lastupdated">Last updated on June 02, 2026.
       </span></p>
   </div>
 

@@ -61,6 +61,6 @@ Extending the AMR base design to support additional layers of communication, spe
 
 The AMR hardware base design defines PF1 to enable CPM PCIe BAR configurations. This allows DDR and HBM memory to be targeted by CPM DMA transfers to and from host memory.
 
-**Note**: The availability and configuration of PF1 may vary depending on the specific platform implementation (V80, RAVE, etc.).
+**Note**: The availability and configuration of PF1 may vary depending on the specific board implementation (V80, RAVE, etc.).
 
 

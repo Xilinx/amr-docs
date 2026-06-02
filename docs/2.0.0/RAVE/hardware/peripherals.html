@@ -72,11 +72,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../hardware/index.html">Hardware Design - AMR Common</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">V80 Board</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../V80/index.html">V80 Platform Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../V80/index.html">V80 Board Documentation</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">RAVE Board</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Hardware Design - RAVE VPR-4616</a></li>
 </ul>
@@ -138,10 +138,10 @@
 <p><span id="amrrave-peripherals-overview"></span></p>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
-<p>RAVE platforms include on-board peripherals for standalone embedded operation. This document focuses on the firmware and software interfaces used by AMR to access these peripherals.</p>
+<p>RAVE Boards include on-board peripherals for standalone embedded operation. This document focuses on the firmware and software interfaces used by AMR to access these peripherals.</p>
 <p><strong>AMR-Managed Peripherals:</strong></p>
 <ul class="simple">
-<li><p>Board-ID EEPROM (I2C) - Platform identification</p></li>
+<li><p>Board-ID EEPROM (I2C) - board identification</p></li>
 <li><p>TPM 2.0 (SPI) - Security operations</p></li>
 <li><p>Status LEDs (GPIO) - Status indication</p></li>
 <li><p>UART bridges - Console access</p></li>
@@ -150,12 +150,12 @@
 </div>
 <div class="section" id="board-id-eeprom">
 <h2>Board-ID EEPROM<a class="headerlink" href="#board-id-eeprom" title="Permalink to this heading">¶</a></h2>
-<p>The Board-ID EEPROM stores platform identification and manufacturing information accessible via I2C.</p>
+<p>The Board-ID EEPROM stores board identification and manufacturing information accessible via I2C.</p>
 <p><strong>AMR Access:</strong></p>
 <ul class="simple">
 <li><p><strong>Firmware</strong>: Via CIPS I2C peripheral (I2C address 0x57)</p></li>
 <li><p><strong>Host</strong>: Via AMI commands</p></li>
-<li><p><strong>Use Case</strong>: Platform identification for XRT/Vitis workflow</p></li>
+<li><p><strong>Use Case</strong>: board identification for XRT/Vitis workflow</p></li>
 </ul>
 <p><strong>EEPROM Content:</strong></p>
 <ul class="simple">
@@ -221,9 +221,9 @@ lsusb<span class="w"> </span><span class="p">|</span><span class="w"> </span>gre
 <p><strong>Note:</strong> For LED placement and hardware details, refer to the <a class="reference external" href="https://www.amd.com/en/products/embedded/embedded-plus.html">Sapphire RAVE1 EDGE+</a>.</p>
 <p><span id="amrrave-peripherals-emmc"></span></p>
 </div>
-<div class="section" id="platform-specific-peripherals-vpr-5050a">
-<h2>Platform-Specific Peripherals (VPR-5050A)<a class="headerlink" href="#platform-specific-peripherals-vpr-5050a" title="Permalink to this heading">¶</a></h2>
-<p>Some RAVE platform variants include additional peripherals:</p>
+<div class="section" id="board-specific-peripherals-vpr-5050a">
+<h2>Board-specific Peripherals (VPR-5050A)<a class="headerlink" href="#board-specific-peripherals-vpr-5050a" title="Permalink to this heading">¶</a></h2>
+<p>Some RAVE Board variants include additional peripherals:</p>
 <p><strong>eMMC Storage (VPR-5050A only):</strong></p>
 <ul class="simple">
 <li><p>On-board persistent storage accessible via Versal MIO</p></li>
@@ -234,7 +234,7 @@ lsusb<span class="w"> </span><span class="p">|</span><span class="w"> </span>gre
 <li><p>USB 2.0 host controller via Versal MIO</p></li>
 <li><p>Supports USB storage, peripherals, debug interfaces</p></li>
 </ul>
-<p><strong>Note:</strong> For availability and specifications, refer to the specific platform product page.</p>
+<p><strong>Note:</strong> For availability and specifications, refer to the specific board product page.</p>
 <p><span id="amrrave-peripherals-mioconfiguration"></span></p>
 </div>
 <div class="section" id="mio-pin-configuration-summary">
@@ -405,7 +405,7 @@ lsusb<span class="w"> </span><span class="p">|</span><span class="w"> </span>gre
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 28, 2026.
+      <span class="lastupdated">Last updated on June 02, 2026.
       </span></p>
   </div>
 

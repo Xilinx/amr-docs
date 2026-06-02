@@ -1,5 +1,5 @@
 ==========================
-V80 Platform Documentation
+V80 Board Documentation
 ==========================
 
 This section contains V80-specific documentation including installation, deployment, hardware design, and testing.

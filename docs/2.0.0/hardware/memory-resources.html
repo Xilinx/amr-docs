@@ -72,11 +72,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Hardware Design - AMR Common</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">V80 Board</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Platform Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Board Documentation</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">RAVE Board</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../RAVE/hardware/index.html">Hardware Design - RAVE VPR-4616</a></li>
 </ul>
@@ -132,7 +132,7 @@
   <div class="section" id="amr-memory-architecture-concepts-common">
 <h1>AMR - Memory Architecture Concepts (Common)<a class="headerlink" href="#amr-memory-architecture-concepts-common" title="Permalink to this heading">¶</a></h1>
 <blockquote>
-<div><p><strong>For platform-specific memory configurations</strong>, see:</p>
+<div><p><strong>For board-specific memory configurations</strong>, see:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../V80/hardware/memory-resources.html"><span class="std std-doc">V80 Memory Resources</span></a> - HBM + DDR4 DIMM + Discrete SDRAM (68GB)</p></li>
 <li><p><a class="reference internal" href="../RAVE/hardware/memory-resources.html"><span class="std std-doc">RAVE Memory Resources</span></a> - LPDDR4 only (8-16GB)</p></li>
@@ -141,9 +141,9 @@
 <p><span id="amr-memoryresources-overview"></span></p>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
-<p>This document describes <strong>common memory architecture concepts</strong> shared across all AMR platforms. All platforms use Versal integrated memory controllers and DRAM for RPU0 execution and inter-processor communication.</p>
-<p>All AMR platforms allocate DRAM memory for RPU0 firmware execution, storing the firmware code sections, data sections, stack, and heap in memory accessible by the R5 processors. Shared DRAM regions support the software GCQ implementation for inter-processor communication, with ring buffers and message storage allocated in memory accessible by both the RPU and PCIe host. The Versal integrated memory controllers (DDRMC) provide hardened logic for controlling DRAM and LPDDR4 devices, with NoC connectivity enabling access from multiple masters throughout the system.</p>
-<p>Platform-specific memory configurations vary significantly in capacity and architecture. The V80 platform combines HBM (32GB), DDR DIMM (32GB), and discrete SDRAM (4GB) for a total of 68GB of memory resources distributed across multiple memory types optimized for different access patterns. The RAVE platform uses LPDDR4 exclusively with 8GB or 16GB total capacity depending on the board variant, providing a more constrained memory environment optimized for embedded applications.</p>
+<p>This document describes <strong>common memory architecture concepts</strong> shared across all AMR boards. All boards use Versal integrated memory controllers and DRAM for RPU0 execution and inter-processor communication.</p>
+<p>All AMR boards allocate DRAM memory for RPU0 firmware execution, storing the firmware code sections, data sections, stack, and heap in memory accessible by the R5 processors. Shared DRAM regions support the software GCQ implementation for inter-processor communication, with ring buffers and message storage allocated in memory accessible by both the RPU and PCIe host. The Versal integrated memory controllers (DDRMC) provide hardened logic for controlling DRAM and LPDDR4 devices, with NoC connectivity enabling access from multiple masters throughout the system.</p>
+<p>Board-specific memory configurations vary significantly in capacity and architecture. The V80 Board combines HBM (32GB), DDR DIMM (32GB), and discrete SDRAM (4GB) for a total of 68GB of memory resources distributed across multiple memory types optimized for different access patterns. The RAVE Board uses LPDDR4 exclusively with 8GB or 16GB total capacity depending on the board variant, providing a more constrained memory environment optimized for embedded applications.</p>
 <p><span id="amr-memoryresources-memorycontrollers"></span></p>
 </div>
 <div class="section" id="versal-integrated-memory-controllers">
@@ -152,7 +152,7 @@
 <div class="section" id="ddrmc-architecture">
 <h3>DDRMC Architecture<a class="headerlink" href="#ddrmc-architecture" title="Permalink to this heading">¶</a></h3>
 <p>The Versal integrated memory controllers implement hardened logic for DDR and LPDDR4 memory management. Each controller provides multiple ports for parallel access, with four ports per controller enabling concurrent access from different masters to optimize overall memory throughput. The controllers integrate with the NoC through DDRMC_NSU (NoC Slave Unit) interfaces that convert NoC packet domain traffic directly to memory controller operations.</p>
-<p>The memory controllers operate at configurable frequencies with 200 MHz being the typical configuration for AMR platforms. This frequency applies to the controller clock, with DDR and LPDDR4 devices achieving higher effective data rates through double-data-rate operation. The controllers support various DDR technologies including DDR4, LPDDR4, and LPDDR4X depending on the specific Versal device variant.</p>
+<p>The memory controllers operate at configurable frequencies with 200 MHz being the typical configuration for AMR boards. This frequency applies to the controller clock, with DDR and LPDDR4 devices achieving higher effective data rates through double-data-rate operation. The controllers support various DDR technologies including DDR4, LPDDR4, and LPDDR4X depending on the specific Versal device variant.</p>
 <p>Each memory controller provides four ports that can be independently addressed and accessed. AMR designs typically utilize two ports per controller (ports 0 and 1) for CIPS traffic and PCIe DMA operations. The remaining ports (2 and 3) stay available for user application memory masters when additional bandwidth or parallel access paths are required.</p>
 <p>More information: <a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Integrated-Memory-Controller-DDRMC-Architecture">Integrated Memory Controller Architecture</a></p>
 <p><span id="amr-memoryresources-memoryusagepatterns"></span></p>
@@ -162,7 +162,7 @@
 <h2>Common Memory Usage Patterns<a class="headerlink" href="#common-memory-usage-patterns" title="Permalink to this heading">¶</a></h2>
 <div class="section" id="rpu-execution-memory">
 <h3>RPU Execution Memory<a class="headerlink" href="#rpu-execution-memory" title="Permalink to this heading">¶</a></h3>
-<p>All platforms allocate DRAM memory regions for RPU0 firmware execution. The RPU uses this memory for firmware code sections containing the executable instructions, firmware data sections holding initialized and uninitialized variables, and stack and heap regions for runtime memory allocation. Firmware data structures including message buffers, state machines, and configuration tables also reside in this memory.</p>
+<p>All boards allocate DRAM memory regions for RPU0 firmware execution. The RPU uses this memory for firmware code sections containing the executable instructions, firmware data sections holding initialized and uninitialized variables, and stack and heap regions for runtime memory allocation. Firmware data structures including message buffers, state machines, and configuration tables also reside in this memory.</p>
 <p>The RPU accesses DDR memory through the LPD_AXI_NOC_0 NoC interface, which provides a 128-bit connection operating at 800 MHz. The R5 processors have 32-bit addressing capabilities, limiting direct access to a maximum of 4GB of the address space. This constraint influences memory allocation strategies, with firmware and related data structures placed within the lower 4GB region for direct RPU accessibility.</p>
 </div>
 <div class="section" id="inter-processor-communication-ipc">
@@ -228,12 +228,12 @@
 <li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/4-GB-Processor-System-Address-Map">Versal 4GB Address Map</a></p></li>
 <li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map">Versal 16TB Address Map</a></p></li>
 </ul>
-<p><span id="amr-memoryresources-platformdifferences"></span></p>
+<p><span id="amr-memoryresources-boarddifferences"></span></p>
 </div>
 </div>
-<div class="section" id="platform-specific-memory-configurations">
-<h2>Platform-Specific Memory Configurations<a class="headerlink" href="#platform-specific-memory-configurations" title="Permalink to this heading">¶</a></h2>
-<p>For detailed memory configurations, see platform-specific documentation:</p>
+<div class="section" id="board-specific-memory-configurations">
+<h2>Board-Specific Memory Configurations<a class="headerlink" href="#board-specific-memory-configurations" title="Permalink to this heading">¶</a></h2>
+<p>For detailed memory configurations, see board-specific documentation:</p>
 <div class="section" id="v80-memory-configuration">
 <h3>V80 Memory Configuration<a class="headerlink" href="#v80-memory-configuration" title="Permalink to this heading">¶</a></h3>
 <p><a class="reference internal" href="../V80/hardware/memory-resources.html"><span class="std std-doc">V80 Memory Resources</span></a></p>
@@ -266,7 +266,7 @@
 <h3>Memory Allocation<a class="headerlink" href="#memory-allocation" title="Permalink to this heading">¶</a></h3>
 <p>When designing applications for AMR:</p>
 <ol class="arabic simple">
-<li><p><strong>Check platform memory capacity</strong></p>
+<li><p><strong>Check board memory capacity</strong></p>
 <ul class="simple">
 <li><p>V80: 68 GB available</p></li>
 <li><p>RAVE: 8-16 GB available</p></li>
@@ -293,9 +293,9 @@
 </li>
 </ol>
 </div>
-<div class="section" id="platform-portability">
-<h3>Platform Portability<a class="headerlink" href="#platform-portability" title="Permalink to this heading">¶</a></h3>
-<p>To support both platforms, application designs should target the more constrained memory capacity (8-16GB) to ensure portability across platforms. Applications should not assume HBM availability and should instead design memory access patterns that work with standard DDR or LPDDR4 memory. Using QDMA abstractions ensures DMA code works across platforms regardless of whether QDMA is hardened or implemented in PL. Testing memory bandwidth requirements on both platforms validates that performance is acceptable across the different memory architectures.</p>
+<div class="section" id="board-portability">
+<h3>Board Portability<a class="headerlink" href="#board-portability" title="Permalink to this heading">¶</a></h3>
+<p>To support both boards, application designs should target the more constrained memory capacity (8-16GB) to ensure portability across boards. Applications should not assume HBM availability and should instead design memory access patterns that work with standard DDR or LPDDR4 memory. Using QDMA abstractions ensures DMA code works across boards regardless of whether QDMA is hardened or implemented in PL. Testing memory bandwidth requirements on both boards validates that performance is acceptable across the different memory architectures.</p>
 </div>
 </div>
 </div>
@@ -311,7 +311,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 28, 2026.
+      <span class="lastupdated">Last updated on June 02, 2026.
       </span></p>
   </div>
 

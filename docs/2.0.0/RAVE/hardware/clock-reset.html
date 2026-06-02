@@ -72,11 +72,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../hardware/index.html">Hardware Design - AMR Common</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">V80 Board</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../V80/index.html">V80 Platform Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../V80/index.html">V80 Board Documentation</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">RAVE Board</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Hardware Design - RAVE VPR-4616</a></li>
 </ul>
@@ -138,7 +138,7 @@
 <p><span id="amrrave-clockreset-overview"></span></p>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
-<p>The RAVE platform uses CIPS-generated reference clocks along with PCIe-generated clocks for the various logic domains. Multiple processor system reset blocks synchronize resets across the different clock domains present in the design including the PCIe clock domain, XDMA clock domain, and general PL clock domains.</p>
+<p>The RAVE Board uses CIPS-generated reference clocks along with PCIe-generated clocks for the various logic domains. Multiple processor system reset blocks synchronize resets across the different clock domains present in the design including the PCIe clock domain, XDMA clock domain, and general PL clock domains.</p>
 <p><span id="amrrave-clockreset-cipsclocks"></span></p>
 </div>
 <div class="section" id="cips-clock-outputs">
@@ -231,7 +231,7 @@
 </div>
 <div class="section" id="software-based-device-reboot-limitations">
 <h2>Software-Based Device Reboot Limitations<a class="headerlink" href="#software-based-device-reboot-limitations" title="Permalink to this heading">¶</a></h2>
-<p>The RAVE platform uses software-based device reboot via the <code class="docutils literal notranslate"><span class="pre">device_boot</span></code> command to reload PDI from flash partitions. This mechanism requires functional AMC firmware and established AMC-to-AMI communication.</p>
+<p>The RAVE Board uses software-based device reboot via the <code class="docutils literal notranslate"><span class="pre">device_boot</span></code> command to reload PDI from flash partitions. This mechanism requires functional AMC firmware and established AMC-to-AMI communication.</p>
 <p><strong>Important:</strong> GPIO-based PCIe hot reset is not supported in AMR.</p>
 <p>When the PCIe link resets, this reset signal does not automatically propagate to other device regions. Attempting to reset the entire device while maintaining PCIe connectivity would require complex reset sequencing that is not supported in the base design. Changes to the programmable logic configuration require reloading the PDI from flash through a power cycle.</p>
 <p>When AMC-to-AMI communication is not established or if the AMC is not in a good state, software-based device reboot will not function and a complete power cycle of the device is required to properly reinitialize the NoC, memory controllers, and processing system blocks.</p>
@@ -258,7 +258,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 28, 2026.
+      <span class="lastupdated">Last updated on June 02, 2026.
       </span></p>
   </div>
 

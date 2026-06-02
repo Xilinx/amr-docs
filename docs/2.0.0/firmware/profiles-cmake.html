@@ -74,11 +74,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">Hardware Design - AMR Common</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">V80 Board</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Platform Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Board Documentation</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">RAVE Board</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../RAVE/hardware/index.html">Hardware Design - RAVE VPR-4616</a></li>
 </ul>
@@ -151,12 +151,12 @@
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
 <p>AMC uses CMake for its build procedure, automating each stage of the compilation processes.</p>
-<p>AMC source code has been designed to be agnostic from target platform (hardware) and operating system. The CMake build process allows target platform and target OS to be configured at compilation.</p>
+<p>AMC source code has been designed to be agnostic from target board (hardware) and operating system. The CMake build process allows target board and target OS to be configured at compilation.</p>
 <p><span id="profilesandcmakebuildprocess-build"></span></p>
 </div>
 <div class="section" id="build">
 <h2>Build<a class="headerlink" href="#build" title="Permalink to this heading">¶</a></h2>
-<p>The build procedure can be broken into two key stages depending on the target OS and platform specified:</p>
+<p>The build procedure can be broken into two key stages depending on the target OS and board specified:</p>
 <ul class="simple">
 <li><p>Generation of BSP (Board support package)</p></li>
 <li><p>Source code compilation</p></li>
@@ -167,10 +167,10 @@
 </div>
 <div class="section" id="profiles">
 <h2>Profiles<a class="headerlink" href="#profiles" title="Permalink to this heading">¶</a></h2>
-<p>The profiles layer holds all profile-specific (board-specific) includes and definitions, allowing AMC to be ported to different target platform (hardware) without requiring code changes in the AMC or its layers.</p>
+<p>The profiles layer holds all profile-specific (board-specific) includes and definitions, allowing AMC to be ported to different target board (hardware) without requiring code changes in the AMC or its layers.</p>
 <p>The profile directories currently supported on AMC can be seen the <strong>src/profiles/</strong>.</p>
-<p>Cmake will include the appropriate set of header files, depending on the profile specified by the user (rave, v80, etc.). This allows platform (hardware) specific data to be changed and AMC source code to remain the same.</p>
-<p>Porting AMC to new platforms in the future should only require additional profile directories to be created, with no source code changes required. See the following code snippet for detail.</p>
+<p>Cmake will include the appropriate set of header files, depending on the profile specified by the user (rave, v80, etc.). This allows board (hardware) specific data to be changed and AMC source code to remain the same.</p>
+<p>Porting AMC to new boards in the future should only require additional profile directories to be created, with no source code changes required. See the following code snippet for detail.</p>
 <p><strong>CMakeLists.txt</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#set custom profile with -DPROFILE flag (v80, rave, etc), Defaults to rave if not specified
  if(PROFILE MATCHES &quot;^(v80*)$&quot;)
@@ -235,9 +235,9 @@ endif()
 </div>
 <div class="section" id="device-drivers">
 <h2>Device Drivers<a class="headerlink" href="#device-drivers" title="Permalink to this heading">¶</a></h2>
-<p>The device drivers layer of AMC has similarly been designed to be abstracted from the target platform. Each device driver has been written with a common header file but separate source files for AMR and Linux, providing a common API over the BSP-provided drivers and utilities.</p>
+<p>The device drivers layer of AMC has similarly been designed to be abstracted from the target boards. Each device driver has been written with a common header file but separate source files for AMR and Linux, providing a common API over the BSP-provided drivers and utilities.</p>
 <p>Cmake will include the appropriate source code paths, depending on the profile specified by the user (rave, v80, etc.), for each of the device drivers. This allows AMC to be easily compiled for Linux or FreeRTOS OS.</p>
-<p>See the following example of I2c and OSPI device drivers. The common header outlines the API used throughout AMC. OS specific source implementations prevent any further code changes throughout AMC when porting to a new OS/Platform.</p>
+<p>See the following example of I2c and OSPI device drivers. The common header outlines the API used throughout AMC. OS specific source implementations prevent any further code changes throughout AMC when porting to a new OS/boards.</p>
 <p>All future device drivers added to AMC should follow this design pattern.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>i2c
 │   ├── aved
@@ -252,7 +252,7 @@ endif()
 </div>
 <div class="section" id="fal-firmware-abstraction-layer">
 <h2>FAL (Firmware Abstraction Layer)<a class="headerlink" href="#fal-firmware-abstraction-layer" title="Permalink to this heading">¶</a></h2>
-<p>Similarly, the Firmware abstraction layer of AMC has been designed to be abstracted from the target platform. Each FAL implementation has been written with a common header file, providing a common API over the abstracted firmware, but with separate source files for AMC (AMR).</p>
+<p>Similarly, the Firmware abstraction layer of AMC has been designed to be abstracted from the target board. Each FAL implementation has been written with a common header file, providing a common API over the abstracted firmware, but with separate source files for AMC (AMR).</p>
 <p>Just as with the device drivers, cmake will include the appropriate source code paths, depending on the profile specified by the user (rave, v80, etc.).</p>
 <p>See the following example of gcq, ospi and qsfp FALs. All future FAL implementations added to AMC should follow this design pattern.</p>
 <p>├── gcq</p>
@@ -316,7 +316,7 @@ endif()
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 28, 2026.
+      <span class="lastupdated">Last updated on June 02, 2026.
       </span></p>
   </div>
 

@@ -72,11 +72,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Hardware Design - AMR Common</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">V80 Board</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Platform Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Board Documentation</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">RAVE Board</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../RAVE/hardware/index.html">Hardware Design - RAVE VPR-4616</a></li>
 </ul>
@@ -132,7 +132,7 @@
   <div class="section" id="amr-clock-and-reset-concepts-common">
 <h1>AMR - Clock and Reset Concepts (Common)<a class="headerlink" href="#amr-clock-and-reset-concepts-common" title="Permalink to this heading">¶</a></h1>
 <blockquote>
-<div><p><strong>For platform-specific clock/reset configurations</strong>, see:</p>
+<div><p><strong>For board-specific clock/reset configurations</strong>, see:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../V80/hardware/clock-reset.html"><span class="std std-doc">V80 Clock Reset</span></a> - V80 clock configuration</p></li>
 <li><p><a class="reference internal" href="../RAVE/hardware/clock-reset.html"><span class="std std-doc">RAVE Clock Reset</span></a> - RAVE clock configuration</p></li>
@@ -141,15 +141,15 @@
 <p><span id="amr-clockreset-overview"></span></p>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
-<p>This document describes <strong>common clock and reset concepts</strong> shared across all AMR platforms. All platforms use CIPS-generated clocks and processor system reset IP for reset synchronization.</p>
-<p>All AMR platforms follow common clock and reset patterns despite implementation differences. The CIPS generates multiple PL reference clocks at standard frequencies for use by programmable logic IP blocks. Processor System Reset IP blocks synchronize asynchronous reset inputs to specific clock domains, ensuring proper reset timing relationships. Designs typically employ multiple clock domains to accommodate different IP block requirements, with some logic operating at lower frequencies for power efficiency and other logic at higher frequencies for performance. External reset inputs from CIPS are synchronized to internal clocks through the reset IP to prevent metastability and ensure reliable operation.</p>
+<p>This document describes <strong>common clock and reset concepts</strong> shared across all AMR Boards. All boards use CIPS-generated clocks and processor system reset IP for reset synchronization.</p>
+<p>All AMR boards follow common clock and reset patterns despite implementation differences. The CIPS generates multiple PL reference clocks at standard frequencies for use by programmable logic IP blocks. Processor System Reset IP blocks synchronize asynchronous reset inputs to specific clock domains, ensuring proper reset timing relationships. Designs typically employ multiple clock domains to accommodate different IP block requirements, with some logic operating at lower frequencies for power efficiency and other logic at higher frequencies for performance. External reset inputs from CIPS are synchronized to internal clocks through the reset IP to prevent metastability and ensure reliable operation.</p>
 <p><span id="amr-clockreset-cipsclocks"></span></p>
 </div>
 <div class="section" id="cips-pl-reference-clocks-common">
 <h2>CIPS PL Reference Clocks (Common)<a class="headerlink" href="#cips-pl-reference-clocks-common" title="Permalink to this heading">¶</a></h2>
 <div class="section" id="standard-cips-clock-outputs">
 <h3>Standard CIPS Clock Outputs<a class="headerlink" href="#standard-cips-clock-outputs" title="Permalink to this heading">¶</a></h3>
-<p><strong>All AMR platforms generate these clocks from CIPS:</strong></p>
+<p><strong>All AMR boards generate these clocks from CIPS:</strong></p>
 <table border="1" class="docutils">
 <thead>
 <tr>
@@ -182,7 +182,7 @@
 <span class="nv">PMC_CRP_PL2_REF_CTRL_FREQMHZ</span><span class="w"> </span><span class="k">{</span><span class="nv">250</span><span class="k">}</span>
 </pre></div>
 </div>
-<p>Platform variations exist in clock usage strategies. Some platforms use these CIPS clocks directly without additional clock generation, maintaining simplicity in the base design. Other platforms may instantiate clocking wizard IP to generate additional custom frequencies when user kernels or application logic requires clock rates beyond the standard CIPS outputs.</p>
+<p>Board variations exist in clock usage strategies. Some boards use these CIPS clocks directly without additional clock generation, maintaining simplicity in the base design. Other boards may instantiate clocking wizard IP to generate additional custom frequencies when user kernels or application logic requires clock rates beyond the standard CIPS outputs.</p>
 <p><span id="amr-clockreset-plresets"></span></p>
 </div>
 </div>
@@ -190,7 +190,7 @@
 <h2>PL Resets (Common)<a class="headerlink" href="#pl-resets-common" title="Permalink to this heading">¶</a></h2>
 <div class="section" id="cips-reset-output">
 <h3>CIPS Reset Output<a class="headerlink" href="#cips-reset-output" title="Permalink to this heading">¶</a></h3>
-<p><strong>All platforms generate PL reset:</strong></p>
+<p><strong>All boards generate PL reset:</strong></p>
 <table border="1" class="docutils">
 <thead>
 <tr>
@@ -228,7 +228,7 @@
 <h2>Processor System Reset IP (Common)<a class="headerlink" href="#processor-system-reset-ip-common" title="Permalink to this heading">¶</a></h2>
 <div class="section" id="purpose">
 <h3>Purpose<a class="headerlink" href="#purpose" title="Permalink to this heading">¶</a></h3>
-<p>All platforms utilize the Processor System Reset IP (xilinx.com:ip:proc_sys_reset) to handle reset synchronization requirements. The IP synchronizes external asynchronous resets to specific clock domains, preventing metastability and ensuring clean reset assertion and deassertion. The IP generates appropriately timed resets with proper setup and hold relationships relative to the clock edges. Separate reset outputs serve different purposes, with interconnect resets for AXI switches and arbitration logic distinct from peripheral resets for endpoint IP blocks.</p>
+<p>All boards utilize the Processor System Reset IP (xilinx.com:ip:proc_sys_reset) to handle reset synchronization requirements. The IP synchronizes external asynchronous resets to specific clock domains, preventing metastability and ensuring clean reset assertion and deassertion. The IP generates appropriately timed resets with proper setup and hold relationships relative to the clock edges. Separate reset outputs serve different purposes, with interconnect resets for AXI switches and arbitration logic distinct from peripheral resets for endpoint IP blocks.</p>
 </div>
 <div class="section" id="common-reset-outputs">
 <h3>Common Reset Outputs<a class="headerlink" href="#common-reset-outputs" title="Permalink to this heading">¶</a></h3>
@@ -303,7 +303,7 @@ peripheral_aresetn → AXI GPIO, peripherals
 </tr>
 </tbody>
 </table>
-<p><strong>Platform-Specific:</strong></p>
+<p><strong>Board-Specific:</strong></p>
 <ul class="simple">
 <li><p>V80: May need additional clocks for user kernels</p></li>
 <li><p>RAVE: PCIe clock domain from GT, additional clocks for QDMA</p></li>
@@ -366,7 +366,7 @@ Primary proc_sys_reset (100 MHz domain)
 <li><p>PF1 test hierarchy</p></li>
 <li><p>Additional domains if needed</p></li>
 </ul>
-<p>Platform-specific implementations vary in reset block count and complexity. Some platforms maintain minimal base designs with a single processor system reset block in the PF1 hierarchy, sufficient for the basic test logic. Other platforms require multiple reset blocks to handle the various clock domains introduced by PL-based PCIe IP, QDMA IP, and user application logic, with each clock domain requiring its own synchronized reset.</p>
+<p>Board-specific implementations vary in reset block count and complexity. Some board maintain minimal base designs with a single processor system reset block in the PF1 hierarchy, sufficient for the basic test logic. Other boards require multiple reset blocks to handle the various clock domains introduced by PL-based PCIe IP, QDMA IP, and user application logic, with each clock domain requiring its own synchronized reset.</p>
 <p><span id="amr-clockreset-expansionpattern"></span></p>
 </div>
 </div>
@@ -400,11 +400,11 @@ Kernel clocks and resets
 </pre></div>
 </div>
 <p><strong>Important:</strong> AMR does not support GPIO-based PCIe hot reset. Device reboots are performed through software commands that trigger firmware-initiated partition boot.</p>
-<p><span id="amr-clockreset-platformspecific"></span></p>
+<p><span id="amr-clockreset-boardspecific"></span></p>
 </div>
 </div>
-<div class="section" id="platform-specific-clock-reset-details">
-<h2>Platform-Specific Clock/Reset Details<a class="headerlink" href="#platform-specific-clock-reset-details" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="board-specific-clock-reset-details">
+<h2>Board-Specific Clock/Reset Details<a class="headerlink" href="#board-specific-clock-reset-details" title="Permalink to this heading">¶</a></h2>
 <div class="section" id="v80-clock-reset-configuration">
 <h3>V80 Clock/Reset Configuration<a class="headerlink" href="#v80-clock-reset-configuration" title="Permalink to this heading">¶</a></h3>
 <p><a class="reference internal" href="../V80/hardware/clock-reset.html"><span class="std std-doc">V80 Clock Reset</span></a></p>
@@ -450,7 +450,7 @@ Kernel clocks and resets
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 28, 2026.
+      <span class="lastupdated">Last updated on June 02, 2026.
       </span></p>
   </div>
 

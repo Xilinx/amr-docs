@@ -72,11 +72,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Hardware Design - AMR Common</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">V80 Board</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Platform Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Board Documentation</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">RAVE Board</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../RAVE/hardware/index.html">Hardware Design - RAVE VPR-4616</a></li>
 </ul>
@@ -132,7 +132,7 @@
   <div class="section" id="amr-noc-interconnect-overview-common">
 <h1>AMR - NoC Interconnect Overview (Common)<a class="headerlink" href="#amr-noc-interconnect-overview-common" title="Permalink to this heading">¶</a></h1>
 <blockquote>
-<div><p><strong>For platform-specific NoC configurations</strong>, see:</p>
+<div><p><strong>For Board-specific NoC configurations</strong>, see:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../V80/hardware/noc-config.html"><span class="std std-doc">V80 NoC Configuration</span></a> - CPM5 hardened NoC, HBM connections</p></li>
 <li><p><a class="reference internal" href="../RAVE/hardware/noc-config.html"><span class="std std-doc">RAVE NoC Configuration</span></a> - PL PCIe NMU_512, LPDDR4 only</p></li>
@@ -143,7 +143,7 @@
 <h2>Network-On-Chip (NoC) Overview<a class="headerlink" href="#network-on-chip-noc-overview" title="Permalink to this heading">¶</a></h2>
 <p>AMD Versal™ devices use a programmable NoC interconnect based on AXI-4 for high-bandwidth communication throughout the device. The NoC simplifies timing requirements when routing across long distances, multiple SLRs, or connecting to opposite sides of the die.</p>
 <p>The NoC provides a high-bandwidth interconnect based on the AXI-4 protocol, enabling efficient data movement throughout the Versal device. The NoC connects CIPS blocks to programmable logic regions and to memory controllers, handling address decoding, routing, and quality-of-service arbitration. The routing is programmable through configuration of the AXI NoC IP, allowing designs to specify bandwidth requirements and connectivity patterns that the NoC compiler optimizes. The NoC spans multiple super logic regions (SLRs) through vertical NoC (VNoC) channels and horizontal NoC (HNoC) channels that interconnect across the device.</p>
-<p>Platform-specific NoC topologies reflect the different PCIe and memory architectures. Some platforms feature hardened PCIe blocks with integrated NoC connections and may include HBM NoC ports for high-bandwidth memory access. Other platforms route PCIe traffic through programmable logic NMU interfaces and focus on DDR memory connectivity without HBM integration.</p>
+<p>Board-specific NoC topologies reflect the different PCIe and memory architectures. Some boards feature hardened PCIe blocks with integrated NoC connections and may include HBM NoC ports for high-bandwidth memory access. Other boards route PCIe traffic through programmable logic NMU interfaces and focus on DDR memory connectivity without HBM integration.</p>
 <p><span id="amr-nocconfiguration-noccomponents"></span></p>
 </div>
 <div class="section" id="noc-components">
@@ -199,7 +199,7 @@
 <li><p>Partial NSU functionality</p></li>
 <li><p>Converts NoC packets directly to memory controller domain</p></li>
 <li><p>No AXI protocol conversion overhead</p></li>
-<li><p>Used by all AMR platforms for DDR access</p></li>
+<li><p>Used by all AMR boards for DDR access</p></li>
 </ul>
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/DDRMC-NSU">DDRMC_NSU Documentation</a></p>
 </div>
@@ -253,10 +253,10 @@
 <h2>AXI NoC IP<a class="headerlink" href="#axi-noc-ip" title="Permalink to this heading">¶</a></h2>
 <div class="section" id="common-usage">
 <h3>Common Usage<a class="headerlink" href="#common-usage" title="Permalink to this heading">¶</a></h3>
-<p>All AMR platforms use <strong>AXI NoC IP</strong> (xilinx.com:ip:axi_noc) to configure NoC connections:</p>
+<p>All AMR boards use <strong>AXI NoC IP</strong> (xilinx.com:ip:axi_noc) to configure NoC connections:</p>
 <p>The AXI NoC IP provides comprehensive configuration capabilities for NoC connectivity. The IP configures AXI Master and Slave interfaces that connect programmable logic to the NoC fabric. INI (Inter-NoC Interconnect) connections link multiple NoC instances together enabling traffic to traverse between them. Memory controller instantiation occurs within the NoC IP configuration, with support for DDRMC and HBM controllers depending on the device capabilities. Quality of Service (QoS) and bandwidth specification parameters guide the NoC compiler in resource allocation and routing decisions. Address remapping capabilities enable translation between different address domains. Clock domain crossing management handles asynchronous interfaces with appropriate synchronization logic.</p>
 <p>The typical instantiation pattern includes a main NoC instance (commonly named “axi_noc_cips”) that handles primary connectivity between CIPS, PCIe, and programmable logic. Additional NoC instances are dedicated to memory controller integration, providing INI interfaces for the main NoC to access memory.</p>
-<p>Platform differences appear in the number and configuration of NoC instances. Platforms with multiple memory types may use three or more NoC instances to manage the various memory controllers (discrete DDR, DIMM, HBM). Platforms with simpler memory architectures may use one or two NoC instances focused on a single memory type such as LPDDR4.</p>
+<p>board differences appear in the number and configuration of NoC instances. boards with multiple memory types may use three or more NoC instances to manage the various memory controllers (discrete DDR, DIMM, HBM). boards with simpler memory architectures may use one or two NoC instances focused on a single memory type such as LPDDR4.</p>
 <p><span id="amr-nocconfiguration-qosconcepts"></span></p>
 </div>
 </div>
@@ -291,7 +291,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>AMR Usage:</strong> All platforms use <strong>Best Effort</strong> for most connections.</p>
+<p><strong>AMR Usage:</strong> All boards use <strong>Best Effort</strong> for most connections.</p>
 </div>
 <div class="section" id="bandwidth-requirements">
 <h3>Bandwidth Requirements<a class="headerlink" href="#bandwidth-requirements" title="Permalink to this heading">¶</a></h3>
@@ -303,19 +303,19 @@
 <h2>Common NoC Connection Patterns<a class="headerlink" href="#common-noc-connection-patterns" title="Permalink to this heading">¶</a></h2>
 <div class="section" id="pcie-to-memory">
 <h3>PCIe to Memory<a class="headerlink" href="#pcie-to-memory" title="Permalink to this heading">¶</a></h3>
-<p>All platforms route PCIe DMA traffic to memory through a consistent pattern regardless of the specific PCIe implementation. The path begins at the PCIe block (whether hardened or in PL), connects to a NoC Master Unit (NMU), routes through the NoC to an Inter-NoC Interconnect (INI) interface, and terminates at the memory controller’s DDRMC_NSU which converts to the memory controller domain. The specific NMU type varies by platform, with hardened PCIe blocks using NMU_128 for optimized low-latency paths and PL-based PCIe IP using NMU_512 for soft logic connectivity.</p>
+<p>All boards route PCIe DMA traffic to memory through a consistent pattern regardless of the specific PCIe implementation. The path begins at the PCIe block (whether hardened or in PL), connects to a NoC Master Unit (NMU), routes through the NoC to an Inter-NoC Interconnect (INI) interface, and terminates at the memory controller’s DDRMC_NSU which converts to the memory controller domain. The specific NMU type varies by board, with hardened PCIe blocks using NMU_128 for optimized low-latency paths and PL-based PCIe IP using NMU_512 for soft logic connectivity.</p>
 </div>
 <div class="section" id="rpu-to-memory">
 <h3>RPU to Memory<a class="headerlink" href="#rpu-to-memory" title="Permalink to this heading">¶</a></h3>
-<p>All platforms route RPU firmware access to DDR memory through the LPD_AXI_NOC_0 interface. The path begins at the RPU within CIPS, exits through the LPD_AXI_NOC_0 port (a 128-bit interface operating at 800MHz), routes through the NoC fabric, and terminates at the DDRMC_NSU interface of the memory controller. This path carries firmware instruction fetches, data reads and writes, and software GCQ buffer access. The 128-bit interface width and 800 MHz operating frequency provide adequate bandwidth for typical firmware memory access patterns.</p>
+<p>All boards route RPU firmware access to DDR memory through the LPD_AXI_NOC_0 interface. The path begins at the RPU within CIPS, exits through the LPD_AXI_NOC_0 port (a 128-bit interface operating at 800MHz), routes through the NoC fabric, and terminates at the DDRMC_NSU interface of the memory controller. This path carries firmware instruction fetches, data reads and writes, and software GCQ buffer access. The 128-bit interface width and 800 MHz operating frequency provide adequate bandwidth for typical firmware memory access patterns.</p>
 </div>
 <div class="section" id="pmc-to-memory">
 <h3>PMC to Memory<a class="headerlink" href="#pmc-to-memory" title="Permalink to this heading">¶</a></h3>
-<p>All platforms route PMC access to DDR memory through the PMC_NOC_AXI_0 interface during boot and configuration operations. The path begins at the PMC within CIPS, exits through the PMC_NOC_AXI_0 port (a 128-bit interface operating at 400MHz), routes through the NoC fabric, and terminates at the DDRMC_NSU interface. The PMC uses this path during boot to initialize memory, load firmware code and data structures, and perform configuration activities. The 400 MHz operating frequency is adequate for boot-time memory access where bandwidth requirements are moderate compared to runtime DMA operations.</p>
+<p>All boards route PMC access to DDR memory through the PMC_NOC_AXI_0 interface during boot and configuration operations. The path begins at the PMC within CIPS, exits through the PMC_NOC_AXI_0 port (a 128-bit interface operating at 400MHz), routes through the NoC fabric, and terminates at the DDRMC_NSU interface. The PMC uses this path during boot to initialize memory, load firmware code and data structures, and perform configuration activities. The 400 MHz operating frequency is adequate for boot-time memory access where bandwidth requirements are moderate compared to runtime DMA operations.</p>
 </div>
 <div class="section" id="pcie-to-pl">
 <h3>PCIe to PL<a class="headerlink" href="#pcie-to-pl" title="Permalink to this heading">¶</a></h3>
-<p>All platforms route PCIe traffic to programmable logic peripherals through NoC master interfaces that exit the NoC and enter the PL address space. The PCIe traffic routes through the NoC fabric to AXI Master interfaces, typically designated as M00_AXI and M01_AXI, which connect to programmable logic hierarchical blocks or individual peripherals. The common pattern allocates M00_AXI for PF0 management address space access and M01_AXI for PF1 user and test address space access. This separation enables independent address decode and access control for management versus user functions.</p>
+<p>All boards route PCIe traffic to programmable logic peripherals through NoC master interfaces that exit the NoC and enter the PL address space. The PCIe traffic routes through the NoC fabric to AXI Master interfaces, typically designated as M00_AXI and M01_AXI, which connect to programmable logic hierarchical blocks or individual peripherals. The common pattern allocates M00_AXI for PF0 management address space access and M01_AXI for PF1 user and test address space access. This separation enables independent address decode and access control for management versus user functions.</p>
 <p><span id="amr-nocconfiguration-performancetuning"></span></p>
 </div>
 </div>
@@ -333,7 +333,7 @@
 <li><p>Refresh configuration</p></li>
 <li><p>Port arbitration</p></li>
 </ul>
-<p><strong>Platform-specific:</strong> See V80 or RAVE NoC configuration for specific tuning.</p>
+<p><strong>Board-specific:</strong> See V80 or RAVE NoC configuration for specific tuning.</p>
 <p><span id="amr-nocconfiguration-additionalresources"></span></p>
 </div>
 </div>
@@ -350,10 +350,10 @@
 <li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Physical-Link-Raw-Bandwidth">Physical Link Raw Bandwidth</a></p></li>
 <li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Packetization-Overhead">Packetization Overhead</a></p></li>
 </ul>
-<p><span id="amr-nocconfiguration-platformspecific"></span></p>
+<p><span id="amr-nocconfiguration-boardspecific"></span></p>
 </div>
-<div class="section" id="platform-specific-noc-topologies">
-<h2>Platform-Specific NoC Topologies<a class="headerlink" href="#platform-specific-noc-topologies" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="board-specific-noc-topologies">
+<h2>Board-specific NoC Topologies<a class="headerlink" href="#board-specific-noc-topologies" title="Permalink to this heading">¶</a></h2>
 <p>For complete NoC configurations including connection diagrams, routing, and QoS settings:</p>
 <div class="section" id="v80-noc-topology">
 <h3>V80 NoC Topology<a class="headerlink" href="#v80-noc-topology" title="Permalink to this heading">¶</a></h3>
@@ -392,7 +392,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 28, 2026.
+      <span class="lastupdated">Last updated on June 02, 2026.
       </span></p>
   </div>
 

@@ -4,29 +4,29 @@
 
 ## Introduction
 
-This document describes the **common Versal architecture concepts** shared across all AMR platforms (V80, RAVE). For platform-specific implementations, see:
+This document describes the **common Versal architecture concepts** shared across all AMR Boards (V80, RAVE). For board-specific implementations, see:
 - [V80 Hardware Design](../V80/hardware/hierarchy.md) - Alveo V80 with CPM5 and HBM
 - [RAVE Hardware Design](../RAVE/hardware/hierarchy.md) - Embedded+ VE2302 with PL PCIe
 
-The AMR design is a PCIe-based design that demonstrates the capabilities of Versal devices for adaptive management and acceleration. All AMR platforms share a common architectural approach consisting of three major blocks: **CIPS** (Control, Interfaces, and Processing System), **Programmable Logic (PL)**, and **NoC Interconnect**.
+The AMR design is a PCIe-based design that demonstrates the capabilities of Versal devices for adaptive management and acceleration. All AMR boards share a common architectural approach consisting of three major blocks: **CIPS** (Control, Interfaces, and Processing System), **Programmable Logic (PL)**, and **NoC Interconnect**.
 
 <span id="amr-hierarchyoverview-blockdiagram"></span>
 
 ## Block Diagram Concepts
 
-All AMR platforms contain three fundamental architectural blocks that work together to provide the complete system functionality. The CIPS (Control, Interfaces, and Processing System) configures the hard blocks including processing units, memory controllers, and platform management functions. The programmable logic (PL) region contains soft IP implementations and I/O connections specific to each platform's requirements. The NoC (Network-on-Chip) provides high-bandwidth interconnect routing AXI traffic across the device between these components.
+All AMR boards contain three fundamental architectural blocks that work together to provide the complete system functionality. The CIPS (Control, Interfaces, and Processing System) configures the hard blocks including processing units, memory controllers, and board management functions. The programmable logic (PL) region contains soft IP implementations and I/O connections specific to each board's requirements. The NoC (Network-on-Chip) provides high-bandwidth interconnect routing AXI traffic across the device between these components.
 
-Platform-specific implementations differ primarily in their PCIe connectivity approach, memory architecture, and peripheral integration. Some platforms leverage hardened PCIe blocks while others implement PCIe functionality in programmable logic. Memory configurations vary from multiple memory types including HBM to simpler LPDDR4-only architectures. Peripheral integration ranges from minimal I/O to extensive on-board component integration depending on the target application requirements.
+Board-specific implementations differ primarily in their PCIe connectivity approach, memory architecture, and peripheral integration. Some boards leverage hardened PCIe blocks while others implement PCIe functionality in programmable logic. Memory configurations vary from multiple memory types including HBM to simpler LPDDR4-only architectures. Peripheral integration ranges from minimal I/O to extensive on-board component integration depending on the target application requirements.
 
 <span id="amr-hierarchyoverview-control-interfacesandprocessingsystem"></span>
 
 ## Control, Interfaces and Processing System (CIPS)
 
-The Control, Interfaces, and Processing System (CIPS) IP configures the various hard blocks present in AMD Versal™ devices. The AMR design uses CIPS to configure processing units and platform management. The following blocks are **common across all AMR platforms**:
+The Control, Interfaces, and Processing System (CIPS) IP configures the various hard blocks present in AMD Versal™ devices. The AMR design uses CIPS to configure processing units and boards management. The following blocks are **common across all AMR boards**:
 
 ### Real-time Processing Unit (RPU)
 
-The RPU block contains dual Arm Cortex-R5F processors used for running AMC (Adaptive Management Controller) firmware on the device. This block is part of the processing system low-power domain (PS LPD) and serves as the primary management processor for AMR platforms. The RPU handles board management functions including sensor monitoring, power management, inter-processor communication, and host interface coordination.
+The RPU block contains dual Arm Cortex-R5F processors used for running AMC (Adaptive Management Controller) firmware on the device. This block is part of the processing system low-power domain (PS LPD) and serves as the primary management processor for AMR boards. The RPU handles board management functions including sensor monitoring, power management, inter-processor communication, and host interface coordination.
 
 More information: [Versal TRM - LPD Architecture](https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/LPD-Interconnect-Diagram)
 
@@ -42,13 +42,13 @@ The PS provides integrated peripherals including I2C controllers for sensor and 
 
 More information: [Versal TRM - PS Architecture](https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Processing-System-Architecture)
 
-The key architectural difference between platforms lies in the PCIe implementation. Platforms using HBM-series Versal devices include the CPM5 (Coherent PCIe Module) hardened block which integrates PCIe controllers and QDMA engines in silicon. Platforms using Edge-series Versal devices do not include CPM and must instead implement PCIe functionality using IP blocks instantiated in the programmable logic fabric.
+The key architectural difference between boards lies in the PCIe implementation. Boards using HBM-series Versal devices include the CPM5 (Coherent PCIe Module) hardened block which integrates PCIe controllers and QDMA engines in silicon. Boards using Edge-series Versal devices do not include CPM and must instead implement PCIe functionality using IP blocks instantiated in the programmable logic fabric.
 
 <span id="amr-hierarchyoverview-programmablelogic-pl"></span>
 
 ## Programmable Logic (PL)
 
-The PL region contains soft logic IP and I/O connections. All AMR platforms follow a **minimal base design philosophy**:
+The PL region contains soft logic IP and I/O connections. All AMR boards follow a **minimal base design philosophy**:
 
 ### Common Design Principles
 
@@ -66,7 +66,7 @@ Basic test functionality is provided through programmable logic to validate syst
 
 The base design provides several expansion interfaces for future IP integration. The M_AXI_LPD interface is enabled but not connected, reserved for SMBus controllers, additional management peripherals, or custom firmware-accessible IP blocks. PL-PS interrupts are configured but not connected, with IRQ 0 and IRQ 1 available for event signaling from programmable logic to firmware. The PF0 address space provides management register addressing for future IP additions.
 
-Platform-specific programmable logic usage varies based on the device capabilities. Platforms with hardened PCIe blocks maintain minimal PL usage with only test GPIO instantiated. Platforms requiring PL-based PCIe implementation consume more resources with PCIe IP, QDMA IP, and potentially additional peripheral blocks.
+Boards-specific programmable logic usage varies based on the device capabilities. Boards with hardened PCIe blocks maintain minimal PL usage with only test GPIO instantiated. Boards requiring PL-based PCIe implementation consume more resources with PCIe IP, QDMA IP, and potentially additional peripheral blocks.
 
 <span id="amr-hierarchyoverview-nocinterconnect"></span>
 
@@ -84,13 +84,13 @@ NoC Packet Switches (NPS) route traffic between the various NMUs and NSUs based 
 
 ### Common NoC Usage Patterns
 
-All AMR platforms route PCIe traffic to programmable logic address space through NoC master interfaces. The NoC directs traffic destined for PF0 addresses to the management address space, while PF1 traffic routes to the user logic and test infrastructure. This routing enables the PCIe host to access registers and memory in the device through memory-mapped I/O operations.
+All AMR boards route PCIe traffic to programmable logic address space through NoC master interfaces. The NoC directs traffic destined for PF0 addresses to the management address space, while PF1 traffic routes to the user logic and test infrastructure. This routing enables the PCIe host to access registers and memory in the device through memory-mapped I/O operations.
 
 PCIe DMA operations access DDR memory through NoC routing from the DMA engine to the memory controllers. The NoC handles the address translation and routing, with QoS settings ensuring adequate bandwidth allocation for DMA traffic alongside other memory access patterns.
 
 Firmware executing on the RPU accesses DDR memory through the LPD_AXI_NOC_0 interface for code execution, data access, and inter-processor communication buffers. The PMC accesses DDR during boot and configuration through the PMC_NOC_AXI_0 interface, loading firmware code and initializing data structures.
 
-Platform-specific NoC topologies differ in their PCIe connectivity approach and memory controller integration. Platforms with hardened PCIe blocks use NMU_128 interfaces for low-latency connections and may include HBM NoC ports for high-bandwidth memory access. Platforms with PL-based PCIe use NMU_512 interfaces from programmable logic and typically have simpler topologies focused on DDR memory access.
+Board-specific NoC topologies differ in their PCIe connectivity approach and memory controller integration. Boards with hardened PCIe blocks use NMU_128 interfaces for low-latency connections and may include HBM NoC ports for high-bandwidth memory access. Boards with PL-based PCIe use NMU_512 interfaces from programmable logic and typically have simpler topologies focused on DDR memory access.
 
 ### Memory Controller Integration
 
@@ -105,7 +105,7 @@ More information: [Versal Programmable NoC](https://docs.xilinx.com/r/en-US/pg31
 ## Common Design Patterns
 
 ### Two Physical Functions
-All AMR platforms use **2 Physical Functions**:
+All AMR Boards use **2 Physical Functions**:
 
 
 | Function | Purpose    | Common Configuration                                                           |
@@ -114,7 +114,7 @@ All AMR platforms use **2 Physical Functions**:
 | **PF1**  | User/DMA   | Provides test functionality and DMA capabilities                               |
 
 ### Software-Based GCQ
-The General Command Queue (GCQ) is implemented as a **software mechanism** using shared DDR memory, **not as a hardware IP block**. This is common across all platforms.
+The General Command Queue (GCQ) is implemented as a **software mechanism** using shared DDR memory, **not as a hardware IP block**. This is common across all boards.
 
 ### Firmware Architecture
 - **RPU0 (R5)**: Runs AMC (Adaptive Management Controller) firmware
@@ -128,19 +128,19 @@ The General Command Queue (GCQ) is implemented as a **software mechanism** using
 - **A/B Partition Support**: Redundant boot images
 - **PMC Boot Flow**: PMC loads PDI from OSPI and initializes device
 
-<span id="amr-hierarchyoverview-platformdifferences"></span>
+<span id="amr-hierarchyoverview-boarddifferences"></span>
 
-## Platform-Specific Documentation
+## Board-Specific Documentation
 
-For details on how each platform implements these concepts differently:
+For details on how each Board implements these concepts differently:
 
-### V80 Platform
+### V80 Board
 - [V80 Hierarchy](../V80/hardware/hierarchy.md) - Block diagram with CPM5 and HBM
 - [V80 CIPS](../V80/hardware/cips-config.md) - CPM5 Gen5x8 configuration
 - [V80 Memory](../V80/hardware/memory-resources.md) - HBM + DDR DIMM (68GB)
 - [V80 NoC](../V80/hardware/noc-config.md) - CPM5 hardened NoC, HBM connections
 
-### RAVE Platform
+### RAVE Board
 - [RAVE Hierarchy](../RAVE/hardware/hierarchy.md) - Block diagram with PL PCIe
 - [RAVE CIPS](../RAVE/hardware/cips-config.md) - VE2302 configuration (no CPM)
 - [RAVE PCIe](../RAVE/hardware/pcie-config.md) - PL PCIe IP implementation

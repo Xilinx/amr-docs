@@ -60,7 +60,7 @@ Firmware Interface Abstraction Layer (FAL)
   2. Profile-based configuration - Different board profiles (V80, RAVE) can configure
   different FAL implementations via profile_fal.c
   3. Portable proxy drivers - The AMI and APC proxy drivers can work across different
-  hardware platforms with minimal to no code changes
+  hardware boards with minimal to no code changes
 
   FAL Interfaces:
 
@@ -266,7 +266,7 @@ Available Profiles:
 - v80 - Versal V80 board configuration
 - rave - RAVE board configuration
 
-See [Profiles and CMake build process#Profiles](profiles-cmake.md#profilesandcmakebuildprocess-profiles) for a more detailed description of how profiles are used to port AMC across different platforms.
+See [Profiles and CMake build process#Profiles](profiles-cmake.md#profilesandcmakebuildprocess-profiles) for a more detailed description of how profiles are used to port AMC across different boards.
 
 <span id="amrmanagementcontroller-amc-architectureanddesign-proxydrivers"></span>
 

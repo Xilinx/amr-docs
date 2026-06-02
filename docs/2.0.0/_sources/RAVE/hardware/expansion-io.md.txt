@@ -10,7 +10,7 @@
 
 **Note:** Image shows 160-pin Samtec connector, GTYP Bank 104 routing, daughtercard ecosystem.
 
-The RAVE platforms include a 160-pin Samtec SEAM/SEAF expansion connector providing access to:
+The RAVE Boards include a 160-pin Samtec SEAM/SEAF expansion connector providing access to:
 - GT transceivers (GTYP Bank 104)
 - High-speed I/O (XPIO)
 - High-density I/O (HDIO)
@@ -187,11 +187,11 @@ ami_tool pdi_program -i ethernet_1g.pdi
 
 ## Reference Designs
 
-### Available RAVE Vivado Platforms
+### Available RAVE Vivado boards
 
-**From:** https://gitenterprise.xilinx.com/PAEG/amr_vivado_designs/tree/main/emb_plus_ve2302
+**From:** https://github.com/Xilinx/amr_vivado_designs.git
 
-| Platform | Daughtercard | Description |
+| board | Daughtercard | Description |
 |----------|--------------|-------------|
 | **ve2302_1gEth** | 1G Ethernet | Dual 1G Ethernet channels |
 | **ve2302_10g_mrmac** | 10G/25G Ethernet | Dual 10G using MRMAC |
@@ -388,7 +388,7 @@ set_property PACKAGE_PIN <pin> [get_ports exp_refclk0_p]
 set_property PACKAGE_PIN <pin> [get_ports exp_refclk0_n]
 ```
 
-**See:** RAVE platform XDC files for complete pin assignments.
+**See:** RAVE Board XDC files for complete pin assignments.
 
 <span id="amrrave-expansionio-limitations"></span>
 
@@ -436,6 +436,6 @@ set_property PACKAGE_PIN <pin> [get_ports exp_refclk0_n]
 
 - [RAVE Peripherals](peripherals.md) - On-board peripherals
 - [RAVE PCIe Configuration](pcie-config.md) - PCIe uses Bank 103
-- [Sapphire RAVE1 EDGE+](https://www.amd.com/en/products/embedded/embedded-plus.html) - RAVE platform info
-- Vivado Platform Designs - https://gitenterprise.xilinx.com/PAEG/amr_vivado_designs/tree/main/emb_plus_ve2302
+- [Sapphire RAVE1 EDGE+](https://www.amd.com/en/products/embedded/embedded-plus.html) - RAVE Board info
+- Vivado Designs - https://github.com/Xilinx/amr_vivado_designs.git
 

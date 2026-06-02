@@ -72,11 +72,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../hardware/index.html">Hardware Design - AMR Common</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">V80 Board</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../V80/index.html">V80 Platform Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../V80/index.html">V80 Board Documentation</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">RAVE Board</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Hardware Design - RAVE VPR-4616</a></li>
 </ul>
@@ -138,7 +138,7 @@
 <p><span id="amrrave-xdmaconfig-overview"></span></p>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
-<p>The RAVE platform uses the XDMA PL IP (xilinx.com:ip:xdma) for DMA functionality. The VE2302 device is a Versal Edge-series device that does not include a CPM block, so DMA must be implemented in soft logic within the programmable fabric.</p>
+<p>The RAVE Board uses the XDMA PL IP (xilinx.com:ip:xdma) for DMA functionality. The VE2302 device is a Versal Edge-series device that does not include a CPM block, so DMA must be implemented in soft logic within the programmable fabric.</p>
 <p>XDMA provides a channel-based DMA architecture supporting 2 physical functions (PF0 for management with device ID 0x5710, PF1 for user/DMA with device ID 0x5711). The IP supports multiple DMA channels with memory-mapped and streaming interfaces for efficient data transfer between host and device memory.</p>
 <blockquote>
 <div><p><strong>Note:</strong> Legacy RAVE designs used QDMA (Queue DMA) with 512 queues. The platform has migrated to XDMA for improved simplicity and compatibility with VE2302 Embedded+ platform requirements.</p>
@@ -518,7 +518,7 @@ DDRMC_NSU → LPDDR4
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 28, 2026.
+      <span class="lastupdated">Last updated on June 02, 2026.
       </span></p>
   </div>
 

@@ -2,7 +2,7 @@
 
 > **For common Versal architecture concepts**, see [Common Hierarchy](../../hardware/hierarchy.md)
 >
-> This document describes the V80 platform-specific hierarchy and block diagram.
+> This document describes the V80 Board-specific hierarchy and block diagram.
 
 <span id="amrv80-hierarchyoverview-introduction"></span>
 

@@ -74,13 +74,13 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../hardware/index.html">Hardware Design - AMR Common</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">V80 Board</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../index.html">V80 Platform Documentation</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">V80 Board Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../deployment-archive.html">AMR Deployment Archive</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../switch-aved-amr.html">Switching Between AVED and AMR on V80</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Hardware Design - V80 (Alveo)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#v80-platform-overview">V80 Platform Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#v80-board-overview">V80 Board Overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#v80-specific-hardware-documentation">V80-Specific Hardware Documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#key-v80-features">Key V80 Features</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#cpm5-hardened-pcie">CPM5 Hardened PCIe</a></li>
@@ -98,7 +98,7 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">RAVE Board</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../RAVE/hardware/index.html">Hardware Design - RAVE VPR-4616</a></li>
 </ul>
@@ -141,7 +141,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">V80 Platform Documentation</a> &raquo;</li>
+          <li><a href="../index.html">V80 Board Documentation</a> &raquo;</li>
       <li>Hardware Design - V80 (Alveo)</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/V80/hardware/index.md.txt" rel="nofollow"> View page source</a>
@@ -156,13 +156,13 @@
 <h1>Hardware Design - V80 (Alveo)<a class="headerlink" href="#hardware-design-v80-alveo" title="Permalink to this heading">¶</a></h1>
 <blockquote>
 <div><p><strong>For common hardware concepts</strong>, see <a class="reference internal" href="../../hardware/index.html"><span class="std std-doc">Common Hardware Documentation</span></a></p>
-<p>This section contains V80 (Alveo) platform-specific hardware design documentation.</p>
+<p>This section contains V80 (Alveo) Board-specific hardware design documentation.</p>
 </div></blockquote>
-<div class="section" id="v80-platform-overview">
-<h2>V80 Platform Overview<a class="headerlink" href="#v80-platform-overview" title="Permalink to this heading">¶</a></h2>
-<p>The V80 is a PCIe accelerator card featuring the Versal V80 HBM-series device. The platform provides high-performance computing capabilities with hardened PCIe Gen5 connectivity and high-bandwidth memory resources optimized for data center and cloud deployments.</p>
+<div class="section" id="v80-board-overview">
+<h2>V80 Board Overview<a class="headerlink" href="#v80-board-overview" title="Permalink to this heading">¶</a></h2>
+<p>The V80 is a PCIe accelerator card featuring the Versal V80 HBM-series device. The board provides high-performance computing capabilities with hardened PCIe Gen5 connectivity and high-bandwidth memory resources optimized for data center and cloud deployments.</p>
 <p>The V80 includes CPM5 (Coherent PCIe Module) which integrates PCIe Gen5 x8 controller and QDMA functionality in hardened silicon. This eliminates the need for soft logic PCIe and DMA IP, preserving programmable logic resources for user applications. The device also features 32 GB of integrated HBM (High-Bandwidth Memory) providing exceptional memory bandwidth for compute-intensive workloads.</p>
-<p>The platform design targets maximum performance with PCIe bandwidth of approximately 32 GB/s and HBM memory bandwidth approaching 460 GB/s. Total memory capacity reaches 68 GB through the combination of HBM, DDR DIMM, and discrete DDR resources.</p>
+<p>The board design targets maximum performance with PCIe bandwidth of approximately 32 GB/s and HBM memory bandwidth approaching 460 GB/s. Total memory capacity reaches 68 GB through the combination of HBM, DDR DIMM, and discrete DDR resources.</p>
 </div>
 <div class="section" id="v80-specific-hardware-documentation">
 <h2>V80-Specific Hardware Documentation<a class="headerlink" href="#v80-specific-hardware-documentation" title="Permalink to this heading">¶</a></h2>
@@ -197,13 +197,13 @@
 <div class="section" id="performance-characteristics">
 <h3>Performance Characteristics<a class="headerlink" href="#performance-characteristics" title="Permalink to this heading">¶</a></h3>
 <p>The V80 delivers approximately 32 GB/s of PCIe bandwidth through the Gen5 x8 interface. HBM memory bandwidth approaches 460 GB/s peak throughput. The combination of high PCIe bandwidth and exceptional memory bandwidth enables demanding applications including AI inference, video processing, and real-time analytics.</p>
-<p>The platform supports data center deployment scenarios where multiple V80 cards can be installed in a single server, providing scalable compute and memory resources. The PCIe form factor integrates seamlessly with standard server infrastructure.</p>
+<p>The board supports data center deployment scenarios where multiple V80 cards can be installed in a single server, providing scalable compute and memory resources. The PCIe form factor integrates seamlessly with standard server infrastructure.</p>
 </div>
 </div>
 <div class="section" id="v80-target-applications">
 <h2>V80 Target Applications<a class="headerlink" href="#v80-target-applications" title="Permalink to this heading">¶</a></h2>
-<p>The V80 platform is optimized for data center and cloud computing environments requiring maximum performance. Target applications include AI and machine learning inference workloads that benefit from high memory bandwidth, video processing pipelines that demand both PCIe and memory throughput, and high-performance computing tasks requiring large memory capacity.</p>
-<p>The platform excels in scenarios where multiple accelerator cards are deployed in a single server, with the PCIe form factor enabling dense compute configurations. Cloud service providers can leverage the V80 for multi-tenant inference services, while enterprise data centers can deploy the platform for analytics and processing workloads.</p>
+<p>The V80 Board is optimized for data center and cloud computing environments requiring maximum performance. Target applications include AI and machine learning inference workloads that benefit from high memory bandwidth, video processing pipelines that demand both PCIe and memory throughput, and high-performance computing tasks requiring large memory capacity.</p>
+<p>The board excels in scenarios where multiple accelerator cards are deployed in a single server, with the PCIe form factor enabling dense compute configurations. Cloud service providers can leverage the V80 for multi-tenant inference services, while enterprise data centers can deploy the board for analytics and processing workloads.</p>
 </div>
 <div class="section" id="technical-specifications-summary">
 <h2>Technical Specifications Summary<a class="headerlink" href="#technical-specifications-summary" title="Permalink to this heading">¶</a></h2>
@@ -234,7 +234,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 28, 2026.
+      <span class="lastupdated">Last updated on June 02, 2026.
       </span></p>
   </div>
 

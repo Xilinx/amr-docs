@@ -8,7 +8,7 @@
 
 ## Overview
 
-The RAVE platform uses CIPS-generated reference clocks along with PCIe-generated clocks for the various logic domains. Multiple processor system reset blocks synchronize resets across the different clock domains present in the design including the PCIe clock domain, XDMA clock domain, and general PL clock domains.
+The RAVE Board uses CIPS-generated reference clocks along with PCIe-generated clocks for the various logic domains. Multiple processor system reset blocks synchronize resets across the different clock domains present in the design including the PCIe clock domain, XDMA clock domain, and general PL clock domains.
 
 <span id="amrrave-clockreset-cipsclocks"></span>
 
@@ -122,7 +122,7 @@ Clock domain crossings between CIPS clocks, PCIe clocks, and potential user cloc
 
 ## Software-Based Device Reboot Limitations
 
-The RAVE platform uses software-based device reboot via the `device_boot` command to reload PDI from flash partitions. This mechanism requires functional AMC firmware and established AMC-to-AMI communication.
+The RAVE Board uses software-based device reboot via the `device_boot` command to reload PDI from flash partitions. This mechanism requires functional AMC firmware and established AMC-to-AMI communication.
 
 **Important:** GPIO-based PCIe hot reset is not supported in AMR.
 

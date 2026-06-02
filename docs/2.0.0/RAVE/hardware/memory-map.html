@@ -72,11 +72,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../hardware/index.html">Hardware Design - AMR Common</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">V80 Board</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../V80/index.html">V80 Platform Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../V80/index.html">V80 Board Documentation</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">RAVE Board</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Hardware Design - RAVE VPR-4616</a></li>
 </ul>
@@ -155,7 +155,7 @@
 <h3>Upper LPDDR4 Regions<a class="headerlink" href="#upper-lpddr4-regions" title="Permalink to this heading">¶</a></h3>
 <p><strong>Range:</strong> Configured in higher address space</p>
 <p>The remaining LPDDR4 capacity is mapped into the extended address space above 4GB. This memory is accessible through 64-bit addressing from the PCIe host and through NoC from various masters.</p>
-<p>User application data and XDMA buffers typically reside in these upper regions. The total available space depends on the platform variant, with approximately 7-7.5 GB available in 8GB configurations and 15-15.5 GB available in 16GB configurations after accounting for firmware and GCQ overhead.</p>
+<p>User application data and XDMA buffers typically reside in these upper regions. The total available space depends on the board variant, with approximately 7-7.5 GB available in 8GB configurations and 15-15.5 GB available in 16GB configurations after accounting for firmware and GCQ overhead.</p>
 <p><span id="amrrave-memorymap-pladdressspace"></span></p>
 </div>
 </div>
@@ -278,7 +278,7 @@
 </tr>
 </tbody>
 </table>
-<p>Specific address ranges depend on the BAR sizes configured in the XDMA IP and the LPDDR4 capacity of the platform variant. PF0 uses device ID 0x5710, and PF1 uses device ID 0x5711 (vendor ID 0x10EE).</p>
+<p>Specific address ranges depend on the BAR sizes configured in the XDMA IP and the LPDDR4 capacity of the board variant. PF0 uses device ID 0x5710, and PF1 uses device ID 0x5711 (vendor ID 0x10EE).</p>
 </div>
 </div>
 <div class="section" id="references">
@@ -304,7 +304,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 28, 2026.
+      <span class="lastupdated">Last updated on June 02, 2026.
       </span></p>
   </div>
 

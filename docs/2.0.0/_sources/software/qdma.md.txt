@@ -1,6 +1,6 @@
 # AMR QDMA
 
-> **Note:** Queue DMA (QDMA) functionality is supported exclusively on the Alveo V80 platform. QDMA is not available on RAVE (Embedded+) platforms, which utilize XDMA for PCIe data transfer operations.
+> **Note:** Queue DMA (QDMA) functionality is supported exclusively on the Alveo V80 Board. QDMA is not available on RAVE (Embedded+) boards, which utilize XDMA for PCIe data transfer operations.
 
 Xilinx QDMA
 

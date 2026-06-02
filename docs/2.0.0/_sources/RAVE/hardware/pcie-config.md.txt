@@ -8,7 +8,7 @@
 
 ## Overview
 
-The RAVE platform implements PCIe connectivity using the PCIe Versal IP (xilinx.com:ip:pcie_versal) instantiated in programmable logic. The VE2302 device is a Versal Edge-series device that does not include a CPM (Coherent PCIe Module) hardened block, so PCIe functionality must be implemented using soft logic IP in the PL fabric.
+The RAVE Board implements PCIe connectivity using the PCIe Versal IP (xilinx.com:ip:pcie_versal) instantiated in programmable logic. The VE2302 device is a Versal Edge-series device that does not include a CPM (Coherent PCIe Module) hardened block, so PCIe functionality must be implemented using soft logic IP in the PL fabric.
 
 The PCIe IP provides Gen3 x4 connectivity between the VE2302 and the on-board Ryzen processor. This implementation uses GTYP transceivers in Bank 103 and consumes approximately 29,000 LUTs of programmable logic resources. The soft logic approach provides configuration flexibility while requiring careful attention to timing closure and resource budgeting.
 
@@ -208,7 +208,7 @@ The soft logic implementation requires careful floorplanning and timing closure 
 
 ## XDMA Configuration
 
-The RAVE platform uses XDMA for DMA operations with the following configuration:
+The RAVE Board uses XDMA for DMA operations with the following configuration:
 
 - **Physical Functions**: 2 (PF0 for management, PF1 for user/DMA)
 - **Device IDs**: PF0 (0x5710), PF1 (0x5711)
@@ -216,7 +216,7 @@ The RAVE platform uses XDMA for DMA operations with the following configuration:
 - **DMA Channels**: Multiple H2C and C2H channels
 - **AXI Interfaces**: AXI Master, AXI-Lite Master, AXI Bypass
 
-> **Note:** Legacy RAVE designs used QDMA with 512 queues. The platform has migrated to XDMA for improved simplicity and compatibility with VE2302 Embedded+ platform requirements.
+> **Note:** Legacy RAVE designs used QDMA with 512 queues. The board has migrated to XDMA for improved simplicity and compatibility with VE2302 Embedded+ board requirements.
 
 See [RAVE XDMA Configuration](xdma-config.md) for detailed XDMA IP setup.
 

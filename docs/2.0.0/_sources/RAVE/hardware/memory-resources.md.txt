@@ -8,7 +8,7 @@
 
 ## Overview
 
-The RAVE platform provides 8 GB or 16 GB of LPDDR4 memory (depending on variant) serving all memory requirements for the VE2302 device. The memory is organized as two channels with x32 configuration, operating at 200 MHz for 400 MT/s effective data rate.
+The RAVE Board provides 8 GB or 16 GB of LPDDR4 memory (depending on variant) serving all memory requirements for the VE2302 device. The memory is organized as two channels with x32 configuration, operating at 200 MHz for 400 MT/s effective data rate.
 
 <span id="amrrave-memoryresources-lpddr4"></span>
 
@@ -16,14 +16,14 @@ The RAVE platform provides 8 GB or 16 GB of LPDDR4 memory (depending on variant)
 
 ### Memory Organization
 
-The LPDDR4 memory is soldered directly to the board (not socketed) in a configuration determined by the platform variant.
+The LPDDR4 memory is soldered directly to the board (not socketed) in a configuration determined by the board variant.
 
 **Memory Configuration:**
 - Capacity: 8-16 GB total (variant-dependent)
 - Channels: 2 channels
 - Width: x32 per channel
 
-**Note:** For detailed memory organization by platform variant, refer to the [Sapphire RAVE1 EDGE+](https://www.amd.com/en/products/embedded/embedded-plus.html).
+**Note:** For detailed memory organization by board variant, refer to the [Sapphire RAVE1 EDGE+](https://www.amd.com/en/products/embedded/embedded-plus.html).
 
 ### Memory Controller Configuration
 
@@ -191,9 +191,9 @@ For applications approaching memory limits:
 
 <span id="amrrave-memoryresources-upgradetoVPR5050A"></span>
 
-## Platform Variant Memory Differences
+## board Variant Memory Differences
 
-Platform variants offer different LPDDR4 capacities (8GB or 16GB) to meet various application requirements. Higher capacity variants provide more working memory for larger datasets, video frames, and AI applications while maintaining the same dual-channel configuration and operating frequency.
+board variants offer different LPDDR4 capacities (8GB or 16GB) to meet various application requirements. Higher capacity variants provide more working memory for larger datasets, video frames, and AI applications while maintaining the same dual-channel configuration and operating frequency.
 
 **Note:** For variant-specific memory configurations, refer to the [Sapphire RAVE1 EDGE+](https://www.amd.com/en/products/embedded/embedded-plus.html).
 

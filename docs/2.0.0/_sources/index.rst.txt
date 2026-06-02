@@ -4,7 +4,7 @@ AMR
 
 Welcome to the Adaptive Management Runtime (AMR) documentation. AMR provides comprehensive management capabilities for Alveo and Embedded+ boards featuring Versal devices connected to x86 hosts via PCIe.
 
-This documentation covers the complete AMR ecosystem including hardware design, firmware architecture, software services, deployment procedures, and platform-specific information.
+This documentation covers the complete AMR ecosystem including hardware design, firmware architecture, software services, deployment procedures, and board-specific information.
 
 Release Information
 ===================
@@ -21,7 +21,7 @@ Release Information
      - April 15, 2026
    * - Vivado Version
      - 2026.1
-   * - Supported Platforms
+   * - Supported Boards
      - V80, RAVE
 
 ----
@@ -82,14 +82,14 @@ Release Information
 
 .. toctree::
    :maxdepth: 2
-   :caption: V80 Platform
+   :caption: V80 Board
    :hidden:
 
    V80/index
 
 .. toctree::
    :maxdepth: 2
-   :caption: RAVE Platform
+   :caption: RAVE Board
    :hidden:
 
    RAVE/hardware/index

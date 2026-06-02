@@ -8,10 +8,10 @@
 
 ## Overview
 
-RAVE platforms include on-board peripherals for standalone embedded operation. This document focuses on the firmware and software interfaces used by AMR to access these peripherals.
+RAVE Boards include on-board peripherals for standalone embedded operation. This document focuses on the firmware and software interfaces used by AMR to access these peripherals.
 
 **AMR-Managed Peripherals:**
-- Board-ID EEPROM (I2C) - Platform identification
+- Board-ID EEPROM (I2C) - board identification
 - TPM 2.0 (SPI) - Security operations
 - Status LEDs (GPIO) - Status indication
 - UART bridges - Console access
@@ -20,12 +20,12 @@ RAVE platforms include on-board peripherals for standalone embedded operation. T
 
 ## Board-ID EEPROM
 
-The Board-ID EEPROM stores platform identification and manufacturing information accessible via I2C.
+The Board-ID EEPROM stores board identification and manufacturing information accessible via I2C.
 
 **AMR Access:**
 - **Firmware**: Via CIPS I2C peripheral (I2C address 0x57)
 - **Host**: Via AMI commands
-- **Use Case**: Platform identification for XRT/Vitis workflow
+- **Use Case**: board identification for XRT/Vitis workflow
 
 **EEPROM Content:**
 - Board serial number
@@ -92,9 +92,9 @@ lsusb | grep FTDI
 
 <span id="amrrave-peripherals-emmc"></span>
 
-## Platform-Specific Peripherals (VPR-5050A)
+## Board-specific Peripherals (VPR-5050A)
 
-Some RAVE platform variants include additional peripherals:
+Some RAVE Board variants include additional peripherals:
 
 **eMMC Storage (VPR-5050A only):**
 - On-board persistent storage accessible via Versal MIO
@@ -104,7 +104,7 @@ Some RAVE platform variants include additional peripherals:
 - USB 2.0 host controller via Versal MIO
 - Supports USB storage, peripherals, debug interfaces
 
-**Note:** For availability and specifications, refer to the specific platform product page.
+**Note:** For availability and specifications, refer to the specific board product page.
 
 <span id="amrrave-peripherals-mioconfiguration"></span>
 

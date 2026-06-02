@@ -72,11 +72,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../hardware/index.html">Hardware Design - AMR Common</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">V80 Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">V80 Board</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../V80/index.html">V80 Platform Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../V80/index.html">V80 Board Documentation</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">RAVE Platform</span></p>
+<p class="caption" role="heading"><span class="caption-text">RAVE Board</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Hardware Design - RAVE VPR-4616</a></li>
 </ul>
@@ -138,7 +138,7 @@
 <p><span id="amrrave-sourcefiles-overview"></span></p>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
-<p>The RAVE hardware design files are organized under rave/amr_vivado_designs/emb_plus_ve2302/ with multiple platform variants supporting different applications and features. The directory structure includes</p>
+<p>The RAVE hardware design files are organized under rave/amr_vivado_designs/emb_plus_ve2302/ with multiple board variants supporting different applications and features. The directory structure includes</p>
 <p>DFX-capable designs with reconfigurable partitions.</p>
 <p><span id="amrrave-sourcefiles-directorytree"></span></p>
 </div>
@@ -146,7 +146,7 @@
 <h2>RAVE Directory Structure<a class="headerlink" href="#rave-directory-structure" title="Permalink to this heading">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>build_rave/amr_vivado_designs/
 └── emb_plus_ve2302/
-    ├── platforms/
+    ├── boards/
     │   ├── scripts/           (Common SDT generation scripts)
     │   ├── ve2302_xdma_base/  (DFX base design)
     │   ├── ve2302_1gEth/      (1G Ethernet design)
@@ -161,13 +161,13 @@
         └── training/          (Reference RM)
 </pre></div>
 </div>
-<p><span id="amrrave-sourcefiles-platformdesigns"></span></p>
+<p><span id="amrrave-sourcefiles-boarddesigns"></span></p>
 </div>
-<div class="section" id="platform-design-variants">
-<h2>Platform Design Variants<a class="headerlink" href="#platform-design-variants" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="board-design-variants">
+<h2>board Design Variants<a class="headerlink" href="#board-design-variants" title="Permalink to this heading">¶</a></h2>
 <div class="section" id="ve2302-xdma-base">
 <h3>ve2302_xdma_base<a class="headerlink" href="#ve2302-xdma-base" title="Permalink to this heading">¶</a></h3>
-<p>The base DFX-capable platform design provides PCIe/XDMA functionality with a reconfigurable partition for swappable user logic. This design serves as the foundation for dynamic daughtercard support where different IP configurations can be loaded at runtime.</p>
+<p>The base DFX-capable board design provides PCIe/XDMA functionality with a reconfigurable partition for swappable user logic. This design serves as the foundation for dynamic daughtercard support where different IP configurations can be loaded at runtime.</p>
 <p><strong>Key Features:</strong></p>
 <ul class="simple">
 <li><p>XDMA or QDMA for PCIe DMA</p></li>
@@ -230,9 +230,9 @@
 <p><span id="amrrave-sourcefiles-buildstructure"></span></p>
 </div>
 </div>
-<div class="section" id="build-structure-per-platform">
-<h2>Build Structure (Per Platform)<a class="headerlink" href="#build-structure-per-platform" title="Permalink to this heading">¶</a></h2>
-<p>Each platform directory follows a common structure:</p>
+<div class="section" id="build-structure-per-board">
+<h2>Build Structure (Per board)<a class="headerlink" href="#build-structure-per-board" title="Permalink to this heading">¶</a></h2>
+<p>Each board directory follows a common structure:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ve2302_&lt;platform&gt;/
 ├── Makefile              (Build automation)
 ├── scripts/
@@ -277,7 +277,7 @@
 <li><p>QDMA PL IP (512 queues) or XDMA IP</p></li>
 <li><p>AXI NoC instances (LPDDR4 integration)</p></li>
 <li><p>SmartConnect, AXI GPIO, proc_sys_reset</p></li>
-<li><p>Platform-specific IP (Ethernet, GMSL, etc.)</p></li>
+<li><p>Board-specific IP (Ethernet, GMSL, etc.)</p></li>
 <li><p>All interconnect routing and address mappings</p></li>
 </ul>
 <p><span id="amrrave-sourcefiles-xdcconstraints"></span></p>
@@ -331,7 +331,7 @@
 <h2>System Device Tree Generation<a class="headerlink" href="#system-device-tree-generation" title="Permalink to this heading">¶</a></h2>
 <div class="section" id="sdt-scripts">
 <h3>SDT Scripts<a class="headerlink" href="#sdt-scripts" title="Permalink to this heading">¶</a></h3>
-<p>The platforms/scripts/ directory contains SDT generation scripts:</p>
+<p>The boards/scripts/ directory contains SDT generation scripts:</p>
 <p><strong>gen_sdt.tcl:</strong>
 Generates device tree for flat designs using the sdtgen utility. The script specifies the board device tree (versal-emb-plus-ve2302-reva) and outputs to project_sdt/ directory.</p>
 <p><strong>gen_sdt_dfx.tcl:</strong>
@@ -409,7 +409,7 @@ Post-processing script for device tree files, applying any necessary modificatio
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on May 28, 2026.
+      <span class="lastupdated">Last updated on June 02, 2026.
       </span></p>
   </div>
 

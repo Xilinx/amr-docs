@@ -144,6 +144,9 @@ The following steps will guide you through setting up your Vivado environment an
 For more details on output files check 
     [Review the Generated Output section](#how-tobuildanamrdesignforyourself-reviewthegeneratedoutput) 
 <span id="how-tobuildanamrdesignforyourself-firmware"></span>
+
+### Build Firmware, Software independently using below commands
+
 ### Firmware
 
   The following steps will guide you through building the AMC firmware from the cloned source code.

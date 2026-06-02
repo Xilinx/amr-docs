@@ -8,7 +8,7 @@
 
 ## Overview
 
-The RAVE hardware design files are organized under rave/amr_vivado_designs/emb_plus_ve2302/ with multiple platform variants supporting different applications and features. The directory structure includes 
+The RAVE hardware design files are organized under rave/amr_vivado_designs/emb_plus_ve2302/ with multiple board variants supporting different applications and features. The directory structure includes 
 
 
 
@@ -21,7 +21,7 @@ DFX-capable designs with reconfigurable partitions.
 ```
 build_rave/amr_vivado_designs/
 └── emb_plus_ve2302/
-    ├── platforms/
+    ├── boards/
     │   ├── scripts/           (Common SDT generation scripts)
     │   ├── ve2302_xdma_base/  (DFX base design)
     │   ├── ve2302_1gEth/      (1G Ethernet design)
@@ -36,13 +36,13 @@ build_rave/amr_vivado_designs/
         └── training/          (Reference RM)
 ```
 
-<span id="amrrave-sourcefiles-platformdesigns"></span>
+<span id="amrrave-sourcefiles-boarddesigns"></span>
 
-## Platform Design Variants
+## board Design Variants
 
 ### ve2302_xdma_base
 
-The base DFX-capable platform design provides PCIe/XDMA functionality with a reconfigurable partition for swappable user logic. This design serves as the foundation for dynamic daughtercard support where different IP configurations can be loaded at runtime.
+The base DFX-capable board design provides PCIe/XDMA functionality with a reconfigurable partition for swappable user logic. This design serves as the foundation for dynamic daughtercard support where different IP configurations can be loaded at runtime.
 
 **Key Features:**
 - XDMA or QDMA for PCIe DMA
@@ -106,9 +106,9 @@ A reconfigurable module implementing single-channel 10G Ethernet using MRMAC IP.
 
 <span id="amrrave-sourcefiles-buildstructure"></span>
 
-## Build Structure (Per Platform)
+## Build Structure (Per board)
 
-Each platform directory follows a common structure:
+Each board directory follows a common structure:
 
 ```
 ve2302_<platform>/
@@ -150,7 +150,7 @@ The config_bd.tcl script instantiates and configures all IP blocks:
 - QDMA PL IP (512 queues) or XDMA IP
 - AXI NoC instances (LPDDR4 integration)
 - SmartConnect, AXI GPIO, proc_sys_reset
-- Platform-specific IP (Ethernet, GMSL, etc.)
+- Board-specific IP (Ethernet, GMSL, etc.)
 - All interconnect routing and address mappings
 
 <span id="amrrave-sourcefiles-xdcconstraints"></span>
@@ -197,7 +197,7 @@ Implementation constraints specify timing and placement:
 
 ### SDT Scripts
 
-The platforms/scripts/ directory contains SDT generation scripts:
+The boards/scripts/ directory contains SDT generation scripts:
 
 **gen_sdt.tcl:**
 Generates device tree for flat designs using the sdtgen utility. The script specifies the board device tree (versal-emb-plus-ve2302-reva) and outputs to project_sdt/ directory.
