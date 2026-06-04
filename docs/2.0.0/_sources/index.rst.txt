@@ -39,7 +39,8 @@ Release Information
    :hidden:
 
    getting-started/install-prebuilt
-   getting-started/build
+   getting-started/build_rave
+   getting-started/build_v80
 
 .. toctree::
    :maxdepth: 2
