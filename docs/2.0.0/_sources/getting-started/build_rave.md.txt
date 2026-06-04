@@ -1,4 +1,4 @@
-# How-to Build an AMR Design for Yourself
+# How-to Build an AMR Design for RAVE
 
 This is a getting-started guide for the RAVE Adaptive Management Runtime (AMR) to be used with the provided AMR source code on GitHub. The source code comprises firmware library, and a host operating system driver and utility application.
 

@@ -20,5 +20,5 @@ Please refer to the AVED documentation for complete xbtest installation and usag
 If you need AMR functionality without xbtest, refer to:
 
 - [How-to Install Prebuilt AMR Packages](../../getting-started/install-prebuilt.md)
-- [How-to Build an AMR Design for Yourself](../../getting-started/build.md)
+- [How-to Build an AMR Design for V80](../../getting-started/build_v80.md)
 - [AMR Management Interface userguide](../../deployment/ami-tool-guide.md)

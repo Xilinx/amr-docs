@@ -77,7 +77,7 @@ Follow the steps below to install AMR firmware/software with existing AVED/xbtes
 
 ### Steps
 
-1. Build the AMR sources from [How-to Build an AMR Design for Yourself](../getting-started/build.md) or download prebuilt AMR images from [AMR Release Information](../AMR-release-information.md)
+1. Build the AMR sources from [How-to Build an AMR Design for V80](../getting-started/build_v80.md) or download prebuilt AMR images from [AMR Release Information](../AMR-release-information.md)
 
 2. Program the AMR OSPI FPT image using the ami_tool cfgmem_fpt command:
 
