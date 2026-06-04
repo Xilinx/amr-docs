@@ -20,9 +20,7 @@
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="AMR - Board Management Solution" href="../system-architecture/board-management.html" />
-    <link rel="prev" title="How-to Install Prebuilt AMR Packages" href="install-prebuilt.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,30 +44,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../overview/amr-overview.html">AMR Overview</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AMR Getting Started</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="install-prebuilt.html">How-to Install Prebuilt AMR Packages</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">How-to Build an AMR Design for Yourself</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#build-approaches">Build Approaches</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#before-you-begin">Before You Begin</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#build-dependencies">Build Dependencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hardware-test-dependencies-for-v80">Hardware Test Dependencies for V80</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#install-python-from-python-org">Install Python from python.org</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#building-ospi-images-through-yocto">Building OSPI Images through Yocto</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#download-the-source-code">Download the Source Code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#build-the-design">Build the Design</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#build-hardware-firmware-software-together-with-below-command">Build Hardware, Firmware, Software together with below command.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#build-firmware-software-independently-using-below-commands">Build Firmware, Software independently using below commands</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#firmware">Firmware</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#software">Software</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#review-the-generated-output">Review the Generated Output</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#programming-and-testing-the-design">Programming and Testing the Design</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#next-steps">Next Steps</a></li>
-</ul>
-</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AMR System Architecture</span></p>
 <ul>
@@ -144,7 +120,7 @@
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
       <li>How-to Build an AMR Design for Yourself</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/getting-started/build.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/getting-started/build_rave.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -154,7 +130,7 @@
              
   <div class="section" id="how-to-build-an-amr-design-for-yourself">
 <h1>How-to Build an AMR Design for Yourself<a class="headerlink" href="#how-to-build-an-amr-design-for-yourself" title="Permalink to this heading">¶</a></h1>
-<p>This is a getting-started guide for the Adaptive Management Runtime (AMR) to be used with the provided AMR source code on GitHub. The source code comprises firmware library, and a host operating system driver and utility application.</p>
+<p>This is a getting-started guide for the RAVE Adaptive Management Runtime (AMR) to be used with the provided AMR source code on GitHub. The source code comprises firmware library, and a host operating system driver and utility application.</p>
 <div class="section" id="build-approaches">
 <h2>Build Approaches<a class="headerlink" href="#build-approaches" title="Permalink to this heading">¶</a></h2>
 <p>There are two approaches to building AMR:</p>
@@ -193,11 +169,6 @@
 <ul class="simple">
 <li><p>source /proj/xbuilds/2026.1_daily_latest/installs/lin64/2026.1/Vivado/settings64.sh</p></li>
 </ul>
-<p><span id="how-tobuildanamrdesignforyourself-hardwaretestdependencies"></span></p>
-</div>
-<div class="section" id="hardware-test-dependencies-for-v80">
-<h3>Hardware Test Dependencies for V80<a class="headerlink" href="#hardware-test-dependencies-for-v80" title="Permalink to this heading">¶</a></h3>
-<p>See <a class="reference internal" href="../overview/amr-overview.html#AMROverview-SupportedKernelsandDistributions"><span class="std std-ref">Supported Kernels and Distributions</span></a> for an up-to-date list.</p>
 <p><em>Note</em>: root/sudo permissions are required.</p>
 <p><span id="how-tobuildanamrdesignforyourself-installpythonfrompython-org"></span></p>
 </div>
@@ -211,25 +182,15 @@
 <h2>Building OSPI Images through Yocto<a class="headerlink" href="#building-ospi-images-through-yocto" title="Permalink to this heading">¶</a></h2>
 <p><strong>Use this approach for production builds.</strong></p>
 <p>The Yocto build system is used to build all necessary binary OSPI images and packages for production releases. The AMR package is built using the Yocto <a class="reference external" href="https://github.com/Xilinx/meta-embedded-plus">meta-embedded-plus</a> template.</p>
-<p>The final artifacts will be located in:</p>
-<ul class="simple">
-<li><p><strong>RAVE:</strong> <code class="docutils literal notranslate"><span class="pre">build/tmp/deploy/images/emb_plus_ve2302_amr/</span></code></p></li>
-<li><p><strong>V80:</strong> <code class="docutils literal notranslate"><span class="pre">build/tmp/deploy/images/alveo-v80-amr/</span></code></p></li>
-</ul>
-<ol class="arabic">
-<li><p>RAVE
-Build OSPI image:
-MACHINE=emb-plus-ve2302-amr bitbake emb-plus-ospi-amr</p>
-<p>Build APU image:
-MACHINE=emb-plus-ve2302-amr bitbake emb-plus-apu-image</p>
-</li>
-<li><p>V80
-Build OSPI image:
-MACHINE=alveo-v80-amr bitbake emb-plus-ospi-amr</p>
-<p>Build APU image:
-MACHINE=alveo-v80-amr bitbake emb-plus-apu-image</p>
-</li>
-</ol>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Build OSPI image:
+MACHINE=emb-plus-ve2302-amr bitbake emb-plus-ospi-amr
+
+Build APU image:
+MACHINE=emb-plus-ve2302-amr bitbake emb-plus-apu-image
+
+The final artifacts will be located in &lt;`build/tmp/deploy/images/emb_plus_ve2302_amr/`&gt;
+</pre></div>
+</div>
 <p>For building x86 packages refer <a class="reference internal" href="#how-tobuildanamrdesignforyourself-software"><span class="xref myst">software build section</span></a></p>
 </div>
 <div class="section" id="download-the-source-code">
@@ -241,7 +202,7 @@ MACHINE=alveo-v80-amr bitbake emb-plus-apu-image</p>
 <li><p>Clone the latest release branch AMR source code repository. Confirm that you cloned the repository to a development server with sufficient system memory to build AMR, either locally on the server or remotely through LSF.</p></li>
 <li><p>Make a note of the listed Vivado tool version used to build this source code, as AMR has been verified to build with this tool version. You will use the same Vivado version to build AMR.</p></li>
 </ol>
-<p>In this example, we will clone the AMR repo with the latest release (which has been verified with Vivado 2026.1) and build instructions for AMR design are same for both V80 and RAVE. The high-level directory structure will look similar to the following:</p>
+<p>In this example, we will clone the AMR repo with the latest release (which has been verified with Vivado 2026.1) and build it. The high-level directory structure will look similar to the following:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>AMR
 ├── deploy
 │   └── scripts
@@ -258,39 +219,62 @@ MACHINE=alveo-v80-amr bitbake emb-plus-apu-image</p>
 <p><span id="how-tobuildanamrdesignforyourself"></span></p>
 <div class="section" id="build-hardware-firmware-software-together-with-below-command">
 <h3>Build Hardware, Firmware, Software together with below command.<a class="headerlink" href="#build-hardware-firmware-software-together-with-below-command" title="Permalink to this heading">¶</a></h3>
-<p>The following steps will guide you through setting up your Vivado environment and building an AMR V80/RAVE PDI from the cloned source code.</p>
-<ol class="arabic">
-<li><p>Set up the desired version of Vivado in your environment by sourcing the <code class="docutils literal notranslate"><span class="pre">settings64.](c)sh</span></code> script from your Vivado install directory.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    # for csh
-    $ source settings64.csh
-
-    # for bash
-    $ source settings64.sh
-</pre></div>
-</div>
-</li>
-<li><p>To build all components and generate pdi, execute
-./build.sh -profile &lt;v80|rave&gt;</p></li>
+<p>The following steps will guide you through setting up your Vivado environment and building an AMR RAVE PDI from the cloned source code.</p>
+<ol class="arabic simple">
+<li><p>Set up the desired version of Vivado in your environment by sourcing the <code class="docutils literal notranslate"><span class="pre">settings64.](c)sh</span></code> script from your Vivado install directory.</p></li>
+<li><p>To build all components execute the build.sh command</p></li>
 </ol>
 <!-- end list -->
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- For more information on the build script, refer to [AMR Build Scripts](../development/build-scripts.md)
 
+    # for csh
+    $ source settings64.csh
+
+    # for bash
+    $ source settings64.sh
+
    ```bash
-    # To build V80 hardware, firmware and software
+    # To build RAVE hardware, firmware and software
       cd amr
-      ./build.sh -profile v80
+      ./build.sh -profile rave
     ```
 
-To confirm that the build completed successfully, review the generated output folders
-    - build_amc : contains fw build output
-    - build_ami : contains sw build output
-    - build_v80 : contains hw build output
 verify that the required output files are present. 
+By default, the `build.sh` script creates a build directory which would contain fw and sw images. Review your output directory to confirm it looks like the following. 
+
+&lt;AMR&gt;
+├── build_amc      -&gt; contains fw build output
+│   ├── amc.elf*
+│   ├── ┌─────────────────────┐
+│   ├── │ amr_ospi.bin        │
+│   ├── │ amr_ospi_fpt.bin    │
+│   ├── └─────────────────────┘
+│   ├── amr_ospi_pdi.bif*
+│   ├── build.log
+│   ├── CMakeCache.txt
+│   ├── CMakeFiles
+│   ├── cmake_install.cmake
+│   └── Makefile
+├── build_ami       -&gt; contains sw build output
+│   ├── ami
+│   ├── driver
+│   ├── libami
+│   ├── ┌──────────────────────────────────────────────────┐
+│   ├── │ ami_3.0.0-0.0a8a8683.20260224_amd64.deb          │
+│   ├── │ amitool_3.0.0-0.0a8a8683.20260224_amd64.deb      │
+│   └── │ libami_3.0.0-0.0a8a8683.20260224_amd64.deb       │
+│       └──────────────────────────────────────────────────┘
+├── build_rave       -&gt; contains hw build output
+│   └── amr_vivado_designs
+├── build.sh
+├── fw/
+├── scripts/
+└── sw/
+
+Important Note: Generated files followed by a &#39;*&#39; are required files created by each step in the build flow, which can be used as an indication that the build has completed successfully. Verify that these files exist after building the design.
 </pre></div>
 </div>
-<p>For more details on output files check
-<a class="reference internal" href="#how-tobuildanamrdesignforyourself-reviewthegeneratedoutput"><span class="xref myst">Review the Generated Output section</span></a>
-<span id="how-tobuildanamrdesignforyourself-firmware"></span></p>
+<p><span id="how-tobuildanamrdesignforyourself-firmware"></span></p>
 </div>
 <div class="section" id="build-firmware-software-independently-using-below-commands">
 <h3>Build Firmware, Software independently using below commands<a class="headerlink" href="#build-firmware-software-independently-using-below-commands" title="Permalink to this heading">¶</a></h3>
@@ -301,9 +285,9 @@ verify that the required output files are present.
 <ol class="arabic simple">
 <li><p>On your development server, navigate to the AMC directory in &lt;AMR cloned repo&gt;/fw/AMC/.</p></li>
 <li><p>Run the script
-./scripts/build.sh -xsa &lt;hw_xsa&gt; -profile &lt;v80/rave&gt;
-which will build the firmware and generate amr_ospi_fpt.bin, amr_ospi.bin. After successfully building, the firmware package will be in &lt;AMR&gt;/fw/AMC/build_amc/. Copy this to your deployment server.</p></li>
+./scripts/build.sh -xsa &lt;hw_xsa&gt; -profile rave</p></li>
 </ol>
+<p>This will build the firmware and generate amr_ospi_fpt.bin, amr_ospi.bin. After successfully building, the firmware package will be in &lt;AMR&gt;/fw/AMC/build_amc/. Copy this to your deployment server.</p>
 <p><span id="how-tobuildanamrdesignforyourself-software"></span></p>
 </div>
 <div class="section" id="software">
@@ -332,43 +316,6 @@ sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </spa
 </div>
 </li>
 </ol>
-<p><span id="how-tobuildanamrdesignforyourself-reviewthegeneratedoutput"></span></p>
-</div>
-</div>
-<div class="section" id="review-the-generated-output">
-<h2>Review the Generated Output<a class="headerlink" href="#review-the-generated-output" title="Permalink to this heading">¶</a></h2>
-<p>By default, the <code class="docutils literal notranslate"><span class="pre">build.sh</span></code> script creates a build directory which would contain fw and sw images. Review your output directory to confirm it looks like the following. For AMR build_amr</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;AMR&gt;
-├── build_amc
-│   ├── amc.elf*
-│   ├── ┌─────────────────────┐
-│   ├── │ amr_ospi.bin        │
-│   ├── │ amr_ospi_fpt.bin    │
-│   ├── └─────────────────────┘
-│   ├── amr_ospi_pdi.bif*
-│   ├── build.log
-│   ├── CMakeCache.txt
-│   ├── CMakeFiles
-│   ├── cmake_install.cmake
-│   └── Makefile
-├── build_ami
-│   ├── ami
-│   ├── driver
-│   ├── libami
-│   ├── ┌──────────────────────────────────────────────────┐
-│   ├── │ ami_3.0.0-0.0a8a8683.20260224_amd64.deb          │
-│   ├── │ amitool_3.0.0-0.0a8a8683.20260224_amd64.deb      │
-│   └── │ libami_3.0.0-0.0a8a8683.20260224_amd64.deb       │
-│       └──────────────────────────────────────────────────┘
-├── build_v80
-│   └── amr_vivado_designs
-├── build.sh
-├── fw/
-├── scripts/
-└── sw/
-
-Important Note: Generated files followed by a &#39;*&#39; are required files created by each step in the build flow, which can be used as an indication that the build has completed successfully. Verify that these files exist after building the design.
-</pre></div>
 </div>
 </div>
 <div class="section" id="programming-and-testing-the-design">
@@ -417,10 +364,7 @@ Will do a hot reset to boot into partition 0. This may take a minute...
           </div>
           
 				  
-				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="install-prebuilt.html" class="btn btn-neutral float-left" title="How-to Install Prebuilt AMR Packages" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../system-architecture/board-management.html" class="btn btn-neutral float-right" title="AMR - Board Management Solution" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+				  <footer>
 
   <hr/>
 

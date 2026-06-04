@@ -49,6 +49,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#supported-boards">Supported boards</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#alveo-v80">Alveo V80</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#supported-kernels-and-distributions-for-v80">Supported Kernels and Distributions for V80</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-started-with-v80">Getting Started with V80</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rave-embedded-board">RAVE (Embedded+ Board)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#adaptive-management-runtime">Adaptive Management Runtime</a></li>
 </ul>
@@ -62,7 +63,6 @@
 <p class="caption" role="heading"><span class="caption-text">AMR Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/install-prebuilt.html">How-to Install Prebuilt AMR Packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting-started/build.html">How-to Build an AMR Design for Yourself</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AMR System Architecture</span></p>
 <ul>
@@ -216,8 +216,32 @@
 <div><p><strong>Note:</strong> Queue DMA (QDMA) functionality is supported exclusively on the Alveo V80 Board. QDMA is not available on RAVE (Embedded+) boards, which utilize XDMA for PCIe data transfer operations.</p>
 </div></blockquote>
 <p><a class="reference download internal" download="" href="../_downloads/ae7b4c937f1537f5834fd132ead1bf49/1107373415.png"><span class="xref download myst"><img alt="image1" src="../_images/1107373415.png" /></span></a></p>
-<p>To get started with AMR on V80, refer to <a class="reference internal" href="../getting-started/index.html"><span class="std std-doc">getting-started</span></a>.</p>
-<p><strong>Note:</strong> If you need to switch between AVED and AMR on V80, refer to <a class="reference internal" href="../V80/switch-aved-amr.html"><span class="std std-doc">Switching Between AVED and AMR</span></a> for detailed instructions on seamlessly transitioning between the two boards.</p>
+</div>
+<div class="section" id="getting-started-with-v80">
+<h3>Getting Started with V80<a class="headerlink" href="#getting-started-with-v80" title="Permalink to this heading">¶</a></h3>
+<p>Choose the appropriate guide based on your hardware state:</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th><strong>Options</strong></th>
+<th><strong>Link to Follow</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fresh V80 hardware and want to load AMR</td>
+<td><a href="../getting-started/build_v80.md">How-to Build an AMR Design for V80</a> - Follow the getting started guide to build and deploy AMR</td>
+</tr>
+<tr>
+<td>V80 with legacy AVED solution and want to switch to AMR</td>
+<td><a href="../V80/switch-aved-amr.md#swwitching-from-avedxbtest-to-amr">Switching from AVED/xbtest to AMR</a> - Transition from AVED to AMR</td>
+</tr>
+<tr>
+<td>Running AMR on V80 and want to install legacy AVED solution</td>
+<td><a href="../V80/switch-aved-amr.md#switching-from-amr-to-avedxbtest">Switching from AMR to AVED/xbtest</a> - Transition from AMR to AVED</td>
+</tr>
+</tbody>
+</table>
 <p><span id="amroverview-rave"></span></p>
 </div>
 <div class="section" id="rave-embedded-board">

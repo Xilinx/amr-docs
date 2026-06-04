@@ -2,7 +2,9 @@
 
   - [How-to Install Prebuilt AMR Packages](install-prebuilt.md)
 
-  - [How-to Build an AMR Design for Yourself](build.md)
+  - [How-to Build an AMR Design for V80](build_v80.md)
+
+  - [How-to Build an AMR Design for RAVE](build_rave.md)
 
   - [How-to install and run a pre-built xbtest on V80 card](../V80/xbtest/install-and-run-xbtest.md)
 

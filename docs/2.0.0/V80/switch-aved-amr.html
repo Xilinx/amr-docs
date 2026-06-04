@@ -48,7 +48,6 @@
 <p class="caption" role="heading"><span class="caption-text">AMR Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/install-prebuilt.html">How-to Install Prebuilt AMR Packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting-started/build.html">How-to Build an AMR Design for Yourself</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AMR System Architecture</span></p>
 <ul>
@@ -86,7 +85,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#steps">Steps</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#amr-installation-with-existing-aved-xbtest">AMR Installation with Existing AVED/xbtest</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#swwitching-from-aved-xbtest-to-amr">Swwitching from AVED/xbtest to AMR</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id2">Prerequisites</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id3">Steps</a></li>
 </ul>
@@ -238,8 +237,8 @@ sudo<span class="w"> </span>ami_tool<span class="w"> </span>cfgmem_fpt<span clas
 </div>
 </div>
 </div>
-<div class="section" id="amr-installation-with-existing-aved-xbtest">
-<h2>AMR Installation with Existing AVED/xbtest<a class="headerlink" href="#amr-installation-with-existing-aved-xbtest" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="swwitching-from-aved-xbtest-to-amr">
+<h2>Swwitching from AVED/xbtest to AMR<a class="headerlink" href="#swwitching-from-aved-xbtest-to-amr" title="Permalink to this heading">¶</a></h2>
 <p>Follow the steps below to install AMR firmware/software with existing AVED/xbtest.</p>
 <div class="section" id="id2">
 <h3>Prerequisites<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
@@ -252,7 +251,7 @@ sudo<span class="w"> </span>ami_tool<span class="w"> </span>cfgmem_fpt<span clas
 <div class="section" id="id3">
 <h3>Steps<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
 <ol class="arabic">
-<li><p>Build the AMR sources from <a class="reference internal" href="../getting-started/build.html"><span class="std std-doc">How-to Build an AMR Design for Yourself</span></a> or download prebuilt AMR images from <a class="reference internal" href="../AMR-release-information.html"><span class="std std-doc">AMR Release Information</span></a></p></li>
+<li><p>Build the AMR sources from <a class="reference internal" href="#../getting-started/build.md"><span class="xref myst">How-to Build an AMR Design for Yourself</span></a> or download prebuilt AMR images from <a class="reference internal" href="../AMR-release-information.html"><span class="std std-doc">AMR Release Information</span></a></p></li>
 <li><p>Program the AMR OSPI FPT image using the ami_tool cfgmem_fpt command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ami_tool<span class="w"> </span>cfgmem_fpt<span class="w"> </span>-d<span class="w"> </span>&lt;BDF&gt;<span class="w"> </span>-i<span class="w"> </span>&lt;amr_ospi_fpt.bin&gt;<span class="w"> </span>-t<span class="w"> </span>primary
 </pre></div>

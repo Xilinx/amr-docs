@@ -65,7 +65,7 @@ Cold boot the server to boot from flash.
 
 <span id="switchingbetweenavedandamr-amrinstallation"></span>
 
-## AMR Installation with Existing AVED/xbtest
+## Swwitching from AVED/xbtest to AMR
 
 Follow the steps below to install AMR firmware/software with existing AVED/xbtest.
 
