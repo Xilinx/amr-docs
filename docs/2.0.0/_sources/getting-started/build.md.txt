@@ -193,8 +193,10 @@ By default, the `build.sh` script creates a build directory which would contain 
     <AMR>
     ├── build_amc
     │   ├── amc.elf*
-    │   ├── amr_ospi.bin
-    │   ├── amr_ospi_fpt.bin
+    │   ├── ┌─────────────────────┐
+    │   ├── │ amr_ospi.bin        │
+    │   ├── │ amr_ospi_fpt.bin    │
+    │   ├── └─────────────────────┘
     │   ├── amr_ospi_pdi.bif*
     │   ├── build.log
     │   ├── CMakeCache.txt
@@ -205,9 +207,11 @@ By default, the `build.sh` script creates a build directory which would contain 
     │   ├── ami
     │   ├── driver
     │   ├── libami
-    │   ├── ami_3.0.0-0.0a8a8683.20260224_amd64.deb
-    │   ├── amitool_3.0.0-0.0a8a8683.20260224_amd64.deb
-    │   └── libami_3.0.0-0.0a8a8683.20260224_amd64.deb
+    │   ├── ┌──────────────────────────────────────────────────┐
+    │   ├── │ ami_3.0.0-0.0a8a8683.20260224_amd64.deb          │
+    │   ├── │ amitool_3.0.0-0.0a8a8683.20260224_amd64.deb      │
+    │   └── │ libami_3.0.0-0.0a8a8683.20260224_amd64.deb       │
+    │       └──────────────────────────────────────────────────┘
     ├── build_v80
     │   └── amr_vivado_designs
     ├── build.sh

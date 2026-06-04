@@ -341,8 +341,10 @@ sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </spa
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;AMR&gt;
 ├── build_amc
 │   ├── amc.elf*
-│   ├── amr_ospi.bin
-│   ├── amr_ospi_fpt.bin
+│   ├── ┌─────────────────────┐
+│   ├── │ amr_ospi.bin        │
+│   ├── │ amr_ospi_fpt.bin    │
+│   ├── └─────────────────────┘
 │   ├── amr_ospi_pdi.bif*
 │   ├── build.log
 │   ├── CMakeCache.txt
@@ -353,9 +355,11 @@ sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </spa
 │   ├── ami
 │   ├── driver
 │   ├── libami
-│   ├── ami_3.0.0-0.0a8a8683.20260224_amd64.deb
-│   ├── amitool_3.0.0-0.0a8a8683.20260224_amd64.deb
-│   └── libami_3.0.0-0.0a8a8683.20260224_amd64.deb
+│   ├── ┌──────────────────────────────────────────────────┐
+│   ├── │ ami_3.0.0-0.0a8a8683.20260224_amd64.deb          │
+│   ├── │ amitool_3.0.0-0.0a8a8683.20260224_amd64.deb      │
+│   └── │ libami_3.0.0-0.0a8a8683.20260224_amd64.deb       │
+│       └──────────────────────────────────────────────────┘
 ├── build_v80
 │   └── amr_vivado_designs
 ├── build.sh
@@ -422,7 +426,7 @@ Will do a hot reset to boot into partition 0. This may take a minute...
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on June 02, 2026.
+      <span class="lastupdated">Last updated on June 04, 2026.
       </span></p>
   </div>
 
