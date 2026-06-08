@@ -1,0 +1,83 @@
+# V80 Board Documentation
+
+This section contains comprehensive V80-specific documentation including hardware design, software services, installation guides, deployment, and testing.
+
+## V80 Board Overview
+
+The V80 is a PCIe accelerator card featuring the Versal V80 HBM-series device. The board provides high-performance computing capabilities with hardened PCIe Gen5 connectivity and high-bandwidth memory resources optimized for data center and cloud deployments.
+
+The V80 includes CPM5 (Coherent PCIe Module) which integrates PCIe Gen5 x8 controller and QDMA functionality in hardened silicon. The device also features 32 GB of integrated HBM (High-Bandwidth Memory) providing exceptional memory bandwidth for compute-intensive workloads.
+
+## V80 Key Features
+
+- **CPM5 Hardened PCIe**: Gen5 x8 controller with integrated QDMA DMA engine in silicon
+- **HBM High-Bandwidth Memory**: 32 GB organized as two 16GB stacks (~460 GB/s bandwidth)
+- **Memory Capacity**: 68 GB total (32GB HBM + 32GB DDR4 DIMM + 4GB Discrete DDR)
+- **Performance**: ~32 GB/s PCIe bandwidth, ~460 GB/s HBM bandwidth
+
+## V80-Specific Hardware Documentation
+
+For complete V80 hardware design information including block diagrams, CIPS configuration, memory resources, NoC configuration, and build structure, see:
+
+- [V80 Hardware Design](hardware/index.md) - Complete V80 hardware documentation with architecture details, specifications, and design philosophy
+
+## V80-Specific Software Documentation
+
+For V80-specific software, see:
+
+- [AMI Software Services](../software/ami.md) - Adaptive Management Interface (common to all boards)
+- [QDMA Overview](../software/qdma.md) - DMA services (V80 uses CPM5 hardened QDMA)
+
+## V80-Specific AMR Installation
+
+**How-to Install Prebuilt AMR Packages**
+
+For installing prebuilt AMR packages on V80, see:
+
+- [Install Prebuilt AMR Packages](../getting-started/install-prebuilt.md) - Download and install AMR packages for V80
+
+**How-to Build an AMR Design for V80**
+
+For building AMR from source for V80, see:
+
+- [Build an AMR Design for V80](../getting-started/build_v80.md) - Complete build guide for V80
+
+## Switching Between AVED and AMR on V80
+
+AVED and AMR are two different platform management solutions for Alveo V80 cards. See the switching guide:
+
+- [Switching Between AVED and AMR](switch-aved-amr.md) - Detailed instructions for switching between AVED and AMR
+
+## How-to Install and Run Xbtest on V80 Card
+
+For V80 board testing and validation, see:
+
+- [Install and Run Xbtest on V80](xbtest/install-and-run-xbtest.md) - Xbtest installation and usage guide
+
+## V80 Target Applications
+
+The V80 Board is optimized for data center and cloud computing environments requiring maximum performance. Target applications include:
+
+- **AI and Machine Learning Inference**: Workloads that benefit from high memory bandwidth
+- **Video Processing Pipelines**: Applications demanding both PCIe and memory throughput
+- **High-Performance Computing**: Tasks requiring large memory capacity
+- **Multi-Tenant Cloud Services**: Cloud service providers leveraging V80 for inference services
+- **Enterprise Analytics**: Data centers deploying for analytics and processing workloads
+
+## Technical Specifications Summary
+
+| **Property** | **Value** |
+|--------------|-----------|
+| **Device** | Versal V80 (xcv80-lsva4737-2MHP-e-S) |
+| **PCIe Interface** | Gen5 x8 (32 GT/s raw speed, ~32 GB/s bandwidth) |
+| **PCIe Functions** | PF0: 0x50b4 (Management), PF1: 0x50b5 (User/DMA) |
+| **HBM Memory** | 32 GB (two 16GB stacks, ~460 GB/s bandwidth) |
+| **DDR4 DIMM** | 32 GB RDIMM |
+| **Discrete DDR4** | 4 GB (for firmware and control) |
+| **Total Memory** | 68 GB |
+
+## References
+
+- [Common Hardware Documentation](../hardware/index.md) - Shared Versal/CIPS/NoC concepts
+- [Versal V80 Product Brief](https://www.amd.com/en/products/accelerators/alveo/v-series/v80.html) - AMD V80 product information
+- [AMR Release Information](../AMR-release-information.md) - Latest AMR release and download links

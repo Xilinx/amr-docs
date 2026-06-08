@@ -21,8 +21,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="AMR Deployment Archive" href="deployment-archive.html" />
-    <link rel="prev" title="Hardware Design - AMR Common" href="../hardware/index.html" /> 
+    <link rel="next" title="RAVE Board Documentation" href="../RAVE/index.html" />
+    <link rel="prev" title="AMR common Hardware Design" href="../hardware/index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -71,23 +71,23 @@
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">Hardware Design - AMR Common</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">V80 Board</span></p>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">AMR common Hardware Design</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">V80 Board Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="deployment-archive.html">AMR Deployment Archive</a></li>
-<li class="toctree-l2"><a class="reference internal" href="switch-aved-amr.html">Switching Between AVED and AMR on V80</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hardware/index.html">Hardware Design - V80 (Alveo)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run-xbtest.html">How-to Install and Run xbtest on V80 Card</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v80-board-overview">V80 Board Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v80-key-features">V80 Key Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v80-specific-hardware-documentation">V80-Specific Hardware Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v80-specific-software-documentation">V80-Specific Software Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v80-specific-amr-installation">V80-Specific AMR Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#switching-between-aved-and-amr-on-v80">Switching Between AVED and AMR on V80</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-install-and-run-xbtest-on-v80-card">How-to Install and Run Xbtest on V80 Card</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v80-target-applications">V80 Target Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#technical-specifications-summary">Technical Specifications Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">RAVE Board</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../RAVE/hardware/index.html">Hardware Design - RAVE VPR-4616</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RAVE/index.html">RAVE Board Documentation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
@@ -130,7 +130,7 @@
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
       <li>V80 Board Documentation</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/V80/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/V80/index.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -140,38 +140,121 @@
              
   <div class="section" id="v80-board-documentation">
 <h1>V80 Board Documentation<a class="headerlink" href="#v80-board-documentation" title="Permalink to this heading">¶</a></h1>
-<p>This section contains V80-specific documentation including installation, deployment, hardware design, and testing.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="deployment-archive.html">AMR Deployment Archive</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="deployment-archive.html#amr-deployment-archive-contents">AMR Deployment Archive Contents</a></li>
+<p>This section contains comprehensive V80-specific documentation including hardware design, software services, installation guides, deployment, and testing.</p>
+<div class="section" id="v80-board-overview">
+<h2>V80 Board Overview<a class="headerlink" href="#v80-board-overview" title="Permalink to this heading">¶</a></h2>
+<p>The V80 is a PCIe accelerator card featuring the Versal V80 HBM-series device. The board provides high-performance computing capabilities with hardened PCIe Gen5 connectivity and high-bandwidth memory resources optimized for data center and cloud deployments.</p>
+<p>The V80 includes CPM5 (Coherent PCIe Module) which integrates PCIe Gen5 x8 controller and QDMA functionality in hardened silicon. The device also features 32 GB of integrated HBM (High-Bandwidth Memory) providing exceptional memory bandwidth for compute-intensive workloads.</p>
+</div>
+<div class="section" id="v80-key-features">
+<h2>V80 Key Features<a class="headerlink" href="#v80-key-features" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>CPM5 Hardened PCIe</strong>: Gen5 x8 controller with integrated QDMA DMA engine in silicon</p></li>
+<li><p><strong>HBM High-Bandwidth Memory</strong>: 32 GB organized as two 16GB stacks (~460 GB/s bandwidth)</p></li>
+<li><p><strong>Memory Capacity</strong>: 68 GB total (32GB HBM + 32GB DDR4 DIMM + 4GB Discrete DDR)</p></li>
+<li><p><strong>Performance</strong>: ~32 GB/s PCIe bandwidth, ~460 GB/s HBM bandwidth</p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="switch-aved-amr.html">Switching Between AVED and AMR on V80</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="switch-aved-amr.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="switch-aved-amr.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="switch-aved-amr.html#switching-from-amr-to-aved-xbtest">Switching from AMR to AVED/xbtest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="switch-aved-amr.html#swwitching-from-aved-xbtest-to-amr">Swwitching from AVED/xbtest to AMR</a></li>
-<li class="toctree-l2"><a class="reference internal" href="switch-aved-amr.html#install-the-amr-software-packages">Install the AMR Software Packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="switch-aved-amr.html#troubleshooting">Troubleshooting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="switch-aved-amr.html#verification-checklist">Verification Checklist</a></li>
-<li class="toctree-l2"><a class="reference internal" href="switch-aved-amr.html#next-steps">Next Steps</a></li>
+</div>
+<div class="section" id="v80-specific-hardware-documentation">
+<h2>V80-Specific Hardware Documentation<a class="headerlink" href="#v80-specific-hardware-documentation" title="Permalink to this heading">¶</a></h2>
+<p>For complete V80 hardware design information including block diagrams, CIPS configuration, memory resources, NoC configuration, and build structure, see:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="hardware/index.html"><span class="std std-doc">V80 Hardware Design</span></a> - Complete V80 hardware documentation with architecture details, specifications, and design philosophy</p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="hardware/index.html">Hardware Design - V80 (Alveo)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="hardware/index.html#v80-board-overview">V80 Board Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hardware/index.html#v80-specific-hardware-documentation">V80-Specific Hardware Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hardware/index.html#key-v80-features">Key V80 Features</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hardware/index.html#v80-target-applications">V80 Target Applications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hardware/index.html#technical-specifications-summary">Technical Specifications Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hardware/index.html#references">References</a></li>
+</div>
+<div class="section" id="v80-specific-software-documentation">
+<h2>V80-Specific Software Documentation<a class="headerlink" href="#v80-specific-software-documentation" title="Permalink to this heading">¶</a></h2>
+<p>For V80-specific software, see:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../software/ami.html"><span class="std std-doc">AMI Software Services</span></a> - Adaptive Management Interface (common to all boards)</p></li>
+<li><p><a class="reference internal" href="../software/qdma.html"><span class="std std-doc">QDMA Overview</span></a> - DMA services (V80 uses CPM5 hardened QDMA)</p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="xbtest/install-and-run-xbtest.html">How-to Install and Run xbtest on V80 Card</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run-xbtest.html#important-note">Important Note</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xbtest/install-and-run-xbtest.html#next-steps">Next Steps</a></li>
+</div>
+<div class="section" id="v80-specific-amr-installation">
+<h2>V80-Specific AMR Installation<a class="headerlink" href="#v80-specific-amr-installation" title="Permalink to this heading">¶</a></h2>
+<p><strong>How-to Install Prebuilt AMR Packages</strong></p>
+<p>For installing prebuilt AMR packages on V80, see:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../getting-started/install-prebuilt.html"><span class="std std-doc">Install Prebuilt AMR Packages</span></a> - Download and install AMR packages for V80</p></li>
 </ul>
-</li>
+<p><strong>How-to Build an AMR Design for V80</strong></p>
+<p>For building AMR from source for V80, see:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../getting-started/build_v80.html"><span class="std std-doc">Build an AMR Design for V80</span></a> - Complete build guide for V80</p></li>
+</ul>
+</div>
+<div class="section" id="switching-between-aved-and-amr-on-v80">
+<h2>Switching Between AVED and AMR on V80<a class="headerlink" href="#switching-between-aved-and-amr-on-v80" title="Permalink to this heading">¶</a></h2>
+<p>AVED and AMR are two different platform management solutions for Alveo V80 cards. See the switching guide:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="switch-aved-amr.html"><span class="std std-doc">Switching Between AVED and AMR</span></a> - Detailed instructions for switching between AVED and AMR</p></li>
+</ul>
+</div>
+<div class="section" id="how-to-install-and-run-xbtest-on-v80-card">
+<h2>How-to Install and Run Xbtest on V80 Card<a class="headerlink" href="#how-to-install-and-run-xbtest-on-v80-card" title="Permalink to this heading">¶</a></h2>
+<p>For V80 board testing and validation, see:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="xbtest/install-and-run-xbtest.html"><span class="std std-doc">Install and Run Xbtest on V80</span></a> - Xbtest installation and usage guide</p></li>
+</ul>
+</div>
+<div class="section" id="v80-target-applications">
+<h2>V80 Target Applications<a class="headerlink" href="#v80-target-applications" title="Permalink to this heading">¶</a></h2>
+<p>The V80 Board is optimized for data center and cloud computing environments requiring maximum performance. Target applications include:</p>
+<ul class="simple">
+<li><p><strong>AI and Machine Learning Inference</strong>: Workloads that benefit from high memory bandwidth</p></li>
+<li><p><strong>Video Processing Pipelines</strong>: Applications demanding both PCIe and memory throughput</p></li>
+<li><p><strong>High-Performance Computing</strong>: Tasks requiring large memory capacity</p></li>
+<li><p><strong>Multi-Tenant Cloud Services</strong>: Cloud service providers leveraging V80 for inference services</p></li>
+<li><p><strong>Enterprise Analytics</strong>: Data centers deploying for analytics and processing workloads</p></li>
+</ul>
+</div>
+<div class="section" id="technical-specifications-summary">
+<h2>Technical Specifications Summary<a class="headerlink" href="#technical-specifications-summary" title="Permalink to this heading">¶</a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th><strong>Property</strong></th>
+<th><strong>Value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Device</strong></td>
+<td>Versal V80 (xcv80-lsva4737-2MHP-e-S)</td>
+</tr>
+<tr>
+<td><strong>PCIe Interface</strong></td>
+<td>Gen5 x8 (32 GT/s raw speed, ~32 GB/s bandwidth)</td>
+</tr>
+<tr>
+<td><strong>PCIe Functions</strong></td>
+<td>PF0: 0x50b4 (Management), PF1: 0x50b5 (User/DMA)</td>
+</tr>
+<tr>
+<td><strong>HBM Memory</strong></td>
+<td>32 GB (two 16GB stacks, ~460 GB/s bandwidth)</td>
+</tr>
+<tr>
+<td><strong>DDR4 DIMM</strong></td>
+<td>32 GB RDIMM</td>
+</tr>
+<tr>
+<td><strong>Discrete DDR4</strong></td>
+<td>4 GB (for firmware and control)</td>
+</tr>
+<tr>
+<td><strong>Total Memory</strong></td>
+<td>68 GB</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../hardware/index.html"><span class="std std-doc">Common Hardware Documentation</span></a> - Shared Versal/CIPS/NoC concepts</p></li>
+<li><p><a class="reference external" href="https://www.amd.com/en/products/accelerators/alveo/v-series/v80.html">Versal V80 Product Brief</a> - AMD V80 product information</p></li>
+<li><p><a class="reference internal" href="../AMR-release-information.html"><span class="std std-doc">AMR Release Information</span></a> - Latest AMR release and download links</p></li>
 </ul>
 </div>
 </div>
@@ -182,15 +265,15 @@
           
 				  
 				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../hardware/index.html" class="btn btn-neutral float-left" title="Hardware Design - AMR Common" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="deployment-archive.html" class="btn btn-neutral float-right" title="AMR Deployment Archive" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../hardware/index.html" class="btn btn-neutral float-left" title="AMR common Hardware Design" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../RAVE/index.html" class="btn btn-neutral float-right" title="RAVE Board Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on June 04, 2026.
+      <span class="lastupdated">Last updated on June 08, 2026.
       </span></p>
   </div>
 

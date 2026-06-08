@@ -70,17 +70,11 @@
 <li class="toctree-l1"><a class="reference internal" href="development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="development/source-control.html">Source Configuration Control</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="hardware/index.html">Hardware Design - AMR Common</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">V80 Board</span></p>
-<ul>
+<li class="toctree-l1"><a class="reference internal" href="hardware/index.html">AMR common Hardware Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="V80/index.html">V80 Board Documentation</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">RAVE Board</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="RAVE/hardware/index.html">Hardware Design - RAVE VPR-4616</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RAVE/index.html">RAVE Board Documentation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
@@ -104,7 +98,11 @@
 <p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="appendices/abbreviations.html">AMR - List of Abbreviations</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">AMR Release Information</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">AMR Release Information</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#alveo-cards-v80">Alveo Cards (V80)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rave-boards">RAVE Boards</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -133,6 +131,8 @@
              
   <div class="section" id="amr-release-information">
 <h1>AMR Release Information<a class="headerlink" href="#amr-release-information" title="Permalink to this heading">¶</a></h1>
+<div class="section" id="alveo-cards-v80">
+<h2>Alveo Cards (V80)<a class="headerlink" href="#alveo-cards-v80" title="Permalink to this heading">¶</a></h2>
 <table border="1" class="docutils">
 <thead>
 <tr>
@@ -140,8 +140,6 @@
 <th>AMR Deployment Archive</th>
 <th>ALVEO Card</th>
 <th>Vivado Tools Version</th>
-<th>Major Version</th>
-<th>Minor Version</th>
 <th>AMC Version</th>
 <th>AMI Version</th>
 <th>XBTEST SW Version</th>
@@ -151,20 +149,48 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="https://github.com/Xilinx/AVED/releases/tag/amd_v80_gen5x8_25.1_xbtest_20251113">amd_v80_gen5x8_25.1_20251113</a></td>
-<td><a href="https://account.amd.com/content/dam/account/en/member/v80/amd_v80_gen5x8_25.1_xbtest_stress_20251113.zip">amd_v80_gen5x8_25.1_xbtest_stress</a></td>
+<td><a href="https://github.com/Xilinx/AVED/releases/tag/amd_v80_gen5x8_26.1_xbtest_20260608">amd_v80_gen5x8_26.1_20260608</a></td>
+<td><a href="https://account.amd.com/content/dam/account/en/member/v80/amd_v80_gen5x8_26.1_xbtest_stress_20260608.zip">amd_v80_gen5x8_26.1_xbtest_stress</a></td>
 <td>v80</td>
-<td>2025.1</td>
-<td>1</td>
-<td>20251113</td>
-<td>2.4.0</td>
-<td>2.4.0</td>
+<td>2026.1</td>
+<td>3.0</td>
+<td>3.0</td>
 <td>7.1</td>
-<td>Nov 2025</td>
-<td>2025.1 tools V80 AMR release.</td>
+<td>June 2026</td>
+<td>This release is tested and supports OS and kernel distributions mentioned in AMR overview. For any future kernel updates, binaries should be built from source.</td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="section" id="rave-boards">
+<h2>RAVE Boards<a class="headerlink" href="#rave-boards" title="Permalink to this heading">¶</a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>AMR Git Release Tag</th>
+<th>AMR Deployment Archive</th>
+<th>RAVE Board</th>
+<th>Vivado Tools Version</th>
+<th>AMC Version</th>
+<th>AMI Version</th>
+<th>Release Date</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/Xilinx/AVED/releases/tag/amd_rave_26.1_20260608">amd_rave_26.1_20260608</a></td>
+<td><a href="https://account.amd.com/content/dam/account/en/member/rave/amd_rave_26.1_20260608.zip">amd_rave_26.1_20260608</a></td>
+<td>RAVE</td>
+<td>2026.1</td>
+<td>3.0</td>
+<td>3.0</td>
+<td>June 2026</td>
+<td>This release is tested and supports OS and kernel distributions mentioned in AMR overview. For any future kernel updates, binaries should be built from source.</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 
 
@@ -180,7 +206,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on June 04, 2026.
+      <span class="lastupdated">Last updated on June 08, 2026.
       </span></p>
   </div>
 

@@ -1,4 +1,4 @@
-# Hardware Design - AMR Common
+# AMR common Hardware Design 
 
 This section contains hardware design documentation **common to all AMR boards** (V80, RAVE). For board-specific details, see the individual board documentation.
 

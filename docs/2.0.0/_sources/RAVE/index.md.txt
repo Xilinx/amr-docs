@@ -1,0 +1,91 @@
+# RAVE Board Documentation
+
+This section contains comprehensive RAVE-specific documentation including hardware design, software services, installation guides, deployment, and testing.
+
+## RAVE Board Overview
+
+RAVE (Ryzen APU + Versal Edge) is a Mini-ITX embedded platform combining an AMD Ryzen processor with a Versal VE2302 FPGA device. The platform provides a complete standalone system optimized for edge computing, industrial, and automotive applications with balanced performance, power consumption, and cost.
+
+The VE2302 is a Versal Edge-series device featuring GTYP transceivers for Gen3 PCIe connectivity and integrated LPDDR4 memory controllers. The platform connects the VE2302 to an on-board Ryzen R2314 or V2000-series processor via PCIe Gen3 x4, creating a hybrid processing architecture suitable for embedded and edge deployments.
+
+## RAVE Key Features
+
+- **PL-Based PCIe and XDMA**: PCIe Gen3 x4 connectivity through PL IP (GTYP transceivers)
+- **LPDDR4 Memory**: 8-16GB depending on board variant
+- **Peripheral Integration**: Board-ID EEPROM, TPM 2.0, USB-to-UART, status LEDs
+- **Expansion I/O**: 160-pin Samtec connector for daughtercards (Ethernet, camera, custom)
+- **Form Factor**: Mini-ITX standalone embedded platform
+
+## RAVE-Specific Hardware Documentation
+
+For complete RAVE hardware design information including block diagrams, CIPS configuration, PCIe/XDMA setup, memory resources, peripherals, and build structure, see:
+
+- [RAVE Hardware Design](hardware/index.md) - Complete RAVE hardware documentation with architecture details, specifications, and design philosophy
+
+## RAVE-Specific Software Documentation
+
+For RAVE-specific software and deployment information, see:
+
+- [AMI Software Services](../software/ami.md) - Adaptive Management Interface (common to all boards)
+
+## RAVE-Specific AMR Installation
+
+**How-to Install Prebuilt AMR Packages**
+
+For installing prebuilt AMR packages on RAVE, see:
+
+- [Install Prebuilt AMR Packages](../getting-started/install-prebuilt.md) - Download and install AMR packages for RAVE
+
+**How-to Build an AMR Design for RAVE**
+
+For building AMR from source for RAVE, see:
+
+- [Build an AMR Design for RAVE](../getting-started/build_rave.md) - Complete build guide for RAVE
+
+## RAVE Board Variants
+
+The RAVE family includes multiple hardware variants developed by Sapphire Technologies and AMD, each targeting specific market requirements and feature sets.
+
+**Board Variants:**
+- **VPR-4616**: Initial board with 8GB LPDDR4
+- **VPR-5050**: Enhanced processor variant
+- **VPR-5050A**: Most feature-rich variant with 16GB LPDDR4, eMMC, USB 2.0 host
+
+**Common Features:**
+- VE2302 Versal device with PCIe Gen3 x4 connectivity
+- 160-pin expansion connector for daughtercards
+- Mini-ITX form factor
+
+For complete board specifications and variant differences, see the [Sapphire RAVE1 EDGE+](https://www.amd.com/en/products/embedded/embedded-plus.html) product documentation.
+
+## RAVE Target Applications
+
+The RAVE Board is optimized for edge computing, industrial automation, and automotive applications. Target applications include:
+
+- **Edge AI Inference**: Workloads requiring local processing at the edge
+- **Industrial Automation**: Control systems, machine vision, and robotics
+- **Automotive**: In-vehicle computing, ADAS development, and testing
+- **Network Edge**: 5G edge computing with daughtercard networking options
+- **Vision Systems**: GMSL camera integration for surveillance and inspection
+
+The Mini-ITX form factor and embedded processor integration enable standalone deployment scenarios without requiring separate host systems.
+
+## Technical Specifications Summary
+
+| **Property** | **Value** |
+|--------------|-----------|
+| **Device** | Versal VE2302 Edge-series |
+| **PCIe Interface** | Gen3 x4 (PL-based, ~4 GB/s bandwidth) |
+| **PCIe Functions** | PF0: 0x5700 (Management), PF1: 0x5701 (User/DMA) |
+| **LPDDR4 Memory** | 8-16 GB (variant-dependent) |
+| **Host Processor** | AMD Ryzen R2314 or V2000-series |
+| **Expansion** | 160-pin Samtec connector (GTYP Bank 104) |
+| **Peripherals** | EEPROM, TPM 2.0, USB-UART, LEDs |
+| **Enhanced Features (VPR-5050A)** | eMMC storage, USB 2.0 host |
+| **Form Factor** | Mini-ITX embedded platform |
+
+## References
+
+- [Common Hardware Documentation](../hardware/index.md) - Shared Versal/CIPS/NoC concepts
+- [Sapphire RAVE1 EDGE+](https://www.amd.com/en/products/embedded/embedded-plus.html) - RAVE product information
+- [AMR Release Information](../AMR-release-information.md) - Latest AMR release and download links

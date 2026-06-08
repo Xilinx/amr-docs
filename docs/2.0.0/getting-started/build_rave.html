@@ -90,17 +90,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Hardware Design - Common</span></p>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">Hardware Design - AMR Common</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">V80 Board</span></p>
-<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">AMR common Hardware Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Board Documentation</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">RAVE Board</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../RAVE/hardware/index.html">Hardware Design - RAVE VPR-4616</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RAVE/index.html">RAVE Board Documentation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
@@ -245,12 +239,11 @@ The final artifacts will be located in &lt;`build/tmp/deploy/images/emb_plus_ve2
 <p>The following steps will guide you through setting up your Vivado environment and building an AMR RAVE PDI from the cloned source code.</p>
 <ol class="arabic simple">
 <li><p>Set up the desired version of Vivado in your environment by sourcing the <code class="docutils literal notranslate"><span class="pre">settings64.](c)sh</span></code> script from your Vivado install directory.</p></li>
-<li><p>To build all components execute the build.sh command</p></li>
+<li><p>To build all components execute the build.sh command
+For more information on the build script, refer to <a class="reference internal" href="../development/build-scripts.html"><span class="std std-doc">AMR Build Scripts</span></a></p></li>
 </ol>
 <!-- end list -->
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- For more information on the build script, refer to [AMR Build Scripts](../development/build-scripts.md)
-
-    # for csh
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    # for csh
     $ source settings64.csh
 
     # for bash
@@ -396,7 +389,7 @@ Will do a hot reset to boot into partition 0. This may take a minute...
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on June 04, 2026.
+      <span class="lastupdated">Last updated on June 08, 2026.
       </span></p>
   </div>
 

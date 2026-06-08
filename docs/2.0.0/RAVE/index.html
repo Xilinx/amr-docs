@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AMR - Board Management Solution &mdash; AMR  documentation</title>
+  <title>RAVE Board Documentation &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -21,8 +21,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="AMR - Device Programming" href="device-programming.html" />
-    <link rel="prev" title="How-to Build an AMR Design for V80" href="../getting-started/build_v80.html" /> 
+    <link rel="next" title="AMR Management Controller (AMC) - Architecture and Design" href="../firmware/amc-architecture.html" />
+    <link rel="prev" title="V80 Board Documentation" href="../V80/index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -52,19 +52,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/build_v80.html">How-to Build an AMR Design for V80</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AMR System Architecture</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">AMR - Board Management Solution</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#alveo-v80-sensors">Alveo V80 Sensors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#alveo-sensor-data-model-asdm">Alveo Sensor Data Model (ASDM)</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#in-band-pcie-management">In-band (PCIe) Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#out-of-band-smbus-management">Out-of-band (SMBus) Management</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="device-programming.html">AMR - Device Programming</a></li>
-<li class="toctree-l1"><a class="reference internal" href="host-communication.html">AMR - Host to Card Communication</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../system-architecture/board-management.html">AMR - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system-architecture/device-programming.html">AMR - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system-architecture/host-communication.html">AMR - Host to Card Communication</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AMR Deployment</span></p>
 <ul>
@@ -81,10 +72,21 @@
 <li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Hardware Design</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">AMR common Hardware Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Board Documentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../RAVE/index.html">RAVE Board Documentation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RAVE Board Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#rave-board-overview">RAVE Board Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rave-key-features">RAVE Key Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rave-specific-hardware-documentation">RAVE-Specific Hardware Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rave-specific-software-documentation">RAVE-Specific Software Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rave-specific-amr-installation">RAVE-Specific AMR Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rave-board-variants">RAVE Board Variants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rave-target-applications">RAVE Target Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#technical-specifications-summary">Technical Specifications Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
 <ul>
@@ -125,9 +127,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>AMR - Board Management Solution</li>
+      <li>RAVE Board Documentation</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/system-architecture/board-management.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/RAVE/index.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -135,42 +137,136 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="amr-board-management-solution">
-<h1>AMR - Board Management Solution<a class="headerlink" href="#amr-board-management-solution" title="Permalink to this heading">¶</a></h1>
-<p><span id="amr-boardmanagementsolution-overview"></span></p>
-<div class="section" id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
-<p>AMD Alveo™ cards are designed to be production ready for deployment in server environments. To facilitate this, a range of sensors are included on the card to allow its state to be monitored during operation. Management infrastructure in the card and server environment sense and adjust the operating conditions within the server and card to ensure that both can operate efficiently within the current power and thermal conditions of the server environment. The combination of hardware to support these sensors and their related software and interfacing standards in AMR is called the board management solution. This page gives an outline of how AMR enables board management for interfacing to server management infrastructure via standard interfaces like SMBUS and for general status reporting via PCIe™ in-band communication.</p>
-<p><img alt="images/1107373635.png" src="../_images/1107373635.png" /></p>
-<p><span id="amr-boardmanagementsolution-alveov80sensors"></span></p>
-<div class="section" id="alveo-v80-sensors">
-<h3>Alveo V80 Sensors<a class="headerlink" href="#alveo-v80-sensors" title="Permalink to this heading">¶</a></h3>
-<p>Three different types of sensors can be found on the Alveo V80 card:</p>
+  <div class="section" id="rave-board-documentation">
+<h1>RAVE Board Documentation<a class="headerlink" href="#rave-board-documentation" title="Permalink to this heading">¶</a></h1>
+<p>This section contains comprehensive RAVE-specific documentation including hardware design, software services, installation guides, deployment, and testing.</p>
+<div class="section" id="rave-board-overview">
+<h2>RAVE Board Overview<a class="headerlink" href="#rave-board-overview" title="Permalink to this heading">¶</a></h2>
+<p>RAVE (Ryzen APU + Versal Edge) is a Mini-ITX embedded platform combining an AMD Ryzen processor with a Versal VE2302 FPGA device. The platform provides a complete standalone system optimized for edge computing, industrial, and automotive applications with balanced performance, power consumption, and cost.</p>
+<p>The VE2302 is a Versal Edge-series device featuring GTYP transceivers for Gen3 PCIe connectivity and integrated LPDDR4 memory controllers. The platform connects the VE2302 to an on-board Ryzen R2314 or V2000-series processor via PCIe Gen3 x4, creating a hybrid processing architecture suitable for embedded and edge deployments.</p>
+</div>
+<div class="section" id="rave-key-features">
+<h2>RAVE Key Features<a class="headerlink" href="#rave-key-features" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>Card-level sensors integrated on the V80 PCB allow for whole card-level monitoring power and temperature characteristics.</p></li>
-<li><p>Component-level sensors integrated with major card components allow monitoring of the QSFP serial-interfaces.</p></li>
-<li><p>FPGA-level sensors integrated within the Alveo V80 device allow monitoring of conditions within the FPGA and HBM.</p></li>
+<li><p><strong>PL-Based PCIe and XDMA</strong>: PCIe Gen3 x4 connectivity through PL IP (GTYP transceivers)</p></li>
+<li><p><strong>LPDDR4 Memory</strong>: 8-16GB depending on board variant</p></li>
+<li><p><strong>Peripheral Integration</strong>: Board-ID EEPROM, TPM 2.0, USB-to-UART, status LEDs</p></li>
+<li><p><strong>Expansion I/O</strong>: 160-pin Samtec connector for daughtercards (Ethernet, camera, custom)</p></li>
+<li><p><strong>Form Factor</strong>: Mini-ITX standalone embedded platform</p></li>
 </ul>
-<p>A specification of the card and component level sensors included on the Alveo V80 can be found in the <em>Alveo V80 Data Center Accelerator Cards Data Sheet</em> (DS1013). FPGA level sensors are accessed via the AMD Versal™ architecture’s built-in monitoring primitive, <a class="reference external" href="https://docs.xilinx.com/r/en-US/am006-versal-sysmon">sysmon</a>. Card and component level sensors are accessed via the I2C buses on the V80 card.</p>
-<p>The following sections give a brief overview of how Alveo sensors are modeled and how AMR hardware and AMR management controller (AMC) firmware components are engineered to allow readback and react to changing sensor data recovered from each card.</p>
-<p><span id="amr-boardmanagementsolution-alveosensordatamodel-asdm"></span></p>
 </div>
-<div class="section" id="alveo-sensor-data-model-asdm">
-<h3>Alveo Sensor Data Model (ASDM)<a class="headerlink" href="#alveo-sensor-data-model-asdm" title="Permalink to this heading">¶</a></h3>
-<p>The Alveo sensor data model is an abstraction of the sensor capabilities of an Alveo card so that software can present a consistent sensor interface across the range of different Alveo card types, even if the cards themselves have different characteristics and are managed by different software stacks. The ASDM’s scalable data model specification accommodates the natural variation in the number and type of various sensors across different cards. While AMR V80’s reference hardware and firmware are specific to the Alveo V80, the sensor specification used in the AMC firmware and other host AMR Management Interface (AMI) software are aligned to the ASDM and can convey similar sensor status to other Alveo cards that the application developer may have used.</p>
-<p>A full specification of the set of sensors supported by the Alveo V80 card can be found in the <em>Alveo V80 Data Center Accelerator Cards Data Sheet</em> (DS1013) and the AMC software derived version of this specification can be found in the AMC firmware’s profile_sensors.h source file. In addition to dynamic monitoring of the V80 card’s power and thermal state, the ASDM also allows access to the board identification data stored in the Alveo FRU (field replaceable unit) EEPROM (also contained in the <em>Alveo V80 Data Center Accelerator Cards Data Sheet</em> (DS1013)).</p>
-<p><span id="amr-boardmanagementsolution-in-band-pcie-management"></span></p>
+<div class="section" id="rave-specific-hardware-documentation">
+<h2>RAVE-Specific Hardware Documentation<a class="headerlink" href="#rave-specific-hardware-documentation" title="Permalink to this heading">¶</a></h2>
+<p>For complete RAVE hardware design information including block diagrams, CIPS configuration, PCIe/XDMA setup, memory resources, peripherals, and build structure, see:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="hardware/index.html"><span class="std std-doc">RAVE Hardware Design</span></a> - Complete RAVE hardware documentation with architecture details, specifications, and design philosophy</p></li>
+</ul>
 </div>
+<div class="section" id="rave-specific-software-documentation">
+<h2>RAVE-Specific Software Documentation<a class="headerlink" href="#rave-specific-software-documentation" title="Permalink to this heading">¶</a></h2>
+<p>For RAVE-specific software and deployment information, see:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../software/ami.html"><span class="std std-doc">AMI Software Services</span></a> - Adaptive Management Interface (common to all boards)</p></li>
+</ul>
 </div>
-<div class="section" id="in-band-pcie-management">
-<h2>In-band (PCIe) Management<a class="headerlink" href="#in-band-pcie-management" title="Permalink to this heading">¶</a></h2>
-<p>The AMC firmware running within the V80s RPU subsystem includes software services that can read and monitor the V80 sensors. When requests for sensor data are sent over the PCIe® interface, this is referred to as ‘in band’ as the board management communication is intermixed with other application data transported to the card. The AMI utility program builds and sends command requests via the host driver to the AMC firmware to sample and report back the state of the V80 sensors (see the <code class="docutils literal notranslate"><span class="pre">ami_tool</span> <span class="pre">sensors</span></code> subcommand for more information). The operating thresholds of the sensors included in the ASDM allow the AMC firmware to report back whether a given sensor is near or has exceeded operating thresholds. Additionally, the AMC firmware includes a service that monitors the value of sensors with respect to specified operating thresholds. If thresholds are exceeded, the AMC firmware service monitoring the sensors can request the firmware’s clock management service adjust or halt the clocking on the card.</p>
-<p><span id="amr-boardmanagementsolution-out-of-band-smbus-management"></span></p>
+<div class="section" id="rave-specific-amr-installation">
+<h2>RAVE-Specific AMR Installation<a class="headerlink" href="#rave-specific-amr-installation" title="Permalink to this heading">¶</a></h2>
+<p><strong>How-to Install Prebuilt AMR Packages</strong></p>
+<p>For installing prebuilt AMR packages on RAVE, see:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../getting-started/install-prebuilt.html"><span class="std std-doc">Install Prebuilt AMR Packages</span></a> - Download and install AMR packages for RAVE</p></li>
+</ul>
+<p><strong>How-to Build an AMR Design for RAVE</strong></p>
+<p>For building AMR from source for RAVE, see:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../getting-started/build_rave.html"><span class="std std-doc">Build an AMR Design for RAVE</span></a> - Complete build guide for RAVE</p></li>
+</ul>
 </div>
-<div class="section" id="out-of-band-smbus-management">
-<h2>Out-of-band (SMBus) Management<a class="headerlink" href="#out-of-band-smbus-management" title="Permalink to this heading">¶</a></h2>
-<p><strong>Important:</strong> SMBus support is not implemented in the current AMR release. While the hardware design includes an SMBus interface peripheral in the Versal programmable logic, the firmware protocol handling and out-of-band management services are not present. Users must implement SMBus communication and protocol support based on their specific server integration requirements.</p>
-<p>Alveo cards deployed to server environments typically must implement industry standard card management protocols so that the card’s configuration and operating state can be made known to the server’s own board management controller. The AMR hardware design includes an SMBus interface peripheral in the Versal programmable logic to facilitate communication to the server BMC. When implemented, the remote management interface component of the AMC firmware can receive and respond to messages from the BMC to satisfy server integration requirements for card identification (via the FRU EEPROM), implementation of standards for autodetection of the card (PLDM over MCTP), and SMBus access to sensor status during the operating runtime of the card.</p>
+<div class="section" id="rave-board-variants">
+<h2>RAVE Board Variants<a class="headerlink" href="#rave-board-variants" title="Permalink to this heading">¶</a></h2>
+<p>The RAVE family includes multiple hardware variants developed by Sapphire Technologies and AMD, each targeting specific market requirements and feature sets.</p>
+<p><strong>Board Variants:</strong></p>
+<ul class="simple">
+<li><p><strong>VPR-4616</strong>: Initial board with 8GB LPDDR4</p></li>
+<li><p><strong>VPR-5050</strong>: Enhanced processor variant</p></li>
+<li><p><strong>VPR-5050A</strong>: Most feature-rich variant with 16GB LPDDR4, eMMC, USB 2.0 host</p></li>
+</ul>
+<p><strong>Common Features:</strong></p>
+<ul class="simple">
+<li><p>VE2302 Versal device with PCIe Gen3 x4 connectivity</p></li>
+<li><p>160-pin expansion connector for daughtercards</p></li>
+<li><p>Mini-ITX form factor</p></li>
+</ul>
+<p>For complete board specifications and variant differences, see the <a class="reference external" href="https://www.amd.com/en/products/embedded/embedded-plus.html">Sapphire RAVE1 EDGE+</a> product documentation.</p>
+</div>
+<div class="section" id="rave-target-applications">
+<h2>RAVE Target Applications<a class="headerlink" href="#rave-target-applications" title="Permalink to this heading">¶</a></h2>
+<p>The RAVE Board is optimized for edge computing, industrial automation, and automotive applications. Target applications include:</p>
+<ul class="simple">
+<li><p><strong>Edge AI Inference</strong>: Workloads requiring local processing at the edge</p></li>
+<li><p><strong>Industrial Automation</strong>: Control systems, machine vision, and robotics</p></li>
+<li><p><strong>Automotive</strong>: In-vehicle computing, ADAS development, and testing</p></li>
+<li><p><strong>Network Edge</strong>: 5G edge computing with daughtercard networking options</p></li>
+<li><p><strong>Vision Systems</strong>: GMSL camera integration for surveillance and inspection</p></li>
+</ul>
+<p>The Mini-ITX form factor and embedded processor integration enable standalone deployment scenarios without requiring separate host systems.</p>
+</div>
+<div class="section" id="technical-specifications-summary">
+<h2>Technical Specifications Summary<a class="headerlink" href="#technical-specifications-summary" title="Permalink to this heading">¶</a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th><strong>Property</strong></th>
+<th><strong>Value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Device</strong></td>
+<td>Versal VE2302 Edge-series</td>
+</tr>
+<tr>
+<td><strong>PCIe Interface</strong></td>
+<td>Gen3 x4 (PL-based, ~4 GB/s bandwidth)</td>
+</tr>
+<tr>
+<td><strong>PCIe Functions</strong></td>
+<td>PF0: 0x5700 (Management), PF1: 0x5701 (User/DMA)</td>
+</tr>
+<tr>
+<td><strong>LPDDR4 Memory</strong></td>
+<td>8-16 GB (variant-dependent)</td>
+</tr>
+<tr>
+<td><strong>Host Processor</strong></td>
+<td>AMD Ryzen R2314 or V2000-series</td>
+</tr>
+<tr>
+<td><strong>Expansion</strong></td>
+<td>160-pin Samtec connector (GTYP Bank 104)</td>
+</tr>
+<tr>
+<td><strong>Peripherals</strong></td>
+<td>EEPROM, TPM 2.0, USB-UART, LEDs</td>
+</tr>
+<tr>
+<td><strong>Enhanced Features (VPR-5050A)</strong></td>
+<td>eMMC storage, USB 2.0 host</td>
+</tr>
+<tr>
+<td><strong>Form Factor</strong></td>
+<td>Mini-ITX embedded platform</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../hardware/index.html"><span class="std std-doc">Common Hardware Documentation</span></a> - Shared Versal/CIPS/NoC concepts</p></li>
+<li><p><a class="reference external" href="https://www.amd.com/en/products/embedded/embedded-plus.html">Sapphire RAVE1 EDGE+</a> - RAVE product information</p></li>
+<li><p><a class="reference internal" href="../AMR-release-information.html"><span class="std std-doc">AMR Release Information</span></a> - Latest AMR release and download links</p></li>
+</ul>
 </div>
 </div>
 
@@ -180,8 +276,8 @@
           
 				  
 				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../getting-started/build_v80.html" class="btn btn-neutral float-left" title="How-to Build an AMR Design for V80" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="device-programming.html" class="btn btn-neutral float-right" title="AMR - Device Programming" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../V80/index.html" class="btn btn-neutral float-left" title="V80 Board Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../firmware/amc-architecture.html" class="btn btn-neutral float-right" title="AMR Management Controller (AMC) - Architecture and Design" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

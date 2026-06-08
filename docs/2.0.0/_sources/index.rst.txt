@@ -76,24 +76,12 @@ Release Information
 
 .. toctree::
    :maxdepth: 2
-   :caption: Hardware Design - Common
+   :caption: Hardware Design
    :hidden:
 
    hardware/index
-
-.. toctree::
-   :maxdepth: 2
-   :caption: V80 Board
-   :hidden:
-
-   V80/index
-
-.. toctree::
-   :maxdepth: 2
-   :caption: RAVE Board
-   :hidden:
-
-   RAVE/hardware/index
+   V80/index.md
+   RAVE/index.md
 
 .. toctree::
    :maxdepth: 2

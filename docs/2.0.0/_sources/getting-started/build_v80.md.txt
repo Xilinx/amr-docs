@@ -107,11 +107,9 @@ The following steps will guide you through setting up your Vivado environment an
 
 1.  Set up the desired version of Vivado in your environment by sourcing the `settings64.](c)sh` script from your Vivado install directory.
 2.  To build all components execute the build.sh command 
-    
+    For more information on the build script, refer to [AMR Build Scripts](../development/build-scripts.md)
 
 <!-- end list -->
-
-    - For more information on the build script, refer to [AMR Build Scripts](../development/build-scripts.md)
 
         # for csh
         $ source settings64.csh
