@@ -107,6 +107,8 @@ For V80 board testing and validation, see:
 - [Common Hardware Documentation](../hardware/index.md) - Shared Versal/CIPS/NoC concepts
 - [AMR Release Information](../AMR-release-information.md) - Latest AMR release and download links
 
+---
+
 ```{toctree}
 :maxdepth: 1
 :hidden:
