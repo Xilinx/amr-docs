@@ -21,7 +21,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Hardware Design - RAVE VPR-4616" href="hardware/index.html" />
+    <link rel="next" title="AMR RAVE - Hierarchy Overview" href="hierarchy.html" />
     <link rel="prev" title="How-to Install and Run xbtest on V80 Card" href="../V80/xbtest/install-and-run-xbtest.html" /> 
 </head>
 
@@ -77,15 +77,32 @@
 <li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Board Documentation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">RAVE Board Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#rave-board-overview">RAVE Board Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#rave-key-features">RAVE Key Features</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#rave-specific-hardware-documentation">RAVE-Specific Hardware Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rave-board-variants">RAVE Board Variants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#key-rave-features">Key RAVE Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pl-based-pcie-and-xdma">PL-Based PCIe and XDMA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lpddr4-memory">LPDDR4 Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#peripheral-integration">Peripheral Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#expansion-i-o-and-daughtercards">Expansion I/O and Daughtercards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#technical-specifications-summary">Technical Specifications Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rave-target-applications">RAVE Target Applications</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#rave-specific-software-documentation">RAVE-Specific Software Documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#rave-specific-amr-installation">RAVE-Specific AMR Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#rave-board-variants">RAVE Board Variants</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#rave-target-applications">RAVE Target Applications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#technical-specifications-summary">Technical Specifications Summary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#references">References</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="hardware/index.html">Hardware Design - RAVE VPR-4616</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hierarchy.html">AMR RAVE - Hierarchy Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cips-config.html">AMR RAVE - CIPS Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcie-config.html">AMR RAVE - PCIe Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xdma-config.html">AMR RAVE - XDMA Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memory-resources.html">AMR RAVE - Memory Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memory-map.html">AMR RAVE - Memory Map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="noc-config.html">AMR RAVE - NoC Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="base-logic.html">AMR RAVE - Base Logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="peripherals.html">AMR RAVE - Peripherals (RAVE-Specific)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expansion-io.html">AMR RAVE - Expansion I/O</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clock-reset.html">AMR RAVE - Clock and Reset Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source-files.html">AMR RAVE - Source File Overview</a></li>
 </ul>
 </li>
 </ul>
@@ -142,28 +159,98 @@
              
   <div class="section" id="rave-board-documentation">
 <h1>RAVE Board Documentation<a class="headerlink" href="#rave-board-documentation" title="Permalink to this heading">¶</a></h1>
+<blockquote>
+<div><p><strong>For common hardware concepts</strong>, see <a class="reference internal" href="../hardware/index.html"><span class="std std-doc">Common Hardware Documentation</span></a></p>
 <p>This section contains comprehensive RAVE-specific documentation including hardware design, software services, installation guides, deployment, and testing.</p>
+</div></blockquote>
 <div class="section" id="rave-board-overview">
 <h2>RAVE Board Overview<a class="headerlink" href="#rave-board-overview" title="Permalink to this heading">¶</a></h2>
 <p>RAVE (Ryzen APU + Versal Edge) is a Mini-ITX embedded platform combining an AMD Ryzen processor with a Versal VE2302 FPGA device. The platform provides a complete standalone system optimized for edge computing, industrial, and automotive applications with balanced performance, power consumption, and cost.</p>
 <p>The VE2302 is a Versal Edge-series device featuring GTYP transceivers for Gen3 PCIe connectivity and integrated LPDDR4 memory controllers. The platform connects the VE2302 to an on-board Ryzen R2314 or V2000-series processor via PCIe Gen3 x4, creating a hybrid processing architecture suitable for embedded and edge deployments.</p>
-</div>
-<div class="section" id="rave-key-features">
-<h2>RAVE Key Features<a class="headerlink" href="#rave-key-features" title="Permalink to this heading">¶</a></h2>
-<ul class="simple">
-<li><p><strong>PL-Based PCIe and XDMA</strong>: PCIe Gen3 x4 connectivity through PL IP (GTYP transceivers)</p></li>
-<li><p><strong>LPDDR4 Memory</strong>: 8-16GB depending on board variant</p></li>
-<li><p><strong>Peripheral Integration</strong>: Board-ID EEPROM, TPM 2.0, USB-to-UART, status LEDs</p></li>
-<li><p><strong>Expansion I/O</strong>: 160-pin Samtec connector for daughtercards (Ethernet, camera, custom)</p></li>
-<li><p><strong>Form Factor</strong>: Mini-ITX standalone embedded platform</p></li>
-</ul>
+<p>The design implements PCIe and XDMA functionality using programmable logic IP blocks since the Edge-series devices do not include CPM hardened blocks. A 160-pin Samtec expansion connector provides access to additional GTYP transceivers and I/O signals, enabling application-specific daughtercards for networking, vision, and custom interfaces.</p>
 </div>
 <div class="section" id="rave-specific-hardware-documentation">
 <h2>RAVE-Specific Hardware Documentation<a class="headerlink" href="#rave-specific-hardware-documentation" title="Permalink to this heading">¶</a></h2>
-<p>For complete RAVE hardware design information including block diagrams, CIPS configuration, PCIe/XDMA setup, memory resources, peripherals, and build structure, see:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="hardware/index.html"><span class="std std-doc">RAVE Hardware Design</span></a> - Complete RAVE hardware documentation with architecture details, specifications, and design philosophy</p></li>
+<li><p><a class="reference internal" href="hierarchy.html"><span class="std std-doc">RAVE - Hierarchy Overview</span></a> - RAVE block diagram and architecture</p></li>
+<li><p><a class="reference internal" href="cips-config.html"><span class="std std-doc">RAVE - CIPS Configuration</span></a> - VE2302 CIPS configuration</p></li>
+<li><p><a class="reference internal" href="pcie-config.html"><span class="std std-doc">RAVE - PCIe Configuration</span></a> - PL PCIe IP implementation (Gen3 x4)</p></li>
+<li><p><a class="reference internal" href="xdma-config.html"><span class="std std-doc">RAVE - XDMA Configuration</span></a> - XDMA PL IP setup (2 PFs)</p></li>
+<li><p><a class="reference internal" href="memory-resources.html"><span class="std std-doc">RAVE - Memory Resources</span></a> - 8-16GB LPDDR4 configuration</p></li>
+<li><p><a class="reference internal" href="memory-map.html"><span class="std std-doc">RAVE - Memory Map</span></a> - RAVE address mapping</p></li>
+<li><p><a class="reference internal" href="noc-config.html"><span class="std std-doc">RAVE - NoC Configuration</span></a> - RAVE NoC topology</p></li>
+<li><p><a class="reference internal" href="base-logic.html"><span class="std std-doc">RAVE - Base Logic</span></a> - RAVE PF0/PF1 implementation</p></li>
+<li><p><a class="reference internal" href="peripherals.html"><span class="std std-doc">RAVE - Peripherals</span></a> - Board-ID EEPROM, TPM, eMMC, USB, LEDs</p></li>
+<li><p><a class="reference internal" href="expansion-io.html"><span class="std std-doc">RAVE - Expansion I/O</span></a> - Samtec connector, daughtercard ecosystem</p></li>
+<li><p><a class="reference internal" href="clock-reset.html"><span class="std std-doc">RAVE - Clock Reset Module</span></a> - RAVE clock/reset configuration</p></li>
+<li><p><a class="reference internal" href="source-files.html"><span class="std std-doc">RAVE - Source File Overview</span></a> - RAVE build structure</p></li>
 </ul>
+</div>
+<div class="section" id="rave-board-variants">
+<h2>RAVE Board Variants<a class="headerlink" href="#rave-board-variants" title="Permalink to this heading">¶</a></h2>
+<p>The RAVE family includes multiple hardware variants developed by Sapphire Technologies and AMD, each targeting specific market requirements and feature sets.</p>
+<p><strong>board Variants:</strong></p>
+<ul class="simple">
+<li><p><strong>VPR-4616</strong>: Initial board with 8GB LPDDR4</p></li>
+<li><p><strong>VPR-5050</strong>: Enhanced processor variant</p></li>
+<li><p><strong>VPR-5050A</strong>: Most feature-rich variant with 16GB LPDDR4, eMMC, USB 2.0 host</p></li>
+</ul>
+<p><strong>Common Features:</strong></p>
+<ul class="simple">
+<li><p>VE2302 Versal device with PCIe Gen3 x4 connectivity</p></li>
+<li><p>160-pin expansion connector for daughtercards</p></li>
+<li><p>Mini-ITX form factor</p></li>
+</ul>
+<p><strong>Note:</strong> For complete board specifications, variant differences, and feature lists, see the <a class="reference external" href="https://www.amd.com/en/products/embedded/embedded-plus.html">Sapphire RAVE1 EDGE+</a> and related Sapphire product documentation.</p>
+</div>
+<div class="section" id="key-rave-features">
+<h2>Key RAVE Features<a class="headerlink" href="#key-rave-features" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="pl-based-pcie-and-xdma">
+<h3>PL-Based PCIe and XDMA<a class="headerlink" href="#pl-based-pcie-and-xdma" title="Permalink to this heading">¶</a></h3>
+<p>The RAVE Board implements PCIe connectivity through the PCIe Versal IP instantiated in programmable logic. The VE2302 device uses GTYP Bank 103 for the x4 PCIe link operating at Gen3 speeds (8.0 GT/s), providing approximately 4 GB/s of raw bandwidth to the on-board Ryzen processor.</p>
+<p>XDMA functionality comes from the XDMA PL IP supporting DMA operations through multiple channels. The XDMA provides efficient data transfer between host and device memory through AXI interfaces. The configuration uses 2 physical functions: PF0 (device ID 0x5710) for management and PF1 (device ID 0x5711) for user/DMA operations.</p>
+<blockquote>
+<div><p><strong>Note:</strong> Legacy RAVE designs supported QDMA (Queue DMA) with a 512-queue architecture. The board has been migrated to XDMA for improved simplicity and compatibility with the VE2302 Embedded+ platform requirements.</p>
+</div></blockquote>
+<p>The soft logic implementation for both PCIe and XDMA IP blocks represents a substantial portion of the available programmable logic. This resource usage must be factored into overall design planning when adding user applications and custom logic.</p>
+</div>
+<div class="section" id="lpddr4-memory">
+<h3>LPDDR4 Memory<a class="headerlink" href="#lpddr4-memory" title="Permalink to this heading">¶</a></h3>
+<p>The RAVE Board includes 8 GB or 16 GB of LPDDR4 memory (depending on variant) organized as two channels with x32 configuration. The memory operates at 200 MHz providing 400 MT/s effective data rate through double-data-rate operation.</p>
+<p>The LPDDR4 serves all memory requirements for the Versal device including firmware execution, inter-processor communication, user application data, and DMA buffers. Memory controller integration through the NoC enables access from the RPU, PMC, PCIe host, and programmable logic masters.</p>
+</div>
+<div class="section" id="peripheral-integration">
+<h3>Peripheral Integration<a class="headerlink" href="#peripheral-integration" title="Permalink to this heading">¶</a></h3>
+<p>RAVE includes extensive peripheral integration supporting standalone embedded operation. A Board-ID EEPROM (M24C64) stores board identification and configuration data accessible via I2C at address 0x57. The TPM 2.0 security module (SLB9670) provides hardware-based cryptographic operations and secure key storage through an SPI interface.</p>
+<p>The FTDI FT4232HQ USB-to-UART bridge enables multiple serial interfaces for debug and console access from the host system. Four status LEDs connected to MIO pins provide visual indication of system state and application status.</p>
+<p>Enhanced variants (VPR-5050A) add eMMC storage via Versal MIO for persistent on-device data and a USB 2.0 host controller via Versal MIO for direct USB peripheral connectivity.</p>
+</div>
+<div class="section" id="expansion-i-o-and-daughtercards">
+<h3>Expansion I/O and Daughtercards<a class="headerlink" href="#expansion-i-o-and-daughtercards" title="Permalink to this heading">¶</a></h3>
+<p>The 160-pin Samtec SEAM/SEAF expansion connector brings out GTYP Bank 104 transceivers (4 lanes), XPIO signals, and HDIO signals from the VE2302. This enables a daughtercard ecosystem including 1G Ethernet cards, 10G/25G Ethernet cards with dual SFP+ interfaces, and GMSL camera cards for vision applications.</p>
+</div>
+</div>
+<div class="section" id="technical-specifications-summary">
+<h2>Technical Specifications Summary<a class="headerlink" href="#technical-specifications-summary" title="Permalink to this heading">¶</a></h2>
+<p><strong>Versal Device:</strong> VE2302 Versal Edge-series optimized for embedded applications</p>
+<p><strong>PCIe Connectivity:</strong> Gen3 x4 through GTYP Bank 103</p>
+<ul class="simple">
+<li><p>Device IDs: 0x5700 (PF0 management), 0x5701 (PF1 user/DMA)</p></li>
+</ul>
+<p><strong>Memory:</strong> LPDDR4 configuration (variant-dependent: 8GB or 16GB)</p>
+<p><strong>Note:</strong> For detailed memory configurations, processor variants, and complete technical specifications, refer to the <a class="reference external" href="https://www.amd.com/en/products/embedded/embedded-plus.html">Sapphire RAVE1 EDGE+</a> and Sapphire product documentation.</p>
+</div>
+<div class="section" id="rave-target-applications">
+<h2>RAVE Target Applications<a class="headerlink" href="#rave-target-applications" title="Permalink to this heading">¶</a></h2>
+<p>The RAVE Board is optimized for edge computing, industrial automation, and automotive applications. Target applications include:</p>
+<ul class="simple">
+<li><p><strong>Edge AI Inference</strong>: Workloads requiring local processing at the edge</p></li>
+<li><p><strong>Industrial Automation</strong>: Control systems, machine vision, and robotics</p></li>
+<li><p><strong>Automotive</strong>: In-vehicle computing, ADAS development, and testing</p></li>
+<li><p><strong>Network Edge</strong>: 5G edge computing with daughtercard networking options</p></li>
+<li><p><strong>Vision Systems</strong>: GMSL camera integration for surveillance and inspection</p></li>
+</ul>
+<p>The Mini-ITX form factor and embedded processor integration enable standalone deployment scenarios without requiring separate host systems.</p>
 </div>
 <div class="section" id="rave-specific-software-documentation">
 <h2>RAVE-Specific Software Documentation<a class="headerlink" href="#rave-specific-software-documentation" title="Permalink to this heading">¶</a></h2>
@@ -185,84 +272,6 @@
 <li><p><a class="reference internal" href="../getting-started/build_rave.html"><span class="std std-doc">Build an AMR Design for RAVE</span></a> - Complete build guide for RAVE</p></li>
 </ul>
 </div>
-<div class="section" id="rave-board-variants">
-<h2>RAVE Board Variants<a class="headerlink" href="#rave-board-variants" title="Permalink to this heading">¶</a></h2>
-<p>The RAVE family includes multiple hardware variants developed by Sapphire Technologies and AMD, each targeting specific market requirements and feature sets.</p>
-<p><strong>Board Variants:</strong></p>
-<ul class="simple">
-<li><p><strong>VPR-4616</strong>: Initial board with 8GB LPDDR4</p></li>
-<li><p><strong>VPR-5050</strong>: Enhanced processor variant</p></li>
-<li><p><strong>VPR-5050A</strong>: Most feature-rich variant with 16GB LPDDR4, eMMC, USB 2.0 host</p></li>
-</ul>
-<p><strong>Common Features:</strong></p>
-<ul class="simple">
-<li><p>VE2302 Versal device with PCIe Gen3 x4 connectivity</p></li>
-<li><p>160-pin expansion connector for daughtercards</p></li>
-<li><p>Mini-ITX form factor</p></li>
-</ul>
-<p>For complete board specifications and variant differences, see the <a class="reference external" href="https://www.amd.com/en/products/embedded/embedded-plus.html">Sapphire RAVE1 EDGE+</a> product documentation.</p>
-</div>
-<div class="section" id="rave-target-applications">
-<h2>RAVE Target Applications<a class="headerlink" href="#rave-target-applications" title="Permalink to this heading">¶</a></h2>
-<p>The RAVE Board is optimized for edge computing, industrial automation, and automotive applications. Target applications include:</p>
-<ul class="simple">
-<li><p><strong>Edge AI Inference</strong>: Workloads requiring local processing at the edge</p></li>
-<li><p><strong>Industrial Automation</strong>: Control systems, machine vision, and robotics</p></li>
-<li><p><strong>Automotive</strong>: In-vehicle computing, ADAS development, and testing</p></li>
-<li><p><strong>Network Edge</strong>: 5G edge computing with daughtercard networking options</p></li>
-<li><p><strong>Vision Systems</strong>: GMSL camera integration for surveillance and inspection</p></li>
-</ul>
-<p>The Mini-ITX form factor and embedded processor integration enable standalone deployment scenarios without requiring separate host systems.</p>
-</div>
-<div class="section" id="technical-specifications-summary">
-<h2>Technical Specifications Summary<a class="headerlink" href="#technical-specifications-summary" title="Permalink to this heading">¶</a></h2>
-<table border="1" class="docutils">
-<thead>
-<tr>
-<th><strong>Property</strong></th>
-<th><strong>Value</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Device</strong></td>
-<td>Versal VE2302 Edge-series</td>
-</tr>
-<tr>
-<td><strong>PCIe Interface</strong></td>
-<td>Gen3 x4 (PL-based, ~4 GB/s bandwidth)</td>
-</tr>
-<tr>
-<td><strong>PCIe Functions</strong></td>
-<td>PF0: 0x5700 (Management), PF1: 0x5701 (User/DMA)</td>
-</tr>
-<tr>
-<td><strong>LPDDR4 Memory</strong></td>
-<td>8-16 GB (variant-dependent)</td>
-</tr>
-<tr>
-<td><strong>Host Processor</strong></td>
-<td>AMD Ryzen R2314 or V2000-series</td>
-</tr>
-<tr>
-<td><strong>Expansion</strong></td>
-<td>160-pin Samtec connector (GTYP Bank 104)</td>
-</tr>
-<tr>
-<td><strong>Peripherals</strong></td>
-<td>EEPROM, TPM 2.0, USB-UART, LEDs</td>
-</tr>
-<tr>
-<td><strong>Enhanced Features (VPR-5050A)</strong></td>
-<td>eMMC storage, USB 2.0 host</td>
-</tr>
-<tr>
-<td><strong>Form Factor</strong></td>
-<td>Mini-ITX embedded platform</td>
-</tr>
-</tbody>
-</table>
-</div>
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
@@ -282,7 +291,7 @@
 				  
 				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../V80/xbtest/install-and-run-xbtest.html" class="btn btn-neutral float-left" title="How-to Install and Run xbtest on V80 Card" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="hardware/index.html" class="btn btn-neutral float-right" title="Hardware Design - RAVE VPR-4616" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="hierarchy.html" class="btn btn-neutral float-right" title="AMR RAVE - Hierarchy Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

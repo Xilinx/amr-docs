@@ -1,32 +1,80 @@
 # V80 Board Documentation
 
-This section contains comprehensive V80-specific documentation including hardware design, software services, installation guides, deployment, and testing.
+> **For common hardware concepts**, see [Common Hardware Documentation](../hardware/index.md)
+>
+> This section contains V80 (Alveo) Board-specific documentation including hardware design, software services, installation guides, deployment, and testing.
 
 ## V80 Board Overview
 
 The V80 is a PCIe accelerator card featuring the Versal V80 HBM-series device. The board provides high-performance computing capabilities with hardened PCIe Gen5 connectivity and high-bandwidth memory resources optimized for data center and cloud deployments.
 
-The V80 includes CPM5 (Coherent PCIe Module) which integrates PCIe Gen5 x8 controller and QDMA functionality in hardened silicon. The device also features 32 GB of integrated HBM (High-Bandwidth Memory) providing exceptional memory bandwidth for compute-intensive workloads.
+The V80 includes CPM5 (Coherent PCIe Module) which integrates PCIe Gen5 x8 controller and QDMA functionality in hardened silicon. This eliminates the need for soft logic PCIe and DMA IP, preserving programmable logic resources for user applications. The device also features 32 GB of integrated HBM (High-Bandwidth Memory) providing exceptional memory bandwidth for compute-intensive workloads.
 
-## V80 Key Features
-
-- **CPM5 Hardened PCIe**: Gen5 x8 controller with integrated QDMA DMA engine in silicon
-- **HBM High-Bandwidth Memory**: 32 GB organized as two 16GB stacks (~460 GB/s bandwidth)
-- **Memory Capacity**: 68 GB total (32GB HBM + 32GB DDR4 DIMM + 4GB Discrete DDR)
-- **Performance**: ~32 GB/s PCIe bandwidth, ~460 GB/s HBM bandwidth
+The board design targets maximum performance with PCIe bandwidth of approximately 32 GB/s and HBM memory bandwidth approaching 460 GB/s. Total memory capacity reaches 68 GB through the combination of HBM, DDR DIMM, and discrete DDR resources.
 
 ## V80-Specific Hardware Documentation
 
-For complete V80 hardware design information including block diagrams, CIPS configuration, memory resources, NoC configuration, and build structure, see:
+  - [V80 - Hierarchy Overview](hierarchy.md) - V80 block diagram and architecture
 
-- [V80 Hardware Design](hardware/index.md) - Complete V80 hardware documentation with architecture details, specifications, and design philosophy
+  - [V80 - CIPS Configuration](cips-config.md) - CPM5 PCIe Gen5 x8 configuration
+
+  - [V80 - Memory Resources](memory-resources.md) - HBM (32GB) + DDR DIMM (32GB) + Discrete DDR (4GB)
+
+  - [V80 - Memory Map](memory-map.md) - V80 address space with HBM regions
+
+  - [V80 - NoC Configuration](noc-config.md) - CPM5 hardened NoC connection, HBM ports
+
+  - [V80 - Base Logic](base-logic.md) - V80 PF0/PF1 with CPM5, device IDs 0x50b4/0x50b5
+
+  - [V80 - Clock Reset Module](clock-reset.md) - V80 clock configuration
+
+  - [V80 - Source File Overview](source-files.md) - alveo_v80 build structure
+
+## Key V80 Features
+
+### CPM5 Hardened PCIe
+
+The V80 integrates the CPM5 (Coherent PCIe Module) hardened block providing PCIe Gen5 x8 controller and QDMA DMA engine in silicon. This hardened implementation delivers several advantages including zero programmable logic resource consumption for PCIe and DMA, lower latency through dedicated silicon paths, and simplified timing closure without PCIe logic in the fabric.
+
+The CPM5 connects directly to the NoC through hardened NMU_128 interfaces, enabling efficient routing of PCIe traffic to memory controllers and programmable logic peripherals. Configuration is handled through the CIPS IP using the CPM_CONFIG parameter block.
+
+### HBM High-Bandwidth Memory
+
+The V80 includes 32 GB of integrated HBM organized as two 16GB stacks. Each stack contains eight HBM controllers, with each controller providing two pseudo channels. This architecture delivers 32 total HBM ports to the NoC, enabling parallel access patterns and peak bandwidth approaching 460 GB/s.
+
+The HBM operates at 200 MHz and connects to the NoC through HBM_NSU interfaces. Each pseudo channel addresses a dedicated 1GB portion of the HBM, though global memory access is supported across all pseudo channels with some performance trade-offs for non-direct access patterns.
+
+### Memory Capacity
+
+The V80 provides 68 GB of total memory capacity through three distinct memory resources. The 32 GB HBM provides high-bandwidth on-chip memory for compute-intensive operations. The 32 GB DDR4 DIMM offers expandable capacity for general-purpose storage and buffering. The 4 GB discrete DDR supports RPU firmware execution and inter-processor communication.
+
+This memory architecture enables diverse workload requirements with the flexibility to allocate different memory types based on bandwidth and capacity needs. Applications can leverage HBM for high-throughput data processing while using DDR for larger datasets and control structures.
+
+### Performance Characteristics
+
+The V80 delivers approximately 32 GB/s of PCIe bandwidth through the Gen5 x8 interface. HBM memory bandwidth approaches 460 GB/s peak throughput. The combination of high PCIe bandwidth and exceptional memory bandwidth enables demanding applications including AI inference, video processing, and real-time analytics.
+
+The board supports data center deployment scenarios where multiple V80 cards can be installed in a single server, providing scalable compute and memory resources. The PCIe form factor integrates seamlessly with standard server infrastructure.
+
+## V80 Target Applications
+
+The V80 Board is optimized for data center and cloud computing environments requiring maximum performance. Target applications include AI and machine learning inference workloads that benefit from high memory bandwidth, video processing pipelines that demand both PCIe and memory throughput, and high-performance computing tasks requiring large memory capacity.
+
+The board excels in scenarios where multiple accelerator cards are deployed in a single server, with the PCIe form factor enabling dense compute configurations. Cloud service providers can leverage the V80 for multi-tenant inference services, while enterprise data centers can deploy the board for analytics and processing workloads.
+
+## Technical Specifications Summary
+
+The V80 uses the Versal V80 device (part number xcv80-lsva4737-2MHP-e-S), an HBM-series Versal with three super logic regions. The device includes CPM5 for hardened PCIe and QDMA, along with integrated HBM stacks for high-bandwidth memory.
+
+PCIe connectivity provides Gen5 x8 operation at 32 GT/s raw speed. Two physical functions are configured with device IDs 0x50b4 for management (PF0) and 0x50b5 for user/DMA operations (PF1). The CPM5 QDMA engine provides queue-based DMA with hardware acceleration for descriptor processing.
+
+Memory resources include 32 GB HBM (two 16GB stacks), 32 GB DDR4 DIMM (RDIMM configuration), and 4 GB discrete DDR4 for firmware and control operations. All memory types operate at 200 MHz with appropriate data rates for their respective technologies.
 
 ## V80-Specific Software Documentation
 
-For V80-specific software, see:
+For V80-specific software and deployment information, see:
 
 - [AMI Software Services](../software/ami.md) - Adaptive Management Interface (common to all boards)
-- [QDMA Overview](../software/qdma.md) - DMA services (V80 uses CPM5 hardened QDMA)
 
 ## V80-Specific AMR Installation
 
@@ -54,39 +102,24 @@ For V80 board testing and validation, see:
 
 - [Install and Run Xbtest on V80](xbtest/install-and-run-xbtest.md) - Xbtest installation and usage guide
 
-## V80 Target Applications
-
-The V80 Board is optimized for data center and cloud computing environments requiring maximum performance. Target applications include:
-
-- **AI and Machine Learning Inference**: Workloads that benefit from high memory bandwidth
-- **Video Processing Pipelines**: Applications demanding both PCIe and memory throughput
-- **High-Performance Computing**: Tasks requiring large memory capacity
-- **Multi-Tenant Cloud Services**: Cloud service providers leveraging V80 for inference services
-- **Enterprise Analytics**: Data centers deploying for analytics and processing workloads
-
-## Technical Specifications Summary
-
-| **Property** | **Value** |
-|--------------|-----------|
-| **Device** | Versal V80 (xcv80-lsva4737-2MHP-e-S) |
-| **PCIe Interface** | Gen5 x8 (32 GT/s raw speed, ~32 GB/s bandwidth) |
-| **PCIe Functions** | PF0: 0x50b4 (Management), PF1: 0x50b5 (User/DMA) |
-| **HBM Memory** | 32 GB (two 16GB stacks, ~460 GB/s bandwidth) |
-| **DDR4 DIMM** | 32 GB RDIMM |
-| **Discrete DDR4** | 4 GB (for firmware and control) |
-| **Total Memory** | 68 GB |
-
 ## References
 
 - [Common Hardware Documentation](../hardware/index.md) - Shared Versal/CIPS/NoC concepts
-- [Versal V80 Product Brief](https://www.amd.com/en/products/accelerators/alveo/v-series/v80.html) - AMD V80 product information
 - [AMR Release Information](../AMR-release-information.md) - Latest AMR release and download links
 
 ```{toctree}
-:maxdepth: 2
+:maxdepth: 1
 :hidden:
 
-hardware/index
+hierarchy
+cips-config
+memory-resources
+memory-map
+noc-config
+base-logic
+clock-reset
+source-files
 switch-aved-amr
 xbtest/install-and-run-xbtest
 ```
+

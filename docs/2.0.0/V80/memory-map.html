@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AMR common Hardware Design &mdash; AMR  documentation</title>
+  <title>AMR V80 - Memory Map &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -21,8 +21,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="V80 Board Documentation" href="../V80/index.html" />
-    <link rel="prev" title="Source Configuration Control" href="../development/source-control.html" /> 
+    <link rel="next" title="AMR - NoC Configuration" href="noc-config.html" />
+    <link rel="prev" title="AMR - Memory Resources" href="memory-resources.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -73,18 +73,36 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Hardware Design</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">AMR common Hardware Design</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#board-documentation">Board Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#common-hardware-documentation">Common Hardware Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#key-common-design-principles">Key Common Design Principles</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#minimal-base-design">Minimal Base Design</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#boards-agnostic-concepts">Boards-Agnostic Concepts</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#board-specific-implementations">Board-Specific Implementations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">AMR common Hardware Design</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">V80 Board Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#v80-board-overview">V80 Board Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#v80-specific-hardware-documentation">V80-Specific Hardware Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#key-v80-features">Key V80 Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#v80-target-applications">V80 Target Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#technical-specifications-summary">Technical Specifications Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#v80-specific-software-documentation">V80-Specific Software Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#v80-specific-amr-installation">V80-Specific AMR Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#switching-between-aved-and-amr-on-v80">Switching Between AVED and AMR on V80</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#how-to-install-and-run-xbtest-on-v80-card">How-to Install and Run Xbtest on V80 Card</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#references">References</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="hierarchy.html">AMR V80 - Hierarchy Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cips-config.html">AMR - CIPS Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memory-resources.html">AMR - Memory Resources</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">AMR V80 - Memory Map</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#memory-mapping">Memory Mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#amr-memory-map">AMR Memory Map</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="noc-config.html">AMR - NoC Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="base-logic.html">AMR V80 - Base Logic (V80-Specific)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clock-reset.html">AMR V80 - Clock Reset Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source-files.html">AMR V80 - Source File Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="switch-aved-amr.html">Switching Between AVED and AMR on V80</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xbtest/install-and-run-xbtest.html">How-to Install and Run xbtest on V80 Card</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Board Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../RAVE/index.html">RAVE Board Documentation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
@@ -126,9 +144,10 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>AMR common Hardware Design</li>
+          <li><a href="index.html">V80 Board Documentation</a> &raquo;</li>
+      <li>AMR V80 - Memory Map</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/hardware/index.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/V80/memory-map.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -136,61 +155,66 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="amr-common-hardware-design">
-<h1>AMR common Hardware Design<a class="headerlink" href="#amr-common-hardware-design" title="Permalink to this heading">¶</a></h1>
-<p>This section contains hardware design documentation <strong>common to all AMR boards</strong> (V80, RAVE). For board-specific details, see the individual board documentation.</p>
-<div class="section" id="board-documentation">
-<h2>Board Documentation<a class="headerlink" href="#board-documentation" title="Permalink to this heading">¶</a></h2>
+  <div class="section" id="amr-v80-memory-map">
+<h1>AMR V80 - Memory Map<a class="headerlink" href="#amr-v80-memory-map" title="Permalink to this heading">¶</a></h1>
+<p>AMR uses the address mapping illustrated below.</p>
+<p><span id="amr-memorymap-memorymapping"></span></p>
+<div class="section" id="memory-mapping">
+<h2>Memory Mapping<a class="headerlink" href="#memory-mapping" title="Permalink to this heading">¶</a></h2>
+<p>This table shows the recommended functions that can access the DDR Memories. The light grey rows and columns related to the APU, PCIe User, and PCIe DMA are not currently used, but they are captured for future growth. The <strong>Yes/No</strong> entries indicate the recommended memory access. There is not an active control that prohibits unintended access to the DDR. For example, if caution is not exercised, the APU or PL could access DDR locations intended for the RPU (RPU execution).</p>
+<p>Address remapping is configured for PCIe access to the PL memory space through the AXI NoC CIPS (axi_noc_cips):</p>
+<p><strong>PF0 Address Remapping:</strong></p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#../V80/hardware/index.md"><span class="xref myst">V80 Hardware Design</span></a> - Alveo V80 (CPM5, HBM)</p></li>
-<li><p><a class="reference internal" href="#../RAVE/hardware/index.md"><span class="xref myst">RAVE Hardware Design</span></a> - Embedded+ VE2302 (PL PCIe, LPDDR4)</p></li>
+<li><p>PCIe BAR0 Address: 0x201_0000_0000</p></li>
+<li><p>Remaps to AXI Address: 0x1000_0000 (local address space)</p></li>
+<li><p>Aperture Size: 8 MB</p></li>
+<li><p>Configured in axi_noc_cips M00_AXI and S00_AXI/S01_AXI REMAPS</p></li>
 </ul>
+<p><strong>PF1 Address Remapping:</strong></p>
+<ul class="simple">
+<li><p>PCIe BAR2 Address: 0x202_0000_0000</p></li>
+<li><p>Remaps to AXI Address: No remap (direct addressing)</p></li>
+<li><p>Aperture Size: 1 GB</p></li>
+<li><p>Configured in axi_noc_cips M01_AXI</p></li>
+</ul>
+<p>The address remap configuration is implemented in the AXI NoC CIPS (axi_noc_cips) IP block.</p>
+<p><img alt="images/1107374801.png" src="../images/1107374801.png" /></p>
+<p>N/A* The RPU is only 32-bit addressing, so it cannot access more than 4GB of DDR.</p>
+<p><span id="amr-memorymap-amrmemorymap"></span></p>
 </div>
-<div class="section" id="common-hardware-documentation">
-<h2>Common Hardware Documentation<a class="headerlink" href="#common-hardware-documentation" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="amr-memory-map">
+<h2>AMR Memory Map<a class="headerlink" href="#amr-memory-map" title="Permalink to this heading">¶</a></h2>
+<p>This table shows the memory map of AMR. The greyed out rows are not used in AMR, but they are available for future growth.</p>
+<p>A complete AMD Versal™ Address map can be found here:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../overview/amr-overview.html#amroverview-supportedboards"><span class="std std-ref">Board Comparison</span></a> - V80 vs RAVE comparison and selection guide</p></li>
-<li><p><a class="reference internal" href="hierarchy.html"><span class="std std-doc">Versal Architecture Overview</span></a> - Common Versal concepts (CIPS, PL, NoC)</p></li>
-<li><p><a class="reference internal" href="cips-config.html"><span class="std std-doc">CIPS Common Configuration</span></a> - RPU, PMC, and PS peripheral concepts</p></li>
-<li><p><a class="reference internal" href="base-logic.html"><span class="std std-doc">Base Design Philosophy</span></a> - Minimal design, software GCQ, firmware-based management</p></li>
-<li><p><a class="reference internal" href="memory-resources.html"><span class="std std-doc">Memory Architecture Concepts</span></a> - DDR, memory controllers, general concepts</p></li>
-<li><p><a class="reference internal" href="memory-map.html"><span class="std std-doc">Address Mapping Concepts</span></a> - PCIe to AXI address translation</p></li>
-<li><p><a class="reference internal" href="noc-config.html"><span class="std std-doc">NoC Interconnect Overview</span></a> - NoC concepts (NMU, NSU, NPS, performance)</p></li>
-<li><p><a class="reference internal" href="clock-reset.html"><span class="std std-doc">Clock and Reset Concepts</span></a> - CIPS clocks, reset synchronization</p></li>
-<li><p><a class="reference internal" href="source-files.html"><span class="std std-doc">Build System Overview</span></a> - Vivado build structure and flow</p></li>
+<li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/4-GB-Processor-System-Address-Map">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/4-GB-Processor-System-Address-Map</a></p></li>
+<li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map</a></p></li>
 </ul>
+<p><span id="amr-memorymap-amr4gmemoryspace-ddrlower2g-ps-pmc"></span></p>
+<div class="section" id="amr-4g-memory-space-ddr-lower-2g-ps-pmc">
+<h3>AMR 4G Memory Space - DDR Lower 2G &amp; PS/PMC<a class="headerlink" href="#amr-4g-memory-space-ddr-lower-2g-ps-pmc" title="Permalink to this heading">¶</a></h3>
+<p><img alt="images/1107374801.png" src="../images/1107374801.png" /></p>
+<p><span id="amr-memorymap-amrhbmmemoryspace"></span></p>
 </div>
-<div class="section" id="key-common-design-principles">
-<h2>Key Common Design Principles<a class="headerlink" href="#key-common-design-principles" title="Permalink to this heading">¶</a></h2>
-<div class="section" id="minimal-base-design">
-<h3>Minimal Base Design<a class="headerlink" href="#minimal-base-design" title="Permalink to this heading">¶</a></h3>
-<p>All AMR boards follow a minimal base design philosophy:</p>
-<ul class="simple">
-<li><p>No management IP blocks in PL (no GCQ hardware, UUID ROM, EEPROM controllers)</p></li>
-<li><p>Firmware-based management using RPU (R5 processors)</p></li>
-<li><p>Software GCQ implementation using shared DDR memory</p></li>
-<li><p>Expansion points available (M_AXI_LPD, address space, interrupts)</p></li>
-</ul>
+<div class="section" id="amr-hbm-memory-space">
+<h3>AMR HBM Memory Space<a class="headerlink" href="#amr-hbm-memory-space" title="Permalink to this heading">¶</a></h3>
+<p><img alt="images/1107374822.png" src="../images/1107374822.png" /></p>
+<p><span id="amr-memorymap-pf0baraddressing"></span></p>
 </div>
-<div class="section" id="boards-agnostic-concepts">
-<h3>Boards-Agnostic Concepts<a class="headerlink" href="#boards-agnostic-concepts" title="Permalink to this heading">¶</a></h3>
-<p>The following concepts are shared across all boards:</p>
+<div class="section" id="amr-pl-memory-space">
+<h3>AMR PL Memory Space<a class="headerlink" href="#amr-pl-memory-space" title="Permalink to this heading">¶</a></h3>
+<p><img alt="images/1107374813.png" src="../images/1107374813.png" /></p>
+<p><strong>PL Memory Space - Current Base Design:</strong></p>
 <ul class="simple">
-<li><p>Versal CIPS architecture (RPU, PMC, PS)</p></li>
-<li><p>NoC interconnect fundamentals</p></li>
-<li><p>Memory controller architecture</p></li>
-<li><p>Boot and configuration flow</p></li>
-<li><p>2 Physical Functions (PF0 management, PF1 user/DMA)</p></li>
-<li><p>QDMA for DMA transfers (different implementations)</p></li>
+<li><p><strong>PF0 BAR0</strong>: 0x201_0000_0000 - 0x201_007F_FFFF (8 MB) - No hardware IP instantiated, address space reserved</p></li>
+<li><p><strong>PF1 BAR2</strong>: 0x202_0000_0000 - 0x202_0FFF_FFFF (256 MB via 1GB aperture) - SmartConnect → AXI GPIO test</p></li>
 </ul>
+<p><strong>Note:</strong> PCIe® Management functions shown in diagram may reference hardware that is not instantiated in the base design. The base design provides address space for future expansion but does not include management IP blocks (GCQ, UUID ROM, EEPROM controllers) in PL.</p>
+<p><span id="amr-memorymap-amrddrupper2ganddimm32gmemoryspace"></span></p>
 </div>
-<div class="section" id="board-specific-implementations">
-<h3>Board-Specific Implementations<a class="headerlink" href="#board-specific-implementations" title="Permalink to this heading">¶</a></h3>
-<p>See individual board documentation for:</p>
-<ul class="simple">
-<li><p><strong>V80</strong>: CPM5 hardened PCIe, HBM memory, Gen5x8 configuration</p></li>
-<li><p><strong>RAVE</strong>: PL-based PCIe IP, LPDDR4 memory, expansion I/O, peripherals</p></li>
-</ul>
+<div class="section" id="amr-ddr-upper-2g-and-dimm-32g-memory-space">
+<h3>AMR DDR Upper 2G and DIMM 32G Memory Space<a class="headerlink" href="#amr-ddr-upper-2g-and-dimm-32g-memory-space" title="Permalink to this heading">¶</a></h3>
+<p><img alt="images/1107374792.png" src="../images/1107374792.png" /></p>
 </div>
 </div>
 </div>
@@ -201,8 +225,8 @@
           
 				  
 				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../development/source-control.html" class="btn btn-neutral float-left" title="Source Configuration Control" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../V80/index.html" class="btn btn-neutral float-right" title="V80 Board Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="memory-resources.html" class="btn btn-neutral float-left" title="AMR - Memory Resources" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="noc-config.html" class="btn btn-neutral float-right" title="AMR - NoC Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

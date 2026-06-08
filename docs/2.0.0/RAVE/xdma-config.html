@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AMR RAVE - XDMA Configuration &mdash; AMR  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/_static/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="AMR RAVE - Memory Resources" href="memory-resources.html" />
+    <link rel="prev" title="AMR RAVE - PCIe Configuration" href="pcie-config.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+            <a href="../index.html" class="icon icon-home"> AMR
+            <img src="../_static/xilinx-header-logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">AMR Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/amr-overview.html">AMR Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AMR Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/install-prebuilt.html">How-to Install Prebuilt AMR Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/build_rave.html">How-to Build an AMR Design for RAVE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/build_v80.html">How-to Build an AMR Design for V80</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AMR System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../system-architecture/board-management.html">AMR - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system-architecture/device-programming.html">AMR - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system-architecture/host-communication.html">AMR - Host to Card Communication</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AMR Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/install-card.html">AMR Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/update-fpt.html">AMR Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/update-pdi.html">AMR Updating PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/debug.html">AMR Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/jtag-recovery.html">AMR JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/ami-tool-guide.html">AMR Management Interface userguide (ami_tool)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">AMR common Hardware Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Board Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">RAVE Board Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#rave-board-overview">RAVE Board Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#rave-specific-hardware-documentation">RAVE-Specific Hardware Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#rave-board-variants">RAVE Board Variants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#key-rave-features">Key RAVE Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#technical-specifications-summary">Technical Specifications Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#rave-target-applications">RAVE Target Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#rave-specific-software-documentation">RAVE-Specific Software Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#rave-specific-amr-installation">RAVE-Specific AMR Installation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#references">References</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="hierarchy.html">AMR RAVE - Hierarchy Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cips-config.html">AMR RAVE - CIPS Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcie-config.html">AMR RAVE - PCIe Configuration</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">AMR RAVE - XDMA Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xdma-pl-ip">XDMA PL IP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rave-xdma-configuration">RAVE XDMA Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#physical-function-configuration">Physical Function Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#axi-interfaces">AXI Interfaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#noc-integration">NoC Integration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#address-translation">Address Translation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#clocking-and-resets">Clocking and Resets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#design-integration">Design Integration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="memory-resources.html">AMR RAVE - Memory Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memory-map.html">AMR RAVE - Memory Map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="noc-config.html">AMR RAVE - NoC Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="base-logic.html">AMR RAVE - Base Logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="peripherals.html">AMR RAVE - Peripherals (RAVE-Specific)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expansion-io.html">AMR RAVE - Expansion I/O</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clock-reset.html">AMR RAVE - Clock and Reset Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source-files.html">AMR RAVE - Source File Overview</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../firmware/amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firmware/asdm-application.html">AMR ASDM Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firmware/inband-telemetry.html">AMR InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firmware/outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firmware/ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firmware/apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firmware/axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firmware/bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firmware/fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firmware/osal.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../firmware/profiles-cmake.html">Profiles and CMake build process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../software/ami.html">AMR Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/qdma.html">AMR QDMA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/abbreviations.html">AMR - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AMR-release-information.html">AMR Release Information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: black" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AMR</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">RAVE Board Documentation</a> &raquo;</li>
+      <li>AMR RAVE - XDMA Configuration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/RAVE/xdma-config.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="amr-rave-xdma-configuration">
+<h1>AMR RAVE - XDMA Configuration<a class="headerlink" href="#amr-rave-xdma-configuration" title="Permalink to this heading">¶</a></h1>
+<blockquote>
+<div><p><strong>For common DMA concepts</strong>, see <a class="reference internal" href="#../../hardware/index.md"><span class="xref myst">Common Hardware Documentation</span></a></p>
+<p>This document describes the RAVE (VE2302) XDMA PL IP implementation.</p>
+</div></blockquote>
+<p><span id="amrrave-xdmaconfig-overview"></span></p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
+<p>The RAVE Board uses the XDMA PL IP (xilinx.com:ip:xdma) for DMA functionality. The VE2302 device is a Versal Edge-series device that does not include a CPM block, so DMA must be implemented in soft logic within the programmable fabric.</p>
+<p>XDMA provides a channel-based DMA architecture supporting 2 physical functions (PF0 for management with device ID 0x5710, PF1 for user/DMA with device ID 0x5711). The IP supports multiple DMA channels with memory-mapped and streaming interfaces for efficient data transfer between host and device memory.</p>
+<blockquote>
+<div><p><strong>Note:</strong> Legacy RAVE designs used QDMA (Queue DMA) with 512 queues. The platform has migrated to XDMA for improved simplicity and compatibility with VE2302 Embedded+ platform requirements.</p>
+</div></blockquote>
+<p><span id="amrrave-xdmaconfig-xdmaplip"></span></p>
+</div>
+<div class="section" id="xdma-pl-ip">
+<h2>XDMA PL IP<a class="headerlink" href="#xdma-pl-ip" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="ip-information">
+<h3>IP Information<a class="headerlink" href="#ip-information" title="Permalink to this heading">¶</a></h3>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IP Name</strong></td>
+<td>XDMA</td>
+</tr>
+<tr>
+<td><strong>Vendor</strong></td>
+<td>xilinx.com:ip:xdma</td>
+</tr>
+<tr>
+<td><strong>Version</strong></td>
+<td>Latest for Vivado 2026.1</td>
+</tr>
+<tr>
+<td><strong>Implementation</strong></td>
+<td>Soft logic in PL fabric</td>
+</tr>
+<tr>
+<td><strong>Physical Functions</strong></td>
+<td>2 (PF0: 0x5710, PF1: 0x5711)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Reference:</strong> <a class="reference external" href="https://docs.xilinx.com/r/en-US/pg195-pcie-dma">XDMA Product Guide (PG195)</a></p>
+<p><span id="amrrave-xdmaconfig-raveconfiguration"></span></p>
+</div>
+</div>
+<div class="section" id="rave-xdma-configuration">
+<h2>RAVE XDMA Configuration<a class="headerlink" href="#rave-xdma-configuration" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="xdma-settings">
+<h3>XDMA Settings<a class="headerlink" href="#xdma-settings" title="Permalink to this heading">¶</a></h3>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Setting</th>
+<th>RAVE Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Physical Functions</strong></td>
+<td><strong>2</strong> (PF0, PF1)</td>
+<td>Standard AMR configuration</td>
+</tr>
+<tr>
+<td><strong>PF0 Device ID</strong></td>
+<td><strong>0x5710</strong></td>
+<td>Management function</td>
+</tr>
+<tr>
+<td><strong>PF1 Device ID</strong></td>
+<td><strong>0x5711</strong></td>
+<td>User/DMA function</td>
+</tr>
+<tr>
+<td><strong>Vendor ID</strong></td>
+<td><strong>0x10EE</strong></td>
+<td>Xilinx vendor ID</td>
+</tr>
+<tr>
+<td><strong>Mode Selection</strong></td>
+<td><strong>Advanced</strong></td>
+<td>Multi-PF support</td>
+</tr>
+<tr>
+<td><strong>Function Level Reset</strong></td>
+<td><strong>Disabled</strong></td>
+<td>In both XDMA &amp; PCIe IP</td>
+</tr>
+<tr>
+<td><strong>Data Width</strong></td>
+<td><strong>256-bit</strong></td>
+<td>AXI data width</td>
+</tr>
+</tbody>
+</table>
+<p><span id="amrrave-xdmaconfig-physicalfunctions"></span></p>
+</div>
+</div>
+<div class="section" id="physical-function-configuration">
+<h2>Physical Function Configuration<a class="headerlink" href="#physical-function-configuration" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="pf0-management">
+<h3>PF0 (Management)<a class="headerlink" href="#pf0-management" title="Permalink to this heading">¶</a></h3>
+<p><strong>XDMA PF0 Settings:</strong></p>
+<ul class="simple">
+<li><p>Device ID: 0x5710</p></li>
+<li><p>Base Class: 12 (Memory controller)</p></li>
+<li><p>Sub Class: 00</p></li>
+<li><p>BAR0: 8 MB (64-bit, non-prefetchable)</p></li>
+</ul>
+</div>
+<div class="section" id="pf1-user-dma">
+<h3>PF1 (User/DMA)<a class="headerlink" href="#pf1-user-dma" title="Permalink to this heading">¶</a></h3>
+<p><strong>XDMA PF1 Settings:</strong></p>
+<ul class="simple">
+<li><p>Device ID: 0x5711</p></li>
+<li><p>Base Class: 12 (Memory controller)</p></li>
+<li><p>Sub Class: 00</p></li>
+<li><p>BAR0: 16 MB (64-bit, non-prefetchable) - XDMA control registers</p></li>
+<li><p>BAR2: 64 KB (64-bit, non-prefetchable) - AXI-Lite bridge for PL peripherals</p></li>
+<li><p>BAR4: 256 MB (64-bit, prefetchable) - AXI bypass interface for memory access</p></li>
+<li><p>MSI-X: Enabled</p></li>
+</ul>
+<p><span id="amrrave-xdmaconfig-axiinterfaces"></span></p>
+</div>
+</div>
+<div class="section" id="axi-interfaces">
+<h2>AXI Interfaces<a class="headerlink" href="#axi-interfaces" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="xdma-axi-master-h2c-host-to-card">
+<h3>XDMA AXI Master (H2C - Host to Card)<a class="headerlink" href="#xdma-axi-master-h2c-host-to-card" title="Permalink to this heading">¶</a></h3>
+<p><strong>For DMA data transfer:</strong></p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Interface</th>
+<th>Configuration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>M_AXI</strong></td>
+<td>AXI4-MM master interface</td>
+</tr>
+<tr>
+<td><strong>Data Width</strong></td>
+<td>256-bit</td>
+</tr>
+<tr>
+<td><strong>Connection</strong></td>
+<td>To NoC (via SmartConnect)</td>
+</tr>
+<tr>
+<td><strong>Target</strong></td>
+<td>LPDDR4 memory, PL slaves</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="xdma-axi-lite-master">
+<h3>XDMA AXI-Lite Master<a class="headerlink" href="#xdma-axi-lite-master" title="Permalink to this heading">¶</a></h3>
+<p><strong>For register access:</strong></p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Interface</th>
+<th>Configuration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>M_AXI_LITE</strong></td>
+<td>AXI4-Lite master interface</td>
+</tr>
+<tr>
+<td><strong>Size</strong></td>
+<td>16 MB address space</td>
+</tr>
+<tr>
+<td><strong>Prefetchable</strong></td>
+<td>False</td>
+</tr>
+<tr>
+<td><strong>Purpose</strong></td>
+<td>PL peripheral access via PF1 BAR2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="xdma-axi-bypass">
+<h3>XDMA AXI Bypass<a class="headerlink" href="#xdma-axi-bypass" title="Permalink to this heading">¶</a></h3>
+<p><strong>For memory-mapped access:</strong></p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Interface</th>
+<th>Configuration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>M_AXI_BYPASS</strong></td>
+<td>AXI4-MM bypass interface</td>
+</tr>
+<tr>
+<td><strong>Size</strong></td>
+<td>256 MB address space</td>
+</tr>
+<tr>
+<td><strong>Prefetchable</strong></td>
+<td>True</td>
+</tr>
+<tr>
+<td><strong>Purpose</strong></td>
+<td>Direct memory access via PF1 BAR4</td>
+</tr>
+<tr>
+<td><strong>64-bit addressing</strong></td>
+<td>Enabled</td>
+</tr>
+</tbody>
+</table>
+<p><span id="amrrave-xdmaconfig-nocintegration"></span></p>
+</div>
+</div>
+<div class="section" id="noc-integration">
+<h2>NoC Integration<a class="headerlink" href="#noc-integration" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="xdma-to-noc-connection">
+<h3>XDMA to NoC Connection<a class="headerlink" href="#xdma-to-noc-connection" title="Permalink to this heading">¶</a></h3>
+<p><strong>XDMA routes through SmartConnect to NoC:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>XDMA PL IP M_AXI (256-bit)
+  ↓
+SmartConnect (width/protocol conversion)
+  ↓
+NMU (in AXI NoC IP)
+  ↓
+NoC Interconnect
+  ↓
+DDRMC_NSU → LPDDR4
+</pre></div>
+</div>
+<p><strong>Configuration:</strong></p>
+<ul class="simple">
+<li><p>SmartConnect provides width conversion and protocol adaptation</p></li>
+<li><p>Custom axi_addr_mask IP applies address masks for BAR-to-AXI translation</p></li>
+<li><p>NoC handles routing to LPDDR4 memory controllers</p></li>
+<li><p>Clock domain crossing handled by SmartConnect and NoC</p></li>
+</ul>
+<p><span id="amrrave-xdmaconfig-addresstranslation"></span></p>
+</div>
+</div>
+<div class="section" id="address-translation">
+<h2>Address Translation<a class="headerlink" href="#address-translation" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="address-masking">
+<h3>Address Masking<a class="headerlink" href="#address-masking" title="Permalink to this heading">¶</a></h3>
+<p>RAVE uses custom axi_addr_mask IP for BAR address translation:</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Interface</th>
+<th>Mask</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AXI-Lite</strong></td>
+<td>0x0000000000FFFFFF</td>
+<td>Translates PF1 BAR2 to local peripheral addresses</td>
+</tr>
+<tr>
+<td><strong>AXI Bypass</strong></td>
+<td>0x000000000FFFFFFF</td>
+<td>Translates PF1 BAR4 to LPDDR4 addresses</td>
+</tr>
+</tbody>
+</table>
+<p><span id="amrrave-xdmaconfig-clockingandresets"></span></p>
+</div>
+</div>
+<div class="section" id="clocking-and-resets">
+<h2>Clocking and Resets<a class="headerlink" href="#clocking-and-resets" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="xdma-clock-domains">
+<h3>XDMA Clock Domains<a class="headerlink" href="#xdma-clock-domains" title="Permalink to this heading">¶</a></h3>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Clock</th>
+<th>Source</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>axi_aclk</strong></td>
+<td>PCIe user clock</td>
+<td>XDMA AXI interfaces</td>
+</tr>
+<tr>
+<td><strong>axi_ctl_aclk</strong></td>
+<td>PCIe user clock</td>
+<td>XDMA control interface</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="xdma-reset-inputs">
+<h3>XDMA Reset Inputs<a class="headerlink" href="#xdma-reset-inputs" title="Permalink to this heading">¶</a></h3>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Reset</th>
+<th>Source</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>sys_rst_n</strong></td>
+<td>PCIe reset logic</td>
+<td>System reset</td>
+</tr>
+<tr>
+<td><strong>axi_aresetn</strong></td>
+<td>proc_sys_reset</td>
+<td>AXI interface reset</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Reset Synchronization:</strong></p>
+<ul class="simple">
+<li><p>Use proc_sys_reset blocks for proper clock domain synchronization</p></li>
+<li><p>Coordinate PCIe reset with XDMA reset sequencing</p></li>
+</ul>
+<p><span id="amrrave-xdmaconfig-designintegration"></span></p>
+</div>
+</div>
+<div class="section" id="design-integration">
+<h2>Design Integration<a class="headerlink" href="#design-integration" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="key-configuration-parameters">
+<h3>Key Configuration Parameters<a class="headerlink" href="#key-configuration-parameters" title="Permalink to this heading">¶</a></h3>
+<p><strong>From RAVE config_bd.tcl:</strong></p>
+<div class="highlight-tcl notranslate"><div class="highlight"><pre><span></span><span class="c"># XDMA IP configuration</span>
+<span class="nv">CONFIG.PF1_SUBSYSTEM_ID</span><span class="w"> </span><span class="k">{</span><span class="nv">000e</span><span class="k">}</span>
+<span class="nv">CONFIG.axi_bypass_64bit_en</span><span class="w"> </span><span class="k">{</span><span class="nv">true</span><span class="k">}</span>
+<span class="nv">CONFIG.axi_bypass_prefetchable</span><span class="w"> </span><span class="k">{</span><span class="nv">true</span><span class="k">}</span>
+<span class="nv">CONFIG.axi_data_width</span><span class="w"> </span><span class="k">{</span><span class="nv">256_bit</span><span class="k">}</span>
+<span class="nv">CONFIG.axilite_master_prefetchable</span><span class="w"> </span><span class="k">{</span><span class="nv">false</span><span class="k">}</span>
+<span class="nv">CONFIG.axilite_master_size</span><span class="w"> </span><span class="k">{</span><span class="nv">16</span><span class="k">}</span>
+<span class="nv">CONFIG.axist_bypass_size</span><span class="w"> </span><span class="k">{</span><span class="nv">256</span><span class="k">}</span>
+<span class="nv">CONFIG.mode_selection</span><span class="w"> </span><span class="k">{</span><span class="nv">Advanced</span><span class="k">}</span>
+<span class="nv">CONFIG.mult_pf_des</span><span class="w"> </span><span class="k">{</span><span class="nv">true</span><span class="k">}</span>
+<span class="nv">CONFIG.pf0_device_id</span><span class="w"> </span><span class="k">{</span><span class="nv">5710</span><span class="k">}</span>
+<span class="nv">CONFIG.pf1_device_id</span><span class="w"> </span><span class="k">{</span><span class="nv">5711</span><span class="k">}</span>
+<span class="nv">CONFIG.vendor_id</span><span class="w"> </span><span class="k">{</span><span class="nv">10EE</span><span class="k">}</span>
+</pre></div>
+</div>
+<p><span id="amrrave-xdmaconfig-references"></span></p>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg195-pcie-dma">XDMA Product Guide (PG195)</a> - XDMA IP documentation</p></li>
+<li><p><a class="reference internal" href="pcie-config.html"><span class="std std-doc">RAVE PCIe Configuration</span></a> - PCIe IP integration</p></li>
+<li><p><a class="reference internal" href="noc-config.html"><span class="std std-doc">RAVE NoC Configuration</span></a> - NoC topology with XDMA</p></li>
+<li><p><a class="reference internal" href="memory-map.html"><span class="std std-doc">RAVE Memory Map</span></a> - BAR address mapping and XDMA configuration</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          
+				  
+				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pcie-config.html" class="btn btn-neutral float-left" title="AMR RAVE - PCIe Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="memory-resources.html" class="btn btn-neutral float-right" title="AMR RAVE - Memory Resources" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
+      <span class="lastupdated">Last updated on June 08, 2026.
+      </span></p>
+  </div>
+
+
+
+										<div class="aem-Grid aem-Grid--16">
+											<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+												<div class="container-fluid sub-footer">
+
+													                    <div class="row">
+                        <div class="col-xs-24">
+                          <p><a target="_blank" href="https://www.amd.com/en/corporate/copyright">Terms and Conditions</a> | <a target="_blank" href="https://www.amd.com/en/corporate/privacy">Privacy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/cookies">Cookie Policy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/trademarks">Trademarks</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf">Statement on Forced Labor</a> | <a target="_blank" href="https://www.amd.com/en/corporate/competition">Fair and Open Competition</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf">UK Tax Strategy</a> | <a target="_blank" href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA">Inclusive Terminology</a> | <a href="#cookiessettings" class="ot-sdk-show-settings">Cookies Settings</a></p>
+                        </div>
+                    </div>
+												</div>
+											</div>
+										</div>
+										
+</br>
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>
