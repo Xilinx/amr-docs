@@ -89,3 +89,10 @@ The Mini-ITX form factor and embedded processor integration enable standalone de
 - [Common Hardware Documentation](../hardware/index.md) - Shared Versal/CIPS/NoC concepts
 - [Sapphire RAVE1 EDGE+](https://www.amd.com/en/products/embedded/embedded-plus.html) - RAVE product information
 - [AMR Release Information](../AMR-release-information.md) - Latest AMR release and download links
+
+```{toctree}
+:maxdepth: 2
+:hidden:
+
+hardware/index
+```

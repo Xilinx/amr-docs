@@ -81,3 +81,12 @@ The V80 Board is optimized for data center and cloud computing environments requ
 - [Common Hardware Documentation](../hardware/index.md) - Shared Versal/CIPS/NoC concepts
 - [Versal V80 Product Brief](https://www.amd.com/en/products/accelerators/alveo/v-series/v80.html) - AMD V80 product information
 - [AMR Release Information](../AMR-release-information.md) - Latest AMR release and download links
+
+```{toctree}
+:maxdepth: 2
+:hidden:
+
+hardware/index
+switch-aved-amr
+xbtest/install-and-run-xbtest
+```
