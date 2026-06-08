@@ -111,14 +111,6 @@ For V80 board testing and validation, see:
 :maxdepth: 1
 :hidden:
 
-hierarchy
-cips-config
-memory-resources
-memory-map
-noc-config
-base-logic
-clock-reset
-source-files
 switch-aved-amr
 xbtest/install-and-run-xbtest
 ```
