@@ -282,6 +282,69 @@ c1:00.0 | ALVEO V80 PQ | XFL1GF4VJ1KW  | 00000000000000000000000032314bde | 3.0.
 See [AMI Tool Overview](../deployment/ami-tool-guide.md#amrmanagementinterfaceuserguide-ami-tool-overview) for more information on different AMC states.
 
 
+## Loading APU Linux Image
+
+To load a prebuilt APU Linux image onto your device, use the `pdi_program` command with the `-a` flag. Ensure that JTAG is connected to the device to view the APU Linux console output.
+
+### Prerequisites
+
+- AMI software packages installed (Step 2 completed)
+- AMC in READY state (verify with `ami_tool overview`)
+- JTAG connection established for console output
+- Prebuilt APU image file (e.g., `apu_linux.pdi`)
+
+#### Command Usage
+     pdi_program - live-load a PDI bitstream onto a device
+
+    ~% sudo ami_tool pdi_program --help
+    pdi_program - live-load a PDI bitstream onto a device
+
+    This command requires root/sudo permissions.
+
+    Usage:
+        ami_tool pdi_program -d <bdf> -i <path> [-a | -r]
+
+    Options:
+        -h --help             Show this screen
+        -d <b>:[d].[f]        Specify the device BDF
+        -i <path>             Path to PDI image file
+        -a                    APU image (load targeting APU subsystem only)
+        -r                    RPU image (load targeting RPU subsystem only)
+        -y                    Skip confirmation
+        -q                    Quit after programming
+
+
+     ~%
+
+#### Example output for PL pdi load
+
+    ~% sudo ami_tool pdi_program -d 21 -i <path_to_pdi> -a
+    ----------------------------------------------
+    Device      | 21:00.0
+    ----------------------------------------------
+
+    Current Configuration
+    ----------------------------------------------
+    UUID        | 00000000000000000000000014862935
+    ----------------------------------------------
+    Parent UUID | 00000000000000000000000014862935
+    Path        | <This should be path to pdi>
+    ----------------------------------------------
+
+    Are you sure you wish to proceed? [Y/n]: Y
+    
+    Updating image...
+    [####################################################################################################] 100% |
+    PDI programming complete.
+    
+    OK. PDI has been programmed successfully.
+
+### Important Notes
+
+- Make sure JTAG is connected before loading the APU image to monitor console output
+- Allow approximately one minute for the APU subsystem to boot
+- Monitor the JTAG console to verify successful APU Linux boot
+
 ## Next Steps
 
 Now that AMR is installed, you can:

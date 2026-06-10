@@ -44,10 +44,16 @@
               <p class="caption" role="heading"><span class="caption-text">AMR Overview</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">AMR Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#new-in-this-release">New In This Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#new-in-this-release">New In This Release</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#platform-advancements">Platform Advancements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#alveo-v80">Alveo V80:</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#supported-boards">Supported boards</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#alveo-v80">Alveo V80</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Alveo V80</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#supported-kernels-and-distributions-for-v80">Supported Kernels and Distributions for V80</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#getting-started-with-v80">Getting Started with V80</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rave-embedded-board">RAVE (Embedded+ Board)</a></li>
@@ -147,15 +153,31 @@
 <p><span id="amroverview-newinthisrelease"></span></p>
 <div class="section" id="new-in-this-release">
 <h2>New In This Release<a class="headerlink" href="#new-in-this-release" title="Permalink to this heading">¶</a></h2>
+<p>This release represents a significant advancement in card management capabilities, delivering enhanced performance, flexibility for both V80 and RAVE platforms.</p>
+<div class="section" id="platform-advancements">
+<h3>Platform Advancements<a class="headerlink" href="#platform-advancements" title="Permalink to this heading">¶</a></h3>
+<p><strong>Toolset and Performance:</strong></p>
 <ul class="simple">
-<li><p>Support for Vivado™ 2026.1 toolset.</p></li>
-<li><p>Enhanced OSPI flash write performance optimization for faster device programming.</p></li>
-<li><p>Partition flag read/write functionality for advanced flash management and partition control, including power-on load configuration.</p></li>
-<li><p>Improved firmware architecture with board profile system supporting RAVE (standard reference) and V80 variants for flexible platform deployment.</p></li>
-<li><p>Three-partition FPT structure (two boot PDIs + one user partition) with 128-byte header and entries.</p></li>
-<li><p>PS subsystems with RPU0 (AMR), RPU1 and APU.</p></li>
+<li><p><strong>Support for Vivado™ 2026.1 toolset</strong> - Latest toolset integration for improved design productivity and optimization</p></li>
+<li><p><strong>Enhanced OSPI flash write performance optimization</strong> - Significant improvement in device programming speed, dramatically reducing flash write times for faster deployment workflows</p></li>
 </ul>
+<p><strong>Advanced Firmware Architecture:</strong></p>
+<ul class="simple">
+<li><p><strong>Three-partition FPT structure</strong> - Flexible Flash Partition Table with two boot PDIs plus one user partition, featuring 128-byte header and entries for robust configuration management</p></li>
+<li><p><strong>Power-on auto-load user PDI</strong> - Automated user design loading at power-up through partition flag management.</p></li>
+<li><p><strong>PS subsystems with RPU0 (AMR), RPU1 and APU</strong> - Full processing system utilization enabling APU Linux support</p></li>
+</ul>
+<div class="section" id="alveo-v80">
+<h4>Alveo V80:<a class="headerlink" href="#alveo-v80" title="Permalink to this heading">¶</a></h4>
+<p>For V80 users, AMR delivers substantial advantages over the legacy AVED solution:</p>
+<p><strong>Segmented Design Architecture:</strong>
+- <strong>Streamlined IP footprint</strong> - Removed GCQ, UUID, and hardware discovery IPs from the AVED solution, freeing up valuable FPGA resources for user applications</p>
+<p><strong>Enhanced Processing and Flexibility:</strong>
+- <strong>APU Linux support</strong> - Full Linux capability on the Application Processing Unit, enabling sophisticated firmware applications and workflows
+- <strong>Dynamic reconfiguration</strong> - Runtime loading and reconfiguration of PL images without requiring full system reboot</p>
 <p><span id="amroverview-introduction"></span></p>
+</div>
+</div>
 </div>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h2>
@@ -171,8 +193,8 @@
 <div class="section" id="supported-boards">
 <h2>Supported boards<a class="headerlink" href="#supported-boards" title="Permalink to this heading">¶</a></h2>
 <p><span id="amroverview-alveov80"></span></p>
-<div class="section" id="alveo-v80">
-<h3>Alveo V80<a class="headerlink" href="#alveo-v80" title="Permalink to this heading">¶</a></h3>
+<div class="section" id="id1">
+<h3>Alveo V80<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
 <p>The Alveo V80 is a high-performance data processing card in a PCIe form factor containing a Versal HBM FPGA device, DDR memory, and a variety of communication interfaces. The Alveo V80 has a broad range of market applications in high-performance compute, analytics, networking, storage, fintech, and blockchain. The following diagram provides a high-level overview of the primary card features and interfaces. See the Alveo V80 Data Center Accelerator Card Data Sheet (DS1013) for information on the card and its capabilities.</p>
 <p><span id="amroverview-supportedkernelsanddistributions"></span></p>
 </div>
@@ -331,7 +353,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on June 08, 2026.
+      <span class="lastupdated">Last updated on June 10, 2026.
       </span></p>
   </div>
 

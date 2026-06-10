@@ -6,17 +6,29 @@ Adaptive Management Runtime (AMR) is the next-generation platform software stack
 
 ## New In This Release
 
-  - Support for Vivado™ 2026.1 toolset.
+This release represents a significant advancement in card management capabilities, delivering enhanced performance, flexibility for both V80 and RAVE platforms.
 
-  - Enhanced OSPI flash write performance optimization for faster device programming.
+### Platform Advancements
 
-  - Partition flag read/write functionality for advanced flash management and partition control, including power-on load configuration.
+**Toolset and Performance:**
+  - **Support for Vivado™ 2026.1 toolset** - Latest toolset integration for improved design productivity and optimization
+  - **Enhanced OSPI flash write performance optimization** - Significant improvement in device programming speed, dramatically reducing flash write times for faster deployment workflows
 
-  - Improved firmware architecture with board profile system supporting RAVE (standard reference) and V80 variants for flexible platform deployment.
+**Advanced Firmware Architecture:**
+  - **Three-partition FPT structure** - Flexible Flash Partition Table with two boot PDIs plus one user partition, featuring 128-byte header and entries for robust configuration management
+  - **Power-on auto-load user PDI** - Automated user design loading at power-up through partition flag management.
+  - **PS subsystems with RPU0 (AMR), RPU1 and APU** - Full processing system utilization enabling APU Linux support
 
-  - Three-partition FPT structure (two boot PDIs + one user partition) with 128-byte header and entries.
+#### Alveo V80:
 
-  - PS subsystems with RPU0 (AMR), RPU1 and APU.
+For V80 users, AMR delivers substantial advantages over the legacy AVED solution:
+
+  **Segmented Design Architecture:**
+    - **Streamlined IP footprint** - Removed GCQ, UUID, and hardware discovery IPs from the AVED solution, freeing up valuable FPGA resources for user applications
+
+  **Enhanced Processing and Flexibility:**
+    - **APU Linux support** - Full Linux capability on the Application Processing Unit, enabling sophisticated firmware applications and workflows
+    - **Dynamic reconfiguration** - Runtime loading and reconfiguration of PL images without requiring full system reboot
 
 <span id="amroverview-introduction"></span>
 

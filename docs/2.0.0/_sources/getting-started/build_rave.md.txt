@@ -55,16 +55,23 @@ To install Python, navigate to: <https://www.python.org/downloads/>. Locate and 
 
 **Use this approach for production builds.**
 
-The Yocto build system is used to build all necessary binary OSPI images and packages for production releases. The AMR package is built using the Yocto [meta-embedded-plus](https://github.com/Xilinx/meta-embedded-plus) template.
+The Yocto build system is used to build all necessary binary OSPI images and packages for production releases. The AMR package is built using the Yocto [meta-embedded-plus](https://github.com/Xilinx/meta-embedded-plus) template. For more detailed EDF OS development follow the related documentation https://edf.docs.amd.com/
 
+    mkdir yocto
+    cd yocto
+    curl https://storage.googleapis.com/git-repo-downloads/repo > repo
+    chmod a+x repo
+    ./repo init -u https://github.com/Xilinx/yocto-manifests.git -b rel-v2026.1 -m default-edf.xml
+    ./repo start 2026.1 --all
 
     Build OSPI image:
-    MACHINE=emb-plus-ve2302-amr bitbake emb-plus-ospi-amr
+    source edf-init-build-env && MACHINE=emb-plus-ve2302-amr bitbake emb-plus-ospi-amr
 
     Build APU image:
-    MACHINE=emb-plus-ve2302-amr bitbake emb-plus-apu-image
+    source edf-init-build-env && MACHINE=emb-plus-ve2302-amr bitbake emb-plus-apu-image
 
-    The final artifacts will be located in <`build/tmp/deploy/images/emb_plus_ve2302_amr/`>
+    The final artifacts will be located in <build/tmp/deploy/images/emb_plus_ve2302_amr/>
+    
 
 For building x86 packages refer [software build section](#how-tobuildanamrdesignforyourself-software)
 
@@ -76,11 +83,11 @@ Get the latest AMR source code for development.
 
 1.  Refer to the [AMR Release Information](../AMR-release-information.md) to find the latest example design version. the *amr git release branch* will direct you to the release branch source code in github.
 
-2.  Clone the latest release branch AMR source code repository. Confirm that you cloned the repository to a development server with sufficient system memory to build AMR, either locally on the server or remotely through LSF.
+2.  Clone the latest AMR source code from [AMR repository](https://github.com/Xilinx/amr). Confirm that you cloned the repository to a development server with sufficient system memory to build AMR, locally on the server.
 
 3.  Make a note of the listed Vivado tool version used to build this source code, as AMR has been verified to build with this tool version. You will use the same Vivado version to build AMR.
 
-In this example, we will clone the AMR repo with the latest release (which has been verified with Vivado 2026.1) and build it. The high-level directory structure will look similar to the following:
+In this example, we will clone the AMR repo with the latest release and build it. The high-level directory structure will look similar to the following:
 
     AMR
     ├── deploy

@@ -198,14 +198,21 @@
 <div class="section" id="building-ospi-images-through-yocto">
 <h2>Building OSPI Images through Yocto<a class="headerlink" href="#building-ospi-images-through-yocto" title="Permalink to this heading">¶</a></h2>
 <p><strong>Use this approach for production builds.</strong></p>
-<p>The Yocto build system is used to build all necessary binary OSPI images and packages for production releases. The AMR package is built using the Yocto <a class="reference external" href="https://github.com/Xilinx/meta-embedded-plus">meta-embedded-plus</a> template.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Build OSPI image:
-MACHINE=emb-plus-ve2302-amr bitbake emb-plus-ospi-amr
+<p>The Yocto build system is used to build all necessary binary OSPI images and packages for production releases. The AMR package is built using the Yocto <a class="reference external" href="https://github.com/Xilinx/meta-embedded-plus">meta-embedded-plus</a> template. For more detailed EDF OS development follow the related documentation https://edf.docs.amd.com/</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mkdir yocto
+cd yocto
+curl https://storage.googleapis.com/git-repo-downloads/repo &gt; repo
+chmod a+x repo
+./repo init -u https://github.com/Xilinx/yocto-manifests.git -b rel-v2026.1 -m default-edf.xml
+./repo start 2026.1 --all
+
+Build OSPI image:
+source edf-init-build-env &amp;&amp; MACHINE=emb-plus-ve2302-amr bitbake emb-plus-ospi-amr
 
 Build APU image:
-MACHINE=emb-plus-ve2302-amr bitbake emb-plus-apu-image
+source edf-init-build-env &amp;&amp; MACHINE=emb-plus-ve2302-amr bitbake emb-plus-apu-image
 
-The final artifacts will be located in &lt;`build/tmp/deploy/images/emb_plus_ve2302_amr/`&gt;
+The final artifacts will be located in &lt;build/tmp/deploy/images/emb_plus_ve2302_amr/&gt;
 </pre></div>
 </div>
 <p>For building x86 packages refer <a class="reference internal" href="#how-tobuildanamrdesignforyourself-software"><span class="xref myst">software build section</span></a></p>
@@ -216,10 +223,10 @@ The final artifacts will be located in &lt;`build/tmp/deploy/images/emb_plus_ve2
 <p>Get the latest AMR source code for development.</p>
 <ol class="arabic simple">
 <li><p>Refer to the <a class="reference internal" href="../AMR-release-information.html"><span class="std std-doc">AMR Release Information</span></a> to find the latest example design version. the <em>amr git release branch</em> will direct you to the release branch source code in github.</p></li>
-<li><p>Clone the latest release branch AMR source code repository. Confirm that you cloned the repository to a development server with sufficient system memory to build AMR, either locally on the server or remotely through LSF.</p></li>
+<li><p>Clone the latest AMR source code from <a class="reference external" href="https://github.com/Xilinx/amr">AMR repository</a>. Confirm that you cloned the repository to a development server with sufficient system memory to build AMR, locally on the server.</p></li>
 <li><p>Make a note of the listed Vivado tool version used to build this source code, as AMR has been verified to build with this tool version. You will use the same Vivado version to build AMR.</p></li>
 </ol>
-<p>In this example, we will clone the AMR repo with the latest release (which has been verified with Vivado 2026.1) and build it. The high-level directory structure will look similar to the following:</p>
+<p>In this example, we will clone the AMR repo with the latest release and build it. The high-level directory structure will look similar to the following:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>AMR
 ├── deploy
 │   └── scripts
@@ -389,7 +396,7 @@ Will do a hot reset to boot into partition 0. This may take a minute...
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on June 08, 2026.
+      <span class="lastupdated">Last updated on June 10, 2026.
       </span></p>
   </div>
 

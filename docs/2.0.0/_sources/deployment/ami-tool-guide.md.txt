@@ -149,43 +149,43 @@ Displays the version information of the currently installed AMI API and AMI Driv
 
   - [overview](#overview-command)
 
-  - [pcieinfo](#pcieinfo)
+  - [pcieinfo](#amrmanagementinterfaceuserguide-ami-tool-pcieinfo)
 
-  - [reload](#reload)
+  - [reload](#amrmanagementinterfaceuserguide-ami-tool-reload)
 
-  - [sensors](#sensors)
+  - [sensors](#amrmanagementinterfaceuserguide-ami-tool-sensors)
 
-  - [cfgmem_info](#cfgmem_info)
+  - [cfgmem_info](#amrmanagementinterfaceuserguide-ami-tool-cfgmem-info)
 
-  - [cfgmem_program](#cfgmem_program)
+  - [cfgmem_program](#amrmanagementinterfaceuserguide-ami-tool-cfgmem-program)
 
-  - [cfgmem_fpt](#cfgmem_fpt)
+  - [cfgmem_fpt](#amrmanagementinterfaceuserguide-ami-tool-cfgmem-fpt)
 
-  - [cfgmem_copy](#cfgmem_copy)
+  - [cfgmem_copy](#amrmanagementinterfaceuserguide-ami-tool-cfgmem-copy)
 
-  - [cfgmem_flags_rd](#cfgmem_flags_rd)
+  - [cfgmem_flags_rd](#amrmanagementinterfaceuserguide-ami-tool-cfgmem-flags-rd)
 
-  - [cfgmem_flags_wr](#cfgmem_flags_wr)
+  - [cfgmem_flags_wr](#amrmanagementinterfaceuserguide-ami-tool-cfgmem-flags-wr)
 
-  - [pdi_program](#pdi_program)
+  - [pdi_program](#amrmanagementinterfaceuserguide-ami-tool-pdi-program)
 
-  - [bar_wr](#bar_wr)
+  - [bar_wr](#amrmanagementinterfaceuserguide-ami-tool-bar-wr)
 
-  - [bar_rd](#bar_rd)
+  - [bar_rd](#amrmanagementinterfaceuserguide-ami-tool-bar-rd)
 
-  - [device_boot](#device_boot)
+  - [device_boot](#amrmanagementinterfaceuserguide-ami-tool-device-boot)
 
-  - [mfg_info](#mfg_info)
+  - [mfg_info](#amrmanagementinterfaceuserguide-ami-tool-mfg-info)
 
-  - [eeprom_rd](#eeprom_rd)
+  - [eeprom_rd](#amrmanagementinterfaceuserguide-ami-tool-eeprom-rd)
 
-  - [eeprom_wr](#eeprom_wr)
+  - [eeprom_wr](#amrmanagementinterfaceuserguide-ami-tool-eeprom-wr)
 
-  - [module_byte_rd](#module_byte_rd)
+  - [module_byte_rd](#amrmanagementinterfaceuserguide-ami-tool-module-byte-rd)
 
-  - [module_byte_wr](#module_byte_wr)
+  - [module_byte_wr](#amrmanagementinterfaceuserguide-ami-tool-module-byte-wr)
 
-  - [debug_verbosity](#debug_verbosity)
+  - [debug_verbosity](#amrmanagementinterfaceuserguide-ami-tool-debug-verbosity)
 
 ---
 
@@ -843,9 +843,9 @@ Copies the contents of one partition on the card to another.
 
 #### Example output for Partial PL pdi load
 
-    ~% sudo ami_tool pdi_program -d 21 -i <path_to_pdi>
+    ~% sudo ami_tool pdi_program -d 21 -i <pathto apu_linux.pdi>
     ----------------------------------------------
-    Device      | c1:00.0
+    Device      | 21:00.0
     ----------------------------------------------
 
     Current Configuration
@@ -860,19 +860,15 @@ Copies the contents of one partition on the card to another.
     
     Updating image...
     [####################################################################################################] 100% |
-    Image programming complete.
-    Will do a hot reset to boot into partition 1. This may take a minute...
-    
-    OK. Image has been programmed successfully.
-    ***********************************************
-    Hot reset has been performed.
-    ***********************************************
+    PDI programming complete.
+ 
+    OK. PDI has been programmed successfully.
 
 #### Example output for APU image download
 
-    ~% sudo ami_tool pdi_program -d 21 -i <path_to apu.image> -a 
+    ~% sudo ami_tool pdi_program -d 21 -i <path to apu_linux.pdi> -a 
     ----------------------------------------------
-    Device      | c1:00.0
+    Device      | 21:00.0
     ----------------------------------------------
 
     Current Configuration
@@ -880,27 +876,23 @@ Copies the contents of one partition on the card to another.
     UUID        | 00000000000000000000000014862935
     ----------------------------------------------
     Parent UUID | 00000000000000000000000014862935
-    Path        | <This should be path to apu.image>
+    Path        | <This should be path to apu_linux.pdi>
     ----------------------------------------------
 
     Are you sure you wish to proceed? [Y/n]: Y
     
     Updating image...
     [####################################################################################################] 100% |
-    Image programming complete.
-    Will do a hot reset to boot into partition 1. This may take a minute...
-    
-    OK. Image has been programmed successfully.
-    ***********************************************
-    Hot reset has been performed.
-    ***********************************************
+    PDI programming complete.
+ 
+    OK. PDI has been programmed successfully.
 
 
 #### Example output for RPU1 image download
 
     ~% sudo ami_tool pdi_program -d 21 -i <path_to rpu1.image> -r
     ----------------------------------------------
-    Device      | c1:00.0
+    Device      | 21:00.0
     ----------------------------------------------
 
     Current Configuration
@@ -915,13 +907,9 @@ Copies the contents of one partition on the card to another.
     
     Updating image...
     [####################################################################################################] 100% |
-    Image programming complete.
-    Will do a hot reset to boot into partition 1. This may take a minute...
-    
-    OK. Image has been programmed successfully.
-    ***********************************************
-    Hot reset has been performed.
-    ***********************************************
+    PDI programming complete.
+ 
+    OK. PDI has been programmed successfully.
 
 <span id="id35"></span>
     ~%

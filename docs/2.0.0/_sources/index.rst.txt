@@ -18,7 +18,7 @@ Release Information
    * - Version
      - 3.0.0
    * - Release Date
-     - April 15, 2026
+     - June 10, 2026
    * - Vivado Version
      - 2026.1
    * - Supported Boards
