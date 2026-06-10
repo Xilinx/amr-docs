@@ -1,0 +1,206 @@
+# AMR RAVE - Memory Resources
+
+> **For common memory concepts**, see [Common Memory Resources](../../hardware/memory-resources.md)
+>
+> This document describes RAVE-specific memory configuration: LPDDR4 (8-16GB).
+
+<span id="amrrave-memoryresources-overview"></span>
+
+## Overview
+
+The RAVE Board provides 8 GB or 16 GB of LPDDR4 memory (depending on variant) serving all memory requirements for the VE2302 device. The memory is organized as two channels with x32 configuration, operating at 200 MHz for 400 MT/s effective data rate.
+
+<span id="amrrave-memoryresources-lpddr4"></span>
+
+## LPDDR4 Configuration
+
+### Memory Organization
+
+The LPDDR4 memory is soldered directly to the board (not socketed) in a configuration determined by the board variant.
+
+**Memory Configuration:**
+- Capacity: 8-16 GB total (variant-dependent)
+- Channels: 2 channels
+- Width: x32 per channel
+
+**Note:** For detailed memory organization by board variant, refer to the [Sapphire RAVE1 EDGE+](https://www.amd.com/en/products/embedded/embedded-plus.html).
+
+### Memory Controller Configuration
+
+The Versal integrated DDRMC controls the LPDDR4 with the following characteristics:
+
+| Parameter | Value |
+|-----------|-------|
+| **Controller Type** | LPDDR4_SDRAM |
+| **Operating Frequency** | 200 MHz |
+| **Data Rate** | 400 MT/s (DDR) |
+| **Data Width** | 72-bit (64-bit data + 8-bit ECC) |
+| **Channels** | 2 channels |
+| **Banks** | 700, 701, 702 |
+
+### Pin Assignment
+
+The LPDDR4 connects to the VE2302 through dedicated memory banks (Banks 700, 701, 702) with data signals, data masks, data strobes, and address/control signals.
+
+**Note:** For complete pin assignments, refer to the hardware design repository.
+
+<span id="amrrave-memoryresources-memoryusage"></span>
+
+## Memory Usage Allocation
+
+### RPU Firmware Execution
+
+The RPU (R5 processors) use a portion of LPDDR4 for:
+- Firmware code sections (.text, .rodata)
+- Firmware data (.data, .bss)
+- Stack and heap for R5 cores
+- Firmware data structures and buffers
+
+Typical firmware footprint ranges from a few megabytes to tens of megabytes depending on the application complexity and feature set.
+
+### Software GCQ Buffers
+
+Inter-processor communication through the software GCQ mechanism uses shared LPDDR4 regions:
+- Submission queue ring buffers
+- Completion queue ring buffers
+- Message payload storage
+- Synchronized access between RPU and host
+
+The GCQ buffer allocation is typically a few megabytes, sized based on the expected message throughput and queue depths.
+
+### User Application Data
+
+The remaining LPDDR4 capacity is available for user applications:
+- DMA buffers for PCIe transfers
+- Application working memory
+- Frame buffers for video processing
+- Model storage for AI inference
+- Network packet buffers
+
+**Available capacity:**
+- VPR-4616/5050: Approximately 7-7.5 GB after firmware and GCQ
+- VPR-5050A: Approximately 15-15.5 GB after firmware and GCQ
+
+<span id="amrrave-memoryresources-performancecharacteristics"></span>
+
+## Performance Characteristics
+
+### Bandwidth
+
+The LPDDR4 provides theoretical peak bandwidth through the dual-channel configuration:
+- Per channel: ~6.4 GB/s (400 MT/s × 32-bit × 2 / 8)
+- Total theoretical: ~12.8 GB/s (both channels)
+- Effective bandwidth: ~10-11 GB/s (accounting for protocol overhead)
+
+Actual achieved bandwidth depends on access patterns, NoC contention, QoS settings, and whether both channels are utilized efficiently.
+
+### Latency
+
+LPDDR4 latency is influenced by:
+- Memory controller scheduling
+- NoC traversal time
+- Row/bank conflicts
+- Refresh cycles
+
+Typical random access latency ranges from 100-200 nanoseconds, while sequential access benefits from read/write buffering and prefetching within the memory controller.
+
+<span id="amrrave-memoryresources-memorycontroller"></span>
+
+## Memory Controller Configuration
+
+### DDRMC Settings
+
+The AXI NoC IP configures the LPDDR4 memory controller with these settings:
+
+```tcl
+CONFIG.CONTROLLERTYPE {LPDDR4_SDRAM}
+CONFIG.MC_MEMORY_DEVICETYPE {Components}
+CONFIG.MC_COMPONENT_WIDTH {x32}
+CONFIG.MC_DATAWIDTH {72}
+CONFIG.MC_INPUTCLK0_PERIOD {5000}
+CONFIG.MC_NO_CHANNELS {Dual}
+CONFIG.MC_RANK {1} # or 2 for VPR-5050A
+CONFIG.MC_INIT_MEM_USING_ECC_SCRUB {true}
+```
+
+### ECC Configuration
+
+The memory controller is configured with ECC (Error Correction Code) enabled:
+- 72-bit data width (64-bit data + 8-bit ECC)
+- Single-bit error correction
+- Double-bit error detection
+- Memory initialization using ECC scrub
+
+ECC provides data integrity protection important for automotive and industrial applications where reliability is critical.
+
+### Memory Controller Ports
+
+The LPDDR4 memory controller provides four ports for NoC connectivity:
+- Port 0: Typically RPU, PMC, and PCIe DMA traffic
+- Port 1: Typically PCIe DMA traffic
+- Ports 2-3: Available for additional connections
+
+The RAVE base design typically uses ports 0 and 1, with additional ports available for user application memory masters.
+
+<span id="amrrave-memoryresources-nocintegration"></span>
+
+## NoC Integration
+
+### DDRMC NSU Connection
+
+The LPDDR4 memory controller connects to the NoC through DDRMC_NSU (NoC Slave Unit) interfaces. Each port has an associated DDRMC_NSU that converts NoC packet domain traffic directly to the memory controller domain without intermediate AXI protocol conversion.
+
+### Access Patterns
+
+Multiple masters access LPDDR4 through the NoC:
+- **RPU**: Via LPD_AXI_NOC_0 (128-bit @ 800MHz)
+- **PMC**: Via PMC_NOC_AXI_0 (128-bit @ 400MHz)
+- **PCIe DMA**: Via XDMA IP through NMU_512
+- **PL Masters**: Via additional NMU interfaces (if configured)
+
+The NoC arbitrates between these masters based on QoS settings, with the NoC compiler determining optimal routing to memory controller ports.
+
+<span id="amrrave-memoryresources-capacityplanning"></span>
+
+## Capacity Planning
+
+### Design Considerations
+
+When planning memory allocation for RAVE applications:
+
+**Firmware Overhead:**
+- Reserve 100-500 MB for RPU firmware depending on complexity
+- Include space for firmware data structures and runtime buffers
+
+**Software GCQ:**
+- Reserve 10-50 MB for inter-processor communication queues
+- Size based on message rate and queue depth requirements
+
+**Available for Applications:**
+- VPR-4616/5050: Plan for 7-7.5 GB usable capacity
+- VPR-5050A: Plan for 15-15.5 GB usable capacity
+
+### Memory-Constrained Designs
+
+For applications approaching memory limits:
+- Optimize data structures for compactness
+- Use streaming architectures where possible
+- Leverage compression techniques
+- Consider external storage (eMMC in VPR-5050A)
+- Offload processing to Ryzen if appropriate
+
+<span id="amrrave-memoryresources-upgradetoVPR5050A"></span>
+
+## board Variant Memory Differences
+
+board variants offer different LPDDR4 capacities (8GB or 16GB) to meet various application requirements. Higher capacity variants provide more working memory for larger datasets, video frames, and AI applications while maintaining the same dual-channel configuration and operating frequency.
+
+**Note:** For variant-specific memory configurations, refer to the [Sapphire RAVE1 EDGE+](https://www.amd.com/en/products/embedded/embedded-plus.html).
+
+## References
+
+- [Common Memory Resources](../../hardware/memory-resources.md) - Memory controller concepts
+- [RAVE Memory Map](memory-map.md) - LPDDR4 address assignments
+- [RAVE NoC Configuration](noc-config.md) - NoC to memory routing
+- [VE2302 Device Documentation](https://docs.xilinx.com/r/en-US/ds989-versal-edge) - VE2302 specifications
+

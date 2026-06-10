@@ -1,0 +1,16 @@
+# AMI - Device Reboot
+
+AMR supports software-based device reboot functionality. The device can be rebooted to a specific flash partition using the `device_boot` command.
+
+**Important:** AMR does not support GPIO-based PCIe hot reset. Device reboots are performed through software commands that trigger firmware-initiated partition boot.
+
+## Usage
+
+Use the `ami_tool device_boot` command to reboot the device from a specific partition:
+
+```bash
+sudo ami_tool device_boot -d <bdf> -p <partition_number>
+```
+
+This triggers a firmware-controlled reboot that reloads the PDI from the specified flash partition.
+

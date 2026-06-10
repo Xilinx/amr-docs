@@ -1,0 +1,213 @@
+# AMR - CIPS Common Configuration
+
+> **For Board-specific CIPS configurations**, see:
+> - [V80 CIPS Configuration](../V80/hardware/cips-config.md) - CPM5 PCIe Gen5 x8 configuration
+> - [RAVE CIPS Configuration](../RAVE/hardware/cips-config.md) - VE2302 configuration (no CPM)
+
+<span id="amr-cipsconfiguration-overview"></span>
+
+## Overview
+
+The Control, Interfaces, and Processing System (CIPS) IP core configures the hard blocks in Versal devices including:
+- Processing System (PS) - APU, RPU, peripherals
+- Platform Management Controller (PMC)
+- Coherent PCIe Module (CPM) - **V80 only** (VE2302 has no CPM)
+
+This document describes **common CIPS configuration elements** shared across all AMR supported boards.
+
+**Board-Specific Differences:**
+- **V80**: Includes CPM5 configuration for hardened PCIe Gen5 x8
+- **RAVE**: No CPM block (VE2302 is Edge-series), uses PL PCIe IP instead
+
+<span id="amr-cipsconfiguration-commoncomponents"></span>
+
+## Common CIPS Components
+
+### Real-time Processing Unit (RPU)
+
+**All AMR boards use RPU for firmware:**
+
+| Parameter | Common Value |
+|-----------|--------------|
+| **Processors** | 2× Arm Cortex-R5F |
+| **Configuration** | Split mode |
+| **Purpose** | AMC/VMR firmware execution |
+| **Clock** | PS LPD domain clocks |
+| **Memory** | DDR for code/data execution |
+
+The RPU firmware handles multiple critical system functions. During boot, the firmware initializes the system and configures peripherals for operation. Board management responsibilities include monitoring sensors for temperature and voltage, managing power sequencing and thermal controls, and responding to fault conditions. Inter-processor communication occurs through the software GCQ mechanism, with the firmware managing message queues and coordinating with the host. Flash management encompasses OSPI programming operations and Flash Partition Table (FPT) manipulation for firmware updates. Communication with the PCIe host provides the primary interface for management commands and status reporting.
+
+### Platform Management Controller (PMC)
+
+**All AMR boards use PMC for boot/config:**
+
+| Parameter | Common Value |
+|-----------|--------------|
+| **Processor** | MicroBlaze-based subsystem |
+| **Purpose** | Boot, configuration, power management |
+| **Flash Interface** | OSPI (PMC Bank 500) |
+| **Boot Mode** | OSPI |
+
+The PMC manages the complete device boot sequence, reading the Platform Device Image (PDI) from OSPI flash and configuring all device resources. PDI loading includes programming the programmable logic fabric, initializing memory controllers, configuring the NoC, and loading firmware for the RPU. Power management functions control voltage sequencing, monitor power consumption, and handle power state transitions. Reliability and safety functions include monitoring for fault conditions, managing error detection and correction, and implementing lockdown procedures when required. Dynamic Function eXchange (DFX) support enables partial reconfiguration of programmable logic regions without disrupting the rest of the system.
+
+### Processing System (PS) Peripherals
+
+The CIPS integrates several peripheral controllers that provide I/O capabilities without requiring custom IP in programmable logic. The I2C controllers enable communication with board sensors for temperature and voltage monitoring, EEPROMs for board identification and calibration data, and power management ICs for voltage rail control. The SPI controllers handle flash programming operations and may connect to security modules such as TPM (Trusted Platform Module) devices. The UART controllers provide debug console access and system logging capabilities. GPIO signals through MIO (Multiplexed I/O) pins control status LEDs, power enable signals, and other board-level controls.
+
+board-specific peripheral integration varies based on the target application. Some boards add USB 2.0 host controllers for peripheral connectivity and eMMC storage interfaces for on-device data persistence, while others maintain minimal peripheral configurations relying primarily on I2C, SPI, and UART for essential board management functions.
+
+<span id="amr-cipsconfiguration-nocconnections"></span>
+
+## NoC Connections (Common)
+
+### RPU to NoC
+
+All boards connect the RPU to the NoC through the LPD_AXI_NOC_0 interface. This 128-bit interface operates at 800 MHz providing adequate bandwidth for firmware execution, data access, and software GCQ operations. The RPU uses this connection to access DDR memory for code fetches, data reads and writes, and inter-processor communication buffer management. The interface is enabled in CIPS configuration through the PS_USE_NOC_LPD_AXI0 parameter.
+
+### PMC to NoC
+
+All boards connect the PMC to the NoC through the PMC_NOC_AXI_0 interface located in SLR0 where the main CIPS block resides. This 128-bit interface operates at 400 MHz providing sufficient bandwidth for the PMC's boot and configuration memory access patterns. The PMC uses this connection to initialize DDR memory, load firmware code and data, and perform runtime power management and monitoring operations. Some boards include additional PMC NoC connections in SLR1 and SLR2 for devices with multiple super logic regions.
+
+<span id="amr-cipsconfiguration-maxilpd"></span>
+
+## M_AXI_LPD Interface (Common Pattern)
+
+### Configuration
+
+All AMR base designs enable the M_AXI_LPD interface in CIPS configuration but leave it unconnected in the base hardware. This 32-bit AXI4 interface operates at 100 MHz and provides a connection path from the RPU in the Low Power Domain to programmable logic peripherals. The interface remains enabled but unconnected to reserve it for future expansion when designs may add SMBus controller IP, additional management peripherals, or custom firmware-accessible IP blocks. Enabling the interface through the PS_USE_M_AXI_LPD parameter in CIPS configuration allows future designs to simply connect IP to this interface without modifying the CIPS settings.
+
+<span id="amr-cipsconfiguration-interrupts"></span>
+
+## PL-PS Interrupts (Common Pattern)
+
+### LPD Interrupts
+
+All AMR base designs configure PL-to-PS LPD interrupts but leave them unconnected in the base hardware. IRQ 0 and IRQ 1 are available for signaling events from programmable logic to the RPU firmware. These interrupts are reserved for future expansion when designs may add interrupt-driven peripherals. Potential uses include GCQ event notifications when hardware blocks post messages, SMBus interrupt handling for I2C/SMBus transactions, or sensor interrupt processing when monitoring ICs signal threshold crossings. Future designs can wire PL IP interrupt outputs to the pl_ps_irq0 or pl_ps_irq1 ports to enable interrupt functionality.
+
+### Inter-Processor Interrupts (IPI)
+
+All boards enable Inter-Processor Interrupts (IPI) for multi-core communication within the Versal device. The IPI mechanism allows one processor to interrupt another processor for coordination and event notification. IPI agents IPI PMC NO BUF and IPI PSM are assigned to the PMC and PSM (Platform Safety Management) for default system interrupts. IPI agents 0 and 1 are assigned to A72. IPI agents 3 and 4 are assigned to R5_0 (the first R5 core), while IPI agents 5 and 6 are assigned to R5_1 (the second R5 core). This allocation enables the R5 processors to interrupt the PMC and PSM when coordination is required.
+
+<span id="amr-cipsconfiguration-clocks"></span>
+
+## PL Reference Clocks (Common)
+
+### CIPS PL Clock Outputs
+
+**All Boards generate PL clocks from CIPS:**
+
+| Clock | Typical Frequency | Common Usage |
+|-------|-------------------|--------------|
+| **pl0_ref_clk** | 100 MHz | PL logic, SmartConnect, GPIO |
+| **pl1_ref_clk** | 33.33 MHz | Clock wizard input (optional) |
+| **pl2_ref_clk** | 250 MHz | NoC AXI interfaces |
+
+**Configuration:**
+- PMC_CRP_PL0_REF_CTRL_FREQMHZ: 100
+- PMC_CRP_PL1_REF_CTRL_FREQMHZ: 33.3333333
+- PMC_CRP_PL2_REF_CTRL_FREQMHZ: 250
+
+### PL Resets
+
+**All boards generate PL reset:**
+
+| Reset | Usage |
+|-------|-------|
+| **pl0_resetn** | Main PL reset output |
+| **Count** | 1 (PS_NUM_FABRIC_RESETS = 1) |
+
+<span id="amr-cipsconfiguration-ospiflash"></span>
+
+## OSPI Flash Configuration (Common)
+
+### PMC OSPI Interface
+
+**All boards use OSPI for boot:**
+
+| Parameter | Common Value |
+|-----------|--------------|
+| **Interface** | PMC Bank 500 |
+| **Clock** | 200 MHz (PMC_CRP_OSPI_REF_CTRL_FREQMHZ) |
+| **Purpose** | Boot PDI storage |
+
+**OSPI Flash Typical:**
+- V80:  256MB/2Gb
+- RAVE: 128MB/1Gb
+
+**MIO Pins (PMC Bank 500):**
+- CLK, DQ[0-7], DQS, CS_B, RST
+
+<span id="amr-cipsconfiguration-designmode"></span>
+
+## CIPS Design Mode (Common)
+
+**All AMR boards use:**
+
+| Parameter | Value |
+|-----------|-------|
+| **DESIGN_MODE** | 1 (Custom configuration) |
+| **BOOT_MODE** | Custom |
+| **CLOCK_MODE** | Custom |
+| **DDR_MEMORY_MODE** | Custom |
+| **IO_CONFIG_MODE** | Custom |
+
+This enables full customization of CIPS settings.
+
+<span id="amr-cipsconfiguration-pcieapertures"></span>
+
+## PCIe Apertures (Common)
+
+**All boards configure PCIe address apertures:**
+
+| Parameter | Common Value |
+|-----------|--------------|
+| **PCIE_APERTURES_SINGLE_ENABLE** | 1 |
+| **PCIE_APERTURES_DUAL_ENABLE** | 0 |
+
+**Purpose:** Enables single PCIe aperture mode for address mapping.
+
+<span id="amr-cipsconfiguration-boarddifferences"></span>
+
+## Board-Specific CIPS Configurations
+
+### V80 CIPS Configuration
+[V80 CIPS Configuration](../V80/hardware/cips-config.md)
+
+The V80 CIPS configuration includes the complete CPM_CONFIG block specifying all CPM5 parameters. This configuration encompasses the CPM5 PCIe Controller 1 setup for Gen5 x8 operation, the hardened QDMA engine configuration, device ID assignments for the two physical functions (0x50b4 for PF0, 0x50b5 for PF1), extended configuration space options for vendor-specific capabilities, and BAR size and type specifications within the CPM5 block.
+
+### RAVE CIPS Configuration
+[RAVE CIPS Configuration](../RAVE/hardware/cips-config.md)
+
+The RAVE CIPS configuration does not include a CPM_CONFIG block since the VE2302 device does not contain a CPM hardened block. The configuration focuses on PS and PMC setup including processor initialization, peripheral configuration, and NoC connectivity. Additional peripherals such as USB 2.0 host controllers and eMMC storage interfaces are configured in enhanced board variants. The MIO configuration is more extensive to support on-board peripherals including Board-ID EEPROM, TPM security modules, and status LEDs. The PCIe functionality (device ID assignments for the two physical functions 0x5710 for PF0, 0x5711 for PF1), is handled through PL IP instantiation rather than CIPS configuration.
+
+<span id="amr-cipsconfiguration-commonpsconfig"></span>
+
+## Common PS Configuration Settings
+
+### APU Configuration
+
+**All boards have APU available but unused in base design:**
+
+| Parameter | Common Value |
+|-----------|--------------|
+| **APU Processors** | 2× Arm Cortex-A72 |
+| **Status** | Available, not used in base AMR |
+| **Cutome Use** | APU Linux, RPU1 applications |
+
+### LPD Configuration
+
+The Low Power Domain configuration includes the RPU processors enabled and configured for firmware execution. LPD peripherals including I2C controllers, SPI controllers, and UART controllers are configured with appropriate MIO pin assignments and operating parameters. The LPD NoC connection is enabled through the LPD_AXI_NOC_0 interface allowing the RPU to access memory through the NoC fabric.
+
+### FPD Configuration
+
+The Full Power Domain configuration remains minimal in base AMR designs. The APU processors are not utilized in base configurations, remaining available for designs that may require Linux execution or application-level processing. FPD NoC connections are connected in base designs, with the user ability to load RPU1 or APU-based application processing.
+
+<span id="amr-cipsconfiguration-references"></span>
+
+## References
+
+- [CIPS Product Guide (PG352)](https://docs.xilinx.com/r/en-US/pg352-cips) - CIPS IP documentation
+- [Versal TRM - PS Architecture](https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Processing-System-Architecture) - Processing System details
+- [V80 CIPS Configuration](../V80/hardware/cips-config.md) - V80-specific CPM5 settings
+- [RAVE CIPS Configuration](../RAVE/hardware/cips-config.md) - RAVE-specific VE2302 settings
+

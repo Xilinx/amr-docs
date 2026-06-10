@@ -1,0 +1,158 @@
+# AMR - Base Design Philosophy (Common)
+
+<span id="amr-baselogic-overview"></span>
+
+## Overview
+
+This document describes the common base design philosophy shared across all AMR supported Boards (V80, RAVE). For board-specific implementations, refer to the V80 Base Logic or RAVE Base Logic documentation which detail the particular configurations and hardware implementations for each board.
+
+<span id="amr-baselogic-minimaldesign"></span>
+
+## Minimal Base Design Philosophy
+
+All AMR supported boards follow a minimal base design approach that prioritizes simplicity and firmware-based management over complex hardware IP integration. This philosophy recognizes that management and control functions can often be more efficiently implemented in software running on the RPU processors rather than through dedicated hardware logic blocks in the programmable logic fabric.
+
+### Management Through Firmware
+
+The AMR base designs do not include management IP blocks in the programmable logic. There are no hardware implementations of the General Command Queue (GCQ), no UUID ROM or identification ROM blocks, no EEPROM controller IP instantiated in PL, and no hardcoded register tables implemented in programmable logic. The SMBus controller IP, while available in the IP repository, is not instantiated in the base designs.
+
+Instead, management functionality is handled through firmware executing on the RPU (R5 processors). This firmware leverages CIPS-integrated peripherals including I2C for sensor and EEPROM communication, SPI for flash operations, and UART for debug interfaces. Software-based mechanisms such as the shared memory implementation of the GCQ provide inter-processor communication without requiring hardware IP blocks.
+
+This approach reduces programmable logic resource consumption, simplifies the base design, and provides flexibility to adapt management functionality through firmware updates rather than hardware modifications. The reserved address space and interface connections (such as M_AXI_LPD) allow future designs to add management IP if specific requirements demand hardware implementation.
+
+### Software-Based GCQ
+
+The General Command Queue (GCQ) is implemented as a software abstraction using shared DDR memory for inter-processor communication. The GCQ provides message passing capability between the RPU firmware, the PCIe host, and the PMC boot/configuration processor.
+
+The software implementation allocates ring buffer structures in DDR memory that is accessible by all communicating parties. The submission queue holds commands from producers (such as the host), while the completion queue returns results from consumers (such as the RPU firmware). Firmware protocols manage queue advancement, message formatting, and synchronization without requiring dedicated hardware logic.
+
+This software approach provides several advantages. The queue depth and message formats can be adjusted through firmware without hardware changes. The memory allocation can be dynamically sized based on runtime requirements. Error handling and recovery mechanisms can be implemented in firmware with full flexibility. The absence of hardware GCQ IP preserves programmable logic resources for user applications.
+
+<span id="amr-baselogic-twophysicalfunctions"></span>
+
+## Two Physical Functions Pattern
+
+All AMR supported boards utilize two PCIe Physical Functions following a consistent architectural pattern. Physical Function 0 (PF0) serves as the management function, reserved for administrator privileges and protected from non-privileged access. Physical Function 1 (PF1) provides user and DMA functionality including test infrastructure and data transfer capabilities.
+
+### PF0 Management Function
+
+The PF0 physical function provides address space for management register access while reserving this space for future expansion in the base designs. No hardware management IP is instantiated in the base configurations, with the address space available for future designs that may require hardware management blocks.
+
+Management operations are instead handled through firmware running on the RPU. The firmware accesses board resources through CIPS-integrated peripherals, communicates with the host through the software GCQ mechanism, and manages device state through direct register access to CIPS configuration registers. This firmware-based approach provides flexibility and reduces hardware complexity.
+
+The PF0 address space is accessible only by privileged host software, protecting management operations from non-administrator users. This separation ensures that board management functions such as flash programming, sensor monitoring, and power control remain isolated from user application access through PF1.
+
+### PF1 User and DMA Function
+
+The PF1 physical function provides both DMA capabilities for host-device data transfer and AXI bridge access to programmable logic peripherals. The DMA functionality uses QDMA (Queue DMA) architecture whether implemented in hardened silicon or through programmable logic IP, providing queue-based data transfer with descriptor rings managed by host driver software.
+
+The AXI bridge capability allows the host to access registers in the programmable logic through memory-mapped I/O. This enables control and status access to test infrastructure such as GPIO blocks or to user application logic that exposes AXI-Lite register interfaces.
+
+The PF1 configuration supports MSI-X interrupts for efficient event notification to the host. The interrupt vectors signal queue completion events, allowing the host driver to process completed DMA operations without constant polling of status registers.
+
+<span id="amr-baselogic-expansionpoints"></span>
+
+## Expansion Points
+
+All AMR base designs provide interface connections and address space reservations that enable future hardware expansion without requiring fundamental architectural changes. These expansion points recognize that different applications may benefit from hardware acceleration of certain management or processing functions.
+
+### M_AXI_LPD Interface
+
+The M_AXI_LPD interface is enabled in CIPS configuration but remains unconnected in the base designs. This 32-bit AXI4 interface operates at 100 MHz and connects from the RPU in the Low Power Domain to the programmable logic fabric.
+
+The interface is reserved for future firmware-accessible peripherals such as the SMBus controller IP for advanced board management, additional sensor interfaces, or custom management blocks. When hardware management IP is added to future designs, this interface provides the connection path for firmware to configure and control those blocks.
+
+The unconnected state in the base design imposes no performance penalty and consumes minimal resources. Designs that add management IP simply connect to this interface without modifying the CIPS configuration.
+
+### PL-PS Interrupt Connections
+
+The PL-to-PS interrupt capability is configured in CIPS but the interrupt signals remain unconnected in base designs. Two LPD interrupts (IRQ 0 and IRQ 1) are available for signaling events from programmable logic to the RPU firmware.
+
+These interrupts can be used in future designs for event notification such as firmware GCQ event signaling when hardware accelerators post messages, peripheral interrupt handling for management IP blocks like SMBus controllers, or user application event notification when custom IP requires firmware attention.
+
+The configured-but-unconnected state allows designs to add interrupt signaling without modifying CIPS settings. Connecting PL IP interrupt outputs to the pl_ps_irq0 or pl_ps_irq1 ports immediately enables interrupt functionality with firmware interrupt service routines handling the events.
+
+### Address Space Reservation
+
+The PF0 address space is reserved for management registers even though no hardware IP is instantiated in base designs. This reservation pattern provides a consistent address map for future designs that add management hardware.
+
+When hardware IP blocks are added, they are assigned addresses within the reserved PF0 space. Examples include UUID ROM blocks for board identification, management register blocks for hardware control interfaces, or custom control logic exposing AXI-Lite register interfaces. The address space allocation maintains compatibility with existing firmware that uses the software GCQ mechanism while enabling coexistence with hardware management blocks.
+
+<span id="amr-baselogic-testinfrastructure"></span>
+
+## Test Infrastructure
+
+### PF1 Test Hierarchy
+
+All AMR supported boards include test infrastructure within the PF1 hierarchical block to validate PCIe connectivity and basic system functionality. This test logic provides a simple mechanism to verify that the PCIe link is operational and that register access through the PF1 BAR functions correctly.
+
+The SmartConnect IP provides AXI interconnect functionality, routing traffic from the NoC master interface to one or more peripheral slave devices. In the base configuration, the SmartConnect typically routes to a single AXI GPIO block, though additional peripherals can be connected as needed.
+
+The AXI GPIO IP is configured for bidirectional operation with a default output value that varies by board (typically 0xF1). The GPIO implementation includes a loopback connection where the gpio_io_o output port connects directly to the gpio_io_i input port. This loopback enables simple functional testing where software writes values to the GPIO output register and reads back the same values from the input register, verifying the complete PCIe-to-PL register access path.
+
+The Processor System Reset IP provides reset synchronization for the test hierarchy. The block accepts an asynchronous reset input from CIPS (pl0_resetn) and a clock input (typically pl0_ref_clk at 100 MHz). The outputs include interconnect_aresetn for resetting the SmartConnect and peripheral_aresetn for resetting the AXI GPIO and other peripherals. This separation allows the interconnect and peripherals to reset with appropriate timing relationships.
+
+<span id="amr-baselogic-firmwarebasedmanagement"></span>
+
+## Firmware-Based Management
+
+### RPU Firmware Architecture
+
+All AMR supported boards rely on firmware executing on the RPU0 for management operations. The firmware handles boot and initialization sequences, board management including sensor monitoring and thermal management, inter-processor communication through the software GCQ, flash management including OSPI programming and Flash Partition Table (FPT) operations, and host communication through the PCIe interface.
+
+The firmware architecture leverages the CIPS-integrated peripherals rather than requiring dedicated hardware in programmable logic. I2C peripherals access board sensors, EEPROMs, and power management ICs for board-level monitoring and control. SPI peripherals handle flash programming operations for firmware updates and configuration changes. UART peripherals provide debug console access and logging capabilities.
+
+Shared DDR memory serves as the communication medium for the software GCQ, with the firmware managing queue data structures and message processing. NoC connectivity enables firmware memory access for code execution, data storage, and inter-processor communication buffers.
+
+This firmware-centric approach provides several benefits. Management functionality can be updated through firmware releases without hardware modifications. The behavior can be customized for different deployment scenarios through configuration files. Error handling and recovery mechanisms can leverage the full capabilities of the R5 processor including exception handling and debugging support.
+
+### CIPS Peripheral Usage
+
+The CIPS-integrated peripherals provide all necessary I/O for board management without requiring programmable logic IP. The I2C interfaces access board sensors for temperature and voltage monitoring, communicate with EEPROMs for board identification and calibration data storage, and control power management ICs for voltage rail sequencing and monitoring.
+
+The SPI interfaces handle OSPI flash programming through the PMC, with the RPU firmware coordinating flash operations for firmware updates and configuration management. Some boards include additional SPI devices such as TPM (Trusted Platform Module) security modules that the firmware accesses through the SPI peripheral.
+
+The UART peripherals provide console access for debugging and system logging. The firmware outputs diagnostic messages, error reports, and status information through UART, with the host system or debug equipment capturing this output for analysis.
+
+GPIO signals implemented through MIO (Multiplexed I/O) pins control status LEDs, enable signals for power rails, and other board-level control functions. The firmware manipulates these GPIO signals through CIPS register writes, providing direct hardware control without intervening logic in the programmable fabric.
+
+<span id="amr-baselogic-addressmapping"></span>
+
+## Address Mapping Concepts
+
+### PCIe to AXI Address Translation
+
+All AMR supported boards require address translation between the PCIe address domain and the AXI address domain. The PCIe specification uses 64-bit addresses in the terabyte range, with board-specific BARs typically assigned addresses like 0x201_0000_0000 for PF0 and 0x202_0000_0000 for PF1.
+
+The AXI address domain in the Versal device uses local address spaces, often starting at addresses like 0x0000_0000 or 0x1000_0000. This address mismatch requires translation mechanisms implemented through board-specific configuration registers and NoC remapping capabilities.
+
+For boards with CPM, the PCIEBAR2AXIBAR registers in the CPM configuration perform the address translation. For boards using PL-based PCIe IP, the PCIe IP itself provides PCIEBAR2AXIBAR configuration registers. In both cases, these registers specify how PCIe addresses map to AXI addresses.
+
+The NoC provides additional address remapping through the REMAPS configuration parameter in the AXI NoC IP. This parameter specifies the source PCIe address, the destination AXI or memory address, and the size of the mapped region. The NoC compiler uses this information to configure the routing fabric appropriately.
+
+The combination of PCIEBAR2AXIBAR translation and NoC remapping enables flexible address space management. Software GCQ buffers in DDR memory can be accessed through PCIe BAR offsets that the NoC translates to the corresponding physical DDR addresses. PL peripherals at local AXI addresses can be accessed through PCIe addresses that translate to those local addresses.
+
+<span id="amr-baselogic-boardspecifics"></span>
+
+## Board-Specific Implementations
+
+For detailed board-specific configurations, refer to the individual board documentation. The V80 Board implements the base design using CPM5 hardened PCIe and QDMA with minimal programmable logic IP. The configuration includes specific BAR sizes, device IDs, and CPM5 configuration parameters detailed in the V80 Base Logic documentation.
+
+The RAVE Board implements the base design using PL PCIe IP and QDMA PL IP due to the VE2302 device architecture. The configuration includes more programmable logic IP blocks to provide PCIe and DMA functionality, peripheral integration for standalone operation, and expansion connector support. The RAVE Base Logic documentation provides the specific implementation details.
+
+<span id="amr-baselogic-designguidelines"></span>
+
+## Design Guidelines
+
+### Adding Custom IP
+
+When extending AMR base designs with custom IP blocks, consider using the provided expansion points before modifying the core architecture. The M_AXI_LPD interface provides a direct connection from the RPU to programmable logic, suitable for firmware-accessible peripherals. The reserved PF0 and PF1 address spaces can accommodate additional register blocks without address conflicts. The configured PL-PS interrupt signals enable event notification from hardware to firmware.
+
+Maintain the minimal approach when adding IP by implementing only the necessary hardware acceleration or interface functions. Prefer firmware solutions when the performance requirements allow software implementation, as this maintains design flexibility and reduces resource consumption. Test additions on both boards when creating portable IP to ensure compatibility across different device architectures.
+
+### Common vs Board-Specific Documentation
+
+Documentation should be placed in the common hardware folder when it describes concepts, principles, or patterns that apply to all boards regardless of the specific hardware implementation. Examples include general Versal architecture, NoC concepts, the minimal design philosophy, and firmware-based management approaches.
+
+Board-specific documentation belongs in the individual board folders when it describes unique hardware implementations, specific IP configurations, or features available only on that Board. Examples include CPM5 configuration (V80 only), HBM memory (V80 only), PL PCIe IP configuration (RAVE only), or daughtercard expansion (RAVE only).
+
