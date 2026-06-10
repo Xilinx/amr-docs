@@ -8,7 +8,7 @@
 # Go to the [AMR Documentation Landing Page](https://xilinx.github.io/amr-docs/)
 
 This repository contains the documentation source code, which is rendered in HTML to provide an improved user experience.
-
+**Note:** For users interested in the legacy AVED solution for Alveo V80, please refer to the [Xilinx/AVED](https://github.com/Xilinx/AVED) repository.
 
 
 <hr class="sphinxhide"></hr>
