@@ -82,9 +82,9 @@ Choose the appropriate guide based on your hardware state:
 
 | **Options** | **Link to Follow** |
 |-------------------|----------------|
-| Fresh V80 hardware and want to load AMR | [How-to Build an AMR Design for V80](../getting-started/build_v80) - Follow the getting started guide to build and deploy AMR |
-| V80 with legacy AVED solution and want to switch to AMR | [Switching from AVED/xbtest to AMR](../V80/switch-aved-amr#switching-from-avedxbtest-to-amr) - Transition from AVED to AMR |
-| Running AMR on V80 and want to install legacy AVED solution | [Switching from AMR to AVED/xbtest](../V80/switch-aved-amr#switching-from-amr-to-avedxbtest) - Transition from AMR to AVED |
+| Fresh V80 hardware and want to load AMR | [How-to Build an AMR Design for V80](../getting-started/build_v80.md) - Follow the getting started guide to build and deploy AMR |
+| V80 with legacy AVED solution and want to switch to AMR | [Switching from AVED/xbtest to AMR](../V80/switch-aved-amr.md#switching-from-avedxbtest-to-amr) - Transition from AVED to AMR |
+| Running AMR on V80 and want to install legacy AVED solution | [Switching from AMR to AVED/xbtest](../V80/switch-aved-amr.md#switching-from-amr-to-avedxbtest) - Transition from AMR to AVED |
 
 <span id="amroverview-rave"></span>
 
