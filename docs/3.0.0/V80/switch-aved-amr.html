@@ -90,7 +90,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#switching-from-amr-to-aved-xbtest">Switching from AMR to AVED/xbtest</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#swwitching-from-aved-xbtest-to-amr">Swwitching from AVED/xbtest to AMR</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#install-the-amr-software-packages">Install the AMR Software Packages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#verification-checklist">Verification Checklist</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#next-steps">Next Steps</a></li>
@@ -217,6 +216,13 @@ sudo<span class="w"> </span>ami_tool<span class="w"> </span>cfgmem_fpt<span clas
 <h4>Method 2: Using Vivado HW Manager and JTAG<a class="headerlink" href="#method-2-using-vivado-hw-manager-and-jtag" title="Permalink to this heading">¶</a></h4>
 <p>Update the Flash Partition Table (FPT) image in flash using Vivado HW Manager and JTAG. Refer to <a class="reference internal" href="../deployment/update-fpt.html"><span class="std std-doc">Updating FPT Image in Flash</span></a> for step-by-step instructions. If successful, Vivado HW Manager will report this with a pop-up message: “Flash programming completed successfully.”</p>
 <p>Cold boot the server to boot from flash.</p>
+<ol class="arabic simple" start="3">
+<li><p>Install the xbtest software packages</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">    </span>sudo<span class="w"> </span>./aved_install.sh
+</pre></div>
+</div>
+<p>Perform system cold reboot to apply changes</p>
 <p><span id="switchingbetweenavedandamr-amrinstallation"></span></p>
 </div>
 </div>
@@ -243,26 +249,23 @@ sudo<span class="w"> </span>ami_tool<span class="w"> </span>cfgmem_fpt<span clas
 </li>
 </ol>
 <p><span id="switchingbetweenavedandamr-installamrpackages"></span></p>
-</div>
-</div>
-<div class="section" id="install-the-amr-software-packages">
-<h2>Install the AMR Software Packages<a class="headerlink" href="#install-the-amr-software-packages" title="Permalink to this heading">¶</a></h2>
+<ol class="arabic" start="3">
+<li><p>Install the AMR Software Packages</p>
 <p>To install the package onto the host, navigate to the directory with the debian or rpm packages depending on your host OS. Install <code class="docutils literal notranslate"><span class="pre">libami*</span></code>, <code class="docutils literal notranslate"><span class="pre">ami*</span></code>, <code class="docutils literal notranslate"><span class="pre">amitool*</span></code> packages.</p>
-<div class="section" id="ubuntu-installing-debian-packages">
-<h3>Ubuntu - Installing Debian Packages:<a class="headerlink" href="#ubuntu-installing-debian-packages" title="Permalink to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>libami_x.x.x.xxx.xxx_amd64.deb
-sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>ami_x.x.x.xxx.xxx_amd64.deb
-sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>amitool_x.x.x.xxx.xxx_amd64.deb
+<h5 class="rubric" id="ubuntu-installing-debian-packages">Ubuntu - Installing Debian Packages:</h5>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">   </span>sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>libami_x.x.x.xxx.xxx_amd64.deb
+<span class="w">   </span>sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>ami_x.x.x.xxx.xxx_amd64.deb
+<span class="w">   </span>sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>amitool_x.x.x.xxx.xxx_amd64.deb
 </pre></div>
 </div>
-</div>
-<div class="section" id="rhel-installing-rpm-packages">
-<h3>RHEL - Installing RPM Packages:<a class="headerlink" href="#rhel-installing-rpm-packages" title="Permalink to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>rpm<span class="w"> </span>-ivh<span class="w"> </span>libami_x.x.x.xxx.xxx_amd64.rpm
-sudo<span class="w"> </span>rpm<span class="w"> </span>-ivh<span class="w"> </span>ami_x.x.x.xxx.xxx_amd64.rpm
-sudo<span class="w"> </span>rpm<span class="w"> </span>-ivh<span class="w"> </span>amitool_x.x.x.xxx.xxx_amd64.rpm
+<h5 class="rubric" id="rhel-installing-rpm-packages">RHEL - Installing RPM Packages:</h5>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">   </span>sudo<span class="w"> </span>rpm<span class="w"> </span>-ivh<span class="w"> </span>libami_x.x.x.xxx.xxx_amd64.rpm
+<span class="w">   </span>sudo<span class="w"> </span>rpm<span class="w"> </span>-ivh<span class="w"> </span>ami_x.x.x.xxx.xxx_amd64.rpm
+<span class="w">   </span>sudo<span class="w"> </span>rpm<span class="w"> </span>-ivh<span class="w"> </span>amitool_x.x.x.xxx.xxx_amd64.rpm
 </pre></div>
 </div>
+</li>
+</ol>
 </div>
 </div>
 <div class="section" id="troubleshooting">
@@ -380,7 +383,7 @@ rpm<span class="w"> </span>-qa<span class="w"> </span><span class="p">|</span><s
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on June 10, 2026.
+      <span class="lastupdated">Last updated on June 11, 2026.
       </span></p>
   </div>
 
