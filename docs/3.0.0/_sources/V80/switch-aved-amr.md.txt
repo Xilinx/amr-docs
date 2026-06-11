@@ -71,7 +71,7 @@ Perform system cold reboot to apply changes
 
 <span id="switchingbetweenavedandamr-amrinstallation"></span>
 
-## Swwitching from AVED/xbtest to AMR
+## Switching from AVED/xbtest to AMR
 
 Follow the steps below to install AMR firmware/software with existing AVED/xbtest.
 
