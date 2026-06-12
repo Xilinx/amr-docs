@@ -5,8 +5,8 @@
 ## Introduction
 
 This document describes the **common Versal architecture concepts** shared across all AMR Boards (V80, RAVE). For board-specific implementations, see:
-- [V80 Hardware Design](../V80/hardware/hierarchy.md) - Alveo V80 with CPM5 and HBM
-- [RAVE Hardware Design](../RAVE/hardware/hierarchy.md) - Embedded+ VE2302 with PL PCIe
+- [V80 Hardware Design](../V80/hierarchy.md) - Alveo V80 with CPM5 and HBM
+- [RAVE Hardware Design](../RAVE/hierarchy.md) - Embedded+ VE2302 with PL PCIe
 
 The AMR design is a PCIe-based design that demonstrates the capabilities of Versal devices for adaptive management and acceleration. All AMR boards share a common architectural approach consisting of three major blocks: **CIPS** (Control, Interfaces, and Processing System), **Programmable Logic (PL)**, and **NoC Interconnect**.
 
@@ -135,16 +135,16 @@ The General Command Queue (GCQ) is implemented as a **software mechanism** using
 For details on how each Board implements these concepts differently:
 
 ### V80 Board
-- [V80 Hierarchy](../V80/hardware/hierarchy.md) - Block diagram with CPM5 and HBM
-- [V80 CIPS](../V80/hardware/cips-config.md) - CPM5 Gen5x8 configuration
-- [V80 Memory](../V80/hardware/memory-resources.md) - HBM + DDR DIMM (68GB)
-- [V80 NoC](../V80/hardware/noc-config.md) - CPM5 hardened NoC, HBM connections
+- [V80 Hierarchy](../V80/hierarchy.md) - Block diagram with CPM5 and HBM
+- [V80 CIPS](../V80/cips-config.md) - CPM5 Gen5x8 configuration
+- [V80 Memory](../V80/memory-resources.md) - HBM + DDR DIMM (68GB)
+- [V80 NoC](../V80/noc-config.md) - CPM5 hardened NoC, HBM connections
 
 ### RAVE Board
-- [RAVE Hierarchy](../RAVE/hardware/hierarchy.md) - Block diagram with PL PCIe
-- [RAVE CIPS](../RAVE/hardware/cips-config.md) - VE2302 configuration (no CPM)
-- [RAVE PCIe](../RAVE/hardware/pcie-config.md) - PL PCIe IP implementation
-- [RAVE Memory](../RAVE/hardware/memory-resources.md) - LPDDR4 (8-16GB)
-- [RAVE Peripherals](../RAVE/hardware/peripherals.md) - EEPROM, TPM, eMMC, USB
-- [RAVE Expansion](../RAVE/hardware/expansion-io.md) - Daughtercard system
+- [RAVE Hierarchy](../RAVE/hierarchy.md) - Block diagram with PL PCIe
+- [RAVE CIPS](../RAVE/cips-config.md) - VE2302 configuration (no CPM)
+- [RAVE PCIe](../RAVE/pcie-config.md) - PL PCIe IP implementation
+- [RAVE Memory](../RAVE/memory-resources.md) - LPDDR4 (8-16GB)
+- [RAVE Peripherals](../RAVE/peripherals.md) - EEPROM, TPM, eMMC, USB
+- [RAVE Expansion](../RAVE/expansion-io.md) - Daughtercard system
 
