@@ -130,8 +130,8 @@ Some notable characteristics of the AMR include:
 
 The AMR includes board-specific base hardware designs that demonstrate PCIe connectivity and management capabilities. For detailed information on the hardware architecture for each supported boards, please refer to:
 
-- [V80 Hardware Architecture](../V80/hardware/index.md) - Board with eMMC, QSFP, and SMBus support
-- [RAVE Hardware Architecture](../RAVE/hardware/index.md) - Standard reference platform architecture
+- [V80 Hardware Architecture](../V80/index.md) - Board with eMMC, QSFP, and SMBus support
+- [RAVE Hardware Architecture](../RAVE/index.md) - Standard reference platform architecture
 
 <span id="amroverview-amrsoftwarearchitecture"></span>
 
