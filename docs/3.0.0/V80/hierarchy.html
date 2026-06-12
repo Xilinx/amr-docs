@@ -127,7 +127,7 @@
   <div class="section" id="amr-v80-hierarchy-overview">
 <h1>AMR V80 - Hierarchy Overview<a class="headerlink" href="#amr-v80-hierarchy-overview" title="Permalink to this heading">¶</a></h1>
 <blockquote>
-<div><p><strong>For common Versal architecture concepts</strong>, see <a class="reference internal" href="#../../hardware/hierarchy.md"><span class="xref myst">Common Hierarchy</span></a></p>
+<div><p><strong>For common Versal architecture concepts</strong>, see <a class="reference internal" href="#../../hardware/hierarchy.html"><span class="xref myst">Common Hierarchy</span></a></p>
 <p>This document describes the V80 Board-specific hierarchy and block diagram.</p>
 </div></blockquote>
 <p><span id="amrv80-hierarchyoverview-introduction"></span></p>
@@ -188,12 +188,12 @@
 <tr>
 <td>Base Logic</td>
 <td>The base logic region contains test and management IP accessible through PCIe Physical Functions:<br><br>- <strong>PF0 (Management Function):</strong> 16MB BAR0 for management register access via AXI_Bridge_Master<br>- <strong>PF1 (Test Function):</strong> Hierarchical block with SmartConnect, AXI GPIO (loopback test), and reset synchronization. Accessible via 256MB BAR2 (AXI_Bridge_Master) and 512KB BAR0 (DMA).<br>- <strong><em>IMPORTANT:</em></strong> SMBus IP v1.1 is available in the IP repository (ip/smbus_v1_1/) but not instantiated in the base design. The IP must be downloaded separately from https://www.xilinx.com/member/v80.html and added to the IP repository before building the design.</td>
-<td><a href="base-logic.md">AMR V80 - Base Logic</a></td>
+<td><a href="base-logic.html">AMR V80 - Base Logic</a></td>
 </tr>
 <tr>
 <td>Clocks and Resets</td>
 <td>The base design uses CIPS-generated clocks (100 MHz, 33.33 MHz, 250 MHz) and processor system reset blocks for reset synchronization. The PF1 hierarchy contains a proc_sys_reset block for the GPIO test logic. The design supports future expansion with clocking wizards and additional reset synchronizers for user kernels.<br><br><strong>Note:</strong> AMR supports Power-On-Reset to reload designs from flash but does not support hot-reset/PDI reload due to system complexity.</td>
-<td><a href="clock-reset.md">AMR V80 - Clock Reset Module</a></td>
+<td><a href="clock-reset.html">AMR V80 - Clock Reset Module</a></td>
 </tr>
 </tbody>
 </table>

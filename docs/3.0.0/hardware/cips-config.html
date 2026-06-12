@@ -129,8 +129,8 @@
 <blockquote>
 <div><p><strong>For Board-specific CIPS configurations</strong>, see:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#../V80/hardware/cips-config.md"><span class="xref myst">V80 CIPS Configuration</span></a> - CPM5 PCIe Gen5 x8 configuration</p></li>
-<li><p><a class="reference internal" href="#../RAVE/hardware/cips-config.md"><span class="xref myst">RAVE CIPS Configuration</span></a> - VE2302 configuration (no CPM)</p></li>
+<li><p><a class="reference internal" href="#../V80/hardware/cips-config.html"><span class="xref myst">V80 CIPS Configuration</span></a> - CPM5 PCIe Gen5 x8 configuration</p></li>
+<li><p><a class="reference internal" href="#../RAVE/hardware/cips-config.html"><span class="xref myst">RAVE CIPS Configuration</span></a> - VE2302 configuration (no CPM)</p></li>
 </ul>
 </div></blockquote>
 <p><span id="amr-cipsconfiguration-overview"></span></p>
@@ -422,12 +422,12 @@
 <h2>Board-Specific CIPS Configurations<a class="headerlink" href="#board-specific-cips-configurations" title="Permalink to this heading">¶</a></h2>
 <div class="section" id="v80-cips-configuration">
 <h3>V80 CIPS Configuration<a class="headerlink" href="#v80-cips-configuration" title="Permalink to this heading">¶</a></h3>
-<p><a class="reference internal" href="#../V80/hardware/cips-config.md"><span class="xref myst">V80 CIPS Configuration</span></a></p>
+<p><a class="reference internal" href="#../V80/hardware/cips-config.html"><span class="xref myst">V80 CIPS Configuration</span></a></p>
 <p>The V80 CIPS configuration includes the complete CPM_CONFIG block specifying all CPM5 parameters. This configuration encompasses the CPM5 PCIe Controller 1 setup for Gen5 x8 operation, the hardened QDMA engine configuration, device ID assignments for the two physical functions (0x50b4 for PF0, 0x50b5 for PF1), extended configuration space options for vendor-specific capabilities, and BAR size and type specifications within the CPM5 block.</p>
 </div>
 <div class="section" id="rave-cips-configuration">
 <h3>RAVE CIPS Configuration<a class="headerlink" href="#rave-cips-configuration" title="Permalink to this heading">¶</a></h3>
-<p><a class="reference internal" href="#../RAVE/hardware/cips-config.md"><span class="xref myst">RAVE CIPS Configuration</span></a></p>
+<p><a class="reference internal" href="#../RAVE/hardware/cips-config.html"><span class="xref myst">RAVE CIPS Configuration</span></a></p>
 <p>The RAVE CIPS configuration does not include a CPM_CONFIG block since the VE2302 device does not contain a CPM hardened block. The configuration focuses on PS and PMC setup including processor initialization, peripheral configuration, and NoC connectivity. Additional peripherals such as USB 2.0 host controllers and eMMC storage interfaces are configured in enhanced board variants. The MIO configuration is more extensive to support on-board peripherals including Board-ID EEPROM, TPM security modules, and status LEDs. The PCIe functionality (device ID assignments for the two physical functions 0x5710 for PF0, 0x5711 for PF1), is handled through PL IP instantiation rather than CIPS configuration.</p>
 <p><span id="amr-cipsconfiguration-commonpsconfig"></span></p>
 </div>
@@ -475,8 +475,8 @@
 <ul class="simple">
 <li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg352-cips">CIPS Product Guide (PG352)</a> - CIPS IP documentation</p></li>
 <li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Processing-System-Architecture">Versal TRM - PS Architecture</a> - Processing System details</p></li>
-<li><p><a class="reference internal" href="#../V80/hardware/cips-config.md"><span class="xref myst">V80 CIPS Configuration</span></a> - V80-specific CPM5 settings</p></li>
-<li><p><a class="reference internal" href="#../RAVE/hardware/cips-config.md"><span class="xref myst">RAVE CIPS Configuration</span></a> - RAVE-specific VE2302 settings</p></li>
+<li><p><a class="reference internal" href="#../V80/hardware/cips-config.html"><span class="xref myst">V80 CIPS Configuration</span></a> - V80-specific CPM5 settings</p></li>
+<li><p><a class="reference internal" href="#../RAVE/hardware/cips-config.html"><span class="xref myst">RAVE CIPS Configuration</span></a> - RAVE-specific VE2302 settings</p></li>
 </ul>
 </div>
 </div>

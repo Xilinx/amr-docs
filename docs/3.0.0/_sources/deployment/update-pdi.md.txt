@@ -1,55 +1,57 @@
 # AMR Updating PDI in Flash
 
-1.  The ami\_tool cfgmem\_info command will list the available partitions that have been defined in the FPT.
+1. The ami\_tool cfgmem\_info command will list the available partitions that have been defined in the FPT.
 
-    ```bash
-    # Usage: ami_tool cfgmem_info -d <bdf> -t <type> [options...]
-    sudo ami_tool cfgmem_info -d 21:00.0 -t primary
-    ```
+        ~% 
+        # Usage: ami_tool cfgmem_info -d <bdf> -t <type> [options...]
+        ami_tool cfgmem_info -d 21:00.0 -t primary
+    
+        Primary FPT:
 
-       Primary FPT:
+        FPT
+        -----------------
+        Version     | 2
+        Header Size | 128
+        Entry Size  | 128
+        Entries     | 3
 
-    FPT
-    -----------------
-    Version     | 2
-    Header Size | 128
-    Entry Size  | 128
-    Entries     | 3
 
-    Partition | Type     | Address    | Size       | PDI Size   | PDI MD5                          | Power-up Load | Status
-    ---------------------------------------------------------------------------------------------------------------------------
-    0 | PDI_BOOT | 0x00080000 | 0x07400000 | 0x003ec160 | 360874e0d8a584c09afde073c0ff403a | N/A | Active
-    1         | PDI_BOOT | 0x07480000 | 0x07400000 | 0x003ec160 | 360874e0d8a584c09afde073c0ff403a | N/A           | In-Active
-    2         | PDI_USER | 0x0e880000 | 0x01000000 | 0x00000000 | 00000000000000000000000000000000 | Off           | Not Loaded
+        Partition | Type     | Address    | Size       | PDI Size   | PDI MD5                          | Power-up Load | Status   
+        ---------------------------------------------------------------------------------------------------------------------------
+        0         | PDI_BOOT | 0x00080000 | 0x07400000 | 0x003ec160 | 360874e0d8a584c09afde073c0ff403a | N/A           | Active   
+        1         | PDI_BOOT | 0x07480000 | 0x07400000 | 0x003ec160 | 360874e0d8a584c09afde073c0ff403a | N/A           | In-Active
+        2         | PDI_USER | 0x0e880000 | 0x01000000 | 0x00000000 | 00000000000000000000000000000000 | Off           | Not Loaded
 
-2.  The ami\_tool cfgmem\_program command can then be used to write a amr_ospi.bin pdi to a partition 1 and 2. Partition 3 user partition which is used to load user PL pdi's
+        ~%
+
+2. The ami\_tool cfgmem\_program command can then be used to write a amr_ospi.bin pdi to a partition 1 and 2. Partition 3 user partition which is used to load user PL pdi's
 through ami\_tool pdi_\program command.
 
-e.g.
+    e.g.
 
-    ```bash
-    # usage: sudo ami_tool cfgmem_program -d <bdf> -t <type> -i <pdi path> -p <flash partition number>
-    sudo ami_tool cfgmem_program -d 21:00.0 -t primary -i <path_to_amr_ospi.bin> -p 0
-    ```
-    ----------------
-    Device | 21:00.0
-    ----------------
-    Current Configuration
-    ----------------
-    UUID   | 00000000000000000000000014862935
-    ----------------
-    Incoming Configuration
-    ----------------
-    UUID      | 00000000000000000000000014b62935
-    Path      | 
-    Partition | 0
-    ----------------
-    Are you sure you wish to proceed? [Y/n]: Y
-    
-    Updating base flash image...
-    [####################################################################################################] 100% |
-    Image programming complete.
-    Will do a hot reset to boot into partition 0. This may take a minute...
+        ```bash
+        # usage: sudo ami_tool cfgmem_program -d <bdf> -t <type> -i <pdi path> -p <flash partition number>
+        sudo ami_tool cfgmem_program -d 21:00.0 -t primary -i <path_to_amr_ospi.bin> -p 0
+        ```
+        ----------------
+        Device | 21:00.0
+        ----------------
+        Current Configuration
+        ----------------
+        UUID   | 00000000000000000000000014862935
+        ----------------
+        Incoming Configuration
+        ----------------
+        UUID      | 00000000000000000000000014b62935
+        Path      | 
+        Partition | 0
+        ----------------
+        Are you sure you wish to proceed? [Y/n]: Y
+
+        Updating base flash image...
+        [####################################################################################################] 100% |
+        Image programming complete.
+        Will do a hot reset to boot into partition 0. This may take a minute...
 
 **Note:** Once the flash programming starts, as indicated by the progress bar percentage. Once after a hot reset, we can see updated PDI info using ami\_tool overview command.
 
