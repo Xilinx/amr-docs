@@ -1,6 +1,6 @@
 # AMR RAVE - Hierarchy Overview
 
-> **For common Versal architecture concepts**, see [Common Hierarchy](../../hardware/hierarchy.md)
+> **For common Versal architecture concepts**, see [Common Hierarchy](../hardware/hierarchy.md)
 >
 > This document describes the RAVE Board-specific hierarchy and system architecture.
 
@@ -97,7 +97,7 @@ The RPU firmware begins execution after PMC handoff, initializing board peripher
 
 ## References
 
-- [Common Hierarchy](../../hardware/hierarchy.md) - Shared Versal architecture concepts
+- [Common Hierarchy](../hardware/hierarchy.md) - Shared Versal architecture concepts
 - [RAVE CIPS Configuration](cips-config.md) - VE2302 CIPS setup
 - [RAVE PCIe Configuration](pcie-config.md) - PL PCIe IP details
 - [RAVE Memory Resources](memory-resources.md) - LPDDR4 configuration

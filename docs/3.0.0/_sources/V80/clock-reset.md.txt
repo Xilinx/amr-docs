@@ -1,6 +1,6 @@
 # AMR V80 - Clock Reset Module
 
-> **For common clock/reset concepts**, see [Common Clock Reset](../../hardware/clock-reset.md)
+> **For common clock/reset concepts**, see [Common Clock Reset](../hardware/clock-reset.md)
 >
 > This document describes V80-specific clock and reset configuration.
 

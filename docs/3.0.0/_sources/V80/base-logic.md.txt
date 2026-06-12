@@ -1,6 +1,6 @@
 # AMR V80 - Base Logic (V80-Specific)
 
-> **For common base design concepts**, see [Common Base Design Philosophy](../../hardware/base-logic.md)
+> **For common base design concepts**, see [Common Base Design Philosophy](../hardware/base-logic.md)
 >
 > This document contains **V80-specific** implementation details and deltas from the common baseline.
 

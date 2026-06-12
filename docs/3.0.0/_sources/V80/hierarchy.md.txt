@@ -1,6 +1,6 @@
 # AMR V80 - Hierarchy Overview
 
-> **For common Versal architecture concepts**, see [Common Hierarchy](../../hardware/hierarchy.md)
+> **For common Versal architecture concepts**, see [Common Hierarchy](../hardware/hierarchy.md)
 >
 > This document describes the V80 Board-specific hierarchy and block diagram.
 

@@ -151,6 +151,6 @@ Some RAVE Board variants include additional peripherals:
 
 - [RAVE Expansion I/O](expansion-io.md) - Daughtercard interfaces
 - [RAVE CIPS Configuration](cips-config.md) - MIO configuration details
-- [Common Hardware](../../hardware/index.md) - Shared Versal concepts
+- [Common Hardware](../hardware/index.md) - Shared Versal concepts
 - [Sapphire RAVE1 EDGE+](https://www.amd.com/en/products/embedded/embedded-plus.html) - RAVE product info
 

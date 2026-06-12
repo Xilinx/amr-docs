@@ -1,6 +1,6 @@
 # AMR V80 - Source File Overview
 
-> **For common build concepts**, see [Common Source Files](../../hardware/source-files.md)
+> **For common build concepts**, see [Common Source Files](../hardware/source-files.md)
 >
 > This document describes V80-specific build structure: alveo_v80 directory organization.
 

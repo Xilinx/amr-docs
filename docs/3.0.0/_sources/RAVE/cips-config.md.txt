@@ -1,6 +1,6 @@
 # AMR RAVE - CIPS Configuration
 
-> **For common CIPS concepts**, see [Common CIPS Configuration](../../hardware/cips-config.md)
+> **For common CIPS concepts**, see [Common CIPS Configuration](../hardware/cips-config.md)
 >
 > This document describes RAVE (VE2302) CIPS configuration without CPM.
 
@@ -251,7 +251,7 @@ Single aperture mode is used for PCIe address mapping through the NoC to memory 
 
 ## References
 
-- [Common CIPS Configuration](../../hardware/cips-config.md) - RPU, PMC, PS concepts
+- [Common CIPS Configuration](../hardware/cips-config.md) - RPU, PMC, PS concepts
 - [RAVE Peripherals](peripherals.md) - Peripheral details (EEPROM, TPM, eMMC, USB)
 - [RAVE PCIe Configuration](pcie-config.md) - PL PCIe IP integration
 - [CIPS Product Guide](https://docs.xilinx.com/r/en-US/pg352-cips) - CIPS IP documentation
