@@ -16,7 +16,7 @@ The V80 design is a PCIe accelerator card implementing a high-performance archit
 
 The following is the block diagram of the design, highlighting the connectivity for the three blocks in AMR. The *User Application* block is not part of the AMR design, and serves only to illustrate how a user application could be integrated with AMR to connect directly to MCIO and QSFP interfaces, and connect to the NoC to interface with the PCIe, HBM, and DDR4 blocks. The AMR base design can be extended to include the MCIO and QSFP for the user application by uncommenting the pins from the hw/amd\_\<board\>\_gen5x8\_25.1/src/bd/create\_bd\_design.tcl and hw/amd\_\<board\>\_gen5x8\_25.1/src/constraints/impl.pins.xdc.
 
-![images/1107374308.png](../../images/1107374308.png)
+![images/1107374308.png](../images/1107374308.png)
 
 <span id="amr-hierarchyoverview-control-interfacesandprocessingsystem"></span>
 
