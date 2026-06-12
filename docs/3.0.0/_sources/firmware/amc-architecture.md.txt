@@ -132,8 +132,6 @@ The Core Library layer exists within the **Common** layer, which holds all syste
 
 The EVL allows event signaling to ‘higher’ layers. It is predominantly used for proxy drivers to communicate to the application layer whilst maintaining agnosticism and abstraction.
 
-See [Events and Signals](#amrmanagementcontroller-amc-architectureanddesign-ael) for more information.
-
 <span id="amrmanagementcontroller-amc-architectureanddesign-debugaccesslibrary-dal"></span>
 
 ##### Debug Access Library (DAL)

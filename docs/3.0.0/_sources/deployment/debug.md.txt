@@ -189,7 +189,7 @@ For AMI specific commands see - [AMR Management Interface userguide (ami\_tool)]
         
           - Check for expected value
         
-          - See [Sensors and Hardware Monitoring](../software/card-detection.md) for thresholds
+          - See [Sensors and Hardware Monitoring](../firmware/sensors.md) for thresholds
 
 <span id="amrdebugtechniques-xbtestlogsandcsvfiles"></span>
 
