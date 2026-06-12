@@ -16,15 +16,14 @@
     Entry Size  | 128
     Entries     | 3
 
-
-    Partition | Type     | Address    | Size       | PDI Size   | PDI MD5                          | Power-up Load | Status   
+    Partition | Type     | Address    | Size       | PDI Size   | PDI MD5                          | Power-up Load | Status
     ---------------------------------------------------------------------------------------------------------------------------
-    0         | PDI_BOOT | 0x00080000 | 0x07400000 | 0x003ec160 | 360874e0d8a584c09afde073c0ff403a | N/A           | Active   
+    0 | PDI_BOOT | 0x00080000 | 0x07400000 | 0x003ec160 | 360874e0d8a584c09afde073c0ff403a | N/A | Active
     1         | PDI_BOOT | 0x07480000 | 0x07400000 | 0x003ec160 | 360874e0d8a584c09afde073c0ff403a | N/A           | In-Active
     2         | PDI_USER | 0x0e880000 | 0x01000000 | 0x00000000 | 00000000000000000000000000000000 | Off           | Not Loaded
 
-2.  The ami\_tool cfgmem\_program command can then be used to write a amr_ospi.bin pdi to a partition 1 and 2. Partition 3 user partition which is used to load user PL pdi's 
-through ami\_tool pdi_\program command. 
+2.  The ami\_tool cfgmem\_program command can then be used to write a amr_ospi.bin pdi to a partition 1 and 2. Partition 3 user partition which is used to load user PL pdi's
+through ami\_tool pdi_\program command.
 
 e.g.
 

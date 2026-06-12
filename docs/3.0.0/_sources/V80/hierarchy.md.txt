@@ -36,33 +36,10 @@ The Control, interfaces, and processing system (CIPS) IP configures the various 
 
 The PL region contains the soft logic IP and I/O connections. It is separated into two main blocks: Base Logic, and Clocks and Resets. It contains I/O connections to the SMBus, MCIOs, and QSFP I/O interfaces. A summary of the function of each block is described in the table below.
 
-<table>
-<thead>
-<tr class="header">
-<th><p>Block</p></th>
-<th><p>AMR Usage</p></th>
-<th><p>More information</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><p>Base Logic</p></td>
-<td><p>The base logic region contains test and management IP accessible through PCIe Physical Functions:</p>
-<ul>
-<li><p><strong>PF0 (Management Function):</strong> 16MB BAR0 for management register access via AXI_Bridge_Master</p></li>
-<li><p><strong>PF1 (Test Function):</strong> Hierarchical block with SmartConnect, AXI GPIO (loopback test), and reset synchronization. Accessible via 256MB BAR2 (AXI_Bridge_Master) and 512KB BAR0 (DMA).</p></li>
-<li><p><em><strong>IMPORTANT:</strong></em> SMBus IP v1.1 is available in the IP repository (ip/smbus_v1_1/) but not instantiated in the base design. The IP must be downloaded separately from <a href="https://www.xilinx.com/member/v80" class="external-link">https://www.xilinx.com/member/v80.html</a> and added to the IP repository before building the design.</p></li>
-</ul></td>
-<td><p><a href="base-logic.md">AMR V80 - Base Logic</a></p></td>
-</tr>
-<tr class="even">
-<td><p>Clocks and Resets</p></td>
-<td><p>The base design uses CIPS-generated clocks (100 MHz, 33.33 MHz, 250 MHz) and processor system reset blocks for reset synchronization. The PF1 hierarchy contains a proc_sys_reset block for the GPIO test logic. The design supports future expansion with clocking wizards and additional reset synchronizers for user kernels.</p>
-<p><strong>Note:</strong> AMR supports Power-On-Reset to reload designs from flash but does not support hot-reset/PDI reload due to system complexity.</p></td>
-<td><p><a href="clock-reset.md">AMR V80 - Clock Reset Module</a></p></td>
-</tr>
-</tbody>
-</table>
+| Block | AMR Usage | More information |
+|---|---|---|
+| Base Logic | The base logic region contains test and management IP accessible through PCIe Physical Functions:<br><br>- **PF0 (Management Function):** 16MB BAR0 for management register access via AXI_Bridge_Master<br>- **PF1 (Test Function):** Hierarchical block with SmartConnect, AXI GPIO (loopback test), and reset synchronization. Accessible via 256MB BAR2 (AXI_Bridge_Master) and 512KB BAR0 (DMA).<br>- ***IMPORTANT:*** SMBus IP v1.1 is available in the IP repository (ip/smbus_v1_1/) but not instantiated in the base design. The IP must be downloaded separately from https://www.xilinx.com/member/v80.html and added to the IP repository before building the design. | [AMR V80 - Base Logic](base-logic.md) |
+| Clocks and Resets | The base design uses CIPS-generated clocks (100 MHz, 33.33 MHz, 250 MHz) and processor system reset blocks for reset synchronization. The PF1 hierarchy contains a proc_sys_reset block for the GPIO test logic. The design supports future expansion with clocking wizards and additional reset synchronizers for user kernels.<br><br>**Note:** AMR supports Power-On-Reset to reload designs from flash but does not support hot-reset/PDI reload due to system complexity. | [AMR V80 - Clock Reset Module](clock-reset.md) |
 
 <span id="amr-hierarchyoverview-nocinterconnect"></span>
 

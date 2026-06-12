@@ -7,12 +7,14 @@ This is a getting-started guide for the V80 Adaptive Management Runtime (AMR) to
 There are two approaches to building AMR:
 
 **Production Builds (Yocto Process):**
+
 - Use the Yocto build system for production-ready builds
 - Recommended for building official release images
 - Builds all necessary binary OSPI images and packages
 - See [Building OSPI Images through Yocto](#building-ospi-images-through-yocto) section below
 
 **Developer Builds (Local Build Commands):**
+
 - Use local build commands for development with custom changes
 - Recommended for developers making modifications to the source code
 - Allows building individual components (hardware, firmware, software)
@@ -39,13 +41,14 @@ System Memory Requirements
   - 64GB
 
 Pre-requisites
-- source /proj/xbuilds/2026.1_daily_latest/installs/lin64/2026.1/Vivado/settings64.sh
+
+- source settings64.(c)sh script
 
 <span id="how-tobuildanamrdesignforyourself-hardwaretestdependencies"></span>
 
 ### Hardware Test Dependencies for V80
 
-See [Supported Kernels and Distributions](../overview/amr-overview.md#AMROverview-SupportedKernelsandDistributions) for an up-to-date list.
+See [Supported Kernels and Distributions](../overview/amr-overview.md#amroverview-supportedkernelsanddistributions) for an up-to-date list.
 
 *Note*: root/sudo permissions are required.
 
@@ -113,7 +116,7 @@ In this example, we will clone the AMR repo with the latest release and build it
 
 The following steps will guide you through setting up your Vivado environment and building an AMR V80 PDI from the cloned source code.
 
-1.  Set up the desired version of Vivado in your environment by sourcing the `settings64.](c)sh` script from your Vivado install directory.
+1.  Set up the desired version of Vivado in your environment by sourcing the `settings64.(c)sh` script from your Vivado install directory.
 2.  To build all components execute the build.sh command 
     For more information on the build script, refer to [AMR Build Scripts](../development/build-scripts.md)
 
@@ -166,8 +169,6 @@ The following steps will guide you through setting up your Vivado environment an
 
     Important Note: Generated files followed by a '*' are required files created by each step in the build flow, which can be used as an indication that the build has completed successfully. Verify that these files exist after building the design.
 
-For more details on output files check 
-    [Review the Generated Output section](#how-tobuildanamrdesignforyourself-reviewthegeneratedoutput) 
 <span id="how-tobuildanamrdesignforyourself-firmware"></span>
 
 ### Build Firmware, Software independently using below commands
