@@ -10,7 +10,7 @@
 
 The RAVE Board architecture combines an on-board Ryzen processor with a Versal VE2302 FPGA device in a Mini-ITX form factor.
 
-![RAVE Board Block Diagram](../../images/rave_block.png)
+![RAVE Board Block Diagram](../images/rave_block.png)
 
 **Note:** Image shows RAVE system architecture with VE2302, PL-based PCIe/XDMA, LPDDR4 memory, Ryzen connection, and expansion I/O. The design integrates PCIe connectivity between the processors, LPDDR4 memory for the Versal device, and extensive peripheral integration for standalone embedded operation.
 

@@ -14,7 +14,7 @@ The DDR operates at 200MHz and is controlled by the AMD Versal™ integrated mem
 
 More information on the MC can be found here: <https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Integrated-Memory-Controller-DDRMC-Architecture>.
 
-[![image1](../../images/1107374762.png)](../../images/1107374762.png)
+![image1](../images/1107374762.png)
 
 <span id="amr-memoryresources-dimmdiagram"></span>
 
@@ -24,7 +24,7 @@ AMR V80 contains 32GB of DDR DIMM that is a shared memory resource for the host,
 
 More information on the MC can be found at <https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Integrated-Memory-Controller-DDRMC-Architecture>.
 
-[![image2](../../images/1107374759.png)](../../images/1107374759.png)
+![image2](../images/1107374759.png)
 
 <span id="amr-memoryresources-hbmdiagram"></span>
 
@@ -36,5 +36,5 @@ HBM is comprised of two 16GB stacks. Each stack has eight integrated AXI HBM Con
 
 More information on the HBM MC can be found at <https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Integrated-HBM-Controller>.
 
-![image3](../../images/1107374765.png)
+![image3](../images/1107374765.png)
 

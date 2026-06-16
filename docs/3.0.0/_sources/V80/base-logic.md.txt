@@ -16,7 +16,7 @@ The V80 base logic implementation uses **CPM5 hardened PCIe** with minimal PL IP
 - ✓ **No PCIe IP in PL** - all PCIe functionality is hardened in CPM5
 - ✓ Device IDs: 0x50b4 (PF0), 0x50b5 (PF1)
 
-![../../images/1107375471.png)](../../images/1107375471.png)
+![../../images/1107375471.png)](../images/1107375471.png)
 
 <span id="amrv80-baselogic-pf0configuration"></span>
 

@@ -30,9 +30,9 @@ In the CPM5 Basic Configuration window, there are two PCIe Controllers to choose
 
 AMR V80 is a Gen 5x8 design supporting 32GT/s raw bandwidth.
 
-![image1](../../images/grey_arrow_down2.png)
+![image1](../images/grey_arrow_down2.png)
 
-![image2](../../images/1107374422.png)
+![image2](../images/1107374422.png)
 
 <span id="amr-cipsconfiguration-cpm5pciecontroller1configuration"></span>
 
@@ -59,9 +59,9 @@ AMR uses Advanced configuration mode to access MSI-X capabilities and other adva
 
 Used for high bandwidth DDR accesses.
 
-![image3](../../images/grey_arrow_down2.png)
+![image3](../images/grey_arrow_down2.png)
 
-![image4](../../images/1107374413.png)
+![image4](../images/1107374413.png)
 
 <span id="amrv80-cipsconfiguration-capabilities"></span>
 
@@ -73,9 +73,9 @@ Two Physical Functions (PF) are used in the AMR design. PF0 allows the card to b
 
 AMR PCIe uses the synchronous clock from the PCIe edge connector.
 
-![image5](../../images/grey_arrow_down2.png)
+![image5](../images/grey_arrow_down2.png)
 
-![image6](../../images/1107374419.png)
+![image6](../images/1107374419.png)
 
 <span id="amr-cipsconfiguration-pfids"></span>
 
@@ -83,7 +83,7 @@ AMR PCIe uses the synchronous clock from the PCIe edge connector.
 
 These values must match the settings for the AMR card as indicated in the table below. The greyed out settings are not used by AMR.
 
-![images/1107374383.png](../../images/1107374383.png)
+![images/1107374383.png](../images/1107374383.png)
 
 **PF - ID Initial Values: Change values to those below to match AMD specific settings**
 
@@ -99,9 +99,9 @@ These values must match the settings for the AMR card as indicated in the table 
 
   - Subclass Value PF 0: 00 : Processing Accelerator – vendor-specific interface
 
-![image7](../../images/grey_arrow_down2.png)
+![image7](../images/grey_arrow_down2.png)
 
-![image8](../../images/1107374425.png)
+![image8](../images/1107374425.png)
 
 <span id="amr-cipsconfiguration-pciebars"></span>
 
@@ -127,11 +127,11 @@ CPM5 can support up to six 32-bit BARs or three 64-bit BARs per PF. AMR requires
 
 For additional information on address mapping in AMD Versal™ devices, refer to: <https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map>. Since the address space for PCIe and AXI is different, address translation is required and configured through PCIEBAR2AXIBAR registers.
 
-![image9](../../images/grey_arrow_down2.png)
+![image9](../images/grey_arrow_down2.png)
 
 PF0
 
-![image10](../../images/1107374407.png)
+![image10](../images/1107374407.png)
 
 
 <span id="amr-cipsconfiguration-pcie-dma"></span>
@@ -140,17 +140,17 @@ PF0
 
 This functionality is not used by AMR.
 
-![image12](../../images/grey_arrow_down2.png)
+![image12](../images/grey_arrow_down2.png)
 
-![image13](../../images/1107374401.png)
+![image13](../images/1107374401.png)
 
 MSI-X Cap
 
 MSI-X capabilities for PF1 were enabled to be used in conjunction with the DMA.
 
-![image14](../../images/grey_arrow_down2.png)
+![image14](../images/grey_arrow_down2.png)
 
-[![image15](../../images/1107374416.png)](../../images/1107374416.png)
+[![image15](../images/1107374416.png)](../images/1107374416.png)
 
 <span id="amr-cipsconfiguration-advancedoptions"></span>
 
@@ -165,7 +165,7 @@ AMR uses vendor specific extended capabilities (VSEC) with the large extended co
 
 The above configuration can be enabled using the TCL configuration settings below.
 
-![image20](../../images/grey_arrow_down2.png)
+![image20](../images/grey_arrow_down2.png)
 
 CONFIG.CPM\_CONFIG { \\
 
@@ -357,11 +357,11 @@ Note: eMMC1 cannot be used for boot since the pins are shared with OSPI.
 
 **Data Transfer Width:** 8Bit
 
-![image21](../../images/grey_arrow_down2.png)
+![image21](../images/grey_arrow_down2.png)
 
-![image22](../../images/1107374386.png)
+![image22](../images/1107374386.png)
 
-![image23](../../images/1107374392.png)
+![image23](../images/1107374392.png)
 
 <span id="amr-cipsconfiguration-peripherals"></span>
 
@@ -381,9 +381,9 @@ PCIe reset from the host is connected to the PMC MIO pins through a buffer. Ther
 
 <https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/PCIe-Resets-on-MIO-Pins>
 
-![image24](../../images/grey_arrow_down2.png)
+![image24](../images/grey_arrow_down2.png)
 
-![image25](../../images/1107374446.png)
+![image25](../images/1107374446.png)
 
 <span id="amr-cipsconfiguration-uart0-uart1"></span>
 
@@ -397,15 +397,15 @@ AMR connects to two UARTs on the PS MIO (LPD) for debug purposes.
 
 <https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/UART-I/O-Signals>
 
-![image26](../../images/grey_arrow_down2.png)
+![image26](../images/grey_arrow_down2.png)
 
 **UART0**
 
-![image27](../../images/1107374428.png)
+![image27](../images/1107374428.png)
 
 **UART1**
 
-![image28](../../images/1107374581.png)
+![image28](../images/1107374581.png)
 
 <span id="amr-cipsconfiguration-spi0"></span>
 
@@ -419,11 +419,11 @@ The Versal device connects to SPI0 in the PS MIO (LPD). This is used for logging
 
 <https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/SPI-Controller-I/O-Signals>
 
-![image29](../../images/grey_arrow_down2.png)
+![image29](../images/grey_arrow_down2.png)
 
 **SPI0**
 
-![image30](../../images/1107374566.png)
+![image30](../images/1107374566.png)
 
 <span id="amr-cipsconfiguration-lpd-i2c0-lpd-i2c1"></span>
 
@@ -437,15 +437,15 @@ The Versal device connects to both I2C controllers in the LPD. I2C0 is the main 
 
 <https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/LPD-I2C-Interface-Signals>
 
-![image31](../../images/grey_arrow_down2.png)
+![image31](../images/grey_arrow_down2.png)
 
 **LPD\_I2C0**
 
-![image32](../../images/1107374572.png)
+![image32](../images/1107374572.png)
 
 **LPD\_I2C1**
 
-![image33](../../images/1107374557.png)
+![image33](../images/1107374557.png)
 
 <span id="amr-cipsconfiguration-ttc0-ttc1-ttc2-ttc3"></span>
 
@@ -455,23 +455,23 @@ The triple timer counters (TTCs) can generate periodic interrupts or can be used
 
 <https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Triple-Timer-Counters>
 
-![image34](../../images/grey_arrow_down2.png)
+![image34](../images/grey_arrow_down2.png)
 
 **TTC0**
 
-![image35](../../images/1107374563.png)
+![image35](../images/1107374563.png)
 
 **TTC1**
 
-![image36](../../images/1107374569.png)
+![image36](../images/1107374569.png)
 
 **TTC2**
 
-![image37](../../images/1107374560.png)
+![image37](../images/1107374560.png)
 
 **TTC3**
 
-![image38](../../images/1107374551.png)
+![image38](../images/1107374551.png)
 
 <span id="amr-cipsconfiguration-io"></span>
 
@@ -489,9 +489,9 @@ The GPIO direction for each bank is set per the description below. They are also
 
   - PS Bank 2: All the GPIO 2\* signals are outputs except MIO\_5, MIO\_10, MIO\_11, MIO\_14, and MIO\_25, which are inputs.
 
-![image39](../../images/grey_arrow_down2.png)
+![image39](../images/grey_arrow_down2.png)
 
-![image40](../../images/1107374548.png)
+![image40](../images/1107374548.png)
 
 <span id="amr-cipsconfiguration-debug"></span>
 
@@ -503,33 +503,33 @@ None of the debug settings are used. Leave all settings at Default.
 
 ##### PL BSCAN
 
-![image41](../../images/grey_arrow_down2.png)
+![image41](../images/grey_arrow_down2.png)
 
-![image42](../../images/1107374539.png)
+![image42](../images/1107374539.png)
 
 <span id="amr-cipsconfiguration-crosstrigger"></span>
 
 ##### Cross Trigger
 
-![image43](../../images/grey_arrow_down2.png)
+![image43](../images/grey_arrow_down2.png)
 
-![image44](../../images/1107374545.png)
+![image44](../images/1107374545.png)
 
 <span id="amr-cipsconfiguration-psparalleltrace"></span>
 
 ##### PS Parallel Trace
 
-![image45](../../images/grey_arrow_down2.png)
+![image45](../images/grey_arrow_down2.png)
 
-![image46](../../images/1107374554.png)
+![image46](../images/1107374554.png)
 
 <span id="amr-cipsconfiguration-hsdp"></span>
 
 ##### HSDP
 
-![image47](../../images/grey_arrow_down2.png)
+![image47](../images/grey_arrow_down2.png)
 
-![image48](../../images/1107374536.png)
+![image48](../images/1107374536.png)
 
 <span id="amr-cipsconfiguration-clocking"></span>
 
@@ -543,9 +543,9 @@ Change the input REF\_CLK to match the board oscillator clock frequency (from 33
 
 REF\_CLK: 33.333333
 
-![image49](../../images/grey_arrow_down2.png)
+![image49](../images/grey_arrow_down2.png)
 
-![image50](../../images/1107374533.png)
+![image50](../images/1107374533.png)
 
 <span id="amr-cipsconfiguration-outputclocks"></span>
 
@@ -559,13 +559,13 @@ Enable the PL CLK 0, PL CLK 1, and PL CLK 2 and set the frequencies to 100MHz, 3
 
 Change the CPM\_TOPSW clock to 1000MHz so the CPM runs at maximum frequency.
 
-![image51](../../images/grey_arrow_down2.png)
+![image51](../images/grey_arrow_down2.png)
 
-![image52](../../images/1107374542.png)
+![image52](../images/1107374542.png)
 
-![image53](../../images/1107374398.png)
+![image53](../images/1107374398.png)
 
-![image54](../../images/1107374389.png)
+![image54](../images/1107374389.png)
 
 SLR1
 
@@ -575,17 +575,17 @@ SLR2
 
 Leave at the default setting. The Processor memory clocks (HSM0 and HSM1) are not used in AMR because it is a design requirement to use external 200MHz LVDS clocks for HBM and DDR MCs.
 
-![image55](../../images/grey_arrow_down2.png)
+![image55](../images/grey_arrow_down2.png)
 
-![image56](../../images/1107374524.png)
+![image56](../images/1107374524.png)
 
 XilSEM Library
 
 Leave all settings at Default. XilSEM is not used in AMR.
 
-![image57](../../images/grey_arrow_down2.png)
+![image57](../images/grey_arrow_down2.png)
 
-![image58](../../images/1107374521.png)
+![image58](../images/1107374521.png)
 
 <span id="amr-cipsconfiguration-sysmon"></span>
 
@@ -599,9 +599,9 @@ Leave all settings at Default. XilSEM is not used in AMR.
 
 Change the voltage averaging samples to 8.
 
-![image59](../../images/grey_arrow_down2.png)
+![image59](../images/grey_arrow_down2.png)
 
-![image60](../../images/1107374503.png)
+![image60](../images/1107374503.png)
 
 **On Chip Supply**
 
@@ -659,27 +659,27 @@ Monitor GTYP Bank Voltages
 
   - GTYP\_AVCCAUX\_105: Gigabit transceiver; auxiliary analog transceivers
 
-![image61](../../images/grey_arrow_down2.png)
+![image61](../images/grey_arrow_down2.png)
 
-![image62](../../images/1107374455.png)
+![image62](../images/1107374455.png)
 
-![image63](../../images/1107374464.png)
+![image63](../images/1107374464.png)
 
 **Temperature**
 
 Enable the over temperature check to help protect the Versal device and PCB.
 
-![image64](../../images/grey_arrow_down2.png)
+![image64](../images/grey_arrow_down2.png)
 
-![image65](../../images/1107374515.png)
+![image65](../images/1107374515.png)
 
 **External Supply Monitor**
 
 None of the external supplies are monitored in AMR.
 
-![image66](../../images/grey_arrow_down2.png)
+![image66](../images/grey_arrow_down2.png)
 
-![image67](../../images/1107374506.png)
+![image67](../images/1107374506.png)
 
 <span id="amr-cipsconfiguration-slr1-1"></span>
 
@@ -689,9 +689,9 @@ None of the external supplies are monitored in AMR.
 
 None of the supplies in SLR1 are monitored in AMR.
 
-![image68](../../images/grey_arrow_down2.png)
+![image68](../images/grey_arrow_down2.png)
 
-![image69](../../images/1107374518.png)
+![image69](../images/1107374518.png)
 
 <span id="amr-cipsconfiguration-slr2-1"></span>
 
@@ -701,9 +701,9 @@ On Chip Supply
 
 None of the supplies in SLR2 are monitored in AMR V80.
 
-![image70](../../images/grey_arrow_down2.png)
+![image70](../images/grey_arrow_down2.png)
 
-![image71](../../images/1107374494.png)
+![image71](../images/1107374494.png)
 
 <span id="amr-cipsconfiguration-devicesecurity"></span>
 
@@ -729,11 +729,11 @@ Unselect “Known Answer Tests (KATs)”. AMR does not use the Cryptographic eng
 
 AMR does not enable clock monitoring. Leave all settings at Default.
 
-![image72](../../images/grey_arrow_down2.png)
+![image72](../images/grey_arrow_down2.png)
 
-![image73](../../images/1107374440.png)
+![image73](../images/1107374440.png)
 
-![image74](../../images/1107374473.png)
+![image74](../images/1107374473.png)
 
 <span id="id2"></span>
 
@@ -755,11 +755,11 @@ Unselect ‘Known Answer Tests (KATs)’. AMR does not use the Cryptographic eng
 
 AMR does not enable clock monitoring. Leave all settings at default.
 
-![image75](../../images/grey_arrow_down2.png)
+![image75](../images/grey_arrow_down2.png)
 
-![image76](../../images/1107374452.png)
+![image76](../images/1107374452.png)
 
-![image77](../../images/1107374461.png)
+![image77](../images/1107374461.png)
 
 <span id="id3"></span>
 
@@ -781,11 +781,11 @@ Unselect ‘Known Answer Tests (KATs)’. AMR does not use the cryptographic eng
 
 AMR does not enable clock monitoring. Leave all settings at default.
 
-![image78](../../images/grey_arrow_down2.png)
+![image78](../images/grey_arrow_down2.png)
 
-![image79](../../images/1107374443.png)
+![image79](../images/1107374443.png)
 
-![image80](../../images/1107374449.png)
+![image80](../images/1107374449.png)
 
 <span id="amr-cipsconfiguration-tamper"></span>
 
@@ -807,11 +807,11 @@ Leave all settings at default.
 
 Leave all settings at default.
 
-![image81](../../images/grey_arrow_down2.png)
+![image81](../images/grey_arrow_down2.png)
 
-![image82](../../images/1107374500.png)
+![image82](../images/1107374500.png)
 
-![image83](../../images/1107374509.png)
+![image83](../images/1107374509.png)
 
 <span id="id5"></span>
 
@@ -825,11 +825,11 @@ Leave all settings at default.
 
 Leave all settings at default.
 
-![image84](../../images/grey_arrow_down2.png)
+![image84](../images/grey_arrow_down2.png)
 
-![image85](../../images/1107374485.png)
+![image85](../images/1107374485.png)
 
-![image86](../../images/1107374491.png)
+![image86](../images/1107374491.png)
 
 <span id="id6"></span>
 
@@ -843,11 +843,11 @@ Leave all settings at default.
 
 Leave all settings at default.
 
-![image87](../../images/grey_arrow_down2.png)
+![image87](../images/grey_arrow_down2.png)
 
-![image88](../../images/1107374497.png)
+![image88](../images/1107374497.png)
 
-![image89](../../images/1107374482.png)
+![image89](../images/1107374482.png)
 
 <span id="amr-cipsconfiguration-psplinterfaces"></span>
 
@@ -862,9 +862,9 @@ AMR only uses one PL reset from CIPS and it is enabled here. This reset is used 
 
 **Note:** The General Command Queue (GCQ) is implemented as a **software abstraction** in firmware using shared DDR memory, not as a hardware IP block in the current V80 base design.
 
-![image90](../../images/grey_arrow_down2.png)
+![image90](../images/grey_arrow_down2.png)
 
-![image91](../../images/1107374488.png)
+![image91](../images/1107374488.png)
 
 <span id="amr-cipsconfiguration-noc"></span>
 
@@ -884,9 +884,9 @@ PMC:
 
   - Select ‘PMC to NoC’: This creates the 128-bit @ 400MHz PMC\_NOC\_AXI\_0 port on CIPS
 
-![image92](../../images/grey_arrow_down2.png)
+![image92](../images/grey_arrow_down2.png)
 
-![image93](../../images/1107374476.png)
+![image93](../images/1107374476.png)
 
 <span id="id8"></span>
 
@@ -894,9 +894,9 @@ PMC:
 
 AMR does not have any PMC NoC connections in SLR1.
 
-![image94](../../images/grey_arrow_down2.png)
+![image94](../images/grey_arrow_down2.png)
 
-[![image95](../../images/1107374470.png)](../../images/1107374470.png)
+[![image95](../images/1107374470.png)](../images/1107374470.png)
 
 <span id="id9"></span>
 
@@ -904,9 +904,9 @@ AMR does not have any PMC NoC connections in SLR1.
 
 AMR does not have any PMC NoC connections in SLR2.
 
-![image96](../../images/grey_arrow_down2.png)
+![image96](../images/grey_arrow_down2.png)
 
-[![image97](../../images/1107374467.png)](../../images/1107374467.png)
+[![image97](../images/1107374467.png)](../images/1107374467.png)
 
 <span id="amr-cipsconfiguration-interrupts"></span>
 
@@ -926,9 +926,9 @@ Enable Inter Processor Interrupts. The Inter Processor Interrupts allows one pro
 
   - IPI 5:6: R5 1
 
-![image98](../../images/grey_arrow_down2.png)
+![image98](../images/grey_arrow_down2.png)
 
-![image99](../../images/1107374434.png)
+![image99](../images/1107374434.png)
 
 <span id="amr-cipsconfiguration-power"></span>
 
@@ -944,13 +944,13 @@ Set the AMR MIO Bank voltages to match the AMR design requirements.
 
   - Bank3 \[Dedicated\]: LVCMOS 1.8V (default)
 
-![image100](../../images/grey_arrow_down2.png)
+![image100](../images/grey_arrow_down2.png)
 
-[![image101](../../images/1107374458.png)](../../images/1107374458.png)
+[![image101](../images/1107374458.png)](../images/1107374458.png)
 
 PS PMC TCL Settings
 
-![image102](../../images/grey_arrow_down2.png)
+![image102](../images/grey_arrow_down2.png)
 
 CONFIG.PS\_PMC\_CONFIG { \\
 
