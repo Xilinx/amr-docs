@@ -1,0 +1,154 @@
+# AMR - Memory Architecture Concepts (Common)
+
+> **For board-specific memory configurations**, see:
+> - [V80 Memory Resources](../V80/hardware/memory-resources.md) - HBM + DDR4 DIMM + Discrete SDRAM (68GB)
+> - [RAVE Memory Resources](../RAVE/hardware/memory-resources.md) - LPDDR4 only (8-16GB)
+
+<span id="amr-memoryresources-overview"></span>
+
+## Overview
+
+This document describes **common memory architecture concepts** shared across all AMR boards. All boards use Versal integrated memory controllers and DRAM for RPU0 execution and inter-processor communication.
+
+All AMR boards allocate DRAM memory for RPU0 firmware execution, storing the firmware code sections, data sections, stack, and heap in memory accessible by the R5 processors. Shared DRAM regions support the software GCQ implementation for inter-processor communication, with ring buffers and message storage allocated in memory accessible by both the RPU and PCIe host. The Versal integrated memory controllers (DDRMC) provide hardened logic for controlling DRAM and LPDDR4 devices, with NoC connectivity enabling access from multiple masters throughout the system.
+
+Board-specific memory configurations vary significantly in capacity and architecture. The V80 Board combines HBM (32GB), DDR DIMM (32GB), and discrete SDRAM (4GB) for a total of 68GB of memory resources distributed across multiple memory types optimized for different access patterns. The RAVE Board uses LPDDR4 exclusively with 8GB or 16GB total capacity depending on the board variant, providing a more constrained memory environment optimized for embedded applications.
+
+<span id="amr-memoryresources-memorycontrollers"></span>
+
+## Versal Integrated Memory Controllers
+
+All Versal devices include integrated memory controllers (DDRMC) that connect to the NoC.
+
+### DDRMC Architecture
+
+The Versal integrated memory controllers implement hardened logic for DDR and LPDDR4 memory management. Each controller provides multiple ports for parallel access, with four ports per controller enabling concurrent access from different masters to optimize overall memory throughput. The controllers integrate with the NoC through DDRMC_NSU (NoC Slave Unit) interfaces that convert NoC packet domain traffic directly to memory controller operations.
+
+The memory controllers operate at configurable frequencies with 200 MHz being the typical configuration for AMR boards. This frequency applies to the controller clock, with DDR and LPDDR4 devices achieving higher effective data rates through double-data-rate operation. The controllers support various DDR technologies including DDR4, LPDDR4, and LPDDR4X depending on the specific Versal device variant.
+
+Each memory controller provides four ports that can be independently addressed and accessed. AMR designs typically utilize two ports per controller (ports 0 and 1) for CIPS traffic and PCIe DMA operations. The remaining ports (2 and 3) stay available for user application memory masters when additional bandwidth or parallel access paths are required.
+
+More information: [Integrated Memory Controller Architecture](https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Integrated-Memory-Controller-DDRMC-Architecture)
+
+<span id="amr-memoryresources-memoryusagepatterns"></span>
+
+## Common Memory Usage Patterns
+
+### RPU Execution Memory
+
+All boards allocate DRAM memory regions for RPU0 firmware execution. The RPU uses this memory for firmware code sections containing the executable instructions, firmware data sections holding initialized and uninitialized variables, and stack and heap regions for runtime memory allocation. Firmware data structures including message buffers, state machines, and configuration tables also reside in this memory.
+
+The RPU accesses DDR memory through the LPD_AXI_NOC_0 NoC interface, which provides a 128-bit connection operating at 800 MHz. The R5 processors have 32-bit addressing capabilities, limiting direct access to a maximum of 4GB of the address space. This constraint influences memory allocation strategies, with firmware and related data structures placed within the lower 4GB region for direct RPU accessibility.
+
+### Inter-Processor Communication (IPC)
+
+The software GCQ implementation allocates shared DRAM memory regions for inter-processor communication. Ring buffer structures for submission and completion queues reside in memory that is accessible by the RPU through direct addressing, by the PMC through its NoC connection, and by the PCIe host through address-remapped BAR regions. Firmware protocols manage queue synchronization, message formatting, and flow control without dedicated hardware logic. This approach represents a pure software and firmware implementation rather than a hardware IP block in the programmable logic.
+
+### PMC Boot Memory
+
+The PMC utilizes DRAM memory during the boot sequence for pre-boot initialization activities, temporary storage of configuration data, platform management function execution, and device initialization sequences. The PMC writes initialization parameters to memory, prepares data structures for handoff to the RPU, and may cache configuration information before the full system becomes operational.
+
+<span id="amr-memoryresources-nocintegration"></span>
+
+## NoC Integration
+
+### DDRMC to NoC Connection
+
+**All memory controllers connect to NoC via DDRMC_NSU:**
+- Converts NoC packet domain to memory controller domain
+- No AXI protocol conversion (direct NoC to MC)
+- Optimized for memory bandwidth
+
+**NoC Routing to Memory:**
+- PCIe host → NoC → DDRMC_NSU → Memory
+- RPU → NoC → DDRMC_NSU → Memory
+- PMC → NoC → DDRMC_NSU → Memory
+
+### Memory Performance
+
+Memory performance is influenced by several factors that interact in complex ways. NoC contention between multiple masters accessing memory simultaneously can reduce available bandwidth for individual transactions. Quality of Service settings in the NoC configuration affect arbitration priority and bandwidth allocation among competing traffic streams. The read/write ratio of the workload influences memory controller efficiency due to different command overhead for read versus write operations. Burst sizes affect protocol efficiency with larger bursts amortizing command overhead across more data beats. Memory controller address mapping determines whether accesses hit in open row buffers or require row activation commands. The number of active memory controller ports affects parallel access capability and overall throughput potential.
+
+<span id="amr-memoryresources-memoryfrequency"></span>
+
+## Memory Operating Frequency
+
+**Common Configuration:**
+- Memory Controller Frequency: **200 MHz**
+- For DDR: Effective data rate = **400 MT/s** (double data rate)
+- For LPDDR4: Effective data rate = **400 MT/s**
+
+**Note:** HBM (V80 only) uses separate integrated controllers operating at 200 MHz.
+
+<span id="amr-memoryresources-addressspace"></span>
+
+## Address Space Concepts
+
+### Versal Address Map
+
+**4GB Address Space (32-bit accessible):**
+- 0x000_0000_0000 - 0x000_FFFF_FFFF (4GB)
+- Includes PS/PMC peripherals and lower DRAM
+
+**16TB Address Space (64-bit):**
+- 0x000_0000_0000 - 0x0FF_FFFF_FFFF (16TB)
+- Includes upper DDR, HBM (V80), PL address space
+
+**References:**
+- [Versal 4GB Address Map](https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/4-GB-Processor-System-Address-Map)
+- [Versal 16TB Address Map](https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map)
+
+<span id="amr-memoryresources-boarddifferences"></span>
+
+## Board-Specific Memory Configurations
+
+For detailed memory configurations, see board-specific documentation:
+
+### V80 Memory Configuration
+[V80 Memory Resources](../V80/hardware/memory-resources.md)
+
+**V80-Specific:**
+- ✓ **HBM**: 32 GB (2× 16GB stacks, 16 controllers)
+- ✓ **DDR DIMM**: 32 GB DDR4 RDIMM
+- ✓ **Discrete SDRAM**: 4 GB LPDDR4
+- ✓ **Total**: 68 GB
+- ✓ **HBM Bandwidth**: ~460 GB/s
+
+### RAVE Memory Configuration
+[RAVE Memory Resources](../RAVE/hardware/memory-resources.md)
+
+**RAVE-Specific:**
+- ✓ **LPDDR4**: 8 GB or 16 GB (soldered)
+- ✓ **Configuration**: 2 channels x32
+- ✓ **Total**: 8-16 GB
+- ❌ **No HBM**: Edge device limitation
+- ❌ **No DIMM slots**: Embedded platform
+
+<span id="amr-memoryresources-designguidelines"></span>
+
+## Design Guidelines
+
+### Memory Allocation
+
+When designing applications for AMR:
+
+1. **Check board memory capacity**
+   - V80: 68 GB available
+   - RAVE: 8-16 GB available
+
+2. **Reserve RPU memory**
+   - Firmware execution and data
+   - Software GCQ buffers
+   - Typically few MB
+
+3. **Plan for IPC**
+   - Software GCQ requires shared memory
+   - Size based on message throughput
+
+4. **Consider bandwidth**
+   - V80: Use HBM for high-bandwidth workloads
+   - RAVE: LPDDR4 sufficient for edge applications
+
+### Board Portability
+
+To support both boards, application designs should target the more constrained memory capacity (8-16GB) to ensure portability across boards. Applications should not assume HBM availability and should instead design memory access patterns that work with standard DDR or LPDDR4 memory. Using QDMA abstractions ensures DMA code works across boards regardless of whether QDMA is hardened or implemented in PL. Testing memory bandwidth requirements on both boards validates that performance is acceptable across the different memory architectures.
+

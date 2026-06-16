@@ -1,0 +1,123 @@
+# AMR RAVE - Memory Map
+
+> **For common address mapping concepts**, see [Common Memory Map](../../hardware/memory-map.md)
+>
+> This document describes RAVE-specific address assignments and LPDDR4 memory regions.
+
+<span id="amrrave-memorymap-overview"></span>
+
+## Overview
+
+The RAVE memory map encompasses the LPDDR4 address space along with PL address regions for PCIe BAR access via XDMA. The addressing scheme follows standard Versal conventions with both 4GB and 16TB address spaces utilized for different access patterns and masters.
+
+<span id="amrrave-memorymap-lpddr4regions"></span>
+
+## LPDDR4 Address Regions
+
+### Lower 2GB Region (4GB Address Space)
+
+**Range:** 0x000_0000_0000 - 0x000_7FFF_FFFF (2GB)
+
+This region resides within the 32-bit addressable 4GB space, accessible by the RPU processors which have 32-bit addressing limitations. The region contains:
+
+The PMC boot and configuration data occupies the lower portions of this space during device initialization. After boot, these regions become available for firmware use.
+
+RPU firmware code sections (.text, .rodata) load into this region from the boot PDI. The firmware data sections (.data, .bss) along with stack and heap allocations also reside here. Typical firmware footprint ranges from a few megabytes to tens of megabytes.
+
+Software GCQ buffers for inter-processor communication are allocated in this region. The submission and completion queue ring buffers occupy shared memory accessible by both the RPU and the PCIe host (through NoC address remapping and XDMA). Buffer sizes typically range from 10-50 MB depending on throughput requirements.
+
+### Upper LPDDR4 Regions
+
+**Range:** Configured in higher address space
+
+The remaining LPDDR4 capacity is mapped into the extended address space above 4GB. This memory is accessible through 64-bit addressing from the PCIe host and through NoC from various masters.
+
+User application data and XDMA buffers typically reside in these upper regions. The total available space depends on the board variant, with approximately 7-7.5 GB available in 8GB configurations and 15-15.5 GB available in 16GB configurations after accounting for firmware and GCQ overhead.
+
+<span id="amrrave-memorymap-pladdressspace"></span>
+
+## PL Address Space
+
+### PF0 Management Address Space
+
+The PF0 BAR provides access to management address space in the PL region. The specific base address and aperture size are configurable in the PCIe IP PCIEBAR2AXIBAR registers.
+
+The base design reserves this address space for future management IP but does not instantiate hardware management blocks. Management operations are handled through firmware using CIPS peripherals and software GCQ protocols.
+
+### PF1 User Address Space
+
+The PF1 provides multiple BARs for different purposes:
+- **PF1 BAR0** (16 MB): XDMA control and status registers
+- **PF1 BAR2** (64 KB): AXI-Lite bridge access to PL peripherals including test GPIO
+- **PF1 BAR4** (256 MB): AXI bypass interface for user application memory access
+
+The NoC routes PCIe traffic from the PF1 BARs through XDMA to the appropriate destinations. The SmartConnect in the PF1 hierarchy decodes local addresses to route traffic to specific peripheral blocks.
+
+<span id="amrrave-memorymap-addressremapping"></span>
+
+## Address Remapping Configuration
+
+### PCIe to AXI Translation via XDMA
+
+The XDMA IP provides address translation for PCIe BAR addresses to AXI addresses. The XDMA configuration includes:
+- **AXI-Lite Master**: 16 MB address space for PL peripheral access (PF1 BAR2 → 64 KB)
+- **AXI Bypass**: 256 MB address space for direct memory access (PF1 BAR4 → 256 MB)
+- **Address Masking**: Custom axi_addr_mask IP applies masks (0x0000000000FFFFFF for lite, 0x000000000FFFFFFF for bypass) to translate PCIe addresses to local AXI addresses
+
+The AXI NoC IP includes REMAPS configuration parameters that route translated addresses through the NoC fabric to LPDDR4 or PL peripherals.
+
+### Software GCQ Address Translation
+
+The software GCQ mechanism uses address remapping to allow both the RPU and PCIe host to access shared LPDDR4 buffers. The RPU accesses the buffers through direct LPDDR4 addresses in the lower 4GB space. The PCIe host accesses the same physical memory through XDMA using the AXI bypass interface (PF1 BAR4), which the NoC translates to the corresponding LPDDR4 physical addresses.
+
+This dual-access pattern requires careful address planning to ensure the XDMA address masking and NoC remap configuration correctly map the PCIe addresses to the intended LPDDR4 regions. Firmware and host driver software must coordinate on the address conventions to maintain consistency.
+
+<span id="amrrave-memorymap-memoryallocation"></span>
+
+## Memory Allocation Strategy
+
+### Firmware Region (Lower LPDDR4)
+
+Firmware occupies the lower LPDDR4 region with code, data, and stack sections loaded during boot. The exact addresses depend on the linker script configuration and firmware size. Typical allocation reserves the first 100-500 MB of LPDDR4 for firmware use.
+
+### GCQ Buffer Region
+
+The software GCQ buffers are allocated in the lower LPDDR4 region, chosen for efficient RPU access. The PCIe host accesses these buffers through NoC address remapping. Buffer allocation typically reserves 10-50 MB depending on queue depths and message sizes.
+
+### User Application Region
+
+The remaining LPDDR4 capacity is available for user applications. This region may be accessed through XDMA for data transfer between Ryzen and Versal. User applications can allocate buffers for video frames, AI model storage, network packets, or other application-specific data.
+
+The usable capacity accounts for firmware and GCQ overhead, providing approximately 7-7.5 GB in 8GB configurations or 15-15.5 GB in 16GB configurations for application use.
+
+<span id="amrrave-memorymap-addressspacesummary"></span>
+
+## Address Space Summary
+
+### 4GB Space (RPU Accessible)
+
+| Range                             | Purpose            | Access                        |
+| --------------------------------- | ------------------ | ----------------------------- |
+| 0x000_0000_0000 - 0x000_7FFF_FFFF | Lower LPDDR4 (2GB) | PMC, RPU, APU, Host via remap |
+| 0x0F0_0000_0000 - 0x0FF_FFFF_FFFF | PS/PMC Peripherals | RPU, PMC                      |
+
+### Extended Space (64-bit)
+
+| Range            | Purpose              | Access                                   |
+| ---------------- | -------------------- | ---------------------------------------- |
+| 0x500_0000_0000+ | Upper LPDDR4 regions | Host via XDMA, NoC masters               |
+| 0x201_xxxx_xxxx  | PF0 BAR0 (8 MB)      | Host via PCIe PF0                        |
+| 0x202_xxxx_xxxx  | PF1 BAR0 (16 MB)     | Host via PCIe PF1 (XDMA registers)       |
+| 0x202_01xx_xxxx  | PF1 BAR2 (64 KB)     | Host via PCIe PF1 (AXI-Lite peripherals) |
+| 0x202_1xxx_xxxx  | PF1 BAR4 (256 MB)    | Host via PCIe PF1 (AXI bypass/memory)    |
+
+Specific address ranges depend on the BAR sizes configured in the XDMA IP and the LPDDR4 capacity of the board variant. PF0 uses device ID 0x5710, and PF1 uses device ID 0x5711 (vendor ID 0x10EE).
+
+## References
+
+- [Common Memory Map](../../hardware/memory-map.md) - Address mapping concepts
+- [RAVE Memory Resources](memory-resources.md) - LPDDR4 configuration
+- [RAVE PCIe Configuration](pcie-config.md) - PCIe and XDMA configuration
+- [RAVE NoC Configuration](noc-config.md) - NoC routing and remapping
+- [RAVE XDMA Configuration](xdma-config.md) - XDMA IP integration details
+

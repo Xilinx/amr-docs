@@ -1,0 +1,109 @@
+# AMR OutOfBand Telemetry Application<sup>1</sup>
+
+<span id="amroutofbandtelemetryapplication-overview"></span>
+
+## Overview
+
+The Out-of-Band Telemetry application handles the events and communication between the Board Management Controller (BMC) and the ASDM data.
+
+<span id="amroutofbandtelemetryapplication-applicationexternalapis"></span>
+
+## Application External APIs
+
+<span id="amroutofbandtelemetryapplication-initializetheapplication"></span>
+
+### Initialize the application
+
+This function:
+
+  - Creates a mutex
+
+  - Binds into the BMC Proxy via iBMC\_BindCallback and starts listening for incoming events.
+
+![images/1107376220.png](../images/1107376220.png)
+
+**iOUT\_OF\_BAND\_TELEMETRY\_Initialise**
+
+    /**
+     * @brief   Initialise the out of band telemetry application layer
+     *          used to handle events and communication with RMI
+     *
+     * @return  OK          Success
+     *          ERROR       Failure
+     */
+    int iOUT_OF_BAND_TELEMETRY_Initialise( void );
+
+<span id="amroutofbandtelemetryapplication-printstatistics"></span>
+
+### Print Statistics
+
+Debug function used to display the statistic counters and errors.
+
+**iOUT\_OF\_BAND\_TELEMETRY\_PrintStatistics**
+
+    /**
+     * @brief   Print all the stats gathered by the application
+     *
+     * @return  OK          Stats retrieved from the application successfully
+     *          ERROR       Stats not retrieved successfully
+     *
+     */
+    int iOUT_OF_BAND_TELEMETRY_PrintStatistics( void );
+
+<span id="amroutofbandtelemetryapplication-clearstatistics"></span>
+
+### Clear Statistics
+
+Debug function used to clear the all statistics counters back to zero.
+
+**iOUT\_OF\_BAND\_TELEMETRY\_ClearStatistics**
+
+    /**
+     * @brief   Clear all the stats in the application
+     *
+     * @return  OK          Stats cleared successfully
+     *          ERROR       Stats not cleared successfully
+     *
+     */
+    int iOUT_OF_BAND_TELEMETRY_ClearStatistics( void );
+
+<span id="amroutofbandtelemetryapplication-bmccallback"></span>
+
+### BMC Callback
+
+On initialization, the application binds in the BMC callback and starts listening to incoming events.
+
+When an event is received, the application will call back into the BMC Proxy to get additional data associated with the request, e.g. Sensor ID.
+
+The request type (below) is then used to form up the response back from the BMC Proxy, and increment stats where required.
+
+<table>
+<thead>
+<tr class="header">
+<th>Event Type</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span data-colorid="fqh93d2b6k">BMC_PROXY_DRIVER_E_GET_PDR</span></td>
+<td>Stat incremented internally.</td>
+</tr>
+<tr class="even">
+<td><span data-colorid="nowtycj6mz">BMC_PROXY_DRIVER_E_GET_PDR_REPOSITORY_INFO</span></td>
+<td>Stat incremented internally.</td>
+</tr>
+<tr class="odd">
+<td><span data-colorid="eotkfyhipx">BMC_PROXY_DRIVER_E_GET_SENSOR_INFO</span></td>
+<td><p>PLDM ID is decoded into AMC ID and sensor type. The application then calls into the ASC with those parameters to pull the latest sensor value. This is then returned to the BMC proxy as an int16_t.</p>
+<p>Stat incremented internally.</p></td>
+</tr>
+<tr class="even">
+<td><span data-colorid="yh5i51zb3r">BMC_PROXY_DRIVER_E_ENABLE_SENSOR</span></td>
+<td><p>PLDM ID is decoded into AMC ID and sensor type. The application then calls into the ASC with those parameters to set the sensor operational state to the value provided in the initial request. OK returned to BMC if sensor state was set successfully.</p>
+<p>Stat incremented internally.</p></td>
+</tr>
+</tbody>
+</table>
+
+  *<sup>1</sup>Alveo only*

@@ -1,0 +1,24 @@
+# How-to Install and Run xbtest on V80 Card
+
+<span id="how-toinstallandrunxbtestonv80card-note"></span>
+
+## Important Note
+
+**xbtest is not supported with AMR in this release.**
+
+For xbtest functionality on V80 cards, you must use the AVED 2025.2 release instead of AMR.
+
+Please refer to the AVED documentation for complete xbtest installation and usage instructions:
+
+**AVED xbtest Documentation:**
+[https://xilinx.github.io/AVED/amd_v80_gen5x8_exdes_1_20231204/How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html](https://xilinx.github.io/AVED/amd_v80_gen5x8_exdes_1_20231204/How-to%2Binstall%2Band%2Brun%2Ba%2Bpre-built%2BAVED%2Bdesign%2Bon%2Ban%2BALVEO%2Bcard.html)
+
+<span id="how-toinstallandrunxbtestonv80card-nextsteps"></span>
+
+## Next Steps
+
+If you need AMR functionality without xbtest, refer to:
+
+- [How-to Install Prebuilt AMR Packages](../../getting-started/install-prebuilt.md)
+- [How-to Build an AMR Design for V80](../../getting-started/build_v80.md)
+- [AMR Management Interface userguide](../../deployment/ami-tool-guide.md)

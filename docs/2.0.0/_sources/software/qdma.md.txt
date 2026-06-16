@@ -1,0 +1,346 @@
+# AMR QDMA
+
+> **Note:** Queue DMA (QDMA) functionality is supported exclusively on the Alveo V80 Board. QDMA is not available on RAVE (Embedded+) boards, which utilize XDMA for PCIe data transfer operations.
+
+Xilinx QDMA
+
+The Xilinx PCI Express Multi Queue DMA (QDMA) IP provides high-performance direct memory access (DMA) via PCI Express.
+
+Both the linux kernel driver and the DPDK driver can be run on a PCI Express root port host PC to interact with the QDMA endpoint IP via PCI Express.
+
+For the detailed documentation, following links should be followed:
+
+  - Documentation: [QDMA Linux Driver](https://xilinx.github.io/dma_ip_drivers/master/QDMA/linux-kernel/html/index)
+
+  - Github: <https://github.com/Xilinx/dma_ip_drivers>
+
+<span id="amrqdma-installing"></span>
+
+## Installing
+
+Before building add the PCIe identifier into table at end of PF section at src/pci\_ids.h .
+
+The identifier can be found by issuing the following command:
+
+    ```
+    lspci -vd 10ee:
+    21:00.0 Processing accelerators: Xilinx Corporation Device 50b4
+        Subsystem: Xilinx Corporation Device 000e
+        Physical Slot: 7-1
+        Flags: bus master, fast devsel, latency 0, NUMA node 1, IOMMU group 76
+        Memory at 96000000 (64-bit, non-prefetchable) [size=8M]
+        Capabilities: <access denied>
+        Kernel driver in use: ami
+        Kernel modules: ami
+
+    21:00.1 Processing accelerators: Xilinx Corporation Device 50b5
+        Subsystem: Xilinx Corporation Device 000e
+        Physical Slot: 7-1
+        Flags: bus master, fast devsel, latency 0, NUMA node 1, IOMMU group 76
+        Memory at 10120000000 (64-bit, prefetchable) [size=512K]
+        Memory at 10110000000 (64-bit, prefetchable) [size=256M]
+        Capabilities: <access denied>
+        Kernel modules: qdma_pf, ami, qdma_vf
+        Kernel driver in use: qdma-pf
+
+    ```
+
+At the same line with 21:00.1, you can see the PCIe identifier as `50b5`. It should be added to end of `src/pci_ids.h` in the following form:
+
+    ```c
+    { PCI_DEVICE(0x10ee, 0x50b5), },        /** V80 */
+    ```
+
+The QDMA driver can then be built:
+
+    ```bash
+    # Build the QDMA driver
+    cd dma_ip_drivers/QDMA/linux-kernel && make
+
+    # Install the QDMA driver
+    make install-mods
+
+    # After install-mods, check if module is probed
+    lspci -vd 10ee:
+    ```
+    21:00.0 Processing accelerators: Xilinx Corporation Device 50b4
+        Subsystem: Xilinx Corporation Device 000e
+        Physical Slot: 7-1
+        Flags: bus master, fast devsel, latency 0, NUMA node 1, IOMMU group 76
+        Memory at 96000000 (64-bit, non-prefetchable) [size=8M]
+        Capabilities: <access denied>
+        Kernel driver in use: ami
+        Kernel modules: ami
+    
+    21:00.1 Processing accelerators: Xilinx Corporation Device 50b5
+        Subsystem: Xilinx Corporation Device 000e
+        Physical Slot: 7-1
+        Flags: bus master, fast devsel, latency 0, NUMA node 1, IOMMU group 76
+        Memory at 10120000000 (64-bit, prefetchable) [size=512K]
+        Memory at 10110000000 (64-bit, prefetchable) [size=256M]
+        Capabilities: <access denied>
+        Kernel modules: qdma_pf, ami, qdma_vf
+        Kernel driver in use: qdma-pf
+
+<span id="amrqdma-examples"></span>
+
+## Examples:
+
+Note: All examples have been run with sudo privilege
+
+**List Available Devices**
+
+    [xilinx@] dma-ctl dev list
+    
+    qdma01000       0000:01:00.0    max QP: 0, -~-
+    qdma01001       0000:01:00.1    max QP: 0, -~-
+    qdma01002       0000:01:00.2    max QP: 0, -~-
+    qdma01003       0000:01:00.3    max QP: 0, -~-
+
+    **Set Qmax**
+
+    [xilinx@] dma-ctl dev list
+    
+    qdma01000       0000:01:00.0    max QP: 0, -~-
+    qdma01001       0000:01:00.1    max QP: 0, -~-
+    qdma01002       0000:01:00.2    max QP: 0, -~-
+    qdma01003       0000:01:00.3    max QP: 0, -~-
+    
+    
+    qdmavf01004     0000:01:00.4    max QP: 0, -~-
+    
+    
+    [xilinx@] echo 100 > /sys/bus/pci/devices/0000\:01\:00.0/qdma/qmax
+    [xilinx@] echo 100 > /sys/bus/pci/devices/0000\:01\:00.1/qdma/qmax
+    [xilinx@] echo 100 > /sys/bus/pci/devices/0000\:01\:00.2/qdma/qmax
+    [xilinx@] echo 100 > /sys/bus/pci/devices/0000\:01\:00.3/qdma/qmax
+    [xilinx@] echo 100 > /sys/bus/pci/devices/0000\:01\:00.4/qdma/qmax
+    [xilinx@] dma-ctl dev list
+    
+    qdma01000       0000:01:00.0    max QP: 100, 0~99
+    qdma01001       0000:01:00.1    max QP: 100, 100~199
+    qdma01002       0000:01:00.2    max QP: 100, 200~299
+    qdma01003       0000:01:00.3    max QP: 100, 300~399
+    
+    
+    qdmavf01004     0000:01:00.4    max QP: 100, 400~499
+
+**Queue Management**
+
+    ```bash
+    # Queue stats
+    dma-ctl qdma01000 stat
+
+    qdma01000:statistics
+    Total MM H2C packets processed = 0
+    Total MM C2H packets processed = 0
+    Total ST H2C packets processed = 0
+    Total ST C2H packets processed = 0
+    Min Ping Pong Latency = 0
+    Max Ping Pong Latency = 0
+    Avg Ping Pong Latency = 0
+
+    # Add a queue
+    dma-ctl qdma01000 q add idx 4 mode mm dir h2c
+
+    qdma01000-MM-4 H2C added.
+    Added 1 Queues.
+
+    # Start a queue
+    dma-ctl qdma01000 q start idx 4 dir h2c
+    dma-ctl: Info: Default ring size set to 2048
+
+    1 Queues started, idx 4 ~ 4.
+    ```
+
+**Read/Write Operations**
+
+    ```bash
+    # Write to DMA
+    dma-to-device [OPTIONS]
+    -d (--device) device path from /dev. Device name is formed as qdmabbddf-<mode>-<queue_number>. Ex: /dev/qdma01000-MM-0
+    -a (--address) the start address on the AXI bus
+    -s (--size) size of a single transfer in bytes, default 32 bytes
+    -o (--offset) page offset of transfer
+    -c (--count) number of transfers, default 1
+    -f (--data input file) filename to read the data from.
+    -w (--data output file) filename to write the data of the transfers
+    -h (--help) print usage help and exit
+    -v (--verbose) verbose output
+
+    # Example Write
+    dma-to-device -d /dev/qdma06000-MM-0 -s 64
+    size=64 Average BW = 375.194937 KB/sec
+
+    # Read from DMA
+    dma-from-device [OPTIONS]
+    -d (--device) device path from /dev. Device name is formed as qdmabbddf-<mode>-<queue_number>. Ex: /dev/qdma01000-MM-0
+    -a (--address) the start address on the AXI bus
+    -s (--size) size of a single transfer in bytes, default 32 bytes.
+    -o (--offset) page offset of transfer
+    -c (--count) number of transfers, default is 1.
+    -f (--file) file to write the data of the transfers
+    -h (--help) print usage help and exit
+    -v (--verbose) verbose output
+
+    # Example Read
+    dma-from-device -d /dev/qdma01000-MM-1 -s 64
+    size=64 Average BW = 328.311188 KB/sec
+
+    # Compare Example
+    # Create 128kb file filled with random values
+    dd if=/dev/urandom bs=1024 count=128 of=file_128kb conv=notrunc
+
+    # Example write to address 0
+    dma-to-device -d /dev/qdma06000-MM-0 -a 0 -s 131072 -f file_128kb
+
+    # Example read from address 0
+    dma-from-device -d /dev/qdma06000-MM-0 -a 0 -s 131072 -f output_128kb
+
+    # Compare the files
+    cmp ./file_128kb ./output_128kb
+    # If there is nothing showed up, it means files are the same
+    ```
+
+<span id="amrqdma-dmaperf"></span>
+
+## DMA Perf
+
+Standard IO tools such as `fio` can be used for performing IO operations using the char device interface.
+
+However, most of the tools are limited to sending / receiving 1 packet at a time and wait for the processing of the packet to complete, so they are not able to keep the driver/ HW busy enough for performance measurement. Although fio also supports asynchronous interfaces, it does not continuously submit IO requests while polling for the completion in parallel.
+
+To overcome this limitation, Xilinx developed dma-perf tool. It leverages the asynchronous functionality provided by libaio library. Using libaio, an application can submit IO request to the driver and the driver returns the control to the caller immediately (i.e., non-blocking). The completion notification is sent separately, so the application can then poll for the completion and free the buffer upon receiving the completion.
+
+**DMA Performance Tools**
+
+    usage: dma-perf [OPTIONS]
+       -c (--config) config file that has configuration for IO
+    
+    [xilinx@] dma-perf -c perf_config.txt
+    qdma65000-MM-0 H2C added.
+    Added 1 Queues.
+    Queues started, idx 0 ~ 0.
+    qdma65000-MM-0 C2H added.
+    Added 1 Queues.
+    Queues started, idx 0 ~ 0.
+    dmautils(16) threads
+    Exit Check: tid =8, req_sbmitted=1495488 req_completed=1495488 dir=H2C, intime=0 loop_count=0,
+    Exit Check: tid =13, req_sbmitted=1482752 req_completed=1482752 dir=C2H, intime=0 loop_count=0,
+    Exit Check: tid =14, req_sbmitted=1494720 req_completed=1494720 dir=H2C, intime=0 loop_count=0,
+    Exit Check: tid =8, req_sbmitted=1495488 req_completed=1495488 dir=H2C, intime=0 loop_count=0,
+    Exit Check: tid =14, req_sbmitted=1494720 req_completed=1494720 dir=H2C, intime=0 loop_count=0,
+    Exit Check: tid =6, req_sbmitted=1495488 req_completed=1495488 dir=H2C, intime=1495360 loop_count=1,
+    Exit Check: tid =5, req_sbmitted=1485568 req_completed=1485568 dir=C2H, intime=1485440 loop_count=1,
+    Exit Check: tid =11, req_sbmitted=1454208 req_completed=1454208 dir=C2H, intime=1454080 loop_count=1,
+    Exit Check: tid =13, req_sbmitted=1482944 req_completed=1482944 dir=C2H, intime=1482752 loop_count=1,
+    Exit Check: tid =0, req_sbmitted=1495168 req_completed=1495168 dir=H2C, intime=1494976 loop_count=2,
+    Exit Check: tid =10, req_sbmitted=1495104 req_completed=1495104 dir=H2C, intime=1494912 loop_count=2,
+    Exit Check: tid =12, req_sbmitted=1494592 req_completed=1494592 dir=H2C, intime=1494400 loop_count=2,
+    Exit Check: tid =9, req_sbmitted=1486784 req_completed=1486784 dir=C2H, intime=1486592 loop_count=2,
+    Exit Check: tid =15, req_sbmitted=1485248 req_completed=1485248 dir=C2H, intime=1485056 loop_count=2,
+    Exit Check: tid =1, req_sbmitted=1486656 req_completed=1486656 dir=C2H, intime=1486592 loop_count=1,
+    Exit Check: tid =4, req_sbmitted=1495872 req_completed=1495872 dir=H2C, intime=1495744 loop_count=1,
+    Exit Check: tid =3, req_sbmitted=1486336 req_completed=1486336 dir=C2H, intime=1486208 loop_count=2,
+    Exit Check: tid =7, req_sbmitted=1486400 req_completed=1486400 dir=C2H, intime=1486208 loop_count=2,
+    Exit Check: tid =2, req_sbmitted=1495744 req_completed=1495744 dir=H2C, intime=1495616 loop_count=2,
+    Exit Check: tid =10, req_sbmitted=1495296 req_completed=1495104 dir=H2C, intime=1494912 loop_count=10000,
+    Exit Check: tid =11, req_sbmitted=1454464 req_completed=1454336 dir=C2H, intime=1454080 loop_count=10000,
+    Exit Check: tid =5, req_sbmitted=1485632 req_completed=1485504 dir=C2H, intime=1485440 loop_count=10000,
+    Exit Check: tid =0, req_sbmitted=1495616 req_completed=1495424 dir=H2C, intime=1494976 loop_count=10000,
+    Exit Check: tid =12, req_sbmitted=1494912 req_completed=1494720 dir=H2C, intime=1494400 loop_count=10000,
+    Exit Check: tid =6, req_sbmitted=1495616 req_completed=1495488 dir=H2C, intime=1495360 loop_count=10000,
+    Stopped Queues 0 -> 0.
+    Exit Check: tid =9, req_sbmitted=1486912 req_completed=1486720 dir=C2H, intime=1486592 loop_count=10000,
+    Exit Check: tid =15, req_sbmitted=1485952 req_completed=1485760 dir=C2H, intime=1485056 loop_count=10000,
+    Exit Check: tid =13, req_sbmitted=1483456 req_completed=1483264 dir=C2H, intime=1482752 loop_count=10000,
+    Stopped Queues 0 -> 0.
+    Deleted Queues 0 -> 0.
+    Deleted Queues 0 -> 0.
+    WRITE: total pps = 3987072 BW = 255.172608 MB/sec
+    READ: total pps = 3950976 BW = 252.862464 MB/sec
+
+dma-perf tool takes a configuration file as input. The configuration file format is as below.
+
+**Example Config File**
+
+    name=mm_1_1
+    mode=mm #mode
+    dir=bi #dir
+    pf_range=0:0 #no spaces
+    q_range=0:0 #no spaces
+    wb_acc=5
+    tmr_idx=9
+    cntr_idx=0
+    trig_mode=usr_cnt
+    rngidx=9
+    ram_width=15 #31 bits - 2^31 = 2GB
+    runtime=30 #secs
+    num_threads=8
+    bidir_en=1
+    num_pkt=64
+    pkt_sz=64
+    offset_q_en=1
+    h2c_q_start_offset=0x100
+    h2c_q_offset_intvl=10
+    c2h_q_start_offset=0x200
+    c2h_q_offset_intvl=20
+    pci_bus=06
+    pci_device=00
+
+**Parameters**
+
+  - name : name of the configuration
+
+  - mode : mode of the queue, streaming(st) or memory mapped(mm). Mode defaults to mm.
+
+  - dir : Direction of the queue, host-to-card(h2c), card-to-host (c2h) or both (bi).
+
+  - pf\_range : Range of the PFs from 0-3 on which the performance metrics are to be collected.
+
+  - q\_range : Range of the Queues from 0-2047 on which the performance metrics are to be collected.
+
+  - flags : queue flags
+
+  - wb\_acc : write back accumulation index from CSR register ( 0 - 15 )
+
+  - tmr\_idx : timer index from CSR register ( 0 - 15 )
+
+  - cntr\_idx : Counter index from CSR register ( 0 - 15 )
+
+  - trig\_mode : trigger mode (every, usr\_cnt, usr, usr\_tmr, dis)
+
+  - rngidx : Ring index from CSR register ( 0 - 15 )
+
+  - runtime : Duration of the performance runs, time in seconds.
+
+  - num\_threads : number of threads to be used in dma-perf application to pump the traffic to queues
+
+  - bidir\_en : Enable or Disable the bi-direction mode ( 0: Disable, 1: Enable )
+
+  - num\_pkt : number of packets
+
+  - pkt\_sz : Packet size
+
+  - mm\_chnl : MM Channel ( 0 - 1 ) for Versal devices
+
+  - keyhole\_en : Enable the Keyhole feature
+
+  - offset : Offset to be written to for MM Performance Use cases
+
+  - aperture\_sz : Size of aperture when using the keyhole feature
+
+  - offset\_q\_en : Offset queue enable (0-1) to enable H2C/C2H queues offsets.
+
+  - h2c\_q\_start\_offset : Start address of H2C queue.
+
+  - h2c\_q\_offset\_intvl : Fixed interval for subsequent H2C queues offsets.
+
+  - c2h\_q\_start\_offset : Start address of C2H queue.
+
+  - c2h\_q\_offset\_intvl : Fixed interval for subsequent C2H queues offsets.
+
+  - pci\_bus : pci bus id.
+
+  - pci\_device : pci device id.
+

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profiles and CMake build process &mdash; AMR  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/_static/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="AMR Management Interface (AMI)" href="../software/ami.html" />
+    <link rel="prev" title="Operating System Abstraction Layer (OSAL)" href="osal.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+            <a href="../index.html" class="icon icon-home"> AMR
+            <img src="../_static/xilinx-header-logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">AMR Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/amr-overview.html">AMR Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AMR Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/install-prebuilt.html">How-to Install Prebuilt AMR Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/build_rave.html">How-to Build an AMR Design for RAVE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/build_v80.html">How-to Build an AMR Design for V80</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AMR System Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../system-architecture/board-management.html">AMR - Board Management Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system-architecture/device-programming.html">AMR - Device Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system-architecture/host-communication.html">AMR - Host to Card Communication</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AMR Deployment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/install-card.html">AMR Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/update-fpt.html">AMR Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/update-pdi.html">AMR Updating PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/debug.html">AMR Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/jtag-recovery.html">AMR JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/ami-tool-guide.html">AMR Management Interface userguide (ami_tool)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/build-scripts.html">AMR Build Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/source-control.html">Source Configuration Control</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hardware Design</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">AMR common Hardware Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Board Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RAVE/index.html">RAVE Board Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Firmware Design - AMR</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="amc-architecture.html">AMR Management Controller (AMC) - Architecture and Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asdm-application.html">AMR ASDM Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inband-telemetry.html">AMR InBand Telemetry Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="outofband-telemetry.html">AMR OutOfBand Telemetry Application<sup>1</sup></a></li>
+<li class="toctree-l1"><a class="reference internal" href="ami-proxy.html">AMR Management Interface (AMI) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apc-proxy.html">AMR Programming Control (APC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="axc-proxy.html">AMR External Device Control (AXC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bmc-proxy.html">Board Management Controller (BMC) Proxy Driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fw-if-layer.html">Firmware Interface (FW_IF) Abstraction Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="osal.html">Operating System Abstraction Layer (OSAL)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Profiles and CMake build process</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#build">Build</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#profiles">Profiles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bim-profile">BIM Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#firmware-interface-abstraction-layer-fal-profile">Firmware Interface Abstraction Layer (FAL) Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#header-abstraction-layer-hal-profile">Header Abstraction Layer (HAL) Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pdr-profile">PDR Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sensors-profile">Sensors Profile</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#device-drivers">Device Drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fal-firmware-abstraction-layer">FAL (Firmware Abstraction Layer)</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../software/ami.html">AMR Management Interface (AMI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../software/qdma.html">AMR QDMA</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../appendices/abbreviations.html">AMR - List of Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AMR-release-information.html">AMR Release Information</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: black" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AMR</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Profiles and CMake build process</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/firmware/profiles-cmake.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="profiles-and-cmake-build-process">
+<h1>Profiles and CMake build process<a class="headerlink" href="#profiles-and-cmake-build-process" title="Permalink to this heading">¶</a></h1>
+<p><span id="profilesandcmakebuildprocess-overview"></span></p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
+<p>AMC uses CMake for its build procedure, automating each stage of the compilation processes.</p>
+<p>AMC source code has been designed to be agnostic from target board (hardware) and operating system. The CMake build process allows target board and target OS to be configured at compilation.</p>
+<p><span id="profilesandcmakebuildprocess-build"></span></p>
+</div>
+<div class="section" id="build">
+<h2>Build<a class="headerlink" href="#build" title="Permalink to this heading">¶</a></h2>
+<p>The build procedure can be broken into two key stages depending on the target OS and board specified:</p>
+<ul class="simple">
+<li><p>Generation of BSP (Board support package)</p></li>
+<li><p>Source code compilation</p></li>
+</ul>
+<p>The following diagram outlines the build stage called by build.sh, depending on the parameters specified by the user.</p>
+<p><img alt="images/1107376893.png" src="../_images/1107376893.png" /></p>
+<p><span id="profilesandcmakebuildprocess-profiles"></span></p>
+</div>
+<div class="section" id="profiles">
+<h2>Profiles<a class="headerlink" href="#profiles" title="Permalink to this heading">¶</a></h2>
+<p>The profiles layer holds all profile-specific (board-specific) includes and definitions, allowing AMC to be ported to different target board (hardware) without requiring code changes in the AMC or its layers.</p>
+<p>The profile directories currently supported on AMC can be seen the <strong>src/profiles/</strong>.</p>
+<p>Cmake will include the appropriate set of header files, depending on the profile specified by the user (rave, v80, etc.). This allows board (hardware) specific data to be changed and AMC source code to remain the same.</p>
+<p>Porting AMC to new boards in the future should only require additional profile directories to be created, with no source code changes required. See the following code snippet for detail.</p>
+<p><strong>CMakeLists.txt</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#set custom profile with -DPROFILE flag (v80, rave, etc), Defaults to rave if not specified
+ if(PROFILE MATCHES &quot;^(v80*)$&quot;)
+    include_directories(src/profiles/v80)
+    set(PROFILE_FAL_PATH        &quot;src/profiles/v80/profile_fal.c&quot;)
+    set(EEPROM_PATH             &quot;src/device_drivers/eeprom/aved/eeprom.c&quot;)
+    set(PROFILE_DEBUG_MENU_PATH &quot;src/profiles/v80/profile_debug_menu.c&quot;)
+else()
+    include_directories(src/profiles/rave)
+    set(PROFILE_FAL_PATH        &quot;src/profiles/rave/profile_fal.c&quot;)
+    set(EEPROM_PATH             &quot;src/device_drivers/eeprom/rave/eeprom.c&quot;)
+    set(PROFILE_DEBUG_MENU_PATH &quot;src/profiles/rave/profile_debug_menu.c&quot;)
+    add_definitions(-DPROFILE_RAVE)
+endif()
+</pre></div>
+</div>
+<p>Each profile directory includes the following header files.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>profiles/
+├── rave
+│   ├── profile_debug_menu.c
+│   ├── profile_fal.c
+│   ├── profile_hal.h
+│   ├── profile_pdr.h
+│   └── profile_sensors.h
+└── v80
+    ├── profile_debug_menu.c
+    ├── profile_fal.c
+    ├── profile_hal.h
+    ├── profile_pdr.h
+    └── profile_sensors.h
+└── etc...
+</pre></div>
+</div>
+<p><span id="profilesandcmakebuildprocess-bimprofile"></span></p>
+<div class="section" id="bim-profile">
+<h3>BIM Profile<a class="headerlink" href="#bim-profile" title="Permalink to this heading">¶</a></h3>
+<p>The profile_bim.h header file provides event tables for the Built in Monitoring (BIM) Application.</p>
+<p><span id="profilesandcmakebuildprocess-firmwareinterfaceabstractionlayer-fal-profile"></span></p>
+</div>
+<div class="section" id="firmware-interface-abstraction-layer-fal-profile">
+<h3>Firmware Interface Abstraction Layer (FAL) Profile<a class="headerlink" href="#firmware-interface-abstraction-layer-fal-profile" title="Permalink to this heading">¶</a></h3>
+<p>The <strong>profile_fal.c</strong> file provides specific initialization for the FAL.</p>
+<p>The <strong>profile_fal.h</strong> header file provides profile (hardware) specific definitions for the FAL.</p>
+<p><span id="profilesandcmakebuildprocess-headerabstractionlayer-hal-profile"></span></p>
+</div>
+<div class="section" id="header-abstraction-layer-hal-profile">
+<h3>Header Abstraction Layer (HAL) Profile<a class="headerlink" href="#header-abstraction-layer-hal-profile" title="Permalink to this heading">¶</a></h3>
+<p>The <strong>profile_hal.h</strong> header file provides all other profile (hardware) specific definitions.</p>
+<p><span id="profilesandcmakebuildprocess-pdrprofile"></span></p>
+</div>
+<div class="section" id="pdr-profile">
+<h3>PDR Profile<a class="headerlink" href="#pdr-profile" title="Permalink to this heading">¶</a></h3>
+<p>The <strong>profile_pdr.h</strong> header file provides profile (hardware) specific definitions for Out Of Band PDR and sensor reporting.</p>
+<p><span id="profilesandcmakebuildprocess-sensorsprofile"></span></p>
+</div>
+<div class="section" id="sensors-profile">
+<h3>Sensors Profile<a class="headerlink" href="#sensors-profile" title="Permalink to this heading">¶</a></h3>
+<p>The <strong>profile_sensors.h</strong> header file provides profile (hardware) specific definitions for all sensors.</p>
+<p>This profile is where sensor thresholds and limits are set - if a sensor value exceeds the “critical” value, the AMI (on the host interface) will kill any host processes that are using the in-band interface (see <a class="reference internal" href="sensors.html"><span class="std std-doc">Sensors and Hardware Monitoring</span></a>). To add/change thresholds, simply change the value in the relevant sensor_profile. To disable a threshold, set it to <strong>ASC_SENSOR_INVALID_VAL</strong> (-1).</p>
+<p><span id="profilesandcmakebuildprocess-devicedrivers"></span></p>
+</div>
+</div>
+<div class="section" id="device-drivers">
+<h2>Device Drivers<a class="headerlink" href="#device-drivers" title="Permalink to this heading">¶</a></h2>
+<p>The device drivers layer of AMC has similarly been designed to be abstracted from the target boards. Each device driver has been written with a common header file but separate source files for AMR and Linux, providing a common API over the BSP-provided drivers and utilities.</p>
+<p>Cmake will include the appropriate source code paths, depending on the profile specified by the user (rave, v80, etc.), for each of the device drivers. This allows AMC to be easily compiled for Linux or FreeRTOS OS.</p>
+<p>See the following example of I2c and OSPI device drivers. The common header outlines the API used throughout AMC. OS specific source implementations prevent any further code changes throughout AMC when porting to a new OS/boards.</p>
+<p>All future device drivers added to AMC should follow this design pattern.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>i2c
+│   ├── aved
+│   │   └── i2c.c
+│   └── debug
+│   │   └── i2c_debug.c
+|   |   └── i2c_debug.h
+│   ├── i2c.h
+</pre></div>
+</div>
+<p><span id="profilesandcmakebuildprocess-fal-firmwareabstractionlayer"></span></p>
+</div>
+<div class="section" id="fal-firmware-abstraction-layer">
+<h2>FAL (Firmware Abstraction Layer)<a class="headerlink" href="#fal-firmware-abstraction-layer" title="Permalink to this heading">¶</a></h2>
+<p>Similarly, the Firmware abstraction layer of AMC has been designed to be abstracted from the target board. Each FAL implementation has been written with a common header file, providing a common API over the abstracted firmware, but with separate source files for AMC (AMR).</p>
+<p>Just as with the device drivers, cmake will include the appropriate source code paths, depending on the profile specified by the user (rave, v80, etc.).</p>
+<p>See the following example of gcq, ospi and qsfp FALs. All future FAL implementations added to AMC should follow this design pattern.</p>
+<p>├── gcq</p>
+<p>│ ├── fw_if_gcq_amc.c</p>
+<p>│ ├── fw_if_gcq.h</p>
+<p>├── ospi</p>
+<p>│ ├── fw_if_ospi_amc.c</p>
+<p>│ ├── fw_if_ospi.h</p>
+<p>│ └── fw_if_ospi_stub.c</p>
+<p>See the following example code snippet for details.</p>
+<p>Note: cmake can specify paths for appropriate device driver, and FAL (firmware abstraction layer) implementations depending on the OS specified.</p>
+<p><strong>CMakeLists.txt</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if(OS MATCHES &quot;^(FreeRTOS)$&quot;)
+    if (NOT YOCTO)
+        add_definitions(-DSDT)
+        set(CMAKE_C_COMPILER armr5-none-eabi-gcc)
+        set(CMAKE_SYSTEM_NAME Generic)
+        set(CMAKE_SYSTEM_PROCESSOR arm)
+        set(CMAKE_C_FLAGS &quot;${CMAKE_C_FLAGS} -mcpu=cortex-r5 -mfloat-abi=hard -mfpu=vfpv3-d16 -Werror -Wall&quot;)
+        set(amc_SOURCE_DIR &quot;${CMAKE_SOURCE_DIR}&quot;)
+    endif()
+
+    set(CMAKE_CROSSCOMPILING 1)
+    set(CMAKE_C_COMPILER_WORKS TRUE)
+    set(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS &quot;&quot;)
+
+    set(OSAL_PATH       &quot;src/osal/src/freeRTOS/osal.c&quot;)
+    set(FW_IF_PATH      &quot;src/fal/gcq/fw_if_gcq_amc.c&quot;)
+    set(FW_I2C_PATH     &quot;src/device_drivers/i2c/aved/i2c.c&quot;)
+    set(FW_SYS_MON_PATH &quot;src/device_drivers/sensors/sys_mon/aved/sys_mon.c&quot;)
+    set(FW_OSPI_PATH    &quot;src/device_drivers/ospi/aved/ospi.c&quot;)
+    set(FW_IF_OSPI_PATH &quot;src/fal/ospi/fw_if_ospi_amc.c&quot;)
+    if(PROFILE MATCHES &quot;^(v80)$&quot;)
+        set(FW_EMMC_PATH                  &quot;src/device_drivers/emmc/aved/emmc.c&quot;)
+        set(FW_IF_EMMC_PATH               &quot;src/fal/emmc/fw_if_emmc_amc.c&quot;)
+        set(FW_IF_SMBUS_BLOCK_IO_PATH     &quot;src/fal/smbus/fw_if_smbus_block_io.c&quot;)
+        set(FW_IF_MUXED_DEVICE_PATH       &quot;src/fal/muxed_device/fw_if_muxed_device_amc.c&quot;)
+        set(FW_IF_MUXED_DEVICE_DEBUG_PATH &quot;src/fal/muxed_device/debug/fw_if_muxed_device_debug.c&quot;)
+    endif()
+    set(NAME &quot;amc.elf&quot;)
+
+    if(FREERTOS_DEBUG)
+        add_definitions(-DFREERTOS_DEBUG)
+    endif()
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          
+				  
+				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="osal.html" class="btn btn-neutral float-left" title="Operating System Abstraction Layer (OSAL)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../software/ami.html" class="btn btn-neutral float-right" title="AMR Management Interface (AMI)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
+      <span class="lastupdated">Last updated on June 15, 2026.
+      </span></p>
+  </div>
+
+
+
+										<div class="aem-Grid aem-Grid--16">
+											<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+												<div class="container-fluid sub-footer">
+
+													                    <div class="row">
+                        <div class="col-xs-24">
+                          <p><a target="_blank" href="https://www.amd.com/en/corporate/copyright">Terms and Conditions</a> | <a target="_blank" href="https://www.amd.com/en/corporate/privacy">Privacy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/cookies">Cookie Policy</a> | <a target="_blank" href="https://www.amd.com/en/corporate/trademarks">Trademarks</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf">Statement on Forced Labor</a> | <a target="_blank" href="https://www.amd.com/en/corporate/competition">Fair and Open Competition</a> | <a target="_blank" href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf">UK Tax Strategy</a> | <a target="_blank" href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA">Inclusive Terminology</a> | <a href="#cookiessettings" class="ot-sdk-show-settings">Cookies Settings</a></p>
+                        </div>
+                    </div>
+												</div>
+											</div>
+										</div>
+										
+</br>
+
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>
