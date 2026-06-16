@@ -112,11 +112,11 @@ The configuration for the PF0 AXI Bridge Master and PF1 DMA is shown below. Thes
 CPM5 can support up to six 32-bit BARs or three 64-bit BARs per PF. AMR requires two physical functions:
 
 **PF0 Configuration:**
-- BAR0: 16 MB, 64-bit, non-prefetchable, AXI_Bridge_Master
+- BAR0: 8 MB, 64-bit, non-prefetchable, AXI_Bridge_Master
 - BAR2: Disabled (4 KB configured but not enabled)
 - Address Mapping: PCIe BAR0 → AXI address 0x0000020100000000
-- Address Range: 0x201\_0000\_0000 - 0x201\_00FF\_FFFF (16 MB)
-- Purpose: Management interface with access to PL peripherals
+- Address Range: 0x201\_0000\_0000 - 0x201\_007F\_FFFF (8 MB)
+- Purpose: Management interface — remapped via NoC to DDR at 0x1000\_0000 for GCQ shared memory
 
 **PF1 Configuration:**
 - BAR0: 512 KB, 64-bit, prefetchable, DMA
@@ -225,7 +225,7 @@ CPM\_PCIE1\_PF0\_BAR0\_QDMA\_PREFETCHABLE {0} \\
 
 CPM\_PCIE1\_PF0\_BAR0\_QDMA\_SCALE {Megabytes} \\
 
-CPM\_PCIE1\_PF0\_BAR0\_QDMA\_SIZE {16} \\
+CPM\_PCIE1\_PF0\_BAR0\_QDMA\_SIZE {8} \\
 
 CPM\_PCIE1\_PF0\_BAR0\_QDMA\_TYPE {AXI\_Bridge\_Master} \\
 
@@ -269,6 +269,8 @@ CPM\_PCIE1\_PF1\_BAR0\_QDMA\_SCALE {Kilobytes} \\
 
 CPM\_PCIE1\_PF1\_BAR0\_QDMA\_SIZE {512} \\
 
+CPM\_PCIE1\_PF1\_BAR0\_QDMA\_STEERING {CPM\_PCIE\_NOC\_1} \\
+
 CPM\_PCIE1\_PF1\_BAR0\_QDMA\_TYPE {DMA} \\
 
 CPM\_PCIE1\_PF1\_BAR2\_QDMA\_64BIT {1} \\
@@ -280,6 +282,8 @@ CPM\_PCIE1\_PF1\_BAR2\_QDMA\_PREFETCHABLE {1} \\
 CPM\_PCIE1\_PF1\_BAR2\_QDMA\_SCALE {Megabytes} \\
 
 CPM\_PCIE1\_PF1\_BAR2\_QDMA\_SIZE {256} \\
+
+CPM\_PCIE1\_PF1\_BAR2\_QDMA\_STEERING {CPM\_PCIE\_NOC\_1} \\
 
 CPM\_PCIE1\_PF1\_BAR2\_QDMA\_TYPE {AXI\_Bridge\_Master} \\
 
@@ -551,7 +555,7 @@ SLR0
 
 The Processor memory clocks (HSM0 and HSM1) are not used in AMR because it is a design requirement to use external 200MHz LVDS clocks for HBM and DDR MCs.
 
-Enable the PL CLK 0, PL CLK 1, and PL CLK 2 and set the frequencies to 100MHz, 33.3333333MHz, and 250MHz (respectively). This creates the CIPs pl0\_ref\_clk, pl1\_ref\_clk, and pl2\_ref\_clk outputs from CIPS in the BD. PL CLK 0 (100MHz) is used for numerous AXI interfaces. PL CLK 1 is a free running clock used to generate other system clocks. PL CLK 2 is set to run at 250MHz. This is the frequency of the PCIe extended configuration interface.
+Enable the PL CLK 0, PL CLK 1, and PL CLK 2 and set the frequencies to 100MHz, 33.3333333MHz, and 250MHz (respectively). This creates the CIPs pl0\_ref\_clk, pl1\_ref\_clk, and pl2\_ref\_clk outputs from CIPS in the BD. PL CLK 0 (100MHz) is used for numerous AXI interfaces. PL CLK 1 is a free running clock used to generate other system clocks. PL CLK 2 (250MHz) is connected to the CPM5 DMA interface clock (`dma1_intrfc_clk`).
 
 Change the CPM\_TOPSW clock to 1000MHz so the CPM runs at maximum frequency.
 
@@ -853,8 +857,8 @@ AMR only uses one PL reset from CIPS and it is enabled here. This reset is used 
 
 **Current Base Design:**
 - 'Number of PL Resets: 1' creates the CIPS pl0\_resetn output
-- M\_AXI\_LPD is enabled (32-bit @ 100MHz) but **not connected** in the base design
-- This interface is reserved for future firmware/hardware expansion (e.g., SMBus IP, management peripherals)
+- M\_AXI\_LPD is enabled (32-bit @ 100MHz) and connected to the SMBus hierarchical block (`smbus_hier/S00_AXI`)
+- The SMBus IP is clocked by pl0\_ref\_clk (100 MHz) and its interrupt (`ip2intc_irpt`) is wired to `cips/pl_ps_irq1`
 
 **Note:** The General Command Queue (GCQ) is implemented as a **software abstraction** in firmware using shared DDR memory, not as a hardware IP block in the current V80 base design.
 
@@ -908,12 +912,11 @@ AMR does not have any PMC NoC connections in SLR2.
 
 #### Interrupts
 
-**Interrupt Configuration (for future expansion):**
+**Interrupt Configuration:**
 
-The base design configures interrupt infrastructure but does not currently use PL-to-PS interrupts:
-- LPD interrupts IRQ 0 & 1 can be enabled for future use (creates pl\_ps\_irq0 & pl\_ps\_irq1 ports)
-- **Current Base Design**: No PL interrupts are connected
-- **Future Use**: IRQ 0 could be used for firmware GCQ signaling, IRQ 1 for SMBus events
+The base design uses two LPD interrupt channels (PS\_IRQ\_USAGE CH0 and CH1 enabled):
+- **pl\_ps\_irq1**: Connected to SMBus IP interrupt (`smbus_hier/ip2intc_irpt`)
+- **pl\_ps\_irq0**: Available for future use (e.g., firmware GCQ signaling)
 
 Enable Inter Processor Interrupts. The Inter Processor Interrupts allows one processor to interrupt another processor. The PMC and PSM Interrupts are enabled by default, and use the first three IPI agents. To allow R5 interrupts to the PMC and PSM, AMR uses four additional agents; IPI3, IPI4, IPI5, and IPI6. Two agents are used for each R5 processor. These can be changed as deemed necessary.
 

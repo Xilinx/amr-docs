@@ -138,13 +138,13 @@
 </div>
 <div class="section" id="block-diagram">
 <h2>Block Diagram<a class="headerlink" href="#block-diagram" title="Permalink to this heading">¶</a></h2>
-<p>The following is the block diagram of the design, highlighting the connectivity for the three blocks in AMR. The <em>User Application</em> block is not part of the AMR design, and serves only to illustrate how a user application could be integrated with AMR to connect directly to MCIO and QSFP interfaces, and connect to the NoC to interface with the PCIe, HBM, and DDR4 blocks. The AMR base design can be extended to include the MCIO and QSFP for the user application by uncommenting the pins from the hw/amd_&lt;board&gt;_gen5x8_25.1/src/bd/create_bd_design.tcl and hw/amd_&lt;board&gt;_gen5x8_25.1/src/constraints/impl.pins.xdc.</p>
+<p>The following is the block diagram of the design, highlighting the connectivity for the three blocks in AMR. The <em>User Application</em> block is not part of the AMR design, and serves only to illustrate how a user application could be integrated with AMR to connect directly to MCIO and QSFP interfaces, and connect to the NoC to interface with the PCIe, HBM, and DDR4 blocks. The AMR base design can be extended to include the MCIO and QSFP for the user application by uncommenting the pins from the &lt;&gt;/alveo_v80/platforms/v80_base/scripts/config_bd.tcl and &lt;&gt;/alveo_v80/platforms/v80_base/xdc/impl.pins.xdc. Check more detailed in the hardware design repo https://github.com/Xilinx/amr_vivado_designs</p>
 <p><img alt="images/1107374308.png" src="../_images/1107374308.png" /></p>
 <p><span id="amr-hierarchyoverview-control-interfacesandprocessingsystem"></span></p>
 </div>
 <div class="section" id="control-interfaces-and-processing-system">
 <h2>Control, Interfaces and Processing System<a class="headerlink" href="#control-interfaces-and-processing-system" title="Permalink to this heading">¶</a></h2>
-<p>The Control, interfaces, and processing system (CIPS) IP configures the various hard blocks that are present in the AMD Versal™ device. The AMR design configures the coherent module with PCIe (CPM) block, the real-time processing unit (RPU) block, and the platform management controller (PMC) block through the CIPS IP. The primary blocks used in this design are summarized in the following table.</p>
+<p>The Control, interfaces, and processing system (CIPS) IP configures the various hard blocks that are present in the AMD Versal™ device. The AMR design configures the coherent module with PCIe (CPM5) block, the real-time processing unit (RPU) block, and the platform management controller (PMC) block through the CIPS IP. The primary blocks used in this design are summarized in the following table.</p>
 <table border="1" class="docutils">
 <thead>
 <tr>
@@ -156,8 +156,8 @@
 <tbody>
 <tr>
 <td>Coherent Module with PCIe</td>
-<td>The CPM block contains the PCIe gen5x8 and QDMA hardened IPs on the device. It interfaces between the PCIe transceivers and the NoC interconnect to allow communication from the PCIe host to the device. It is configured with the minimum necessary to demonstrate functionality of the card.</td>
-<td><a href="https://docs.xilinx.com/r/en-US/am016-versal-cpm-ccix/Introduction-to-CPM">Versal CPM CCIX Architecture Manual - Introduction to CPM</a></td>
+<td>The CPM5 block contains the PCIe gen5x8 and QDMA hardened IPs on the device. It interfaces between the PCIe transceivers and the NoC interconnect to allow communication from the PCIe host to the device. It is configured with the minimum necessary to demonstrate functionality of the card.</td>
+<td><a href="https://docs.amd.com/r/en-US/pg347-cpm-dma-bridge/Introduction-to-the-CPM5">Introduction to the CPM5</a></td>
 </tr>
 <tr>
 <td>Real-time Processing Unit</td>
@@ -176,24 +176,30 @@
 <div class="section" id="programmable-logic-pl">
 <h2>Programmable Logic (PL)<a class="headerlink" href="#programmable-logic-pl" title="Permalink to this heading">¶</a></h2>
 <p>The PL region contains the soft logic IP and I/O connections. It is separated into two main blocks: Base Logic, and Clocks and Resets. It contains I/O connections to the SMBus, MCIOs, and QSFP I/O interfaces. A summary of the function of each block is described in the table below.</p>
-<table border="1" class="docutils">
+<table>
 <thead>
-<tr>
-<th>Block</th>
-<th>AMR Usage</th>
-<th>More information</th>
+<tr class="header">
+<th><p>Block</p></th>
+<th><p>AMR Usage</p></th>
+<th><p>More information</p></th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>Base Logic</td>
-<td>The base logic region contains test and management IP accessible through PCIe Physical Functions:<br><br>- <strong>PF0 (Management Function):</strong> 16MB BAR0 for management register access via AXI_Bridge_Master<br>- <strong>PF1 (Test Function):</strong> Hierarchical block with SmartConnect, AXI GPIO (loopback test), and reset synchronization. Accessible via 256MB BAR2 (AXI_Bridge_Master) and 512KB BAR0 (DMA).<br>- <strong><em>IMPORTANT:</em></strong> SMBus IP v1.1 is available in the IP repository (ip/smbus_v1_1/) but not instantiated in the base design. The IP must be downloaded separately from https://www.xilinx.com/member/v80.html and added to the IP repository before building the design.</td>
-<td><a href="base-logic.html">AMR V80 - Base Logic</a></td>
+<tr class="odd">
+<td><p>Base Logic</p></td>
+<td><p>The base logic region contains test and management IP accessible through PCIe Physical Functions:</p>
+<ul>
+<li><p><strong>PF0 (Management Function):</strong> 8MB BAR0 for management register access via AXI_Bridge_Master</p></li>
+<li><p><strong>PF1 (Test Function):</strong> Hierarchical block with SmartConnect, AXI GPIO (loopback test), and reset synchronization. Accessible via 256MB BAR2 (AXI_Bridge_Master) and 512KB BAR0 (DMA).</p></li>
+<li><p><em><strong>IMPORTANT:</strong></em> SMBus v1.1 is in-tree <a href="https://github.com/Xilinx/amr_vivado_designs/tree/main/alveo_v80/platforms/v80_base/ip/smbus_v1_1">AMR Vivado designs</a> and in the design for bring-up and follow-on work, not verified as production-ready; include it only if you plan to develop and validate SMBus usage yourself.</p></li>
+</ul></td>
+<td><p><a href="base-logic.html">AMR V80 - Base Logic</a></p></td>
 </tr>
-<tr>
-<td>Clocks and Resets</td>
-<td>The base design uses CIPS-generated clocks (100 MHz, 33.33 MHz, 250 MHz) and processor system reset blocks for reset synchronization. The PF1 hierarchy contains a proc_sys_reset block for the GPIO test logic. The design supports future expansion with clocking wizards and additional reset synchronizers for user kernels.<br><br><strong>Note:</strong> AMR supports Power-On-Reset to reload designs from flash but does not support hot-reset/PDI reload due to system complexity.</td>
-<td><a href="clock-reset.html">AMR V80 - Clock Reset Module</a></td>
+<tr class="even">
+<td><p>Clocks and Resets</p></td>
+<td><p>The base design uses CIPS-generated clocks (100 MHz, 33.33 MHz, 250 MHz) and processor system reset blocks for reset synchronization. The PF1 hierarchy contains a proc_sys_reset block for the GPIO test logic. The design supports future expansion with clocking wizards and additional reset synchronizers for user kernels.</p>
+<p><strong>Note:</strong> AMR supports Power-On-Reset to reload designs from flash but does not support hot-reset/PDI reload due to system complexity.</p></td>
+<td><p><a href="clock-reset.html">AMR V80 - Clock Reset Module</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -216,7 +222,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on June 12, 2026.
+      <span class="lastupdated">Last updated on June 15, 2026.
       </span></p>
   </div>
 

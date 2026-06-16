@@ -213,11 +213,11 @@
 <p>CPM5 can support up to six 32-bit BARs or three 64-bit BARs per PF. AMR requires two physical functions:</p>
 <p><strong>PF0 Configuration:</strong></p>
 <ul class="simple">
-<li><p>BAR0: 16 MB, 64-bit, non-prefetchable, AXI_Bridge_Master</p></li>
+<li><p>BAR0: 8 MB, 64-bit, non-prefetchable, AXI_Bridge_Master</p></li>
 <li><p>BAR2: Disabled (4 KB configured but not enabled)</p></li>
 <li><p>Address Mapping: PCIe BAR0 → AXI address 0x0000020100000000</p></li>
-<li><p>Address Range: 0x201_0000_0000 - 0x201_00FF_FFFF (16 MB)</p></li>
-<li><p>Purpose: Management interface with access to PL peripherals</p></li>
+<li><p>Address Range: 0x201_0000_0000 - 0x201_007F_FFFF (8 MB)</p></li>
+<li><p>Purpose: Management interface — remapped via NoC to DDR at 0x1000_0000 for GCQ shared memory</p></li>
 </ul>
 <p><strong>PF1 Configuration:</strong></p>
 <ul class="simple">
@@ -284,7 +284,7 @@
 <p>CPM_PCIE1_PF0_BAR0_QDMA_ENABLED {1} \</p>
 <p>CPM_PCIE1_PF0_BAR0_QDMA_PREFETCHABLE {0} \</p>
 <p>CPM_PCIE1_PF0_BAR0_QDMA_SCALE {Megabytes} \</p>
-<p>CPM_PCIE1_PF0_BAR0_QDMA_SIZE {16} \</p>
+<p>CPM_PCIE1_PF0_BAR0_QDMA_SIZE {8} \</p>
 <p>CPM_PCIE1_PF0_BAR0_QDMA_TYPE {AXI_Bridge_Master} \</p>
 <p>CPM_PCIE1_PF0_BAR2_QDMA_64BIT {0} \</p>
 <p>CPM_PCIE1_PF0_BAR2_QDMA_ENABLED {0} \</p>
@@ -306,12 +306,14 @@
 <p>CPM_PCIE1_PF1_BAR0_QDMA_PREFETCHABLE {1} \</p>
 <p>CPM_PCIE1_PF1_BAR0_QDMA_SCALE {Kilobytes} \</p>
 <p>CPM_PCIE1_PF1_BAR0_QDMA_SIZE {512} \</p>
+<p>CPM_PCIE1_PF1_BAR0_QDMA_STEERING {CPM_PCIE_NOC_1} \</p>
 <p>CPM_PCIE1_PF1_BAR0_QDMA_TYPE {DMA} \</p>
 <p>CPM_PCIE1_PF1_BAR2_QDMA_64BIT {1} \</p>
 <p>CPM_PCIE1_PF1_BAR2_QDMA_ENABLED {1} \</p>
 <p>CPM_PCIE1_PF1_BAR2_QDMA_PREFETCHABLE {1} \</p>
 <p>CPM_PCIE1_PF1_BAR2_QDMA_SCALE {Megabytes} \</p>
 <p>CPM_PCIE1_PF1_BAR2_QDMA_SIZE {256} \</p>
+<p>CPM_PCIE1_PF1_BAR2_QDMA_STEERING {CPM_PCIE_NOC_1} \</p>
 <p>CPM_PCIE1_PF1_BAR2_QDMA_TYPE {AXI_Bridge_Master} \</p>
 <p>CPM_PCIE1_PF1_BASE_CLASS_VALUE {12} \</p>
 <p>CPM_PCIE1_PF1_CFG_DEV_ID {50b5} \</p>
@@ -493,7 +495,7 @@
 <h5>Output Clocks<a class="headerlink" href="#output-clocks" title="Permalink to this heading">¶</a></h5>
 <p>SLR0</p>
 <p>The Processor memory clocks (HSM0 and HSM1) are not used in AMR because it is a design requirement to use external 200MHz LVDS clocks for HBM and DDR MCs.</p>
-<p>Enable the PL CLK 0, PL CLK 1, and PL CLK 2 and set the frequencies to 100MHz, 33.3333333MHz, and 250MHz (respectively). This creates the CIPs pl0_ref_clk, pl1_ref_clk, and pl2_ref_clk outputs from CIPS in the BD. PL CLK 0 (100MHz) is used for numerous AXI interfaces. PL CLK 1 is a free running clock used to generate other system clocks. PL CLK 2 is set to run at 250MHz. This is the frequency of the PCIe extended configuration interface.</p>
+<p>Enable the PL CLK 0, PL CLK 1, and PL CLK 2 and set the frequencies to 100MHz, 33.3333333MHz, and 250MHz (respectively). This creates the CIPs pl0_ref_clk, pl1_ref_clk, and pl2_ref_clk outputs from CIPS in the BD. PL CLK 0 (100MHz) is used for numerous AXI interfaces. PL CLK 1 is a free running clock used to generate other system clocks. PL CLK 2 (250MHz) is connected to the CPM5 DMA interface clock (<code class="docutils literal notranslate"><span class="pre">dma1_intrfc_clk</span></code>).</p>
 <p>Change the CPM_TOPSW clock to 1000MHz so the CPM runs at maximum frequency.</p>
 <p><img alt="image51" src="../images/grey_arrow_down2.png" /></p>
 <p><img alt="image52" src="../images/1107374542.png" /></p>
@@ -681,8 +683,8 @@
 <p><strong>Current Base Design:</strong></p>
 <ul class="simple">
 <li><p>‘Number of PL Resets: 1’ creates the CIPS pl0_resetn output</p></li>
-<li><p>M_AXI_LPD is enabled (32-bit &#64; 100MHz) but <strong>not connected</strong> in the base design</p></li>
-<li><p>This interface is reserved for future firmware/hardware expansion (e.g., SMBus IP, management peripherals)</p></li>
+<li><p>M_AXI_LPD is enabled (32-bit &#64; 100MHz) and connected to the SMBus hierarchical block (<code class="docutils literal notranslate"><span class="pre">smbus_hier/S00_AXI</span></code>)</p></li>
+<li><p>The SMBus IP is clocked by pl0_ref_clk (100 MHz) and its interrupt (<code class="docutils literal notranslate"><span class="pre">ip2intc_irpt</span></code>) is wired to <code class="docutils literal notranslate"><span class="pre">cips/pl_ps_irq1</span></code></p></li>
 </ul>
 <p><strong>Note:</strong> The General Command Queue (GCQ) is implemented as a <strong>software abstraction</strong> in firmware using shared DDR memory, not as a hardware IP block in the current V80 base design.</p>
 <p><img alt="image90" src="../images/grey_arrow_down2.png" /></p>
@@ -724,12 +726,11 @@
 </div>
 <div class="section" id="interrupts">
 <h4>Interrupts<a class="headerlink" href="#interrupts" title="Permalink to this heading">¶</a></h4>
-<p><strong>Interrupt Configuration (for future expansion):</strong></p>
-<p>The base design configures interrupt infrastructure but does not currently use PL-to-PS interrupts:</p>
+<p><strong>Interrupt Configuration:</strong></p>
+<p>The base design uses two LPD interrupt channels (PS_IRQ_USAGE CH0 and CH1 enabled):</p>
 <ul class="simple">
-<li><p>LPD interrupts IRQ 0 &amp; 1 can be enabled for future use (creates pl_ps_irq0 &amp; pl_ps_irq1 ports)</p></li>
-<li><p><strong>Current Base Design</strong>: No PL interrupts are connected</p></li>
-<li><p><strong>Future Use</strong>: IRQ 0 could be used for firmware GCQ signaling, IRQ 1 for SMBus events</p></li>
+<li><p><strong>pl_ps_irq1</strong>: Connected to SMBus IP interrupt (<code class="docutils literal notranslate"><span class="pre">smbus_hier/ip2intc_irpt</span></code>)</p></li>
+<li><p><strong>pl_ps_irq0</strong>: Available for future use (e.g., firmware GCQ signaling)</p></li>
 </ul>
 <p>Enable Inter Processor Interrupts. The Inter Processor Interrupts allows one processor to interrupt another processor. The PMC and PSM Interrupts are enabled by default, and use the first three IPI agents. To allow R5 interrupts to the PMC and PSM, AMR uses four additional agents; IPI3, IPI4, IPI5, and IPI6. Two agents are used for each R5 processor. These can be changed as deemed necessary.</p>
 <ul class="simple">
@@ -913,7 +914,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on June 12, 2026.
+      <span class="lastupdated">Last updated on June 15, 2026.
       </span></p>
   </div>
 
