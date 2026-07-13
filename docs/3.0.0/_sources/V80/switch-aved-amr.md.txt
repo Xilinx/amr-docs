@@ -52,7 +52,7 @@ Follow the steps below if you have an existing AMR installation and want to swit
 
 ```bash
 cd amd_v80_gen5x8_25.1_xbtest_stress_20251113  # Replace with your actual release package
-sudo ami_tool cfgmem_fpt -d <BDF> -i flash_setup/fpt_setup_amd_v80_gen5x8_25.1_exdes_1_yyymmdd.pdi -p 0 -t primary
+sudo ami_tool cfgmem_fpt -d <BDF> -i flash_setup/fpt_setup_amd_v80_gen5x8_25.1_exdes_1_yyymmdd.pdi -t primary
 ```
 
 **Note:** Replace `amd_v80_gen5x8_25.1_xbtest_stress_20251113` with your actual release package name, and replace `yyymmdd` with the actual date in the filename.
