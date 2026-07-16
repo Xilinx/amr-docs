@@ -1,0 +1,107 @@
+# AMR RAVE - NoC Configuration
+
+> **For common NoC concepts**, see [Common NoC Overview](../../hardware/noc-config.md)
+>
+> This document describes RAVE-specific NoC topology with PL PCIe connections and LPDDR4 memory.
+
+<span id="amrrave-nocconfiguration-overview"></span>
+
+## Overview
+
+**Note:** Image shows RAVE NoC with PL PCIe NMU_512 connections, LPDDR4 controller, no HBM.
+
+The RAVE NoC configuration routes traffic between the PL-based PCIe/XDMA IP blocks, CIPS components (RPU, PMC), and the LPDDR4 memory controller. The topology uses NMU and NSU interfaces for programmable logic connections, along with hardened interfaces for CIPS blocks.
+
+The VE2302 device provides a smaller NoC fabric than larger Versal devices, with topology optimized for the embedded use case.
+
+> **Hardware Design Reference**
+> This document provides architectural overview. For specific configuration details including interface assignments, bandwidth allocations, QoS parameters, address mappings, and other implementation-specific settings, refer to the hardware design repository.
+
+<span id="amrrave-nocconfiguration-axinocinstances"></span>
+
+## AXI NoC IP Instances
+
+The RAVE design uses one or more AXI NoC IP instances to connect PCIe, CIPS, and memory subsystems. The topology includes:
+
+- **Primary NoC**: Routes traffic between PCIe/XDMA IP, CIPS components (RPU, PMC), and memory through INI connections
+- **Memory Controller NoC**: Integrates the LPDDR4 controller and provides INI slave interfaces
+
+**Note:** Specific interface assignments, bandwidth allocations, and QoS settings are implementation-dependent. Refer to the hardware design repository for current NoC instance configurations and connection details.
+
+<span id="amrrave-nocconfiguration-plpcieconnection"></span>
+
+## PL PCIe to NoC Connection
+
+The PCIe and XDMA IP blocks connect to the NoC through programmable logic NMU interfaces. The XDMA M_AXI master interface connects to an NMU configured in the AXI NoC IP, which converts AXI protocol traffic to NoC packet domain and routes DMA requests to the LPDDR4 memory controller.
+
+The NoC configuration includes QoS settings for bandwidth allocation and traffic class assignment. The AXI NoC IP handles clock domain crossing between the XDMA clock domain and the NoC clock domain using asynchronous FIFOs and handshake protocols.
+
+**Note:** Specific interface widths, bandwidth values, and QoS parameters are defined in the hardware design repository.
+
+<span id="amrrave-nocconfiguration-cipsconnections"></span>
+
+## CIPS NoC Connections
+
+### RPU to NoC
+
+The LPD_AXI_NOC_0 interface connects the RPU to the NoC for firmware access to LPDDR4 memory. The NoC routes RPU traffic through INI connections to the LPDDR4 memory controller, with QoS settings configured for firmware execution, data access, and software GCQ operations.
+
+### PMC to NoC
+
+The PMC_NOC_AXI_0 interface connects the PMC to the NoC for boot and configuration access to LPDDR4. During boot, the PMC uses this path to initialize memory, load firmware code and data, and set up initial system state.
+
+**Note:** Interface widths, operating frequencies, and bandwidth allocations are specified in the hardware design repository.
+
+<span id="amrrave-nocconfiguration-qossettings"></span>
+
+## QoS Configuration
+
+The NoC configuration includes Quality of Service (QoS) settings for traffic class assignment and bandwidth allocation. The RAVE design typically uses Best Effort traffic class for most connections, which provides good performance for bulk data transfers while allowing the NoC compiler flexibility in routing optimization.
+
+Bandwidth requirements specified in the NoC configuration guide the NoC compiler in resource allocation for PCIe/XDMA, RPU, and PMC connections.
+
+**Note:** Specific traffic class selections and bandwidth values are defined in the hardware design repository.
+
+<span id="amrrave-nocconfiguration-addressremapping"></span>
+
+## Address Remapping in NoC
+
+The AXI NoC IP REMAPS parameter configures address translation for PCIe access to LPDDR4. The remap configuration translates PCIe BAR addresses to local AXI addresses or LPDDR4 physical addresses, specifying the source PCIe address, destination AXI address, and aperture size.
+
+This enables the host to access shared memory regions (such as software GCQ buffers) using PCIe BAR offsets that map to LPDDR4 addresses.
+
+**Note:** Specific address mappings and aperture sizes are defined in the hardware design repository.
+
+<span id="amrrave-nocconfiguration-performancetuning"></span>
+
+## NoC Performance Optimization
+
+NoC performance is influenced by multiple factors including traffic patterns, QoS settings, memory controller address mapping, and routing through the NoC fabric.
+
+Key optimization considerations:
+- **Port distribution**: Traffic can be distributed across multiple memory controller ports for higher bandwidth
+- **Address mapping**: Memory controller address mapping affects bank and row locality
+- **Sequential vs. random access**: Access patterns benefit from appropriate interleaving schemes
+
+The NoC routing can be verified after implementation by opening the Vivado NoC window (Window → NoC), which displays the actual NoC paths chosen by the compiler.
+
+**Note:** Current port allocations and address mapping schemes are defined in the hardware design repository.
+
+<span id="amrrave-nocconfiguration-nocresources"></span>
+
+## NoC Resource Usage
+
+The VE2302 device includes NoC resources distributed across its fabric. The AXI NoC IP configuration determines which NMU (NoC Master Unit), NSU (NoC Slave Unit), and NPS (NoC Packet Switch) resources are utilized based on connection requirements and QoS specifications.
+
+The NoC compiler routes traffic through available NPS resources, with routing decisions based on minimizing congestion and meeting QoS requirements. Resource utilization can impact timing closure, as heavily utilized NoC paths may require additional pipelining or routing constraints.
+
+**Note:** Current NoC resource allocations and floorplanning constraints are defined in the hardware design repository.
+
+## References
+
+- [Common NoC Overview](../../hardware/noc-config.md) - NoC concepts and QoS
+- [RAVE Memory Resources](memory-resources.md) - LPDDR4 configuration
+- [RAVE PCIe Configuration](pcie-config.md) - PCIe IP integration
+- [RAVE XDMA Configuration](xdma-config.md) - XDMA NoC connection
+- [NoC Product Guide (PG313)](https://docs.xilinx.com/r/en-US/pg313-network-on-chip) - NoC IP documentation
+

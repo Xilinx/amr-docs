@@ -1,0 +1,14 @@
+# AMR Release Information
+
+## Alveo Cards (V80)
+
+| AMR Git<br>Release Tag | AMR Deployment<br>Archive | ALVEO<br>Card | Vivado Tools<br>Version | AMC<br>Version | AMI<br>Version | XBTEST SW<br>Version | Release<br>Date | Notes |
+| ------- | ------------------ | ----- | ------ | --- | --- | ------ | ------- | ----- |
+| [amd\_v80\_gen5x8\_26.1\_20260608](https://github.com/Xilinx/AVED/releases/tag/amd_v80_gen5x8_26.1_xbtest_20260608) | [amd\_v80\_gen5x8\_25.1\_xbtest\_stress](https://account.amd.com/content/dam/account/en/member/v80/amd_v80_gen5x8_25.1_xbtest_stress_20251113.zip) | v80 | 2026.1 | 3.0 | 3.0 | 7.1 | June 2026 | This release is tested and supports OS and kernel distributions mentioned in AMR overview. For any future kernel updates, binaries should be built from source. |
+
+## RAVE Boards
+
+| AMR Git<br>Release Tag | AMR Deployment<br>Archive | RAVE<br>Board | Vivado Tools<br>Version | AMC<br>Version | AMI<br>Version | Release<br>Date | Notes |
+| ------- | ------------------ | ----- | ------ | --- | --- | ------- | ----- |
+| [amd\_rave\_26.1\_20260608](https://github.com/Xilinx/AVED/releases/tag/amd_rave_26.1_20260608) | [amd\_rave\_26.1\_20260608](https://account.amd.com/content/dam/account/en/member/rave/amd_rave_26.1_20260608.zip) | RAVE | 2026.1 | 3.0 | 3.0 | June 2026 | This release is tested and supports OS and kernel distributions mentioned in AMR overview. For any future kernel updates, binaries should be built from source. |
+

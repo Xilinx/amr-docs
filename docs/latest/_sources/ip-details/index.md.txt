@@ -1,0 +1,3 @@
+# IP Details
+
+  - [SMBus IP v1.1 - Product Guide](smbus-ip.md)
