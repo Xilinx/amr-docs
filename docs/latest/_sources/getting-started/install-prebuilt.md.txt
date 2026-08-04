@@ -4,32 +4,69 @@ This guide provides step-by-step instructions for installing prebuilt AMD Adapti
 
 **Prerequisites**
 
+- Alveo V80 card installed in an x86 host running Ubuntu or an RPM-based Linux
 - Root or sudo permissions are required for installation
 - Physical installation of the Alveo V80 or Embedded+ card in your system
-- For JTAG programming: Vivado Hardware Manager (Vivado 2026.1) 
-
-<span id="how-toinstallprebuiltamrpackages-downloadpackages"></span>
+- For JTAG programming: Vivado Hardware Manager (Vivado 2026.1)
 
 ## Download Prebuilt Packages
 
 1. Refer to the [AMR Release Information](../AMR-release-information.md) to find the latest release version and download links.
-
 2. Download the deployment archive for your Board (V80 or RAVE).
-
 3. Extract the downloaded archive:
+  ```bash
+   unzip <alveo|rave>_<version>_<date>.zip
+   cd <alveo|rave>_<version>_<date>
+  ```
 
-   ```bash
-   unzip amr_<version>_<date>.zip
-   cd amr_<version>_<date>
-   ```
+<span id="how-toinstallprebuiltamrpackages-packagecontents"></span>
 
 The package contains the following components:
-- **amr_ospi_fpt.bin** - OSPI firmware image with Flash Partition Table (FPT)
-- **ami** - Kernel driver package (.deb or .rpm)
-- **libami** - AMI API library (.deb or .rpm)
-- **amitool** - AMI command-line interface tool (.deb or .rpm)
 
-<span id="how-toinstallprebuiltamrpackages-programfirmware"></span>
+```
+├── amr_install.sh
+├── apu_linux.pdi
+├── v80_base_pld.pdi
+├── boot_strap  - If ami_tool is not present, amr_install.sh auto-installs bootstrap package
+│   ├── ami_1.8.0-0<hash date>_amd64.deb
+│   └── ami-1.8.0-0<hash date>.x86_64.rpm
+├── flash_setup
+│   ├── amr_ospi.bin     - OSPI flash image
+│   ├── amr_ospi_fpt.bin - OSPI flash image with Flash Partition Table (FPT)
+│   └── v80_initialization.pdi
+├── Readme.txt
+└── sw_packages
+   ├── ami_<version date>_amd64.deb      - Kernel driver package
+   ├── ami-<version date>.x86_64.rpm     - Kernel driver package
+   ├── libami_<version date>_amd64.deb   - AMI API library
+   ├── libami-<version date>.x86_64.rpm  - AMI API library
+   ├── amitool_<version date>_amd64.deb  - AMI command-line interface tool
+   └── amitool-<version date>.x86_64.rpm - AMI command-line interface tool
+```
+
+
+
+## Install
+
+From the release directory, run (reboot required if no ami_tool exists):
+
+```bash
+sudo ./amr_install.sh
+```
+
+Optional:
+
+```bash
+# Installing for a card
+sudo ./amr_install.sh -device <bdf>
+
+# Installation when there is no previously installed ami_tool
+sudo ./amr_install.sh -ami-deb boot_strap/ami_1.8.0-0<hash date>_amd64.<deb|rpm>
+```
+
+
+## Manual Steps
+
 
 ## Step 1: Program OSPI Firmware to Device
 
@@ -48,13 +85,13 @@ This method programs the firmware over PCIe using the AMI tool.
 ami_tool overview
 
 # If AMC shows READY state, program the FPT image
-sudo ami_tool cfgmem_fpt -d <BDF> -i amr_ospi_fpt.bin -t primary -p 0
+sudo ami_tool cfgmem_fpt -d <BDF> -i amr_ospi_fpt.bin -t primary
 ```
 
 **Example:**
 
 ```bash
-sudo ami_tool cfgmem_fpt -d c1:00.0 -i amr_ospi_fpt.bin -t primary -p 0
+sudo ami_tool cfgmem_fpt -d c1:00.0 -i amr_ospi_fpt.bin -t primary
 ```
 
 After programming completes, power cycle or perform cold reboot to boot the new firmware. Wait approximately one minute for the device to become ready.
@@ -66,6 +103,7 @@ After programming completes, power cycle or perform cold reboot to boot the new 
 ### Method 2: Flash Through JTAG Using Vivado Hardware Manager (Recommended for Initial Setup)
 
 **When to use:**
+
 - First-time installation on a new card
 - AMC is not in READY state
 - When AMI is not yet installed or not working
@@ -141,7 +179,7 @@ bash prog_spi.sh -d rave -V -i /path/to/amr_ospi_fpt.bin
 
 5. Verify installation with `ami_tool overview` (after installing AMI packages in Step 2)
 
-**Tool repository:** https://github.com/Xilinx/embpf-bootfw-update-tool
+**Tool repository:** [https://github.com/Xilinx/embpf-bootfw-update-tool](https://github.com/Xilinx/embpf-bootfw-update-tool)
 
 
 ## Step 2: Install AMI Software Packages
@@ -339,6 +377,29 @@ To load a prebuilt APU Linux image onto your device, use the `pdi_program` comma
     
     OK. PDI has been programmed successfully.
 
+
+## Testing example PL PDI
+
+Use the following steps to verify PL PDI after programming a PDI.
+
+- Program the target `v80_base_pld.pdi` (included in the [installation package](#how-toinstallprebuiltamrpackages-packagecontents)) on device:
+
+```bash
+sudo ami_tool pdi_program -d <BDF> -i v80_base_pld.pdi -y
+```
+
+- Read PF1 Region 2 + offset 0x20000 and verify value 0xF1:
+
+```bash
+BDF=<PF1 BDF>; sudo devmem2 "$(printf '0x%X' $((0x$(lspci -s "PF1 $BDF" -vv | awk '/Region 2:/{print $5; exit}') + 0x20000)))" b
+```
+
+- Expected output includes:
+
+```
+Value at address ... : 0xF1
+```
+
 ### Important Notes
 
 - Make sure JTAG is connected before loading the APU image to monitor console output
@@ -354,3 +415,4 @@ Now that AMR is installed, you can:
 - Update PDI images in flash using [AMR Updating Design PDI in Flash](../deployment/update-pdi.md)
 - Review [Debug Techniques](../deployment/debug.md) for troubleshooting
 - For V80 Boards, see [xbtest Installation and Testing](../V80/xbtest/install-and-run-xbtest.md)
+

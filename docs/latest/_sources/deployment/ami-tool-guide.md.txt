@@ -34,7 +34,7 @@ The **ami\_tool** application provides a command line interface (CLI) to the use
 
 ## Notes
 
-1.  Ensure that the AMI API and AMI Driver versions are the same. Behaviour is undefined when the versions do not match. See [overview](https://amd.atlassian.net/wiki/spaces/~71202065244d6db58848f69318bfa2c81340bb/pages/1107374046/../management-interface-userguide-ami_tool#overview2) for more information.
+1. Ensure that the AMI API and AMI Driver versions are the same. Behaviour is undefined when the versions do not match.
 
 <span id="amrmanagementinterfaceuserguide-ami-tool-usage-options"></span>
 

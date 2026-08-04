@@ -101,6 +101,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../appendices/abbreviations.html">AMR - List of Abbreviations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../AMR-release-information.html">AMR Release Information</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Future Changes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../future-changes.html">Future Changes</a></li>
+</ul>
 
         </div>
       </div>
@@ -130,50 +134,60 @@
 <h1>AMR Updating PDI in Flash<a class="headerlink" href="#amr-updating-pdi-in-flash" title="Permalink to this heading">¶</a></h1>
 <ol class="arabic">
 <li><p>The ami_tool cfgmem_info command will list the available partitions that have been defined in the FPT.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Usage: ami_tool cfgmem_info -d &lt;bdf&gt; -t &lt;type&gt; [options...]</span>
-sudo<span class="w"> </span>ami_tool<span class="w"> </span>cfgmem_info<span class="w"> </span>-d<span class="w"> </span><span class="m">21</span>:00.0<span class="w"> </span>-t<span class="w"> </span>primary
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> ~% 
+ # Usage: ami_tool cfgmem_info -d &lt;bdf&gt; -t &lt;type&gt; [options...]
+ ami_tool cfgmem_info -d 21:00.0 -t primary
+
+ Primary FPT:
+
+ FPT
+ -----------------
+ Version     | 2
+ Header Size | 128
+ Entry Size  | 128
+ Entries     | 3
+
+
+ Partition | Type     | Address    | Size       | PDI Size   | PDI MD5                          | Power-up Load | Status   
+ ---------------------------------------------------------------------------------------------------------------------------
+ 0         | PDI_BOOT | 0x00080000 | 0x07400000 | 0x003ec160 | 360874e0d8a584c09afde073c0ff403a | N/A           | Active   
+ 1         | PDI_BOOT | 0x07480000 | 0x07400000 | 0x003ec160 | 360874e0d8a584c09afde073c0ff403a | N/A           | In-Active
+ 2         | PDI_USER | 0x0e880000 | 0x01000000 | 0x00000000 | 00000000000000000000000000000000 | Off           | Not Loaded
+
+ ~%
 </pre></div>
 </div>
-<p>Primary FPT:</p>
-<h2 class="rubric" id="fpt">FPT</h2>
-<p>Version     | 2
-Header Size | 128
-Entry Size  | 128
-Entries     | 3</p>
-<h2 class="rubric" id="partition-type-address-size-pdi-size-pdi-md5-power-up-load-status">Partition | Type     | Address    | Size       | PDI Size   | PDI MD5                          | Power-up Load | Status</h2>
-<p>0         | PDI_BOOT | 0x00080000 | 0x07400000 | 0x003ec160 | 360874e0d8a584c09afde073c0ff403a | N/A           | Active<br />
-1         | PDI_BOOT | 0x07480000 | 0x07400000 | 0x003ec160 | 360874e0d8a584c09afde073c0ff403a | N/A           | In-Active
-2         | PDI_USER | 0x0e880000 | 0x01000000 | 0x00000000 | 00000000000000000000000000000000 | Off           | Not Loaded</p>
 </li>
 <li><p>The ami_tool cfgmem_program command can then be used to write a amr_ospi.bin pdi to a partition 1 and 2. Partition 3 user partition which is used to load user PL pdi’s
-through ami_tool pdi_\program command.</p></li>
-</ol>
+through ami_tool pdi_\program command.</p>
 <p>e.g.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>```bash
-# usage: sudo ami_tool cfgmem_program -d &lt;bdf&gt; -t &lt;type&gt; -i &lt;pdi path&gt; -p &lt;flash partition number&gt;
-sudo ami_tool cfgmem_program -d 21:00.0 -t primary -i &lt;path_to_amr_ospi.bin&gt; -p 0
-```
-----------------
-Device | 21:00.0
-----------------
-Current Configuration
-----------------
-UUID   | 00000000000000000000000014862935
-----------------
-Incoming Configuration
-----------------
-UUID      | 00000000000000000000000014b62935
-Path      | 
-Partition | 0
-----------------
-Are you sure you wish to proceed? [Y/n]: Y
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> ```bash
+ # usage: sudo ami_tool cfgmem_program -d &lt;bdf&gt; -t &lt;type&gt; -i &lt;pdi path&gt; -p &lt;flash partition number&gt;
+ sudo ami_tool cfgmem_program -d 21:00.0 -t primary -i &lt;path_to_amr_ospi.bin&gt; -p 0
+ ```
+ ----------------
+ Device | 21:00.0
+ ----------------
+ Current Configuration
+ ----------------
+ UUID   | 00000000000000000000000014862935
+ ----------------
+ Incoming Configuration
+ ----------------
+ UUID      | 00000000000000000000000014b62935
+ Path      | 
+ Partition | 0
+ ----------------
+ Are you sure you wish to proceed? [Y/n]: Y
 
-Updating base flash image...
-[####################################################################################################] 100% |
-Image programming complete.
-Will do a hot reset to boot into partition 0. This may take a minute...
+ Updating base flash image...
+ [####################################################################################################] 100% |
+ Image programming complete.
+ Will do a hot reset to boot into partition 0. This may take a minute...
 </pre></div>
 </div>
+</li>
+</ol>
 <p><strong>Note:</strong> Once the flash programming starts, as indicated by the progress bar percentage. Once after a hot reset, we can see updated PDI info using ami_tool overview command.</p>
 <ol class="arabic simple" start="3">
 <li><p>Unless the -q option was specified, AMI will automatically instruct a boot to occur from the newly updated partition upon the completion of the cfgmem_program command.</p></li>
@@ -200,7 +214,7 @@ Will do a hot reset to boot into partition 0. This may take a minute...
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on June 10, 2026.
+      <span class="lastupdated">Last updated on August 04, 2026.
       </span></p>
   </div>
 

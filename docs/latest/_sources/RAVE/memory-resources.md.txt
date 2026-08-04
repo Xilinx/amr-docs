@@ -1,6 +1,6 @@
 # AMR RAVE - Memory Resources
 
-> **For common memory concepts**, see [Common Memory Resources](../../hardware/memory-resources.md)
+> **For common memory concepts**, see [Common Memory Resources](../hardware/memory-resources.md)
 >
 > This document describes RAVE-specific memory configuration: LPDDR4 (8-16GB).
 
@@ -199,7 +199,7 @@ board variants offer different LPDDR4 capacities (8GB or 16GB) to meet various a
 
 ## References
 
-- [Common Memory Resources](../../hardware/memory-resources.md) - Memory controller concepts
+- [Common Memory Resources](../hardware/memory-resources.md) - Memory controller concepts
 - [RAVE Memory Map](memory-map.md) - LPDDR4 address assignments
 - [RAVE NoC Configuration](noc-config.md) - NoC to memory routing
 - [VE2302 Device Documentation](https://docs.xilinx.com/r/en-US/ds989-versal-edge) - VE2302 specifications

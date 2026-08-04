@@ -56,7 +56,6 @@ Release Information
    :caption: AMR Deployment
    :hidden:
 
-   deployment/deployment-archive
    deployment/install-host
    deployment/install-card
    deployment/update-fpt
@@ -116,3 +115,10 @@ Release Information
 
    appendices/abbreviations
    AMR-release-information
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Future Changes
+   :hidden:
+
+   future-changes

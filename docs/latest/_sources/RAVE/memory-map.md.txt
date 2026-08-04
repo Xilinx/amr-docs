@@ -1,6 +1,6 @@
 # AMR RAVE - Memory Map
 
-> **For common address mapping concepts**, see [Common Memory Map](../../hardware/memory-map.md)
+> **For common address mapping concepts**, see [Common Memory Map](../hardware/memory-map.md)
 >
 > This document describes RAVE-specific address assignments and LPDDR4 memory regions.
 
@@ -115,7 +115,7 @@ Specific address ranges depend on the BAR sizes configured in the XDMA IP and th
 
 ## References
 
-- [Common Memory Map](../../hardware/memory-map.md) - Address mapping concepts
+- [Common Memory Map](../hardware/memory-map.md) - Address mapping concepts
 - [RAVE Memory Resources](memory-resources.md) - LPDDR4 configuration
 - [RAVE PCIe Configuration](pcie-config.md) - PCIe and XDMA configuration
 - [RAVE NoC Configuration](noc-config.md) - NoC routing and remapping

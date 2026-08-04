@@ -10,9 +10,9 @@ AMD Versal™ devices are designed around a programmable NoC interconnect based 
 
 ### NoC Diagram
 
-![image1](../../images/grey_arrow_down3.png)
+![image1](../images/grey_arrow_down3.png)
 
-![image2](../../images/1107374964.png)
+![image2](../images/1107374964.png)
 
 <span id="amr-nocconfiguration-noccomponents"></span>
 
@@ -158,7 +158,7 @@ Additional information on the NoC, NoC performance, and performance tuning can b
 
 The table below shows the total number of NMU and NSU in the Versal device.
 
-![images/1107375048.png](../../images/1107375048.png)
+![images/1107375048.png](../images/1107375048.png)
 
 <span id="amr-nocconfiguration-cips-specificnmu-nsu"></span>
 
@@ -166,7 +166,7 @@ The table below shows the total number of NMU and NSU in the Versal device.
 
 All NMU\_128 and NSU\_128 connect to CIPS. The main CIPS core is located in SLR0 and it has multiple NoC connections which include PCIe, PMC, RPU, cache coherent, and Non-cache coherent. In V80, there is also a CIPS core in SLR1 and SLR2. Each of these CIPS cores have one PMC\_NMU and one PMC\_NSU connection to it.
 
-![images/1107375096.png](../../images/1107375096.png)
+![images/1107375096.png](../images/1107375096.png)
 
 NCI: Non-cache coherent interconnect
 
@@ -180,7 +180,7 @@ CCI: Cache coherent interconnect
 
 The following table shows the total number of NMU and NSU used by AMR.
 
-![images/1107375039.png](../../images/1107375039.png)
+![images/1107375039.png](../images/1107375039.png)
 
 \*There are four DDRMC controllers, but AMR only uses two. The DDR uses two DDRMC NSU and the DIMM uses two DDRMC NSUs.
 
@@ -188,23 +188,23 @@ A break down of the different NMU and NSU connections are given in the following
 
 The host uses multiple connections (CPM\_PCIE\_NOC\_0 and CPM\_PCIE\_NOC\_1) to access PL slaves, the DDR, and the DIMM for more optimal performance.
 
-![images/1107375030.png](../../images/1107375030.png)
+![images/1107375030.png](../images/1107375030.png)
 
 The host uses multiple connections (CPM\_PCIE\_NOC\_0 and CPM\_PCIE\_NOC\_1) to access PL slaves, the DDR, and the DIMM for more optimal performance.
 
-![images/1107375033.png](../../images/1107375033.png)
+![images/1107375033.png](../images/1107375033.png)
 
 The PMC connects to the DDR and DIMM to manage primary pre-boot tasks and management of the hardware for reliable power-up and power-down of device resources.
 
-![images/1107375102.png](../../images/1107375102.png)
+![images/1107375102.png](../images/1107375102.png)
 
 The host and RPU, which operates in the LPD, communicate through the use of the DDR.
 
-![images/1107375150.png](../../images/1107375150.png)
+![images/1107375150.png](../images/1107375150.png)
 
 CPM\_PCIE\_NOC\_0 and CPM\_PCIE\_NOC\_1 connect to HBM\_MC ports to exercise the NoC and HBM performance.
 
-![images/1107375024.png](../../images/1107375024.png)
+![images/1107375024.png](../images/1107375024.png)
 
 Additional connections can be made to the NoC and memory ports as required by other designs. As more connections are made, additional tuning to the NoC components and DIMM/HBM addressing may be required for optimum performance.
 
@@ -242,9 +242,9 @@ If more information is needed for more advanced NoC performance tuning, it can b
 
 The axi\_noc\_cips block connects the CIPS to the PL logic and memory controllers through NoC connections. The port connections and configuration of this block are described below.
 
-![image3](../../images/grey_arrow_down3.png)
+![image3](../images/grey_arrow_down3.png)
 
-![image4](../../images/1107375021.png)
+![image4](../images/1107375021.png)
 
 <span id="amr-nocconfiguration-guiconfigurationofaxi-noc-cips"></span>
 
@@ -258,9 +258,9 @@ For AMR, the NoC configuration changes are described below. More documentation c
 
 The general tab allows the number of AXI master and slave interfaces, INI master and slave interfaces, and integrated memory controller connections to be specified. The settings are explained below.
 
-![image5](../../images/grey_arrow_down3.png)
+![image5](../images/grey_arrow_down3.png)
 
-![image6](../../images/1107375009.png)
+![image6](../images/1107375009.png)
 
 Note: The AMR design does not utilize any of the 64 HBM AXI PL Slave interfaces. These provide direct connections from the PL to the HBM NMUs and can be used to saturate the HBM memory bandwidth.
 
@@ -270,13 +270,13 @@ AMR connects the following slave interfaces to the CIPS master. The following ta
 
 The axi\_noc\_cips connections outlined in the tables below are further illustrated in the [NoC Connection Diagrams](#amr-nocconfiguration-nocconnectiondiagrams).
 
-![images/1107375012.png](../../images/1107375012.png)
+![images/1107375012.png](../images/1107375012.png)
 
 **AXI Interfaces** - AXI Master
 
 AMR connects the following master interfaces from NoC to PL address space:
 
-![images/1107375006.png](../../images/1107375006.png)
+![images/1107375006.png](../images/1107375006.png)
 
 **Current Base Design:**
 - **M00_AXI**: Routes to PF0 address space (16MB) - No hardware IP instantiated, address space reserved
@@ -287,7 +287,7 @@ AMR connects the following master interfaces from NoC to PL address space:
 
 The AXI NoC IP uses the CIPS clocks to manage clock domain crossings to the NoC. The table below shows clocks connected to axi\_noc\_cips.
 
-![images/1107374988.png](../../images/1107374988.png)
+![images/1107374988.png](../images/1107374988.png)
 
 **INI Interfaces** - INI Slave
 
@@ -297,7 +297,7 @@ No Connections
 
 AMR V80 connects the following master INI interfaces to the DDR/DIMM memory controllers. The following table shows the axi\_noc\_cips INI connections to the DDR and DIMM MCs.
 
-![images/1107375126.png](../../images/1107375126.png)
+![images/1107375126.png](../images/1107375126.png)
 
 **Memory Controllers** - DDR4/LPDDR4
 
@@ -311,9 +311,9 @@ Inputs
 
 As mentioned in the [AXI Interfaces Slave section](#amr-nocconfiguration-cipsmaster-to-axi-noc-cipsslave) above, there are four CIPS AXI masters connected to the axi\_noc\_cips slaves.
 
-![image7](../../images/grey_arrow_down3.png)
+![image7](../images/grey_arrow_down3.png)
 
-![image8](../../images/1107375204.png)
+![image8](../images/1107375204.png)
 
 <span id="amr-nocconfiguration-outputs"></span>
 
@@ -321,9 +321,9 @@ As mentioned in the [AXI Interfaces Slave section](#amr-nocconfiguration-cipsmas
 
 As mentioned in the [AXI Interfaces Master section](#amrv80-nocconfiguration-axi-noc-cipsmastertopl) above, there are four CIPS AXI masters connected to the PL.
 
-![image9](../../images/grey_arrow_down3.png)
+![image9](../images/grey_arrow_down3.png)
 
-![image10](../../images/1107374997.png)
+![image10](../images/1107374997.png)
 
 <span id="amr-nocconfiguration-connectivity"></span>
 
@@ -347,9 +347,9 @@ See [NoC Connection Diagrams](#amrv80-nocconfiguration-nocconnectiondiagrams) fo
 
 While the table does not capture the complete connection to the HBM, the same pattern is followed through HBM15 PC0 and HBM15 PC1.
 
-![image11](../../images/grey_arrow_down3.png)
+![image11](../images/grey_arrow_down3.png)
 
-![image12](../../images/1107374994.png)
+![image12](../images/1107374994.png)
 
 **NoC Connection Diagrams**
 
@@ -365,33 +365,33 @@ In the diagram below, the green lines in the axi\_noc\_cips block, illustrate th
 
 3.  axi\_noc\_cips/M02\_INI (which then connects to axi\_noc\_mc\_ddr4\_1/S00\_INI of the DIMM in the Block Design)
 
-![image13](../../images/grey_arrow_down3.png)
+![image13](../images/grey_arrow_down3.png)
 
-![image14](../../images/1107374961.png)
+![image14](../images/1107374961.png)
 
 **CPM\_PCIE\_NOC\_1 End-to-End NoC Connection Diagram**
 
 In the diagram below, the green lines in the axi\_noc\_cips block, illustrate the connections from CIPS PCIe (CPM\_PCIE\_NOC\_1) to the base logic, DDR, and DIMM.
 
-![image15](../../images/grey_arrow_down3.png)
+![image15](../images/grey_arrow_down3.png)
 
-![image16](../../images/1107374952.png)
+![image16](../images/1107374952.png)
 
 **PMC\_NOC\_AXI\_0 End-to-End NoC Connection Diagram**
 
 In the diagram below, the green lines in the axi\_noc\_cips block, illustrate the connections from PMC to DDR and DIMM.
 
-![image17](../../images/grey_arrow_down3.png)
+![image17](../images/grey_arrow_down3.png)
 
-![image18](../../images/1107374955.png)
+![image18](../images/1107374955.png)
 
 **LPD\_AXI\_NOC\_0 End-to-End NoC Connection Diagram**
 
 In the diagram below, the green lines in the axi\_noc\_cips block, illustrate the connections from the RPU to the DDR.
 
-![image19](../../images/grey_arrow_down3.png)
+![image19](../images/grey_arrow_down3.png)
 
-![image20](../../images/1107374967.png)
+![image20](../images/1107374967.png)
 
 <span id="amr-nocconfiguration-qos"></span>
 
@@ -423,13 +423,13 @@ More information can be found here:
 
 The following figures show all the connections made to the axi\_noc\_cips inputs and their desired bandwidths.
 
-![image21](../../images/grey_arrow_down3.png)
+![image21](../images/grey_arrow_down3.png)
 
-![image22](../../images/1107374982.png)
+![image22](../images/1107374982.png)
 
-![image23](../../images/1107374979.png)
+![image23](../images/1107374979.png)
 
-![image24](../../images/1107374985.png)
+![image24](../images/1107374985.png)
 
 After the implemented design has been opened in AMD Vivado™, the NoC performance can be verified by opening the Vivado Window → NoC window. This will also show the routed NoC paths.
 
@@ -443,13 +443,13 @@ The NMU supports address remapping as a way to override the default address map 
 
   - [DDR Memory Organization](memory-resources.md#AMRV80-MemoryResources-DiscreteDDRDiagram)
 
-![images/1107375123.png](../../images/1107375123.png)
+![images/1107375123.png](../images/1107375123.png)
 
 See the Address Re-mapping section of the Versal Adaptive SoC Programmable Network on Chip and Integrated Memory Controller 1.0 LogiCORE IP Product Guide ([PG313](https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Address-Re-mapping)) for more information.
 
-![image25](../../images/grey_arrow_down3.png)
+![image25](../images/grey_arrow_down3.png)
 
-[![image26](../../images/1107375195.png)](../../images/1107375195.png)
+![image26](../images/1107375195.png)
 
 <span id="amr-nocconfiguration-hbmconfiguration"></span>
 
@@ -465,9 +465,9 @@ The HBM uses two external LVDS clocks operating at 200MHz. These are dedicated c
 
 The ‘Configure Channels’ button opens a full set of HBM options. The options are explained in detail in the HBM Configuration Tab section of the Versal Adaptive SoC Programmable Network on Chip and Integrated Memory Controller 1.0 LogiCORE IP Product Guide ([PG313](https://docs.xilinx.com/r/en-US/pg313-network-on-chip/HBM-Configuration-Tab)):
 
-![image27](../../images/grey_arrow_down3.png)
+![image27](../images/grey_arrow_down3.png)
 
-![image28](../../images/1107375171.png)
+![image28](../images/1107375171.png)
 
 **Configure Channels**
 
@@ -483,9 +483,9 @@ Other designs may require different settings to meet performance requirements. M
 
   - The Routing Use Cases and HBM Subsystems section of the [Versal Adaptive SoC Programmable Network on Chip and Integrated Memory Controller 1.0 LogiCORE IP](https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Routing-Use-Cases-and-HBM-Subsystems) Product Guide ([PG313](https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Routing-Use-Cases-and-HBM-Subsystems)).
 
-![image29](../../images/grey_arrow_down3.png)
+![image29](../images/grey_arrow_down3.png)
 
-![image30](../../images/1107374973.png)
+![image30](../images/1107374973.png)
 
 *HBM Refresh and Power Saving Options*
 
@@ -493,9 +493,9 @@ AMR uses All Bank Refresh mode. Temperature compensated refresh is not enabled b
 
 For more information see the HBM Refresh and Power Savings Tab of the [Versal Adaptive SoC Programmable Network on Chip and Integrated Memory Controller 1.0 LogiCORE IP](https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Address-Mapping)Product Guide ([PG313](https://docs.xilinx.com/r/en-US/pg313-network-on-chip/HBM-Refresh-and-Power-Savings-Tab)).
 
-![image31](../../images/grey_arrow_down3.png)
+![image31](../images/grey_arrow_down3.png)
 
-![image32](../../images/1107374976.png)
+![image32](../images/1107374976.png)
 
 *HBM Reliability Options*
 
@@ -505,9 +505,9 @@ AMR uses the default settings. Information on these settings can be found in the
 
   - DBI: Dynamic bus inversion is enabled for read and write data.
 
-![image33](../../images/grey_arrow_down3.png)
+![image33](../images/grey_arrow_down3.png)
 
-![image34](../../images/1107374970.png)
+![image34](../images/1107374970.png)
 
 <span id="amrv80-nocconfiguration-axinocddrmc"></span>
 
@@ -521,9 +521,9 @@ AMR uses a high-efficiency, low-latency integrated DDR memory controller (MC) fo
 
 There are a minimal number of ports on axi\_noc\_mc\_ddr4\_0, as shown in the following figure.
 
-![image35](../../images/grey_arrow_down3.png)
+![image35](../images/grey_arrow_down3.png)
 
-[![image36](../../images/1107375153.png)](../../images/1107375153.png)
+[![image36](../images/1107375153.png)](../images/1107375153.png)
 
 <span id="amrv80-nocconfiguration-guiconfigurationofaxi-noc-mc-ddr4-0"></span>
 
@@ -567,9 +567,9 @@ For AMR, the NoC DDRMC configuration may be specified in a TCL file or through t
 
 The General tab allows the number of AXI master and slave interfaces, INI master and slave interfaces, and Integrated memory controller connections to be specified. The settings are explained below.
 
-![image37](../../images/grey_arrow_down3.png)
+![image37](../images/grey_arrow_down3.png)
 
-![image38](../../images/1107375201.png)
+![image38](../images/1107375201.png)
 
 **AXI Interfaces**
 
@@ -583,7 +583,7 @@ The General tab allows the number of AXI master and slave interfaces, INI master
 
 AMR connects the following master interfaces to the DDRMC. The following table shows the INI master connections to axi\_noc\_mc\_ddr4\_0.
 
-![images/1107375114.png](../../images/1107375114.png)
+![images/1107375114.png](../images/1107375114.png)
 
 M00\_INI connects to the CIPS PCIe, PMC, and RPU through the axi\_noc\_cips.
 
@@ -609,9 +609,9 @@ N/A
 
 As mentioned in the [INI Interfaces](#amrv80-nocconfiguration-ddrinislave) section above, there are two CIPS INI masters connected to the axi\_noc\_mc\_ddr4\_0 slaves.
 
-![image39](../../images/grey_arrow_down3.png)
+![image39](../images/grey_arrow_down3.png)
 
-![image40](../../images/1107375186.png)
+![image40](../images/1107375186.png)
 
 <span id="id2"></span>
 
@@ -631,9 +631,9 @@ The figure below captures the connectivity enabled in AMR:
 
   - S0I\_INI (CIPS PCIe Host) connects to port 1 of the MC.
 
-![image41](../../images/grey_arrow_down3.png)
+![image41](../images/grey_arrow_down3.png)
 
-![image42](../../images/1107375192.png)
+![image42](../images/1107375192.png)
 
 DDR and DIMM Port Connections
 
@@ -649,7 +649,7 @@ Note: Multiple connections are made to DDR Port 0 and DIMM Port 0.
 
   - LPD\_AXI\_NOC\_0
 
-![image43](../../images/1107374958.png)
+![image43](../images/1107374958.png)
 
 <span id="id4"></span>
 
@@ -681,9 +681,9 @@ More information can be found in the following:
 
 The following figure shows all the connections made to the axi\_noc\_mc\_ddr4\_0 inputs and their desired bandwidths.
 
-![image44](../../images/grey_arrow_down3.png)
+![image44](../images/grey_arrow_down3.png)
 
-![image45](../../images/1107375036.png)
+![image45](../images/1107375036.png)
 
 After the implemented design has been opened in Vivado, the NoC performance can be verified by opening the Vivado Window → NoC window. This will also show the routed NoC paths.
 
@@ -701,15 +701,15 @@ Information on the DDR Memory options is found 7in the Configuring the Memory Co
 
 AMR supports DDR4 running at 200MHz.
 
-![image46](../../images/grey_arrow_down3.png)
+![image46](../images/grey_arrow_down3.png)
 
-![image47](../../images/1107375189.png)
+![image47](../images/1107375189.png)
 
 **Clocks**
 
 The AXI NoC IP uses the DDR board clock to manage the clock domain crossings between the NoC and DDR.
 
-![images/1107375105.png](../../images/1107375105.png)
+![images/1107375105.png](../images/1107375105.png)
 
 <span id="amrv80-nocconfiguration-ddrmemory"></span>
 
@@ -717,9 +717,9 @@ The AXI NoC IP uses the DDR board clock to manage the clock domain crossings bet
 
 AMR supports a 4GB memory. Choose the settings below for the proper part and speed grade.
 
-![image48](../../images/grey_arrow_down3.png)
+![image48](../images/grey_arrow_down3.png)
 
-![image49](../../images/1107375165.png)
+![image49](../images/1107375165.png)
 
 <span id="amrv80-nocconfiguration-ddraddressmapping"></span>
 
@@ -727,9 +727,9 @@ AMR supports a 4GB memory. Choose the settings below for the proper part and spe
 
 No change - leave at defaults
 
-![image50](../../images/grey_arrow_down3.png)
+![image50](../images/grey_arrow_down3.png)
 
-![image51](../../images/1107375156.png)
+![image51](../images/1107375156.png)
 
 <span id="amrv80-nocconfiguration-ddradvanced"></span>
 
@@ -737,9 +737,9 @@ No change - leave at defaults
 
 AMR requires ECC per design requirements.
 
-![image52](../../images/grey_arrow_down3.png)
+![image52](../images/grey_arrow_down3.png)
 
-![image53](../../images/1107375144.png)
+![image53](../images/1107375144.png)
 
 <span id="amrv80-nocconfiguration-axinocdimmmc"></span>
 
@@ -753,9 +753,9 @@ AMR V80 uses a high-efficiency, low-latency integrated DDR memory controller (MC
 
 There are a minimal number of ports on axi\_noc\_mc\_ddr4\_1 as shown in the following figure.
 
-![image54](../../images/grey_arrow_down3.png)
+![image54](../images/grey_arrow_down3.png)
 
-[![image55](../../images/1107375060.png)](../../images/1107375060.png)
+![image55](../images/1107375060.png)
 
 <span id="amrv80-nocconfiguration-guiconfigurationofaxi-noc-mc-ddr4-1"></span>
 
@@ -799,9 +799,9 @@ For AMR, the NoC DDRMC configuration may be specified in a TCL file or through t
 
 The General tab allows the number of AXI master and slave interfaces, INI master and slave interfaces, and integrated memory controller connections to be specified. The settings are explained below.
 
-![image56](../../images/grey_arrow_down3.png)
+![image56](../images/grey_arrow_down3.png)
 
-![image57](../../images/1107375093.png)
+![image57](../images/1107375093.png)
 
 **AXI Interfaces**
 
@@ -813,7 +813,7 @@ The General tab allows the number of AXI master and slave interfaces, INI master
 
 The AXI NoC IP uses the DDR board clock, user clock, and CIPS PL clock to manage the clock domain crossings between the NoC and DIMM.
 
-![images/1107375084.png](../../images/1107375084.png)
+![images/1107375084.png](../images/1107375084.png)
 
 **INI Interfaces**
 
@@ -821,7 +821,7 @@ The AXI NoC IP uses the DDR board clock, user clock, and CIPS PL clock to manage
 
 AMR V80 connects the following master INI interfaces to the memory controller.
 
-![images/1107375078.png](../../images/1107375078.png)
+![images/1107375078.png](../images/1107375078.png)
 
 M02\_INI connects to the CIPS PCIe and PMC through the axi\_noc\_cips.
 
@@ -845,9 +845,9 @@ N/A
 
 As mentioned in the [AXI Interfaces](#amrv80-nocconfiguration-dimmaxislave) and [INI Interfaces](#amrv80-nocconfiguration-dimminislave) section above, there are two CIPS INI masters connected to the axi\_noc\_mc\_ddr4\_1 slaves.
 
-![image58](../../images/grey_arrow_down3.png)
+![image58](../images/grey_arrow_down3.png)
 
-![image59](../../images/1107375075.png)
+![image59](../images/1107375075.png)
 
 <span id="id9"></span>
 
@@ -867,9 +867,9 @@ The figure below captures the connectivity enabled in AMR:
 
   - S0I\_INI (CIPS PCIe Host) connects to port 1 of the MC.
 
-![image60](../../images/grey_arrow_down3.png)
+![image60](../images/grey_arrow_down3.png)
 
-![image61](../../images/1107375063.png)
+![image61](../images/1107375063.png)
 
 DDRMC Access
 
@@ -881,9 +881,9 @@ The diagram below shows the V80 DIMM DDRMC port access paths with CIPS.
 
   - PMC\_NOC\_AXI\_0
 
-![image62](../../images/grey_arrow_down3.png)
+![image62](../images/grey_arrow_down3.png)
 
-![image63](../../images/1107374958.png)
+![image63](../images/1107374958.png)
 
 <span id="id11"></span>
 
@@ -913,9 +913,9 @@ More information can be found here:
 
 The following figure shows all the connections made to the axi\_noc\_mc\_ddr4\_1 inputs and their desired bandwidths.
 
-![image64](../../images/grey_arrow_down3.png)
+![image64](../images/grey_arrow_down3.png)
 
-[![image65](../../images/1107375069.png)](../../images/1107375069.png)
+![image65](../images/1107375069.png)
 
 After the implemented design has been opened in Vivado, the NoC performance can be verified by opening the Vivado Window → NoC window. This will also show the routed NoC paths.
 
@@ -931,9 +931,9 @@ N/A
 
 AMR V80 uses an external 200MHz clock for the DDR.
 
-![image66](../../images/grey_arrow_down3.png)
+![image66](../images/grey_arrow_down3.png)
 
-![image67](../../images/1107375177.png)
+![image67](../images/1107375177.png)
 
 <span id="id14"></span>
 
@@ -947,9 +947,9 @@ These options are enabled for future growth:
 
   - Future Expansion for PCB designs - Versal Adaptive SoC Programmable Network on Chip and Integrated Memory Controller 1.0 LogiCORE IP Product Guide ([PG313](https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Generating-Future-Expansion-Pinouts?tocId=FcWxmZBM7ow8K8MyIO97yA)).
 
-![image68](../../images/grey_arrow_down3.png)
+![image68](../images/grey_arrow_down3.png)
 
-![image69](../../images/1107375168.png)
+![image69](../images/1107375168.png)
 
 <span id="id15"></span>
 
@@ -957,9 +957,9 @@ These options are enabled for future growth:
 
 In order to achieve maximum DIMM performance, the predefined address map may need to be modified based on the user logic traffic pattern. More information can be found in the DRAM Address Mapping section of the Versal Adaptive SoC Programmable Network on Chip and Integrated Memory Controller 1.0 LogiCORE IP Product Guide ([PG313](https://docs.xilinx.com/r/en-US/pg313-network-on-chip/DRAM-Address-Mapping)).
 
-![image70](../../images/grey_arrow_down3.png)
+![image70](../images/grey_arrow_down3.png)
 
-![image71](../../images/1107375066.png)
+![image71](../images/1107375066.png)
 
 <span id="id16"></span>
 
@@ -967,7 +967,7 @@ In order to achieve maximum DIMM performance, the predefined address map may nee
 
 AMR V80 requires ECC.
 
-![image72](../../images/grey_arrow_down3.png)
+![image72](../images/grey_arrow_down3.png)
 
-![image73](../../images/1107375174.png)
+![image73](../images/1107375174.png)
 

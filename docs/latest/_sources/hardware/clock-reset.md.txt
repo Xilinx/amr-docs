@@ -1,8 +1,8 @@
 # AMR - Clock and Reset Concepts (Common)
 
 > **For board-specific clock/reset configurations**, see:
-> - [V80 Clock Reset](../V80/hardware/clock-reset.md) - V80 clock configuration
-> - [RAVE Clock Reset](../RAVE/hardware/clock-reset.md) - RAVE clock configuration
+> - [V80 Clock Reset](../V80/clock-reset.md) - V80 clock configuration
+> - [RAVE Clock Reset](../RAVE/clock-reset.md) - RAVE clock configuration
 
 <span id="amr-clockreset-overview"></span>
 
@@ -198,7 +198,7 @@ sudo ami_tool device_boot -d <bdf> -p <partition_number>
 ## Board-Specific Clock/Reset Details
 
 ### V80 Clock/Reset Configuration
-[V80 Clock Reset](../V80/hardware/clock-reset.md)
+[V80 Clock Reset](../V80/clock-reset.md)
 
 **V80-Specific:**
 - Single proc_sys_reset in PF1 hierarchy
@@ -206,7 +206,7 @@ sudo ami_tool device_boot -d <bdf> -p <partition_number>
 - Minimal clock domains
 
 ### RAVE Clock/Reset Configuration
-[RAVE Clock Reset](../RAVE/hardware/clock-reset.md)
+[RAVE Clock Reset](../RAVE/clock-reset.md)
 
 **RAVE-Specific:**
 - PCIe clock domain from GT transceivers
@@ -220,6 +220,6 @@ sudo ami_tool device_boot -d <bdf> -p <partition_number>
 
 - [Clocking Wizard Documentation](https://docs.xilinx.com/r/en-US/ug1273-versal-acap-design/Clocking) - Versal clocking
 - [Processor System Reset IP (PG164)](https://docs.xilinx.com/v/u/en-US/pg164-proc-sys-reset) - PSR IP guide
-- [V80 Clock Reset](../V80/hardware/clock-reset.md) - V80-specific
-- [RAVE Clock Reset](../RAVE/hardware/clock-reset.md) - RAVE-specific
+- [V80 Clock Reset](../V80/clock-reset.md) - V80-specific
+- [RAVE Clock Reset](../RAVE/clock-reset.md) - RAVE-specific
 

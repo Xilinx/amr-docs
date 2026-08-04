@@ -49,6 +49,8 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">How-to Install Prebuilt AMR Packages</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#download-prebuilt-packages">Download Prebuilt Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install">Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#manual-steps">Manual Steps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#step-1-program-ospi-firmware-to-device">Step 1: Program OSPI Firmware to Device</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#method-1-using-ami-tool-cfgmem-fpt-if-ami-already-installed-and-amc-is-in-ready-state">Method 1: Using ami_tool cfgmem_fpt (If AMI Already Installed and AMC is in READY state)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#method-2-flash-through-jtag-using-vivado-hardware-manager-recommended-for-initial-setup">Method 2: Flash Through JTAG Using Vivado Hardware Manager (Recommended for Initial Setup)</a></li>
@@ -72,6 +74,9 @@
 <li class="toctree-l4"><a class="reference internal" href="#example-output-for-pl-pdi-load">Example output for PL pdi load</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-example-pl-pdi">Testing example PL PDI</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#important-notes">Important Notes</a></li>
 </ul>
 </li>
@@ -131,6 +136,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../appendices/abbreviations.html">AMR - List of Abbreviations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../AMR-release-information.html">AMR Release Information</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Future Changes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../future-changes.html">Future Changes</a></li>
+</ul>
 
         </div>
       </div>
@@ -161,31 +170,62 @@
 <p>This guide provides step-by-step instructions for installing prebuilt AMD Adaptive Management Runtime (AMR) packages on your system. Prebuilt packages allow you to quickly deploy AMR without building from source.</p>
 <p><strong>Prerequisites</strong></p>
 <ul class="simple">
+<li><p>Alveo V80 card installed in an x86 host running Ubuntu or an RPM-based Linux</p></li>
 <li><p>Root or sudo permissions are required for installation</p></li>
 <li><p>Physical installation of the Alveo V80 or Embedded+ card in your system</p></li>
 <li><p>For JTAG programming: Vivado Hardware Manager (Vivado 2026.1)</p></li>
 </ul>
-<p><span id="how-toinstallprebuiltamrpackages-downloadpackages"></span></p>
 <div class="section" id="download-prebuilt-packages">
 <h2>Download Prebuilt Packages<a class="headerlink" href="#download-prebuilt-packages" title="Permalink to this heading">¶</a></h2>
-<ol class="arabic">
+<ol class="arabic simple">
 <li><p>Refer to the <a class="reference internal" href="../AMR-release-information.html"><span class="std std-doc">AMR Release Information</span></a> to find the latest release version and download links.</p></li>
 <li><p>Download the deployment archive for your Board (V80 or RAVE).</p></li>
-<li><p>Extract the downloaded archive:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>unzip<span class="w"> </span>amr_&lt;version&gt;_&lt;date&gt;.zip
-<span class="nb">cd</span><span class="w"> </span>amr_&lt;version&gt;_&lt;date&gt;
+<li><p>Extract the downloaded archive:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>unzip<span class="w"> </span>&lt;alveo<span class="p">|</span>rave&gt;_&lt;version&gt;_&lt;date&gt;.zip
+<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>&lt;alveo<span class="p">|</span>rave&gt;_&lt;version&gt;_&lt;date&gt;
 </pre></div>
 </div>
-</li>
-</ol>
+<p><span id="how-toinstallprebuiltamrpackages-packagecontents"></span></p>
 <p>The package contains the following components:</p>
-<ul class="simple">
-<li><p><strong>amr_ospi_fpt.bin</strong> - OSPI firmware image with Flash Partition Table (FPT)</p></li>
-<li><p><strong>ami</strong> - Kernel driver package (.deb or .rpm)</p></li>
-<li><p><strong>libami</strong> - AMI API library (.deb or .rpm)</p></li>
-<li><p><strong>amitool</strong> - AMI command-line interface tool (.deb or .rpm)</p></li>
-</ul>
-<p><span id="how-toinstallprebuiltamrpackages-programfirmware"></span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├── amr_install.sh
+├── apu_linux.pdi
+├── v80_base_pld.pdi
+├── boot_strap  - If ami_tool is not present, amr_install.sh auto-installs bootstrap package
+│   ├── ami_1.8.0-0&lt;hash date&gt;_amd64.deb
+│   └── ami-1.8.0-0&lt;hash date&gt;.x86_64.rpm
+├── flash_setup
+│   ├── amr_ospi.bin     - OSPI flash image
+│   ├── amr_ospi_fpt.bin - OSPI flash image with Flash Partition Table (FPT)
+│   └── v80_initialization.pdi
+├── Readme.txt
+└── sw_packages
+   ├── ami_&lt;version date&gt;_amd64.deb      - Kernel driver package
+   ├── ami-&lt;version date&gt;.x86_64.rpm     - Kernel driver package
+   ├── libami_&lt;version date&gt;_amd64.deb   - AMI API library
+   ├── libami-&lt;version date&gt;.x86_64.rpm  - AMI API library
+   ├── amitool_&lt;version date&gt;_amd64.deb  - AMI command-line interface tool
+   └── amitool-&lt;version date&gt;.x86_64.rpm - AMI command-line interface tool
+</pre></div>
+</div>
+</div>
+<div class="section" id="install">
+<h2>Install<a class="headerlink" href="#install" title="Permalink to this heading">¶</a></h2>
+<p>From the release directory, run (reboot required if no ami_tool exists):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>./amr_install.sh
+</pre></div>
+</div>
+<p>Optional:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Installing for a card</span>
+sudo<span class="w"> </span>./amr_install.sh<span class="w"> </span>-device<span class="w"> </span>&lt;bdf&gt;
+
+<span class="c1"># Installation when there is no previously installed ami_tool</span>
+sudo<span class="w"> </span>./amr_install.sh<span class="w"> </span>-ami-deb<span class="w"> </span>boot_strap/ami_1.8.0-0&lt;<span class="nb">hash</span><span class="w"> </span>date&gt;_amd64.&lt;deb<span class="p">|</span>rpm&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="manual-steps">
+<h2>Manual Steps<a class="headerlink" href="#manual-steps" title="Permalink to this heading">¶</a></h2>
 </div>
 <div class="section" id="step-1-program-ospi-firmware-to-device">
 <h2>Step 1: Program OSPI Firmware to Device<a class="headerlink" href="#step-1-program-ospi-firmware-to-device" title="Permalink to this heading">¶</a></h2>
@@ -199,11 +239,11 @@
 ami_tool<span class="w"> </span>overview
 
 <span class="c1"># If AMC shows READY state, program the FPT image</span>
-sudo<span class="w"> </span>ami_tool<span class="w"> </span>cfgmem_fpt<span class="w"> </span>-d<span class="w"> </span>&lt;BDF&gt;<span class="w"> </span>-i<span class="w"> </span>amr_ospi_fpt.bin<span class="w"> </span>-t<span class="w"> </span>primary<span class="w"> </span>-p<span class="w"> </span><span class="m">0</span>
+sudo<span class="w"> </span>ami_tool<span class="w"> </span>cfgmem_fpt<span class="w"> </span>-d<span class="w"> </span>&lt;BDF&gt;<span class="w"> </span>-i<span class="w"> </span>amr_ospi_fpt.bin<span class="w"> </span>-t<span class="w"> </span>primary
 </pre></div>
 </div>
 <p><strong>Example:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ami_tool<span class="w"> </span>cfgmem_fpt<span class="w"> </span>-d<span class="w"> </span>c1:00.0<span class="w"> </span>-i<span class="w"> </span>amr_ospi_fpt.bin<span class="w"> </span>-t<span class="w"> </span>primary<span class="w"> </span>-p<span class="w"> </span><span class="m">0</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ami_tool<span class="w"> </span>cfgmem_fpt<span class="w"> </span>-d<span class="w"> </span>c1:00.0<span class="w"> </span>-i<span class="w"> </span>amr_ospi_fpt.bin<span class="w"> </span>-t<span class="w"> </span>primary
 </pre></div>
 </div>
 <p>After programming completes, power cycle or perform cold reboot to boot the new firmware. Wait approximately one minute for the device to become ready.</p>
@@ -273,7 +313,7 @@ sudo<span class="w"> </span>ami_tool<span class="w"> </span>cfgmem_fpt<span clas
 <li><p>After programming completes, perform a <strong>cold reboot</strong> of the host server</p></li>
 <li><p>Verify installation with <code class="docutils literal notranslate"><span class="pre">ami_tool</span> <span class="pre">overview</span></code> (after installing AMI packages in Step 2)</p></li>
 </ol>
-<p><strong>Tool repository:</strong> https://github.com/Xilinx/embpf-bootfw-update-tool</p>
+<p><strong>Tool repository:</strong> <a class="reference external" href="https://github.com/Xilinx/embpf-bootfw-update-tool">https://github.com/Xilinx/embpf-bootfw-update-tool</a></p>
 </div>
 </div>
 <div class="section" id="step-2-install-ami-software-packages">
@@ -458,6 +498,28 @@ OK. PDI has been programmed successfully.
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="testing-example-pl-pdi">
+<h2>Testing example PL PDI<a class="headerlink" href="#testing-example-pl-pdi" title="Permalink to this heading">¶</a></h2>
+<p>Use the following steps to verify PL PDI after programming a PDI.</p>
+<ul class="simple">
+<li><p>Program the target <code class="docutils literal notranslate"><span class="pre">v80_base_pld.pdi</span></code> (included in the <a class="reference internal" href="#how-toinstallprebuiltamrpackages-packagecontents"><span class="xref myst">installation package</span></a>) on device:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ami_tool<span class="w"> </span>pdi_program<span class="w"> </span>-d<span class="w"> </span>&lt;BDF&gt;<span class="w"> </span>-i<span class="w"> </span>v80_base_pld.pdi<span class="w"> </span>-y
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Read PF1 Region 2 + offset 0x20000 and verify value 0xF1:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">BDF</span><span class="o">=</span>&lt;PF1<span class="w"> </span>BDF&gt;<span class="p">;</span><span class="w"> </span>sudo<span class="w"> </span>devmem2<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;0x%X&#39;</span><span class="w"> </span><span class="k">$((</span><span class="m">0</span><span class="nv">x</span><span class="k">$(</span>lspci<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;PF1 </span><span class="nv">$BDF</span><span class="s2">&quot;</span><span class="w"> </span>-vv<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;/Region 2:/{print $5; exit}&#39;</span><span class="k">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0x20000</span><span class="k">)))</span><span class="s2">&quot;</span><span class="w"> </span>b
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Expected output includes:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Value</span> <span class="n">at</span> <span class="n">address</span> <span class="o">...</span> <span class="p">:</span> <span class="mh">0xF1</span>
+</pre></div>
+</div>
 <div class="section" id="important-notes">
 <h3>Important Notes<a class="headerlink" href="#important-notes" title="Permalink to this heading">¶</a></h3>
 <ul class="simple">
@@ -494,7 +556,7 @@ OK. PDI has been programmed successfully.
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on June 10, 2026.
+      <span class="lastupdated">Last updated on August 04, 2026.
       </span></p>
   </div>
 

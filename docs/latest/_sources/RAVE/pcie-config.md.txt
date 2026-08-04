@@ -1,6 +1,6 @@
 # AMR RAVE - PCIe Configuration
 
-> **For common PCIe concepts**, see [Common Hardware Documentation](../../hardware/index.md)
+> **For common PCIe concepts**, see [Common Hardware Documentation](../hardware/index.md)
 >
 > This document describes the RAVE (VE2302) PCIe implementation.
 
@@ -236,6 +236,6 @@ See [RAVE XDMA Configuration](xdma-config.md) for detailed XDMA IP setup.
 ## References
 
 - [RAVE XDMA Configuration](xdma-config.md) - XDMA PL IP details
-- [Common Base Design](../../hardware/base-logic.md) - Shared design philosophy
+- [Common Base Design](../hardware/base-logic.md) - Shared design philosophy
 - [PCIe Versal IP Product Guide](https://docs.xilinx.com/r/en-US/pg213-pcie-dma-versal) - IP documentation
 

@@ -99,6 +99,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../appendices/abbreviations.html">AMR - List of Abbreviations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../AMR-release-information.html">AMR Release Information</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Future Changes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../future-changes.html">Future Changes</a></li>
+</ul>
 
         </div>
       </div>
@@ -127,7 +131,7 @@
   <div class="section" id="amr-rave-cips-configuration">
 <h1>AMR RAVE - CIPS Configuration<a class="headerlink" href="#amr-rave-cips-configuration" title="Permalink to this heading">¶</a></h1>
 <blockquote>
-<div><p><strong>For common CIPS concepts</strong>, see <a class="reference internal" href="#../../hardware/cips-config.md"><span class="xref myst">Common CIPS Configuration</span></a></p>
+<div><p><strong>For common CIPS concepts</strong>, see <a class="reference internal" href="../hardware/cips-config.html"><span class="std std-doc">Common CIPS Configuration</span></a></p>
 <p>This document describes RAVE (VE2302) CIPS configuration without CPM.</p>
 </div></blockquote>
 <p><span id="amrrave-cipsconfiguration-overview"></span></p>
@@ -165,11 +169,8 @@
 </ul>
 <p><strong>M_AXI_LPD Interface:</strong></p>
 <ul class="simple">
-<li><p>Data Width: 32-bit</p></li>
-<li><p>Frequency: 100 MHz</p></li>
-<li><p>Status: Enabled but not connected in base design</p></li>
-<li><p>Purpose: Reserved for future management IP (SMBus, peripherals)</p></li>
-<li><p>Enable: PS_USE_M_AXI_LPD = 1</p></li>
+<li><p>Status: <strong>Disabled</strong> in the RAVE base design (PS_USE_M_AXI_LPD = 0)</p></li>
+<li><p>The LPD AXI clock (<code class="docutils literal notranslate"><span class="pre">m_axi_lpd_aclk</span></code>) is driven by pl0_ref_clk (100 MHz) for internal CIPS requirements, but no M_AXI_LPD port is exposed</p></li>
 </ul>
 <p><span id="amrrave-cipsconfiguration-pmc"></span></p>
 </div>
@@ -181,6 +182,12 @@
 <li><p>PMC_NOC_AXI_0: 128-bit &#64; 400MHz (SLR0)</p></li>
 <li><p>Purpose: PMC access to LPDDR4 during boot/config</p></li>
 <li><p>Enable: PS_USE_PMC_NOC_AXI0 = 1</p></li>
+</ul>
+<p><strong>FPD CCI NoC Connections:</strong></p>
+<ul class="simple">
+<li><p>FPD_CCI_NOC_0 through FPD_CCI_NOC_3: 4 cache-coherent interconnect ports</p></li>
+<li><p>Purpose: APU/CCI access to LPDDR4 and PL address space</p></li>
+<li><p>Enable: PS_USE_FPD_CCI_NOC = 1, PS_USE_FPD_CCI_NOC0 = 1</p></li>
 </ul>
 <p><strong>OSPI Configuration:</strong></p>
 <ul class="simple">
@@ -253,7 +260,7 @@
 </div>
 <div class="section" id="pl-reference-clocks">
 <h2>PL Reference Clocks<a class="headerlink" href="#pl-reference-clocks" title="Permalink to this heading">¶</a></h2>
-<p>The CIPS generates three PL reference clocks:</p>
+<p>The CIPS generates two PL reference clocks (configured via board automation with <code class="docutils literal notranslate"><span class="pre">pl_clocks</span> <span class="pre">{2}</span></code>):</p>
 <table border="1" class="docutils">
 <thead>
 <tr>
@@ -266,35 +273,29 @@
 <tr>
 <td><strong>pl0_ref_clk</strong></td>
 <td>100 MHz</td>
-<td>PL logic, SmartConnect, GPIO</td>
+<td>CIPS internal (m_axi_lpd_aclk), NoC aclk7</td>
 </tr>
 <tr>
 <td><strong>pl1_ref_clk</strong></td>
-<td>33.33 MHz</td>
-<td>Clock wizard input (optional)</td>
-</tr>
-<tr>
-<td><strong>pl2_ref_clk</strong></td>
-<td>250 MHz</td>
-<td>NoC AXI interfaces</td>
+<td>200 MHz</td>
+<td>DFX reconfigurable partition clock</td>
 </tr>
 </tbody>
 </table>
 <p><strong>Configuration:</strong></p>
 <ul class="simple">
 <li><p>PMC_CRP_PL0_REF_CTRL_FREQMHZ: 100</p></li>
-<li><p>PMC_CRP_PL1_REF_CTRL_FREQMHZ: 33.3333333</p></li>
-<li><p>PMC_CRP_PL2_REF_CTRL_FREQMHZ: 250</p></li>
+<li><p>PMC_CRP_PL1_REF_CTRL_FREQMHZ: 200</p></li>
 </ul>
 <p><span id="amrrave-cipsconfiguration-plresets"></span></p>
 </div>
 <div class="section" id="pl-resets">
 <h2>PL Resets<a class="headerlink" href="#pl-resets" title="Permalink to this heading">¶</a></h2>
-<p><strong>pl0_resetn:</strong></p>
+<p><strong>pl0_resetn and pl1_resetn:</strong></p>
 <ul class="simple">
-<li><p>Count: 1 (PS_NUM_FABRIC_RESETS = 1)</p></li>
-<li><p>Purpose: Main PL reset output</p></li>
-<li><p>Usage: Drives proc_sys_reset blocks in PL</p></li>
+<li><p>Count: 2 (configured via board automation with <code class="docutils literal notranslate"><span class="pre">pl_resets</span> <span class="pre">{2}</span></code>)</p></li>
+<li><p><strong>pl0_resetn</strong>: Main PL reset (not directly used in base design connections)</p></li>
+<li><p><strong>pl1_resetn</strong>: Passed to DFX reconfigurable partition as <code class="docutils literal notranslate"><span class="pre">pl_1_resetn</span></code></p></li>
 </ul>
 <p><span id="amrrave-cipsconfiguration-interrupts"></span></p>
 </div>
@@ -302,11 +303,12 @@
 <h2>Interrupt Configuration<a class="headerlink" href="#interrupt-configuration" title="Permalink to this heading">¶</a></h2>
 <div class="section" id="pl-ps-interrupts">
 <h3>PL-PS Interrupts<a class="headerlink" href="#pl-ps-interrupts" title="Permalink to this heading">¶</a></h3>
-<p><strong>LPD Interrupts (Optional):</strong></p>
+<p><strong>LPD Interrupts:</strong></p>
 <ul class="simple">
-<li><p>IRQ 0-1: Configured but not connected in base design</p></li>
-<li><p>Purpose: Reserved for firmware events (GCQ signals, peripheral interrupts)</p></li>
-<li><p>Enable: PS_IRQ_USAGE configuration</p></li>
+<li><p>CH0: Enabled (available for firmware use)</p></li>
+<li><p>CH8: Enabled (available for firmware use)</p></li>
+<li><p>Configuration: <code class="docutils literal notranslate"><span class="pre">PS_IRQ_USAGE</span> <span class="pre">{{CH0</span> <span class="pre">1}</span> <span class="pre">{CH8</span> <span class="pre">1}}</span></code></p></li>
+<li><p>Other channels (CH1-CH7, CH9-CH15): Not enabled</p></li>
 </ul>
 </div>
 <div class="section" id="inter-processor-interrupts-ipi">
@@ -391,31 +393,42 @@
 </div>
 <div class="section" id="design-mode-settings">
 <h2>Design Mode Settings<a class="headerlink" href="#design-mode-settings" title="Permalink to this heading">¶</a></h2>
-<p>The CIPS uses custom design mode for full configuration control:</p>
-<div class="highlight-tcl notranslate"><div class="highlight"><pre><span></span><span class="nv">DESIGN_MODE</span><span class="w"> </span><span class="k">{</span><span class="nv">1</span><span class="k">}</span>
-<span class="nv">BOOT_MODE</span><span class="w"> </span><span class="k">{</span><span class="nv">Custom</span><span class="k">}</span>
-<span class="nv">CLOCK_MODE</span><span class="w"> </span><span class="k">{</span><span class="nv">Custom</span><span class="k">}</span>
-<span class="nv">DDR_MEMORY_MODE</span><span class="w"> </span><span class="k">{</span><span class="nv">Custom</span><span class="k">}</span>
-<span class="nv">IO_CONFIG_MODE</span><span class="w"> </span><span class="k">{</span><span class="nv">Custom</span><span class="k">}</span>
-<span class="nv">DEVICE_INTEGRITY_MODE</span><span class="w"> </span><span class="k">{</span><span class="nv">Custom</span><span class="k">}</span>
+<p>The RAVE CIPS uses <strong>board automation</strong> for initial configuration, then applies selective overrides:</p>
+<div class="highlight-tcl notranslate"><div class="highlight"><pre><span></span><span class="nv">apply_bd_automation</span><span class="w"> </span><span class="o">-</span>rule<span class="w"> </span>xilinx.com:bd_rule:cips<span class="w"> </span><span class="o">-</span>config<span class="w"> </span><span class="k">{</span>
+<span class="w">    </span><span class="nv">board_preset</span><span class="w"> </span><span class="k">{</span><span class="nv">Yes</span><span class="k">}</span>
+<span class="w">    </span><span class="nv">boot_config</span><span class="w"> </span><span class="k">{</span><span class="nv">Custom</span><span class="k">}</span>
+<span class="w">    </span><span class="nv">configure_noc</span><span class="w"> </span><span class="k">{</span><span class="nv">Add</span><span class="w"> </span>new<span class="w"> </span>AXI<span class="w"> </span>NoC<span class="k">}</span>
+<span class="w">    </span><span class="nv">debug_config</span><span class="w"> </span><span class="k">{</span><span class="nv">JTAG</span><span class="k">}</span>
+<span class="w">    </span><span class="nv">design_flow</span><span class="w"> </span><span class="k">{</span><span class="nv">Full</span><span class="w"> </span>System<span class="k">}</span>
+<span class="w">    </span><span class="nv">mc_type</span><span class="w"> </span><span class="k">{</span><span class="nv">LPDDR</span><span class="k">}</span>
+<span class="w">    </span><span class="nv">num_mc_ddr</span><span class="w"> </span><span class="k">{</span><span class="nv">None</span><span class="k">}</span>
+<span class="w">    </span><span class="nv">num_mc_lpddr</span><span class="w"> </span><span class="k">{</span><span class="nv">1</span><span class="k">}</span>
+<span class="w">    </span><span class="nv">pl_clocks</span><span class="w"> </span><span class="k">{</span><span class="nv">2</span><span class="k">}</span>
+<span class="w">    </span><span class="nv">pl_resets</span><span class="w"> </span><span class="k">{</span><span class="nv">2</span><span class="k">}</span>
+<span class="k">}</span>
 </pre></div>
 </div>
-<p>These custom mode settings enable detailed configuration of all CIPS parameters specific to the RAVE hardware design.</p>
+<p>After board automation, the script overrides specific PS_PMC_CONFIG parameters (PL clock frequencies, IRQ usage, FPD/LPD NoC enables, SMON configuration).</p>
 <p><span id="amrrave-cipsconfiguration-pcieapertures"></span></p>
 </div>
 <div class="section" id="pcie-aperture-configuration">
 <h2>PCIe Aperture Configuration<a class="headerlink" href="#pcie-aperture-configuration" title="Permalink to this heading">¶</a></h2>
-<p><strong>Aperture Settings:</strong></p>
+<p>The RAVE design uses PL-based PCIe (pcie_versal IP + XDMA), so PCIe apertures are configured through the NoC and XDMA address masking rather than CIPS CPM apertures.</p>
+<p><strong>PL-to-NoC PCIe Address Paths:</strong></p>
 <ul class="simple">
-<li><p>PCIE_APERTURES_SINGLE_ENABLE: 1</p></li>
-<li><p>PCIE_APERTURES_DUAL_ENABLE: 0</p></li>
+<li><p><strong>XDMA M_AXI</strong> (S06_AXI): DMA path to LPDDR4 (M00_INI) and PL INI (M04_INI)</p></li>
+<li><p><strong>XDMA M_AXI_LITE</strong> (S07_AXI via addr_mask): Remapped <code class="docutils literal notranslate"><span class="pre">0x0000_0000</span></code> → <code class="docutils literal notranslate"><span class="pre">0x1000_0000</span></code> (8 MB) for GCQ shared memory in LPDDR4</p></li>
+<li><p><strong>XDMA M_AXI_BYPASS</strong> (S08_AXI via addr_mask): Remapped to LPDDR4 high (<code class="docutils literal notranslate"><span class="pre">0x0800_0000</span></code> → <code class="docutils literal notranslate"><span class="pre">0x0500_0000_0000</span></code>, 128 MB) and to DFX PL region (<code class="docutils literal notranslate"><span class="pre">0x0</span></code> → <code class="docutils literal notranslate"><span class="pre">0x202_0000_0000</span></code>, 8 MB)</p></li>
 </ul>
-<p>Single aperture mode is used for PCIe address mapping through the NoC to memory and PL address spaces.</p>
+<p><strong>DFX Partition Aperture:</strong></p>
+<ul class="simple">
+<li><p>M_PCIE_PL_INI: <code class="docutils literal notranslate"><span class="pre">{0x202_0000_0000</span> <span class="pre">8M}</span></code> — routes PCIe access to the reconfigurable partition</p></li>
+</ul>
 </div>
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="#../../hardware/cips-config.md"><span class="xref myst">Common CIPS Configuration</span></a> - RPU, PMC, PS concepts</p></li>
+<li><p><a class="reference internal" href="#../../hardware/cips-config.html"><span class="xref myst">Common CIPS Configuration</span></a> - RPU, PMC, PS concepts</p></li>
 <li><p><a class="reference internal" href="peripherals.html"><span class="std std-doc">RAVE Peripherals</span></a> - Peripheral details (EEPROM, TPM, eMMC, USB)</p></li>
 <li><p><a class="reference internal" href="pcie-config.html"><span class="std std-doc">RAVE PCIe Configuration</span></a> - PL PCIe IP integration</p></li>
 <li><p><a class="reference external" href="https://docs.xilinx.com/r/en-US/pg352-cips">CIPS Product Guide</a> - CIPS IP documentation</p></li>
@@ -434,7 +447,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on June 10, 2026.
+      <span class="lastupdated">Last updated on August 04, 2026.
       </span></p>
   </div>
 

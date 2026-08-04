@@ -46,7 +46,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">AMR Overview</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#new-in-this-release">New In This Release</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#platform-advancements">Platform Advancements</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#alveo-v80">Alveo V80:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#alveo-v80">Alveo V80</a></li>
 </ul>
 </li>
 </ul>
@@ -122,6 +122,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../appendices/abbreviations.html">AMR - List of Abbreviations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../AMR-release-information.html">AMR Release Information</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Future Changes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../future-changes.html">Future Changes</a></li>
+</ul>
 
         </div>
       </div>
@@ -168,7 +172,7 @@
 <li><p><strong>PS subsystems with RPU0 (AMR), RPU1 and APU</strong> - Full processing system utilization enabling APU Linux support</p></li>
 </ul>
 <div class="section" id="alveo-v80">
-<h4>Alveo V80:<a class="headerlink" href="#alveo-v80" title="Permalink to this heading">¶</a></h4>
+<h4>Alveo V80<a class="headerlink" href="#alveo-v80" title="Permalink to this heading">¶</a></h4>
 <p>For V80 users, AMR delivers substantial advantages over the legacy AVED solution:</p>
 <p><strong>Segmented Design Architecture:</strong>
 - Removed GCQ, UUID, and hardware discovery IPs from the AVED solution, freeing up FPGA resources for user applications</p>
@@ -203,24 +207,24 @@
 <table border="1" class="docutils">
 <thead>
 <tr>
-<th><span data-colorid="kdq9nyngzr">Operating System</span></th>
-<th><span data-colorid="uu37qyp26c">Architecture</span></th>
-<th><span data-colorid="zgwzhugq9a">Supported Versions</span></th>
-<th><span data-colorid="g2qoz68626">Kernel-Version</span></th>
+<th>Operating System</th>
+<th>Architecture</th>
+<th>Supported Versions</th>
+<th>Kernel-Version</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><span data-colorid="w6a3hfta9z">Ubuntu</span></td>
-<td><span data-colorid="dwhflvbtbg">x86_64</span></td>
-<td><span data-colorid="bmtdp27dz1">22.04<br>24.04<br>24.04.3</span></td>
-<td><span data-colorid="ytedsyen0b">5.15.0<br>6.8.0<br>6.17.12</span></td>
+<td>Ubuntu</td>
+<td>x86_64</td>
+<td>22.04<br>24.04<br>24.04.3</td>
+<td>5.15.0<br>6.8.0<br>6.17.12</td>
 </tr>
 <tr>
-<td><span data-colorid="a9kve1ggv2">RHEL</span></td>
-<td><span data-colorid="vt4guanqx8">x86_64</span></td>
-<td><span data-colorid="tmrzs0i204">8.3<br>9.7</span></td>
-<td><span data-colorid="el6txwhuye">4.18.0<br>6.19.3</span></td>
+<td>RHEL</td>
+<td>x86_64</td>
+<td>9.7</td>
+<td>6.19.3</td>
 </tr>
 </tbody>
 </table>
@@ -233,33 +237,16 @@
 <blockquote>
 <div><p><strong>Note:</strong> Queue DMA (QDMA) functionality is supported exclusively on the Alveo V80 Board. QDMA is not available on RAVE (Embedded+) boards, which utilize XDMA for PCIe data transfer operations.</p>
 </div></blockquote>
-<p><a class="reference download internal" download="" href="../_downloads/ae7b4c937f1537f5834fd132ead1bf49/1107373415.png"><span class="xref download myst"><img alt="image1" src="../_images/1107373415.png" /></span></a></p>
+<p><img alt="image1" src="../_images/1107373415.png" /></p>
 </div>
 <div class="section" id="getting-started-with-v80">
 <h3>Getting Started with V80<a class="headerlink" href="#getting-started-with-v80" title="Permalink to this heading">¶</a></h3>
 <p>Choose the appropriate guide based on your hardware state:</p>
-<table border="1" class="docutils">
-<thead>
-<tr>
-<th><strong>Options</strong></th>
-<th><strong>Link to Follow</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Fresh V80 hardware and want to load AMR</td>
-<td><a href="../getting-started/build_v80.md">How-to Build an AMR Design for V80</a> - Follow the getting started guide to build and deploy AMR</td>
-</tr>
-<tr>
-<td>V80 with legacy AVED solution and want to switch to AMR</td>
-<td><a href="../V80/switch-aved-amr.md#swwitching-from-avedxbtest-to-amr">Switching from AVED/xbtest to AMR</a> - Transition from AVED to AMR</td>
-</tr>
-<tr>
-<td>Running AMR on V80 and want to install legacy AVED solution</td>
-<td><a href="../V80/switch-aved-amr.md#switching-from-amr-to-avedxbtest">Switching from AMR to AVED/xbtest</a> - Transition from AMR to AVED</td>
-</tr>
-</tbody>
-</table>
+<ol class="arabic simple">
+<li><p>Fresh V80 hardware and want to load AMR: <a class="reference internal" href="../getting-started/build_v80.html"><span class="std std-doc">How-to Build an AMR Design for V80</span></a></p></li>
+<li><p>V80 with legacy AVED solution and want to switch to AMR: <a class="reference internal" href="../V80/switch-aved-amr.html#switching-from-avedxbtest-to-amr"><span class="std std-ref">Switching from AVED/xbtest to AMR</span></a></p></li>
+<li><p>Running AMR on V80 and want to install legacy AVED solution: <a class="reference internal" href="../V80/switch-aved-amr.html#switching-from-amr-to-avedxbtest"><span class="std std-ref">Switching from AMR to AVED/xbtest</span></a></p></li>
+</ol>
 <p><span id="amroverview-rave"></span></p>
 </div>
 <div class="section" id="rave-embedded-board">
@@ -299,8 +286,8 @@
 <h2>AMR Hardware Architecture<a class="headerlink" href="#amr-hardware-architecture" title="Permalink to this heading">¶</a></h2>
 <p>The AMR includes board-specific base hardware designs that demonstrate PCIe connectivity and management capabilities. For detailed information on the hardware architecture for each supported boards, please refer to:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#../V80/hardware/index.md"><span class="xref myst">V80 Hardware Architecture</span></a> - Board with eMMC, QSFP, and SMBus support</p></li>
-<li><p><a class="reference internal" href="#../RAVE/hardware/index.md"><span class="xref myst">RAVE Hardware Architecture</span></a> - Standard reference platform architecture</p></li>
+<li><p><a class="reference internal" href="../V80/index.html"><span class="std std-doc">V80 Hardware Architecture</span></a> - Board with eMMC, QSFP, and SMBus support</p></li>
+<li><p><a class="reference internal" href="../RAVE/index.html"><span class="std std-doc">RAVE Hardware Architecture</span></a> - Standard reference platform architecture</p></li>
 </ul>
 <p><span id="amroverview-amrsoftwarearchitecture"></span></p>
 </div>
@@ -353,7 +340,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on June 10, 2026.
+      <span class="lastupdated">Last updated on August 04, 2026.
       </span></p>
   </div>
 

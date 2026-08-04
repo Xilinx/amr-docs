@@ -1,6 +1,6 @@
 # AMR RAVE - NoC Configuration
 
-> **For common NoC concepts**, see [Common NoC Overview](../../hardware/noc-config.md)
+> **For common NoC concepts**, see [Common NoC Overview](../hardware/noc-config.md)
 >
 > This document describes RAVE-specific NoC topology with PL PCIe connections and LPDDR4 memory.
 
@@ -99,7 +99,7 @@ The NoC compiler routes traffic through available NPS resources, with routing de
 
 ## References
 
-- [Common NoC Overview](../../hardware/noc-config.md) - NoC concepts and QoS
+- [Common NoC Overview](../hardware/noc-config.md) - NoC concepts and QoS
 - [RAVE Memory Resources](memory-resources.md) - LPDDR4 configuration
 - [RAVE PCIe Configuration](pcie-config.md) - PCIe IP integration
 - [RAVE XDMA Configuration](xdma-config.md) - XDMA NoC connection

@@ -99,6 +99,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../appendices/abbreviations.html">AMR - List of Abbreviations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../AMR-release-information.html">AMR Release Information</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Future Changes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../future-changes.html">Future Changes</a></li>
+</ul>
 
         </div>
       </div>
@@ -148,8 +152,8 @@
 <h4>CPM5 Basic Configuration<a class="headerlink" href="#cpm5-basic-configuration" title="Permalink to this heading">¶</a></h4>
 <p>In the CPM5 Basic Configuration window, there are two PCIe Controllers to choose from. When selecting a PCIe controller, AMR follows the same guidance listed here: <a class="reference external" href="https://docs.xilinx.com/r/en-US/pg347-cpm-dma-bridge/General-Guidance-for-CPM5">https://docs.xilinx.com/r/en-US/pg347-cpm-dma-bridge/General-Guidance-for-CPM5</a>. In addition to this, AMR is only using 8 lanes, and to be in PCI SIG compliance, the bottom 8 lanes must be used. As a result, PCIe® controller 1 must be used.</p>
 <p>AMR V80 is a Gen 5x8 design supporting 32GT/s raw bandwidth.</p>
-<p><img alt="image1" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image2" src="../images/1107374422.png" /></p>
+<p><img alt="image1" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image2" src="../_images/1107374422.png" /></p>
 <p><span id="amr-cipsconfiguration-cpm5pciecontroller1configuration"></span></p>
 </div>
 <div class="section" id="cpm5-pcie-controller-1-configuration">
@@ -172,8 +176,8 @@
 </ol>
 <p><strong>Functional Mode: QDMA</strong></p>
 <p>Used for high bandwidth DDR accesses.</p>
-<p><img alt="image3" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image4" src="../images/1107374413.png" /></p>
+<p><img alt="image3" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image4" src="../_images/1107374413.png" /></p>
 <p><span id="amrv80-cipsconfiguration-capabilities"></span></p>
 </div>
 <div class="section" id="capabilities">
@@ -181,14 +185,14 @@
 <p><strong>Total Physical Functions: 2</strong></p>
 <p>Two Physical Functions (PF) are used in the AMR design. PF0 allows the card to be managed by the PCIe host. PF1 allows DMA transfers with the PCIe Host. Additional PFs can be enabled as required by user applications.</p>
 <p>AMR PCIe uses the synchronous clock from the PCIe edge connector.</p>
-<p><img alt="image5" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image6" src="../images/1107374419.png" /></p>
+<p><img alt="image5" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image6" src="../_images/1107374419.png" /></p>
 <p><span id="amr-cipsconfiguration-pfids"></span></p>
 </div>
 <div class="section" id="pf-ids">
 <h5>PF IDs<a class="headerlink" href="#pf-ids" title="Permalink to this heading">¶</a></h5>
 <p>These values must match the settings for the AMR card as indicated in the table below. The greyed out settings are not used by AMR.</p>
-<p><img alt="images/1107374383.png" src="../images/1107374383.png" /></p>
+<p><img alt="images/1107374383.png" src="../_images/1107374383.png" /></p>
 <p><strong>PF - ID Initial Values: Change values to those below to match AMD specific settings</strong></p>
 <ul class="simple">
 <li><p>Device ID PF 0</p></li>
@@ -203,8 +207,8 @@
 <li><p>Base Class Value PF 0: 12 : Processing Accelerator – vendor-specific interface</p></li>
 <li><p>Subclass Value PF 0: 00 : Processing Accelerator – vendor-specific interface</p></li>
 </ul>
-<p><img alt="image7" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image8" src="../images/1107374425.png" /></p>
+<p><img alt="image7" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image8" src="../_images/1107374425.png" /></p>
 <p><span id="amr-cipsconfiguration-pciebars"></span></p>
 </div>
 <div class="section" id="pcie-bars">
@@ -213,11 +217,11 @@
 <p>CPM5 can support up to six 32-bit BARs or three 64-bit BARs per PF. AMR requires two physical functions:</p>
 <p><strong>PF0 Configuration:</strong></p>
 <ul class="simple">
-<li><p>BAR0: 16 MB, 64-bit, non-prefetchable, AXI_Bridge_Master</p></li>
+<li><p>BAR0: 8 MB, 64-bit, non-prefetchable, AXI_Bridge_Master</p></li>
 <li><p>BAR2: Disabled (4 KB configured but not enabled)</p></li>
 <li><p>Address Mapping: PCIe BAR0 → AXI address 0x0000020100000000</p></li>
-<li><p>Address Range: 0x201_0000_0000 - 0x201_00FF_FFFF (16 MB)</p></li>
-<li><p>Purpose: Management interface with access to PL peripherals</p></li>
+<li><p>Address Range: 0x201_0000_0000 - 0x201_007F_FFFF (8 MB)</p></li>
+<li><p>Purpose: Management interface — remapped via NoC to DDR at 0x1000_0000 for GCQ shared memory</p></li>
 </ul>
 <p><strong>PF1 Configuration:</strong></p>
 <ul class="simple">
@@ -228,20 +232,20 @@
 <li><p>Purpose: DMA transfers (BAR0) and test GPIO access via PL (BAR2)</p></li>
 </ul>
 <p>For additional information on address mapping in AMD Versal™ devices, refer to: <a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/16-TB-Address-Map</a>. Since the address space for PCIe and AXI is different, address translation is required and configured through PCIEBAR2AXIBAR registers.</p>
-<p><img alt="image9" src="../images/grey_arrow_down2.png" /></p>
+<p><img alt="image9" src="../_images/grey_arrow_down2.png" /></p>
 <p>PF0</p>
-<p><img alt="image10" src="../images/1107374407.png" /></p>
+<p><img alt="image10" src="../_images/1107374407.png" /></p>
 <p><span id="amr-cipsconfiguration-pcie-dma"></span></p>
 </div>
 <div class="section" id="pcie-dma">
 <h5>PCIe: DMA<a class="headerlink" href="#pcie-dma" title="Permalink to this heading">¶</a></h5>
 <p>This functionality is not used by AMR.</p>
-<p><img alt="image12" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image13" src="../images/1107374401.png" /></p>
+<p><img alt="image12" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image13" src="../_images/1107374401.png" /></p>
 <p>MSI-X Cap</p>
 <p>MSI-X capabilities for PF1 were enabled to be used in conjunction with the DMA.</p>
-<p><img alt="image14" src="../images/grey_arrow_down2.png" /></p>
-<p><a class="reference internal" href="#../../images/1107374416.png"><span class="xref myst"><img alt="image15" src="../images/1107374416.png" /></span></a></p>
+<p><img alt="image14" src="../_images/grey_arrow_down2.png" /></p>
+<p><a class="reference download internal" download="" href="../_downloads/1d656b7e0e9729d63b6a67bdb7b4a9e9/1107374416.png"><span class="xref download myst"><img alt="image15" src="../_images/1107374416.png" /></span></a></p>
 <p><span id="amr-cipsconfiguration-advancedoptions"></span></p>
 </div>
 <div class="section" id="advanced-options">
@@ -254,7 +258,7 @@
 <div class="section" id="cpm5-tcl-configuration">
 <h3>CPM5 TCL Configuration<a class="headerlink" href="#cpm5-tcl-configuration" title="Permalink to this heading">¶</a></h3>
 <p>The above configuration can be enabled using the TCL configuration settings below.</p>
-<p><img alt="image20" src="../images/grey_arrow_down2.png" /></p>
+<p><img alt="image20" src="../_images/grey_arrow_down2.png" /></p>
 <p>CONFIG.CPM_CONFIG { \</p>
 <p>CPM_PCIE0_MODES {None} \</p>
 <p>CPM_PCIE1_ACS_CAP_ON {0} \</p>
@@ -284,7 +288,7 @@
 <p>CPM_PCIE1_PF0_BAR0_QDMA_ENABLED {1} \</p>
 <p>CPM_PCIE1_PF0_BAR0_QDMA_PREFETCHABLE {0} \</p>
 <p>CPM_PCIE1_PF0_BAR0_QDMA_SCALE {Megabytes} \</p>
-<p>CPM_PCIE1_PF0_BAR0_QDMA_SIZE {16} \</p>
+<p>CPM_PCIE1_PF0_BAR0_QDMA_SIZE {8} \</p>
 <p>CPM_PCIE1_PF0_BAR0_QDMA_TYPE {AXI_Bridge_Master} \</p>
 <p>CPM_PCIE1_PF0_BAR2_QDMA_64BIT {0} \</p>
 <p>CPM_PCIE1_PF0_BAR2_QDMA_ENABLED {0} \</p>
@@ -306,12 +310,14 @@
 <p>CPM_PCIE1_PF1_BAR0_QDMA_PREFETCHABLE {1} \</p>
 <p>CPM_PCIE1_PF1_BAR0_QDMA_SCALE {Kilobytes} \</p>
 <p>CPM_PCIE1_PF1_BAR0_QDMA_SIZE {512} \</p>
+<p>CPM_PCIE1_PF1_BAR0_QDMA_STEERING {CPM_PCIE_NOC_1} \</p>
 <p>CPM_PCIE1_PF1_BAR0_QDMA_TYPE {DMA} \</p>
 <p>CPM_PCIE1_PF1_BAR2_QDMA_64BIT {1} \</p>
 <p>CPM_PCIE1_PF1_BAR2_QDMA_ENABLED {1} \</p>
 <p>CPM_PCIE1_PF1_BAR2_QDMA_PREFETCHABLE {1} \</p>
 <p>CPM_PCIE1_PF1_BAR2_QDMA_SCALE {Megabytes} \</p>
 <p>CPM_PCIE1_PF1_BAR2_QDMA_SIZE {256} \</p>
+<p>CPM_PCIE1_PF1_BAR2_QDMA_STEERING {CPM_PCIE_NOC_1} \</p>
 <p>CPM_PCIE1_PF1_BAR2_QDMA_TYPE {AXI_Bridge_Master} \</p>
 <p>CPM_PCIE1_PF1_BASE_CLASS_VALUE {12} \</p>
 <p>CPM_PCIE1_PF1_CFG_DEV_ID {50b5} \</p>
@@ -355,9 +361,9 @@
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Secondary-Boot-Process-and-Device-Choices">https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Secondary-Boot-Process-and-Device-Choices</a></p>
 <p><strong>Slot Type:</strong> eMMC</p>
 <p><strong>Data Transfer Width:</strong> 8Bit</p>
-<p><img alt="image21" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image22" src="../images/1107374386.png" /></p>
-<p><img alt="image23" src="../images/1107374392.png" /></p>
+<p><img alt="image21" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image22" src="../_images/1107374386.png" /></p>
+<p><img alt="image23" src="../_images/1107374392.png" /></p>
 <p><span id="amr-cipsconfiguration-peripherals"></span></p>
 </div>
 <div class="section" id="peripherals">
@@ -372,8 +378,8 @@
 <li><p>IO → PS-Domain → PCIe Reset → CPM PCIE Controller 1 (End Point) → PMC_MIO_25</p></li>
 </ul>
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/PCIe-Resets-on-MIO-Pins">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/PCIe-Resets-on-MIO-Pins</a></p>
-<p><img alt="image24" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image25" src="../images/1107374446.png" /></p>
+<p><img alt="image24" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image25" src="../_images/1107374446.png" /></p>
 <p><span id="amr-cipsconfiguration-uart0-uart1"></span></p>
 </div>
 <div class="section" id="uart0-uart1">
@@ -384,11 +390,11 @@
 <li><p>IO → PS-Domain → UART1 → PS_MIO_20 and PS_MIO_21</p></li>
 </ul>
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/UART-I/O-Signals">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/UART-I/O-Signals</a></p>
-<p><img alt="image26" src="../images/grey_arrow_down2.png" /></p>
+<p><img alt="image26" src="../_images/grey_arrow_down2.png" /></p>
 <p><strong>UART0</strong></p>
-<p><img alt="image27" src="../images/1107374428.png" /></p>
+<p><img alt="image27" src="../_images/1107374428.png" /></p>
 <p><strong>UART1</strong></p>
-<p><img alt="image28" src="../images/1107374581.png" /></p>
+<p><img alt="image28" src="../_images/1107374581.png" /></p>
 <p><span id="amr-cipsconfiguration-spi0"></span></p>
 </div>
 <div class="section" id="spi0">
@@ -399,9 +405,9 @@
 <li><p>IO → PS-Domain → SPI0 → SS0 → PS_MIO_15</p></li>
 </ul>
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/SPI-Controller-I/O-Signals">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/SPI-Controller-I/O-Signals</a></p>
-<p><img alt="image29" src="../images/grey_arrow_down2.png" /></p>
+<p><img alt="image29" src="../_images/grey_arrow_down2.png" /></p>
 <p><strong>SPI0</strong></p>
-<p><img alt="image30" src="../images/1107374566.png" /></p>
+<p><img alt="image30" src="../_images/1107374566.png" /></p>
 <p><span id="amr-cipsconfiguration-lpd-i2c0-lpd-i2c1"></span></p>
 </div>
 <div class="section" id="lpd-i2c0-lpd-i2c1">
@@ -412,26 +418,26 @@
 <li><p>IO → PS-Domain → I2C1 → PS_MIO_0 and PS_MIO_1</p></li>
 </ul>
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/LPD-I2C-Interface-Signals">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/LPD-I2C-Interface-Signals</a></p>
-<p><img alt="image31" src="../images/grey_arrow_down2.png" /></p>
+<p><img alt="image31" src="../_images/grey_arrow_down2.png" /></p>
 <p><strong>LPD_I2C0</strong></p>
-<p><img alt="image32" src="../images/1107374572.png" /></p>
+<p><img alt="image32" src="../_images/1107374572.png" /></p>
 <p><strong>LPD_I2C1</strong></p>
-<p><img alt="image33" src="../images/1107374557.png" /></p>
+<p><img alt="image33" src="../_images/1107374557.png" /></p>
 <p><span id="amr-cipsconfiguration-ttc0-ttc1-ttc2-ttc3"></span></p>
 </div>
 <div class="section" id="ttc0-ttc1-ttc2-ttc3">
 <h5>TTC0 / TTC1 / TTC2 / TTC3<a class="headerlink" href="#ttc0-ttc1-ttc2-ttc3" title="Permalink to this heading">¶</a></h5>
 <p>The triple timer counters (TTCs) can generate periodic interrupts or can be used to count the widths of signal pulses from an MIO pin or from the PL. In AMR, the TTCs are used by SW to generate periodic interrupts for runtime purposes. The TTCs cannot be used to monitor any HW functionality through the PMC MIO or PS MIO pins because there are not any spare MIO pins.</p>
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Triple-Timer-Counters">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Triple-Timer-Counters</a></p>
-<p><img alt="image34" src="../images/grey_arrow_down2.png" /></p>
+<p><img alt="image34" src="../_images/grey_arrow_down2.png" /></p>
 <p><strong>TTC0</strong></p>
-<p><img alt="image35" src="../images/1107374563.png" /></p>
+<p><img alt="image35" src="../_images/1107374563.png" /></p>
 <p><strong>TTC1</strong></p>
-<p><img alt="image36" src="../images/1107374569.png" /></p>
+<p><img alt="image36" src="../_images/1107374569.png" /></p>
 <p><strong>TTC2</strong></p>
-<p><img alt="image37" src="../images/1107374560.png" /></p>
+<p><img alt="image37" src="../_images/1107374560.png" /></p>
 <p><strong>TTC3</strong></p>
-<p><img alt="image38" src="../images/1107374551.png" /></p>
+<p><img alt="image38" src="../_images/1107374551.png" /></p>
 <p><span id="amr-cipsconfiguration-io"></span></p>
 </div>
 </div>
@@ -445,8 +451,8 @@
 <li><p>PMC Bank 1: All the GPIO 1* signals are outputs except MIO_33, MIO_37, MIO_41, MIO_48, MIO_49, MIO_50, which are inputs.</p></li>
 <li><p>PS Bank 2: All the GPIO 2* signals are outputs except MIO_5, MIO_10, MIO_11, MIO_14, and MIO_25, which are inputs.</p></li>
 </ul>
-<p><img alt="image39" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image40" src="../images/1107374548.png" /></p>
+<p><img alt="image39" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image40" src="../_images/1107374548.png" /></p>
 <p><span id="amr-cipsconfiguration-debug"></span></p>
 </div>
 <div class="section" id="debug">
@@ -455,26 +461,26 @@
 <p><span id="amr-cipsconfiguration-plbscan"></span></p>
 <div class="section" id="pl-bscan">
 <h5>PL BSCAN<a class="headerlink" href="#pl-bscan" title="Permalink to this heading">¶</a></h5>
-<p><img alt="image41" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image42" src="../images/1107374539.png" /></p>
+<p><img alt="image41" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image42" src="../_images/1107374539.png" /></p>
 <p><span id="amr-cipsconfiguration-crosstrigger"></span></p>
 </div>
 <div class="section" id="cross-trigger">
 <h5>Cross Trigger<a class="headerlink" href="#cross-trigger" title="Permalink to this heading">¶</a></h5>
-<p><img alt="image43" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image44" src="../images/1107374545.png" /></p>
+<p><img alt="image43" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image44" src="../_images/1107374545.png" /></p>
 <p><span id="amr-cipsconfiguration-psparalleltrace"></span></p>
 </div>
 <div class="section" id="ps-parallel-trace">
 <h5>PS Parallel Trace<a class="headerlink" href="#ps-parallel-trace" title="Permalink to this heading">¶</a></h5>
-<p><img alt="image45" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image46" src="../images/1107374554.png" /></p>
+<p><img alt="image45" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image46" src="../_images/1107374554.png" /></p>
 <p><span id="amr-cipsconfiguration-hsdp"></span></p>
 </div>
 <div class="section" id="hsdp">
 <h5>HSDP<a class="headerlink" href="#hsdp" title="Permalink to this heading">¶</a></h5>
-<p><img alt="image47" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image48" src="../images/1107374536.png" /></p>
+<p><img alt="image47" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image48" src="../_images/1107374536.png" /></p>
 <p><span id="amr-cipsconfiguration-clocking"></span></p>
 </div>
 </div>
@@ -485,30 +491,30 @@
 <h5>Input Clocks<a class="headerlink" href="#input-clocks" title="Permalink to this heading">¶</a></h5>
 <p>Change the input REF_CLK to match the board oscillator clock frequency (from 33.333MHz to 33.333333MHz).</p>
 <p>REF_CLK: 33.333333</p>
-<p><img alt="image49" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image50" src="../images/1107374533.png" /></p>
+<p><img alt="image49" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image50" src="../_images/1107374533.png" /></p>
 <p><span id="amr-cipsconfiguration-outputclocks"></span></p>
 </div>
 <div class="section" id="output-clocks">
 <h5>Output Clocks<a class="headerlink" href="#output-clocks" title="Permalink to this heading">¶</a></h5>
 <p>SLR0</p>
 <p>The Processor memory clocks (HSM0 and HSM1) are not used in AMR because it is a design requirement to use external 200MHz LVDS clocks for HBM and DDR MCs.</p>
-<p>Enable the PL CLK 0, PL CLK 1, and PL CLK 2 and set the frequencies to 100MHz, 33.3333333MHz, and 250MHz (respectively). This creates the CIPs pl0_ref_clk, pl1_ref_clk, and pl2_ref_clk outputs from CIPS in the BD. PL CLK 0 (100MHz) is used for numerous AXI interfaces. PL CLK 1 is a free running clock used to generate other system clocks. PL CLK 2 is set to run at 250MHz. This is the frequency of the PCIe extended configuration interface.</p>
+<p>Enable the PL CLK 0, PL CLK 1, and PL CLK 2 and set the frequencies to 100MHz, 33.3333333MHz, and 250MHz (respectively). This creates the CIPs pl0_ref_clk, pl1_ref_clk, and pl2_ref_clk outputs from CIPS in the BD. PL CLK 0 (100MHz) is used for numerous AXI interfaces. PL CLK 1 is a free running clock used to generate other system clocks. PL CLK 2 (250MHz) is connected to the CPM5 DMA interface clock (<code class="docutils literal notranslate"><span class="pre">dma1_intrfc_clk</span></code>).</p>
 <p>Change the CPM_TOPSW clock to 1000MHz so the CPM runs at maximum frequency.</p>
-<p><img alt="image51" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image52" src="../images/1107374542.png" /></p>
-<p><img alt="image53" src="../images/1107374398.png" /></p>
-<p><img alt="image54" src="../images/1107374389.png" /></p>
+<p><img alt="image51" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image52" src="../_images/1107374542.png" /></p>
+<p><img alt="image53" src="../_images/1107374398.png" /></p>
+<p><img alt="image54" src="../_images/1107374389.png" /></p>
 <p>SLR1</p>
 <p>There are not any options for SLR1 - this tab does not exist.</p>
 <p>SLR2</p>
 <p>Leave at the default setting. The Processor memory clocks (HSM0 and HSM1) are not used in AMR because it is a design requirement to use external 200MHz LVDS clocks for HBM and DDR MCs.</p>
-<p><img alt="image55" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image56" src="../images/1107374524.png" /></p>
+<p><img alt="image55" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image56" src="../_images/1107374524.png" /></p>
 <p>XilSEM Library</p>
 <p>Leave all settings at Default. XilSEM is not used in AMR.</p>
-<p><img alt="image57" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image58" src="../images/1107374521.png" /></p>
+<p><img alt="image57" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image58" src="../_images/1107374521.png" /></p>
 <p><span id="amr-cipsconfiguration-sysmon"></span></p>
 </div>
 </div>
@@ -519,8 +525,8 @@
 <h5>SLR0<a class="headerlink" href="#slr0" title="Permalink to this heading">¶</a></h5>
 <p><strong>Basic Configuration</strong></p>
 <p>Change the voltage averaging samples to 8.</p>
-<p><img alt="image59" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image60" src="../images/1107374503.png" /></p>
+<p><img alt="image59" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image60" src="../_images/1107374503.png" /></p>
 <p><strong>On Chip Supply</strong></p>
 <p>These are optional voltages that can be monitored by AMC for future use. The ADC and thresholds would need to be adjusted appropriately.</p>
 <p>Additional information on the nomenclature can be found here: <a class="reference external" href="https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Power-Pins">https://docs.xilinx.com/r/en-US/am011-versal-acap-trm/Power-Pins</a></p>
@@ -557,33 +563,33 @@
 <li><p>GTYP_AVCCAUX_104: Gigabit transceiver; auxiliary analog transceivers</p></li>
 <li><p>GTYP_AVCCAUX_105: Gigabit transceiver; auxiliary analog transceivers</p></li>
 </ul>
-<p><img alt="image61" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image62" src="../images/1107374455.png" /></p>
-<p><img alt="image63" src="../images/1107374464.png" /></p>
+<p><img alt="image61" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image62" src="../_images/1107374455.png" /></p>
+<p><img alt="image63" src="../_images/1107374464.png" /></p>
 <p><strong>Temperature</strong></p>
 <p>Enable the over temperature check to help protect the Versal device and PCB.</p>
-<p><img alt="image64" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image65" src="../images/1107374515.png" /></p>
+<p><img alt="image64" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image65" src="../_images/1107374515.png" /></p>
 <p><strong>External Supply Monitor</strong></p>
 <p>None of the external supplies are monitored in AMR.</p>
-<p><img alt="image66" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image67" src="../images/1107374506.png" /></p>
+<p><img alt="image66" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image67" src="../_images/1107374506.png" /></p>
 <p><span id="amr-cipsconfiguration-slr1-1"></span></p>
 </div>
 <div class="section" id="slr1">
 <h5>SLR1<a class="headerlink" href="#slr1" title="Permalink to this heading">¶</a></h5>
 <p><strong>On Chip Supply</strong></p>
 <p>None of the supplies in SLR1 are monitored in AMR.</p>
-<p><img alt="image68" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image69" src="../images/1107374518.png" /></p>
+<p><img alt="image68" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image69" src="../_images/1107374518.png" /></p>
 <p><span id="amr-cipsconfiguration-slr2-1"></span></p>
 </div>
 <div class="section" id="slr2">
 <h5>SLR2<a class="headerlink" href="#slr2" title="Permalink to this heading">¶</a></h5>
 <p>On Chip Supply</p>
 <p>None of the supplies in SLR2 are monitored in AMR V80.</p>
-<p><img alt="image70" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image71" src="../images/1107374494.png" /></p>
+<p><img alt="image70" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image71" src="../_images/1107374494.png" /></p>
 <p><span id="amr-cipsconfiguration-devicesecurity"></span></p>
 </div>
 </div>
@@ -600,9 +606,9 @@
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Known-Answer-Tests">https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Known-Answer-Tests</a></p>
 <p><strong>Clock Monitor</strong></p>
 <p>AMR does not enable clock monitoring. Leave all settings at Default.</p>
-<p><img alt="image72" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image73" src="../images/1107374440.png" /></p>
-<p><img alt="image74" src="../images/1107374473.png" /></p>
+<p><img alt="image72" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image73" src="../_images/1107374440.png" /></p>
+<p><img alt="image74" src="../_images/1107374473.png" /></p>
 <p><span id="id2"></span></p>
 </div>
 <div class="section" id="id2">
@@ -615,9 +621,9 @@
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Known-Answer-Tests">https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Known-Answer-Tests</a></p>
 <p><strong>Clock Monitor</strong></p>
 <p>AMR does not enable clock monitoring. Leave all settings at default.</p>
-<p><img alt="image75" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image76" src="../images/1107374452.png" /></p>
-<p><img alt="image77" src="../images/1107374461.png" /></p>
+<p><img alt="image75" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image76" src="../_images/1107374452.png" /></p>
+<p><img alt="image77" src="../_images/1107374461.png" /></p>
 <p><span id="id3"></span></p>
 </div>
 <div class="section" id="id3">
@@ -630,9 +636,9 @@
 <p><a class="reference external" href="https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Known-Answer-Tests">https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg/Known-Answer-Tests</a></p>
 <p><strong>Clock Monitor</strong></p>
 <p>AMR does not enable clock monitoring. Leave all settings at default.</p>
-<p><img alt="image78" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image79" src="../images/1107374443.png" /></p>
-<p><img alt="image80" src="../images/1107374449.png" /></p>
+<p><img alt="image78" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image79" src="../_images/1107374443.png" /></p>
+<p><img alt="image80" src="../_images/1107374449.png" /></p>
 <p><span id="amr-cipsconfiguration-tamper"></span></p>
 </div>
 </div>
@@ -647,9 +653,9 @@
 <p>Leave all settings at default.</p>
 <p><strong>Voltage</strong></p>
 <p>Leave all settings at default.</p>
-<p><img alt="image81" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image82" src="../images/1107374500.png" /></p>
-<p><img alt="image83" src="../images/1107374509.png" /></p>
+<p><img alt="image81" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image82" src="../_images/1107374500.png" /></p>
+<p><img alt="image83" src="../_images/1107374509.png" /></p>
 <p><span id="id5"></span></p>
 </div>
 <div class="section" id="id5">
@@ -658,9 +664,9 @@
 <p>Leave all settings at default.</p>
 <p><strong>Voltage</strong></p>
 <p>Leave all settings at default.</p>
-<p><img alt="image84" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image85" src="../images/1107374485.png" /></p>
-<p><img alt="image86" src="../images/1107374491.png" /></p>
+<p><img alt="image84" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image85" src="../_images/1107374485.png" /></p>
+<p><img alt="image86" src="../_images/1107374491.png" /></p>
 <p><span id="id6"></span></p>
 </div>
 <div class="section" id="id6">
@@ -669,9 +675,9 @@
 <p>Leave all settings at default.</p>
 <p><strong>Voltage</strong></p>
 <p>Leave all settings at default.</p>
-<p><img alt="image87" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image88" src="../images/1107374497.png" /></p>
-<p><img alt="image89" src="../images/1107374482.png" /></p>
+<p><img alt="image87" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image88" src="../_images/1107374497.png" /></p>
+<p><img alt="image89" src="../_images/1107374482.png" /></p>
 <p><span id="amr-cipsconfiguration-psplinterfaces"></span></p>
 </div>
 </div>
@@ -681,12 +687,12 @@
 <p><strong>Current Base Design:</strong></p>
 <ul class="simple">
 <li><p>‘Number of PL Resets: 1’ creates the CIPS pl0_resetn output</p></li>
-<li><p>M_AXI_LPD is enabled (32-bit &#64; 100MHz) but <strong>not connected</strong> in the base design</p></li>
-<li><p>This interface is reserved for future firmware/hardware expansion (e.g., SMBus IP, management peripherals)</p></li>
+<li><p>M_AXI_LPD is enabled (32-bit &#64; 100MHz) and connected to the SMBus hierarchical block (<code class="docutils literal notranslate"><span class="pre">smbus_hier/S00_AXI</span></code>)</p></li>
+<li><p>The SMBus IP is clocked by pl0_ref_clk (100 MHz) and its interrupt (<code class="docutils literal notranslate"><span class="pre">ip2intc_irpt</span></code>) is wired to <code class="docutils literal notranslate"><span class="pre">cips/pl_ps_irq1</span></code></p></li>
 </ul>
 <p><strong>Note:</strong> The General Command Queue (GCQ) is implemented as a <strong>software abstraction</strong> in firmware using shared DDR memory, not as a hardware IP block in the current V80 base design.</p>
-<p><img alt="image90" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image91" src="../images/1107374488.png" /></p>
+<p><img alt="image90" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image91" src="../_images/1107374488.png" /></p>
 <p><span id="amr-cipsconfiguration-noc"></span></p>
 </div>
 <div class="section" id="noc">
@@ -703,33 +709,32 @@
 <ul class="simple">
 <li><p>Select ‘PMC to NoC’: This creates the 128-bit &#64; 400MHz PMC_NOC_AXI_0 port on CIPS</p></li>
 </ul>
-<p><img alt="image92" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image93" src="../images/1107374476.png" /></p>
+<p><img alt="image92" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image93" src="../_images/1107374476.png" /></p>
 <p><span id="id8"></span></p>
 </div>
 <div class="section" id="id8">
 <h5>SLR1<a class="headerlink" href="#id8" title="Permalink to this heading">¶</a></h5>
 <p>AMR does not have any PMC NoC connections in SLR1.</p>
-<p><img alt="image94" src="../images/grey_arrow_down2.png" /></p>
-<p><a class="reference internal" href="#../../images/1107374470.png"><span class="xref myst"><img alt="image95" src="../images/1107374470.png" /></span></a></p>
+<p><img alt="image94" src="../_images/grey_arrow_down2.png" /></p>
+<p><a class="reference download internal" download="" href="../_downloads/5bd225dcc233af73906d488c8323fc22/1107374470.png"><span class="xref download myst"><img alt="image95" src="../_images/1107374470.png" /></span></a></p>
 <p><span id="id9"></span></p>
 </div>
 <div class="section" id="id9">
 <h5>SLR2<a class="headerlink" href="#id9" title="Permalink to this heading">¶</a></h5>
 <p>AMR does not have any PMC NoC connections in SLR2.</p>
-<p><img alt="image96" src="../images/grey_arrow_down2.png" /></p>
-<p><a class="reference internal" href="#../../images/1107374467.png"><span class="xref myst"><img alt="image97" src="../images/1107374467.png" /></span></a></p>
+<p><img alt="image96" src="../_images/grey_arrow_down2.png" /></p>
+<p><a class="reference download internal" download="" href="../_downloads/2ad45ff576d9e9de4c1182d31f0affdd/1107374467.png"><span class="xref download myst"><img alt="image97" src="../_images/1107374467.png" /></span></a></p>
 <p><span id="amr-cipsconfiguration-interrupts"></span></p>
 </div>
 </div>
 <div class="section" id="interrupts">
 <h4>Interrupts<a class="headerlink" href="#interrupts" title="Permalink to this heading">¶</a></h4>
-<p><strong>Interrupt Configuration (for future expansion):</strong></p>
-<p>The base design configures interrupt infrastructure but does not currently use PL-to-PS interrupts:</p>
+<p><strong>Interrupt Configuration:</strong></p>
+<p>The base design uses two LPD interrupt channels (PS_IRQ_USAGE CH0 and CH1 enabled):</p>
 <ul class="simple">
-<li><p>LPD interrupts IRQ 0 &amp; 1 can be enabled for future use (creates pl_ps_irq0 &amp; pl_ps_irq1 ports)</p></li>
-<li><p><strong>Current Base Design</strong>: No PL interrupts are connected</p></li>
-<li><p><strong>Future Use</strong>: IRQ 0 could be used for firmware GCQ signaling, IRQ 1 for SMBus events</p></li>
+<li><p><strong>pl_ps_irq1</strong>: Connected to SMBus IP interrupt (<code class="docutils literal notranslate"><span class="pre">smbus_hier/ip2intc_irpt</span></code>)</p></li>
+<li><p><strong>pl_ps_irq0</strong>: Available for future use (e.g., firmware GCQ signaling)</p></li>
 </ul>
 <p>Enable Inter Processor Interrupts. The Inter Processor Interrupts allows one processor to interrupt another processor. The PMC and PSM Interrupts are enabled by default, and use the first three IPI agents. To allow R5 interrupts to the PMC and PSM, AMR uses four additional agents; IPI3, IPI4, IPI5, and IPI6. Two agents are used for each R5 processor. These can be changed as deemed necessary.</p>
 <ul class="simple">
@@ -737,8 +742,8 @@
 <li><p>IPI 3:4: R5 0</p></li>
 <li><p>IPI 5:6: R5 1</p></li>
 </ul>
-<p><img alt="image98" src="../images/grey_arrow_down2.png" /></p>
-<p><img alt="image99" src="../images/1107374434.png" /></p>
+<p><img alt="image98" src="../_images/grey_arrow_down2.png" /></p>
+<p><img alt="image99" src="../_images/1107374434.png" /></p>
 <p><span id="amr-cipsconfiguration-power"></span></p>
 </div>
 <div class="section" id="power">
@@ -750,10 +755,10 @@
 <li><p>Bank2 [MIO 0:25]: LVCMOS 3.3V</p></li>
 <li><p>Bank3 [Dedicated]: LVCMOS 1.8V (default)</p></li>
 </ul>
-<p><img alt="image100" src="../images/grey_arrow_down2.png" /></p>
-<p><a class="reference internal" href="#../../images/1107374458.png"><span class="xref myst"><img alt="image101" src="../images/1107374458.png" /></span></a></p>
+<p><img alt="image100" src="../_images/grey_arrow_down2.png" /></p>
+<p><a class="reference download internal" download="" href="../_downloads/2a579ae16855871f1f8628f871fa7ff2/1107374458.png"><span class="xref download myst"><img alt="image101" src="../_images/1107374458.png" /></span></a></p>
 <p>PS PMC TCL Settings</p>
-<p><img alt="image102" src="../images/grey_arrow_down2.png" /></p>
+<p><img alt="image102" src="../_images/grey_arrow_down2.png" /></p>
 <p>CONFIG.PS_PMC_CONFIG { \</p>
 <p>BOOT_MODE {Custom} \</p>
 <p>CLOCK_MODE {Custom} \</p>
@@ -913,7 +918,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on June 10, 2026.
+      <span class="lastupdated">Last updated on August 04, 2026.
       </span></p>
   </div>
 

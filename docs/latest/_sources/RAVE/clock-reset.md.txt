@@ -1,6 +1,6 @@
 # AMR RAVE - Clock and Reset Configuration
 
-> **For common clock/reset concepts**, see [Common Clock Reset](../../hardware/clock-reset.md)
+> **For common clock/reset concepts**, see [Common Clock Reset](../hardware/clock-reset.md)
 >
 > This document describes RAVE-specific clock and reset implementation.
 
@@ -132,7 +132,7 @@ When AMC-to-AMI communication is not established or if the AMC is not in a good 
 
 ## References
 
-- [Common Clock Reset](../../hardware/clock-reset.md) - Reset synchronization concepts
+- [Common Clock Reset](../hardware/clock-reset.md) - Reset synchronization concepts
 - [RAVE PCIe Configuration](pcie-config.md) - PCIe clock details
 - [RAVE XDMA Configuration](xdma-config.md) - XDMA clock requirements
 - [Processor System Reset IP](https://docs.xilinx.com/v/u/en-US/pg164-proc-sys-reset) - PSR IP documentation

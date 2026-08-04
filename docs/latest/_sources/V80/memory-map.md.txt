@@ -24,7 +24,7 @@ Address remapping is configured for PCIe access to the PL memory space through t
 
 The address remap configuration is implemented in the AXI NoC CIPS (axi\_noc\_cips) IP block.
 
-![images/1107374801.png](../../images/1107374801.png)
+![images/1107374801.png](../images/1107374801.png)
 
 N/A\* The RPU is only 32-bit addressing, so it cannot access more than 4GB of DDR.
 
@@ -44,19 +44,19 @@ A complete AMD Versal™ Address map can be found here:
 
 ### AMR 4G Memory Space - DDR Lower 2G & PS/PMC
 
-![images/1107374801.png](../../images/1107374801.png)
+![images/1107374801.png](../images/1107374801.png)
 
 <span id="amr-memorymap-amrhbmmemoryspace"></span>
 
 ### AMR HBM Memory Space
 
-![images/1107374822.png](../../images/1107374822.png)
+![images/1107374822.png](../images/1107374822.png)
 
 <span id="amr-memorymap-pf0baraddressing"></span>
 
 ### AMR PL Memory Space
 
-![images/1107374813.png](../../images/1107374813.png)
+![images/1107374813.png](../images/1107374813.png)
 
 **PL Memory Space - Current Base Design:**
 - **PF0 BAR0**: 0x201_0000_0000 - 0x201_007F_FFFF (8 MB) - No hardware IP instantiated, address space reserved
@@ -68,5 +68,5 @@ A complete AMD Versal™ Address map can be found here:
 
 ### AMR DDR Upper 2G and DIMM 32G Memory Space
 
-![images/1107374792.png](../../images/1107374792.png)
+![images/1107374792.png](../images/1107374792.png)
 

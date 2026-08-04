@@ -1,6 +1,6 @@
 # AMR RAVE - Hierarchy Overview
 
-> **For common Versal architecture concepts**, see [Common Hierarchy](../../hardware/hierarchy.md)
+> **For common Versal architecture concepts**, see [Common Hierarchy](../hardware/hierarchy.md)
 >
 > This document describes the RAVE Board-specific hierarchy and system architecture.
 
@@ -10,7 +10,7 @@
 
 The RAVE Board architecture combines an on-board Ryzen processor with a Versal VE2302 FPGA device in a Mini-ITX form factor.
 
-![RAVE Board Block Diagram](../../images/rave_block.png)
+![RAVE Board Block Diagram](../images/rave_block.png)
 
 **Note:** Image shows RAVE system architecture with VE2302, PL-based PCIe/XDMA, LPDDR4 memory, Ryzen connection, and expansion I/O. The design integrates PCIe connectivity between the processors, LPDDR4 memory for the Versal device, and extensive peripheral integration for standalone embedded operation.
 
@@ -97,7 +97,7 @@ The RPU firmware begins execution after PMC handoff, initializing board peripher
 
 ## References
 
-- [Common Hierarchy](../../hardware/hierarchy.md) - Shared Versal architecture concepts
+- [Common Hierarchy](../hardware/hierarchy.md) - Shared Versal architecture concepts
 - [RAVE CIPS Configuration](cips-config.md) - VE2302 CIPS setup
 - [RAVE PCIe Configuration](pcie-config.md) - PL PCIe IP details
 - [RAVE Memory Resources](memory-resources.md) - LPDDR4 configuration

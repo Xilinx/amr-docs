@@ -121,6 +121,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../appendices/abbreviations.html">AMR - List of Abbreviations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../AMR-release-information.html">AMR Release Information</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Future Changes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../future-changes.html">Future Changes</a></li>
+</ul>
 
         </div>
       </div>
@@ -185,13 +189,13 @@
 </ul>
 <p>Pre-requisites</p>
 <ul class="simple">
-<li><p>source /proj/xbuilds/2026.1_daily_latest/installs/lin64/2026.1/Vivado/settings64.sh</p></li>
+<li><p>source settings64.(c)sh script</p></li>
 </ul>
 <p><span id="how-tobuildanamrdesignforyourself-hardwaretestdependencies"></span></p>
 </div>
 <div class="section" id="hardware-test-dependencies-for-v80">
 <h3>Hardware Test Dependencies for V80<a class="headerlink" href="#hardware-test-dependencies-for-v80" title="Permalink to this heading">¶</a></h3>
-<p>See <a class="reference internal" href="../overview/amr-overview.html#AMROverview-SupportedKernelsandDistributions"><span class="std std-ref">Supported Kernels and Distributions</span></a> for an up-to-date list.</p>
+<p>See <a class="reference internal" href="../overview/amr-overview.html#amroverview-supportedkernelsanddistributions"><span class="std std-ref">Supported Kernels and Distributions</span></a> for an up-to-date list.</p>
 <p><em>Note</em>: root/sudo permissions are required.</p>
 <p><span id="how-tobuildanamrdesignforyourself-installpythonfrompython-org"></span></p>
 </div>
@@ -251,7 +255,7 @@ The final artifacts will be located in &lt;build/tmp/deploy/images/alveo-v80-amr
 <h3>Build Hardware, Firmware, Software together with below command.<a class="headerlink" href="#build-hardware-firmware-software-together-with-below-command" title="Permalink to this heading">¶</a></h3>
 <p>The following steps will guide you through setting up your Vivado environment and building an AMR V80 PDI from the cloned source code.</p>
 <ol class="arabic simple">
-<li><p>Set up the desired version of Vivado in your environment by sourcing the <code class="docutils literal notranslate"><span class="pre">settings64.](c)sh</span></code> script from your Vivado install directory.</p></li>
+<li><p>Set up the desired version of Vivado in your environment by sourcing the <code class="docutils literal notranslate"><span class="pre">settings64.(c)sh</span></code> script from your Vivado install directory.</p></li>
 <li><p>To build all components execute the build.sh command
 For more information on the build script, refer to <a class="reference internal" href="../development/build-scripts.html"><span class="std std-doc">AMR Build Scripts</span></a></p></li>
 </ol>
@@ -304,9 +308,7 @@ By default, the `build.sh` script creates a build directory which would contain 
 Important Note: Generated files followed by a &#39;*&#39; are required files created by each step in the build flow, which can be used as an indication that the build has completed successfully. Verify that these files exist after building the design.
 </pre></div>
 </div>
-<p>For more details on output files check
-<a class="reference internal" href="#how-tobuildanamrdesignforyourself-reviewthegeneratedoutput"><span class="xref myst">Review the Generated Output section</span></a>
-<span id="how-tobuildanamrdesignforyourself-firmware"></span></p>
+<p><span id="how-tobuildanamrdesignforyourself-firmware"></span></p>
 </div>
 <div class="section" id="build-firmware-software-independently-using-below-commands">
 <h3>Build Firmware, Software independently using below commands<a class="headerlink" href="#build-firmware-software-independently-using-below-commands" title="Permalink to this heading">¶</a></h3>
@@ -405,7 +407,7 @@ Will do a hot reset to boot into partition 0. This may take a minute...
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on June 10, 2026.
+      <span class="lastupdated">Last updated on August 04, 2026.
       </span></p>
   </div>
 

@@ -99,6 +99,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../appendices/abbreviations.html">AMR - List of Abbreviations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../AMR-release-information.html">AMR Release Information</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Future Changes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../future-changes.html">Future Changes</a></li>
+</ul>
 
         </div>
       </div>
@@ -134,14 +138,14 @@
 <p>AMR contains 4GB of discrete DDR that is used for RPU (R5) execution and inter-processor communication. The General Command Queue (GCQ) is implemented as a <strong>software mechanism</strong> using shared DDR memory regions for communication between the RPU and PCIe host/PMC (not a hardware IP block).</p>
 <p>The DDR operates at 200MHz and is controlled by the AMD Versal™ integrated memory controller (DDRMC). This hardened MC contains four ports to optimize throughput to the DDR. The AMR V80 base design uses MC Ports 0 and 1. The diagram below illustrates the organization of the DDR memory.</p>
 <p>More information on the MC can be found here: <a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Integrated-Memory-Controller-DDRMC-Architecture">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Integrated-Memory-Controller-DDRMC-Architecture</a>.</p>
-<p><a class="reference internal" href="#../../images/1107374762.png"><span class="xref myst"><img alt="image1" src="../images/1107374762.png" /></span></a></p>
+<p><img alt="image1" src="../_images/1107374762.png" /></p>
 <p><span id="amr-memoryresources-dimmdiagram"></span></p>
 </div>
 <div class="section" id="ddr-dimm">
 <h2>DDR DIMM<a class="headerlink" href="#ddr-dimm" title="Permalink to this heading">¶</a></h2>
 <p>AMR V80 contains 32GB of DDR DIMM that is a shared memory resource for the host, APU, and programmable logic (PL). There is not any predefined organization or partitioning of this memory. Like the DDR, the DIMM operates at 200MHz and it is controlled by the Versal integrated memory controller (DDRMC). This hardened MC contains four ports to optimize throughput to the DDR. The AMR V80 design uses all four ports, but other connections to these ports are allowed. The diagram below illustrates the DIMM memory space. AMR V80 does not currently use the APU, but it is available for future growth.</p>
 <p>More information on the MC can be found at <a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Integrated-Memory-Controller-DDRMC-Architecture">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Integrated-Memory-Controller-DDRMC-Architecture</a>.</p>
-<p><a class="reference internal" href="#../../images/1107374759.png"><span class="xref myst"><img alt="image2" src="../images/1107374759.png" /></span></a></p>
+<p><img alt="image2" src="../_images/1107374759.png" /></p>
 <p><span id="amr-memoryresources-hbmdiagram"></span></p>
 </div>
 <div class="section" id="hbm">
@@ -149,7 +153,7 @@
 <p>HBM memory is a high bandwidth, low power memory alternative to DDR. AMR contains 32GB of on-chip high-bandwidth memory (HBM). Like the DDR and DIMM, HBM operates at 200MHz. It is controlled by the Versal Integrated HBM controller. There is not any predefined organization or partitioning of this memory.</p>
 <p>HBM is comprised of two 16GB stacks. Each stack has eight integrated AXI HBM Controllers. Each HBM controller contains two pseudo channels where each pseudo channel addresses a 1GB dedicated portion of the HBM. The HBM architecture also allows for global memory access to each master connected to the HBM; however accessing a non-direct portion of the memory will come at a performance cost.</p>
 <p>More information on the HBM MC can be found at <a class="reference external" href="https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Integrated-HBM-Controller">https://docs.xilinx.com/r/en-US/pg313-network-on-chip/Integrated-HBM-Controller</a>.</p>
-<p><img alt="image3" src="../images/1107374765.png" /></p>
+<p><img alt="image3" src="../_images/1107374765.png" /></p>
 </div>
 </div>
 
@@ -164,7 +168,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on June 10, 2026.
+      <span class="lastupdated">Last updated on August 04, 2026.
       </span></p>
   </div>
 

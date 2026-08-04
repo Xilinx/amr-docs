@@ -52,7 +52,7 @@ Follow the steps below if you have an existing AMR installation and want to swit
 
 ```bash
 cd amd_v80_gen5x8_25.1_xbtest_stress_20251113  # Replace with your actual release package
-sudo ami_tool cfgmem_fpt -d <BDF> -i flash_setup/fpt_setup_amd_v80_gen5x8_25.1_exdes_1_yyymmdd.pdi -p 0 -t primary
+sudo ami_tool cfgmem_fpt -d <BDF> -i flash_setup/fpt_setup_amd_v80_gen5x8_25.1_exdes_1_yyymmdd.pdi -t primary
 ```
 
 **Note:** Replace `amd_v80_gen5x8_25.1_xbtest_stress_20251113` with your actual release package name, and replace `yyymmdd` with the actual date in the filename.
@@ -63,9 +63,15 @@ Update the Flash Partition Table (FPT) image in flash using Vivado HW Manager an
 
 Cold boot the server to boot from flash.
 
+3. Install the xbtest software packages
+```bash
+    sudo ./aved_install.sh
+```
+Perform system cold reboot to apply changes
+
 <span id="switchingbetweenavedandamr-amrinstallation"></span>
 
-## Swwitching from AVED/xbtest to AMR
+## Switching from AVED/xbtest to AMR
 
 Follow the steps below to install AMR firmware/software with existing AVED/xbtest.
 
@@ -87,27 +93,25 @@ Follow the steps below to install AMR firmware/software with existing AVED/xbtes
 
 <span id="switchingbetweenavedandamr-installamrpackages"></span>
 
-## Install the AMR Software Packages
+3. Install the AMR Software Packages
 
-To install the package onto the host, navigate to the directory with the debian or rpm packages depending on your host OS. Install `libami*`, `ami*`, `amitool*` packages.
+   To install the package onto the host, navigate to the directory with the debian or rpm packages depending on your host OS. Install `libami*`, `ami*`, `amitool*` packages.
 
-### Ubuntu - Installing Debian Packages:
+    ##### Ubuntu - Installing Debian Packages:
 
-```bash
-sudo dpkg -i libami_x.x.x.xxx.xxx_amd64.deb
-sudo dpkg -i ami_x.x.x.xxx.xxx_amd64.deb
-sudo dpkg -i amitool_x.x.x.xxx.xxx_amd64.deb
-```
+    ```bash
+       sudo dpkg -i libami_x.x.x.xxx.xxx_amd64.deb
+       sudo dpkg -i ami_x.x.x.xxx.xxx_amd64.deb
+       sudo dpkg -i amitool_x.x.x.xxx.xxx_amd64.deb
+    ```
 
-### RHEL - Installing RPM Packages:
+    ##### RHEL - Installing RPM Packages:
 
-```bash
-sudo rpm -ivh libami_x.x.x.xxx.xxx_amd64.rpm
-sudo rpm -ivh ami_x.x.x.xxx.xxx_amd64.rpm
-sudo rpm -ivh amitool_x.x.x.xxx.xxx_amd64.rpm
-```
-
-
+    ```bash
+       sudo rpm -ivh libami_x.x.x.xxx.xxx_amd64.rpm
+       sudo rpm -ivh ami_x.x.x.xxx.xxx_amd64.rpm
+       sudo rpm -ivh amitool_x.x.x.xxx.xxx_amd64.rpm
+    ```
 ## Troubleshooting
 
 <span id="switchingbetweenavedandamr-devicenotready"></span>
