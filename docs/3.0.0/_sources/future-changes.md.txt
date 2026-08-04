@@ -1,0 +1,48 @@
+# Future Changes
+
+This section describes upcoming features planned for future AMR releases and features that are scheduled for deprecation.
+
+## Upcoming Features
+
+The following features are planned for upcoming AMR releases:
+
+### VFIO-Based Userspace Driver
+
+- **Target Release**: 2026.2
+- **Description**: Migration from kernel-based AMI driver to VFIO (Virtual Function I/O) userspace framework
+  - Direct device access from userspace applications without kernel module dependencies
+  - Simplified deployment with no kernel module compilation required
+  - Better portability across kernel versions and distributions
+
+## Deprecation Notices
+
+The following features, APIs, and workflows are scheduled for deprecation or removal in future releases.
+
+### AMI Kernel Driver (ami.ko)
+
+- **Deprecation Timeline**: Deprecated and will be removed in 2026.2
+- **Alternative**: VFIO-based userspace driver framework
+- **Rationale**:
+  - Eliminates kernel version dependencies and recompilation requirements
+  - Provides direct userspace device access with improved flexibility
+- **Migration Path**:
+  - New APIs will maintain functional compatibility while leveraging VFIO infrastructure
+  - Migration guide will be provided in 2026.2 release documentation
+
+### Hardware Monitoring (hwmon) Interface
+
+- **Deprecation Timeline**: Removed in 2026.2
+- **Alternative**: AMI tool and libami.so API for telemetry access
+- **Impact**:
+  - Applications relying on `/sys/class/hwmon/*` interfaces must migrate to `ami_tool` CLI or `libami.so` API
+
+## Feedback
+
+If you have questions or concerns about upcoming changes or deprecations, please:
+
+- Open an issue on the [AMR GitHub repository](https://github.com/Xilinx/amr/issues)
+- Contact AMD support through your regular support channels
+
+---
+
+*Last updated: August 2026*

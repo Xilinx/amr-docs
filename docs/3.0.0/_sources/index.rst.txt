@@ -115,3 +115,10 @@ Release Information
 
    appendices/abbreviations
    AMR-release-information
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Future Changes
+   :hidden:
+
+   future-changes
