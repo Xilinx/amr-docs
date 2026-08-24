@@ -218,6 +218,56 @@ endif()
 <div class="section" id="header-abstraction-layer-hal-profile">
 <h3>Header Abstraction Layer (HAL) Profile<a class="headerlink" href="#header-abstraction-layer-hal-profile" title="Permalink to this heading">¶</a></h3>
 <p>The <strong>profile_hal.h</strong> header file provides all other profile (hardware) specific definitions.</p>
+<p>SMBus-related HAL flags:</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Macro</th>
+<th>V80</th>
+<th>RAVE</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>HAL_SMBUS_FEATURE</code></td>
+<td>1</td>
+<td>0</td>
+<td>Compile the real SMBus FAL (<code>fw_if_smbus_block_io.c</code>) instead of the stub (<code>fw_if_smbus_stub.c</code>)</td>
+</tr>
+<tr>
+<td><code>HAL_PL_SMBUS_FEATURE</code></td>
+<td>1</td>
+<td>0</td>
+<td>SMBus IP is in the PL; AMC defers FAL/BMC/OOB init until PDI load</td>
+</tr>
+<tr>
+<td><code>HAL_SMBUS_BASE_ADDR</code></td>
+<td>From <code>xparameters.h</code></td>
+<td>unused</td>
+<td>SMBus IP base address</td>
+</tr>
+<tr>
+<td><code>HAL_SMBUS_INTERRUPT</code></td>
+<td>SPI 85 from <code>pl.dtsi</code></td>
+<td>unused</td>
+<td>SMBus IRQ (SPI index, not GIC ID + 32)</td>
+</tr>
+<tr>
+<td><code>HAL_SMBUS_INIT_PROBE_TIMEOUT_MS</code></td>
+<td>100</td>
+<td>unused</td>
+<td>Magic-number probe timeout after PDI load</td>
+</tr>
+<tr>
+<td><code>HAL_SMBUS_INIT_PROBE_INTERVAL_MS</code></td>
+<td>10</td>
+<td>unused</td>
+<td>Probe poll interval</td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">profile_fal.c</span></code> implements <code class="docutils literal notranslate"><span class="pre">iFAL_SMBUS_Initialise()</span></code> when <code class="docutils literal notranslate"><span class="pre">HAL_SMBUS_FEATURE</span></code> is 1. On V80 that function is called from the deferred bring-up path, not from <code class="docutils literal notranslate"><span class="pre">iFAL_Initialise()</span></code>.</p>
 <p><span id="profilesandcmakebuildprocess-pdrprofile"></span></p>
 </div>
 <div class="section" id="pdr-profile">
@@ -315,7 +365,7 @@ endif()
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on August 04, 2026.
+      <span class="lastupdated">Last updated on August 23, 2026.
       </span></p>
   </div>
 

@@ -132,7 +132,7 @@
 <h1>SMBus IP v1.1 - Product Guide<a class="headerlink" href="#smbus-ip-v1-1-product-guide" title="Permalink to this heading">¶</a></h1>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
-<p><strong>Important:</strong> SMBus support is not implemented in the current AMR release. The SMBus IP and associated infrastructure are provided for reference, but functional SMBus communication and protocol handling are not present. Users must implement and establish SMBus support based on their specific requirements.</p>
+<p>On V80, AMC firmware uses this IP for out-of-band BMC traffic (MCTP/PLDM). The IP is implemented in the PL, so firmware initializes it only after a PDI that contains the IP is loaded. The RAVE profile does not enable the SMBus firmware stack. See <a class="reference internal" href="../system-architecture/board-management.html"><span class="std std-doc">Out-of-band (SMBus) Management</span></a> and <a class="reference internal" href="../firmware/amc-architecture.html"><span class="std std-doc">AMC architecture</span></a>.</p>
 <p>The SMBus IP provides a mechanism through which a Versal ACAP based system may interact with external devices that are compliant to the <a class="reference external" href="http://smbus.org/specs/SMBus_3_2_20220112.pdf">System Management Bus (SMBus) v3.2 Specification</a>. SMBus is a two-wire open-drain interface based on the principles of operation defined by the <a class="reference external" href="https://www.nxp.com/docs/en/user-guide/UM10204.pdf">I2C Bus Specification</a>. It provides a standardized control path that enables devices to pass system and power management related messages.</p>
 <p>The SMBus IP is designed to be implemented within the PL region of a Versal ACAP and requires connection to I/O Buffers located within an appropriate HDIO bank, these IOBs must be configured to meet the electrical requirements outlined in the SMBus Specification. The IP implements an AXI4-Lite Subordinate memory mapped control interface to enable a processor to interact with other external SMBus devices, the IP supports operation as both a Controller and a multi-device Target to enable multiple management protocols to be implemented simultaneously.</p>
 <p><span id="smbusipv1-1-productguide-features"></span></p>
@@ -2807,7 +2807,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on August 04, 2026.
+      <span class="lastupdated">Last updated on August 23, 2026.
       </span></p>
   </div>
 

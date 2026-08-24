@@ -6,7 +6,7 @@
 
   - [AMR InBand Telemetry Application](inband-telemetry.md)
 
-  - [AMR OutOfBand Telemetry Application](outofband-telemetry.md)
+  - [AMR OutOfBand Telemetry Application](outofband-telemetry.md) — on V80, started after SMBus IP is available in the loaded PDI; not enabled on RAVE
 
   - [AMR Management Interface (AMI) Proxy Driver](ami-proxy.md)
 
@@ -16,7 +16,7 @@
 
   - [AMR External Device Control (AXC) Proxy Driver](axc-proxy.md)
 
-  - [Board Management Controller (BMC) Proxy Driver](bmc-proxy.md)
+  - [Board Management Controller (BMC) Proxy Driver](bmc-proxy.md) — V80 SMBus/MCTP/PLDM path; deferred until PDI load
 
   - [Firmware Interface (FW_IF) Abstraction Layer](fw-if-layer.md)
 

@@ -226,6 +226,11 @@ typedef enum APC_PROXY_DRIVER_EVENTS
 } APC_PROXY_DRIVER_EVENTS;
 </pre></div>
 </div>
+<p>Additional data flag on <code class="docutils literal notranslate"><span class="pre">EVL_SIGNAL</span></code> when a PDI is loaded into the PL. AMC uses this on V80 to request SMBus/BMC/OOB bring-up. APC sets it on download complete only when the image is a PL PDI (<code class="docutils literal notranslate"><span class="pre">iPdiProgram</span></code> is true).</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/* Additional data flag for EVL_SIGNAL when a PDI is loaded into PL */
+#define APC_PROXY_PDI_PL_LOADED        ( 1 )
+</pre></div>
+</div>
 <p>Boot device IDs.</p>
 <p><strong>APC_BOOT_DEVICES</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
@@ -939,7 +944,7 @@ else
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on August 04, 2026.
+      <span class="lastupdated">Last updated on August 23, 2026.
       </span></p>
   </div>
 

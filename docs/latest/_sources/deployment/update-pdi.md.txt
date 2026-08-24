@@ -65,3 +65,5 @@ When using this approach it is important to make sure that the version of AMI is
 
 Further details on how to use the AMI tool to update the design PDI can be found here [AMR Management Interface userguide (ami\_tool)](ami-tool-guide.md)
 
+To program a V80 PL PDI into partition 2, enable power-on load, and check out-of-band temperature via the server BMC, see [V80 BMC / SMBus out-of-band validation](bmc-smbus-validation.md).
+

@@ -132,6 +132,8 @@ The Core Library layer exists within the **Common** layer, which holds all syste
 
 The EVL allows event signaling to ‘higher’ layers. It is predominantly used for proxy drivers to communicate to the application layer whilst maintaining agnosticism and abstraction.
 
+`iEVL_CreateRecord` allocates a record (including its mutex). `iEVL_DestroyRecord` releases the callback list, mutex, and record so a failed proxy init (for example BMC) can free those resources before a retry.
+
 <span id="amrmanagementcontroller-amc-architectureanddesign-debugaccesslibrary-dal"></span>
 
 ##### Debug Access Library (DAL)
@@ -204,6 +206,8 @@ command/response transactions.
 #### SMBus<sup>1</sup>
 
 The SMBus driver is an implementation of SMBus 3.2, and provides an Out-of-band interface to the BMC.
+
+On V80 the SMBus IP is in the PL (`HAL_PL_SMBUS_FEATURE` is 1). AMC initializes the SMBus FAL, BMC proxy, and out-of-band telemetry only after a PDI that contains the IP is loaded. RAVE leaves `HAL_SMBUS_FEATURE` at 0 and uses the SMBus stub. See [SMBus and out-of-band bring-up](#amrmanagementcontroller-amc-architectureanddesign-smbusandoobbring-up).
 
 The SMBus driver source is provided with further documentation, available in **\<AMR\_directory\>/fw/AMC/src/device\_drivers/smbus\_driver/doc/**.
 
@@ -345,6 +349,8 @@ The Out-of-Band Telemetry application handles any requests from the Out-of-Band 
 
 This application does not have its own task, and operates entirely on events raised by the BMC and ASC proxy drivers.
 
+On V80 this application is started with the deferred SMBus/BMC stack after PDI load, not during the boot-time application init pass.
+
 <span id="amrmanagementcontroller-amc-architectureanddesign-alveosensordatamodel-asdm"></span>
 
 #### AMR Sensor Data Model (ASDM)
@@ -402,24 +408,51 @@ Note: In the above example, **Proxy N** can be the same proxy as **Proxy X**.
    - fw_if_XXX_init calls.
    - fw_if_XXX_create calls.
      - FW_IF_CFG structures held locally in the profile_fal.c source file.
+   - On V80, SMBus FAL init/create is **not** done here. It runs later via `iFAL_SMBUS_Initialise()` after PDI load.
 4. Proxy Driver Initialisation
 
    - XXX_PROXY_DRIVER_Initialise calls.
      - FW_IF_CFG handle and Proxy ID
    - XXX_PROXY_DRIVER_BindCallback calls.
      - Event-handling callback passed in.
+   - BMC EVL record is pre-allocated here (`iBMC_AllocateEvlRecord`) before heap-heavy SMBus init.
+   - On V80, BMC proxy initialise is deferred with the SMBus stack.
 5. Application Initialisation
 
    1. ASDM
    2. In Band Telemetry
-   3. Out of Band Telemetry
+   3. Out of Band Telemetry (boot-time only when SMBus is not PL-hosted)
    4. BIM
 6. Debug Initialisation
 
    1. DAL Layer Initialisation
-7. Do nothing - keep alive task.
+7. Keep alive / poll loop.
 
    - If available, can flash an LED or kick a watchdog to show signs of life.
+   - On V80, this loop also runs pending SMBus/BMC/OOB init after a PDI load (`vProcessPendingSmbusOobInit`).
+
+<span id="amrmanagementcontroller-amc-architectureanddesign-smbusandoobbring-up"></span>
+
+### SMBus and out-of-band bring-up
+
+Two HAL flags in `profile_hal.h` control the stack:
+
+| Flag | V80 | RAVE | Meaning |
+| --- | --- | --- | --- |
+| `HAL_SMBUS_FEATURE` | 1 | 0 | Real SMBus FAL vs stub |
+| `HAL_PL_SMBUS_FEATURE` | 1 | 0 | Defer SMBus/BMC/OOB until a PDI is in the PL |
+
+`iInitSmbusOobStackIfNeeded()` is the single idempotent path: allocate the BMC EVL record, SMBus FAL, BMC proxy, then out-of-band telemetry.
+
+On a non-PL SMBus card that path runs once at boot from application init. On V80 it is requested after PDI load and executed from the AMC main task (not from an EVL callback), so mutex/task creation does not run in callback context.
+
+V80 requests deferred init when:
+
+- Power-up user PDI load succeeds (`USER_PDI_POWERUP_LOADED`)
+- `APC_PROXY_DRIVER_E_DOWNLOAD_COMPLETE` with `ucAdditionalData == APC_PROXY_PDI_PL_LOADED` (APC sets that only for a PL PDI, not APU/RPU images)
+- `APC_PROXY_DRIVER_E_PROGRAM_COMPLETE` (always requests bring-up; unlike download complete, this event is not PL-gated)
+
+`iFAL_SMBUS_Initialise()` enables the PCIe SMBus sideband, then polls the IP magic `0x534D4273` at `HAL_SMBUS_BASE_ADDR + 0x8` for 100 ms (10 ms steps). If the magic does not match, SMBus init is skipped and the SMBus status bits are cleared so a later PDI can retry.
 
 ### AMR Management Interface (AMI) Proxy Driver
 
@@ -492,6 +525,7 @@ Note: In the above example, **Proxy N** can be the same proxy as **Proxy X**.
   - Copy an image from one partition to another
   - Select which partition to boot from
   - Enable the hot reset capability
+  - On PL PDI download complete, set `ucAdditionalData` to `APC_PROXY_PDI_PL_LOADED` so V80 can bring up SMBus
 
 ### AMR External Device Control (AXC) Proxy Driver
 

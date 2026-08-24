@@ -333,6 +333,12 @@ typedef struct
 uint32_t ulFW_IF_SMBUS_Init( FWIfSMBusInitCfg *pxCfg );
 </pre></div>
 </div>
+<p>The SMBus block-I/O implementation also exposes a runtime byte trace:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void vFW_IF_SMBUS_SetByteTrace( uint8_t ucEnable );
+uint8_t ucFW_IF_SMBUS_GetByteTrace( void );
+</pre></div>
+</div>
+<p>When enabled (BMC DAL <code class="docutils literal notranslate"><span class="pre">enable_byte_trace</span></code>), incoming requests and outgoing responses are hex-dumped at PLL <code class="docutils literal notranslate"><span class="pre">LOGGING</span></code> level.</p>
 <p>The initialization function should only pass in a pointer to the initialization structure, so that porting a user application from one driver to another takes minimal effort (only the structure contents and the name of the function need changed).</p>
 <p><strong>Note: The user application is responsible for the storage of the configuration structure.</strong></p>
 <p><span id="firmwareinterface-fw-if-abstractionlayer-creatinganinterface"></span></p>
@@ -1086,7 +1092,7 @@ if( FW_IF_TRUE == thereIsAnError )
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on August 04, 2026.
+      <span class="lastupdated">Last updated on August 23, 2026.
       </span></p>
   </div>
 

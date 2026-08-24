@@ -190,6 +190,13 @@ If any configuration values aren’t required for a specific implementation, the
      */
     uint32_t ulFW_IF_SMBUS_Init( FWIfSMBusInitCfg *pxCfg );
 
+The SMBus block-I/O implementation also exposes a runtime byte trace:
+
+    void vFW_IF_SMBUS_SetByteTrace( uint8_t ucEnable );
+    uint8_t ucFW_IF_SMBUS_GetByteTrace( void );
+
+When enabled (BMC DAL `enable_byte_trace`), incoming requests and outgoing responses are hex-dumped at PLL `LOGGING` level.
+
 The initialization function should only pass in a pointer to the initialization structure, so that porting a user application from one driver to another takes minimal effort (only the structure contents and the name of the function need changed).
 
 **Note: The user application is responsible for the storage of the configuration structure.**

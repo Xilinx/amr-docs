@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Important:** SMBus support is not implemented in the current AMR release. The SMBus IP and associated infrastructure are provided for reference, but functional SMBus communication and protocol handling are not present. Users must implement and establish SMBus support based on their specific requirements.
+On V80, AMC firmware uses this IP for out-of-band BMC traffic (MCTP/PLDM). The IP is implemented in the PL, so firmware initializes it only after a PDI that contains the IP is loaded. The RAVE profile does not enable the SMBus firmware stack. See [Out-of-band (SMBus) Management](../system-architecture/board-management.md) and [AMC architecture](../firmware/amc-architecture.md).
 
 The SMBus IP provides a mechanism through which a Versal ACAP based system may interact with external devices that are compliant to the [System Management Bus (SMBus) v3.2 Specification](http://smbus.org/specs/SMBus_3_2_20220112.pdf). SMBus is a two-wire open-drain interface based on the principles of operation defined by the [I2C Bus Specification](https://www.nxp.com/docs/en/user-guide/UM10204.pdf). It provides a standardized control path that enables devices to pass system and power management related messages.
 

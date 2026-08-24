@@ -116,6 +116,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#tasks">Tasks</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#amc-main-task">AMC (main task)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#smbus-and-out-of-band-bring-up">SMBus and out-of-band bring-up</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#amr-management-interface-ami-proxy-driver">AMR Management Interface (AMI) Proxy Driver</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#amr-programming-control-apc-proxy-driver">AMR Programming Control (APC) Proxy Driver</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#amr-external-device-control-axc-proxy-driver">AMR External Device Control (AXC) Proxy Driver</a></li>
@@ -292,6 +293,7 @@ and FAL components.</p>
 <div class="section" id="event-library-evl">
 <h5>Event Library (EVL)<a class="headerlink" href="#event-library-evl" title="Permalink to this heading">¶</a></h5>
 <p>The EVL allows event signaling to ‘higher’ layers. It is predominantly used for proxy drivers to communicate to the application layer whilst maintaining agnosticism and abstraction.</p>
+<p><code class="docutils literal notranslate"><span class="pre">iEVL_CreateRecord</span></code> allocates a record (including its mutex). <code class="docutils literal notranslate"><span class="pre">iEVL_DestroyRecord</span></code> releases the callback list, mutex, and record so a failed proxy init (for example BMC) can free those resources before a retry.</p>
 <p><span id="amrmanagementcontroller-amc-architectureanddesign-debugaccesslibrary-dal"></span></p>
 </div>
 <div class="section" id="debug-access-library-dal">
@@ -355,6 +357,7 @@ command/response transactions.</p>
 <div class="section" id="smbus1">
 <h4>SMBus<sup>1</sup><a class="headerlink" href="#smbus1" title="Permalink to this heading">¶</a></h4>
 <p>The SMBus driver is an implementation of SMBus 3.2, and provides an Out-of-band interface to the BMC.</p>
+<p>On V80 the SMBus IP is in the PL (<code class="docutils literal notranslate"><span class="pre">HAL_PL_SMBUS_FEATURE</span></code> is 1). AMC initializes the SMBus FAL, BMC proxy, and out-of-band telemetry only after a PDI that contains the IP is loaded. RAVE leaves <code class="docutils literal notranslate"><span class="pre">HAL_SMBUS_FEATURE</span></code> at 0 and uses the SMBus stub. See <a class="reference internal" href="#amrmanagementcontroller-amc-architectureanddesign-smbusandoobbring-up"><span class="xref myst">SMBus and out-of-band bring-up</span></a>.</p>
 <p>The SMBus driver source is provided with further documentation, available in <strong>&lt;AMR_directory&gt;/fw/AMC/src/device_drivers/smbus_driver/doc/</strong>.</p>
 <p><span id="amrmanagementcontroller-amc-architectureanddesign-i2c"></span></p>
 </div>
@@ -474,6 +477,7 @@ behavior of these components.</p>
 <p>The Out-Of-Band Telemetry application handles the events and communication between the BMC and the Sensors.</p>
 <p>The Out-of-Band Telemetry application handles any requests from the Out-of-Band interface (BMC Proxy) that require data or information from other proxy drivers (primarily the ASC).</p>
 <p>This application does not have its own task, and operates entirely on events raised by the BMC and ASC proxy drivers.</p>
+<p>On V80 this application is started with the deferred SMBus/BMC stack after PDI load, not during the boot-time application init pass.</p>
 <p><span id="amrmanagementcontroller-amc-architectureanddesign-alveosensordatamodel-asdm"></span></p>
 </div>
 <div class="section" id="amr-sensor-data-model-asdm">
@@ -533,6 +537,7 @@ relevant tasks.</p></li>
 <li><p>FW_IF_CFG structures held locally in the profile_fal.c source file.</p></li>
 </ul>
 </li>
+<li><p>On V80, SMBus FAL init/create is <strong>not</strong> done here. It runs later via <code class="docutils literal notranslate"><span class="pre">iFAL_SMBUS_Initialise()</span></code> after PDI load.</p></li>
 </ul>
 </li>
 <li><p>Proxy Driver Initialisation</p>
@@ -547,13 +552,15 @@ relevant tasks.</p></li>
 <li><p>Event-handling callback passed in.</p></li>
 </ul>
 </li>
+<li><p>BMC EVL record is pre-allocated here (<code class="docutils literal notranslate"><span class="pre">iBMC_AllocateEvlRecord</span></code>) before heap-heavy SMBus init.</p></li>
+<li><p>On V80, BMC proxy initialise is deferred with the SMBus stack.</p></li>
 </ul>
 </li>
 <li><p>Application Initialisation</p>
 <ol class="arabic simple">
 <li><p>ASDM</p></li>
 <li><p>In Band Telemetry</p></li>
-<li><p>Out of Band Telemetry</p></li>
+<li><p>Out of Band Telemetry (boot-time only when SMBus is not PL-hosted)</p></li>
 <li><p>BIM</p></li>
 </ol>
 </li>
@@ -562,12 +569,51 @@ relevant tasks.</p></li>
 <li><p>DAL Layer Initialisation</p></li>
 </ol>
 </li>
-<li><p>Do nothing - keep alive task.</p>
+<li><p>Keep alive / poll loop.</p>
 <ul class="simple">
 <li><p>If available, can flash an LED or kick a watchdog to show signs of life.</p></li>
+<li><p>On V80, this loop also runs pending SMBus/BMC/OOB init after a PDI load (<code class="docutils literal notranslate"><span class="pre">vProcessPendingSmbusOobInit</span></code>).</p></li>
 </ul>
 </li>
 </ol>
+<p><span id="amrmanagementcontroller-amc-architectureanddesign-smbusandoobbring-up"></span></p>
+</div>
+<div class="section" id="smbus-and-out-of-band-bring-up">
+<h3>SMBus and out-of-band bring-up<a class="headerlink" href="#smbus-and-out-of-band-bring-up" title="Permalink to this heading">¶</a></h3>
+<p>Two HAL flags in <code class="docutils literal notranslate"><span class="pre">profile_hal.h</span></code> control the stack:</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Flag</th>
+<th>V80</th>
+<th>RAVE</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>HAL_SMBUS_FEATURE</code></td>
+<td>1</td>
+<td>0</td>
+<td>Real SMBus FAL vs stub</td>
+</tr>
+<tr>
+<td><code>HAL_PL_SMBUS_FEATURE</code></td>
+<td>1</td>
+<td>0</td>
+<td>Defer SMBus/BMC/OOB until a PDI is in the PL</td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">iInitSmbusOobStackIfNeeded()</span></code> is the single idempotent path: allocate the BMC EVL record, SMBus FAL, BMC proxy, then out-of-band telemetry.</p>
+<p>On a non-PL SMBus card that path runs once at boot from application init. On V80 it is requested after PDI load and executed from the AMC main task (not from an EVL callback), so mutex/task creation does not run in callback context.</p>
+<p>V80 requests deferred init when:</p>
+<ul class="simple">
+<li><p>Power-up user PDI load succeeds (<code class="docutils literal notranslate"><span class="pre">USER_PDI_POWERUP_LOADED</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">APC_PROXY_DRIVER_E_DOWNLOAD_COMPLETE</span></code> with <code class="docutils literal notranslate"><span class="pre">ucAdditionalData</span> <span class="pre">==</span> <span class="pre">APC_PROXY_PDI_PL_LOADED</span></code> (APC sets that only for a PL PDI, not APU/RPU images)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">APC_PROXY_DRIVER_E_PROGRAM_COMPLETE</span></code> (always requests bring-up; unlike download complete, this event is not PL-gated)</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">iFAL_SMBUS_Initialise()</span></code> enables the PCIe SMBus sideband, then polls the IP magic <code class="docutils literal notranslate"><span class="pre">0x534D4273</span></code> at <code class="docutils literal notranslate"><span class="pre">HAL_SMBUS_BASE_ADDR</span> <span class="pre">+</span> <span class="pre">0x8</span></code> for 100 ms (10 ms steps). If the magic does not match, SMBus init is skipped and the SMBus status bits are cleared so a later PDI can retry.</p>
 </div>
 <div class="section" id="amr-management-interface-ami-proxy-driver">
 <h3>AMR Management Interface (AMI) Proxy Driver<a class="headerlink" href="#amr-management-interface-ami-proxy-driver" title="Permalink to this heading">¶</a></h3>
@@ -649,6 +695,7 @@ These include APIs to:</p>
 <li><p>Copy an image from one partition to another</p></li>
 <li><p>Select which partition to boot from</p></li>
 <li><p>Enable the hot reset capability</p></li>
+<li><p>On PL PDI download complete, set <code class="docutils literal notranslate"><span class="pre">ucAdditionalData</span></code> to <code class="docutils literal notranslate"><span class="pre">APC_PROXY_PDI_PL_LOADED</span></code> so V80 can bring up SMBus</p></li>
 </ul>
 </li>
 </ul>
@@ -1509,7 +1556,7 @@ Applications handling: BIM, Out-of-Band Telemetry
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on August 04, 2026.
+      <span class="lastupdated">Last updated on August 23, 2026.
       </span></p>
   </div>
 

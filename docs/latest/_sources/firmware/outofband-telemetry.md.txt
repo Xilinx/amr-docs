@@ -6,6 +6,10 @@
 
 The Out-of-Band Telemetry application handles the events and communication between the Board Management Controller (BMC) and the ASDM data.
 
+On V80, `iOUT_OF_BAND_TELEMETRY_Initialise()` runs as part of the deferred SMBus/BMC stack after a PDI with SMBus IP is loaded, not during AMC boot. On a profile where SMBus is available at boot (`HAL_SMBUS_FEATURE` and not `HAL_PL_SMBUS_FEATURE`), it still starts from the application init pass. RAVE does not start this application.
+
+To validate the path on hardware, see [V80 BMC / SMBus out-of-band validation](../deployment/bmc-smbus-validation.md).
+
 <span id="amroutofbandtelemetryapplication-applicationexternalapis"></span>
 
 ## Application External APIs

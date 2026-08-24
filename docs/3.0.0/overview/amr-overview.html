@@ -276,7 +276,8 @@
 <li><p>The AMR’s design flow produces full programming images for the FPGA, which simplifies the overall design flow and avoids other management overheads associated with dynamic function exchange.</p></li>
 </ul>
 </li>
-<li><p>The AMR’s firmware provides a reference implementation of card management functions for in-band (PCIe) sensor access and card control, plus other application-level card management functions. This includes writing new PDIs into the card’s OSPI flash configuration memory across three partitions (two boot PDIs and one user design), with enhanced write performance, partition flag management, and automatic partition loading on power-up. <strong>Note:</strong> Out-of-band SMBus/BMC support is not implemented; users must establish SMBus functionality based on their requirements.</p></li>
+<li><p>The AMR’s firmware provides a reference implementation of card management functions for in-band (PCIe) sensor access and card control, plus other application-level card management functions. This includes writing new PDIs into the card’s OSPI flash configuration memory across three partitions (two boot PDIs and one user design), with enhanced write performance, partition flag management, and automatic partition loading on power-up.</p></li>
+<li><p>On V80, AMC also provides out-of-band (SMBus) management: MCTP/PLDM over the SMBus IP in the programmable logic, brought up after a PDI that contains that IP is loaded. The RAVE profile does not enable the SMBus stack.</p></li>
 <li><p>The AMR supports two board profiles: rave (standard reference implementation) and v80 (with eMMC storage, SMBus interface, and QSFP module control), allowing flexible deployment across different Alveo and Embedded+ boards.</p></li>
 </ul>
 <p><span id="amroverview-amrhardwarearchitecture"></span></p>
@@ -340,7 +341,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on August 04, 2026.
+      <span class="lastupdated">Last updated on August 23, 2026.
       </span></p>
   </div>
 

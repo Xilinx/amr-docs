@@ -55,6 +55,11 @@ APC proxy driver event IDs.
 
     } APC_PROXY_DRIVER_EVENTS;
 
+Additional data flag on `EVL_SIGNAL` when a PDI is loaded into the PL. AMC uses this on V80 to request SMBus/BMC/OOB bring-up. APC sets it on download complete only when the image is a PL PDI (`iPdiProgram` is true).
+
+    /* Additional data flag for EVL_SIGNAL when a PDI is loaded into PL */
+    #define APC_PROXY_PDI_PL_LOADED        ( 1 )
+
 Boot device IDs.
 
 **APC\_BOOT\_DEVICES**

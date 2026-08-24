@@ -1,0 +1,48 @@
+# V80 BMC / SMBus out-of-band validation
+
+V80 out-of-band management uses the SMBus IP in the PL. AMC brings up MCTP/PLDM only after a PDI that contains that IP is loaded. This procedure programs the user PL PDI into OSPI partition 2, enables power-on load, boots AMC from the primary boot partition, reboots the host so the server BMC rediscovers the card, then reads FPGA temperature over IPMI.
+
+See [Out-of-band (SMBus) Management](../system-architecture/board-management.md) and [AMC architecture](../firmware/amc-architecture.md#amrmanagementcontroller-amc-architectureanddesign-smbusandoobbring-up).
+
+This flow applies to the **V80** profile only. RAVE does not enable the SMBus stack.
+
+## Prerequisites
+
+- AMI is installed and `ami_tool` can see the card (`ami_tool overview -d <bdf>`).
+- A PL PDI that includes the SMBus IP (for example `v80_base_pld.pdi`).
+- Network access to the server BMC for `ipmitool` (LAN+).
+
+Replace `<bdf>`, `<bmc-ip>`, `<bmc-user>`, and `<bmc-password>` with values for the target system.
+
+## Procedure
+
+1. Program the PL PDI into OSPI flash partition 2 (user partition):
+
+        sudo ami_tool cfgmem_program -d <bdf> -t primary -p 2 -y -i v80_base_pld.pdi
+
+2. Enable power-on PDI load for partition 2:
+
+        sudo ami_tool cfgmem_flags_wr -d <bdf> -t primary -p 2 -i on
+
+3. Boot AMR from the primary boot partition:
+
+        sudo ami_tool device_boot -d <bdf> -t primary -p 0
+
+4. Reboot the host so the server BMC rediscovers the card:
+
+        sudo reboot
+
+5. After the host is back, read V80 temperature from the BMC:
+
+        ipmitool -I lanplus -H <bmc-ip> -U <bmc-user> -P <bmc-password> sdr type temperature | grep FPGA
+
+Example:
+
+        ipmitool -I lanplus -H 172.19.242.12 -U ADMIN -P <bmc-password> sdr type temperature | grep FPGA
+        AOC_FPGA6 Temp   | 60h | ok  | 11.116 | 29 degrees C
+
+The number in `AOC_FPGA6` is the PCIe slot number (slot 6 in the example above).
+
+A temperature reading with status `ok` confirms that SMBus, AMC out-of-band telemetry, and the server BMC path are working after the PL PDI load.
+
+Command details: [ami_tool cfgmem_program](ami-tool-guide.md#amrmanagementinterfaceuserguide-ami-tool-cfgmem-program), [cfgmem_flags_wr](ami-tool-guide.md#amrmanagementinterfaceuserguide-ami-tool-cfgmem-flags-wr), [device_boot](ami-tool-guide.md#amrmanagementinterfaceuserguide-ami-tool-device-boot).

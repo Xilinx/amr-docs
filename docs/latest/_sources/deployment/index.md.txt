@@ -8,6 +8,8 @@
 
   - [AMR Updating PDI in Flash](update-pdi.md)
 
+  - [V80 BMC / SMBus out-of-band validation](bmc-smbus-validation.md)
+
   - [AMR Debug Techniques](debug.md)
 
   - [AMR JTAG Boot Recovery](jtag-recovery.md)

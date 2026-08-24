@@ -42,7 +42,11 @@ The AMC firmware running within the V80s RPU subsystem includes software service
 
 ## Out-of-band (SMBus) Management
 
-**Important:** SMBus support is not implemented in the current AMR release. While the hardware design includes an SMBus interface peripheral in the Versal programmable logic, the firmware protocol handling and out-of-band management services are not present. Users must implement SMBus communication and protocol support based on their specific server integration requirements.
+Alveo cards deployed to server environments typically must implement industry standard card management protocols so that the card's configuration and operating state can be made known to the server's own board management controller. On V80, the AMR hardware design includes an SMBus interface peripheral in the Versal programmable logic, and AMC firmware brings up MCTP/PLDM over that interface so the server BMC can identify the card (FRU EEPROM / UUID), discover it (PLDM over MCTP), and read sensor status at runtime.
 
-Alveo cards deployed to server environments typically must implement industry standard card management protocols so that the card's configuration and operating state can be made known to the server's own board management controller. The AMR hardware design includes an SMBus interface peripheral in the Versal programmable logic to facilitate communication to the server BMC. When implemented, the remote management interface component of the AMC firmware can receive and respond to messages from the BMC to satisfy server integration requirements for card identification (via the FRU EEPROM), implementation of standards for autodetection of the card (PLDM over MCTP), and SMBus access to sensor status during the operating runtime of the card.
+Because the SMBus IP lives in the PL, AMC does not touch its registers at RPU boot. After a PDI that contains the IP is loaded (power-up user PDI, or a later PL PDI download/program), AMC probes the IP, initializes the SMBus FAL, starts the BMC proxy, and starts out-of-band telemetry. If the loaded PDI does not contain SMBus IP, that bring-up is skipped and can be retried after a later PDI load. See [AMC architecture](../firmware/amc-architecture.md) and [BMC proxy](../firmware/bmc-proxy.md).
+
+The RAVE profile does not enable the SMBus stack (`HAL_SMBUS_FEATURE` is 0).
+
+To confirm the path on V80 (program PL PDI, enable power-on load, reboot, IPMI temperature), see [V80 BMC / SMBus out-of-band validation](../deployment/bmc-smbus-validation.md).
 

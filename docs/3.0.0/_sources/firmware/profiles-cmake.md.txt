@@ -88,6 +88,19 @@ The **profile\_fal.h** header file provides profile (hardware) specific definiti
 
 The **profile\_hal.h** header file provides all other profile (hardware) specific definitions.
 
+SMBus-related HAL flags:
+
+| Macro | V80 | RAVE | Purpose |
+| --- | --- | --- | --- |
+| `HAL_SMBUS_FEATURE` | 1 | 0 | Compile the real SMBus FAL (`fw_if_smbus_block_io.c`) instead of the stub (`fw_if_smbus_stub.c`) |
+| `HAL_PL_SMBUS_FEATURE` | 1 | 0 | SMBus IP is in the PL; AMC defers FAL/BMC/OOB init until PDI load |
+| `HAL_SMBUS_BASE_ADDR` | From `xparameters.h` | unused | SMBus IP base address |
+| `HAL_SMBUS_INTERRUPT` | SPI 85 from `pl.dtsi` | unused | SMBus IRQ (SPI index, not GIC ID + 32) |
+| `HAL_SMBUS_INIT_PROBE_TIMEOUT_MS` | 100 | unused | Magic-number probe timeout after PDI load |
+| `HAL_SMBUS_INIT_PROBE_INTERVAL_MS` | 10 | unused | Probe poll interval |
+
+`profile_fal.c` implements `iFAL_SMBUS_Initialise()` when `HAL_SMBUS_FEATURE` is 1. On V80 that function is called from the deferred bring-up path, not from `iFAL_Initialise()`.
+
 <span id="profilesandcmakebuildprocess-pdrprofile"></span>
 
 ### PDR Profile

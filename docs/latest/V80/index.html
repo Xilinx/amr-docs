@@ -162,6 +162,7 @@
 <h2>V80 Board Overview<a class="headerlink" href="#v80-board-overview" title="Permalink to this heading">¶</a></h2>
 <p>The V80 is a PCIe accelerator card featuring the Versal V80 HBM-series device. The board provides high-performance computing capabilities with hardened PCIe Gen5 connectivity and high-bandwidth memory resources optimized for data center and cloud deployments.</p>
 <p>The V80 includes CPM5 (Coherent PCIe Module) which integrates PCIe Gen5 x8 controller and QDMA functionality in hardened silicon. This eliminates the need for soft logic PCIe and DMA IP, preserving programmable logic resources for user applications. The device also features 32 GB of integrated HBM (High-Bandwidth Memory) providing exceptional memory bandwidth for compute-intensive workloads.</p>
+<p>Out-of-band card management uses the SMBus IP in the programmable logic. AMC firmware probes and initializes that IP after a PDI containing it is loaded, then runs MCTP/PLDM for the server BMC. See <a class="reference internal" href="../system-architecture/board-management.html"><span class="std std-doc">Out-of-band (SMBus) Management</span></a>.</p>
 <p>The board design targets maximum performance with PCIe bandwidth of approximately 32 GB/s and HBM memory bandwidth approaching 460 GB/s. Total memory capacity reaches 68 GB through the combination of HBM, DDR DIMM, and discrete DDR resources.</p>
 </div>
 <div class="section" id="v80-specific-hardware-documentation">
@@ -243,6 +244,7 @@
 <p>For V80 board testing and validation, see:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="xbtest/install-and-run-xbtest.html"><span class="std std-doc">Install and Run Xbtest on V80</span></a> - Xbtest installation and usage guide</p></li>
+<li><p><a class="reference internal" href="../deployment/bmc-smbus-validation.html"><span class="std std-doc">V80 BMC / SMBus out-of-band validation</span></a> - Program PL PDI, enable power-on load, and read FPGA temperature via IPMI</p></li>
 </ul>
 </div>
 <div class="section" id="references">
@@ -271,7 +273,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on August 04, 2026.
+      <span class="lastupdated">Last updated on August 23, 2026.
       </span></p>
   </div>
 

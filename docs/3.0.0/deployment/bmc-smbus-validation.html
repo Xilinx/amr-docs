@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AMR V80 - Source File Overview &mdash; AMR  documentation</title>
+  <title>V80 BMC / SMBus out-of-band validation &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -57,12 +57,12 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">AMR Deployment</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../deployment/install-card.html">AMR Installing the Design onto the Card</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../deployment/update-fpt.html">AMR Updating FPT Image in Flash</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../deployment/update-pdi.html">AMR Updating PDI in Flash</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../deployment/debug.html">AMR Debug Techniques</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../deployment/jtag-recovery.html">AMR JTAG Boot Recovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../deployment/ami-tool-guide.html">AMR Management Interface userguide (ami_tool)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-card.html">AMR Installing the Design onto the Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update-fpt.html">AMR Updating FPT Image in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update-pdi.html">AMR Updating PDI in Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debug.html">AMR Debug Techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jtag-recovery.html">AMR JTAG Boot Recovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ami-tool-guide.html">AMR Management Interface userguide (ami_tool)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development Overview</span></p>
 <ul>
@@ -71,7 +71,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Hardware Design</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">AMR common Hardware Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hardware/index.html">AMR common Hardware Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../V80/index.html">V80 Board Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../RAVE/index.html">RAVE Board Documentation</a></li>
 </ul>
@@ -118,9 +118,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>AMR V80 - Source File Overview</li>
+      <li>V80 BMC / SMBus out-of-band validation</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/hardware/source-files.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/deployment/bmc-smbus-validation.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -128,96 +128,57 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="amr-v80-source-file-overview">
-<h1>AMR V80 - Source File Overview<a class="headerlink" href="#amr-v80-source-file-overview" title="Permalink to this heading">¶</a></h1>
-<p><span id="amrv80-sourcefileoverview-hardwaredirectorytree"></span></p>
-<div class="section" id="hardware-directory-tree">
-<h2>Hardware Directory Tree<a class="headerlink" href="#hardware-directory-tree" title="Permalink to this heading">¶</a></h2>
-<p><strong>Hardware Source</strong></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>└── amr_vivado_designs
-└── alveo_v80
-└── boards
-├── scripts
-│   └── gen_sdt.tcl
-└── v80_base
-├── ip
-│   └── smbus_v1_1*
-│       ├── src
-│       │   └── ...
-│       ├── xgui
-│       │   ├── smbus_v1_1.tcl
-│       │   └── smbus_v1_1_v1_0.tcl
-│       └── component.xml
-├── Makefile
-├── scripts
-│   ├── config_bd.tcl
-│   └── main.tcl
-└── xdc
-├── impl.pins.xdc
-└── impl.xdc
+  <div class="section" id="v80-bmc-smbus-out-of-band-validation">
+<h1>V80 BMC / SMBus out-of-band validation<a class="headerlink" href="#v80-bmc-smbus-out-of-band-validation" title="Permalink to this heading">¶</a></h1>
+<p>V80 out-of-band management uses the SMBus IP in the PL. AMC brings up MCTP/PLDM only after a PDI that contains that IP is loaded. This procedure programs the user PL PDI into OSPI partition 2, enables power-on load, boots AMC from the primary boot partition, reboots the host so the server BMC rediscovers the card, then reads FPGA temperature over IPMI.</p>
+<p>See <a class="reference internal" href="../system-architecture/board-management.html"><span class="std std-doc">Out-of-band (SMBus) Management</span></a> and <a class="reference internal" href="../firmware/amc-architecture.html#amrmanagementcontroller-amc-architectureanddesign-smbusandoobbring-up"><span class="std std-ref">AMC architecture</span></a>.</p>
+<p>This flow applies to the <strong>V80</strong> profile only. RAVE does not enable the SMBus stack.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>AMI is installed and <code class="docutils literal notranslate"><span class="pre">ami_tool</span></code> can see the card (<code class="docutils literal notranslate"><span class="pre">ami_tool</span> <span class="pre">overview</span> <span class="pre">-d</span> <span class="pre">&lt;bdf&gt;</span></code>).</p></li>
+<li><p>A PL PDI that includes the SMBus IP (for example <code class="docutils literal notranslate"><span class="pre">v80_base_pld.pdi</span></code>).</p></li>
+<li><p>Network access to the server BMC for <code class="docutils literal notranslate"><span class="pre">ipmitool</span></code> (LAN+).</p></li>
+</ul>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">&lt;bdf&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;bmc-ip&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;bmc-user&gt;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&lt;bmc-password&gt;</span></code> with values for the target system.</p>
+</div>
+<div class="section" id="procedure">
+<h2>Procedure<a class="headerlink" href="#procedure" title="Permalink to this heading">¶</a></h2>
+<ol class="arabic">
+<li><p>Program the PL PDI into OSPI flash partition 2 (user partition):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> sudo ami_tool cfgmem_program -d &lt;bdf&gt; -t primary -p 2 -y -i v80_base_pld.pdi
 </pre></div>
 </div>
-<p><span id="amrv80-sourcefileoverview-amr"></span></p>
-</div>
-<div class="section" id="amr">
-<h2>amr<a class="headerlink" href="#amr" title="Permalink to this heading">¶</a></h2>
-<p>This is the top level directory containing the source files for creating the AMR design and the build script. When executed, the build.sh script builds the hardware design, firmware, and final PDI.</p>
-<p><span id="amrv80-sourcefileoverview-hw"></span></p>
-<div class="section" id="hw">
-<h3>hw<a class="headerlink" href="#hw" title="Permalink to this heading">¶</a></h3>
-<p>The hw directory contains the files necessary to build the hardware design.</p>
-<p><span id="amrv80-sourcefileoverview-amr-v80"></span></p>
-<div class="section" id="build-sh">
-<h4>build.sh<a class="headerlink" href="#build-sh" title="Permalink to this heading">¶</a></h4>
-<p>This is the main build shell. Executing this shell will launch Vivado<sup>TM</sup>, build the AMR hardware design, compile the AMC firmware, and generate the PDI files. This is indicated by the asterisk in the Hardware Directory Tree above.</p>
-<p><span id="amrv80-sourcefileoverview-pdi-gen"></span></p>
-</div>
-<div class="section" id="pdi-gen-this-is-used-in-the-build-sh-to-combine-the-fw-amc-elf-with-the-hw-pdi">
-<h4>PDI Gen - This is used in the build.sh to combine the FW amc.elf with the HW PDI.<a class="headerlink" href="#pdi-gen-this-is-used-in-the-build-sh-to-combine-the-fw-amc-elf-with-the-hw-pdi" title="Permalink to this heading">¶</a></h4>
-<ul class="simple">
-<li><p>output: build_amc/amr_ospi_fpt.bin</p></li>
-<li><p>fpt_pdi_gen.py - This file is used in the build.sh to create the final FPT PDI</p>
-<ul>
-<li><p>output: amr_ospi.bin and amr_ospi_fpt.bin</p></li>
-</ul>
 </li>
-</ul>
-<p><span id="amrv80-sourcefileoverview-src"></span></p>
+<li><p>Enable power-on PDI load for partition 2:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> sudo ami_tool cfgmem_flags_wr -d &lt;bdf&gt; -t primary -p 2 -i on
+</pre></div>
 </div>
-<div class="section" id="src">
-<h4>src<a class="headerlink" href="#src" title="Permalink to this heading">¶</a></h4>
-<ul>
-<li><p><strong>bd</strong> - This is the Block Design generation directory which contains the TCL file necessary to build the AMD Vivado™ AMR design.</p>
-<ul class="simple">
-<li><p>create_bd_design.tcl - This TCL file is used by Vivado to create the base AMR design. Since the GTs are not used in this design, the interface ports have been commented out. The user may uncomment them as required for their design.</p></li>
-</ul>
 </li>
-<li><p><strong>build_design.tcl</strong> - This script uses Vivado to create the XSA and run synthesis and implementation.</p></li>
-<li><p><strong>constraints</strong> - This directory contains the constraints required for Vivado implementation to generate a PDI.</p>
-<ul class="simple">
-<li><p>impl.pins.xdc - This file contains the top level I/O pin names, locations, and IO standards for the DDR, DIMM, GTYPs, GTMs, and clocks.</p>
-<ul>
-<li><p><em>Note</em>: Since the GTs are not used in the base V80 design, these pins have been commented out.</p></li>
-</ul>
-</li>
-</ul>
-<p>impl.xdc - This file defines strictly enforced pblocks for each SLR. A strictly enforced pblock does not allow cells to be moved outside pblock boundaries. The base logic is assigned to SLR0, while user logic can be assigned to SLR0, SLR1, and SLR2 as needed.</p>
-<p>The NMU for the PCIe Management SmartConnect (pcie_slr0_mgmt_sc) is LOC’d to keep the base logic resources close to the CIPS in SLR0.</p>
-<ul class="simple">
-<li><p>opt.post.tcl - This file turns on bitstream compression and enables NPI DMA mode to accelerate device download. It also disables BUFG insertion in placement to prevent clock changes.</p></li>
-<li><p>place.pre.tcl - The PCIe Management PDI Reset logic currently is not used in AMR, but it was added for future growth. Currently, the settings in this file connect the reset to a PMC interrupt. The response to this interrupt has not been defined.</p></li>
-<li><p>write_device_image.pre.tcl - This file generates the UUID for the AMR design which is stored in the UUID of the base logic.</p></li>
-<li><p><strong>create_design.tcl</strong> - This file is used by Vivado to create the project, create the BD, add the constraint files, and set the processing order for creating the AMR design.</p></li>
-<li><p><strong>iprepo</strong> - This directory contains all the additional IP necessary to build the AMR design that is not included in the Vivado released SW.</p>
-<ul>
-<li><p>smbus_v1_1 - This IP is used by the v80 to communicate with server board management controller.</p></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<li><p>Boot AMR from the primary boot partition:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> sudo ami_tool device_boot -d &lt;bdf&gt; -t primary -p 0
+</pre></div>
 </div>
+</li>
+<li><p>Reboot the host so the server BMC rediscovers the card:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> sudo reboot
+</pre></div>
 </div>
+</li>
+<li><p>After the host is back, read V80 temperature from the BMC:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> ipmitool -I lanplus -H &lt;bmc-ip&gt; -U &lt;bmc-user&gt; -P &lt;bmc-password&gt; sdr type temperature | grep FPGA
+</pre></div>
+</div>
+</li>
+</ol>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    ipmitool -I lanplus -H 172.19.242.12 -U ADMIN -P &lt;bmc-password&gt; sdr type temperature | grep FPGA
+    AOC_FPGA6 Temp   | 60h | ok  | 11.116 | 29 degrees C
+</pre></div>
+</div>
+<p>The number in <code class="docutils literal notranslate"><span class="pre">AOC_FPGA6</span></code> is the PCIe slot number (slot 6 in the example above).</p>
+<p>A temperature reading with status <code class="docutils literal notranslate"><span class="pre">ok</span></code> confirms that SMBus, AMC out-of-band telemetry, and the server BMC path are working after the PL PDI load.</p>
+<p>Command details: <a class="reference internal" href="ami-tool-guide.html#amrmanagementinterfaceuserguide-ami-tool-cfgmem-program"><span class="std std-ref">ami_tool cfgmem_program</span></a>, <a class="reference internal" href="ami-tool-guide.html#amrmanagementinterfaceuserguide-ami-tool-cfgmem-flags-wr"><span class="std std-ref">cfgmem_flags_wr</span></a>, <a class="reference internal" href="ami-tool-guide.html#amrmanagementinterfaceuserguide-ami-tool-device-boot"><span class="std std-ref">device_boot</span></a>.</p>
 </div>
 </div>
 

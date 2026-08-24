@@ -10,6 +10,8 @@ PLDM - Platform Level Data Model
 
 The BMC proxy allows for communication and sensor management between the BMC and AMC through MCTP/PLDM protocols. The BMC proxy is polling indefinitely and listening for incoming messages through a FAL **read** call. If a message is received, an internal flag is set that will start the processing of the message. The proxy calls into the MCTP code to determine whether the message is an MCTP, PLDM Type 0 or PLDM Type 2 form which will determine the exact command. The PLDM code will then form a response to the initial request, which gets sent back to the BMC via a firmware interface **write** by the BMC proxy driver.
 
+On V80, BMC proxy initialise is deferred until SMBus FAL create succeeds after a PDI with SMBus IP is loaded. RAVE does not build this proxy (`HAL_SMBUS_FEATURE` is 0).
+
 <span id="boardmanagementcontroller-bmc-proxydriver-note"></span>
 
 ### Note:
@@ -274,6 +276,10 @@ Get sensor response IDs.
 
 ### Initialize the proxy
 
+`iBMC_AllocateEvlRecord` may be called before `iBMC_Initialise` so the EVL record is taken from the heap before SMBus driver init (which is heap-heavy). The call is idempotent. On V80, full BMC initialise still waits until SMBus FAL create has succeeded after PDI load.
+
+If initialise fails part-way through, `vBMC_CleanupPartialInit` releases PDR buffers, the task, semaphore, mutex, and EVL record (`iEVL_DestroyRecord`) so a later retry can start clean.
+
 The initialize function takes in 15 parameters:
 
   - The unique ID of the proxy driver
@@ -295,6 +301,16 @@ The initialize function takes in 15 parameters:
   - Pointer to the list of names sensor PDRs
 
   - Total number of PDRs in the respective lists
+
+**iBMC\_AllocateEvlRecord**
+
+    /**
+     * @brief   Pre-allocate the BMC EVL record before heap-heavy init (e.g. SMBus)
+     *
+     * @return  OK      EVL record allocated or already present
+     *          ERROR   Allocation failed
+     */
+    int iBMC_AllocateEvlRecord( void );
 
 **iBMC\_Initialise**
 
@@ -522,6 +538,12 @@ Gets the current health state of the proxy.
     * ERROR If not successful
     */
     int iBMC_GetState( MODULE_STATE *pxState );
+
+<span id="boardmanagementcontroller-bmc-proxydriver-smbusbytetrace"></span>
+
+### SMBus byte trace (debug)
+
+The BMC DAL menu includes `enable_byte_trace` and `disable_byte_trace`. These call `vFW_IF_SMBUS_SetByteTrace()` so SMBus block I/O can hex-dump TX and RX payloads at the `LOGGING` PLL level without raising global verbosity.
 
 <span id="boardmanagementcontroller-bmc-proxydriver-bmcproxyhandlingrequests"></span>
 

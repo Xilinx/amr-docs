@@ -110,6 +110,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#print-statistics">Print statistics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#clear-statistics">Clear statistics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#get-proxy-state">Get proxy state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#smbus-byte-trace-debug">SMBus byte trace (debug)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#bmc-proxy-handling-requests">BMC Proxy Handling Requests</a></li>
@@ -177,6 +178,7 @@
 <p>MCTP - Management Component Transport Protocol</p>
 <p>PLDM - Platform Level Data Model</p>
 <p>The BMC proxy allows for communication and sensor management between the BMC and AMC through MCTP/PLDM protocols. The BMC proxy is polling indefinitely and listening for incoming messages through a FAL <strong>read</strong> call. If a message is received, an internal flag is set that will start the processing of the message. The proxy calls into the MCTP code to determine whether the message is an MCTP, PLDM Type 0 or PLDM Type 2 form which will determine the exact command. The PLDM code will then form a response to the initial request, which gets sent back to the BMC via a firmware interface <strong>write</strong> by the BMC proxy driver.</p>
+<p>On V80, BMC proxy initialise is deferred until SMBus FAL create succeeds after a PDI with SMBus IP is loaded. RAVE does not build this proxy (<code class="docutils literal notranslate"><span class="pre">HAL_SMBUS_FEATURE</span></code> is 0).</p>
 <p><span id="boardmanagementcontroller-bmc-proxydriver-note"></span></p>
 <div class="section" id="note">
 <h3>Note:<a class="headerlink" href="#note" title="Permalink to this heading">¶</a></h3>
@@ -443,6 +445,8 @@ typedef enum BMC_GET_SENSOR_RESPONSE
 </div>
 <div class="section" id="initialize-the-proxy">
 <h3>Initialize the proxy<a class="headerlink" href="#initialize-the-proxy" title="Permalink to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">iBMC_AllocateEvlRecord</span></code> may be called before <code class="docutils literal notranslate"><span class="pre">iBMC_Initialise</span></code> so the EVL record is taken from the heap before SMBus driver init (which is heap-heavy). The call is idempotent. On V80, full BMC initialise still waits until SMBus FAL create has succeeded after PDI load.</p>
+<p>If initialise fails part-way through, <code class="docutils literal notranslate"><span class="pre">vBMC_CleanupPartialInit</span></code> releases PDR buffers, the task, semaphore, mutex, and EVL record (<code class="docutils literal notranslate"><span class="pre">iEVL_DestroyRecord</span></code>) so a later retry can start clean.</p>
 <p>The initialize function takes in 15 parameters:</p>
 <ul class="simple">
 <li><p>The unique ID of the proxy driver</p></li>
@@ -456,6 +460,16 @@ typedef enum BMC_GET_SENSOR_RESPONSE
 <li><p>Pointer to the list of names sensor PDRs</p></li>
 <li><p>Total number of PDRs in the respective lists</p></li>
 </ul>
+<p><strong>iBMC_AllocateEvlRecord</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
+ * @brief   Pre-allocate the BMC EVL record before heap-heavy init (e.g. SMBus)
+ *
+ * @return  OK      EVL record allocated or already present
+ *          ERROR   Allocation failed
+ */
+int iBMC_AllocateEvlRecord( void );
+</pre></div>
+</div>
 <p><strong>iBMC_Initialise</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/**
  * @brief   Main initialisation point for the BMC Proxy Driver
@@ -669,6 +683,11 @@ int iBMC_ClearStatistics( void );
 int iBMC_GetState( MODULE_STATE *pxState );
 </pre></div>
 </div>
+<p><span id="boardmanagementcontroller-bmc-proxydriver-smbusbytetrace"></span></p>
+</div>
+<div class="section" id="smbus-byte-trace-debug">
+<h3>SMBus byte trace (debug)<a class="headerlink" href="#smbus-byte-trace-debug" title="Permalink to this heading">¶</a></h3>
+<p>The BMC DAL menu includes <code class="docutils literal notranslate"><span class="pre">enable_byte_trace</span></code> and <code class="docutils literal notranslate"><span class="pre">disable_byte_trace</span></code>. These call <code class="docutils literal notranslate"><span class="pre">vFW_IF_SMBUS_SetByteTrace()</span></code> so SMBus block I/O can hex-dump TX and RX payloads at the <code class="docutils literal notranslate"><span class="pre">LOGGING</span></code> PLL level without raising global verbosity.</p>
 <p><span id="boardmanagementcontroller-bmc-proxydriver-bmcproxyhandlingrequests"></span></p>
 </div>
 </div>
@@ -1190,7 +1209,7 @@ static int iBmcProxyCallback( EVL_SIGNAL *pxSignal )
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on August 04, 2026.
+      <span class="lastupdated">Last updated on August 23, 2026.
       </span></p>
   </div>
 

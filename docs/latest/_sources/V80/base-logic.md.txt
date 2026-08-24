@@ -63,10 +63,11 @@ The V80 base logic implementation uses **CPM5 hardened PCIe** with minimal PL IP
 - Management handled by firmware on RPU
 
 **Future Expansion Potential:**
-- SMBus controller
 - Identification/UUID ROMs
 - Management register blocks
 - Custom control interfaces
+
+The AMC out-of-band path uses the AXI SMBus IP that is present in the loaded PL PDI (see [Out-of-band (SMBus) Management](../system-architecture/board-management.md)). That is separate from the optional `smbus_v1_1` IP in the Vivado IP repository, which is not instantiated in the V80 shell.
 
 <span id="amrv80-baselogic-pf1configuration"></span>
 

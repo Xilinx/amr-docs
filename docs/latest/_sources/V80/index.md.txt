@@ -10,6 +10,8 @@ The V80 is a PCIe accelerator card featuring the Versal V80 HBM-series device. T
 
 The V80 includes CPM5 (Coherent PCIe Module) which integrates PCIe Gen5 x8 controller and QDMA functionality in hardened silicon. This eliminates the need for soft logic PCIe and DMA IP, preserving programmable logic resources for user applications. The device also features 32 GB of integrated HBM (High-Bandwidth Memory) providing exceptional memory bandwidth for compute-intensive workloads.
 
+Out-of-band card management uses the SMBus IP in the programmable logic. AMC firmware probes and initializes that IP after a PDI containing it is loaded, then runs MCTP/PLDM for the server BMC. See [Out-of-band (SMBus) Management](../system-architecture/board-management.md).
+
 The board design targets maximum performance with PCIe bandwidth of approximately 32 GB/s and HBM memory bandwidth approaching 460 GB/s. Total memory capacity reaches 68 GB through the combination of HBM, DDR DIMM, and discrete DDR resources.
 
 ## V80-Specific Hardware Documentation
@@ -101,6 +103,7 @@ AVED and AMR are two different platform management solutions for Alveo V80 cards
 For V80 board testing and validation, see:
 
 - [Install and Run Xbtest on V80](xbtest/install-and-run-xbtest.md) - Xbtest installation and usage guide
+- [V80 BMC / SMBus out-of-band validation](../deployment/bmc-smbus-validation.md) - Program PL PDI, enable power-on load, and read FPGA temperature via IPMI
 
 ## References
 
