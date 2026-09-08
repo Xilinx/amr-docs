@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AMR Management Interface (AMI) &mdash; AMR  documentation</title>
+  <title>AMI VFIO Userspace Driver (Experimental) &mdash; AMR  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -20,9 +20,7 @@
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="AMR QDMA" href="qdma.html" />
-    <link rel="prev" title="Profiles and CMake build process" href="../firmware/profiles-cmake.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -92,8 +90,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../firmware/profiles-cmake.html">Profiles and CMake build process</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Software Services (AMI)</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">AMR Management Interface (AMI)</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ami.html">AMR Management Interface (AMI)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="qdma.html">AMR QDMA</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendices</span></p>
@@ -117,9 +115,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>AMR Management Interface (AMI)</li>
+      <li>AMI VFIO Userspace Driver (Experimental)</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/software/ami.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/software/ami-vfio-userspace.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -127,18 +125,63 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="amr-management-interface-ami">
-<h1>AMR Management Interface (AMI)<a class="headerlink" href="#amr-management-interface-ami" title="Permalink to this heading">¶</a></h1>
+  <div class="section" id="ami-vfio-userspace-driver-experimental">
+<h1>AMI VFIO Userspace Driver (Experimental)<a class="headerlink" href="#ami-vfio-userspace-driver-experimental" title="Permalink to this heading">¶</a></h1>
+<p>This guide describes how to build and test the experimental VFIO-based userspace driver for AMI.</p>
+<blockquote>
+<div><p><strong>Note</strong>: This feature is experimental and planned for release in 2026.2.</p>
+</div></blockquote>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">¶</a></h2>
+<p>Before installing the VFIO userspace driver, ensure your host has support for IOMMU groups.</p>
+</div>
+<div class="section" id="building-the-vfio-userspace-driver">
+<h2>Building the VFIO Userspace Driver<a class="headerlink" href="#building-the-vfio-userspace-driver" title="Permalink to this heading">¶</a></h2>
+<ol class="arabic">
+<li><p><strong>Navigate to the AMI source directory</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>amr/sw/AMI
+</pre></div>
+</div>
+</li>
+<li><p><strong>Run the build script with VFIO option</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./script/build.sh<span class="w"> </span>-driver<span class="w"> </span>vfio
+</pre></div>
+</div>
+</li>
+<li><p><strong>Build artifacts</strong>:
+The build process creates a <code class="docutils literal notranslate"><span class="pre">build_ami</span></code> directory containing Debian and RPM packages.</p></li>
+</ol>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h2>
+<p>Install the packages based on which distribution you are running:</p>
+<div class="section" id="debian-based-distributions-ubuntu-debian">
+<h3>Debian-based Distributions (Ubuntu, Debian)<a class="headerlink" href="#debian-based-distributions-ubuntu-debian" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>build_ami/*.deb
+</pre></div>
+</div>
+</div>
+<div class="section" id="rpm-based-distributions-rhel-centos-fedora">
+<h3>RPM-based Distributions (RHEL, CentOS, Fedora)<a class="headerlink" href="#rpm-based-distributions-rhel-centos-fedora" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>rpm<span class="w"> </span>-ivh<span class="w"> </span>build_ami/*.rpm
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h2>
+<p>All legacy <code class="docutils literal notranslate"><span class="pre">ami_tool</span></code> commands continue to work with the VFIO userspace driver without modification.</p>
+<p>For detailed information on available commands and usage examples, refer to the <a class="reference internal" href="../deployment/ami-tool-guide.html"><span class="std std-doc">AMR Management Interface (ami_tool) User Guide</span></a>.</p>
+</div>
+<div class="section" id="feedback">
+<h2>Feedback<a class="headerlink" href="#feedback" title="Permalink to this heading">¶</a></h2>
+<p>This is an experimental feature. If you encounter issues or have feedback:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="ami-architecture.html"><span class="std std-doc">AMI Architecture</span></a></p></li>
-<li><p><a class="reference internal" href="card-detection.html"><span class="std std-doc">Card Detection, Selection, and General Overview</span></a></p></li>
-<li><p><a class="reference internal" href="../firmware/sensors.html"><span class="std std-doc">Sensors and Hardware Monitoring</span></a></p></li>
-<li><p><a class="reference internal" href="../firmware/user-interface.html"><span class="std std-doc">User Interface</span></a></p></li>
-<li><p><a class="reference internal" href="ami-kernel-driver.html"><span class="std std-doc">AMI - Kernel Driver Interaction</span></a></p></li>
-<li><p><a class="reference internal" href="ami-vfio-userspace.html"><span class="std std-doc">AMI - VFIO Userspace Driver (Experimental)</span></a></p></li>
-<li><p><a class="reference internal" href="ami-api.html"><span class="std std-doc">AMI - API Description</span></a></p></li>
-<li><p><a class="reference internal" href="ami-hot-reset.html"><span class="std std-doc">AMI - Device Reboot</span></a></p></li>
+<li><p>Open an issue on the <a class="reference external" href="https://github.com/Xilinx/amr/issues">AMR GitHub repository</a></p></li>
+<li><p>Contact AMD support through your regular support channels</p></li>
 </ul>
+<hr class="docutils" />
+</div>
 </div>
 
 
@@ -146,10 +189,7 @@
           </div>
           
 				  
-				  <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../firmware/profiles-cmake.html" class="btn btn-neutral float-left" title="Profiles and CMake build process" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="qdma.html" class="btn btn-neutral float-right" title="AMR QDMA" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+				  <footer>
 
   <hr/>
 

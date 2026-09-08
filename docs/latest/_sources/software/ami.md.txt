@@ -10,6 +10,8 @@
 
   - [AMI - Kernel Driver Interaction](ami-kernel-driver.md)
 
+  - [AMI - VFIO Userspace Driver (Experimental)](ami-vfio-userspace.md)
+
   - [AMI - API Description](ami-api.md)
 
   - [AMI - Device Reboot](ami-hot-reset.md)

@@ -1,0 +1,54 @@
+# AMI VFIO Userspace Driver (Experimental)
+
+This guide describes how to build and test the experimental VFIO-based userspace driver for AMI.
+
+> **Note**: This feature is experimental and planned for release in 2026.2.
+
+## Prerequisites
+
+Before installing the VFIO userspace driver, ensure your host has support for IOMMU groups.
+
+## Building the VFIO Userspace Driver
+
+1. **Navigate to the AMI source directory**:
+   ```bash
+   cd amr/sw/AMI
+   ```
+
+2. **Run the build script with VFIO option**:
+   ```bash
+   ./script/build.sh -driver vfio
+   ```
+
+3. **Build artifacts**:
+   The build process creates a `build_ami` directory containing Debian and RPM packages.
+
+## Installation
+
+Install the packages based on which distribution you are running:
+
+### Debian-based Distributions (Ubuntu, Debian)
+
+```bash
+sudo dpkg -i build_ami/*.deb
+```
+
+### RPM-based Distributions (RHEL, CentOS, Fedora)
+
+```bash
+sudo rpm -ivh build_ami/*.rpm
+```
+
+## Usage
+
+All legacy `ami_tool` commands continue to work with the VFIO userspace driver without modification.
+
+For detailed information on available commands and usage examples, refer to the [AMR Management Interface (ami_tool) User Guide](../deployment/ami-tool-guide.md).
+
+## Feedback
+
+This is an experimental feature. If you encounter issues or have feedback:
+- Open an issue on the [AMR GitHub repository](https://github.com/Xilinx/amr/issues)
+- Contact AMD support through your regular support channels
+
+---

@@ -14,6 +14,7 @@ The following features are planned for upcoming AMR releases:
   - Simplified deployment with no kernel module compilation required
   - Better portability across kernel versions and distributions
   - **Note**: This feature is experimental
+- **Build and Test Instructions**: To build and test the userspace driver, follow the instructions [here](../software/ami-vfio-userspace.md)
 
 ## Deprecation Notices
 
