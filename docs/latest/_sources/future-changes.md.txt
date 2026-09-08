@@ -1,18 +1,19 @@
-# Future Changes
+# Announcements
 
-This section describes upcoming features planned for future AMR releases and features that are scheduled for deprecation.
+This section provides early notification for upcoming features, changes and functionality planned to be discontinued in near future.
 
 ## Upcoming Features
 
 The following features are planned for upcoming AMR releases:
 
-### VFIO-Based Userspace Driver
+### VFIO-Based Userspace Driver (Experimental)
 
 - **Target Release**: 2026.2
 - **Description**: Migration from kernel-based AMI driver to VFIO (Virtual Function I/O) userspace framework
   - Direct device access from userspace applications without kernel module dependencies
   - Simplified deployment with no kernel module compilation required
   - Better portability across kernel versions and distributions
+  - **Note**: This feature is experimental
 
 ## Deprecation Notices
 
