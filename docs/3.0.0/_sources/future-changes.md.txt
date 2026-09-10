@@ -16,32 +16,24 @@ The following features are planned for upcoming AMR releases:
   - **Note**: This feature is experimental
 - **Build and Test Instructions**: To build and test the userspace driver, follow the instructions [here](software/ami-vfio-userspace.md)
 
-## Deprecation Notices
+## Deprecated Features
 
-The following features, APIs, and workflows are scheduled for deprecation or removal in future releases.
+The following features are scheduled for removal in future releases:
 
 ### AMI Kernel Driver (ami.ko)
 
-> **Deprecation Timeline:** Deprecated and will be removed in 2026.2
->
-> **Alternative:** VFIO-based userspace driver framework
->
-> **Rationale:**
-> - Eliminates kernel version dependencies and recompilation requirements
-> - Provides direct userspace device access with improved flexibility
->
-> **Migration Path:**
-> - New APIs will maintain functional compatibility while leveraging VFIO infrastructure
-> - Migration guide will be provided in 2026.2 release documentation
+- Deprecated and will be removed in 2026.2
+- Alternative: VFIO-based userspace driver framework
+- Eliminates kernel version dependencies and recompilation requirements
+- Provides direct userspace device access with improved flexibility
+- New APIs will maintain functional compatibility while leveraging VFIO infrastructure
+- Migration guide will be provided in 2026.2 release documentation
 
 ### Hardware Monitoring (hwmon) Interface
 
-> **Deprecation Timeline:** Removed in 2026.2
->
-> **Alternative:** AMI tool and libami.so API for telemetry access
->
-> **Impact:**
-> - Applications relying on `/sys/class/hwmon/*` interfaces must migrate to `ami_tool` CLI or `libami.so` API
+- Removed in 2026.2
+- Alternative: AMI tool and libami.so API for telemetry access
+- Applications relying on `/sys/class/hwmon/*` interfaces must migrate to `ami_tool` CLI or `libami.so` API
 
 ## Feedback
 

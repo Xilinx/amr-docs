@@ -104,7 +104,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#vfio-based-userspace-driver-experimental">VFIO-Based Userspace Driver (Experimental)</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#deprecation-notices">Deprecation Notices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#deprecated-features">Deprecated Features</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#ami-kernel-driver-ami-ko">AMI Kernel Driver (ami.ko)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hardware-monitoring-hwmon-interface">Hardware Monitoring (hwmon) Interface</a></li>
 </ul>
@@ -160,36 +160,27 @@
 </ul>
 </div>
 </div>
-<div class="section" id="deprecation-notices">
-<h2>Deprecation Notices<a class="headerlink" href="#deprecation-notices" title="Permalink to this heading">¶</a></h2>
-<p>The following features, APIs, and workflows are scheduled for deprecation or removal in future releases.</p>
+<div class="section" id="deprecated-features">
+<h2>Deprecated Features<a class="headerlink" href="#deprecated-features" title="Permalink to this heading">¶</a></h2>
+<p>The following features are scheduled for removal in future releases:</p>
 <div class="section" id="ami-kernel-driver-ami-ko">
 <h3>AMI Kernel Driver (ami.ko)<a class="headerlink" href="#ami-kernel-driver-ami-ko" title="Permalink to this heading">¶</a></h3>
-<blockquote>
-<div><p><strong>Deprecation Timeline:</strong> Deprecated and will be removed in 2026.2</p>
-<p><strong>Alternative:</strong> VFIO-based userspace driver framework</p>
-<p><strong>Rationale:</strong></p>
 <ul class="simple">
+<li><p>Deprecated and will be removed in 2026.2</p></li>
+<li><p>Alternative: VFIO-based userspace driver framework</p></li>
 <li><p>Eliminates kernel version dependencies and recompilation requirements</p></li>
 <li><p>Provides direct userspace device access with improved flexibility</p></li>
-</ul>
-<p><strong>Migration Path:</strong></p>
-<ul class="simple">
 <li><p>New APIs will maintain functional compatibility while leveraging VFIO infrastructure</p></li>
 <li><p>Migration guide will be provided in 2026.2 release documentation</p></li>
 </ul>
-</div></blockquote>
 </div>
 <div class="section" id="hardware-monitoring-hwmon-interface">
 <h3>Hardware Monitoring (hwmon) Interface<a class="headerlink" href="#hardware-monitoring-hwmon-interface" title="Permalink to this heading">¶</a></h3>
-<blockquote>
-<div><p><strong>Deprecation Timeline:</strong> Removed in 2026.2</p>
-<p><strong>Alternative:</strong> AMI tool and libami.so API for telemetry access</p>
-<p><strong>Impact:</strong></p>
 <ul class="simple">
+<li><p>Removed in 2026.2</p></li>
+<li><p>Alternative: AMI tool and libami.so API for telemetry access</p></li>
 <li><p>Applications relying on <code class="docutils literal notranslate"><span class="pre">/sys/class/hwmon/*</span></code> interfaces must migrate to <code class="docutils literal notranslate"><span class="pre">ami_tool</span></code> CLI or <code class="docutils literal notranslate"><span class="pre">libami.so</span></code> API</p></li>
 </ul>
-</div></blockquote>
 </div>
 </div>
 <div class="section" id="feedback">
