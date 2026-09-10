@@ -105,8 +105,19 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#deprecation-notices">Deprecation Notices</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#ami-kernel-driver-ami-ko">AMI Kernel Driver (ami.ko)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hardware-monitoring-hwmon-interface">Hardware Monitoring (hwmon) Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ami-kernel-driver-ami-ko">AMI Kernel Driver (ami.ko)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#deprecation-timeline">Deprecation Timeline</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#alternative">Alternative</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rationale">Rationale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#migration-path">Migration Path</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-monitoring-hwmon-interface">Hardware Monitoring (hwmon) Interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Deprecation Timeline</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Alternative</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#impact">Impact</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#feedback">Feedback</a></li>
@@ -165,34 +176,45 @@
 <p>The following features, APIs, and workflows are scheduled for deprecation or removal in future releases.</p>
 <div class="section" id="ami-kernel-driver-ami-ko">
 <h3>AMI Kernel Driver (ami.ko)<a class="headerlink" href="#ami-kernel-driver-ami-ko" title="Permalink to this heading">¶</a></h3>
+<div class="section" id="deprecation-timeline">
+<h4>Deprecation Timeline<a class="headerlink" href="#deprecation-timeline" title="Permalink to this heading">¶</a></h4>
+<p>Deprecated and will be removed in 2026.2</p>
+</div>
+<div class="section" id="alternative">
+<h4>Alternative<a class="headerlink" href="#alternative" title="Permalink to this heading">¶</a></h4>
+<p>VFIO-based userspace driver framework</p>
+</div>
+<div class="section" id="rationale">
+<h4>Rationale<a class="headerlink" href="#rationale" title="Permalink to this heading">¶</a></h4>
 <ul class="simple">
-<li><p><strong>Deprecation Timeline</strong>: Deprecated and will be removed in 2026.2</p></li>
-<li><p><strong>Alternative</strong>: VFIO-based userspace driver framework</p></li>
-<li><p><strong>Rationale</strong>:</p>
-<ul>
 <li><p>Eliminates kernel version dependencies and recompilation requirements</p></li>
 <li><p>Provides direct userspace device access with improved flexibility</p></li>
 </ul>
-</li>
-<li><p><strong>Migration Path</strong>:</p>
-<ul>
+</div>
+<div class="section" id="migration-path">
+<h4>Migration Path<a class="headerlink" href="#migration-path" title="Permalink to this heading">¶</a></h4>
+<ul class="simple">
 <li><p>New APIs will maintain functional compatibility while leveraging VFIO infrastructure</p></li>
 <li><p>Migration guide will be provided in 2026.2 release documentation</p></li>
 </ul>
-</li>
-</ul>
+</div>
 </div>
 <div class="section" id="hardware-monitoring-hwmon-interface">
 <h3>Hardware Monitoring (hwmon) Interface<a class="headerlink" href="#hardware-monitoring-hwmon-interface" title="Permalink to this heading">¶</a></h3>
+<div class="section" id="id1">
+<h4>Deprecation Timeline<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h4>
+<p>Removed in 2026.2</p>
+</div>
+<div class="section" id="id2">
+<h4>Alternative<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h4>
+<p>AMI tool and libami.so API for telemetry access</p>
+</div>
+<div class="section" id="impact">
+<h4>Impact<a class="headerlink" href="#impact" title="Permalink to this heading">¶</a></h4>
 <ul class="simple">
-<li><p><strong>Deprecation Timeline</strong>: Removed in 2026.2</p></li>
-<li><p><strong>Alternative</strong>: AMI tool and libami.so API for telemetry access</p></li>
-<li><p><strong>Impact</strong>:</p>
-<ul>
 <li><p>Applications relying on <code class="docutils literal notranslate"><span class="pre">/sys/class/hwmon/*</span></code> interfaces must migrate to <code class="docutils literal notranslate"><span class="pre">ami_tool</span></code> CLI or <code class="docutils literal notranslate"><span class="pre">libami.so</span></code> API</p></li>
 </ul>
-</li>
-</ul>
+</div>
 </div>
 </div>
 <div class="section" id="feedback">
@@ -219,7 +241,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2023-2026, Advanced Micro Devices, Inc.
-      <span class="lastupdated">Last updated on September 08, 2026.
+      <span class="lastupdated">Last updated on September 10, 2026.
       </span></p>
   </div>
 
