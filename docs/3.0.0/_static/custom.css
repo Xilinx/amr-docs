@@ -12,7 +12,7 @@
 @media screen and (max-width: 950px){
     .wy-body-for-nav{background:#000000}
     .wy-nav-top{display:block}
-    .wy-nav-side{left:300px}
+    .wy-nav-side{left:-300px}
     .wy-nav-side.shift{width:85%;left:0}
     .wy-side-scroll{width:auto}
     .wy-side-nav-search{width:auto}
